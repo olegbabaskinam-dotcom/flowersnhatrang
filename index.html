@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Доставка цветов в Нячанге</title>
-    
+
     <!-- метатеги для красивого отображения ссылок в мессенджерах -->
     <meta name="description" content="Свежие цветы, шары и открытки в Нячанге. Бесплатная доставка день в день. Принимаем донги, рубли, доллары.">
     <meta property="og:title" content="Доставка цветов в Нячанге | NhaTrang Flowers">
@@ -16,16 +16,16 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Подключаем FontAwesome для иконок -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Настройка новых премиальных шрифтов -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
-        
-        body { 
-            font-family: 'Montserrat', sans-serif; 
+
+        body {
+            font-family: 'Montserrat', sans-serif;
         }
-        h1, h2, h3, .font-serif { 
-            font-family: 'Playfair Display', serif; 
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
         }
     </style>
 </head>
@@ -39,11 +39,11 @@
     <!-- Шапка -->
     <header class="bg-[#FDFBF7]/90 backdrop-blur-md sticky top-0 z-50 border-b border-stone-200">
         <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center gap-2 text-stone-800">
-                <i class="fa-solid fa-fan text-rose-400 text-2xl"></i>
-                <span class="font-serif font-bold text-xl leading-tight tracking-wide">NhaTrang<br>Flowers</span>
+            <div class="flex items-center gap-3">
+                <img src="https://i.yapx.ru/dqRu8.jpg" alt="NhaTrang Flowers" class="h-12 w-12 rounded-xl object-cover">
+                <span class="font-medium text-xs leading-tight text-stone-700 tracking-wide">Доставка цветов и<br>гелиевых шаров в Нячанге</span>
             </div>
-            
+
             <!-- Иконки контактов -->
             <div class="flex gap-4 text-xl">
                 <a href="https://wa.me/37443529162" target="_blank" class="text-stone-600 hover:text-[#25D366] transition" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
@@ -55,262 +55,290 @@
     </header>
 
     <!-- Первый экран (Hero) -->
-    <section class="relative py-24 md:py-32 px-4 flex items-center justify-center min-h-[70vh] md:min-h-[85vh] overflow-hidden">
+    <section class="relative py-12 md:py-24 px-4 flex items-center justify-center min-h-[50vh] md:min-h-[70vh] overflow-hidden">
         <!-- Фоновое изображение -->
         <div class="absolute inset-0 z-0">
             <img src="https://i.yapx.ru/dSXDj.jpg" alt="Фоновый букет Нячанг" class="w-full h-full object-cover object-center">
-            <div class="absolute inset-0 bg-[#FDFBF7]/50"></div>
+            <div class="absolute inset-0 bg-[#FDFBF7]/55"></div>
         </div>
-        
+
         <!-- Текстовый блок по центру -->
         <div class="relative z-10 max-w-4xl mx-auto text-center">
-            <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl font-medium italic text-rose-500 mb-6 leading-tight tracking-wide drop-shadow-sm">
-                Доставка цветов, шаров и подарков в Нячанге
+            <h1 class="font-serif text-3xl md:text-6xl lg:text-7xl font-medium italic text-rose-500 mb-4 leading-tight tracking-wide drop-shadow-sm">
+                Доставка цветов и шаров в Нячанге
             </h1>
-            <p class="text-stone-800 mb-10 text-lg md:text-xl font-medium tracking-wide max-w-2xl mx-auto">
-                Свежие цветы с бесплатной доставкой день в день. порадуйте близких, даже если вы далеко.
+            <p class="text-stone-800 mb-3 text-base md:text-xl font-medium tracking-wide max-w-2xl mx-auto">
+                Бесплатная доставка по городу. Закажи до 18:00 — привезём сегодня.
             </p>
-            <a href="#catalog" class="inline-block bg-rose-500 text-white font-medium py-4 px-10 rounded-full shadow-lg shadow-rose-200 hover:bg-rose-600 active:scale-95 transition-all w-full md:w-auto tracking-wide text-sm uppercase">
-                смотреть каталог
-            </a>
+            <p class="text-rose-600 font-bold text-sm md:text-base mb-8 tracking-wide">
+                🕐 работаем с 7:00 до 22:00 · заказ до 18:00 — доставим сегодня
+            </p>
+            <div class="flex flex-col items-center gap-4">
+                <div class="flex gap-4 justify-center">
+                    <a href="https://wa.me/37443529162?text=Здравствуйте,%20хочу%20заказать%20цветы" target="_blank" class="flex items-center gap-2 bg-[#25D366] text-white font-medium py-3 px-6 rounded-full shadow-lg hover:bg-[#20b858] active:scale-95 transition-all text-sm">
+                        <i class="fa-brands fa-whatsapp text-xl"></i> WhatsApp
+                    </a>
+                    <a href="https://t.me/babaskin_o?text=Здравствуйте,%20хочу%20заказать%20цветы" target="_blank" class="flex items-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-6 rounded-full shadow-lg hover:bg-[#1d88ba] active:scale-95 transition-all text-sm">
+                        <i class="fa-brands fa-telegram text-xl"></i> Telegram
+                    </a>
+                    <a href="https://instagram.com/flowers_vietnam_inst" target="_blank" class="flex items-center gap-2 bg-[#E1306C] text-white font-medium py-3 px-6 rounded-full shadow-lg hover:bg-[#c0275d] active:scale-95 transition-all text-sm">
+                        <i class="fa-brands fa-instagram text-xl"></i> Instagram
+                    </a>
+                </div>
+                <a href="#catalog" class="text-stone-600 text-sm font-medium underline underline-offset-2 hover:text-stone-900 transition">
+                    смотреть каталог ↓
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок доверия -->
+    <section class="py-6 px-4 bg-white border-b border-stone-100">
+        <div class="max-w-4xl mx-auto">
+            <div class="grid grid-cols-3 gap-4 text-center">
+                <div class="flex flex-col items-center gap-1">
+                    <div class="text-2xl md:text-3xl font-bold text-stone-900">500+</div>
+                    <div class="text-stone-500 text-xs md:text-sm font-medium">букетов доставлено</div>
+                </div>
+                <div class="flex flex-col items-center gap-1">
+                    <div class="flex items-center gap-1 justify-center">
+                        <span class="text-2xl md:text-3xl font-bold text-stone-900">5.0</span>
+                        <i class="fa-solid fa-star text-yellow-400 text-xl md:text-2xl"></i>
+                    </div>
+                    <div class="text-stone-500 text-xs md:text-sm font-medium">104 отзыва на Google</div>
+                </div>
+                <div class="flex flex-col items-center gap-1">
+                    <div class="text-2xl md:text-3xl font-bold text-stone-900">Работаем</div>
+                    <div class="text-stone-500 text-xs md:text-sm font-medium">каждый день</div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" class="inline-flex items-center gap-2 text-rose-500 font-medium text-sm hover:text-rose-600 transition underline underline-offset-2">
+                    <i class="fa-solid fa-star text-yellow-400"></i>
+                    читать отзывы на Google Maps
+                </a>
+            </div>
         </div>
     </section>
 
     <!-- Каталог товаров -->
     <section id="catalog" class="py-16 px-4 max-w-5xl mx-auto flex-grow">
         <h2 class="font-serif text-3xl md:text-4xl font-bold text-center mb-10 text-stone-900">наш каталог</h2>
-        
-        <!-- Фильтры каталога -->
-        <div class="flex flex-wrap justify-center gap-3 mb-12">
-            <button onclick="filterCatalog('all')" data-filter="all" class="filter-btn bg-stone-900 text-white px-6 py-2 rounded-full text-sm font-medium transition-colors border border-stone-900">все</button>
-            <button onclick="filterCatalog('mono')" data-filter="mono" class="filter-btn bg-transparent text-stone-800 hover:bg-stone-100 px-6 py-2 rounded-full text-sm font-medium transition-colors border border-stone-300">розы</button>
-            <button onclick="filterCatalog('mix')" data-filter="mix" class="filter-btn bg-transparent text-stone-800 hover:bg-stone-100 px-6 py-2 rounded-full text-sm font-medium transition-colors border border-stone-300">сборные</button>
-            <button onclick="filterCatalog('balloons')" data-filter="balloons" class="filter-btn bg-transparent text-stone-800 hover:bg-stone-100 px-6 py-2 rounded-full text-sm font-medium transition-colors border border-stone-300">шары</button>
-        </div>
 
-        <!-- Сетка товаров: 1 колонка на мобильных, 2 на планшетах, 3 на ПК -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8" id="catalog-grid">
-            
-            <!-- Карточка товара 1 (Розы) -->
-            <div class="catalog-item bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col" data-category="mono">
-                <img src="https://i.yapx.ru/dSOqg.jpg" alt="Белые розы" class="w-full h-72 object-cover">
+        <!-- Сетка товаров -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+
+            <!-- 1. 25 розовых роз -->
+            <div class="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col">
+                <img src="https://i.yapx.ru/dqReH.jpg" alt="25 розовых роз" class="w-full h-72 object-cover">
                 <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-3">белые розы</h3>
-                    <div class="text-stone-800 text-sm mb-6 flex-grow space-y-2 font-medium">
-                        <p>25 шт - 500 000 донгов</p>
-                        <p>51 шт - 1 000 000 донгов</p>
-                        <p>101 шт - 1 500 000 донгов</p>
-                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">25 розовых роз</h3>
+                    <p class="text-stone-600 text-sm mb-2 flex-grow">нежные розовые розы в белой упаковке — трогательный подарок на любой повод</p>
+                    <p class="text-stone-900 font-bold text-lg mb-5">500 000 донгов</p>
                     <div class="flex flex-col gap-3">
-                        <a href="https://wa.me/37443529162?text=Здравствуйте,%20хочу%20заказать%20белые%20розы" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-whatsapp text-lg"></i>
-                            заказать в WhatsApp
+                        <a href="https://wa.me/37443529162?text=Здравствуйте,%20хочу%20заказать%2025%20розовых%20роз" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> заказать в WhatsApp
                         </a>
-                        <a href="https://t.me/babaskin_o?text=Здравствуйте,%20хочу%20заказать%20белые%20розы" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-telegram text-lg"></i>
-                            заказать в Telegram
+                        <a href="https://t.me/babaskin_o?text=Здравствуйте,%20хочу%20заказать%2025%20розовых%20роз" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
+                            <i class="fa-brands fa-telegram text-lg"></i> заказать в Telegram
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Карточка товара 2 (Розы) -->
-            <div class="catalog-item bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col" data-category="mono">
-                <img src="https://i.yapx.ru/dSOvF.jpg" alt="Розовые розы" class="w-full h-72 object-cover">
+            <!-- 2. 25 белых роз -->
+            <div class="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col">
+                <img src="https://i.yapx.ru/dqReP.jpg" alt="25 белых роз" class="w-full h-72 object-cover">
                 <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-3">розовые розы</h3>
-                    <div class="text-stone-800 text-sm mb-6 flex-grow space-y-2 font-medium">
-                        <p>25 шт - 500 000 донгов</p>
-                        <p>51 шт - 1 000 000 донгов</p>
-                        <p>101 шт - 1 500 000 донгов</p>
-                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">25 белых роз</h3>
+                    <p class="text-stone-600 text-sm mb-2 flex-grow">классические белые розы в белой упаковке — элегантный подарок</p>
+                    <p class="text-stone-900 font-bold text-lg mb-5">500 000 донгов</p>
                     <div class="flex flex-col gap-3">
-                        <a href="https://wa.me/37443529162?text=Здравствуйте,%20хочу%20заказать%20розовые%20розы" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-whatsapp text-lg"></i>
-                            заказать в WhatsApp
+                        <a href="https://wa.me/37443529162?text=Здравствуйте,%20хочу%20заказать%2025%20белых%20роз" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> заказать в WhatsApp
                         </a>
-                        <a href="https://t.me/babaskin_o?text=Здравствуйте,%20хочу%20заказать%20розовые%20розы" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-telegram text-lg"></i>
-                            заказать в Telegram
+                        <a href="https://t.me/babaskin_o?text=Здравствуйте,%20хочу%20заказать%2025%20белых%20роз" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
+                            <i class="fa-brands fa-telegram text-lg"></i> заказать в Telegram
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Карточка товара 3 (Розы) -->
-            <div class="catalog-item bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col" data-category="mono">
-                <img src="https://i.yapx.ru/dSOvS.jpg" alt="Розовые розы" class="w-full h-72 object-cover">
+            <!-- 3. 25 красных роз -->
+            <div class="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col">
+                <img src="https://i.yapx.ru/dqRY6.jpg" alt="25 красных роз" class="w-full h-72 object-cover">
                 <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-3">розовые розы</h3>
-                    <div class="text-stone-800 text-sm mb-6 flex-grow space-y-2 font-medium">
-                        <p>25 шт - 500 000 донгов</p>
-                        <p>51 шт - 1 000 000 донгов</p>
-                        <p>101 шт - 1 500 000 донгов</p>
-                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">25 красных роз</h3>
+                    <p class="text-stone-600 text-sm mb-2 flex-grow">яркие красные пионовидные розы в белой упаковке</p>
+                    <p class="text-stone-900 font-bold text-lg mb-5">500 000 донгов</p>
                     <div class="flex flex-col gap-3">
-                        <a href="https://wa.me/37443529162?text=Здравствуйте,%20хочу%20заказать%20розовые%20розы" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-whatsapp text-lg"></i>
-                            заказать в WhatsApp
+                        <a href="https://wa.me/37443529162?text=Здравствуйте,%20хочу%20заказать%2025%20красных%20роз" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> заказать в WhatsApp
                         </a>
-                        <a href="https://t.me/babaskin_o?text=Здравствуйте,%20хочу%20заказать%20розовые%20розы" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-telegram text-lg"></i>
-                            заказать в Telegram
+                        <a href="https://t.me/babaskin_o?text=Здравствуйте,%20хочу%20заказать%2025%20красных%20роз" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
+                            <i class="fa-brands fa-telegram text-lg"></i> заказать в Telegram
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Карточка товара 4 (Розы) -->
-            <div class="catalog-item bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col" data-category="mono">
-                <img src="https://i.yapx.ru/dSOvU.jpg" alt="Розовые розы" class="w-full h-72 object-cover">
+            <!-- 4. 25 розовых пионовидных роз -->
+            <div class="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col">
+                <img src="https://i.yapx.ru/dqRRa.jpg" alt="25 розовых пионовидных роз" class="w-full h-72 object-cover">
                 <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-3">розовые розы</h3>
-                    <div class="text-stone-800 text-sm mb-6 flex-grow space-y-2 font-medium">
-                        <p>25 шт - 500 000 донгов</p>
-                        <p>51 шт - 1 000 000 донгов</p>
-                        <p>101 шт - 1 500 000 донгов</p>
-                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">25 розовых пионовидных роз</h3>
+                    <p class="text-stone-600 text-sm mb-2 flex-grow">нежные пионовидные розы в белой упаковке — идеальный подарок для любого повода</p>
+                    <p class="text-stone-900 font-bold text-lg mb-5">500 000 донгов</p>
                     <div class="flex flex-col gap-3">
-                        <a href="https://wa.me/37443529162?text=Здравствуйте,%20хочу%20заказать%20розовые%20розы" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-whatsapp text-lg"></i>
-                            заказать в WhatsApp
+                        <a href="https://wa.me/37443529162?text=Здравствуйте,%20хочу%20заказать%2025%20розовых%20пионовидных%20роз" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> заказать в WhatsApp
                         </a>
-                        <a href="https://t.me/babaskin_o?text=Здравствуйте,%20хочу%20заказать%20розовые%20розы" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-telegram text-lg"></i>
-                            заказать в Telegram
+                        <a href="https://t.me/babaskin_o?text=Здравствуйте,%20хочу%20заказать%2025%20розовых%20пионовидных%20роз" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
+                            <i class="fa-brands fa-telegram text-lg"></i> заказать в Telegram
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Карточка товара 5 (Розы) -->
-            <div class="catalog-item bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col" data-category="mono">
-                <img src="https://i.yapx.ru/dSOvW.jpg" alt="Розовые розы" class="w-full h-72 object-cover">
+            <!-- 5. 7 веток лилий -->
+            <div class="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col">
+                <img src="https://i.yapx.ru/dqRaL.jpg" alt="7 веток лилий" class="w-full h-72 object-cover">
                 <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-3">розовые розы</h3>
-                    <div class="text-stone-800 text-sm mb-6 flex-grow space-y-2 font-medium">
-                        <p>25 шт - 500 000 донгов</p>
-                        <p>51 шт - 1 000 000 донгов</p>
-                        <p>101 шт - 1 500 000 донгов</p>
-                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">7 веток лилий</h3>
+                    <p class="text-stone-600 text-sm mb-2 flex-grow">свежие белые лилии в белой упаковке — нежный и ароматный букет</p>
+                    <p class="text-stone-900 font-bold text-lg mb-5">600 000 донгов</p>
                     <div class="flex flex-col gap-3">
-                        <a href="https://wa.me/37443529162?text=Здравствуйте,%20хочу%20заказать%20розовые%20розы" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-whatsapp text-lg"></i>
-                            заказать в WhatsApp
+                        <a href="https://wa.me/37443529162?text=Здравствуйте,%20хочу%20заказать%207%20веток%20лилий" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> заказать в WhatsApp
                         </a>
-                        <a href="https://t.me/babaskin_o?text=Здравствуйте,%20хочу%20заказать%20розовые%20розы" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-telegram text-lg"></i>
-                            заказать в Telegram
+                        <a href="https://t.me/babaskin_o?text=Здравствуйте,%20хочу%20заказать%207%20веток%20лилий" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
+                            <i class="fa-brands fa-telegram text-lg"></i> заказать в Telegram
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Карточка товара 6 (Розы) -->
-            <div class="catalog-item bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col" data-category="mono">
-                <img src="https://i.yapx.ru/dSOvT.jpg" alt="Красные розы" class="w-full h-72 object-cover">
+            <!-- 6. 51 белая роза с эвкалиптом -->
+            <div class="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col">
+                <img src="https://i.yapx.ru/dqRWB.jpg" alt="51 белая роза с эвкалиптом" class="w-full h-72 object-cover">
                 <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-3">красные розы</h3>
-                    <div class="text-stone-800 text-sm mb-6 flex-grow space-y-2 font-medium">
-                        <p>25 шт - 500 000 донгов</p>
-                        <p>51 шт - 1 000 000 донгов</p>
-                        <p>101 шт - 1 500 000 донгов</p>
-                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">51 белая роза с эвкалиптом</h3>
+                    <p class="text-stone-600 text-sm mb-2 flex-grow">элегантный букет белых роз с веточками эвкалипта — нежно и со вкусом</p>
+                    <p class="text-stone-900 font-bold text-lg mb-5">1 000 000 донгов</p>
                     <div class="flex flex-col gap-3">
-                        <a href="https://wa.me/37443529162?text=Здравствуйте,%20хочу%20заказать%20красные%20розы" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-whatsapp text-lg"></i>
-                            заказать в WhatsApp
+                        <a href="https://wa.me/37443529162?text=Здравствуйте,%20хочу%20заказать%2051%20белую%20розу%20с%20эвкалиптом" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> заказать в WhatsApp
                         </a>
-                        <a href="https://t.me/babaskin_o?text=Здравствуйте,%20хочу%20заказать%20красные%20розы" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-telegram text-lg"></i>
-                            заказать в Telegram
+                        <a href="https://t.me/babaskin_o?text=Здравствуйте,%20хочу%20заказать%2051%20белую%20розу%20с%20эвкалиптом" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
+                            <i class="fa-brands fa-telegram text-lg"></i> заказать в Telegram
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Карточка товара 7 (Сборные) -->
-            <div class="catalog-item bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col" data-category="mix">
-                <img src="https://i.yapx.ru/dSOvD.jpg" alt="Сборные букеты" class="w-full h-72 object-cover">
+            <!-- 7. 51 бело-розовая роза -->
+            <div class="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col">
+                <img src="https://i.yapx.ru/dqRYB.jpg" alt="51 бело-розовая роза" class="w-full h-72 object-cover">
                 <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-3">сборные букеты</h3>
-                    <div class="text-stone-800 text-sm mb-6 flex-grow space-y-2 font-medium">
-                        <p>напишите менеджеру ваши пожелания</p>
-                        <p class="text-stone-900 font-bold pt-2">цена - от 1 000 000 донгов</p>
-                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">51 бело-розовая роза</h3>
+                    <p class="text-stone-600 text-sm mb-2 flex-grow">пышный букет из бело-розовых роз в белой упаковке</p>
+                    <p class="text-stone-900 font-bold text-lg mb-5">1 000 000 донгов</p>
                     <div class="flex flex-col gap-3">
-                        <a href="https://wa.me/37443529162?text=Здравствуйте,%20хочу%20заказать%20сборные%20букеты" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-whatsapp text-lg"></i>
-                            заказать в WhatsApp
+                        <a href="https://wa.me/37443529162?text=Здравствуйте,%20хочу%20заказать%2051%20бело-розовую%20розу" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> заказать в WhatsApp
                         </a>
-                        <a href="https://t.me/babaskin_o?text=Здравствуйте,%20хочу%20заказать%20сборные%20букеты" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-telegram text-lg"></i>
-                            заказать в Telegram
+                        <a href="https://t.me/babaskin_o?text=Здравствуйте,%20хочу%20заказать%2051%20бело-розовую%20розу" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
+                            <i class="fa-brands fa-telegram text-lg"></i> заказать в Telegram
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Карточка товара 8 (Сборные) -->
-            <div class="catalog-item bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col" data-category="mix">
-                <img src="https://i.yapx.ru/dSOvG.jpg" alt="Лилии" class="w-full h-72 object-cover">
+            <!-- 8. Набор шаров S -->
+            <div class="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col">
+                <img src="https://i.yapx.ru/dqRd2.jpg" alt="Набор шаров S" class="w-full h-72 object-cover">
                 <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-3">лилии</h3>
-                    <div class="text-stone-800 text-sm mb-6 flex-grow space-y-2 font-medium">
-                        <p>9 шт - <span class="text-stone-900 font-bold">900 000 донгов</span></p>
-                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">набор шаров S</h3>
+                    <p class="text-stone-600 text-sm mb-2 flex-grow">2 большие цифры, или 1 цифра + 3 шара, или 7 фольгированных шаров</p>
+                    <p class="text-stone-900 font-bold text-lg mb-5">1 000 000 донгов</p>
                     <div class="flex flex-col gap-3">
-                        <a href="https://wa.me/37443529162?text=Здравствуйте,%20хочу%20заказать%20лилии" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-whatsapp text-lg"></i>
-                            заказать в WhatsApp
+                        <a href="https://wa.me/37443529162?text=Здравствуйте,%20хочу%20заказать%20набор%20шаров%20S" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> заказать в WhatsApp
                         </a>
-                        <a href="https://t.me/babaskin_o?text=Здравствуйте,%20хочу%20заказать%20лилии" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-telegram text-lg"></i>
-                            заказать в Telegram
+                        <a href="https://t.me/babaskin_o?text=Здравствуйте,%20хочу%20заказать%20набор%20шаров%20S" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
+                            <i class="fa-brands fa-telegram text-lg"></i> заказать в Telegram
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Карточка товара 9 (Сборные) -->
-            <div class="catalog-item bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col" data-category="mix">
-                <img src="https://i.yapx.ru/dSOvV.jpg" alt="Подсолнухи" class="w-full h-72 object-cover">
+            <!-- 9. 101 роза в корзине (розово-коралловые) -->
+            <div class="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col">
+                <img src="https://i.yapx.ru/dqRS4.jpg" alt="101 роза в корзине" class="w-full h-72 object-cover">
                 <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-3">подсолнухи</h3>
-                    <div class="text-stone-800 text-sm mb-6 flex-grow space-y-2 font-medium">
-                        <p>41 шт - <span class="text-stone-900 font-bold">1 250 000 донгов</span></p>
-                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">101 роза в корзине</h3>
+                    <p class="text-stone-600 text-sm mb-2 flex-grow">роскошный букет из розово-коралловых роз в корзине — подарок, который запомнится</p>
+                    <p class="text-stone-900 font-bold text-lg mb-5">2 000 000 донгов</p>
                     <div class="flex flex-col gap-3">
-                        <a href="https://wa.me/37443529162?text=Здравствуйте,%20хочу%20заказать%20подсолнухи" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-whatsapp text-lg"></i>
-                            заказать в WhatsApp
+                        <a href="https://wa.me/37443529162?text=Здравствуйте,%20хочу%20заказать%20101%20розу%20в%20корзине" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> заказать в WhatsApp
                         </a>
-                        <a href="https://t.me/babaskin_o?text=Здравствуйте,%20хочу%20заказать%20подсолнухи" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-telegram text-lg"></i>
-                            заказать в Telegram
+                        <a href="https://t.me/babaskin_o?text=Здравствуйте,%20хочу%20заказать%20101%20розу%20в%20корзине" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
+                            <i class="fa-brands fa-telegram text-lg"></i> заказать в Telegram
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Карточка товара 10 (Шары) -->
-            <div class="catalog-item bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col" data-category="balloons">
-                <img src="https://i.yapx.ru/dSXDg.jpg" alt="Гелиевый шар" class="w-full h-72 object-cover">
+            <!-- 10. 101 бело-розовая роза в корзине -->
+            <div class="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col">
+                <img src="https://i.yapx.ru/dqRc2.jpg" alt="101 бело-розовая роза в корзине" class="w-full h-72 object-cover">
                 <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-3">гелиевый шар</h3>
-                    <div class="text-stone-800 text-sm mb-6 flex-grow space-y-2 font-medium">
-                        <p>фольгированный,</p>
-                        <p>летает 2-3 дня</p>
-                        <p class="text-stone-900 font-bold pt-2">150 000 донгов</p>
-                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">101 бело-розовая роза в корзине</h3>
+                    <p class="text-stone-600 text-sm mb-2 flex-grow">нежные бело-розовые розы в корзине — роскошный подарок</p>
+                    <p class="text-stone-900 font-bold text-lg mb-5">2 000 000 донгов</p>
                     <div class="flex flex-col gap-3">
-                        <a href="https://wa.me/37443529162?text=Здравствуйте,%20хочу%20заказать%20гелиевый%20шар" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-whatsapp text-lg"></i>
-                            заказать в WhatsApp
+                        <a href="https://wa.me/37443529162?text=Здравствуйте,%20хочу%20заказать%20101%20бело-розовую%20розу%20в%20корзине" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> заказать в WhatsApp
                         </a>
-                        <a href="https://t.me/babaskin_o?text=Здравствуйте,%20хочу%20заказать%20гелиевый%20шар" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-telegram text-lg"></i>
-                            заказать в Telegram
+                        <a href="https://t.me/babaskin_o?text=Здравствуйте,%20хочу%20заказать%20101%20бело-розовую%20розу%20в%20корзине" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
+                            <i class="fa-brands fa-telegram text-lg"></i> заказать в Telegram
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 11. Набор шаров L -->
+            <div class="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col">
+                <img src="https://i.yapx.ru/dqRWj.jpg" alt="Набор шаров L" class="w-full h-72 object-cover">
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">набор шаров L</h3>
+                    <p class="text-stone-600 text-sm mb-2 flex-grow">2 цифры + 7 шаров, или 1 цифра + 10 шаров, или 15 фольгированных шаров</p>
+                    <p class="text-stone-900 font-bold text-lg mb-5">2 000 000 донгов</p>
+                    <div class="flex flex-col gap-3">
+                        <a href="https://wa.me/37443529162?text=Здравствуйте,%20хочу%20заказать%20набор%20шаров%20L" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> заказать в WhatsApp
+                        </a>
+                        <a href="https://t.me/babaskin_o?text=Здравствуйте,%20хочу%20заказать%20набор%20шаров%20L" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
+                            <i class="fa-brands fa-telegram text-lg"></i> заказать в Telegram
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 12. 151 фиолетовая роза -->
+            <div class="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col">
+                <img src="https://i.yapx.ru/dqRce.jpg" alt="151 фиолетовая роза" class="w-full h-72 object-cover">
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">151 фиолетовая роза</h3>
+                    <p class="text-stone-600 text-sm mb-2 flex-grow">грандиозный букет из фиолетовых роз в розовой упаковке — максимальное впечатление</p>
+                    <p class="text-stone-900 font-bold text-lg mb-5">2 250 000 донгов</p>
+                    <div class="flex flex-col gap-3">
+                        <a href="https://wa.me/37443529162?text=Здравствуйте,%20хочу%20заказать%20151%20фиолетовую%20розу" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> заказать в WhatsApp
+                        </a>
+                        <a href="https://t.me/babaskin_o?text=Здравствуйте,%20хочу%20заказать%20151%20фиолетовую%20розу" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
+                            <i class="fa-brands fa-telegram text-lg"></i> заказать в Telegram
                         </a>
                     </div>
                 </div>
@@ -323,7 +351,7 @@
     <section class="py-16 px-4">
         <div class="max-w-4xl mx-auto bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-stone-100">
             <h2 class="font-serif text-3xl font-bold text-stone-900 mb-8 text-center">доставка и оплата</h2>
-            
+
             <div class="space-y-8">
                 <!-- Условия и сроки -->
                 <div class="flex gap-5">
@@ -332,7 +360,7 @@
                         <h4 class="font-bold text-lg text-stone-900 mb-3">условия доставки</h4>
                         <ul class="space-y-3 text-stone-800 font-medium">
                             <li class="flex gap-2"><i class="fa-solid fa-check text-rose-300 mt-1"></i> бесплатная доставка по Нячангу.</li>
-                            <li class="flex gap-2"><i class="fa-solid fa-check text-rose-300 mt-1"></i> доставка день в день при заказе до 15:00.</li>
+                            <li class="flex gap-2"><i class="fa-solid fa-check text-rose-300 mt-1"></i> доставка день в день при заказе до 18:00.</li>
                             <li class="bg-rose-50 text-rose-900 p-3 rounded-xl mt-4 inline-block text-sm">камрань: доставка от 51 розы, стоимость доставки - 600 000 донгов (оплачивается отдельно).</li>
                         </ul>
                     </div>
@@ -352,17 +380,6 @@
         </div>
     </section>
 
-    <!-- Наш адрес и отзывы -->
-    <section class="py-16 px-4 bg-rose-50/30 border-t border-stone-100">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="font-serif text-3xl font-bold text-stone-900 mb-8">наш адрес и отзывы</h2>
-            <a href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" class="inline-flex items-center justify-center gap-2 bg-rose-500 text-white font-medium py-3 px-8 rounded-full hover:bg-rose-600 transition w-full sm:w-auto text-sm uppercase shadow-sm">
-                <i class="fa-solid fa-star text-yellow-400"></i>
-                открыть Google Maps
-            </a>
-        </div>
-    </section>
-
     <!-- Подвал (Footer) -->
     <footer class="bg-rose-500 text-white py-12 px-4 mt-auto">
         <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
@@ -370,7 +387,7 @@
                 <div class="font-serif font-bold text-2xl text-white mb-2">NhaTrang Flowers</div>
                 <div class="text-sm font-medium text-rose-100">элегантная флористика и доставка</div>
             </div>
-            
+
             <!-- Дублирование контактов -->
             <div class="flex gap-6 text-2xl">
                 <a href="https://wa.me/37443529162" target="_blank" class="text-rose-100 hover:text-white transition" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
@@ -384,30 +401,5 @@
         </div>
     </footer>
 
-    <!-- Скрипт для фильтрации товаров -->
-    <script>
-        function filterCatalog(category) {
-            const items = document.querySelectorAll('.catalog-item');
-            const buttons = document.querySelectorAll('.filter-btn');
-
-            // сбрасываем стили всех кнопок
-            buttons.forEach(btn => {
-                btn.className = 'filter-btn bg-transparent text-stone-800 hover:bg-stone-100 px-6 py-2 rounded-full text-sm font-medium transition-colors border border-stone-300';
-            });
-
-            // применяем активный стиль к нажатой кнопке
-            const activeBtn = document.querySelector(`[data-filter="${category}"]`);
-            activeBtn.className = 'filter-btn bg-stone-900 text-white px-6 py-2 rounded-full text-sm font-medium transition-colors border border-stone-900';
-
-            // показываем или скрываем карточки
-            items.forEach(item => {
-                if (category === 'all' || item.dataset.category === category) {
-                    item.style.display = 'flex';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        }
-    </script>
 </body>
 </html>
