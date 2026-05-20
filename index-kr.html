@@ -64,9 +64,10 @@
             <p class="text-stone-800 mb-3 text-sm md:text-xl font-medium max-w-2xl mx-auto">
                 시내 무료 배달. 18:00 이전 주문 시 당일 배달.
             </p>
-            <p class="text-rose-600 font-bold text-xs md:text-base mb-8">
+            <p class="text-rose-600 font-bold text-xs md:text-base mb-3">
                 🕐 영업시간 7:00~22:00<br class="md:hidden"> · 18:00 이전 주문 시 당일 배달
             </p>
+            <p id="countdown" style="display:none" class="text-rose-700 font-bold text-sm md:text-base mb-5"></p>
             <div class="flex flex-col items-center gap-4">
                 <div class="flex flex-wrap gap-3 justify-center">
                     <a href="http://pf.kakao.com/_zbwKX" target="_blank" class="flex items-center gap-2 bg-[#FAE100] text-stone-900 font-medium py-3 px-5 rounded-full shadow-lg hover:bg-[#e8d000] active:scale-95 transition-all text-sm">
@@ -100,8 +101,8 @@
                     <div class="text-stone-500 text-xs md:text-sm font-medium">구글 리뷰 104개</div>
                 </div>
                 <div class="flex flex-col items-center gap-1">
-                    <div class="text-2xl md:text-3xl font-bold text-stone-900">매일</div>
-                    <div class="text-stone-500 text-xs md:text-sm font-medium">영업 중</div>
+                    <div class="text-2xl md:text-3xl font-bold text-stone-900">💵</div>
+                    <div class="text-stone-500 text-xs md:text-sm font-medium">착불 결제</div>
                 </div>
             </div>
             <div class="text-center mt-5">
@@ -125,7 +126,8 @@
                 <div class="p-6 flex flex-col flex-grow">
                     <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">핑크 장미 25송이</h3>
                     <p class="text-stone-600 text-sm mb-2 flex-grow">흰 포장지에 감싼 부드러운 핑크 장미 — 어떤 날에도 어울리는 선물</p>
-                    <p class="text-stone-900 font-bold text-lg mb-5">500,000 동</p>
+                    <p class="text-stone-900 font-bold text-lg mb-1">500,000 동</p>
+                    <p class="text-stone-500 text-xs mb-5">≈ $20 · ₩31,000</p>
                     <div class="flex flex-col gap-3">
                         <a href="http://pf.kakao.com/_zbwKX" target="_blank" class="flex items-center justify-center gap-2 bg-[#FAE100] text-stone-900 font-medium py-3 px-4 rounded-xl hover:bg-[#e8d000] transition w-full shadow-sm text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 3C6.477 3 2 6.477 2 10.8c0 2.7 1.6 5.1 4 6.6l-1 3.7 4.3-2.8c.9.2 1.8.3 2.7.3 5.523 0 10-3.477 10-7.8S17.523 3 12 3z"/></svg>
@@ -144,7 +146,8 @@
                 <div class="p-6 flex flex-col flex-grow">
                     <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">흰 장미 25송이</h3>
                     <p class="text-stone-600 text-sm mb-2 flex-grow">흰 포장지에 담긴 클래식한 흰 장미 — 우아한 선물</p>
-                    <p class="text-stone-900 font-bold text-lg mb-5">500,000 동</p>
+                    <p class="text-stone-900 font-bold text-lg mb-1">500,000 동</p>
+                    <p class="text-stone-500 text-xs mb-5">≈ $20 · ₩31,000</p>
                     <div class="flex flex-col gap-3">
                         <a href="http://pf.kakao.com/_zbwKX" target="_blank" class="flex items-center justify-center gap-2 bg-[#FAE100] text-stone-900 font-medium py-3 px-4 rounded-xl hover:bg-[#e8d000] transition w-full shadow-sm text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 3C6.477 3 2 6.477 2 10.8c0 2.7 1.6 5.1 4 6.6l-1 3.7 4.3-2.8c.9.2 1.8.3 2.7.3 5.523 0 10-3.477 10-7.8S17.523 3 12 3z"/></svg>
@@ -163,7 +166,8 @@
                 <div class="p-6 flex flex-col flex-grow">
                     <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">빨간 장미 25송이</h3>
                     <p class="text-stone-600 text-sm mb-2 flex-grow">흰 포장지에 담긴 선명한 빨간 피오니 장미</p>
-                    <p class="text-stone-900 font-bold text-lg mb-5">500,000 동</p>
+                    <p class="text-stone-900 font-bold text-lg mb-1">500,000 동</p>
+                    <p class="text-stone-500 text-xs mb-5">≈ $20 · ₩31,000</p>
                     <div class="flex flex-col gap-3">
                         <a href="http://pf.kakao.com/_zbwKX" target="_blank" class="flex items-center justify-center gap-2 bg-[#FAE100] text-stone-900 font-medium py-3 px-4 rounded-xl hover:bg-[#e8d000] transition w-full shadow-sm text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 3C6.477 3 2 6.477 2 10.8c0 2.7 1.6 5.1 4 6.6l-1 3.7 4.3-2.8c.9.2 1.8.3 2.7.3 5.523 0 10-3.477 10-7.8S17.523 3 12 3z"/></svg>
@@ -182,7 +186,8 @@
                 <div class="p-6 flex flex-col flex-grow">
                     <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">피오니 핑크 장미 25송이</h3>
                     <p class="text-stone-600 text-sm mb-2 flex-grow">흰 포장지에 담긴 부드러운 피오니 장미 — 어떤 날에도 완벽한 선물</p>
-                    <p class="text-stone-900 font-bold text-lg mb-5">500,000 동</p>
+                    <p class="text-stone-900 font-bold text-lg mb-1">500,000 동</p>
+                    <p class="text-stone-500 text-xs mb-5">≈ $20 · ₩31,000</p>
                     <div class="flex flex-col gap-3">
                         <a href="http://pf.kakao.com/_zbwKX" target="_blank" class="flex items-center justify-center gap-2 bg-[#FAE100] text-stone-900 font-medium py-3 px-4 rounded-xl hover:bg-[#e8d000] transition w-full shadow-sm text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 3C6.477 3 2 6.477 2 10.8c0 2.7 1.6 5.1 4 6.6l-1 3.7 4.3-2.8c.9.2 1.8.3 2.7.3 5.523 0 10-3.477 10-7.8S17.523 3 12 3z"/></svg>
@@ -201,7 +206,8 @@
                 <div class="p-6 flex flex-col flex-grow">
                     <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">백합 7가지</h3>
                     <p class="text-stone-600 text-sm mb-2 flex-grow">흰 포장지에 담긴 신선한 흰 백합 — 섬세하고 향기로운 꽃다발</p>
-                    <p class="text-stone-900 font-bold text-lg mb-5">600,000 동</p>
+                    <p class="text-stone-900 font-bold text-lg mb-1">600,000 동</p>
+                    <p class="text-stone-500 text-xs mb-5">≈ $24 · ₩37,500</p>
                     <div class="flex flex-col gap-3">
                         <a href="http://pf.kakao.com/_zbwKX" target="_blank" class="flex items-center justify-center gap-2 bg-[#FAE100] text-stone-900 font-medium py-3 px-4 rounded-xl hover:bg-[#e8d000] transition w-full shadow-sm text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 3C6.477 3 2 6.477 2 10.8c0 2.7 1.6 5.1 4 6.6l-1 3.7 4.3-2.8c.9.2 1.8.3 2.7.3 5.523 0 10-3.477 10-7.8S17.523 3 12 3z"/></svg>
@@ -220,7 +226,8 @@
                 <div class="p-6 flex flex-col flex-grow">
                     <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">흰 장미 51송이 + 유칼립투스</h3>
                     <p class="text-stone-600 text-sm mb-2 flex-grow">유칼립투스가 어우러진 우아한 흰 장미 꽃다발</p>
-                    <p class="text-stone-900 font-bold text-lg mb-5">1,000,000 동</p>
+                    <p class="text-stone-900 font-bold text-lg mb-1">1,000,000 동</p>
+                    <p class="text-stone-500 text-xs mb-5">≈ $40 · ₩62,500</p>
                     <div class="flex flex-col gap-3">
                         <a href="http://pf.kakao.com/_zbwKX" target="_blank" class="flex items-center justify-center gap-2 bg-[#FAE100] text-stone-900 font-medium py-3 px-4 rounded-xl hover:bg-[#e8d000] transition w-full shadow-sm text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 3C6.477 3 2 6.477 2 10.8c0 2.7 1.6 5.1 4 6.6l-1 3.7 4.3-2.8c.9.2 1.8.3 2.7.3 5.523 0 10-3.477 10-7.8S17.523 3 12 3z"/></svg>
@@ -239,7 +246,8 @@
                 <div class="p-6 flex flex-col flex-grow">
                     <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">흰·핑크 장미 51송이</h3>
                     <p class="text-stone-600 text-sm mb-2 flex-grow">흰 포장지에 담긴 풍성한 흰·핑크 장미 꽃다발</p>
-                    <p class="text-stone-900 font-bold text-lg mb-5">1,000,000 동</p>
+                    <p class="text-stone-900 font-bold text-lg mb-1">1,000,000 동</p>
+                    <p class="text-stone-500 text-xs mb-5">≈ $40 · ₩62,500</p>
                     <div class="flex flex-col gap-3">
                         <a href="http://pf.kakao.com/_zbwKX" target="_blank" class="flex items-center justify-center gap-2 bg-[#FAE100] text-stone-900 font-medium py-3 px-4 rounded-xl hover:bg-[#e8d000] transition w-full shadow-sm text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 3C6.477 3 2 6.477 2 10.8c0 2.7 1.6 5.1 4 6.6l-1 3.7 4.3-2.8c.9.2 1.8.3 2.7.3 5.523 0 10-3.477 10-7.8S17.523 3 12 3z"/></svg>
@@ -258,7 +266,8 @@
                 <div class="p-6 flex flex-col flex-grow">
                     <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">풍선 세트 S</h3>
                     <p class="text-stone-600 text-sm mb-2 flex-grow">큰 숫자 2개, 또는 숫자 1개 + 풍선 3개, 또는 호일 풍선 7개</p>
-                    <p class="text-stone-900 font-bold text-lg mb-5">1,000,000 동</p>
+                    <p class="text-stone-900 font-bold text-lg mb-1">1,000,000 동</p>
+                    <p class="text-stone-500 text-xs mb-5">≈ $40 · ₩62,500</p>
                     <div class="flex flex-col gap-3">
                         <a href="http://pf.kakao.com/_zbwKX" target="_blank" class="flex items-center justify-center gap-2 bg-[#FAE100] text-stone-900 font-medium py-3 px-4 rounded-xl hover:bg-[#e8d000] transition w-full shadow-sm text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 3C6.477 3 2 6.477 2 10.8c0 2.7 1.6 5.1 4 6.6l-1 3.7 4.3-2.8c.9.2 1.8.3 2.7.3 5.523 0 10-3.477 10-7.8S17.523 3 12 3z"/></svg>
@@ -277,7 +286,8 @@
                 <div class="p-6 flex flex-col flex-grow">
                     <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">바구니에 장미 101송이</h3>
                     <p class="text-stone-600 text-sm mb-2 flex-grow">바구니에 담긴 핑크·코럴 장미 — 기억에 남을 선물</p>
-                    <p class="text-stone-900 font-bold text-lg mb-5">2,000,000 동</p>
+                    <p class="text-stone-900 font-bold text-lg mb-1">2,000,000 동</p>
+                    <p class="text-stone-500 text-xs mb-5">≈ $80 · ₩125,000</p>
                     <div class="flex flex-col gap-3">
                         <a href="http://pf.kakao.com/_zbwKX" target="_blank" class="flex items-center justify-center gap-2 bg-[#FAE100] text-stone-900 font-medium py-3 px-4 rounded-xl hover:bg-[#e8d000] transition w-full shadow-sm text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 3C6.477 3 2 6.477 2 10.8c0 2.7 1.6 5.1 4 6.6l-1 3.7 4.3-2.8c.9.2 1.8.3 2.7.3 5.523 0 10-3.477 10-7.8S17.523 3 12 3z"/></svg>
@@ -296,7 +306,8 @@
                 <div class="p-6 flex flex-col flex-grow">
                     <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">바구니에 흰·핑크 장미 101송이</h3>
                     <p class="text-stone-600 text-sm mb-2 flex-grow">바구니에 담긴 흰·핑크 장미 — 럭셔리한 선물</p>
-                    <p class="text-stone-900 font-bold text-lg mb-5">2,000,000 동</p>
+                    <p class="text-stone-900 font-bold text-lg mb-1">2,000,000 동</p>
+                    <p class="text-stone-500 text-xs mb-5">≈ $80 · ₩125,000</p>
                     <div class="flex flex-col gap-3">
                         <a href="http://pf.kakao.com/_zbwKX" target="_blank" class="flex items-center justify-center gap-2 bg-[#FAE100] text-stone-900 font-medium py-3 px-4 rounded-xl hover:bg-[#e8d000] transition w-full shadow-sm text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 3C6.477 3 2 6.477 2 10.8c0 2.7 1.6 5.1 4 6.6l-1 3.7 4.3-2.8c.9.2 1.8.3 2.7.3 5.523 0 10-3.477 10-7.8S17.523 3 12 3z"/></svg>
@@ -315,7 +326,8 @@
                 <div class="p-6 flex flex-col flex-grow">
                     <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">풍선 세트 L</h3>
                     <p class="text-stone-600 text-sm mb-2 flex-grow">숫자 2개 + 풍선 7개, 또는 숫자 1개 + 풍선 10개, 또는 호일 풍선 15개</p>
-                    <p class="text-stone-900 font-bold text-lg mb-5">2,000,000 동</p>
+                    <p class="text-stone-900 font-bold text-lg mb-1">2,000,000 동</p>
+                    <p class="text-stone-500 text-xs mb-5">≈ $80 · ₩125,000</p>
                     <div class="flex flex-col gap-3">
                         <a href="http://pf.kakao.com/_zbwKX" target="_blank" class="flex items-center justify-center gap-2 bg-[#FAE100] text-stone-900 font-medium py-3 px-4 rounded-xl hover:bg-[#e8d000] transition w-full shadow-sm text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 3C6.477 3 2 6.477 2 10.8c0 2.7 1.6 5.1 4 6.6l-1 3.7 4.3-2.8c.9.2 1.8.3 2.7.3 5.523 0 10-3.477 10-7.8S17.523 3 12 3z"/></svg>
@@ -334,7 +346,8 @@
                 <div class="p-6 flex flex-col flex-grow">
                     <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">보라 장미 151송이</h3>
                     <p class="text-stone-600 text-sm mb-2 flex-grow">핑크 포장지에 담긴 보라 장미 대형 꽃다발 — 최고의 임팩트</p>
-                    <p class="text-stone-900 font-bold text-lg mb-5">2,250,000 동</p>
+                    <p class="text-stone-900 font-bold text-lg mb-1">2,250,000 동</p>
+                    <p class="text-stone-500 text-xs mb-5">≈ $90 · ₩140,000</p>
                     <div class="flex flex-col gap-3">
                         <a href="http://pf.kakao.com/_zbwKX" target="_blank" class="flex items-center justify-center gap-2 bg-[#FAE100] text-stone-900 font-medium py-3 px-4 rounded-xl hover:bg-[#e8d000] transition w-full shadow-sm text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 3C6.477 3 2 6.477 2 10.8c0 2.7 1.6 5.1 4 6.6l-1 3.7 4.3-2.8c.9.2 1.8.3 2.7.3 5.523 0 10-3.477 10-7.8S17.523 3 12 3z"/></svg>
@@ -401,5 +414,22 @@
         </div>
     </footer>
 
+<script>
+(function(){
+    var el = document.getElementById('countdown');
+    if(!el) return;
+    function update(){
+        var now = new Date(), h = now.getHours();
+        if(h < 6 || h >= 18){ el.style.display='none'; return; }
+        el.style.display = '';
+        var d = new Date(now); d.setHours(18,0,0,0);
+        var diff = d - now;
+        var hh=Math.floor(diff/3600000), mm=Math.floor((diff%3600000)/60000), ss=Math.floor((diff%60000)/1000);
+        var p=function(n){return('0'+n).slice(-2);};
+        el.textContent = '⏱ 18:00까지 남은 시간: ' + p(hh) + ':' + p(mm) + ':' + p(ss);
+    }
+    update(); setInterval(update,1000);
+})();
+</script>
 </body>
 </html>
