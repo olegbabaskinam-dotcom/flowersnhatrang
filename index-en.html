@@ -74,7 +74,7 @@
                 Free delivery across the city. Order before 6 PM — delivered today.
             </p>
             <p class="text-rose-600 font-bold text-xs md:text-base mb-3">
-                🕐 Open daily 7:00 AM – 10:00 PM<br class="md:hidden"> · Order before 6 PM for same-day delivery
+                🕐 Open daily 6:00 AM – 10:00 PM<br class="md:hidden"> · Order before 6 PM for same-day delivery
             </p>
             <p id="countdown" style="display:none" class="text-rose-700 font-bold text-sm md:text-base mb-5"></p>
             <div class="flex flex-col items-center gap-4">
@@ -127,6 +127,18 @@
             </div>
         </div>
     </section>
+
+    <!-- Anchor buttons -->
+    <div class="py-4 px-4 bg-white border-b border-stone-100">
+        <div class="max-w-4xl mx-auto flex flex-wrap gap-3 justify-center">
+            <a href="#delivery" class="inline-flex items-center gap-2 text-sm font-medium text-stone-600 bg-stone-50 hover:bg-stone-100 border border-stone-200 rounded-full px-4 py-2 transition">
+                <i class="fa-solid fa-truck-fast text-rose-400"></i> delivery info
+            </a>
+            <a href="#delivery" class="inline-flex items-center gap-2 text-sm font-medium text-stone-600 bg-stone-50 hover:bg-stone-100 border border-stone-200 rounded-full px-4 py-2 transition">
+                <i class="fa-regular fa-credit-card text-rose-400"></i> payment methods
+            </a>
+        </div>
+    </div>
 
     <!-- Customer Reviews -->
     <section class="py-8 px-4 bg-white border-b border-stone-100">
@@ -426,7 +438,7 @@
     </section>
 
     <!-- Delivery & Payment -->
-    <section class="py-16 px-4">
+    <section id="delivery" class="py-16 px-4">
         <div class="max-w-4xl mx-auto bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-stone-100">
             <h2 class="font-serif text-3xl font-bold text-stone-900 mb-8 text-center">delivery & payment</h2>
 
@@ -443,13 +455,36 @@
                     </div>
                 </div>
 
-                <div class="flex gap-5 border-t border-stone-100 pt-8">
-                    <div class="text-rose-400 text-3xl"><i class="fa-regular fa-credit-card"></i></div>
-                    <div>
-                        <h4 class="font-bold text-lg text-stone-900 mb-3">how to pay</h4>
-                        <p class="text-stone-800 font-medium leading-relaxed">
-                            Payment is made via bank transfer through our manager after confirming all bouquet details and delivery address. We accept VND, USD, and other currencies (details provided by manager).
-                        </p>
+                <div class="border-t border-stone-100 pt-8">
+                    <div class="flex gap-5 mb-6">
+                        <div class="text-rose-400 text-3xl"><i class="fa-regular fa-credit-card"></i></div>
+                        <h4 class="font-bold text-lg text-stone-900 self-center">payment methods</h4>
+                    </div>
+                    <div class="flex flex-wrap gap-3 justify-center">
+                        <div class="flex flex-col items-center gap-2 bg-stone-50 rounded-2xl px-5 py-4 w-[calc(50%-6px)] sm:w-28">
+                            <div class="w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center">
+                                <span class="text-lg font-bold text-red-600">₫</span>
+                            </div>
+                            <span class="text-stone-700 font-medium text-xs text-center">transfer VND</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 bg-stone-50 rounded-2xl px-5 py-4 w-[calc(50%-6px)] sm:w-28">
+                            <div class="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center">
+                                <i class="fa-solid fa-dollar-sign text-green-600 text-lg"></i>
+                            </div>
+                            <span class="text-stone-700 font-medium text-xs text-center">transfer USD</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 bg-stone-50 rounded-2xl px-5 py-4 w-[calc(50%-6px)] sm:w-28">
+                            <div class="w-10 h-10 rounded-xl bg-teal-100 flex items-center justify-center">
+                                <span class="text-xs font-bold text-teal-600">USDT</span>
+                            </div>
+                            <span class="text-stone-700 font-medium text-xs text-center">transfer USDT</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 bg-stone-50 rounded-2xl px-5 py-4 w-[calc(50%-6px)] sm:w-28">
+                            <div class="w-10 h-10 rounded-xl bg-rose-100 flex items-center justify-center">
+                                <i class="fa-solid fa-hand-holding-dollar text-rose-500 text-lg"></i>
+                            </div>
+                            <span class="text-stone-700 font-medium text-xs text-center">cash on delivery</span>
+                        </div>
                     </div>
                 </div>
             </div>
