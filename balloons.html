@@ -118,6 +118,18 @@
         </div>
     </section>
 
+    <!-- Кнопки-якоря -->
+    <div class="py-4 px-4 bg-white border-b border-stone-100">
+        <div class="max-w-4xl mx-auto flex flex-wrap gap-3 justify-center">
+            <a href="#delivery" class="inline-flex items-center gap-2 text-sm font-medium text-stone-600 bg-stone-50 hover:bg-stone-100 border border-stone-200 rounded-full px-4 py-2 transition">
+                <i class="fa-solid fa-truck-fast text-rose-400"></i> условия доставки
+            </a>
+            <a href="#delivery" class="inline-flex items-center gap-2 text-sm font-medium text-stone-600 bg-stone-50 hover:bg-stone-100 border border-stone-200 rounded-full px-4 py-2 transition">
+                <i class="fa-regular fa-credit-card text-rose-400"></i> способы оплаты
+            </a>
+        </div>
+    </div>
+
     <!-- Отзывы -->
     <section class="py-8 px-4 bg-white border-b border-stone-100">
         <div class="max-w-4xl mx-auto">
@@ -356,27 +368,58 @@
     </section>
 
     <!-- Доставка и оплата -->
-    <section class="py-16 px-4">
+    <section id="delivery" class="py-16 px-4">
         <div class="max-w-4xl mx-auto bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-stone-100">
             <h2 class="font-serif text-3xl font-bold text-stone-900 mb-8 text-center">доставка и оплата</h2>
             <div class="space-y-8">
                 <div class="flex gap-5">
                     <div class="text-rose-400 text-3xl"><i class="fa-solid fa-truck-fast"></i></div>
-                    <div>
+                    <div class="w-full">
                         <h4 class="font-bold text-lg text-stone-900 mb-3">условия доставки</h4>
                         <ul class="space-y-3 text-stone-800 font-medium">
-                            <li class="flex gap-2"><i class="fa-solid fa-check text-rose-300 mt-1"></i> бесплатная доставка по Нячангу.</li>
-                            <li class="flex gap-2"><i class="fa-solid fa-check text-rose-300 mt-1"></i> доставка день в день при заказе до 20:00.</li>
+                            <li class="flex gap-2"><i class="fa-solid fa-check text-rose-300 mt-1 flex-shrink-0"></i> бесплатная доставка по Нячангу.</li>
+                            <li class="flex gap-2"><i class="fa-solid fa-check text-rose-300 mt-1 flex-shrink-0"></i> доставка в Камрань — 600 000 донгов.</li>
+                            <li class="flex gap-2"><i class="fa-solid fa-check text-rose-300 mt-1 flex-shrink-0"></i> работаем с 6:00 до 22:00.</li>
+                            <li class="flex gap-2"><i class="fa-solid fa-check text-rose-300 mt-1 flex-shrink-0"></i> шары: заказ до 20:00 — привезём сегодня.</li>
                         </ul>
                     </div>
                 </div>
-                <div class="flex gap-5 border-t border-stone-100 pt-8">
-                    <div class="text-rose-400 text-3xl"><i class="fa-regular fa-credit-card"></i></div>
-                    <div>
-                        <h4 class="font-bold text-lg text-stone-900 mb-3">как оплатить</h4>
-                        <p class="text-stone-800 font-medium leading-relaxed">
-                            оплата при получении. принимаем донги, рубли и доллары.
-                        </p>
+                <div class="border-t border-stone-100 pt-8">
+                    <div class="flex gap-5 mb-6">
+                        <div class="text-rose-400 text-3xl"><i class="fa-regular fa-credit-card"></i></div>
+                        <h4 class="font-bold text-lg text-stone-900 self-center">способы оплаты</h4>
+                    </div>
+                    <div class="flex flex-wrap gap-3 justify-center">
+                        <div class="flex flex-col items-center gap-2 bg-stone-50 rounded-2xl px-5 py-4 w-[calc(50%-6px)] sm:w-28">
+                            <div class="w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center">
+                                <span class="text-lg font-bold text-red-600">₫</span>
+                            </div>
+                            <span class="text-stone-700 font-medium text-xs text-center">перевод донги</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 bg-stone-50 rounded-2xl px-5 py-4 w-[calc(50%-6px)] sm:w-28">
+                            <div class="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center">
+                                <i class="fa-solid fa-ruble-sign text-blue-600 text-lg"></i>
+                            </div>
+                            <span class="text-stone-700 font-medium text-xs text-center">перевод рубли</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 bg-stone-50 rounded-2xl px-5 py-4 w-[calc(50%-6px)] sm:w-28">
+                            <div class="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center">
+                                <i class="fa-solid fa-dollar-sign text-green-600 text-lg"></i>
+                            </div>
+                            <span class="text-stone-700 font-medium text-xs text-center">перевод доллары</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 bg-stone-50 rounded-2xl px-5 py-4 w-[calc(50%-6px)] sm:w-28">
+                            <div class="w-10 h-10 rounded-xl bg-teal-100 flex items-center justify-center">
+                                <span class="text-xs font-bold text-teal-600">USDT</span>
+                            </div>
+                            <span class="text-stone-700 font-medium text-xs text-center">перевод USDT</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 bg-stone-50 rounded-2xl px-5 py-4 w-[calc(50%-6px)] sm:w-28">
+                            <div class="w-10 h-10 rounded-xl bg-rose-100 flex items-center justify-center">
+                                <i class="fa-solid fa-hand-holding-dollar text-rose-500 text-lg"></i>
+                            </div>
+                            <span class="text-stone-700 font-medium text-xs text-center">наличные при получении</span>
+                        </div>
                     </div>
                 </div>
             </div>
