@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flower Delivery in Nha Trang | NhaTrang Flowers</title>
+    <title>Flower Delivery in Nha Trang</title>
 
-    <meta name="description" content="Fresh flowers & helium balloons delivered in Nha Trang. Free city delivery. Order before 6 PM — delivered today.">
+    <meta name="description" content="Fresh flowers, balloons and greeting cards in Nha Trang. Free same-day delivery. Pay in VND, USD or cash.">
     <meta property="og:title" content="Flower Delivery in Nha Trang | NhaTrang Flowers">
-    <meta property="og:description" content="Surprise your loved ones with fresh flowers. Free delivery across Nha Trang.">
+    <meta property="og:description" content="Surprise your loved ones with fresh flowers. Free delivery across the city.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:image" content="https://i.yapx.ru/dSXDj.jpg">
 
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NNYC00Y4EB"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -27,138 +26,193 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 
+        :root {
+            --rose: #c0687a;
+            --rose-light: #fce8ee;
+            --rose-hover: #a8566a;
+        }
+
         body {
             font-family: 'Montserrat', sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
         }
-        h1, h2, h3, .font-serif {
-            font-family: 'Playfair Display', serif;
+        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
-        /* Remove Telegram links — English page uses WhatsApp + Instagram only */
-        a[href*="t.me"] { display: none !important; }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card-img-wrap { overflow: hidden; }
+        .card-img-wrap img {
+            transition: transform 0.45s ease;
+        }
+        .card-img-wrap:hover img {
+            transform: scale(1.04);
+        }
+
+        .product-card {
+            border: 1px solid #f0e0e5;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+        .product-card:hover {
+            border-color: var(--rose);
+            box-shadow: 0 4px 24px rgba(192, 104, 122, 0.1);
+        }
+
+        .btn-rose {
+            border: 1.5px solid var(--rose);
+            color: var(--rose);
+            background: transparent;
+            transition: background 0.22s ease, color 0.22s ease, transform 0.15s ease;
+        }
+        .btn-rose:hover {
+            background: var(--rose);
+            color: #ffffff;
+            transform: translateY(-1px);
+        }
+        .btn-rose:active { transform: scale(0.97); }
+
+        @keyframes heroFadeUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .hero-animate  { animation: heroFadeUp 0.75s ease forwards; }
+        .hero-animate-delay  { opacity:0; animation: heroFadeUp 0.75s ease 0.2s forwards; }
+        .hero-animate-delay2 { opacity:0; animation: heroFadeUp 0.75s ease 0.4s forwards; }
     </style>
 </head>
-<body class="bg-[#FDFBF7] text-stone-800 antialiased flex flex-col min-h-screen">
+<body class="antialiased flex flex-col min-h-screen">
 
     <!-- Top banner -->
-    <div class="bg-rose-100 text-rose-900 text-sm md:text-base text-center py-3 px-4 font-medium tracking-wide">
-        We accept payment in VND, USD and other currencies
+    <div style="background:#fce8ee; color:#a8566a;" class="text-xs py-2 text-center tracking-widest font-medium uppercase">
+        Quality · Responsibility · Punctuality
     </div>
 
     <!-- Header -->
-    <header class="bg-[#FDFBF7]/90 backdrop-blur-md sticky top-0 z-50 border-b border-stone-200">
+    <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-stone-100">
         <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center gap-3">
                 <img src="https://i.yapx.ru/dqRu8.jpg" alt="NhaTrang Flowers" class="h-12 w-12 rounded-xl object-cover">
-                <span class="font-medium text-xs leading-tight text-stone-700 tracking-wide">Flower & Balloon<br>Delivery in Nha Trang</span>
+                <span class="font-medium text-xs leading-tight text-stone-600 tracking-wide">Flower & Balloon<br>Delivery in Nha Trang</span>
             </div>
-
             <div class="flex gap-4 text-xl">
-                <a href="https://wa.me/37443529162" target="_blank" class="text-stone-600 hover:text-[#25D366] transition" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-                <a href="https://t.me/babaskin_o" target="_blank" class="text-stone-600 hover:text-[#229ED9] transition" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
-                <a href="https://instagram.com/flowers_vietnam_inst" target="_blank" class="text-stone-600 hover:text-[#E1306C] transition" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://wa.me/37443529162" target="_blank" class="text-stone-400 hover:text-[#c0687a] transition" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://t.me/babaskin_o" target="_blank" class="text-stone-400 hover:text-[#c0687a] transition" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://vk.com/flowers_vietnam" target="_blank" class="text-stone-400 hover:text-[#c0687a] transition" aria-label="VK"><i class="fa-brands fa-vk"></i></a>
+                <a href="https://instagram.com/flowers_vietnam_inst" target="_blank" class="text-stone-400 hover:text-[#c0687a] transition" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
             </div>
         </div>
     </header>
 
-    <!-- Hero -->
-    <section class="relative py-12 md:py-24 px-4 flex items-center justify-center min-h-[50vh] md:min-h-[70vh] overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <img src="https://i.yapx.ru/dSXDj.jpg" alt="Flowers Nha Trang" class="w-full h-full object-cover object-center">
-            <div class="absolute inset-0 bg-[#FDFBF7]/55"></div>
-        </div>
+    <!-- Hero — split layout -->
+    <section class="flex flex-col md:flex-row min-h-[70vh] md:min-h-[80vh]">
 
-        <div class="relative z-10 w-full max-w-4xl mx-auto text-center px-4">
-            <h1 class="font-serif text-xl md:text-6xl lg:text-7xl font-medium italic text-rose-500 mb-4 leading-tight drop-shadow-sm">
-                Flower & Balloon Delivery in Nha Trang
-            </h1>
-            <p class="text-stone-800 mb-3 text-sm md:text-xl font-medium max-w-2xl mx-auto">
-                Free delivery across the city. Order before 6 PM — delivered today.
-            </p>
-            <p class="text-rose-600 font-bold text-xs md:text-base mb-3">
-                🕐 Open daily 6:00 AM – 10:00 PM<br class="md:hidden"> · Order before 6 PM for same-day delivery
-            </p>
-            <p id="countdown" style="display:none" class="text-rose-700 font-bold text-sm md:text-base mb-5"></p>
-            <div class="flex flex-col items-center gap-4">
-                <div class="flex flex-wrap gap-3 justify-center">
-                    <a href="https://wa.me/37443529162?text=Hello,%20I%20would%20like%20to%20order%20flowers" target="_blank" class="flex items-center gap-2 bg-[#25D366] text-white font-medium py-3 px-5 rounded-full shadow-lg hover:bg-[#20b858] active:scale-95 transition-all text-sm">
-                        <i class="fa-brands fa-whatsapp text-xl"></i> WhatsApp
+        <!-- Left panel -->
+        <div class="md:w-1/2 bg-white flex items-center justify-center px-8 py-16 md:py-0" style="border-right: 1px solid #f0d0d8; box-shadow: 4px 0 24px rgba(192,104,122,0.06);">
+            <div class="max-w-sm w-full text-center">
+                <p class="text-xs tracking-widest uppercase mb-4 hero-animate" style="color:#c0687a;">Nha Trang · Vietnam</p>
+                <h1 class="font-serif text-5xl md:text-6xl lg:text-7xl font-medium italic mb-5 leading-tight hero-animate" style="color:#1a1a1a;">
+                    Flower & Balloon Delivery
+                </h1>
+                <p class="text-stone-700 text-sm md:text-base mb-2 hero-animate-delay">
+                    Free delivery across the city. Order before 18:00 — delivered today.
+                </p>
+                <p class="text-xs mb-1 hero-animate-delay" style="color:#c0687a;">
+                    🕐 we work from 6:00 to 22:00
+                </p>
+                <p id="countdown" style="display:none; color:#c0687a;" class="text-xs mb-6"></p>
+
+                <div class="flex flex-col gap-3 mt-6 hero-animate-delay2">
+                    <a href="https://wa.me/37443529162?text=Hello,%20I'd%20like%20to%20order%20flowers" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-3 px-5 rounded-xl text-sm">
+                        <i class="fa-brands fa-whatsapp text-base"></i> WhatsApp
                     </a>
-                    <a href="https://t.me/babaskin_o?text=Hello,%20I%20would%20like%20to%20order%20flowers" target="_blank" class="flex items-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-5 rounded-full shadow-lg hover:bg-[#1d88ba] active:scale-95 transition-all text-sm">
-                        <i class="fa-brands fa-telegram text-xl"></i> Telegram
+                    <a href="https://t.me/babaskin_o?text=Hello,%20I'd%20like%20to%20order%20flowers" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-3 px-5 rounded-xl text-sm">
+                        <i class="fa-brands fa-telegram text-base"></i> Telegram
                     </a>
-                    <a href="https://instagram.com/flowers_vietnam_inst" target="_blank" class="flex items-center gap-2 bg-[#E1306C] text-white font-medium py-3 px-5 rounded-full shadow-lg hover:bg-[#c0275d] active:scale-95 transition-all text-sm">
-                        <i class="fa-brands fa-instagram text-xl"></i> Instagram
+                    <a href="https://instagram.com/flowers_vietnam_inst" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-3 px-5 rounded-xl text-sm">
+                        <i class="fa-brands fa-instagram text-base"></i> Instagram
                     </a>
                 </div>
-                <div class="inline-flex items-center gap-2 bg-white/80 text-stone-700 text-xs font-medium py-1.5 px-4 rounded-full border border-stone-200">
-                    🇬🇧 English-speaking manager & delivery
-                </div>
-                <a href="#catalog" class="text-stone-600 text-sm font-medium underline underline-offset-2 hover:text-stone-900 transition">
+
+                <a href="#catalog" class="block text-center text-stone-400 text-xs mt-6 hover:text-stone-700 transition tracking-wide">
                     view catalog ↓
                 </a>
             </div>
         </div>
+
+        <!-- Right — photo -->
+        <div class="md:w-1/2 h-64 md:h-auto overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1615182787503-08365d1e7fae?q=80&w=900&auto=format&fit=crop" alt="Flower bouquets Nha Trang" class="w-full h-full object-cover object-center">
+        </div>
     </section>
 
-    <!-- Trust block -->
-    <section class="py-6 px-4 bg-white border-b border-stone-100">
+    <!-- Trust bar -->
+    <section class="reveal py-8 px-4 border-b border-stone-100">
         <div class="max-w-4xl mx-auto">
-            <div class="grid grid-cols-3 gap-4 text-center">
-                <div class="flex flex-col items-center gap-1">
-                    <div class="text-2xl md:text-3xl font-bold text-stone-900">500+</div>
-                    <div class="text-stone-500 text-xs md:text-sm font-medium">bouquets delivered</div>
+            <div class="flex flex-wrap justify-center divide-x divide-stone-100">
+                <div class="flex flex-col items-center px-8 py-2">
+                    <div class="text-2xl md:text-3xl font-bold" style="color:#1a1a1a;">500+</div>
+                    <div class="text-stone-400 text-xs font-medium mt-1">bouquets delivered</div>
                 </div>
-                <div class="flex flex-col items-center gap-1">
-                    <div class="flex items-center gap-1 justify-center">
-                        <span class="text-2xl md:text-3xl font-bold text-stone-900">5.0</span>
-                        <i class="fa-solid fa-star text-yellow-400 text-xl md:text-2xl"></i>
+                <div class="flex flex-col items-center px-8 py-2">
+                    <div class="flex items-center gap-1">
+                        <span class="text-2xl md:text-3xl font-bold" style="color:#1a1a1a;">5.0</span>
+                        <i class="fa-solid fa-star text-yellow-400 text-lg"></i>
                     </div>
-                    <div class="text-stone-500 text-xs md:text-sm font-medium">104 reviews on Google</div>
+                    <div class="text-stone-400 text-xs font-medium mt-1">104 reviews on Google</div>
                 </div>
-                <div class="flex flex-col items-center gap-1">
-                    <div class="text-2xl md:text-3xl font-bold text-stone-900">💵</div>
-                    <div class="text-stone-500 text-xs md:text-sm font-medium">cash on delivery</div>
+                <div class="flex flex-col items-center px-8 py-2">
+                    <div class="text-2xl md:text-3xl font-bold" style="color:#1a1a1a;">💵</div>
+                    <div class="text-stone-400 text-xs font-medium mt-1">pay on delivery</div>
                 </div>
             </div>
-            <div class="text-center mt-5">
-                <a href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" class="inline-flex items-center gap-2 text-rose-500 font-medium text-sm hover:text-rose-600 transition underline underline-offset-2">
+            <div class="text-center mt-4">
+                <a href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank"
+                   class="inline-flex items-center gap-2 font-medium text-xs hover:underline transition" style="color:#c0687a;">
                     <i class="fa-solid fa-star text-yellow-400"></i>
-                    Read reviews on Google Maps
+                    read reviews on Google Maps
                 </a>
             </div>
         </div>
     </section>
 
     <!-- Anchor buttons -->
-    <div class="py-4 px-4 bg-white border-b border-stone-100">
+    <div class="py-4 px-4 border-b border-stone-100">
         <div class="max-w-4xl mx-auto flex flex-wrap gap-3 justify-center">
-            <a href="#delivery" class="inline-flex items-center gap-2 text-sm font-medium text-stone-600 bg-stone-50 hover:bg-stone-100 border border-stone-200 rounded-full px-4 py-2 transition">
-                <i class="fa-solid fa-truck-fast text-rose-400"></i> delivery info
+            <a href="#delivery" class="inline-flex items-center gap-2 text-xs font-medium text-stone-500 bg-white hover:bg-stone-50 border border-stone-200 rounded-full px-4 py-2 transition">
+                <i class="fa-solid fa-truck-fast" style="color:#c0687a;"></i> delivery info
             </a>
-            <a href="#delivery" class="inline-flex items-center gap-2 text-sm font-medium text-stone-600 bg-stone-50 hover:bg-stone-100 border border-stone-200 rounded-full px-4 py-2 transition">
-                <i class="fa-regular fa-credit-card text-rose-400"></i> payment methods
+            <a href="#delivery" class="inline-flex items-center gap-2 text-xs font-medium text-stone-500 bg-white hover:bg-stone-50 border border-stone-200 rounded-full px-4 py-2 transition">
+                <i class="fa-regular fa-credit-card" style="color:#c0687a;"></i> payment methods
             </a>
         </div>
     </div>
 
-    <!-- Customer Reviews -->
-    <section class="py-8 px-4 bg-white border-b border-stone-100">
+    <!-- Reviews -->
+    <section class="reveal py-10 px-4 border-b border-stone-100">
         <div class="max-w-4xl mx-auto">
-            <h3 class="font-serif text-2xl font-bold text-center mb-6 text-stone-900">Google reviews</h3>
+            <h3 class="font-serif text-2xl font-bold text-center mb-6" style="color:#1a1a1a;">Google reviews</h3>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div class="rounded-2xl overflow-hidden border border-stone-100 bg-white">
                     <div class="h-[280px] flex items-center justify-center p-2">
-                        <img src="https://i.yapx.ru/dqj82.jpg" alt="Google Review" class="max-h-full max-w-full object-contain">
+                        <img src="https://i.yapx.ru/dqj8G.jpg" alt="Google Review" class="max-h-full max-w-full object-contain">
                     </div>
                 </div>
                 <div class="rounded-2xl overflow-hidden border border-stone-100 bg-white">
                     <div class="h-[280px] flex items-center justify-center p-2">
-                        <img src="https://i.yapx.ru/dqj9Z.jpg" alt="Google Review" class="max-h-full max-w-full object-contain">
+                        <img src="https://i.yapx.ru/dqj8P.jpg" alt="Google Review" class="max-h-full max-w-full object-contain">
                     </div>
                 </div>
                 <div class="rounded-2xl overflow-hidden border border-stone-100 bg-white">
                     <div class="h-[280px] flex items-center justify-center p-2">
-                        <img src="https://i.yapx.ru/dqkBd.jpg" alt="Google Review" class="max-h-full max-w-full object-contain">
+                        <img src="https://i.yapx.ru/dqj8o.jpg" alt="Google Review" class="max-h-full max-w-full object-contain">
                     </div>
                 </div>
             </div>
@@ -167,269 +221,257 @@
 
     <!-- Catalog -->
     <section id="catalog" class="py-16 px-4 max-w-5xl mx-auto flex-grow">
-        <h2 class="font-serif text-3xl md:text-4xl font-bold text-center mb-10 text-stone-900">our catalog</h2>
+        <h2 class="reveal font-serif text-3xl md:text-4xl font-bold text-center mb-12" style="color:#1a1a1a;">our catalog</h2>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 
-            <!-- 1. 25 Pink Roses -->
-            <div class="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col">
-                <img src="https://i.yapx.ru/dqReH.jpg" alt="25 Pink Roses" class="w-full h-72 object-cover">
-                <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">25 Pink Roses</h3>
-                    <p class="text-stone-600 text-sm mb-2 flex-grow">Soft pink roses in white wrapping — a heartfelt gift for any occasion</p>
-                    <p class="text-stone-900 font-bold text-lg mb-1">500,000 VND</p>
-                    <p class="text-stone-500 text-xs mb-5">≈ $20</p>
-                    <div class="flex flex-col gap-3">
-                        <a href="https://wa.me/37443529162?text=Hello,%20I%20would%20like%20to%20order%2025%20Pink%20Roses" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-whatsapp text-lg"></i> Order via WhatsApp
+            <!-- 1 -->
+            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col">
+                <div class="card-img-wrap">
+                    <img src="https://i.yapx.ru/dqReH.jpg" alt="25 pink roses" class="w-full h-64 object-cover">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">25 pink roses</h3>
+                    <p class="text-stone-600 text-xs mb-3 flex-grow">tender pink roses in white wrapping — a touching gift for any occasion</p>
+                    <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">500,000 VND</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $20</p>
+                    <div class="flex flex-col gap-2">
+                        <a href="https://wa.me/37443529162?text=Hello,%20I'd%20like%20to%20order%2025%20pink%20roses" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">
+                            <i class="fa-brands fa-whatsapp"></i> order via WhatsApp
                         </a>
-                        <a href="https://t.me/babaskin_o?text=Hello,%20I%20would%20like%20to%20order%2025%20Pink%20Roses" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-telegram text-lg"></i> Order via Telegram
-                        </a>
-                        <a href="https://instagram.com/flowers_vietnam_inst" target="_blank" class="flex items-center justify-center gap-2 bg-[#E1306C] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#c0275d] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-instagram text-lg"></i> Order via Instagram
+                        <a href="https://t.me/babaskin_o?text=Hello,%20I'd%20like%20to%20order%2025%20pink%20roses" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">
+                            <i class="fa-brands fa-telegram"></i> order via Telegram
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- 2. 25 White Roses -->
-            <div class="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col">
-                <img src="https://i.yapx.ru/dqReP.jpg" alt="25 White Roses" class="w-full h-72 object-cover">
-                <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">25 White Roses</h3>
-                    <p class="text-stone-600 text-sm mb-2 flex-grow">Classic white roses in white wrapping — an elegant gift</p>
-                    <p class="text-stone-900 font-bold text-lg mb-1">500,000 VND</p>
-                    <p class="text-stone-500 text-xs mb-5">≈ $20</p>
-                    <div class="flex flex-col gap-3">
-                        <a href="https://wa.me/37443529162?text=Hello,%20I%20would%20like%20to%20order%2025%20White%20Roses" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-whatsapp text-lg"></i> Order via WhatsApp
+            <!-- 2 -->
+            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col">
+                <div class="card-img-wrap">
+                    <img src="https://i.yapx.ru/dqReP.jpg" alt="25 white roses" class="w-full h-64 object-cover">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">25 white roses</h3>
+                    <p class="text-stone-600 text-xs mb-3 flex-grow">classic white roses in white wrapping — an elegant and timeless gift</p>
+                    <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">500,000 VND</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $20</p>
+                    <div class="flex flex-col gap-2">
+                        <a href="https://wa.me/37443529162?text=Hello,%20I'd%20like%20to%20order%2025%20white%20roses" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">
+                            <i class="fa-brands fa-whatsapp"></i> order via WhatsApp
                         </a>
-                        <a href="https://t.me/babaskin_o?text=Hello,%20I%20would%20like%20to%20order%2025%20White%20Roses" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-telegram text-lg"></i> Order via Telegram
-                        </a>
-                        <a href="https://instagram.com/flowers_vietnam_inst" target="_blank" class="flex items-center justify-center gap-2 bg-[#E1306C] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#c0275d] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-instagram text-lg"></i> Order via Instagram
+                        <a href="https://t.me/babaskin_o?text=Hello,%20I'd%20like%20to%20order%2025%20white%20roses" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">
+                            <i class="fa-brands fa-telegram"></i> order via Telegram
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- 3. 25 Red Roses -->
-            <div class="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col">
-                <img src="https://i.yapx.ru/dqRY6.jpg" alt="25 Red Roses" class="w-full h-72 object-cover">
-                <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">25 Red Roses</h3>
-                    <p class="text-stone-600 text-sm mb-2 flex-grow">Vibrant red peony roses in white wrapping</p>
-                    <p class="text-stone-900 font-bold text-lg mb-1">500,000 VND</p>
-                    <p class="text-stone-500 text-xs mb-5">≈ $20</p>
-                    <div class="flex flex-col gap-3">
-                        <a href="https://wa.me/37443529162?text=Hello,%20I%20would%20like%20to%20order%2025%20Red%20Roses" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-whatsapp text-lg"></i> Order via WhatsApp
+            <!-- 3 -->
+            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col">
+                <div class="card-img-wrap">
+                    <img src="https://i.yapx.ru/dqRY6.jpg" alt="25 red roses" class="w-full h-64 object-cover">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">25 red roses</h3>
+                    <p class="text-stone-600 text-xs mb-3 flex-grow">vibrant red garden roses in white wrapping — bold and beautiful</p>
+                    <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">500,000 VND</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $20</p>
+                    <div class="flex flex-col gap-2">
+                        <a href="https://wa.me/37443529162?text=Hello,%20I'd%20like%20to%20order%2025%20red%20roses" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">
+                            <i class="fa-brands fa-whatsapp"></i> order via WhatsApp
                         </a>
-                        <a href="https://t.me/babaskin_o?text=Hello,%20I%20would%20like%20to%20order%2025%20Red%20Roses" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-telegram text-lg"></i> Order via Telegram
-                        </a>
-                        <a href="https://instagram.com/flowers_vietnam_inst" target="_blank" class="flex items-center justify-center gap-2 bg-[#E1306C] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#c0275d] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-instagram text-lg"></i> Order via Instagram
+                        <a href="https://t.me/babaskin_o?text=Hello,%20I'd%20like%20to%20order%2025%20red%20roses" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">
+                            <i class="fa-brands fa-telegram"></i> order via Telegram
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- 4. 25 Pink Peony Roses -->
-            <div class="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col">
-                <img src="https://i.yapx.ru/dqRRa.jpg" alt="25 Pink Peony Roses" class="w-full h-72 object-cover">
-                <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">25 Pink Peony Roses</h3>
-                    <p class="text-stone-600 text-sm mb-2 flex-grow">Delicate peony roses in white wrapping — a perfect gift for any occasion</p>
-                    <p class="text-stone-900 font-bold text-lg mb-1">500,000 VND</p>
-                    <p class="text-stone-500 text-xs mb-5">≈ $20</p>
-                    <div class="flex flex-col gap-3">
-                        <a href="https://wa.me/37443529162?text=Hello,%20I%20would%20like%20to%20order%2025%20Pink%20Peony%20Roses" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-whatsapp text-lg"></i> Order via WhatsApp
+            <!-- 4 -->
+            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col">
+                <div class="card-img-wrap">
+                    <img src="https://i.yapx.ru/dqRRa.jpg" alt="25 garden pink roses" class="w-full h-64 object-cover">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">25 garden pink roses</h3>
+                    <p class="text-stone-600 text-xs mb-3 flex-grow">lush peony-style pink roses in white wrapping — a perfect romantic gift</p>
+                    <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">500,000 VND</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $20</p>
+                    <div class="flex flex-col gap-2">
+                        <a href="https://wa.me/37443529162?text=Hello,%20I'd%20like%20to%20order%2025%20garden%20pink%20roses" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">
+                            <i class="fa-brands fa-whatsapp"></i> order via WhatsApp
                         </a>
-                        <a href="https://t.me/babaskin_o?text=Hello,%20I%20would%20like%20to%20order%2025%20Pink%20Peony%20Roses" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-telegram text-lg"></i> Order via Telegram
-                        </a>
-                        <a href="https://instagram.com/flowers_vietnam_inst" target="_blank" class="flex items-center justify-center gap-2 bg-[#E1306C] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#c0275d] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-instagram text-lg"></i> Order via Instagram
+                        <a href="https://t.me/babaskin_o?text=Hello,%20I'd%20like%20to%20order%2025%20garden%20pink%20roses" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">
+                            <i class="fa-brands fa-telegram"></i> order via Telegram
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- 5. 7 Lily Stems -->
-            <div class="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col">
-                <img src="https://i.yapx.ru/dqRaL.jpg" alt="7 Lily Stems" class="w-full h-72 object-cover">
-                <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">7 Lily Stems</h3>
-                    <p class="text-stone-600 text-sm mb-2 flex-grow">Fresh white lilies in white wrapping — delicate and fragrant</p>
-                    <p class="text-stone-900 font-bold text-lg mb-1">600,000 VND</p>
-                    <p class="text-stone-500 text-xs mb-5">≈ $24</p>
-                    <div class="flex flex-col gap-3">
-                        <a href="https://wa.me/37443529162?text=Hello,%20I%20would%20like%20to%20order%207%20Lily%20Stems" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-whatsapp text-lg"></i> Order via WhatsApp
+            <!-- 5 -->
+            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col">
+                <div class="card-img-wrap">
+                    <img src="https://i.yapx.ru/dqRaL.jpg" alt="7 lily stems" class="w-full h-64 object-cover">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">7 lily stems</h3>
+                    <p class="text-stone-600 text-xs mb-3 flex-grow">fresh white lilies in white wrapping — delicate and fragrant bouquet</p>
+                    <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">600,000 VND</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $24</p>
+                    <div class="flex flex-col gap-2">
+                        <a href="https://wa.me/37443529162?text=Hello,%20I'd%20like%20to%20order%207%20lily%20stems" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">
+                            <i class="fa-brands fa-whatsapp"></i> order via WhatsApp
                         </a>
-                        <a href="https://t.me/babaskin_o?text=Hello,%20I%20would%20like%20to%20order%207%20Lily%20Stems" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-telegram text-lg"></i> Order via Telegram
-                        </a>
-                        <a href="https://instagram.com/flowers_vietnam_inst" target="_blank" class="flex items-center justify-center gap-2 bg-[#E1306C] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#c0275d] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-instagram text-lg"></i> Order via Instagram
+                        <a href="https://t.me/babaskin_o?text=Hello,%20I'd%20like%20to%20order%207%20lily%20stems" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">
+                            <i class="fa-brands fa-telegram"></i> order via Telegram
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- 6. 51 White Roses with Eucalyptus -->
-            <div class="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col">
-                <img src="https://i.yapx.ru/dqRWB.jpg" alt="51 White Roses with Eucalyptus" class="w-full h-72 object-cover">
-                <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">51 White Roses with Eucalyptus</h3>
-                    <p class="text-stone-600 text-sm mb-2 flex-grow">Elegant white roses with eucalyptus sprigs — refined and tasteful</p>
-                    <p class="text-stone-900 font-bold text-lg mb-1">1,000,000 VND</p>
-                    <p class="text-stone-500 text-xs mb-5">≈ $40</p>
-                    <div class="flex flex-col gap-3">
-                        <a href="https://wa.me/37443529162?text=Hello,%20I%20would%20like%20to%20order%2051%20White%20Roses%20with%20Eucalyptus" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-whatsapp text-lg"></i> Order via WhatsApp
+            <!-- 6 -->
+            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col">
+                <div class="card-img-wrap">
+                    <img src="https://i.yapx.ru/dqRWB.jpg" alt="51 white roses with eucalyptus" class="w-full h-64 object-cover">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">51 white roses & eucalyptus</h3>
+                    <p class="text-stone-600 text-xs mb-3 flex-grow">an elegant bouquet of white roses with eucalyptus sprigs</p>
+                    <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">1,000,000 VND</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $40</p>
+                    <div class="flex flex-col gap-2">
+                        <a href="https://wa.me/37443529162?text=Hello,%20I'd%20like%20to%20order%2051%20white%20roses%20with%20eucalyptus" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">
+                            <i class="fa-brands fa-whatsapp"></i> order via WhatsApp
                         </a>
-                        <a href="https://t.me/babaskin_o?text=Hello,%20I%20would%20like%20to%20order%2051%20White%20Roses%20with%20Eucalyptus" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-telegram text-lg"></i> Order via Telegram
-                        </a>
-                        <a href="https://instagram.com/flowers_vietnam_inst" target="_blank" class="flex items-center justify-center gap-2 bg-[#E1306C] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#c0275d] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-instagram text-lg"></i> Order via Instagram
+                        <a href="https://t.me/babaskin_o?text=Hello,%20I'd%20like%20to%20order%2051%20white%20roses%20with%20eucalyptus" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">
+                            <i class="fa-brands fa-telegram"></i> order via Telegram
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- 7. 51 White & Pink Roses -->
-            <div class="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col">
-                <img src="https://i.yapx.ru/dqRYB.jpg" alt="51 White & Pink Roses" class="w-full h-72 object-cover">
-                <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">51 White & Pink Roses</h3>
-                    <p class="text-stone-600 text-sm mb-2 flex-grow">Lush bouquet of white and pink roses in white wrapping</p>
-                    <p class="text-stone-900 font-bold text-lg mb-1">1,000,000 VND</p>
-                    <p class="text-stone-500 text-xs mb-5">≈ $40</p>
-                    <div class="flex flex-col gap-3">
-                        <a href="https://wa.me/37443529162?text=Hello,%20I%20would%20like%20to%20order%2051%20White%20and%20Pink%20Roses" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-whatsapp text-lg"></i> Order via WhatsApp
+            <!-- 7 -->
+            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col">
+                <div class="card-img-wrap">
+                    <img src="https://i.yapx.ru/dqRYB.jpg" alt="51 white-pink roses" class="w-full h-64 object-cover">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">51 white-pink roses</h3>
+                    <p class="text-stone-600 text-xs mb-3 flex-grow">a lush bouquet of white and pink roses in white wrapping</p>
+                    <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">1,000,000 VND</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $40</p>
+                    <div class="flex flex-col gap-2">
+                        <a href="https://wa.me/37443529162?text=Hello,%20I'd%20like%20to%20order%2051%20white-pink%20roses" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">
+                            <i class="fa-brands fa-whatsapp"></i> order via WhatsApp
                         </a>
-                        <a href="https://t.me/babaskin_o?text=Hello,%20I%20would%20like%20to%20order%2051%20White%20and%20Pink%20Roses" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-telegram text-lg"></i> Order via Telegram
-                        </a>
-                        <a href="https://instagram.com/flowers_vietnam_inst" target="_blank" class="flex items-center justify-center gap-2 bg-[#E1306C] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#c0275d] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-instagram text-lg"></i> Order via Instagram
+                        <a href="https://t.me/babaskin_o?text=Hello,%20I'd%20like%20to%20order%2051%20white-pink%20roses" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">
+                            <i class="fa-brands fa-telegram"></i> order via Telegram
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- 8. Balloon Set S -->
-            <div class="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col">
-                <img src="https://i.yapx.ru/dqRd2.jpg" alt="Balloon Set S" class="w-full h-72 object-cover">
-                <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">Balloon Set S</h3>
-                    <p class="text-stone-600 text-sm mb-2 flex-grow">2 large number balloons, or 1 number + 3 balloons, or 7 foil balloons</p>
-                    <p class="text-stone-900 font-bold text-lg mb-1">1,000,000 VND</p>
-                    <p class="text-stone-500 text-xs mb-5">≈ $40</p>
-                    <div class="flex flex-col gap-3">
-                        <a href="https://wa.me/37443529162?text=Hello,%20I%20would%20like%20to%20order%20Balloon%20Set%20S" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-whatsapp text-lg"></i> Order via WhatsApp
+            <!-- 8 -->
+            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col">
+                <div class="card-img-wrap">
+                    <img src="https://i.yapx.ru/dqRd2.jpg" alt="Balloon set S" class="w-full h-64 object-cover">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">balloon set S</h3>
+                    <p class="text-stone-600 text-xs mb-3 flex-grow">2 large number balloons, or 1 number + 3 balloons, or 7 foil balloons</p>
+                    <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">1,000,000 VND</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $40</p>
+                    <div class="flex flex-col gap-2">
+                        <a href="https://wa.me/37443529162?text=Hello,%20I'd%20like%20to%20order%20balloon%20set%20S" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">
+                            <i class="fa-brands fa-whatsapp"></i> order via WhatsApp
                         </a>
-                        <a href="https://t.me/babaskin_o?text=Hello,%20I%20would%20like%20to%20order%20Balloon%20Set%20S" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-telegram text-lg"></i> Order via Telegram
-                        </a>
-                        <a href="https://instagram.com/flowers_vietnam_inst" target="_blank" class="flex items-center justify-center gap-2 bg-[#E1306C] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#c0275d] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-instagram text-lg"></i> Order via Instagram
+                        <a href="https://t.me/babaskin_o?text=Hello,%20I'd%20like%20to%20order%20balloon%20set%20S" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">
+                            <i class="fa-brands fa-telegram"></i> order via Telegram
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- 9. 101 Roses in a Basket (Pink & Coral) -->
-            <div class="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col">
-                <img src="https://i.yapx.ru/dqRS4.jpg" alt="101 Roses in a Basket" class="w-full h-72 object-cover">
-                <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">101 Roses in a Basket</h3>
-                    <p class="text-stone-600 text-sm mb-2 flex-grow">Luxurious pink & coral roses in a basket — a gift to remember</p>
-                    <p class="text-stone-900 font-bold text-lg mb-1">2,000,000 VND</p>
-                    <p class="text-stone-500 text-xs mb-5">≈ $80</p>
-                    <div class="flex flex-col gap-3">
-                        <a href="https://wa.me/37443529162?text=Hello,%20I%20would%20like%20to%20order%20101%20Roses%20in%20a%20Basket" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-whatsapp text-lg"></i> Order via WhatsApp
+            <!-- 9 -->
+            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col">
+                <div class="card-img-wrap">
+                    <img src="https://i.yapx.ru/dqRS4.jpg" alt="101 roses in a basket" class="w-full h-64 object-cover">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">101 roses in a basket</h3>
+                    <p class="text-stone-600 text-xs mb-3 flex-grow">a lavish arrangement of pink-coral roses in a wicker basket</p>
+                    <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">2,000,000 VND</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $80</p>
+                    <div class="flex flex-col gap-2">
+                        <a href="https://wa.me/37443529162?text=Hello,%20I'd%20like%20to%20order%20101%20roses%20in%20a%20basket" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">
+                            <i class="fa-brands fa-whatsapp"></i> order via WhatsApp
                         </a>
-                        <a href="https://t.me/babaskin_o?text=Hello,%20I%20would%20like%20to%20order%20101%20Roses%20in%20a%20Basket" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-telegram text-lg"></i> Order via Telegram
-                        </a>
-                        <a href="https://instagram.com/flowers_vietnam_inst" target="_blank" class="flex items-center justify-center gap-2 bg-[#E1306C] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#c0275d] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-instagram text-lg"></i> Order via Instagram
+                        <a href="https://t.me/babaskin_o?text=Hello,%20I'd%20like%20to%20order%20101%20roses%20in%20a%20basket" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">
+                            <i class="fa-brands fa-telegram"></i> order via Telegram
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- 10. 101 White & Pink Roses in a Basket -->
-            <div class="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col">
-                <img src="https://i.yapx.ru/dqRc2.jpg" alt="101 White & Pink Roses in a Basket" class="w-full h-72 object-cover">
-                <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">101 White & Pink Roses in a Basket</h3>
-                    <p class="text-stone-600 text-sm mb-2 flex-grow">Soft white and pink roses in a basket — a luxurious gift</p>
-                    <p class="text-stone-900 font-bold text-lg mb-1">2,000,000 VND</p>
-                    <p class="text-stone-500 text-xs mb-5">≈ $80</p>
-                    <div class="flex flex-col gap-3">
-                        <a href="https://wa.me/37443529162?text=Hello,%20I%20would%20like%20to%20order%20101%20White%20and%20Pink%20Roses%20in%20a%20Basket" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-whatsapp text-lg"></i> Order via WhatsApp
+            <!-- 10 -->
+            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col">
+                <div class="card-img-wrap">
+                    <img src="https://i.yapx.ru/dqRc2.jpg" alt="101 white-pink roses in a basket" class="w-full h-64 object-cover">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">101 white-pink roses in a basket</h3>
+                    <p class="text-stone-600 text-xs mb-3 flex-grow">tender white-pink roses in a wicker basket — a truly luxurious gift</p>
+                    <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">2,000,000 VND</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $80</p>
+                    <div class="flex flex-col gap-2">
+                        <a href="https://wa.me/37443529162?text=Hello,%20I'd%20like%20to%20order%20101%20white-pink%20roses%20in%20a%20basket" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">
+                            <i class="fa-brands fa-whatsapp"></i> order via WhatsApp
                         </a>
-                        <a href="https://t.me/babaskin_o?text=Hello,%20I%20would%20like%20to%20order%20101%20White%20and%20Pink%20Roses%20in%20a%20Basket" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-telegram text-lg"></i> Order via Telegram
-                        </a>
-                        <a href="https://instagram.com/flowers_vietnam_inst" target="_blank" class="flex items-center justify-center gap-2 bg-[#E1306C] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#c0275d] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-instagram text-lg"></i> Order via Instagram
+                        <a href="https://t.me/babaskin_o?text=Hello,%20I'd%20like%20to%20order%20101%20white-pink%20roses%20in%20a%20basket" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">
+                            <i class="fa-brands fa-telegram"></i> order via Telegram
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- 11. Balloon Set L -->
-            <div class="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col">
-                <img src="https://i.yapx.ru/dqRWj.jpg" alt="Balloon Set L" class="w-full h-72 object-cover">
-                <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">Balloon Set L</h3>
-                    <p class="text-stone-600 text-sm mb-2 flex-grow">2 numbers + 7 balloons, or 1 number + 10 balloons, or 15 foil balloons</p>
-                    <p class="text-stone-900 font-bold text-lg mb-1">2,000,000 VND</p>
-                    <p class="text-stone-500 text-xs mb-5">≈ $80</p>
-                    <div class="flex flex-col gap-3">
-                        <a href="https://wa.me/37443529162?text=Hello,%20I%20would%20like%20to%20order%20Balloon%20Set%20L" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-whatsapp text-lg"></i> Order via WhatsApp
+            <!-- 11 -->
+            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col">
+                <div class="card-img-wrap">
+                    <img src="https://i.yapx.ru/dqRWj.jpg" alt="Balloon set L" class="w-full h-64 object-cover">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">balloon set L</h3>
+                    <p class="text-stone-600 text-xs mb-3 flex-grow">2 numbers + 7 balloons, or 1 number + 10 balloons, or 15 foil balloons</p>
+                    <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">2,000,000 VND</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $80</p>
+                    <div class="flex flex-col gap-2">
+                        <a href="https://wa.me/37443529162?text=Hello,%20I'd%20like%20to%20order%20balloon%20set%20L" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">
+                            <i class="fa-brands fa-whatsapp"></i> order via WhatsApp
                         </a>
-                        <a href="https://t.me/babaskin_o?text=Hello,%20I%20would%20like%20to%20order%20Balloon%20Set%20L" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-telegram text-lg"></i> Order via Telegram
-                        </a>
-                        <a href="https://instagram.com/flowers_vietnam_inst" target="_blank" class="flex items-center justify-center gap-2 bg-[#E1306C] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#c0275d] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-instagram text-lg"></i> Order via Instagram
+                        <a href="https://t.me/babaskin_o?text=Hello,%20I'd%20like%20to%20order%20balloon%20set%20L" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">
+                            <i class="fa-brands fa-telegram"></i> order via Telegram
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- 12. 151 Purple Roses -->
-            <div class="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-stone-100 overflow-hidden flex flex-col">
-                <img src="https://i.yapx.ru/dqRce.jpg" alt="151 Purple Roses" class="w-full h-72 object-cover">
-                <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2">151 Purple Roses</h3>
-                    <p class="text-stone-600 text-sm mb-2 flex-grow">A grand bouquet of purple roses in pink wrapping — maximum impression</p>
-                    <p class="text-stone-900 font-bold text-lg mb-1">2,250,000 VND</p>
-                    <p class="text-stone-500 text-xs mb-5">≈ $90</p>
-                    <div class="flex flex-col gap-3">
-                        <a href="https://wa.me/37443529162?text=Hello,%20I%20would%20like%20to%20order%20151%20Purple%20Roses" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#20b858] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-whatsapp text-lg"></i> Order via WhatsApp
+            <!-- 12 -->
+            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col">
+                <div class="card-img-wrap">
+                    <img src="https://i.yapx.ru/dqRce.jpg" alt="151 purple roses" class="w-full h-64 object-cover">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">151 purple roses</h3>
+                    <p class="text-stone-600 text-xs mb-3 flex-grow">a grand bouquet of deep purple roses — maximum impression guaranteed</p>
+                    <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">2,250,000 VND</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $90</p>
+                    <div class="flex flex-col gap-2">
+                        <a href="https://wa.me/37443529162?text=Hello,%20I'd%20like%20to%20order%20151%20purple%20roses" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">
+                            <i class="fa-brands fa-whatsapp"></i> order via WhatsApp
                         </a>
-                        <a href="https://t.me/babaskin_o?text=Hello,%20I%20would%20like%20to%20order%20151%20Purple%20Roses" target="_blank" class="flex items-center justify-center gap-2 bg-[#229ED9] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#1d88ba] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-telegram text-lg"></i> Order via Telegram
-                        </a>
-                        <a href="https://instagram.com/flowers_vietnam_inst" target="_blank" class="flex items-center justify-center gap-2 bg-[#E1306C] text-white font-medium py-3 px-4 rounded-xl hover:bg-[#c0275d] transition w-full shadow-sm text-sm">
-                            <i class="fa-brands fa-instagram text-lg"></i> Order via Instagram
+                        <a href="https://t.me/babaskin_o?text=Hello,%20I'd%20like%20to%20order%20151%20purple%20roses" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">
+                            <i class="fa-brands fa-telegram"></i> order via Telegram
                         </a>
                     </div>
                 </div>
@@ -438,53 +480,51 @@
         </div>
     </section>
 
-    <!-- Delivery & Payment -->
-    <section id="delivery" class="py-16 px-4">
-        <div class="max-w-4xl mx-auto bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-stone-100">
-            <h2 class="font-serif text-3xl font-bold text-stone-900 mb-8 text-center">delivery & payment</h2>
-
+    <!-- Delivery and payment -->
+    <section id="delivery" class="reveal py-16 px-4" style="background:#fdf4f7;">
+        <div class="max-w-4xl mx-auto bg-white rounded-2xl p-8 md:p-12 border border-stone-100">
+            <h2 class="font-serif text-3xl font-bold mb-8 text-center" style="color:#1a1a1a;">delivery & payment</h2>
             <div class="space-y-8">
                 <div class="flex gap-5">
-                    <div class="text-rose-400 text-3xl"><i class="fa-solid fa-truck-fast"></i></div>
+                    <div class="text-2xl" style="color:#c0687a;"><i class="fa-solid fa-truck-fast"></i></div>
                     <div>
-                        <h4 class="font-bold text-lg text-stone-900 mb-3">delivery terms</h4>
-                        <ul class="space-y-3 text-stone-800 font-medium">
-                            <li class="flex gap-2"><i class="fa-solid fa-check text-rose-300 mt-1"></i> Free delivery across Nha Trang.</li>
-                            <li class="flex gap-2"><i class="fa-solid fa-check text-rose-300 mt-1"></i> Same-day delivery when ordered before 6:00 PM.</li>
-                            <li class="bg-rose-50 text-rose-900 p-3 rounded-xl mt-4 inline-block text-sm">Cam Ranh: delivery available for orders of 51+ roses, delivery fee 600,000 VND (paid separately).</li>
+                        <h4 class="font-bold text-base mb-3" style="color:#1a1a1a;">delivery terms</h4>
+                        <ul class="space-y-2 text-stone-500 text-sm">
+                            <li class="flex gap-2"><i class="fa-solid fa-check mt-0.5" style="color:#c0687a;"></i> free delivery across Nha Trang.</li>
+                            <li class="flex gap-2"><i class="fa-solid fa-check mt-0.5" style="color:#c0687a;"></i> same-day delivery when ordered before 18:00.</li>
+                            <li class="p-3 rounded-xl mt-3 text-xs" style="background:#fce8ee; color:#a8566a;">cam ranh: delivery for orders of 51+ roses — 600,000 VND (charged separately).</li>
                         </ul>
                     </div>
                 </div>
-
                 <div class="border-t border-stone-100 pt-8">
                     <div class="flex gap-5 mb-6">
-                        <div class="text-rose-400 text-3xl"><i class="fa-regular fa-credit-card"></i></div>
-                        <h4 class="font-bold text-lg text-stone-900 self-center">payment methods</h4>
+                        <div class="text-2xl" style="color:#c0687a;"><i class="fa-regular fa-credit-card"></i></div>
+                        <h4 class="font-bold text-base self-center" style="color:#1a1a1a;">payment methods</h4>
                     </div>
                     <div class="flex flex-wrap gap-3 justify-center">
                         <div class="flex flex-col items-center gap-2 bg-stone-50 rounded-2xl px-5 py-4 w-[calc(50%-6px)] sm:w-28">
-                            <div class="w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center">
-                                <span class="text-lg font-bold text-red-600">₫</span>
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:#fce8ee;">
+                                <span class="text-base font-bold" style="color:#c0687a;">₫</span>
                             </div>
-                            <span class="text-stone-700 font-medium text-xs text-center">transfer VND</span>
+                            <span class="text-stone-500 font-medium text-xs text-center">VND</span>
                         </div>
                         <div class="flex flex-col items-center gap-2 bg-stone-50 rounded-2xl px-5 py-4 w-[calc(50%-6px)] sm:w-28">
-                            <div class="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center">
-                                <i class="fa-solid fa-dollar-sign text-green-600 text-lg"></i>
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:#fce8ee;">
+                                <i class="fa-solid fa-dollar-sign text-base" style="color:#c0687a;"></i>
                             </div>
-                            <span class="text-stone-700 font-medium text-xs text-center">transfer USD</span>
+                            <span class="text-stone-500 font-medium text-xs text-center">USD</span>
                         </div>
                         <div class="flex flex-col items-center gap-2 bg-stone-50 rounded-2xl px-5 py-4 w-[calc(50%-6px)] sm:w-28">
-                            <div class="w-10 h-10 rounded-xl bg-teal-100 flex items-center justify-center">
-                                <span class="text-xs font-bold text-teal-600">USDT</span>
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:#fce8ee;">
+                                <span class="text-xs font-bold" style="color:#c0687a;">USDT</span>
                             </div>
-                            <span class="text-stone-700 font-medium text-xs text-center">transfer USDT</span>
+                            <span class="text-stone-500 font-medium text-xs text-center">USDT</span>
                         </div>
                         <div class="flex flex-col items-center gap-2 bg-stone-50 rounded-2xl px-5 py-4 w-[calc(50%-6px)] sm:w-28">
-                            <div class="w-10 h-10 rounded-xl bg-rose-100 flex items-center justify-center">
-                                <i class="fa-solid fa-hand-holding-dollar text-rose-500 text-lg"></i>
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:#fce8ee;">
+                                <i class="fa-solid fa-hand-holding-dollar text-base" style="color:#c0687a;"></i>
                             </div>
-                            <span class="text-stone-700 font-medium text-xs text-center">cash on delivery</span>
+                            <span class="text-stone-500 font-medium text-xs text-center">cash</span>
                         </div>
                     </div>
                 </div>
@@ -493,26 +533,25 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-rose-500 text-white py-12 px-4 mt-auto">
+    <footer class="py-12 px-4 mt-auto" style="background:#fce8ee;">
         <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
             <div class="text-center md:text-left">
-                <div class="font-serif font-bold text-2xl text-white mb-2">NhaTrang Flowers</div>
-                <div class="text-sm font-medium text-rose-100">elegant floristry & delivery</div>
+                <div class="font-serif font-bold text-2xl mb-1" style="color:#1a1a1a;">NhaTrang Flowers</div>
+                <div class="text-xs font-medium tracking-widest uppercase" style="color:#a8566a;">Quality · Responsibility · Punctuality</div>
             </div>
-
             <div class="flex gap-6 text-2xl">
-                <a href="https://wa.me/37443529162" target="_blank" class="text-rose-100 hover:text-white transition" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-                <a href="https://t.me/babaskin_o" target="_blank" class="text-rose-100 hover:text-white transition" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
-                <a href="https://instagram.com/flowers_vietnam_inst" target="_blank" class="text-rose-100 hover:text-white transition" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://wa.me/37443529162" target="_blank" style="color:#c0a0a8;" class="hover:text-[#c0687a] transition" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://t.me/babaskin_o" target="_blank" style="color:#c0a0a8;" class="hover:text-[#c0687a] transition" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://vk.com/flowers_vietnam" target="_blank" style="color:#c0a0a8;" class="hover:text-[#c0687a] transition" aria-label="VK"><i class="fa-brands fa-vk"></i></a>
+                <a href="https://instagram.com/flowers_vietnam_inst" target="_blank" style="color:#c0a0a8;" class="hover:text-[#c0687a] transition" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
             </div>
         </div>
-        <div class="text-center text-xs text-rose-100 mt-12 border-t border-rose-400/50 pt-6 font-medium">
-            &copy; 2026 NhaTrang Flowers. All rights reserved.
+        <div class="text-center text-xs mt-10 pt-6" style="border-top: 1px solid #f0d0d8; color:#b08090;">
+            &copy; 2026 NhaTrang Flowers. all rights reserved.
         </div>
     </footer>
 
 <script>
-// Google Ads — conversion tracking (messenger click)
 document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"]').forEach(function(el) {
     el.addEventListener('click', function() {
         gtag('event', 'conversion', {
@@ -536,10 +575,23 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"]').forEach(function(
         var diff = d - now;
         var hh=Math.floor(diff/3600000), mm=Math.floor((diff%3600000)/60000), ss=Math.floor((diff%60000)/1000);
         var p=function(n){return('0'+n).slice(-2);};
-        el.textContent = '⏱ Order deadline in: ' + p(hh) + ':' + p(mm) + ':' + p(ss);
+        el.textContent = '⏱ order by 18:00, time left: ' + p(hh) + ':' + p(mm) + ':' + p(ss);
     }
     update(); setInterval(update,1000);
 })();
 </script>
+
+<script>
+(function(){
+    var els = document.querySelectorAll('.reveal');
+    var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+            if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+        });
+    }, { threshold: 0.1 });
+    els.forEach(function(el){ io.observe(el); });
+})();
+</script>
+
 </body>
 </html>
