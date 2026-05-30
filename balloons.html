@@ -224,7 +224,7 @@
             <!-- Набор S видео 1 -->
             <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col">
                 <div class="vimeo-wrap">
-                    <iframe src="https://player.vimeo.com/video/1195281273?autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture"></iframe>
+                    <iframe data-src="https://player.vimeo.com/video/1195281273?autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture"></iframe>
                 </div>
                 <div class="p-5 flex flex-col flex-grow">
                     <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">набор шаров S</h3>
@@ -266,7 +266,7 @@
             <!-- Набор S видео 2 -->
             <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col">
                 <div class="vimeo-wrap">
-                    <iframe src="https://player.vimeo.com/video/1195280046?autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture"></iframe>
+                    <iframe data-src="https://player.vimeo.com/video/1195280046?autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture"></iframe>
                 </div>
                 <div class="p-5 flex flex-col flex-grow">
                     <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">набор шаров S</h3>
@@ -308,7 +308,7 @@
             <!-- Набор M видео -->
             <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col">
                 <div class="vimeo-wrap">
-                    <iframe src="https://player.vimeo.com/video/1195279868?autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture"></iframe>
+                    <iframe data-src="https://player.vimeo.com/video/1195279868?autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture"></iframe>
                 </div>
                 <div class="p-5 flex flex-col flex-grow">
                     <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">набор шаров M</h3>
@@ -329,7 +329,7 @@
             <!-- Набор L видео 1 -->
             <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col">
                 <div class="vimeo-wrap">
-                    <iframe src="https://player.vimeo.com/video/1195280423?autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture"></iframe>
+                    <iframe data-src="https://player.vimeo.com/video/1195280423?autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture"></iframe>
                 </div>
                 <div class="p-5 flex flex-col flex-grow">
                     <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">набор шаров L</h3>
@@ -371,7 +371,7 @@
             <!-- Набор L видео 2 -->
             <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col">
                 <div class="vimeo-wrap">
-                    <iframe src="https://player.vimeo.com/video/1195279270?autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture"></iframe>
+                    <iframe data-src="https://player.vimeo.com/video/1195279270?autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture"></iframe>
                 </div>
                 <div class="p-5 flex flex-col flex-grow">
                     <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">набор шаров L</h3>
@@ -392,7 +392,7 @@
             <!-- Набор S + 25 роз видео -->
             <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col">
                 <div class="vimeo-wrap">
-                    <iframe src="https://player.vimeo.com/video/1195279718?autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture"></iframe>
+                    <iframe data-src="https://player.vimeo.com/video/1195279718?autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture"></iframe>
                 </div>
                 <div class="p-5 flex flex-col flex-grow">
                     <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">набор S + 25 роз</h3>
@@ -413,7 +413,7 @@
             <!-- Набор S + 101 роза видео -->
             <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col">
                 <div class="vimeo-wrap">
-                    <iframe src="https://player.vimeo.com/video/1195279544?autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture"></iframe>
+                    <iframe data-src="https://player.vimeo.com/video/1195279544?autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture"></iframe>
                 </div>
                 <div class="p-5 flex flex-col flex-grow">
                     <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">набор S + 101 роза</h3>
@@ -553,5 +553,19 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"]').forEach(function(
 })();
 </script>
 
+<script>
+(function(){
+    var iframes = document.querySelectorAll('iframe[data-src]');
+    var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+            if(e.isIntersecting){
+                e.target.src = e.target.dataset.src;
+                io.unobserve(e.target);
+            }
+        });
+    }, { rootMargin: '300px' });
+    iframes.forEach(function(el){ io.observe(el); });
+})();
+</script>
 </body>
 </html>
