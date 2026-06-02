@@ -90,6 +90,10 @@ def patch(fname, lang, is_home):
                '        .btn-rose-filled:hover { background: var(--rose-hover); transform: translateY(-1px); }\n    </style>')
         s = s.replace("    </style>", css, 1)
 
+    # 0b. og:image → абсолютный URL (для превью при шеринге)
+    s = re.sub(r'(<meta property="og:image" content=")(?!https?:)([^"]*)(">)',
+               lambda mo: f'{mo.group(1)}{B.DOMAIN}/{mo.group(2)}{mo.group(3)}', s)
+
     # 1. nav — полностью перестраиваем (детерминированно, языково-корректно, идемпотентно)
     d, m = build_nav(lang)
     s = re.sub(r'<nav class="hidden md:flex items-center gap-1 text-xs font-medium">.*?</nav>',

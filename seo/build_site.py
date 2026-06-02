@@ -147,6 +147,11 @@ def price_num(price):
     digits = re.sub(r"[^\d]", "", price)
     return digits or "0"
 
+# валюта «донгов» (только в RU-данных products.csv) → корректная для языка
+CUR = {"ru": "донгов", "en": "VND", "ko": "동"}
+def price_loc(price, lang):
+    return price.replace("донгов", CUR[lang])
+
 def head(lang, title, desc, canonical, alts, base, og_image):
     links = [f'<link rel="canonical" href="{canonical}">']
     for l in LANGS:
@@ -163,7 +168,7 @@ def head(lang, title, desc, canonical, alts, base, og_image):
     <meta property="og:title" content="{html.escape(title)}">
     <meta property="og:description" content="{html.escape(desc)}">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="{base}{og_image}">
+    <meta property="og:image" content="{DOMAIN}/{og_image}">
     {links_str}
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NNYC00Y4EB"></script>
     <script>
@@ -351,7 +356,7 @@ def product_card(p, lang, base, t):
                 <div class="p-5 flex flex-col flex-grow">
                     <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">{html.escape(name)}</h3>
                     <p class="text-stone-600 text-xs mb-3 flex-grow">{html.escape(desc)}</p>
-                    <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">{html.escape(p['price'])}</p>
+                    <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">{html.escape(price_loc(p['price'], lang))}</p>
                     <p class="text-stone-500 text-xs mb-4">{html.escape(p['price_sub'])}</p>
                     <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">{t["details"]} →</span>
                 </div>
@@ -391,10 +396,10 @@ def render_product(p, lang, products):
         meta = f"{name} с доставкой по Нячангу день в день. {desc}. Цена {p['price']}. Заказ в WhatsApp и Telegram."
     elif lang == "en":
         title = f"{name} — delivery in Nha Trang | NhaTrang Flowers"
-        meta = f"{name} with same-day delivery in Nha Trang. {desc}. Price {p['price']}. Order via WhatsApp or Telegram."
+        meta = f"{name} with same-day delivery in Nha Trang. {desc}. Price {price_loc(p['price'], lang)}. Order via WhatsApp or Telegram."
     else:
         title = f"{name} — 나트랑 배달 | NhaTrang Flowers"
-        meta = f"{name} 나트랑 당일 배달. {desc}. 가격 {p['price']}. WhatsApp·Telegram 주문."
+        meta = f"{name} 나트랑 당일 배달. {desc}. 가격 {price_loc(p['price'], lang)}. WhatsApp·Telegram 주문."
     meta = meta[:300]
 
     # похожие — 3 следующих по кругу
@@ -439,7 +444,7 @@ def render_product(p, lang, products):
             <h1 class="font-serif text-3xl md:text-4xl font-bold mb-4 leading-tight" style="color:#1a1a1a;">{html.escape(name)}</h1>
             <p class="text-stone-600 mb-6 leading-relaxed">{html.escape(desc)}.</p>
             <div class="price-box mb-6">
-                <p class="font-bold text-3xl mb-1" style="color:#1a1a1a;">{html.escape(p['price'])}</p>
+                <p class="font-bold text-3xl mb-1" style="color:#1a1a1a;">{html.escape(price_loc(p['price'], lang))}</p>
                 <p class="text-stone-500 text-sm">{html.escape(p['price_sub'])}</p>
             </div>
             {order_buttons(name, t)}
