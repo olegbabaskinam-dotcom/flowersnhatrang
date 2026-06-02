@@ -36,18 +36,20 @@ QUALITY = 80
 
 os.makedirs(IMG_DIR, exist_ok=True)
 
-def search_photo(query):
+def search_photo(query, seed=0):
+    # берём пул из 15 фото и выбираем разное по seed (id статьи),
+    # чтобы у статей с одинаковым запросом были разные картинки
     r = requests.get(
         "https://api.pexels.com/v1/search",
         headers={"Authorization": PEXELS_KEY},
-        params={"query": query, "per_page": 1, "orientation": "landscape"},
+        params={"query": query, "per_page": 15, "orientation": "landscape"},
         timeout=30,
     )
     r.raise_for_status()
-    data = r.json()
-    if not data.get("photos"):
+    photos = r.json().get("photos", [])
+    if not photos:
         return None, None
-    p = data["photos"][0]
+    p = photos[seed % len(photos)]
     return p["src"]["large2x"], p.get("photographer", "")
 
 def save_webp(img_bytes, out_path, width):
@@ -71,7 +73,7 @@ def main(limit):
         query = row["photo_query_en"]
         attempts += 1
         try:
-            url, author = search_photo(query)
+            url, author = search_photo(query, seed=int(row["id"]))
             if not url:
                 print(f"  нет фото для: {query}")
                 continue
