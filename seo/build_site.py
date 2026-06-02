@@ -122,7 +122,9 @@ UI = {
            "dl_free": "Бесплатная доставка по всему Нячангу",
            "dl_day": "Доставка в тот же день при заказе до 18:00",
            "dl_cam": "Камрань — доставка от 51 розы (600 000 донгов отдельно)",
-           "dl_pay": "Оплата: донги, рубли, доллары, USDT, наличные"},
+           "dl_pay": "Оплата: донги, рубли, доллары, USDT, наличные",
+           "st1": "букетов доставлено", "st2": "отзыва на Google", "st3": "оплата при получении",
+           "rev_h": "отзывы на Google", "rev_cta": "читать отзывы на Google Maps"},
     "en": {"b_fresh": "fresh flowers", "b_day": "same-day",
            "chip_free": "free in Nha Trang", "chip_day": "same-day delivery", "chip_pay": "card / cash",
            "f1t": "Freshness", "f1d": "Cut and arranged on the delivery day",
@@ -131,7 +133,9 @@ UI = {
            "dl_free": "Free delivery across Nha Trang",
            "dl_day": "Same-day delivery for orders before 6 PM",
            "dl_cam": "Cam Ranh — delivery from 51 roses (600,000 VND separately)",
-           "dl_pay": "Payment: VND, USD, RUB, USDT, cash"},
+           "dl_pay": "Payment: VND, USD, RUB, USDT, cash",
+           "st1": "bouquets delivered", "st2": "Google reviews", "st3": "pay on delivery",
+           "rev_h": "Google reviews", "rev_cta": "read reviews on Google Maps"},
     "ko": {"b_fresh": "신선한 꽃", "b_day": "당일 배송",
            "chip_free": "나트랑 무료 배송", "chip_day": "당일 배송", "chip_pay": "카드 / 현금",
            "f1t": "신선함", "f1d": "배송 당일에 꽃을 손질하고 제작합니다",
@@ -140,7 +144,9 @@ UI = {
            "dl_free": "나트랑 전역 무료 배송",
            "dl_day": "오후 6시 이전 주문 시 당일 배송",
            "dl_cam": "깜라인 — 51송이부터 배송(60만 동 별도)",
-           "dl_pay": "결제: 동, 달러, 루블, USDT, 현금"},
+           "dl_pay": "결제: 동, 달러, 루블, USDT, 현금",
+           "st1": "꽃다발 배달 완료", "st2": "Google 리뷰", "st3": "수령 시 결제",
+           "rev_h": "Google 리뷰", "rev_cta": "Google 지도에서 리뷰 보기"},
 }
 
 def price_num(price):
@@ -201,6 +207,7 @@ def head(lang, title, desc, canonical, alts, base, og_image):
         .max-w-3xl {{ max-width: 48rem; }}
         .max-w-xl {{ max-width: 36rem; }}
         .px-6 {{ padding-left: 1.5rem; padding-right: 1.5rem; }}
+        .pt-12 {{ padding-top: 3rem; }}
         .pb-2 {{ padding-bottom: .5rem; }}
         .pb-16 {{ padding-bottom: 4rem; }}
         .pb-24 {{ padding-bottom: 6rem; }}
@@ -455,6 +462,7 @@ def render_product(p, lang, products):
             </div>
         </div>
     </section>
+    {trust_bar(lang, base)}
 
     <section class="max-w-5xl mx-auto px-6 py-6">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -492,6 +500,8 @@ def render_product(p, lang, products):
             {faq_html}
         </div>
     </section>
+
+    {reviews_block(lang, base)}
 
     <section class="max-w-5xl mx-auto px-6 py-12">
         <h2 class="font-serif text-2xl font-bold mb-8 text-center" style="color:#1a1a1a;">{t["related"]}</h2>
@@ -535,6 +545,64 @@ def articles_block(lang, base):
     </section>
 '''
 
+GMAPS = "https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic"
+REVIEW_IMGS = ["img/dqj8G.webp", "img/dqj8P.webp", "img/dqj8o.webp"]
+
+def trust_bar(lang, base):
+    """Полоса доверия: 500+ доставлено · 5.0 / отзывы Google · оплата при получении."""
+    u = UI[lang]
+    return f'''
+    <section class="reveal py-8 px-4 border-b border-stone-100">
+        <div class="max-w-4xl mx-auto">
+            <div class="grid grid-cols-3 divide-x divide-stone-100">
+                <div class="flex flex-col items-center px-4 py-2 text-center">
+                    <div class="text-2xl md:text-3xl font-bold" style="color:#1a1a1a;">500+</div>
+                    <div class="text-stone-400 text-xs font-medium mt-1">{u["st1"]}</div>
+                </div>
+                <div class="flex flex-col items-center px-4 py-2 text-center">
+                    <div class="flex items-center justify-center gap-1">
+                        <span class="text-2xl md:text-3xl font-bold" style="color:#1a1a1a;">5.0</span>
+                        <span style="color:#f5b301;">{IC_STAR}</span>
+                    </div>
+                    <div class="text-stone-400 text-xs font-medium mt-1">104 {u["st2"]}</div>
+                </div>
+                <div class="flex flex-col items-center px-4 py-2 text-center">
+                    <div class="text-2xl md:text-3xl font-bold" style="color:#1a1a1a;">💵</div>
+                    <div class="text-stone-400 text-xs font-medium mt-1">{u["st3"]}</div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="{GMAPS}" target="_blank" class="inline-flex items-center gap-2 font-medium text-xs hover:underline transition" style="color:#c0687a;">
+                    <span style="color:#f5b301;">{IC_STAR}</span> {u["rev_cta"]}
+                </a>
+            </div>
+        </div>
+    </section>
+'''
+
+def reviews_block(lang, base):
+    """Блок из 3 скриншотов Google-отзывов."""
+    u = UI[lang]
+    cells = "\n                ".join(
+        f'''<div class="rounded-2xl overflow-hidden border border-stone-100 bg-white">
+                    <div class="h-[280px] flex items-center justify-center p-2">
+                        <img src="{base}{im}" alt="{u["rev_h"]}" loading="lazy" class="max-h-full max-w-full object-contain">
+                    </div>
+                </div>''' for im in REVIEW_IMGS)
+    return f'''
+    <section class="reveal py-10 px-4 border-b border-stone-100">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="font-serif text-2xl font-bold text-center mb-6" style="color:#1a1a1a;">{u["rev_h"]}</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {cells}
+            </div>
+            <div class="text-center mt-6">
+                <a href="{GMAPS}" target="_blank" class="btn-rose inline-block font-medium py-2.5 px-6 rounded-xl text-sm">{u["rev_cta"]} →</a>
+            </div>
+        </div>
+    </section>
+'''
+
 def render_catalog(lang, products):
     t = T[lang]
     base = ""
@@ -555,11 +623,13 @@ def render_catalog(lang, products):
         <h1 class="font-serif text-3xl md:text-4xl font-bold mb-3" style="color:#1a1a1a;">{t["catalog_h1"]}</h1>
         <p class="text-stone-500 text-sm max-w-xl mx-auto">{t["catalog_sub"]}</p>
     </section>
-    <section class="pb-16 px-4 max-w-5xl mx-auto">
+    {trust_bar(lang, base)}
+    <section class="pb-16 px-4 max-w-5xl mx-auto pt-12">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {cards}
         </div>
     </section>
+    {reviews_block(lang, base)}
     {articles_block(lang, base)}
     </main>
 '''
