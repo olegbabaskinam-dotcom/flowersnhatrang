@@ -60,6 +60,20 @@
         @media (min-width: 768px) {
             .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
+        /* красивые компоненты страницы товара */
+        .badge { display:inline-flex; align-items:center; gap:.4rem; background:var(--rose-light); color:var(--rose-hover); font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; padding:.4rem .85rem; border-radius:999px; }
+        .price-box { background:#fdf4f7; border:1px solid #f0d0d8; border-radius:1rem; padding:1.25rem 1.5rem; }
+        .chip { display:inline-flex; align-items:center; gap:.45rem; background:#fff; border:1px solid #f0e0e5; border-radius:999px; padding:.5rem .9rem; font-size:.76rem; color:#6b6b6b; font-weight:500; }
+        .chip svg { color:var(--rose); }
+        .icon-badge { width:2.9rem; height:2.9rem; border-radius:.9rem; background:var(--rose-light); color:var(--rose); display:flex; align-items:center; justify-content:center; font-size:1.15rem; flex:0 0 auto; }
+        .sec-card { background:#fff; border:1px solid #f0e0e5; border-radius:1.25rem; padding:1.75rem; }
+        .feature { background:#fff; border:1px solid #f0e0e5; border-radius:1rem; padding:1.4rem 1rem; text-align:center; transition:border-color .2s ease, box-shadow .2s ease; }
+        .feature:hover { border-color:var(--rose); box-shadow:0 4px 20px rgba(192,104,122,.08); }
+        .faq-item { background:#fff; border:1px solid #f0e0e5; border-radius:1rem; padding:1.1rem 1.3rem; transition:border-color .2s ease, box-shadow .2s ease; }
+        .faq-item:hover { border-color:var(--rose); box-shadow:0 4px 20px rgba(192,104,122,.08); }
+        .check-li { display:flex; gap:.6rem; align-items:flex-start; color:#6b6b6b; font-size:.9rem; line-height:1.55; }
+        .check-li svg { color:var(--rose); flex:0 0 auto; margin-top:.2rem; }
+        .accent-bar { border-left:3px solid var(--rose); padding-left:1rem; }
     </style>
 </head>
 <body class="antialiased flex flex-col min-h-screen">

@@ -32,6 +32,15 @@ HOTELS = [
 WA_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>'
 TG_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>'
 
+# Иконки (FontAwesome-пути, как на сайте)
+IC_CHECK = '<svg viewBox="0 0 448 512" fill="currentColor" width="1em" height="1em"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>'
+IC_TRUCK = '<svg viewBox="0 0 640 512" fill="currentColor" width="1em" height="1em"><path d="M112 0C85.5 0 64 21.5 64 48V96H16c-8.8 0-16 7.2-16 16s7.2 16 16 16H64 272c8.8 0 16 7.2 16 16s-7.2 16-16 16H64 48c-8.8 0-16 7.2-16 16s7.2 16 16 16H64 240c8.8 0 16 7.2 16 16s-7.2 16-16 16H64V416c0 53 43 96 96 96s96-43 96-96H384c0 53 43 96 96 96s96-43 96-96h32c17.7 0 32-14.3 32-32V288 256 237.3c0-17-6.7-33.3-18.7-45.3L512 114.7c-12-12-28.3-18.7-45.3-18.7H416V48c0-26.5-21.5-48-48-48H112zM544 237.3V256H416V160h50.7L544 237.3zM160 368a48 48 0 1 1 0 96 48 48 0 1 1 0-96zm272 48a48 48 0 1 1 96 0 48 48 0 1 1 -96 0z"/></svg>'
+IC_CLOCK = '<svg viewBox="0 0 512 512" fill="currentColor" width="1em" height="1em"><path d="M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"/></svg>'
+IC_CARD = '<svg viewBox="0 0 576 512" fill="currentColor" width="1em" height="1em"><path d="M64 32C28.7 32 0 60.7 0 96v32H576V96c0-35.3-28.7-64-64-64H64zM576 224H0V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V224zM112 352h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></svg>'
+IC_HOTEL = '<svg viewBox="0 0 512 512" fill="currentColor" width="1em" height="1em"><path d="M0 64C0 46.3 14.3 32 32 32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32V448c17.7 0 32 14.3 32 32s-14.3 32-32 32H304V464c0-26.5-21.5-48-48-48s-48 21.5-48 48v48H32c-17.7 0-32-14.3-32-32s14.3-32 32-32V96C14.3 96 0 81.7 0 64zm128 80v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V144c0-8.8-7.2-16-16-16H144c-8.8 0-16 7.2-16 16zm160-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V144c0-8.8-7.2-16-16-16H288zM128 240v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V240c0-8.8-7.2-16-16-16H144c-8.8 0-16 7.2-16 16zm160-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V240c0-8.8-7.2-16-16-16H288z"/></svg>'
+IC_FLOWER = '<svg viewBox="0 0 512 512" fill="currentColor" width="1em" height="1em"><path d="M256 96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm0 320a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zM128 256a64 64 0 1 1 0 128 64 64 0 1 1 0-128zm256 0a64 64 0 1 1 0 128 64 64 0 1 1 0-128zM256 224a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/><path d="M192 96a64 64 0 1 1 128 0A64 64 0 1 1 192 96z"/></svg>'
+IC_STAR = '<svg viewBox="0 0 576 512" fill="currentColor" width="1em" height="1em"><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg>'
+
 LANGS = ["ru", "en", "ko"]
 # имя файла главной для каждого языка
 HOME = {"ru": "index.html", "en": "index-en.html", "ko": "index-kr.html"}
@@ -102,6 +111,36 @@ T = {
     },
 }
 
+UI = {
+    "ru": {"b_fresh": "свежие цветы", "b_day": "день в день",
+           "chip_free": "бесплатно по Нячангу", "chip_day": "доставка день в день", "chip_pay": "оплата картой/нал.",
+           "f1t": "Свежесть", "f1d": "Срезаем и собираем букет в день доставки",
+           "f2t": "День в день", "f2d": "Доставим до 18:00 в день заказа",
+           "f3t": "В отель и на виллу", "f3d": "Привезём прямо в номер по Нячангу и Камрани",
+           "dl_free": "Бесплатная доставка по всему Нячангу",
+           "dl_day": "Доставка в тот же день при заказе до 18:00",
+           "dl_cam": "Камрань — доставка от 51 розы (600 000 донгов отдельно)",
+           "dl_pay": "Оплата: донги, рубли, доллары, USDT, наличные"},
+    "en": {"b_fresh": "fresh flowers", "b_day": "same-day",
+           "chip_free": "free in Nha Trang", "chip_day": "same-day delivery", "chip_pay": "card / cash",
+           "f1t": "Freshness", "f1d": "Cut and arranged on the delivery day",
+           "f2t": "Same day", "f2d": "Delivered by 6 PM on your order day",
+           "f3t": "To hotel & villa", "f3d": "Straight to your room in Nha Trang & Cam Ranh",
+           "dl_free": "Free delivery across Nha Trang",
+           "dl_day": "Same-day delivery for orders before 6 PM",
+           "dl_cam": "Cam Ranh — delivery from 51 roses (600,000 VND separately)",
+           "dl_pay": "Payment: VND, USD, RUB, USDT, cash"},
+    "ko": {"b_fresh": "신선한 꽃", "b_day": "당일 배송",
+           "chip_free": "나트랑 무료 배송", "chip_day": "당일 배송", "chip_pay": "카드 / 현금",
+           "f1t": "신선함", "f1d": "배송 당일에 꽃을 손질하고 제작합니다",
+           "f2t": "당일 배송", "f2d": "주문 당일 오후 6시 이전 배송",
+           "f3t": "호텔·빌라 배송", "f3d": "나트랑·깜라인 객실로 직접 배달",
+           "dl_free": "나트랑 전역 무료 배송",
+           "dl_day": "오후 6시 이전 주문 시 당일 배송",
+           "dl_cam": "깜라인 — 51송이부터 배송(60만 동 별도)",
+           "dl_pay": "결제: 동, 달러, 루블, USDT, 현금"},
+}
+
 def price_num(price):
     digits = re.sub(r"[^\d]", "", price)
     return digits or "0"
@@ -170,6 +209,20 @@ def head(lang, title, desc, canonical, alts, base, og_image):
         @media (min-width: 768px) {{
             .md\\:grid-cols-2 {{ grid-template-columns: repeat(2, minmax(0, 1fr)); }}
         }}
+        /* красивые компоненты страницы товара */
+        .badge {{ display:inline-flex; align-items:center; gap:.4rem; background:var(--rose-light); color:var(--rose-hover); font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; padding:.4rem .85rem; border-radius:999px; }}
+        .price-box {{ background:#fdf4f7; border:1px solid #f0d0d8; border-radius:1rem; padding:1.25rem 1.5rem; }}
+        .chip {{ display:inline-flex; align-items:center; gap:.45rem; background:#fff; border:1px solid #f0e0e5; border-radius:999px; padding:.5rem .9rem; font-size:.76rem; color:#6b6b6b; font-weight:500; }}
+        .chip svg {{ color:var(--rose); }}
+        .icon-badge {{ width:2.9rem; height:2.9rem; border-radius:.9rem; background:var(--rose-light); color:var(--rose); display:flex; align-items:center; justify-content:center; font-size:1.15rem; flex:0 0 auto; }}
+        .sec-card {{ background:#fff; border:1px solid #f0e0e5; border-radius:1.25rem; padding:1.75rem; }}
+        .feature {{ background:#fff; border:1px solid #f0e0e5; border-radius:1rem; padding:1.4rem 1rem; text-align:center; transition:border-color .2s ease, box-shadow .2s ease; }}
+        .feature:hover {{ border-color:var(--rose); box-shadow:0 4px 20px rgba(192,104,122,.08); }}
+        .faq-item {{ background:#fff; border:1px solid #f0e0e5; border-radius:1rem; padding:1.1rem 1.3rem; transition:border-color .2s ease, box-shadow .2s ease; }}
+        .faq-item:hover {{ border-color:var(--rose); box-shadow:0 4px 20px rgba(192,104,122,.08); }}
+        .check-li {{ display:flex; gap:.6rem; align-items:flex-start; color:#6b6b6b; font-size:.9rem; line-height:1.55; }}
+        .check-li svg {{ color:var(--rose); flex:0 0 auto; margin-top:.2rem; }}
+        .accent-bar {{ border-left:3px solid var(--rose); padding-left:1rem; }}
     </style>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
@@ -346,7 +399,7 @@ def render_product(p, lang, products):
            (t["faq_q2"], t["faq_a2"]),
            (t["faq_q3"], t["faq_a3"])]
     faq_html = "\n            ".join(
-        f'<div class="bg-white rounded-xl p-5 border border-stone-100"><h3 class="font-bold text-sm mb-2" style="color:#1a1a1a;">{html.escape(q)}</h3><p class="text-stone-600 text-sm">{html.escape(a)}</p></div>'
+        f'<div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> {html.escape(q)}</h3><p class="text-stone-600 text-sm leading-relaxed">{html.escape(a)}</p></div>'
         for q, a in faq)
     faq_schema = ",".join(
         '{"@type":"Question","name":%s,"acceptedAnswer":{"@type":"Answer","text":%s}}'
@@ -361,6 +414,7 @@ def render_product(p, lang, products):
     )
     faqschema = '<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[%s]}</script>' % faq_schema
 
+    u = UI[lang]
     body = f'''    <main class="flex-grow">
     <nav class="max-w-5xl mx-auto px-6 pt-8 pb-2 text-xs text-stone-400">
         <a href="{base}catalog-{lang}.html" class="hover:text-[#c0687a]">{t["nav_catalog"]}</a> / <span style="color:#1a1a1a;">{html.escape(name)}</span>
@@ -370,24 +424,57 @@ def render_product(p, lang, products):
         {gallery(p, base, alt)}
         </div>
         <div class="reveal flex flex-col">
+            <div class="flex gap-2 mb-4">
+                <span class="badge">{IC_FLOWER} {u["b_fresh"]}</span>
+                <span class="badge">{IC_CLOCK} {u["b_day"]}</span>
+            </div>
             <h1 class="font-serif text-3xl md:text-4xl font-bold mb-4 leading-tight" style="color:#1a1a1a;">{html.escape(name)}</h1>
-            <p class="text-stone-600 mb-5 leading-relaxed">{html.escape(desc)}.</p>
-            <p class="font-bold text-2xl mb-1" style="color:#1a1a1a;">{html.escape(p['price'])}</p>
-            <p class="text-stone-500 text-sm mb-6">{html.escape(p['price_sub'])}</p>
+            <p class="text-stone-600 mb-6 leading-relaxed">{html.escape(desc)}.</p>
+            <div class="price-box mb-6">
+                <p class="font-bold text-3xl mb-1" style="color:#1a1a1a;">{html.escape(p['price'])}</p>
+                <p class="text-stone-500 text-sm">{html.escape(p['price_sub'])}</p>
+            </div>
             {order_buttons(name, t)}
-            <p class="text-stone-500 text-xs mt-5 leading-relaxed">{html.escape(hotel_text)}</p>
+            <div class="flex flex-wrap gap-2 mt-5">
+                <span class="chip">{IC_TRUCK} {u["chip_free"]}</span>
+                <span class="chip">{IC_CLOCK} {u["chip_day"]}</span>
+                <span class="chip">{IC_CARD} {u["chip_pay"]}</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-5xl mx-auto px-6 py-6">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="feature reveal"><div class="icon-badge mx-auto mb-3">{IC_FLOWER}</div><h3 class="font-bold text-sm mb-1" style="color:#1a1a1a;">{u["f1t"]}</h3><p class="text-stone-500 text-xs leading-relaxed">{u["f1d"]}</p></div>
+            <div class="feature reveal"><div class="icon-badge mx-auto mb-3">{IC_CLOCK}</div><h3 class="font-bold text-sm mb-1" style="color:#1a1a1a;">{u["f2t"]}</h3><p class="text-stone-500 text-xs leading-relaxed">{u["f2d"]}</p></div>
+            <div class="feature reveal"><div class="icon-badge mx-auto mb-3">{IC_HOTEL}</div><h3 class="font-bold text-sm mb-1" style="color:#1a1a1a;">{u["f3t"]}</h3><p class="text-stone-500 text-xs leading-relaxed">{u["f3d"]}</p></div>
         </div>
     </section>
 
     <section class="max-w-3xl mx-auto px-6 py-8">
-        <h2 class="font-serif text-2xl font-bold mb-4" style="color:#1a1a1a;">{t["composition"]}</h2>
-        <p class="text-stone-600 mb-8 leading-relaxed">{html.escape(name)} — {html.escape(desc)}. {html.escape(hotel_text)}</p>
-        <h2 class="font-serif text-2xl font-bold mb-4" style="color:#1a1a1a;">{t["delivery"]}</h2>
-        <p class="text-stone-600 leading-relaxed">{html.escape(t["del_text"])}</p>
+        <div class="sec-card reveal mb-6">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="icon-badge">{IC_FLOWER}</div>
+                <h2 class="font-serif text-2xl font-bold" style="color:#1a1a1a;">{t["composition"]}</h2>
+            </div>
+            <p class="text-stone-600 leading-relaxed accent-bar">{html.escape(name)} — {html.escape(desc)}. {html.escape(hotel_text)}</p>
+        </div>
+        <div class="sec-card reveal">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="icon-badge">{IC_TRUCK}</div>
+                <h2 class="font-serif text-2xl font-bold" style="color:#1a1a1a;">{t["delivery"]}</h2>
+            </div>
+            <ul class="space-y-3">
+                <li class="check-li">{IC_CHECK}<span>{u["dl_free"]}</span></li>
+                <li class="check-li">{IC_CHECK}<span>{u["dl_day"]}</span></li>
+                <li class="check-li">{IC_CHECK}<span>{u["dl_cam"]}</span></li>
+                <li class="check-li">{IC_CARD}<span>{u["dl_pay"]}</span></li>
+            </ul>
+        </div>
     </section>
 
     <section class="max-w-3xl mx-auto px-6 py-8">
-        <h2 class="font-serif text-2xl font-bold mb-5" style="color:#1a1a1a;">{t["faq"]}</h2>
+        <h2 class="font-serif text-2xl font-bold mb-6 text-center" style="color:#1a1a1a;">{t["faq"]}</h2>
         <div class="space-y-3">
             {faq_html}
         </div>
