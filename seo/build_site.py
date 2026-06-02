@@ -230,18 +230,22 @@ def head(lang, title, desc, canonical, alts, base, og_image):
 <body class="antialiased flex flex-col min-h-screen">
 '''
 
-def header(lang, base):
+def header(lang, base, lang_urls=None):
     t = T[lang]
+    # куда ведут переключатели языка (по умолчанию — главная этого языка).
+    # для страниц товара/каталога/блога передаётся эквивалент той же страницы.
+    if lang_urls is None:
+        lang_urls = {l: f"{base}{HOME[l]}" for l in LANGS}
     def navlink(l, label, code):
         if l == lang:
             return f'<span class="px-3 py-1.5 rounded-lg text-white text-xs font-medium" style="background:#c0687a;">{label}</span>'
-        return f'<a href="{base}{HOME[l]}" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{label}</a>'
+        return f'<a href="{lang_urls[l]}" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{label}</a>'
     flags = {"ru": "🇷🇺 RU", "en": "🇬🇧 EN", "ko": "🇰🇷 KR"}
     nav_langs = "\n                ".join(navlink(l, flags[l], l) for l in LANGS)
     nav_langs_m = "\n            ".join(
         (f'<span class="px-3 py-1.5 rounded-lg text-white whitespace-nowrap" style="background:#c0687a;">{flags[l]}</span>'
          if l == lang else
-         f'<a href="{base}{HOME[l]}" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{flags[l]}</a>')
+         f'<a href="{lang_urls[l]}" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{flags[l]}</a>')
         for l in LANGS)
     return f'''    <div style="background:#fce8ee; color:#a8566a;" class="text-xs py-2 text-center tracking-widest font-medium uppercase">
         NhaTrang Flowers
@@ -495,8 +499,9 @@ def render_product(p, lang, products):
     </section>
     </main>
 '''
+    lang_urls = {l: f"{p['slug']}-{l}.html" for l in LANGS}
     return (head(lang, title, meta, canonical, alts, base, p["img"])
-            + schema + faqschema + header(lang, base) + body + footer(base) + SCRIPTS)
+            + schema + faqschema + header(lang, base, lang_urls) + body + footer(base) + SCRIPTS)
 
 def jstr(s):
     import json
@@ -553,7 +558,8 @@ def render_catalog(lang, products):
     {articles_block(lang, base)}
     </main>
 '''
-    return head(lang, title, meta, canonical, alts, base, products[0]["img"]) + header(lang, base) + body + footer(base) + SCRIPTS
+    lang_urls = {l: f"catalog-{l}.html" for l in LANGS}
+    return head(lang, title, meta, canonical, alts, base, products[0]["img"]) + header(lang, base, lang_urls) + body + footer(base) + SCRIPTS
 
 def render_blog(lang):
     t = T[lang]
@@ -581,7 +587,8 @@ def render_blog(lang):
     </section>
     </main>
 '''
-    return head(lang, title, meta, canonical, alts, base, "img/dSXDj.webp") + header(lang, base) + body + footer(base) + SCRIPTS
+    lang_urls = {l: f"blog-{l}.html" for l in LANGS}
+    return head(lang, title, meta, canonical, alts, base, "img/dSXDj.webp") + header(lang, base, lang_urls) + body + footer(base) + SCRIPTS
 
 def main():
     products = list(csv.DictReader(open(PRODUCTS, encoding="utf-8")))
