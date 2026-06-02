@@ -44,6 +44,8 @@ IC_STAR = '<svg viewBox="0 0 576 512" fill="currentColor" width="1em" height="1e
 LANGS = ["ru", "en", "ko"]
 # имя файла главной для каждого языка
 HOME = {"ru": "index.html", "en": "index-en.html", "ko": "index-kr.html"}
+# имя файла страницы шаров для каждого языка (ru = balloons.html)
+BALLOONS = {"ru": "balloons.html", "en": "balloons-en.html", "ko": "balloons-kr.html"}
 HREFLANG = {"ru": "ru", "en": "en", "ko": "ko"}
 HTML_LANG = {"ru": "ru", "en": "en", "ko": "ko"}
 
@@ -51,7 +53,7 @@ HTML_LANG = {"ru": "ru", "en": "en", "ko": "ko"}
 T = {
     "ru": {
         "site_sub": "Доставка цветов и<br>гелиевых шаров в Нячанге",
-        "nav_catalog": "Каталог", "nav_articles": "Статьи", "nav_balloons": "🎈 Шары",
+        "nav_home": "Главная", "nav_catalog": "Каталог", "nav_articles": "Статьи", "nav_balloons": "🎈 Шары",
         "catalog_h1": "Каталог букетов",
         "catalog_sub": "Свежие букеты и гелиевые шары с доставкой по Нячангу день в день.",
         "order_wa": "заказать в WhatsApp", "order_tg": "заказать в Telegram",
@@ -71,7 +73,7 @@ T = {
     },
     "en": {
         "site_sub": "Flower & balloon delivery<br>in Nha Trang",
-        "nav_catalog": "Catalog", "nav_articles": "Articles", "nav_balloons": "🎈 Balloons",
+        "nav_home": "Home", "nav_catalog": "Catalog", "nav_articles": "Articles", "nav_balloons": "🎈 Balloons",
         "catalog_h1": "Bouquet catalog",
         "catalog_sub": "Fresh bouquets and helium balloons with same-day delivery in Nha Trang.",
         "order_wa": "order on WhatsApp", "order_tg": "order on Telegram",
@@ -91,7 +93,7 @@ T = {
     },
     "ko": {
         "site_sub": "나트랑 꽃 & 풍선<br>배달 서비스",
-        "nav_catalog": "카탈로그", "nav_articles": "블로그", "nav_balloons": "🎈 풍선",
+        "nav_home": "홈", "nav_catalog": "카탈로그", "nav_articles": "블로그", "nav_balloons": "🎈 풍선",
         "catalog_h1": "꽃다발 카탈로그",
         "catalog_sub": "나트랑 당일 배달, 신선한 꽃다발과 헬륨 풍선.",
         "order_wa": "WhatsApp으로 주문", "order_tg": "Telegram으로 주문",
@@ -251,9 +253,10 @@ def header(lang, base):
                 <span class="font-medium text-xs leading-tight text-stone-600 tracking-wide">{t["site_sub"]}</span>
             </a>
             <nav class="hidden md:flex items-center gap-1 text-xs font-medium">
+                <a href="{base}{HOME[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_home"]}</a>
                 <a href="{base}catalog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_catalog"]}</a>
                 <a href="{base}blog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_articles"]}</a>
-                <a href="{base}balloons.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_balloons"]}</a>
+                <a href="{base}{BALLOONS[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_balloons"]}</a>
                 <span class="w-px h-4 bg-stone-200 mx-1"></span>
                 {nav_langs}
             </nav>
@@ -263,9 +266,10 @@ def header(lang, base):
             </div>
         </div>
         <div class="md:hidden border-t border-stone-100 px-4 py-2 flex gap-1 text-xs font-medium overflow-x-auto justify-center">
+            <a href="{base}{HOME[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{t["nav_home"]}</a>
             <a href="{base}catalog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{t["nav_catalog"]}</a>
             <a href="{base}blog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{t["nav_articles"]}</a>
-            <a href="{base}balloons.html" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{t["nav_balloons"]}</a>
+            <a href="{base}{BALLOONS[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{t["nav_balloons"]}</a>
             <span class="w-px h-4 bg-stone-200 mx-1"></span>
             {nav_langs_m}
         </div>

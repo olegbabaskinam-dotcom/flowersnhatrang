@@ -22,12 +22,43 @@ FILES = {
     "balloons.html": ("ru", False), "balloons-en.html": ("en", False), "balloons-kr.html": ("ko", False),
 }
 
-def nav_links(lang):
+FLAGS = {"ru": "🇷🇺 RU", "en": "🇬🇧 EN", "ko": "🇰🇷 KR"}
+
+def build_nav(lang):
+    """Полная навигация (как в build_site.header): Главная, Каталог, Статьи, Шары, | RU EN KR.
+    Языково-корректные ссылки. Возвращает (desktop_nav, mobile_nav)."""
     t = B.T[lang]
-    d = (f'\n                <a href="catalog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_catalog"]}</a>'
-         f'\n                <a href="blog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_articles"]}</a>')
-    m = (f'\n            <a href="catalog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{t["nav_catalog"]}</a>'
-         f'\n            <a href="blog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{t["nav_articles"]}</a>')
+    def lk(href, label, ind):
+        return f'\n{ind}<a href="{href}" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{label}</a>'
+    def lkm(href, label, ind):
+        return f'\n{ind}<a href="{href}" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{label}</a>'
+    # переключатели языка
+    def flag(l):
+        if l == lang:
+            return f'\n                <span class="px-3 py-1.5 rounded-lg text-white text-xs font-medium" style="background:#c0687a;">{FLAGS[l]}</span>'
+        return f'\n                <a href="{B.HOME[l]}" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{FLAGS[l]}</a>'
+    def flagm(l):
+        if l == lang:
+            return f'\n            <span class="px-3 py-1.5 rounded-lg text-white whitespace-nowrap" style="background:#c0687a;">{FLAGS[l]}</span>'
+        return f'\n            <a href="{B.HOME[l]}" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{FLAGS[l]}</a>'
+    I = "                "
+    d = ('<nav class="hidden md:flex items-center gap-1 text-xs font-medium"><!--MARK-NAV-->'
+         + lk(B.HOME[lang], t["nav_home"], I)
+         + lk(f"catalog-{lang}.html", t["nav_catalog"], I)
+         + lk(f"blog-{lang}.html", t["nav_articles"], I)
+         + lk(B.BALLOONS[lang], t["nav_balloons"], I)
+         + f'\n{I}<span class="w-px h-4 bg-stone-200 mx-1"></span>'
+         + "".join(flag(l) for l in B.LANGS)
+         + '\n            </nav>')
+    Im = "            "
+    m = ('<div class="md:hidden border-t border-stone-100 px-4 py-2 flex gap-1 text-xs font-medium overflow-x-auto justify-center"><!--MARK-NAVM-->'
+         + lkm(B.HOME[lang], t["nav_home"], Im)
+         + lkm(f"catalog-{lang}.html", t["nav_catalog"], Im)
+         + lkm(f"blog-{lang}.html", t["nav_articles"], Im)
+         + lkm(B.BALLOONS[lang], t["nav_balloons"], Im)
+         + f'\n{Im}<span class="w-px h-4 bg-stone-200 mx-1"></span>'
+         + "".join(flagm(l) for l in B.LANGS)
+         + '\n        </div>')
     return d, m
 
 def catalog_section(lang):
@@ -59,15 +90,12 @@ def patch(fname, lang, is_home):
                '        .btn-rose-filled:hover { background: var(--rose-hover); transform: translateY(-1px); }\n    </style>')
         s = s.replace("    </style>", css, 1)
 
-    # 1. nav links (по маркеру, чтобы не дублировать)
-    if "MARK-NAV" not in s:
-        d, m = nav_links(lang)
-        s = s.replace(
-            '<nav class="hidden md:flex items-center gap-1 text-xs font-medium">',
-            '<nav class="hidden md:flex items-center gap-1 text-xs font-medium"><!--MARK-NAV-->' + d, 1)
-        s = s.replace(
-            '<div class="md:hidden border-t border-stone-100 px-4 py-2 flex gap-1 text-xs font-medium overflow-x-auto justify-center">',
-            '<div class="md:hidden border-t border-stone-100 px-4 py-2 flex gap-1 text-xs font-medium overflow-x-auto justify-center"><!--MARK-NAVM-->' + m, 1)
+    # 1. nav — полностью перестраиваем (детерминированно, языково-корректно, идемпотентно)
+    d, m = build_nav(lang)
+    s = re.sub(r'<nav class="hidden md:flex items-center gap-1 text-xs font-medium">.*?</nav>',
+               lambda mo: d, s, count=1, flags=re.S)
+    s = re.sub(r'<div class="md:hidden border-t border-stone-100 px-4 py-2 flex gap-1 text-xs font-medium overflow-x-auto justify-center">.*?</div>',
+               lambda mo: m, s, count=1, flags=re.S)
 
     # 2. сквозной блок Статьи (баннер с фото) — после блока «Гелиевые шары»
     # сначала убираем старую вставку, если была (идемпотентность)
