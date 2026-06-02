@@ -291,8 +291,8 @@ def gallery(p, base, alt):
             f'<img src="{base}{im}" data-full="{base}{im}" alt="{html.escape(alt)} {i+1}" class="gallery-thumb w-20 h-20 object-cover rounded-lg{" active" if i==0 else ""}">'
             for i, im in enumerate(imgs))
         thumbs = f'<div class="flex gap-2 mt-3 flex-wrap">\n            {cells}\n        </div>'
-    return f'''<div class="card-img-wrap rounded-2xl overflow-hidden">
-            <img id="gallery-main" src="{base}{main}" alt="{html.escape(alt)}" class="w-full h-[420px] object-cover">
+    return f'''<div class="rounded-2xl overflow-hidden border border-stone-100 flex items-center justify-center p-3" style="background:#fdf4f7;">
+            <img id="gallery-main" src="{base}{main}" alt="{html.escape(alt)}" class="max-h-[360px] w-auto max-w-full object-contain rounded-xl">
         </div>
         {thumbs}'''
 
@@ -343,43 +343,43 @@ def render_product(p, lang, products):
     faqschema = '<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[%s]}</script>' % faq_schema
 
     body = f'''    <main class="flex-grow">
-    <nav class="max-w-5xl mx-auto px-4 pt-6 text-xs text-stone-400">
+    <nav class="max-w-5xl mx-auto px-6 pt-8 pb-2 text-xs text-stone-400">
         <a href="{base}catalog-{lang}.html" class="hover:text-[#c0687a]">{t["nav_catalog"]}</a> / <span style="color:#1a1a1a;">{html.escape(name)}</span>
     </nav>
-    <section class="max-w-5xl mx-auto px-4 py-8 grid md:grid-cols-2 gap-10">
+    <section class="max-w-5xl mx-auto px-6 py-8 grid md:grid-cols-2 gap-10 items-start">
         <div class="reveal">
         {gallery(p, base, alt)}
         </div>
         <div class="reveal flex flex-col">
-            <h1 class="font-serif text-3xl md:text-4xl font-bold mb-3" style="color:#1a1a1a;">{html.escape(name)}</h1>
-            <p class="text-stone-600 mb-4">{html.escape(desc)}.</p>
-            <p class="font-bold text-2xl mb-0.5" style="color:#1a1a1a;">{html.escape(p['price'])}</p>
-            <p class="text-stone-500 text-sm mb-5">{html.escape(p['price_sub'])}</p>
+            <h1 class="font-serif text-3xl md:text-4xl font-bold mb-4 leading-tight" style="color:#1a1a1a;">{html.escape(name)}</h1>
+            <p class="text-stone-600 mb-5 leading-relaxed">{html.escape(desc)}.</p>
+            <p class="font-bold text-2xl mb-1" style="color:#1a1a1a;">{html.escape(p['price'])}</p>
+            <p class="text-stone-500 text-sm mb-6">{html.escape(p['price_sub'])}</p>
             {order_buttons(name, t)}
-            <p class="text-stone-500 text-xs mt-4">{html.escape(hotel_text)}</p>
+            <p class="text-stone-500 text-xs mt-5 leading-relaxed">{html.escape(hotel_text)}</p>
         </div>
     </section>
 
-    <section class="max-w-3xl mx-auto px-4 py-6">
-        <h2 class="font-serif text-2xl font-bold mb-3" style="color:#1a1a1a;">{t["composition"]}</h2>
-        <p class="text-stone-600 mb-3">{html.escape(name)} — {html.escape(desc)}. {html.escape(hotel_text)}</p>
-        <h2 class="font-serif text-2xl font-bold mt-6 mb-3" style="color:#1a1a1a;">{t["delivery"]}</h2>
-        <p class="text-stone-600">{html.escape(t["del_text"])}</p>
+    <section class="max-w-3xl mx-auto px-6 py-8">
+        <h2 class="font-serif text-2xl font-bold mb-4" style="color:#1a1a1a;">{t["composition"]}</h2>
+        <p class="text-stone-600 mb-8 leading-relaxed">{html.escape(name)} — {html.escape(desc)}. {html.escape(hotel_text)}</p>
+        <h2 class="font-serif text-2xl font-bold mb-4" style="color:#1a1a1a;">{t["delivery"]}</h2>
+        <p class="text-stone-600 leading-relaxed">{html.escape(t["del_text"])}</p>
     </section>
 
-    <section class="max-w-3xl mx-auto px-4 py-6">
-        <h2 class="font-serif text-2xl font-bold mb-4" style="color:#1a1a1a;">{t["faq"]}</h2>
+    <section class="max-w-3xl mx-auto px-6 py-8">
+        <h2 class="font-serif text-2xl font-bold mb-5" style="color:#1a1a1a;">{t["faq"]}</h2>
         <div class="space-y-3">
             {faq_html}
         </div>
     </section>
 
-    <section class="max-w-5xl mx-auto px-4 py-10">
-        <h2 class="font-serif text-2xl font-bold mb-6 text-center" style="color:#1a1a1a;">{t["related"]}</h2>
+    <section class="max-w-5xl mx-auto px-6 py-12">
+        <h2 class="font-serif text-2xl font-bold mb-8 text-center" style="color:#1a1a1a;">{t["related"]}</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {rel_cards}
         </div>
-        <div class="text-center mt-8">
+        <div class="text-center mt-10">
             <a href="{base}catalog-{lang}.html" class="btn-rose inline-block font-medium py-2.5 px-6 rounded-xl text-sm">{t["back"]}</a>
         </div>
     </section>
@@ -392,17 +392,26 @@ def jstr(s):
     import json
     return json.dumps(s, ensure_ascii=False)
 
+ARTICLES_BANNER_IMG = "img/photo-1615182787503-08365d1e7fae.avif"
+ARTICLES_KICKER = {"ru": "читайте", "en": "read", "ko": "읽어보기"}
+ARTICLES_CTA = {"ru": "смотреть статьи →", "en": "view articles →", "ko": "블로그 보기 →"}
+
 def articles_block(lang, base):
-    """Сквозной блок 'Статьи' после Hero (для всех страниц)."""
+    """Сквозной блок 'Статьи' — баннер с фото в стиле блока «Гелиевые шары»."""
     t = T[lang]
     return f'''
     <!-- Сквозной блок: Статьи -->
-    <section class="reveal py-12 px-4" style="background:#fdf4f7;">
-        <div class="max-w-5xl mx-auto text-center">
-            <h2 class="font-serif text-3xl font-bold mb-3" style="color:#1a1a1a;">{t["blog_h1"]}</h2>
-            <p class="text-stone-500 text-sm mb-6">{t["blog_sub"]}</p>
-            <a href="{base}blog-{lang}.html" class="btn-rose inline-block font-medium py-2.5 px-6 rounded-xl text-sm">{t["nav_articles"]} →</a>
-        </div>
+    <section class="reveal py-10 px-4 max-w-5xl mx-auto w-full">
+        <a href="{base}blog-{lang}.html" class="block rounded-3xl overflow-hidden relative group" style="height: 340px;">
+            <img src="{base}{ARTICLES_BANNER_IMG}" alt="{t["blog_h1"]}" class="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105">
+            <div class="absolute inset-0 transition-opacity duration-500" style="background: linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 100%);"></div>
+            <div class="absolute inset-0 flex flex-col justify-center px-10 md:px-14">
+                <p class="text-xs tracking-widest uppercase mb-3 font-medium" style="color:#fce8ee; opacity:0.85;">{ARTICLES_KICKER[lang]}</p>
+                <h2 class="font-serif text-4xl md:text-5xl font-medium italic text-white mb-4 leading-tight">{t["blog_h1"]}</h2>
+                <p class="text-white/80 text-sm mb-6 max-w-xs">{t["blog_sub"]}</p>
+                <span class="inline-flex items-center gap-2 text-sm font-medium text-white border border-white/50 rounded-xl px-5 py-2.5 self-start transition-all duration-300 group-hover:bg-white group-hover:text-stone-800">{ARTICLES_CTA[lang]}</span>
+            </div>
+        </a>
     </section>
 '''
 

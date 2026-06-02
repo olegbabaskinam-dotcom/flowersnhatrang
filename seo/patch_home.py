@@ -59,16 +59,16 @@ def patch(fname, lang, is_home):
             '<div class="md:hidden border-t border-stone-100 px-4 py-2 flex gap-1 text-xs font-medium overflow-x-auto justify-center">',
             '<div class="md:hidden border-t border-stone-100 px-4 py-2 flex gap-1 text-xs font-medium overflow-x-auto justify-center"><!--MARK-NAVM-->' + m, 1)
 
-    # 2. сквозной блок Статьи
-    if "MARK-ARTICLES" not in s:
-        block = '<!--MARK-ARTICLES-->' + B.articles_block(lang, "")
-        if is_home and "<!-- Hero" in s:
-            # после закрытия первой секции Hero
-            i = s.index("<!-- Hero")
-            j = s.index("</section>", i) + len("</section>")
-            s = s[:j] + "\n" + block + s[j:]
-        else:
-            s = s.replace("</header>", "</header>\n" + block, 1)
+    # 2. сквозной блок Статьи (баннер с фото) — после блока «Гелиевые шары»
+    # сначала убираем старую вставку, если была (идемпотентность)
+    s = re.sub(r'<!--MARK-ARTICLES-->.*?<!--/MARK-ARTICLES-->\s*', '', s, flags=re.S)
+    block = '<!--MARK-ARTICLES-->' + B.articles_block(lang, "") + '<!--/MARK-ARTICLES-->\n'
+    m = re.search(r'class="block rounded-3xl[^"]*"[^>]*style="height: 340px;"', s)
+    if m:  # есть баннер шаров → вставляем после его секции
+        j = s.index("</section>", m.end()) + len("</section>")
+        s = s[:j] + "\n" + block + s[j:]
+    else:  # на страницах шаров — перед футером
+        s = s.replace("<footer", block + "\n    <footer", 1)
 
     # 3. каталог: 6 товаров + кнопка
     if is_home and "MARK-CATALOG" not in s:
