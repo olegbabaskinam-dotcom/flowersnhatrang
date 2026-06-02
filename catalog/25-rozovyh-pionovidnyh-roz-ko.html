@@ -41,6 +41,25 @@
         .btn-rose-filled:hover { background: var(--rose-hover); transform: translateY(-1px); }
         .gallery-thumb { cursor:pointer; opacity:.6; transition:opacity .2s ease, border-color .2s ease; border:2px solid transparent; }
         .gallery-thumb.active, .gallery-thumb:hover { opacity:1; border-color: var(--rose); }
+        /* утилиты, которых нет в purged styles.css */
+        .max-w-3xl { max-width: 48rem; }
+        .max-w-xl { max-width: 36rem; }
+        .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+        .pb-2 { padding-bottom: .5rem; }
+        .pb-16 { padding-bottom: 4rem; }
+        .pb-24 { padding-bottom: 6rem; }
+        .p-12 { padding: 3rem; }
+        .mt-5 { margin-top: 1.25rem; }
+        .gap-10 { gap: 2.5rem; }
+        .items-start { align-items: flex-start; }
+        .leading-relaxed { line-height: 1.625; }
+        .inline-block { display: inline-block; }
+        .w-auto { width: auto; }
+        .space-y-3 > * + * { margin-top: .75rem; }
+        .gallery-main-img { max-height: 360px; width: auto; max-width: 100%; }
+        @media (min-width: 768px) {
+            .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
     </style>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
@@ -84,7 +103,7 @@
     <section class="max-w-5xl mx-auto px-6 py-8 grid md:grid-cols-2 gap-10 items-start">
         <div class="reveal">
         <div class="rounded-2xl overflow-hidden border border-stone-100 flex items-center justify-center p-3" style="background:#fdf4f7;">
-            <img id="gallery-main" src="../img/dqRRa.webp" alt="피오니 핑크 장미 25송이" class="max-h-[360px] w-auto max-w-full object-contain rounded-xl">
+            <img id="gallery-main" src="../img/dqRRa.webp" alt="피오니 핑크 장미 25송이" class="gallery-main-img object-contain rounded-xl">
         </div>
         
         </div>

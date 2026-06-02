@@ -34,7 +34,10 @@ def catalog_section(lang):
     t = B.T[lang]
     cards = "\n            ".join(B.product_card(p, lang, "", t) for p in products[:6])
     return f'''<section id="catalog" class="py-16 px-4 max-w-5xl mx-auto flex-grow">
-        <h2 class="reveal font-serif text-3xl md:text-4xl font-bold text-center mb-12" style="color:#1a1a1a;">{CAT_H2[lang]}</h2>
+        <a href="catalog-{lang}.html" class="block text-center mb-12 group">
+            <h2 class="reveal font-serif text-3xl md:text-4xl font-bold group-hover:text-[#c0687a] transition" style="color:#1a1a1a;">{CAT_H2[lang]}</h2>
+            <span class="inline-block mt-3 text-sm font-medium" style="color:#c0687a;">{MORE[lang]} →</span>
+        </a>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {cards}
         </div>
@@ -48,6 +51,13 @@ def patch(fname, lang, is_home):
     if not os.path.exists(path):
         print(f"  пропуск (нет файла): {fname}"); return
     s = open(path, encoding="utf-8").read()
+
+    # 0. недостающий стиль кнопки (есть только в сгенерированных страницах)
+    if ".btn-rose-filled {" not in s:
+        css = ('        .btn-rose-filled { background: var(--rose); color:#fff; border:1.5px solid var(--rose); '
+               'transition: background .22s ease, transform .15s ease; }\n'
+               '        .btn-rose-filled:hover { background: var(--rose-hover); transform: translateY(-1px); }\n    </style>')
+        s = s.replace("    </style>", css, 1)
 
     # 1. nav links (по маркеру, чтобы не дублировать)
     if "MARK-NAV" not in s:
@@ -70,8 +80,8 @@ def patch(fname, lang, is_home):
     else:  # на страницах шаров — перед футером
         s = s.replace("<footer", block + "\n    <footer", 1)
 
-    # 3. каталог: 6 товаров + кнопка
-    if is_home and "MARK-CATALOG" not in s:
+    # 3. каталог: 6 товаров + кнопка (всегда перестраиваем — секция детерминирована)
+    if is_home:
         new = catalog_section(lang).replace('id="catalog"', 'id="catalog" data-mark="MARK-CATALOG"', 1)
         s = re.sub(r'<section id="catalog".*?</section>', lambda mo: new, s, count=1, flags=re.S)
 
