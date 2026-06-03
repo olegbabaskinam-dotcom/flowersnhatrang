@@ -301,7 +301,7 @@ def header(lang, base, lang_urls=None):
     <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-stone-100">
         <div class="max-w-5xl mx-auto px-4 py-3 hidden md:flex justify-between items-center">
             <a href="{base}{HOME[lang]}" class="flex items-center gap-3">
-                <img src="{base}img/dqRu8.webp" alt="NhaTrang Flowers" class="h-12 w-12 rounded-xl object-cover">
+                <img src="{base}img/site/logo.webp" alt="NhaTrang Flowers" class="h-12 w-12 rounded-xl object-cover">
                 <span class="font-medium text-xs leading-tight text-stone-600 tracking-wide">{t["site_sub"]}</span>
             </a>
             <nav class="hidden md:flex items-center gap-1 text-xs font-medium">
@@ -415,12 +415,13 @@ def product_card(p, lang, base, t):
             </a>'''
 
 def gallery(p, base, alt):
-    # Галерея на 7-8 фото: сейчас 1 фото, доп. ищутся как <slug>-2.webp ... -8.webp
+    # Галерея: главное фото из products.csv (img/products/<slug>/1.webp),
+    # доп. — img/products/<slug>/2.webp ... 8.webp (если есть)
     imgs = [p["img"]]
     for n in range(2, 9):
-        cand = os.path.join(ROOT, "img", f"{p['slug']}-{n}.webp")
+        cand = os.path.join(ROOT, "img", "products", p["slug"], f"{n}.webp")
         if os.path.exists(cand):
-            imgs.append(f"img/{p['slug']}-{n}.webp")
+            imgs.append(f"img/products/{p['slug']}/{n}.webp")
     main = imgs[0]
     thumbs = ""
     if len(imgs) > 1:
@@ -567,7 +568,7 @@ def jstr(s):
     import json
     return json.dumps(s, ensure_ascii=False)
 
-ARTICLES_BANNER_IMG = "img/photo-1615182787503-08365d1e7fae.avif"
+ARTICLES_BANNER_IMG = "img/site/articles-banner.avif"
 ARTICLES_KICKER = {"ru": "читайте", "en": "read", "ko": "읽어보기"}
 ARTICLES_CTA = {"ru": "смотреть статьи →", "en": "view articles →", "ko": "블로그 보기 →"}
 
@@ -591,7 +592,7 @@ def articles_block(lang, base):
 '''
 
 GMAPS = "https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic"
-REVIEW_IMGS = ["img/dqj8G.webp", "img/dqj8P.webp", "img/dqj8o.webp"]
+REVIEW_IMGS = ["img/site/review-1.webp", "img/site/review-2.webp", "img/site/review-3.webp"]
 
 def trust_bar(lang, base):
     """Полоса доверия: 500+ доставлено · 5.0 / отзывы Google · оплата при получении."""
@@ -741,7 +742,7 @@ def render_article(art, lang, products, all_articles):
     canonical = f"{DOMAIN}/blog/{slug}-{lang}.html"
     alts = {l: f"{DOMAIN}/blog/{slug}-{l}.html" for l in LANGS}
     cover = art.get("photo")
-    og = cover if cover else "img/dSXDj.webp"
+    og = cover if cover else "img/site/og-default.webp"
 
     # тело статьи
     secs = "\n".join(
@@ -860,7 +861,7 @@ def render_blog(lang):
     </main>
 '''
     lang_urls = {l: f"blog-{l}.html" for l in LANGS}
-    return head(lang, title, meta, canonical, alts, base, "img/dSXDj.webp") + header(lang, base, lang_urls) + body + footer(base, lang) + SCRIPTS
+    return head(lang, title, meta, canonical, alts, base, "img/site/og-default.webp") + header(lang, base, lang_urls) + body + footer(base, lang) + SCRIPTS
 
 def main():
     products = list(csv.DictReader(open(PRODUCTS, encoding="utf-8")))
