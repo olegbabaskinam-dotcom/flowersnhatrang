@@ -18,6 +18,9 @@ os.makedirs(CATALOG_DIR, exist_ok=True)
 
 WA = "https://wa.me/37443529162"
 TG = "https://t.me/babaskin_o"
+# Корейская аудитория не пользуется WhatsApp/Telegram — только KakaoTalk + KO Instagram
+KAKAO = "http://pf.kakao.com/_zbwKX"
+IG_KO = "https://instagram.com/nhatrang.kkot"
 DOMAIN = "https://flowers-nha-trang.online"
 
 HOTELS = [
@@ -31,6 +34,20 @@ HOTELS = [
 # SVG-иконки мессенджеров (как в index.html)
 WA_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>'
 TG_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>'
+IG_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>'
+KAKAO_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M12 3C6.477 3 2 6.463 2 10.74c0 2.74 1.83 5.146 4.59 6.51-.2.74-.73 2.66-.836 3.072-.13.51.187.503.394.366.163-.107 2.6-1.766 3.66-2.487.71.105 1.444.16 2.192.16 5.523 0 10-3.463 10-7.74S17.523 3 12 3z"/></svg>'
+
+def contact_links(lang):
+    """Иконки соцсетей для шапки/футера по языку (KO: Kakao + KO Instagram)."""
+    if lang == "ko":
+        return [(KAKAO, "KakaoTalk", KAKAO_SVG), (IG_KO, "Instagram", IG_SVG)]
+    return [(WA, "WhatsApp", WA_SVG), (TG, "Telegram", TG_SVG)]
+
+def order_contacts(lang, t):
+    """Кнопки заказа (url, подпись, иконка) по языку."""
+    if lang == "ko":
+        return [(KAKAO, t["order_kakao"], KAKAO_SVG), (IG_KO, t["order_ig"], IG_SVG)]
+    return [(WA, t["order_wa"], WA_SVG), (TG, t["order_tg"], TG_SVG)]
 
 # Иконки (FontAwesome-пути, как на сайте)
 IC_CHECK = '<svg viewBox="0 0 448 512" fill="currentColor" width="1em" height="1em"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>'
@@ -57,6 +74,7 @@ T = {
         "catalog_h1": "Каталог букетов",
         "catalog_sub": "Свежие букеты и гелиевые шары с доставкой по Нячангу день в день.",
         "order_wa": "заказать в WhatsApp", "order_tg": "заказать в Telegram",
+        "order_kakao": "заказать в KakaoTalk", "order_ig": "заказать в Instagram",
         "composition": "Описание", "delivery": "Доставка и оплата",
         "related": "Похожие букеты", "faq": "Частые вопросы",
         "back": "← весь каталог", "details": "подробнее",
@@ -77,6 +95,7 @@ T = {
         "catalog_h1": "Bouquet catalog",
         "catalog_sub": "Fresh bouquets and helium balloons with same-day delivery in Nha Trang.",
         "order_wa": "order on WhatsApp", "order_tg": "order on Telegram",
+        "order_kakao": "order on KakaoTalk", "order_ig": "order on Instagram",
         "composition": "Description", "delivery": "Delivery & payment",
         "related": "Similar bouquets", "faq": "FAQ",
         "back": "← back to catalog", "details": "details",
@@ -97,6 +116,7 @@ T = {
         "catalog_h1": "꽃다발 카탈로그",
         "catalog_sub": "나트랑 당일 배달, 신선한 꽃다발과 헬륨 풍선.",
         "order_wa": "WhatsApp으로 주문", "order_tg": "Telegram으로 주문",
+        "order_kakao": "카카오톡으로 주문", "order_ig": "인스타그램으로 주문",
         "composition": "상품 설명", "delivery": "배송 및 결제",
         "related": "비슷한 꽃다발", "faq": "자주 묻는 질문",
         "back": "← 카탈로그로", "details": "자세히",
@@ -288,9 +308,8 @@ def header(lang, base, lang_urls=None):
                 <span class="w-px h-4 bg-stone-200 mx-1"></span>
                 {nav_langs}
             </nav>
-            <div class="flex gap-4 text-xl">
-                <a href="{WA}" target="_blank" class="text-stone-400 hover:text-[#c0687a] transition" aria-label="WhatsApp">{WA_SVG}</a>
-                <a href="{TG}" target="_blank" class="text-stone-400 hover:text-[#c0687a] transition" aria-label="Telegram">{TG_SVG}</a>
+            <div class="hidden md:flex gap-4 text-xl">
+                {"".join(f'<a href="{u}" target="_blank" class="text-stone-400 hover:text-[#c0687a] transition" aria-label="{lbl}">{svg}</a>' for u, lbl, svg in contact_links(lang))}
             </div>
         </div>
         <div class="md:hidden border-t border-stone-100 px-4 py-2 flex gap-1 text-xs font-medium overflow-x-auto justify-center">
@@ -318,8 +337,7 @@ def footer(base, lang="ru"):
                 <div class="text-xs font-medium tracking-widest uppercase" style="color:#a8566a;">Качество · Ответственность · Пунктуальность</div>
             </div>
             <div class="flex gap-6 text-2xl">
-                <a href="{WA}" target="_blank" style="color:#c0a0a8;" class="hover:text-[#c0687a] transition" aria-label="WhatsApp">{WA_SVG}</a>
-                <a href="{TG}" target="_blank" style="color:#c0a0a8;" class="hover:text-[#c0687a] transition" aria-label="Telegram">{TG_SVG}</a>
+                {"".join(f'<a href="{u}" target="_blank" style="color:#c0a0a8;" class="hover:text-[#c0687a] transition" aria-label="{lbl}">{svg}</a>' for u, lbl, svg in contact_links(lang))}
             </div>
         </div>
         <div class="text-center text-xs mt-8" style="color:#a8566a;">🕖 {HOURS.get(lang, HOURS["ru"])}</div>
@@ -330,7 +348,7 @@ def footer(base, lang="ru"):
 '''
 
 SCRIPTS = '''<script>
-document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"]').forEach(function(el) {
+document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"], a[href*="kakao"], a[href*="nhatrang.kkot"]').forEach(function(el) {
     el.addEventListener('click', function() {
         gtag('event', 'conversion', {'send_to': 'AW-18183091777/YJxbCLWUtbIcEMHsr95D','value': 1.0,'currency': 'VND'});
     });
@@ -363,11 +381,15 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"]').forEach(function(
 </html>
 '''
 
-def order_buttons(name, t, size="full"):
+def order_buttons(name, t, lang, size="full"):
     msg = name.replace(" ", "%20")
+    rows = []
+    for url, label, svg in order_contacts(lang, t):
+        href = f"{url}?text={msg}" if ("wa.me" in url or "t.me" in url) else url
+        rows.append(f'<a href="{href}" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">{svg} {label}</a>')
+    btns = "\n                    ".join(rows)
     return f'''<div class="flex flex-col gap-2">
-                    <a href="{WA}?text={msg}" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">{WA_SVG} {t["order_wa"]}</a>
-                    <a href="{TG}?text={msg}" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">{TG_SVG} {t["order_tg"]}</a>
+                    {btns}
                 </div>'''
 
 def product_card(p, lang, base, t):
@@ -473,7 +495,7 @@ def render_product(p, lang, products):
                 <p class="font-bold text-3xl mb-1" style="color:#1a1a1a;">{html.escape(price_loc(p['price'], lang))}</p>
                 <p class="text-stone-500 text-sm">{html.escape(p['price_sub'])}</p>
             </div>
-            {order_buttons(name, t)}
+            {order_buttons(name, t, lang)}
             <div class="flex flex-wrap gap-2 mt-5">
                 <span class="chip">{IC_TRUCK} {u["chip_free"]}</span>
                 <span class="chip">{IC_CLOCK} {u["chip_day"]}</span>
@@ -702,8 +724,7 @@ def article_cta(lang, base):
             <h2 class="font-serif text-2xl font-bold mb-2" style="color:#1a1a1a;">{u["art_cta_h"]}</h2>
             <p class="text-stone-600 text-sm mb-6 max-w-xl mx-auto">{u["art_cta_sub"]}</p>
             <div class="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
-                <a href="{WA}" target="_blank" class="btn-rose-filled flex items-center justify-center gap-2 font-medium py-3 px-6 rounded-xl text-sm">{WA_SVG} {t["order_wa"]}</a>
-                <a href="{TG}" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-3 px-6 rounded-xl text-sm">{TG_SVG} {t["order_tg"]}</a>
+                {"".join(f'<a href="{u}" target="_blank" class="{("btn-rose-filled" if i==0 else "btn-rose")} flex items-center justify-center gap-2 font-medium py-3 px-6 rounded-xl text-sm">{svg} {label}</a>' for i, (u, label, svg) in enumerate(order_contacts(lang, t)))}
             </div>
         </div>
     </section>
