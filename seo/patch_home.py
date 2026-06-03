@@ -61,9 +61,25 @@ def build_nav(lang):
          + '\n        </div>')
     return d, m
 
+# витрина на главной: 6 товаров из РАЗНЫХ категорий (для разнообразия)
+# 25 роз · лилии · 51 роза · набор шаров · 101 роза в корзине · 151 роза
+FEATURED_IDS = ["1", "5", "6", "8", "9", "12"]
+
+def featured_products():
+    by_id = {p["id"]: p for p in products}
+    sel = [by_id[i] for i in FEATURED_IDS if i in by_id]
+    # добор, если каких-то id нет
+    if len(sel) < 6:
+        for p in products:
+            if p not in sel:
+                sel.append(p)
+            if len(sel) == 6:
+                break
+    return sel[:6]
+
 def catalog_section(lang):
     t = B.T[lang]
-    cards = "\n            ".join(B.product_card(p, lang, "", t) for p in products[:6])
+    cards = "\n            ".join(B.product_card(p, lang, "", t) for p in featured_products())
     return f'''<section id="catalog" class="py-16 px-4 max-w-5xl mx-auto flex-grow">
         <a href="catalog-{lang}.html" class="block text-center mb-12 group">
             <h2 class="reveal font-serif text-3xl md:text-4xl font-bold group-hover:text-[#c0687a] transition" style="color:#1a1a1a;">{CAT_H2[lang]}</h2>
