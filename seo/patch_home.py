@@ -24,6 +24,16 @@ FILES = {
 
 FLAGS = {"ru": "🇷🇺 RU", "en": "🇬🇧 EN", "ko": "🇰🇷 KR"}
 
+# SEO-заголовки под ключи (детерминированно, идемпотентно)
+TITLES = {
+    "index.html": "Доставка цветов в Нячанге 24/7 — букеты и розы | NhaTrang Flowers",
+    "index-en.html": "Flower Delivery in Nha Trang 24/7 — Bouquets & Roses | NhaTrang Flowers",
+    "index-kr.html": "나트랑 꽃 배달 24/7 — 꽃다발·장미 | NhaTrang Flowers",
+    "balloons.html": "Гелиевые шары в Нячанге — доставка наборов S/M/L | NhaTrang Flowers",
+    "balloons-en.html": "Helium Balloons in Nha Trang — S/M/L Set Delivery | NhaTrang Flowers",
+    "balloons-kr.html": "나트랑 헬륨 풍선 — S/M/L 세트 배달 | NhaTrang Flowers",
+}
+
 def build_nav(lang):
     """Полная навигация (как в build_site.header): Главная, Каталог, Статьи, Шары, | RU EN KR.
     Языково-корректные ссылки. Возвращает (desktop_nav, mobile_nav)."""
@@ -109,6 +119,21 @@ def patch(fname, lang, is_home):
     # 0b. og:image → абсолютный URL (для превью при шеринге)
     s = re.sub(r'(<meta property="og:image" content=")(?!https?:)([^"]*)(">)',
                lambda mo: f'{mo.group(1)}{B.DOMAIN}/{mo.group(2)}{mo.group(3)}', s)
+
+    # 0c. favicon (идемпотентно)
+    if 'rel="apple-touch-icon"' not in s:
+        fav = ('<link rel="icon" href="favicon.ico" sizes="any">\n'
+               '    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">\n'
+               '    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">\n'
+               '    <link rel="apple-touch-icon" href="apple-touch-icon.png">\n    <title>')
+        s = s.replace("<title>", fav, 1)
+
+    # 0d. SEO-title + og:title (детерминированно)
+    if fname in TITLES:
+        nt = TITLES[fname]
+        s = re.sub(r'<title>.*?</title>', f'<title>{nt}</title>', s, count=1, flags=re.S)
+        s = re.sub(r'(<meta property="og:title" content=")[^"]*(">)',
+                   lambda mo: f'{mo.group(1)}{nt}{mo.group(2)}', s, count=1)
 
     # 1. nav — полностью перестраиваем (детерминированно, языково-корректно, идемпотентно)
     d, m = build_nav(lang)

@@ -207,6 +207,10 @@ def head(lang, title, desc, canonical, alts, base, og_image):
     <meta property="og:description" content="{html.escape(desc)}">
     <meta property="og:type" content="website">
     <meta property="og:image" content="{DOMAIN}/{og_image}">
+    <link rel="icon" href="{base}favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="{base}favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{base}favicon-16x16.png">
+    <link rel="apple-touch-icon" href="{base}apple-touch-icon.png">
     {links_str}
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NNYC00Y4EB"></script>
     <script>
