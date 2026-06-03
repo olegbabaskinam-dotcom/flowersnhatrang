@@ -117,6 +117,11 @@ def patch(fname, lang, is_home):
         new = catalog_section(lang).replace('id="catalog"', 'id="catalog" data-mark="MARK-CATALOG"', 1)
         s = re.sub(r'<section id="catalog".*?</section>', lambda mo: new, s, count=1, flags=re.S)
 
+    # 3b. мобайл: скрыть верхний ряд (лого + соцыконки-контакты), оставить тонкое меню
+    s = s.replace(
+        '<div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">',
+        '<div class="max-w-5xl mx-auto px-4 py-3 hidden md:flex justify-between items-center">', 1)
+
     # 4. часы работы в футер (перед копирайтом), идемпотентно
     s = re.sub(r'<div class="text-center text-xs mt-8" style="color:#a8566a;"><!--MARK-HOURS-->.*?</div>\s*', '', s, flags=re.S)
     hours_div = (f'<div class="text-center text-xs mt-8" style="color:#a8566a;"><!--MARK-HOURS-->'

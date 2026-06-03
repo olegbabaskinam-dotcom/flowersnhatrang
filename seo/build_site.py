@@ -275,7 +275,7 @@ def header(lang, base, lang_urls=None):
         NhaTrang Flowers
     </div>
     <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-stone-100">
-        <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
+        <div class="max-w-5xl mx-auto px-4 py-3 hidden md:flex justify-between items-center">
             <a href="{base}{HOME[lang]}" class="flex items-center gap-3">
                 <img src="{base}img/dqRu8.webp" alt="NhaTrang Flowers" class="h-12 w-12 rounded-xl object-cover">
                 <span class="font-medium text-xs leading-tight text-stone-600 tracking-wide">{t["site_sub"]}</span>
