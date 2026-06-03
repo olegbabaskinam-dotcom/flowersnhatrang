@@ -54,11 +54,12 @@
         .btn-rose-filled { background: var(--rose); color:#fff; border:1.5px solid var(--rose); transition: background .22s ease, transform .15s ease; }
         .btn-rose-filled:hover { background: var(--rose-hover); transform: translateY(-1px); }
         
+        
         /*MARK-CARD-CSS*/
         .pcard-slider{position:relative;overflow:hidden;height:16rem;background:#fdf4f7;}
         .pcard-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s ease;}
         .pcard-slide.active{opacity:1;}
-        .pcard-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.92);border:none;width:2.1rem;height:2.1rem;border-radius:999px;font-size:1.3rem;line-height:1;color:#a8566a;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:.85;transition:opacity .2s,background .2s;z-index:3;box-shadow:0 1px 5px rgba(0,0,0,.18);}
+        .pcard-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.96);border:none;width:2.5rem;height:2.5rem;border-radius:999px;font-size:1.6rem;line-height:1;color:#a8566a;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:1;transition:opacity .2s,background .2s,transform .15s;z-index:5;box-shadow:0 2px 8px rgba(0,0,0,.22);}
         .pcard-arrow:hover{opacity:1;background:#fff;}
         .pcard-prev{left:.5rem;} .pcard-next{right:.5rem;}
         .pcard-dots{position:absolute;bottom:.55rem;left:0;right:0;display:flex;gap:.3rem;justify-content:center;z-index:3;}
@@ -444,6 +445,7 @@ document.querySelectorAll('a[href*="kakao.com"], a[href*="instagram.com"]').forE
     iframes.forEach(function(el){ io.observe(el); });
 })();
 </script>
+
 
 
 <script>/*MARK-CARD-JS*/

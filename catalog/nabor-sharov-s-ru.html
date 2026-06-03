@@ -83,7 +83,7 @@
         .pcard-slider{position:relative;overflow:hidden;height:16rem;background:#fdf4f7;}
         .pcard-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s ease;}
         .pcard-slide.active{opacity:1;}
-        .pcard-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.92);border:none;width:2.1rem;height:2.1rem;border-radius:999px;font-size:1.3rem;line-height:1;color:#a8566a;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:.85;transition:opacity .2s,background .2s;z-index:3;box-shadow:0 1px 5px rgba(0,0,0,.18);}
+        .pcard-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.96);border:none;width:2.5rem;height:2.5rem;border-radius:999px;font-size:1.6rem;line-height:1;color:#a8566a;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:1;transition:opacity .2s,background .2s,transform .15s;z-index:5;box-shadow:0 2px 8px rgba(0,0,0,.22);}
         .pcard-arrow:hover{opacity:1;background:#fff;}
         .pcard-prev{left:.5rem;} .pcard-next{right:.5rem;}
         .pcard-dots{position:absolute;bottom:.55rem;left:0;right:0;display:flex;gap:.3rem;justify-content:center;z-index:3;}
@@ -265,7 +265,7 @@
     <section class="max-w-5xl mx-auto px-6 py-12">
         <h2 class="font-serif text-2xl font-bold mb-8 text-center" style="color:#1a1a1a;">Похожие букеты</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="r101" data-color="">
+            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="r101" data-color="red">
                 <div class="pcard-slider">
                     <img src="../img/products/101-roza-v-korzine/1.webp" alt="101 роза в корзине Нячанг доставка" loading="lazy" class="pcard-slide active">
                     
