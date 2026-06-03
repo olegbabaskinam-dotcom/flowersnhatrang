@@ -117,6 +117,12 @@ def patch(fname, lang, is_home):
         new = catalog_section(lang).replace('id="catalog"', 'id="catalog" data-mark="MARK-CATALOG"', 1)
         s = re.sub(r'<section id="catalog".*?</section>', lambda mo: new, s, count=1, flags=re.S)
 
+    # 4. часы работы в футер (перед копирайтом), идемпотентно
+    s = re.sub(r'<div class="text-center text-xs mt-8" style="color:#a8566a;"><!--MARK-HOURS-->.*?</div>\s*', '', s, flags=re.S)
+    hours_div = (f'<div class="text-center text-xs mt-8" style="color:#a8566a;"><!--MARK-HOURS-->'
+                 f'\U0001F552 {B.HOURS.get(lang, B.HOURS["ru"])}</div>\n        ')
+    s = re.sub(r'(<div class="text-center text-xs mt-10 pt-6")', hours_div + r'\1', s, count=1)
+
     open(path, "w", encoding="utf-8").write(s)
     print(f"  патч ок: {fname}")
 

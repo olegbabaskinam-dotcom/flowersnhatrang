@@ -115,7 +115,7 @@ T = {
 
 UI = {
     "ru": {"b_fresh": "свежие цветы", "b_day": "день в день",
-           "chip_free": "бесплатно по Нячангу", "chip_day": "доставка день в день", "chip_pay": "оплата картой/нал.",
+           "chip_free": "бесплатно по Нячангу", "chip_day": "доставка день в день", "chip_pay": "наличные / перевод",
            "f1t": "Свежесть", "f1d": "Собираем букет в день доставки",
            "f2t": "День в день", "f2d": "Доставим до 18:00 в день заказа",
            "f3t": "Доставка до отеля", "f3d": "Если лифт работает без карты — поднимемся прямо в номер",
@@ -130,7 +130,7 @@ UI = {
            "art_cta_sub": "Свежие букеты день в день, доставим прямо в отель или на виллу.",
            "art_faq_h": "Частые вопросы", "art_min": "мин чтения"},
     "en": {"b_fresh": "fresh flowers", "b_day": "same-day",
-           "chip_free": "free in Nha Trang", "chip_day": "same-day delivery", "chip_pay": "card / cash",
+           "chip_free": "free in Nha Trang", "chip_day": "same-day delivery", "chip_pay": "cash / transfer",
            "f1t": "Freshness", "f1d": "Bouquet arranged on the delivery day",
            "f2t": "Same day", "f2d": "Delivered by 6 PM on your order day",
            "f3t": "Hotel delivery", "f3d": "If the lift works without a keycard, we come up to your room",
@@ -145,7 +145,7 @@ UI = {
            "art_cta_sub": "Fresh bouquets same day, delivered straight to your hotel or villa.",
            "art_faq_h": "FAQ", "art_min": "min read"},
     "ko": {"b_fresh": "신선한 꽃", "b_day": "당일 배송",
-           "chip_free": "나트랑 무료 배송", "chip_day": "당일 배송", "chip_pay": "카드 / 현금",
+           "chip_free": "나트랑 무료 배송", "chip_day": "당일 배송", "chip_pay": "현금 / 송금",
            "f1t": "신선함", "f1d": "배송 당일에 꽃다발을 제작합니다",
            "f2t": "당일 배송", "f2d": "주문 당일 오후 6시 이전 배송",
            "f3t": "호텔 배송", "f3d": "엘리베이터가 카드 없이 작동하면 객실까지 직접 올라갑니다",
@@ -304,7 +304,13 @@ def header(lang, base, lang_urls=None):
     </header>
 '''
 
-def footer(base):
+HOURS = {
+    "ru": "Работаем ежедневно · Нячанг 06:00–22:00 · Камрань 06:00–21:00",
+    "en": "Open daily · Nha Trang 06:00–22:00 · Cam Ranh 06:00–21:00",
+    "ko": "연중무휴 · 나트랑 06:00–22:00 · 깜라인 06:00–21:00",
+}
+
+def footer(base, lang="ru"):
     return f'''    <footer class="py-12 px-4 mt-auto" style="background:#fce8ee;">
         <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
             <div class="text-center md:text-left">
@@ -316,7 +322,8 @@ def footer(base):
                 <a href="{TG}" target="_blank" style="color:#c0a0a8;" class="hover:text-[#c0687a] transition" aria-label="Telegram">{TG_SVG}</a>
             </div>
         </div>
-        <div class="text-center text-xs mt-10 pt-6" style="border-top: 1px solid #f0d0d8; color:#b08090;">
+        <div class="text-center text-xs mt-8" style="color:#a8566a;">🕖 {HOURS.get(lang, HOURS["ru"])}</div>
+        <div class="text-center text-xs mt-6 pt-6" style="border-top: 1px solid #f0d0d8; color:#b08090;">
             &copy; 2026 NhaTrang Flowers.
         </div>
     </footer>
@@ -528,7 +535,7 @@ def render_product(p, lang, products):
 '''
     lang_urls = {l: f"{p['slug']}-{l}.html" for l in LANGS}
     return (head(lang, title, meta, canonical, alts, base, p["img"])
-            + schema + faqschema + header(lang, base, lang_urls) + body + footer(base) + SCRIPTS)
+            + schema + faqschema + header(lang, base, lang_urls) + body + footer(base, lang) + SCRIPTS)
 
 def jstr(s):
     import json
@@ -646,7 +653,7 @@ def render_catalog(lang, products):
     </main>
 '''
     lang_urls = {l: f"catalog-{l}.html" for l in LANGS}
-    return head(lang, title, meta, canonical, alts, base, products[0]["img"]) + header(lang, base, lang_urls) + body + footer(base) + SCRIPTS
+    return head(lang, title, meta, canonical, alts, base, products[0]["img"]) + header(lang, base, lang_urls) + body + footer(base, lang) + SCRIPTS
 
 # ---------- СТАТЬИ (блог) ----------
 ARTICLES_DIR = os.path.join(HERE, "articles")
@@ -789,7 +796,7 @@ def render_article(art, lang, products, all_articles):
     faqschema = ('<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[%s]}</script>' % faq_schema) if faq else ""
     lang_urls = {l: f"{slug}-{l}.html" for l in LANGS}
     return (head(lang, a["title"], a["meta"], canonical, alts, base, og)
-            + art_schema + faqschema + header(lang, base, lang_urls) + body + footer(base) + SCRIPTS)
+            + art_schema + faqschema + header(lang, base, lang_urls) + body + footer(base, lang) + SCRIPTS)
 
 def render_blog(lang):
     t = T[lang]
@@ -828,7 +835,7 @@ def render_blog(lang):
     </main>
 '''
     lang_urls = {l: f"blog-{l}.html" for l in LANGS}
-    return head(lang, title, meta, canonical, alts, base, "img/dSXDj.webp") + header(lang, base, lang_urls) + body + footer(base) + SCRIPTS
+    return head(lang, title, meta, canonical, alts, base, "img/dSXDj.webp") + header(lang, base, lang_urls) + body + footer(base, lang) + SCRIPTS
 
 def main():
     products = list(csv.DictReader(open(PRODUCTS, encoding="utf-8")))
