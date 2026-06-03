@@ -79,6 +79,22 @@
         .check-li { display:flex; gap:.6rem; align-items:flex-start; color:#6b6b6b; font-size:.9rem; line-height:1.55; }
         .check-li svg { color:var(--rose); flex:0 0 auto; margin-top:.2rem; }
         .accent-bar { border-left:3px solid var(--rose); padding-left:1rem; }
+        /*MARK-CARD-CSS*/
+        .pcard-slider{position:relative;overflow:hidden;height:16rem;background:#fdf4f7;}
+        .pcard-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s ease;}
+        .pcard-slide.active{opacity:1;}
+        .pcard-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.9);border:none;width:2rem;height:2rem;border-radius:999px;font-size:1.2rem;line-height:1;color:#a8566a;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;z-index:2;box-shadow:0 1px 4px rgba(0,0,0,.12);}
+        .pcard-slider:hover .pcard-arrow{opacity:1;}
+        .pcard-prev{left:.5rem;} .pcard-next{right:.5rem;}
+        .pcard-dots{position:absolute;bottom:.55rem;left:0;right:0;display:flex;gap:.3rem;justify-content:center;z-index:2;}
+        .pcard-dot{width:.4rem;height:.4rem;border-radius:999px;background:rgba(255,255,255,.55);transition:background .2s;}
+        .pcard-dot.active{background:#fff;}
+        @media (max-width:767px){.pcard-arrow{opacity:1;}}
+        .cat-filters{display:flex;flex-direction:column;gap:.75rem;align-items:center;margin-bottom:2rem;}
+        .filt-group{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;}
+        .filt{background:#fff;border:1px solid #f0e0e5;color:#6b6b6b;font-size:.8rem;font-weight:500;padding:.45rem .9rem;border-radius:999px;cursor:pointer;transition:all .2s;}
+        .filt:hover{border-color:var(--rose);color:var(--rose);}
+        .filt.active{background:var(--rose);color:#fff;border-color:var(--rose);}
     </style>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
@@ -248,42 +264,45 @@
     <section class="max-w-5xl mx-auto px-6 py-12">
         <h2 class="font-serif text-2xl font-bold mb-8 text-center" style="color:#1a1a1a;">Similar bouquets</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            <a href="../catalog/151-krasnyh-roz-korzina-i-nabor-sharov-l-en.html" class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group">
-                <div class="card-img-wrap">
-                    <img src="../img/products/151-krasnyh-roz-korzina-i-nabor-sharov-l/1.webp" alt="151 red roses basket and balloon set L delivery Nha Trang" loading="lazy" class="w-full h-64 object-cover">
+            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="r101" data-color="red">
+                <div class="pcard-slider">
+                    <img src="../img/products/151-krasnyh-roz-korzina-i-nabor-sharov-l/1.webp" alt="151 red roses basket and balloon set L delivery Nha Trang" loading="lazy" class="pcard-slide active"><img src="../img/products/151-krasnyh-roz-korzina-i-nabor-sharov-l/2.webp" alt="151 red roses basket and balloon set L delivery Nha Trang" loading="lazy" class="pcard-slide"><img src="../img/products/151-krasnyh-roz-korzina-i-nabor-sharov-l/3.webp" alt="151 red roses basket and balloon set L delivery Nha Trang" loading="lazy" class="pcard-slide"><img src="../img/products/151-krasnyh-roz-korzina-i-nabor-sharov-l/4.webp" alt="151 red roses basket and balloon set L delivery Nha Trang" loading="lazy" class="pcard-slide"><img src="../img/products/151-krasnyh-roz-korzina-i-nabor-sharov-l/5.webp" alt="151 red roses basket and balloon set L delivery Nha Trang" loading="lazy" class="pcard-slide"><img src="../img/products/151-krasnyh-roz-korzina-i-nabor-sharov-l/6.webp" alt="151 red roses basket and balloon set L delivery Nha Trang" loading="lazy" class="pcard-slide"><img src="../img/products/151-krasnyh-roz-korzina-i-nabor-sharov-l/7.webp" alt="151 red roses basket and balloon set L delivery Nha Trang" loading="lazy" class="pcard-slide"><img src="../img/products/151-krasnyh-roz-korzina-i-nabor-sharov-l/8.webp" alt="151 red roses basket and balloon set L delivery Nha Trang" loading="lazy" class="pcard-slide">
+                    <button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots"><span class="pcard-dot active"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span></div>
                 </div>
-                <div class="p-5 flex flex-col flex-grow">
+                <a href="../catalog/151-krasnyh-roz-korzina-i-nabor-sharov-l-en.html" class="p-5 flex flex-col flex-grow">
                     <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">151 red roses in a basket + balloon set L</h3>
                     <p class="text-stone-600 text-xs mb-3 flex-grow">151 red roses in a woven basket plus a helium balloon set L with giant gold numbers — a stunning birthday surprise</p>
                     <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">4 700 000 VND</p>
                     <p class="text-stone-500 text-xs mb-4">≈ $188 · 14 900 ₽</p>
                     <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">details →</span>
+                </a>
+            </div>
+            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="r25" data-color="pink">
+                <div class="pcard-slider">
+                    <img src="../img/products/25-rozovyh-roz/1.webp" alt="25 pink roses delivery Nha Trang" loading="lazy" class="pcard-slide active">
+                    
                 </div>
-            </a>
-            <a href="../catalog/25-rozovyh-roz-en.html" class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group">
-                <div class="card-img-wrap">
-                    <img src="../img/products/25-rozovyh-roz/1.webp" alt="25 pink roses delivery Nha Trang" loading="lazy" class="w-full h-64 object-cover">
-                </div>
-                <div class="p-5 flex flex-col flex-grow">
+                <a href="../catalog/25-rozovyh-roz-en.html" class="p-5 flex flex-col flex-grow">
                     <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">25 pink roses</h3>
                     <p class="text-stone-600 text-xs mb-3 flex-grow">tender pink roses in white wrapping — a touching gift for any occasion</p>
                     <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">500 000 VND</p>
                     <p class="text-stone-500 text-xs mb-4">≈ $20 · 1 600 ₽</p>
                     <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">details →</span>
+                </a>
+            </div>
+            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="r25" data-color="white">
+                <div class="pcard-slider">
+                    <img src="../img/products/25-belyh-roz/1.webp" alt="25 white roses delivery Nha Trang" loading="lazy" class="pcard-slide active">
+                    
                 </div>
-            </a>
-            <a href="../catalog/25-belyh-roz-en.html" class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group">
-                <div class="card-img-wrap">
-                    <img src="../img/products/25-belyh-roz/1.webp" alt="25 white roses delivery Nha Trang" loading="lazy" class="w-full h-64 object-cover">
-                </div>
-                <div class="p-5 flex flex-col flex-grow">
+                <a href="../catalog/25-belyh-roz-en.html" class="p-5 flex flex-col flex-grow">
                     <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">25 white roses</h3>
                     <p class="text-stone-600 text-xs mb-3 flex-grow">classic white roses in white wrapping — an elegant and timeless gift</p>
                     <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">500 000 VND</p>
                     <p class="text-stone-500 text-xs mb-4">≈ $20 · 1 600 ₽</p>
                     <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">details →</span>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
         <div class="text-center mt-10">
             <a href="../catalog-en.html" class="btn-rose inline-block font-medium py-2.5 px-6 rounded-xl text-sm">← back to catalog</a>
@@ -333,6 +352,39 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"], a[href*="kakao"], 
             t.classList.add('active');
         });
     });
+})();
+</script>
+<script>/*MARK-CARD-JS*/
+(function(){
+  document.querySelectorAll('.pcard-slider').forEach(function(sl){
+    var slides=sl.querySelectorAll('.pcard-slide');
+    var dots=sl.querySelectorAll('.pcard-dot');
+    if(slides.length<2)return;
+    var i=0;
+    function go(n){slides[i].classList.remove('active');if(dots[i])dots[i].classList.remove('active');i=(n+slides.length)%slides.length;slides[i].classList.add('active');if(dots[i])dots[i].classList.add('active');}
+    var pv=sl.querySelector('.pcard-prev'),nx=sl.querySelector('.pcard-next');
+    if(pv)pv.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();go(i-1);});
+    if(nx)nx.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();go(i+1);});
+    var x0=null;
+    sl.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;},{passive:true});
+    sl.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40){go(dx<0?i+1:i-1);}x0=null;});
+  });
+  var bar=document.querySelector('.cat-filters');
+  if(bar){
+    var state={cat:'',color:''};
+    bar.querySelectorAll('.filt').forEach(function(b){
+      b.addEventListener('click',function(){
+        var g=b.parentNode.getAttribute('data-filter');
+        state[g]=b.getAttribute('data-val');
+        b.parentNode.querySelectorAll('.filt').forEach(function(x){x.classList.remove('active');});
+        b.classList.add('active');
+        document.querySelectorAll('.product-card').forEach(function(c){
+          var ok=(state.cat===''||c.getAttribute('data-cat')===state.cat)&&(state.color===''||c.getAttribute('data-color')===state.color);
+          c.style.display=ok?'':'none';
+        });
+      });
+    });
+  }
 })();
 </script>
 </body>

@@ -135,6 +135,12 @@ def patch(fname, lang, is_home):
         s = re.sub(r'(<meta property="og:title" content=")[^"]*(">)',
                    lambda mo: f'{mo.group(1)}{nt}{mo.group(2)}', s, count=1)
 
+    # 0e. CSS карусели/фильтров + JS карточек (идемпотентно по маркерам)
+    if "/*MARK-CARD-CSS*/" not in s:
+        s = s.replace("    </style>", "        " + B.CARD_CSS + "\n    </style>", 1)
+    if "/*MARK-CARD-JS*/" not in s:
+        s = s.replace("</body>", B.CARD_JS + "\n</body>", 1)
+
     # 1. nav — полностью перестраиваем (детерминированно, языково-корректно, идемпотентно)
     d, m = build_nav(lang)
     s = re.sub(r'<nav class="hidden md:flex items-center gap-1 text-xs font-medium">.*?</nav>',

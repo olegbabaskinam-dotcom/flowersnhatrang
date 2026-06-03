@@ -190,6 +190,57 @@ CUR = {"ru": "донгов", "en": "VND", "ko": "동"}
 def price_loc(price, lang):
     return price.replace("донгов", CUR[lang])
 
+CARD_CSS = """/*MARK-CARD-CSS*/
+        .pcard-slider{position:relative;overflow:hidden;height:16rem;background:#fdf4f7;}
+        .pcard-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s ease;}
+        .pcard-slide.active{opacity:1;}
+        .pcard-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.9);border:none;width:2rem;height:2rem;border-radius:999px;font-size:1.2rem;line-height:1;color:#a8566a;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;z-index:2;box-shadow:0 1px 4px rgba(0,0,0,.12);}
+        .pcard-slider:hover .pcard-arrow{opacity:1;}
+        .pcard-prev{left:.5rem;} .pcard-next{right:.5rem;}
+        .pcard-dots{position:absolute;bottom:.55rem;left:0;right:0;display:flex;gap:.3rem;justify-content:center;z-index:2;}
+        .pcard-dot{width:.4rem;height:.4rem;border-radius:999px;background:rgba(255,255,255,.55);transition:background .2s;}
+        .pcard-dot.active{background:#fff;}
+        @media (max-width:767px){.pcard-arrow{opacity:1;}}
+        .cat-filters{display:flex;flex-direction:column;gap:.75rem;align-items:center;margin-bottom:2rem;}
+        .filt-group{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;}
+        .filt{background:#fff;border:1px solid #f0e0e5;color:#6b6b6b;font-size:.8rem;font-weight:500;padding:.45rem .9rem;border-radius:999px;cursor:pointer;transition:all .2s;}
+        .filt:hover{border-color:var(--rose);color:var(--rose);}
+        .filt.active{background:var(--rose);color:#fff;border-color:var(--rose);}"""
+
+CARD_JS = """<script>/*MARK-CARD-JS*/
+(function(){
+  document.querySelectorAll('.pcard-slider').forEach(function(sl){
+    var slides=sl.querySelectorAll('.pcard-slide');
+    var dots=sl.querySelectorAll('.pcard-dot');
+    if(slides.length<2)return;
+    var i=0;
+    function go(n){slides[i].classList.remove('active');if(dots[i])dots[i].classList.remove('active');i=(n+slides.length)%slides.length;slides[i].classList.add('active');if(dots[i])dots[i].classList.add('active');}
+    var pv=sl.querySelector('.pcard-prev'),nx=sl.querySelector('.pcard-next');
+    if(pv)pv.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();go(i-1);});
+    if(nx)nx.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();go(i+1);});
+    var x0=null;
+    sl.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;},{passive:true});
+    sl.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40){go(dx<0?i+1:i-1);}x0=null;});
+  });
+  var bar=document.querySelector('.cat-filters');
+  if(bar){
+    var state={cat:'',color:''};
+    bar.querySelectorAll('.filt').forEach(function(b){
+      b.addEventListener('click',function(){
+        var g=b.parentNode.getAttribute('data-filter');
+        state[g]=b.getAttribute('data-val');
+        b.parentNode.querySelectorAll('.filt').forEach(function(x){x.classList.remove('active');});
+        b.classList.add('active');
+        document.querySelectorAll('.product-card').forEach(function(c){
+          var ok=(state.cat===''||c.getAttribute('data-cat')===state.cat)&&(state.color===''||c.getAttribute('data-color')===state.color);
+          c.style.display=ok?'':'none';
+        });
+      });
+    });
+  }
+})();
+</script>"""
+
 def head(lang, title, desc, canonical, alts, base, og_image):
     links = [f'<link rel="canonical" href="{canonical}">']
     for l in LANGS:
@@ -273,6 +324,7 @@ def head(lang, title, desc, canonical, alts, base, og_image):
         .check-li {{ display:flex; gap:.6rem; align-items:flex-start; color:#6b6b6b; font-size:.9rem; line-height:1.55; }}
         .check-li svg {{ color:var(--rose); flex:0 0 auto; margin-top:.2rem; }}
         .accent-bar {{ border-left:3px solid var(--rose); padding-left:1rem; }}
+        {CARD_CSS}
     </style>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
@@ -381,9 +433,11 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"], a[href*="kakao"], 
     });
 })();
 </script>
+__CARD_JS__
 </body>
 </html>
 '''
+SCRIPTS = SCRIPTS.replace("__CARD_JS__", CARD_JS)
 
 def order_buttons(name, t, lang, size="full"):
     msg = name.replace(" ", "%20")
@@ -396,32 +450,76 @@ def order_buttons(name, t, lang, size="full"):
                     {btns}
                 </div>'''
 
-def product_card(p, lang, base, t):
-    name = p[f"name_{lang}"]
-    desc = p[f"desc_{lang}"]
-    alt = p[f"alt_{lang}"]
-    url = f"{base}catalog/{p['slug']}-{lang}.html"
-    return f'''<a href="{url}" class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group">
-                <div class="card-img-wrap">
-                    <img src="{base}{p['img']}" alt="{html.escape(alt)}" loading="lazy" class="w-full h-64 object-cover">
-                </div>
-                <div class="p-5 flex flex-col flex-grow">
-                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">{html.escape(name)}</h3>
-                    <p class="text-stone-600 text-xs mb-3 flex-grow">{html.escape(desc)}</p>
-                    <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">{html.escape(price_loc(p['price'], lang))}</p>
-                    <p class="text-stone-500 text-xs mb-4">{html.escape(p['price_sub'])}</p>
-                    <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">{t["details"]} →</span>
-                </div>
-            </a>'''
-
-def gallery(p, base, alt):
-    # Галерея: главное фото из products.csv (img/products/<slug>/1.webp),
-    # доп. — img/products/<slug>/2.webp ... 8.webp (если есть)
+def product_imgs(p):
+    """Список всех фото товара: главное (products.csv) + 2..8.webp из папки."""
     imgs = [p["img"]]
     for n in range(2, 9):
         cand = os.path.join(ROOT, "img", "products", p["slug"], f"{n}.webp")
         if os.path.exists(cand):
             imgs.append(f"img/products/{p['slug']}/{n}.webp")
+    return imgs
+
+def product_cat(p):
+    """Категория для фильтра каталога."""
+    s = p["slug"].lower()
+    n = p.get("name_ru", "").lower()
+    # сначала по числу роз (комбо «розы+шары» относим к розам)
+    if s.startswith("25-"):
+        return "r25"
+    if s.startswith("51-"):
+        return "r51"
+    if s.startswith("101-") or s.startswith("151-"):
+        return "r101"
+    # чистые наборы шаров
+    if "shar" in s or "шар" in n:
+        return "balloons"
+    return "mixed"
+
+def product_color(p):
+    """Цвет роз для фильтра (red/white/pink/'')."""
+    s = p["slug"].lower()
+    if "belo-rozov" in s:
+        return "pink"
+    if "kras" in s:
+        return "red"
+    if "bel" in s:
+        return "white"
+    if "rozov" in s:
+        return "pink"
+    return ""
+
+def product_card(p, lang, base, t):
+    name = p[f"name_{lang}"]
+    desc = p[f"desc_{lang}"]
+    alt = p[f"alt_{lang}"]
+    url = f"{base}catalog/{p['slug']}-{lang}.html"
+    imgs = product_imgs(p)
+    slides = "".join(
+        f'<img src="{base}{im}" alt="{html.escape(alt)}" loading="lazy" class="pcard-slide{" active" if i==0 else ""}">'
+        for i, im in enumerate(imgs))
+    nav = ""
+    if len(imgs) > 1:
+        dots = "".join(f'<span class="pcard-dot{" active" if i==0 else ""}"></span>' for i in range(len(imgs)))
+        nav = ('<button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button>'
+               '<button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button>'
+               f'<div class="pcard-dots">{dots}</div>')
+    return f'''<div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="{product_cat(p)}" data-color="{product_color(p)}">
+                <div class="pcard-slider">
+                    {slides}
+                    {nav}
+                </div>
+                <a href="{url}" class="p-5 flex flex-col flex-grow">
+                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">{html.escape(name)}</h3>
+                    <p class="text-stone-600 text-xs mb-3 flex-grow">{html.escape(desc)}</p>
+                    <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">{html.escape(price_loc(p['price'], lang))}</p>
+                    <p class="text-stone-500 text-xs mb-4">{html.escape(p['price_sub'])}</p>
+                    <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">{t["details"]} →</span>
+                </a>
+            </div>'''
+
+def gallery(p, base, alt):
+    # Галерея на странице товара: главное фото + миниатюры
+    imgs = product_imgs(p)
     main = imgs[0]
     thumbs = ""
     if len(imgs) > 1:
@@ -664,6 +762,20 @@ def render_catalog(lang, products):
         title = "꽃다발 카탈로그 — 나트랑 꽃 배달 | NhaTrang Flowers"
         meta = "나트랑 당일 배달 신선한 꽃다발과 헬륨 풍선 카탈로그. 장미, 백합, 바구니. 달러·동·루블 결제."
     cards = "\n            ".join(product_card(p, lang, base, t) for p in products)
+    FILT = {
+        "ru": {"cat": [("", "Все"), ("r25", "25 роз"), ("r51", "51 роза"), ("r101", "101+ роз"), ("mixed", "Сборные"), ("balloons", "Шары")],
+               "color": [("", "Все цвета"), ("red", "Красные"), ("white", "Белые"), ("pink", "Розовые")]},
+        "en": {"cat": [("", "All"), ("r25", "25 roses"), ("r51", "51 roses"), ("r101", "101+ roses"), ("mixed", "Mixed"), ("balloons", "Balloons")],
+               "color": [("", "All colors"), ("red", "Red"), ("white", "White"), ("pink", "Pink")]},
+        "ko": {"cat": [("", "전체"), ("r25", "장미 25"), ("r51", "장미 51"), ("r101", "장미 101+"), ("mixed", "혼합"), ("balloons", "풍선")],
+               "color": [("", "전체 색상"), ("red", "레드"), ("white", "화이트"), ("pink", "핑크")]},
+    }[lang]
+    def filt_group(kind):
+        btns = "".join(
+            f'<button type="button" class="filt{" active" if v=="" else ""}" data-val="{v}">{lbl}</button>'
+            for v, lbl in FILT[kind])
+        return f'<div class="filt-group" data-filter="{kind}">{btns}</div>'
+    filters = f'<div class="cat-filters">{filt_group("cat")}{filt_group("color")}</div>'
     body = f'''    <main class="flex-grow">
     <section class="py-12 px-4 max-w-5xl mx-auto text-center">
         <h1 class="font-serif text-3xl md:text-4xl font-bold mb-3" style="color:#1a1a1a;">{t["catalog_h1"]}</h1>
@@ -671,6 +783,7 @@ def render_catalog(lang, products):
     </section>
     {trust_bar(lang, base)}
     <section class="pb-16 px-4 max-w-5xl mx-auto pt-12">
+        {filters}
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {cards}
         </div>
