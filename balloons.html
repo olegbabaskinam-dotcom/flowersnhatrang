@@ -103,10 +103,14 @@
         
         
         
+        
         /*MARK-CARD-CSS*/
         .pcard-slider{position:relative;overflow:hidden;height:16rem;background:#fdf4f7;}
         .pcard-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s ease;}
         .pcard-slide.active{opacity:1;}
+        .gallery-slider{height:24rem;}
+        @media(min-width:768px){.gallery-slider{height:30rem;}}
+        .gallery-slider .pcard-slide{object-fit:contain;padding:.75rem;}
         .pcard-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.96);border:none;width:2.5rem;height:2.5rem;border-radius:999px;font-size:1.6rem;line-height:1;color:#a8566a;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:1;transition:opacity .2s,background .2s,transform .15s;z-index:5;box-shadow:0 2px 8px rgba(0,0,0,.22);}
         .pcard-arrow:hover{opacity:1;background:#fff;}
         .pcard-prev{left:.5rem;} .pcard-next{right:.5rem;}
@@ -636,6 +640,7 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"]').forEach(function(
     iframes.forEach(function(el){ io.observe(el); });
 })();
 </script>
+
 
 
 
