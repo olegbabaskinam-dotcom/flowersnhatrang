@@ -8,7 +8,7 @@
 Шапка/подвал/стили берутся из общего шаблона, совпадают с index.html.
 Запуск:  python3 seo/build_site.py
 """
-import os, csv, re, html
+import os, csv, re, html, json
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -124,7 +124,11 @@ UI = {
            "dl_cam": "Камрань — доставка от 51 розы (600 000 донгов отдельно)",
            "dl_pay": "Оплата: донги, рубли, доллары, USDT, наличные",
            "st1": "букетов доставлено", "st2": "отзыва на Google", "st3": "оплата при получении",
-           "rev_h": "отзывы на Google", "rev_cta": "читать отзывы на Google Maps"},
+           "rev_h": "отзывы на Google", "rev_cta": "читать отзывы на Google Maps",
+           "art_read": "читать", "art_back": "← все статьи", "art_rel_h": "Подходящие букеты",
+           "art_cta_h": "Закажите доставку букета в Нячанге",
+           "art_cta_sub": "Свежие букеты день в день, доставим прямо в отель или на виллу.",
+           "art_faq_h": "Частые вопросы", "art_min": "мин чтения"},
     "en": {"b_fresh": "fresh flowers", "b_day": "same-day",
            "chip_free": "free in Nha Trang", "chip_day": "same-day delivery", "chip_pay": "card / cash",
            "f1t": "Freshness", "f1d": "Cut and arranged on the delivery day",
@@ -135,7 +139,11 @@ UI = {
            "dl_cam": "Cam Ranh — delivery from 51 roses (600,000 VND separately)",
            "dl_pay": "Payment: VND, USD, RUB, USDT, cash",
            "st1": "bouquets delivered", "st2": "Google reviews", "st3": "pay on delivery",
-           "rev_h": "Google reviews", "rev_cta": "read reviews on Google Maps"},
+           "rev_h": "Google reviews", "rev_cta": "read reviews on Google Maps",
+           "art_read": "read", "art_back": "← all articles", "art_rel_h": "Bouquets you may like",
+           "art_cta_h": "Order flower delivery in Nha Trang",
+           "art_cta_sub": "Fresh bouquets same day, delivered straight to your hotel or villa.",
+           "art_faq_h": "FAQ", "art_min": "min read"},
     "ko": {"b_fresh": "신선한 꽃", "b_day": "당일 배송",
            "chip_free": "나트랑 무료 배송", "chip_day": "당일 배송", "chip_pay": "카드 / 현금",
            "f1t": "신선함", "f1d": "배송 당일에 꽃을 손질하고 제작합니다",
@@ -146,7 +154,11 @@ UI = {
            "dl_cam": "깜라인 — 51송이부터 배송(60만 동 별도)",
            "dl_pay": "결제: 동, 달러, 루블, USDT, 현금",
            "st1": "꽃다발 배달 완료", "st2": "Google 리뷰", "st3": "수령 시 결제",
-           "rev_h": "Google 리뷰", "rev_cta": "Google 지도에서 리뷰 보기"},
+           "rev_h": "Google 리뷰", "rev_cta": "Google 지도에서 리뷰 보기",
+           "art_read": "읽기", "art_back": "← 모든 글", "art_rel_h": "어울리는 꽃다발",
+           "art_cta_h": "나트랑 꽃 배달 주문하기",
+           "art_cta_sub": "신선한 꽃다발 당일 배송, 호텔·빌라로 직접 배달해 드립니다.",
+           "art_faq_h": "자주 묻는 질문", "art_min": "분 분량"},
 }
 
 def price_num(price):
@@ -636,9 +648,153 @@ def render_catalog(lang, products):
     lang_urls = {l: f"catalog-{l}.html" for l in LANGS}
     return head(lang, title, meta, canonical, alts, base, products[0]["img"]) + header(lang, base, lang_urls) + body + footer(base) + SCRIPTS
 
+# ---------- СТАТЬИ (блог) ----------
+ARTICLES_DIR = os.path.join(HERE, "articles")
+BLOG_DIR = os.path.join(ROOT, "blog")
+os.makedirs(BLOG_DIR, exist_ok=True)
+
+def load_articles():
+    """Читает seo/articles/*.json. Возвращает список dict, отсортированный по date desc."""
+    arts = []
+    if os.path.isdir(ARTICLES_DIR):
+        for fn in os.listdir(ARTICLES_DIR):
+            if fn.endswith(".json"):
+                with open(os.path.join(ARTICLES_DIR, fn), encoding="utf-8") as f:
+                    arts.append(json.load(f))
+    arts.sort(key=lambda a: a.get("date", ""), reverse=True)
+    return arts
+
+def _read_minutes(art, lang):
+    words = len(re.sub(r"<[^>]+>", " ", " ".join(s["html"] for s in art[lang]["sections"])).split())
+    return max(2, round(words / 180))
+
+def article_card(art, lang, base):
+    a = art[lang]
+    u = UI[lang]
+    url = f"{base}blog/{art['slug']}-{lang}.html"
+    cover = art.get("photo")
+    img = (f'<div class="card-img-wrap"><img src="{base}{cover}" alt="{html.escape(a["title"])}" loading="lazy" class="w-full h-48 object-cover"></div>'
+           if cover else
+           f'<div class="card-img-wrap flex items-center justify-center" style="height:12rem;background:linear-gradient(135deg,#fce8ee,#fdf4f7);"><span class="font-serif text-2xl" style="color:#c0687a;">{IC_FLOWER}</span></div>')
+    return f'''<a href="{url}" class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group">
+                {img}
+                <div class="p-5 flex flex-col flex-grow">
+                    <span class="text-xs font-medium mb-2" style="color:#c0687a;">{html.escape(art.get("category",""))}</span>
+                    <h3 class="font-serif text-lg font-bold mb-2 leading-snug" style="color:#1a1a1a;">{html.escape(a["title"])}</h3>
+                    <p class="text-stone-500 text-xs mb-4 flex-grow">{html.escape(a.get("excerpt", a["intro"])[:120])}…</p>
+                    <span class="text-xs font-medium" style="color:#c0687a;">{u["art_read"]} →</span>
+                </div>
+            </a>'''
+
+def article_cta(lang, base):
+    u = UI[lang]; t = T[lang]
+    return f'''
+    <section class="reveal py-12 px-4">
+        <div class="max-w-3xl mx-auto sec-card text-center" style="background:#fdf4f7;">
+            <div class="icon-badge mx-auto mb-4">{IC_FLOWER}</div>
+            <h2 class="font-serif text-2xl font-bold mb-2" style="color:#1a1a1a;">{u["art_cta_h"]}</h2>
+            <p class="text-stone-600 text-sm mb-6 max-w-xl mx-auto">{u["art_cta_sub"]}</p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
+                <a href="{WA}" target="_blank" class="btn-rose-filled flex items-center justify-center gap-2 font-medium py-3 px-6 rounded-xl text-sm">{WA_SVG} {t["order_wa"]}</a>
+                <a href="{TG}" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-3 px-6 rounded-xl text-sm">{TG_SVG} {t["order_tg"]}</a>
+            </div>
+        </div>
+    </section>
+'''
+
+def render_article(art, lang, products, all_articles):
+    t = T[lang]; u = UI[lang]; a = art[lang]
+    base = "../"
+    slug = art["slug"]
+    canonical = f"{DOMAIN}/blog/{slug}-{lang}.html"
+    alts = {l: f"{DOMAIN}/blog/{slug}-{l}.html" for l in LANGS}
+    cover = art.get("photo")
+    og = cover if cover else "img/dSXDj.webp"
+
+    # тело статьи
+    secs = "\n".join(
+        f'<h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">{html.escape(s["h2"])}</h2>\n{s["html"]}'
+        for s in a["sections"])
+
+    # подходящие букеты
+    pmap = {p["slug"]: p for p in products}
+    rel = [pmap[s] for s in art.get("related", []) if s in pmap][:3]
+    rel_cards = "\n            ".join(product_card(p, lang, base, t) for p in rel)
+    rel_block = (f'''
+    <section class="max-w-5xl mx-auto px-6 py-12">
+        <h2 class="font-serif text-2xl font-bold mb-8 text-center" style="color:#1a1a1a;">{u["art_rel_h"]}</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {rel_cards}
+        </div>
+    </section>''' if rel else "")
+
+    # FAQ
+    faq = a.get("faq", [])
+    faq_html = "\n            ".join(
+        f'<div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> {html.escape(q)}</h3><p class="text-stone-600 text-sm leading-relaxed">{html.escape(ans)}</p></div>'
+        for q, ans in faq)
+    faq_block = (f'''
+    <section class="max-w-3xl mx-auto px-6 py-8">
+        <h2 class="font-serif text-2xl font-bold mb-6 text-center" style="color:#1a1a1a;">{u["art_faq_h"]}</h2>
+        <div class="space-y-3">
+            {faq_html}
+        </div>
+    </section>''' if faq else "")
+    faq_schema = ",".join(
+        '{"@type":"Question","name":%s,"acceptedAnswer":{"@type":"Answer","text":%s}}'
+        % (jstr(q), jstr(ans)) for q, ans in faq)
+
+    # hero (с фото или текстовый)
+    if cover:
+        hero = f'''<section class="max-w-4xl mx-auto px-6 pt-8">
+        <div class="rounded-3xl overflow-hidden" style="height:340px;">
+            <img src="{base}{cover}" alt="{html.escape(a["title"])}" class="w-full h-full object-cover">
+        </div>
+    </section>'''
+    else:
+        hero = f'''<section class="max-w-4xl mx-auto px-6 pt-8">
+        <div class="rounded-3xl flex flex-col justify-center px-8 md:px-12" style="height:240px;background:linear-gradient(135deg,#fce8ee,#fdf4f7);">
+            <span class="text-xs tracking-widest uppercase mb-2 font-medium" style="color:#c0687a;">{html.escape(art.get("category",""))}</span>
+            <span class="font-serif text-2xl md:text-3xl font-bold" style="color:#1a1a1a;">{html.escape(a["h1"])}</span>
+        </div>
+    </section>'''
+
+    body = f'''    <main class="flex-grow">
+    <nav class="max-w-4xl mx-auto px-6 pt-8 pb-2 text-xs text-stone-400">
+        <a href="{base}blog-{lang}.html" class="hover:text-[#c0687a]">{t["nav_articles"]}</a> / <span style="color:#1a1a1a;">{html.escape(a["title"])}</span>
+    </nav>
+    {hero}
+    <article class="max-w-3xl mx-auto px-6 py-8">
+        <span class="text-xs font-medium" style="color:#c0687a;">{html.escape(art.get("category",""))} · {_read_minutes(art, lang)} {u["art_min"]}</span>
+        <h1 class="font-serif text-3xl md:text-4xl font-bold mt-2 mb-6 leading-tight" style="color:#1a1a1a;">{html.escape(a["h1"])}</h1>
+        <p class="text-stone-600 text-lg leading-relaxed mb-2">{a["intro"]}</p>
+        {secs}
+    </article>
+    {rel_block}
+    {article_cta(lang, base)}
+    {faq_block}
+    <section class="max-w-3xl mx-auto px-6 pb-16 text-center">
+        <a href="{base}blog-{lang}.html" class="btn-rose inline-block font-medium py-2.5 px-6 rounded-xl text-sm">{u["art_back"]}</a>
+    </section>
+    </main>
+'''
+    art_schema = (
+        '<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article",'
+        '"headline":%s,"description":%s,"image":%s,"datePublished":"%s",'
+        '"author":{"@type":"Organization","name":"NhaTrang Flowers"},'
+        '"publisher":{"@type":"Organization","name":"NhaTrang Flowers"},'
+        '"mainEntityOfPage":%s}</script>'
+        % (jstr(a["title"]), jstr(a["meta"]), jstr(f"{DOMAIN}/{og}"), art.get("date",""), jstr(canonical))
+    )
+    faqschema = ('<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[%s]}</script>' % faq_schema) if faq else ""
+    lang_urls = {l: f"{slug}-{l}.html" for l in LANGS}
+    return (head(lang, a["title"], a["meta"], canonical, alts, base, og)
+            + art_schema + faqschema + header(lang, base, lang_urls) + body + footer(base) + SCRIPTS)
+
 def render_blog(lang):
     t = T[lang]
     base = ""
+    articles = load_articles()
     canonical = f"{DOMAIN}/blog-{lang}.html"
     alts = {l: f"{DOMAIN}/blog-{l}.html" for l in LANGS}
     if lang == "ru":
@@ -650,16 +806,25 @@ def render_blog(lang):
     else:
         title = "꽃과 기념일 블로그 — NhaTrang Flowers"
         meta = "꽃, 선물 기념일, 베트남 문화에 대한 유용한 글. 나트랑 꽃다발 배달."
+    if articles:
+        cards = "\n            ".join(article_card(a, lang, base) for a in articles)
+        grid = f'''<section class="pb-24 px-4 max-w-5xl mx-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {cards}
+        </div>
+    </section>'''
+    else:
+        grid = f'''<section class="pb-24 px-4 max-w-5xl mx-auto">
+        <div class="bg-white rounded-2xl border border-stone-100 p-12 text-center text-stone-400">
+            {t["blog_soon"]}
+        </div>
+    </section>'''
     body = f'''    <main class="flex-grow">
     <section class="py-12 px-4 max-w-5xl mx-auto text-center">
         <h1 class="font-serif text-3xl md:text-4xl font-bold mb-3" style="color:#1a1a1a;">{t["blog_h1"]}</h1>
         <p class="text-stone-500 text-sm max-w-xl mx-auto">{t["blog_sub"]}</p>
     </section>
-    <section class="pb-24 px-4 max-w-5xl mx-auto">
-        <div class="bg-white rounded-2xl border border-stone-100 p-12 text-center text-stone-400">
-            {t["blog_soon"]}
-        </div>
-    </section>
+    {grid}
     </main>
 '''
     lang_urls = {l: f"blog-{l}.html" for l in LANGS}
@@ -676,8 +841,18 @@ def main():
         open(os.path.join(ROOT, f"catalog-{lang}.html"), "w", encoding="utf-8").write(render_catalog(lang, products))
         open(os.path.join(ROOT, f"blog-{lang}.html"), "w", encoding="utf-8").write(render_blog(lang))
         n += 2
-    print(f"Готово. Создано файлов: {n}")
-    print(f"  товары: {len(products)*3}, каталог: 3, блог: 3")
+    # статьи
+    articles = load_articles()
+    na = 0
+    for lang in LANGS:
+        for art in articles:
+            if lang not in art:
+                continue
+            out = os.path.join(BLOG_DIR, f"{art['slug']}-{lang}.html")
+            open(out, "w", encoding="utf-8").write(render_article(art, lang, products, articles))
+            na += 1
+    print(f"Готово. Создано файлов: {n + na}")
+    print(f"  товары: {len(products)*3}, каталог: 3, блог-витрина: 3, статьи: {na}")
 
 if __name__ == "__main__":
     main()

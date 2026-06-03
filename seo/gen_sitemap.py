@@ -39,6 +39,15 @@ for p in products:
     alts = trio(f"{DOMAIN}/catalog/{s}-ru.html", f"{DOMAIN}/catalog/{s}-en.html", f"{DOMAIN}/catalog/{s}-ko.html")
     for l in B.LANGS:
         blocks.append(url(f"{DOMAIN}/catalog/{s}-{l}.html", alts, "0.7"))
+# статьи (только языки, которые реально есть в JSON)
+for art in B.load_articles():
+    s = art["slug"]
+    langs = [l for l in B.LANGS if l in art]
+    alts = [(l, f"{DOMAIN}/blog/{s}-{l}.html") for l in langs]
+    if "ru" in langs:
+        alts.append(("x-default", f"{DOMAIN}/blog/{s}-ru.html"))
+    for l in langs:
+        blocks.append(url(f"{DOMAIN}/blog/{s}-{l}.html", alts, "0.7"))
 
 xml = ('<?xml version="1.0" encoding="UTF-8"?>\n'
        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n'
