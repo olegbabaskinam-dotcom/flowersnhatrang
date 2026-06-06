@@ -2,7 +2,7 @@ id,date,type,category,keyword_ru,title_ru,slug,photo_query_en,status_ru,status_e
 1,2026-06-03,article,Повод,цветы на день рождения,Какие цветы подарить на день рождения в Нячанге,kakie-cvety-podarit-na-den-rozhdeniya-v-nyachange,birthday flowers bouquet,done,done,done
 2,2026-06-04,article,Повод,букет на день рождения,Идеи букетов на день рождения: гид для туриста в Нячанге,idei-buketov-na-den-rozhdeniya-gid-dlya-turista-v-nyachange,birthday flowers bouquet,todo,todo,todo
 3,2026-06-05,article,Повод,цветы на годовщину свадьбы,Какие цветы подарить на годовщину свадьбы в Нячанге,kakie-cvety-podarit-na-godovschinu-svadby-v-nyachange,anniversary roses,done,done,done
-4,2026-06-06,article,Повод,букет на годовщину свадьбы,Идеи букетов на годовщину свадьбы: гид для туриста в Нячанге,idei-buketov-na-godovschinu-svadby-gid-dlya-turista-v-nyachange,anniversary roses,done,done,done
+4,2026-06-06,article,Повод,букет на годовщину свадьбы,Идеи букетов на годовщину свадьбы: гид для туриста в Нячанге,idei-buketov-na-godovschinu-svadby-gid-dlya-turista-v-nyachange,anniversary roses,todo,todo,todo
 5,2026-06-07,article,Повод,цветы на 8 марта,Какие цветы подарить на 8 марта в Нячанге,kakie-cvety-podarit-na-8-marta-v-nyachange,tulips spring,todo,todo,todo
 6,2026-06-08,article,Повод,букет на 8 марта,Идеи букетов на 8 марта: гид для туриста в Нячанге,idei-buketov-na-8-marta-gid-dlya-turista-v-nyachange,tulips spring,todo,todo,todo
 7,2026-06-09,article,Повод,цветы на день матери,Какие цветы подарить на день матери в Нячанге,kakie-cvety-podarit-na-den-materi-v-nyachange,flowers mother,todo,todo,todo
@@ -216,7 +216,7 @@ id,date,type,category,keyword_ru,title_ru,slug,photo_query_en,status_ru,status_e
 215,2027-01-03,article,Связка,что подарить любимой без повода,Что подарить любимой без повода в Нячанге: цветы и идеи,chto-podarit-lyubimoy-bez-povoda-v-nyachange-cvety-i-idei,beloved surprise flowers,todo,todo,todo
 216,2027-01-04,article,Отель,доставка цветов Muong Thanh,Доставка цветов в отель Muong Thanh (Нячанг / Камрань),dostavka-cvetov-v-otel-muong-thanh-nyachang-kamran,hotel flowers luxury,todo,todo,todo
 217,2027-01-05,article,Отель,доставка цветов Sheraton,Доставка цветов в отель Sheraton (Нячанг / Камрань),dostavka-cvetov-v-otel-sheraton-nyachang-kamran,hotel flowers luxury,todo,todo,todo
-218,2027-01-06,article,Отель,доставка цветов InterContinental,Доставка цветов в отель InterContinental (Нячанг / Камрань),dostavka-cvetov-v-otel-intercontinental-nyachang-kamran,hotel flowers luxury,todo,todo,todo
+218,2027-01-06,article,Отель,доставка цветов InterContinental,Доставка цветов в отель InterContinental (Нячанг / Камрань),dostavka-cvetov-v-otel-intercontinental-nyachang-kamran,hotel flowers luxury,done,done,done
 219,2027-01-07,article,Отель,доставка цветов Novotel,Доставка цветов в отель Novotel (Нячанг / Камрань),dostavka-cvetov-v-otel-novotel-nyachang-kamran,hotel flowers luxury,todo,todo,todo
 220,2027-01-08,article,Отель,доставка цветов Mercure,Доставка цветов в отель Mercure (Нячанг / Камрань),dostavka-cvetov-v-otel-mercure-nyachang-kamran,hotel flowers luxury,todo,todo,todo
 221,2027-01-09,article,Отель,доставка цветов Sunrise,Доставка цветов в отель Sunrise (Нячанг / Камрань),dostavka-cvetov-v-otel-sunrise-nyachang-kamran,hotel flowers luxury,todo,todo,todo
