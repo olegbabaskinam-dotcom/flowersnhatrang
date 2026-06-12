@@ -3,3 +3,5 @@ seo/__pycache__/
 **/__pycache__/
 *.pyc
 .DS_Store
+Dialog.html
+Code.gs
