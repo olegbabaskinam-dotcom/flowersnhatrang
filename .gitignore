@@ -1,7 +1,8 @@
-seo/.env
-seo/__pycache__/
-**/__pycache__/
-*.pyc
+# Приватные файлы — НИКОГДА не коммитить
+*.xlsx
+*.xls
+Март_блок_*.txt
+outputs_preview.png
+КОНТЕКСТ_Олег_цветы.md
+# служебное
 .DS_Store
-Dialog.html
-Code.gs
