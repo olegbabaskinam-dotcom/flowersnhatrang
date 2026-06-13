@@ -451,9 +451,9 @@ def order_buttons(name, t, lang, size="full"):
                 </div>'''
 
 def product_imgs(p):
-    """Список всех фото товара: главное (products.csv) + 2..8.webp из папки."""
+    """Список всех фото товара: главное (products.csv) + 2..40.webp из папки."""
     imgs = [p["img"]]
-    for n in range(2, 9):
+    for n in range(2, 41):
         cand = os.path.join(ROOT, "img", "products", p["slug"], f"{n}.webp")
         if os.path.exists(cand):
             imgs.append(f"img/products/{p['slug']}/{n}.webp")
