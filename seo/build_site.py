@@ -793,9 +793,9 @@ def render_catalog(lang, products):
                "color": [("", "전체 색상"), ("red", "레드"), ("white", "화이트"), ("pink", "핑크")]},
     }[lang]
     SORT = {
-        "ru": [("asc", "Сначала дешёвые"), ("desc", "Сначала дорогие")],
-        "en": [("asc", "Cheapest first"), ("desc", "Most expensive first")],
-        "ko": [("asc", "저렴한 순"), ("desc", "비싼 순")],
+        "ru": [("asc", "Цена ↑"), ("desc", "Цена ↓")],
+        "en": [("asc", "Price ↑"), ("desc", "Price ↓")],
+        "ko": [("asc", "가격 ↑"), ("desc", "가격 ↓")],
     }[lang]
     def filt_group(kind):
         btns = "".join(
