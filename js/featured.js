@@ -15,10 +15,23 @@
   var arr = PRODUCTS.slice();
   for(var i=arr.length-1;i>0;i--){ var j=Math.floor(rnd()*(i+1)); var t=arr[i]; arr[i]=arr[j]; arr[j]=t; }
   var pick = arr.slice(0, 6);
+  var IMGN = {"101-belaya-roza-i-nabor-sharov-m": 7, "101-belo-rozovaya-roza-v-korzine": 1, "101-fioletovaya-roza-v-upakovke": 8, "101-roza-v-korzine": 1, "101-rozovaya-roza-v-upakovke": 5, "151-fioletovaya-roza": 1, "151-krasnyh-roz-korzina-i-nabor-sharov-l": 9, "25-belyh-roz": 1, "25-krasnyh-roz": 1, "25-rozovyh-pionovidnyh-roz": 1, "25-rozovyh-roz": 1, "25-rozovyh-roz-v-upakovke": 6, "5-vetok-eustomy-belaya-upakovka": 7, "51-belaya-roza-s-evkaliptom": 1, "51-belaya-roza-v-upakovke": 7, "51-belo-rozovaya-roza": 1, "51-krasnaya-i-2-buketa-25-rozovyh-roz": 8, "51-pionovidnaya-rozovaya-roza-v-upakovke": 10, "51-rozovaya-roza-v-upakovke": 7, "7-vetok-liliy": 8, "nabor-sharov-l": 1, "nabor-sharov-m-cifry-3-shara": 6, "nabor-sharov-s": 1, "nabor-sharov-s-7-cifr": 8, "nabor-sharov-s-7-sharov": 4, "stilnyy-sbornyy-buket-rozovyy": 8};
+  function slider(p,d){
+    var n = IMGN[p.slug]||1, s='<div class="pcard-slider">';
+    for(var k=1;k<=n;k++){
+      s+='<img src="img/products/'+p.slug+'/'+k+'.webp" alt="'+esc(d.alt)+(k>1?' '+k:'')+'" loading="'+(k===1?'eager':'lazy')+'" class="pcard-slide'+(k===1?' active':'')+'">';
+    }
+    if(n>1){
+      s+='<button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots">';
+      for(var j=0;j<n;j++){ s+='<span class="pcard-dot'+(j===0?' active':'')+'"></span>'; }
+      s+='</div>';
+    }
+    return s+'</div>';
+  }
   grid.innerHTML = pick.map(function(p){
     var d = p[L] || p.ru;
     return '<div class="reveal visible product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="'+p.cat+'" data-color="'+(p.color||'')+'">'
-      + '<div class="pcard-slider"><img src="img/products/'+p.slug+'/1.webp" alt="'+esc(d.alt)+'" loading="lazy" class="pcard-slide active"></div>'
+      + slider(p,d)
       + '<a href="catalog/'+p.slug+'-'+L+'.html" class="p-5 flex flex-col flex-grow">'
       + '<h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">'+esc(d.name)+'</h3>'
       + '<p class="text-stone-600 text-xs mb-3 flex-grow">'+esc(d.desc)+'</p>'
@@ -27,4 +40,17 @@
       + '<span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">'+BTN[L]+'</span>'
       + '</a></div>';
   }).join('');
+  grid.querySelectorAll('.pcard-slider').forEach(function(sl){
+    var slides=sl.querySelectorAll('.pcard-slide');
+    var dots=sl.querySelectorAll('.pcard-dot');
+    if(slides.length<2)return;
+    var i=0;
+    function go(n){slides[i].classList.remove('active');if(dots[i])dots[i].classList.remove('active');i=(n+slides.length)%slides.length;slides[i].classList.add('active');if(dots[i])dots[i].classList.add('active');}
+    var pv=sl.querySelector('.pcard-prev'),nx=sl.querySelector('.pcard-next');
+    if(pv)pv.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();go(i-1);});
+    if(nx)nx.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();go(i+1);});
+    var x0=null;
+    sl.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;},{passive:true});
+    sl.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40){go(dx<0?i+1:i-1);}x0=null;});
+  });
 })();
