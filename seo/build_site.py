@@ -233,7 +233,8 @@ CARD_JS = """<script>/*MARK-CARD-JS*/
         b.parentNode.querySelectorAll('.filt').forEach(function(x){x.classList.remove('active');});
         b.classList.add('active');
         document.querySelectorAll('.product-card').forEach(function(c){
-          var ok=(state.cat===''||c.getAttribute('data-cat')===state.cat)&&(state.color===''||c.getAttribute('data-color')===state.color);
+          var dc=' '+(c.getAttribute('data-cat')||'')+' ';
+          var ok=(state.cat===''||dc.indexOf(' '+state.cat+' ')>-1)&&(state.color===''||c.getAttribute('data-color')===state.color);
           c.style.display=ok?'':'none';
         });
       });
@@ -485,17 +486,22 @@ def product_cat(p):
     """Категория для фильтра каталога."""
     s = p["slug"].lower()
     n = p.get("name_ru", "").lower()
-    # сначала по числу роз (комбо «розы+шары» относим к розам)
+    has_balloons = "shar" in s or "шар" in n
+    # сначала по числу роз
     if s.startswith("25-"):
-        return "r25"
-    if s.startswith("51-"):
-        return "r51"
-    if s.startswith("101-") or s.startswith("151-"):
-        return "r101"
-    # чистые наборы шаров
-    if "shar" in s or "шар" in n:
+        base = "r25"
+    elif s.startswith("51-"):
+        base = "r51"
+    elif s.startswith("101-") or s.startswith("151-"):
+        base = "r101"
+    elif has_balloons:
         return "balloons"
-    return "mixed"
+    else:
+        return "mixed"
+    # комбо «розы+шары» получают обе метки — видны и в розах, и в шарах
+    if has_balloons:
+        return base + " balloons"
+    return base
 
 def product_color(p):
     """Цвет роз для фильтра (red/white/pink/'')."""
