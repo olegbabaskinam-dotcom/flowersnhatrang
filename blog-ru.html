@@ -33,8 +33,8 @@
         h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
         .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
-        .card-img-wrap { overflow: hidden; }
-        .card-img-wrap img { transition: transform 0.45s ease; }
+        .card-img-wrap { overflow: hidden; height: 12rem; }
+        .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.45s ease; }
         .card-img-wrap:hover img { transform: scale(1.04); }
         .product-card { border: 1px solid #f0e0e5; transition: border-color 0.25s ease, box-shadow 0.25s ease; }
         .product-card:hover { border-color: var(--rose); box-shadow: 0 4px 24px rgba(192, 104, 122, 0.1); }
