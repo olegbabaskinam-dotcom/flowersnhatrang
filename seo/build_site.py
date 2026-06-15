@@ -205,7 +205,8 @@ CARD_CSS = """/*MARK-CARD-CSS*/
         .filt-group{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;}
         .filt{background:#fff;border:1px solid #f0e0e5;color:#6b6b6b;font-size:.8rem;font-weight:500;padding:.45rem .9rem;border-radius:999px;cursor:pointer;transition:all .2s;}
         .filt:hover{border-color:var(--rose);color:var(--rose);}
-        .filt.active{background:var(--rose);color:#fff;border-color:var(--rose);}"""
+        .filt.active{background:var(--rose);color:#fff;border-color:var(--rose);}
+        .sort-bar{display:flex;justify-content:center;margin-bottom:1rem;}"""
 
 CARD_JS = """<script>/*MARK-CARD-JS*/
 (function(){
@@ -238,6 +239,27 @@ CARD_JS = """<script>/*MARK-CARD-JS*/
       });
     });
   }
+  (function(){
+    var cf=document.querySelector('.cat-filters'); if(!cf) return;
+    var grid=cf.nextElementSibling; if(!grid) return;
+    function price(c){var el=c.querySelector('p.font-bold');return el?parseInt(el.textContent.replace(/[^0-9]/g,'')||'0',10):0;}
+    function sortBy(dir){
+      var cards=Array.prototype.slice.call(grid.querySelectorAll('.product-card'));
+      cards.sort(function(a,b){return dir==='desc'?price(b)-price(a):price(a)-price(b);});
+      cards.forEach(function(c){grid.appendChild(c);});
+    }
+    sortBy('asc');
+    var sg=document.querySelector('.sort-bar .filt-group[data-filter="sort"]');
+    if(sg){
+      sg.querySelectorAll('.filt').forEach(function(b){
+        b.addEventListener('click',function(){
+          sg.querySelectorAll('.filt').forEach(function(x){x.classList.remove('active');});
+          b.classList.add('active');
+          sortBy(b.getAttribute('data-val'));
+        });
+      });
+    }
+  })();
 })();
 </script>"""
 
@@ -770,12 +792,21 @@ def render_catalog(lang, products):
         "ko": {"cat": [("", "전체"), ("r25", "장미 25"), ("r51", "장미 51"), ("r101", "장미 101+"), ("mixed", "혼합"), ("balloons", "풍선")],
                "color": [("", "전체 색상"), ("red", "레드"), ("white", "화이트"), ("pink", "핑크")]},
     }[lang]
+    SORT = {
+        "ru": [("asc", "Сначала дешёвые"), ("desc", "Сначала дорогие")],
+        "en": [("asc", "Cheapest first"), ("desc", "Most expensive first")],
+        "ko": [("asc", "저렴한 순"), ("desc", "비싼 순")],
+    }[lang]
     def filt_group(kind):
         btns = "".join(
             f'<button type="button" class="filt{" active" if v=="" else ""}" data-val="{v}">{lbl}</button>'
             for v, lbl in FILT[kind])
         return f'<div class="filt-group" data-filter="{kind}">{btns}</div>'
-    filters = f'<div class="cat-filters">{filt_group("cat")}{filt_group("color")}</div>'
+    sort_btns = "".join(
+        f'<button type="button" class="filt{" active" if v=="asc" else ""}" data-val="{v}">{lbl}</button>'
+        for v, lbl in SORT)
+    sort_bar = f'<div class="sort-bar"><div class="filt-group" data-filter="sort">{sort_btns}</div></div>'
+    filters = f'{sort_bar}<div class="cat-filters">{filt_group("cat")}{filt_group("color")}</div>'
     body = f'''    <main class="flex-grow">
     <section class="py-12 px-4 max-w-5xl mx-auto text-center">
         <h1 class="font-serif text-3xl md:text-4xl font-bold mb-3" style="color:#1a1a1a;">{t["catalog_h1"]}</h1>
