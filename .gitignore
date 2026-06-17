@@ -6,3 +6,11 @@ outputs_preview.png
 КОНТЕКСТ_Олег_цветы.md
 # служебное
 .DS_Store
+# Graphify (карта проекта) — не коммитить
+graphify-out/
+.graphifyignore
+# Локальные служебные файлы — не на сайт
+Dialog.html
+Code.gs
+SEO_АУДИТ_*.html
+SEO_АУДИТ_*.md
