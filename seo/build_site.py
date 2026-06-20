@@ -413,7 +413,7 @@ def footer(base, lang="ru"):
         <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
             <div class="text-center md:text-left">
                 <div class="font-serif font-bold text-2xl mb-1" style="color:#1a1a1a;">NhaTrang Flowers</div>
-                <div class="text-xs font-medium tracking-widest uppercase" style="color:#a8566a;">Качество · Ответственность · Пунктуальность</div>
+                <div class="text-xs font-medium tracking-widest uppercase" style="color:#a8566a;">{ {"ru":"Качество · Ответственность · Пунктуальность","en":"Quality · Responsibility · Punctuality","ko":"품질 · 책임 · 시간 엄수"}.get(lang,"Качество · Ответственность · Пунктуальность") }</div>
             </div>
             <div class="flex gap-6 text-2xl">
                 {"".join(f'<a href="{u}" target="_blank" style="color:#c0a0a8;" class="hover:text-[#c0687a] transition" aria-label="{lbl}">{svg}</a>' for u, lbl, svg in contact_links(lang))}
@@ -579,7 +579,9 @@ def render_product(p, lang, products):
     else:
         title = f"{name} — 나트랑 배달 | NhaTrang Flowers"
         meta = f"{name} 나트랑 당일 배달. {desc}. 가격 {price_loc(p['price'], lang)}. WhatsApp·Telegram 주문."
-    meta = meta[:300]
+    # ограничение длины meta-description под лимиты Google (~160 симв), обрезка по границе слова
+    if len(meta) > 160:
+        meta = meta[:158].rsplit(" ", 1)[0].rstrip(" .,;—-") + "…"
 
     # похожие — 3 следующих по кругу
     idx = products.index(p)
