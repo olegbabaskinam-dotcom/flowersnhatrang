@@ -267,18 +267,191 @@
         </div>
     </div>
 
-    <!-- 리뷰 -->
+    <!--REVIEWS-START-->
     <section class="reveal py-10 px-4 border-b border-stone-100">
-        <div class="max-w-4xl mx-auto">
-            <h3 class="font-serif text-2xl font-bold text-center mb-6" style="color:#1a1a1a;">구글 리뷰</h3>
-            <div class="flex justify-center">
-                <div class="rounded-2xl overflow-hidden border border-stone-100 bg-white" style="max-width:360px;">
-                    <div class="flex items-center justify-center p-2">
-                        <img src="img/site/review-ko-1.webp" alt="구글 리뷰 — Wonjin Seo, 베트남 나트랑 꽃 배달" class="max-w-full object-contain">
-                    </div>
+        <div class="max-w-6xl mx-auto">
+            <h3 class="font-serif text-2xl font-bold text-center mb-1" style="color:#1a1a1a;">구글 리뷰</h3>
+            <p class="text-center text-stone-400 text-sm mb-2">실제 고객들의 후기</p>
+            <div class="rv-rate"><span class="s">★★★★★</span><span>리뷰 122개 · 5.0</span></div>
+            <style>
+.rv-wrap{position:relative;max-width:72rem;margin:0 auto}
+.rv-top{display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:.25rem}
+.rv-top .rv-g{font-weight:600;color:#1a1a1a}
+.rv-rate{display:flex;align-items:center;justify-content:center;gap:.4rem;color:#9c9490;font-size:.82rem;margin-bottom:1.25rem}
+.rv-rate .s{color:#fbbc04;letter-spacing:1px}
+.rv-track{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:4px 2px 14px;scrollbar-width:none}
+.rv-track::-webkit-scrollbar{display:none}
+.rv-card{scroll-snap-align:start;flex:0 0 300px;max-width:300px;background:#fff;border:1px solid #efeae7;border-radius:1rem;padding:1.15rem 1.2rem;display:flex;flex-direction:column;gap:.65rem;box-shadow:0 1px 3px rgba(0,0,0,.03)}
+@media(min-width:640px){.rv-card{flex-basis:332px;max-width:332px}}
+.rv-head{display:flex;align-items:center;gap:.65rem}
+.rv-ava{width:42px;height:42px;border-radius:50%;color:#fff;font-weight:600;display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex:0 0 auto}
+.rv-meta{flex:1 1 auto;min-width:0}
+.rv-name{font-weight:600;color:#1a1a1a;font-size:.92rem;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rv-date{color:#9c9490;font-size:.75rem;margin-top:2px}
+.rv-stars{color:#fbbc04;font-size:.98rem;letter-spacing:1.5px}
+.rv-text{color:#57514e;font-size:.88rem;line-height:1.55;margin:0;display:-webkit-box;-webkit-line-clamp:9;-webkit-box-orient:vertical;overflow:hidden}
+.rv-nav{position:absolute;top:48%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid #e7e1de;box-shadow:0 2px 8px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#80757a;z-index:5;transition:.2s}
+.rv-nav:hover{color:#c0687a;border-color:#e7c3cd}
+.rv-prev{left:-6px}.rv-next{right:-6px}
+@media(max-width:680px){.rv-nav{display:none}}
+.rv-cta{text-align:center;margin-top:.5rem}
+</style>
+            <div class="rv-wrap">
+                <button class="rv-nav rv-prev" id="rvPrev-ko" aria-label="이전" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+                <div class="rv-track" id="rvTrack-ko">
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#7E57C2">Л</div>
+<div class="rv-meta"><div class="rv-name">Лина Зверева</div><div class="rv-date">4일 전</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">별 10개가 있다면 다 드리고 싶어요! 체계적이고 정말 빠르고 친절해요! 아이가 깜짝 선물을 받고 너무 좋아했어요. 풍선 퀄리티도 훌륭하고, 7시 40분에 연락했는데 1시간 반 만에 집에 도착했어요!</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#26A69A">A</div>
+<div class="rv-meta"><div class="rv-name">Anna D.</div><div class="rv-date">2주 전</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">오늘 딸이 15살이 되었어요. WhatsApp으로 부케를 주문했어요. 약속한 시간에 부케 사진을 보내주고 빠르게 배달해 주었어요. 모든 것이 정확하고, 품질도 좋고, 시간도 잘 지키고 가격도 합리적이에요. 딸이 정말 좋아했어요. 강력 추천합니다!</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#EF5350">W</div>
+<div class="rv-meta"><div class="rv-name">Wonjin Seo</div><div class="rv-date">3주 전</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">베트남에서 처음 꽃을 선물해보는데 여기저기 알아보다가 러시아 사장님 가게에 주문했어요. 베트남 가게들보다 꽃이 더 퀄리티 있고, 무엇보다 여자친구가 너무 좋아하더라구요. 다음 여자친구 생일에도 이용할게요~</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#5C6BC0">H</div>
+<div class="rv-meta"><div class="rv-name">harrys kalaigidis</div><div class="rv-date">2개월 전</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">정말 전문적인 분이에요. 모든 것을 세심하게 처리해 주었어요. 단계마다 알려주었고, 소통이 빠르고 쉬웠어요. 가격도 아주 좋아요.</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#EC407A">П</div>
+<div class="rv-meta"><div class="rv-name">Павел К</div><div class="rv-date">2주 전</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">훌륭한 서비스예요. 빠르게 협의하고, 꽃과 포장 옵션 사진을 보내주고, 약속한 시간에 호텔로 배달해 주었어요. 아주 친절하고 긍정적인 분이에요. 사업 번창을 기원합니다!</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#FF7043">I</div>
+<div class="rv-meta"><div class="rv-name">Iskhak Dzhanov</div><div class="rv-date">2개월 전</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">훌륭한 서비스예요. 부케 3개와 풍선을 주문했는데 모두 예쁘게 포장하고 카드도 넣어주고 꽃도 신선했어요. 원하는 장소와 시간에 무료 배달해 주었어요.</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#AB47BC">Ю</div>
+<div class="rv-meta"><div class="rv-name">Юля Певлина</div><div class="rv-date">3개월 전</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">냐짱에서 가장 신선한 꽃을 빠르고 정확하게 배달해 줘요. 핑크 장미 51송이를 주문했어요. 답장이 빨라요 — 아침에 연락하니 40분 만에 고를 수 있는 사진을 보내주고, 30분 뒤 깜라인 근처 호텔로 배달됐어요.</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#D81B60">М</div>
+<div class="rv-meta"><div class="rv-name">Марина Бахметьева</div><div class="rv-date">2개월 전</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">정말 감사합니다! 부케가 너무 멋져요! 아내가 아주 좋아해요!</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#42A5F5">V</div>
+<div class="rv-meta"><div class="rv-name">Vitas Grishov</div><div class="rv-date">3개월 전</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">팀에게 정말 감사해요 — 제 여자친구를 행복하게 해줬어요! 새벽 6시까지 객실로 배달해 주었어요. 다시 한번 감사합니다, 정말 최고예요!</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#66BB6A">A</div>
+<div class="rv-meta"><div class="rv-name">Artem Yurin</div><div class="rv-date">2개월 전</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">최고예요. 정말 감사합니다!</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#8D6E63">А</div>
+<div class="rv-meta"><div class="rv-name">Амелия Емельянова</div><div class="rv-date">2개월 전</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">엄마 생신을 위해 빨간 장미와 흰 백합 두 부케를 주문했어요. 상담도 잘 해주고 꽃 종류도 다양했어요. 꽃이 신선하고 예뻤어요. 정말 마음에 들었어요!</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#7E57C2">А</div>
+<div class="rv-meta"><div class="rv-name">Андрей Рудиков</div><div class="rv-date">1주 전</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">훌륭한 서비스예요. 냐짱에서 가깝고 종류 많은 꽃집을 못 찾고 있었는데, 설명도 잘 되어 있고 부케 사진에 헬륨 풍선까지 있는 이 배달 서비스를 발견했어요. 점심에 주문했는데 모든 게 완벽했어요!</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#FFA726">M</div>
+<div class="rv-meta"><div class="rv-name">Mad Mike</div><div class="rv-date">3개월 전</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">환상적이에요! 아침 9시에 가장 예쁘고 신선한 부케를 호텔로 배달해 주었어요!</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#26C6DA">О</div>
+<div class="rv-meta"><div class="rv-name">Оксана Герасимова</div><div class="rv-date">3주 전</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">부케가 예쁘고 장미가 신선해요! 서비스도 훌륭해요! 정말 감사합니다!</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#5C6BC0">I</div>
+<div class="rv-meta"><div class="rv-name">Iskander Gera</div><div class="rv-date">어제</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">모든 것이 완벽했어요: 부케, 서비스, 소통까지. 주문을 조금 수정해야 했을 때도 다 해결해 주었어요. 추천합니다!</p>
+</article>
                 </div>
+                <button class="rv-nav rv-next" id="rvNext-ko" aria-label="다음" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+            </div>
+            <div class="rv-cta">
+                <a href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" class="inline-flex items-center gap-2 font-medium text-xs hover:underline transition" style="color:#c0687a;">
+                    <svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>구글에서 모든 리뷰 보기
+                </a>
             </div>
         </div>
+        <script>
+        (function(){
+          var t=document.getElementById('rvTrack-ko');if(!t)return;
+          function step(d){var c=t.querySelector('.rv-card');if(!c)return;t.scrollBy({left:d*(c.offsetWidth+16),behavior:'smooth'});}
+          var p=document.getElementById('rvPrev-ko'),n=document.getElementById('rvNext-ko');
+          if(p)p.addEventListener('click',function(){step(-1)});
+          if(n)n.addEventListener('click',function(){step(1)});
+        })();
+        </script>
     </section>
 
     <!-- 풍선 배너 -->
