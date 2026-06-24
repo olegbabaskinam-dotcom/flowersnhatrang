@@ -738,7 +738,7 @@ def trust_bar(lang, base):
                         <span class="text-2xl md:text-3xl font-bold" style="color:#1a1a1a;">5.0</span>
                         <span style="color:#f5b301;">{IC_STAR}</span>
                     </div>
-                    <div class="text-stone-400 text-xs font-medium mt-1">115 {u["st2"]}</div>
+                    <div class="text-stone-400 text-xs font-medium mt-1">122 {u["st2"]}</div>
                 </div>
                 <div class="flex flex-col items-center px-4 py-2 text-center">
                     <div class="text-2xl md:text-3xl font-bold" style="color:#1a1a1a;">💵</div>
