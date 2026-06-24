@@ -96,6 +96,11 @@
         .filt:hover{border-color:var(--rose);color:var(--rose);}
         .filt.active{background:var(--rose);color:#fff;border-color:var(--rose);}
         .sort-bar{display:flex;justify-content:center;margin-bottom:1rem;}
+            .gallery-slider{height:24rem;}
+        @media(min-width:768px){.gallery-slider{height:30rem;}}
+        .gallery-slider .pcard-slide{object-fit:contain;padding:.75rem;}
+        .gallery-slider .pcard-arrow{opacity:1;width:2.5rem;height:2.5rem;font-size:1.6rem;background:rgba(255,255,255,.96);box-shadow:0 2px 8px rgba(0,0,0,.22);z-index:5;}
+        .gallery-slider .pcard-dot{width:.45rem;height:.45rem;}
     </style>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
@@ -139,17 +144,9 @@
     </nav>
     <section class="max-w-5xl mx-auto px-6 py-8 grid md:grid-cols-2 gap-10 items-start">
         <div class="reveal">
-        <div class="rounded-2xl overflow-hidden border border-stone-100 flex items-center justify-center p-3" style="background:#fdf4f7;">
-            <img id="gallery-main" src="../img/products/nabor-sharov-m-10-serdec/1.webp" alt="Balloon set M 10 red hearts delivery Nha Trang" class="gallery-main-img object-contain rounded-xl">
-        </div>
-        <div class="flex gap-2 mt-3 flex-wrap">
-            <img src="../img/products/nabor-sharov-m-10-serdec/1.webp" data-full="../img/products/nabor-sharov-m-10-serdec/1.webp" alt="Balloon set M 10 red hearts delivery Nha Trang 1" class="gallery-thumb w-20 h-20 object-cover rounded-lg active">
-            <img src="../img/products/nabor-sharov-m-10-serdec/2.webp" data-full="../img/products/nabor-sharov-m-10-serdec/2.webp" alt="Balloon set M 10 red hearts delivery Nha Trang 2" class="gallery-thumb w-20 h-20 object-cover rounded-lg">
-            <img src="../img/products/nabor-sharov-m-10-serdec/3.webp" data-full="../img/products/nabor-sharov-m-10-serdec/3.webp" alt="Balloon set M 10 red hearts delivery Nha Trang 3" class="gallery-thumb w-20 h-20 object-cover rounded-lg">
-            <img src="../img/products/nabor-sharov-m-10-serdec/4.webp" data-full="../img/products/nabor-sharov-m-10-serdec/4.webp" alt="Balloon set M 10 red hearts delivery Nha Trang 4" class="gallery-thumb w-20 h-20 object-cover rounded-lg">
-            <img src="../img/products/nabor-sharov-m-10-serdec/5.webp" data-full="../img/products/nabor-sharov-m-10-serdec/5.webp" alt="Balloon set M 10 red hearts delivery Nha Trang 5" class="gallery-thumb w-20 h-20 object-cover rounded-lg">
-            <img src="../img/products/nabor-sharov-m-10-serdec/6.webp" data-full="../img/products/nabor-sharov-m-10-serdec/6.webp" alt="Balloon set M 10 red hearts delivery Nha Trang 6" class="gallery-thumb w-20 h-20 object-cover rounded-lg">
-            <img src="../img/products/nabor-sharov-m-10-serdec/7.webp" data-full="../img/products/nabor-sharov-m-10-serdec/7.webp" alt="Balloon set M 10 red hearts delivery Nha Trang 7" class="gallery-thumb w-20 h-20 object-cover rounded-lg">
+        <div class="pcard-slider gallery-slider rounded-2xl border border-stone-100">
+            <img src="../img/products/nabor-sharov-m-10-serdec/1.webp" alt="Balloon set M 10 red hearts delivery Nha Trang" loading="eager" class="pcard-slide active"><img src="../img/products/nabor-sharov-m-10-serdec/2.webp" alt="Balloon set M 10 red hearts delivery Nha Trang 2" loading="lazy" class="pcard-slide"><img src="../img/products/nabor-sharov-m-10-serdec/3.webp" alt="Balloon set M 10 red hearts delivery Nha Trang 3" loading="lazy" class="pcard-slide"><img src="../img/products/nabor-sharov-m-10-serdec/4.webp" alt="Balloon set M 10 red hearts delivery Nha Trang 4" loading="lazy" class="pcard-slide"><img src="../img/products/nabor-sharov-m-10-serdec/5.webp" alt="Balloon set M 10 red hearts delivery Nha Trang 5" loading="lazy" class="pcard-slide"><img src="../img/products/nabor-sharov-m-10-serdec/6.webp" alt="Balloon set M 10 red hearts delivery Nha Trang 6" loading="lazy" class="pcard-slide"><img src="../img/products/nabor-sharov-m-10-serdec/7.webp" alt="Balloon set M 10 red hearts delivery Nha Trang 7" loading="lazy" class="pcard-slide">
+            <button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots"><span class="pcard-dot active"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span></div>
         </div>
         </div>
         <div class="reveal flex flex-col">
