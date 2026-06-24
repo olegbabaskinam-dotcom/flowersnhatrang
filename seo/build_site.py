@@ -194,6 +194,11 @@ CARD_CSS = """/*MARK-CARD-CSS*/
         .pcard-slider{position:relative;overflow:hidden;height:16rem;background:#fdf4f7;}
         .pcard-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s ease;}
         .pcard-slide.active{opacity:1;}
+        .gallery-slider{height:24rem;}
+        @media(min-width:768px){.gallery-slider{height:30rem;}}
+        .gallery-slider .pcard-slide{object-fit:contain;padding:.75rem;}
+        .gallery-slider .pcard-arrow{opacity:1;width:2.5rem;height:2.5rem;font-size:1.6rem;background:rgba(255,255,255,.96);box-shadow:0 2px 8px rgba(0,0,0,.22);z-index:5;}
+        .gallery-slider .pcard-dot{width:.45rem;height:.45rem;}
         .pcard-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.9);border:none;width:2rem;height:2rem;border-radius:999px;font-size:1.2rem;line-height:1;color:#a8566a;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;z-index:2;box-shadow:0 1px 4px rgba(0,0,0,.12);}
         .pcard-slider:hover .pcard-arrow{opacity:1;}
         .pcard-prev{left:.5rem;} .pcard-next{right:.5rem;}
@@ -281,6 +286,12 @@ def head(lang, title, desc, canonical, alts, base, og_image):
     <meta property="og:description" content="{html.escape(desc)}">
     <meta property="og:type" content="website">
     <meta property="og:image" content="{DOMAIN}/{og_image}">
+    <meta property="og:url" content="{canonical}">
+    <meta property="og:site_name" content="NhaTrang Flowers">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{html.escape(title)}">
+    <meta name="twitter:description" content="{html.escape(desc)}">
+    <meta name="twitter:image" content="{DOMAIN}/{og_image}">
     <link rel="icon" href="{base}favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="{base}favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="{base}favicon-16x16.png">
@@ -546,19 +557,21 @@ def product_card(p, lang, base, t):
             </div>'''
 
 def gallery(p, base, alt):
-    # Галерея на странице товара: главное фото + миниатюры
+    # Галерея на странице товара: слайдер с листанием (стрелки/свайп/точки)
     imgs = product_imgs(p)
-    main = imgs[0]
-    thumbs = ""
+    slides = "".join(
+        f'<img src="{base}{im}" alt="{html.escape(alt)}{"" if i==0 else " "+str(i+1)}" loading="{"eager" if i==0 else "lazy"}" class="pcard-slide{" active" if i==0 else ""}">'
+        for i, im in enumerate(imgs))
+    nav = ""
     if len(imgs) > 1:
-        cells = "\n            ".join(
-            f'<img src="{base}{im}" data-full="{base}{im}" alt="{html.escape(alt)} {i+1}" class="gallery-thumb w-20 h-20 object-cover rounded-lg{" active" if i==0 else ""}">'
-            for i, im in enumerate(imgs))
-        thumbs = f'<div class="flex gap-2 mt-3 flex-wrap">\n            {cells}\n        </div>'
-    return f'''<div class="rounded-2xl overflow-hidden border border-stone-100 flex items-center justify-center p-3" style="background:#fdf4f7;">
-            <img id="gallery-main" src="{base}{main}" alt="{html.escape(alt)}" class="gallery-main-img object-contain rounded-xl">
-        </div>
-        {thumbs}'''
+        dots = "".join(f'<span class="pcard-dot{" active" if i==0 else ""}"></span>' for i in range(len(imgs)))
+        nav = ('<button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button>'
+               '<button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button>'
+               f'<div class="pcard-dots">{dots}</div>')
+    return f'''<div class="pcard-slider gallery-slider rounded-2xl border border-stone-100">
+            {slides}
+            {nav}
+        </div>'''
 
 def render_product(p, lang, products):
     t = T[lang]
@@ -607,6 +620,12 @@ def render_product(p, lang, products):
         % (jstr(name), jstr(f"{DOMAIN}/{p['img']}"), jstr(desc), price_num(p["price"]), jstr(canonical))
     )
     faqschema = '<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[%s]}</script>' % faq_schema
+    breadcrumbschema = (
+        '<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":['
+        '{"@type":"ListItem","position":1,"name":%s,"item":"%s/"},'
+        '{"@type":"ListItem","position":2,"name":%s,"item":"%s/catalog-%s.html"},'
+        '{"@type":"ListItem","position":3,"name":%s,"item":%s}]}</script>'
+        % (jstr(t["nav_home"]), DOMAIN, jstr(t["nav_catalog"]), DOMAIN, lang, jstr(name), jstr(canonical)))
 
     u = UI[lang]
     body = f'''    <main class="flex-grow">
@@ -690,7 +709,7 @@ def render_product(p, lang, products):
 '''
     lang_urls = {l: f"{p['slug']}-{l}.html" for l in LANGS}
     return (head(lang, title, meta, canonical, alts, base, p["img"])
-            + schema + faqschema + header(lang, base, lang_urls) + body + footer(base, lang) + SCRIPTS)
+            + schema + faqschema + breadcrumbschema + header(lang, base, lang_urls) + body + footer(base, lang) + SCRIPTS)
 
 def jstr(s):
     import json
