@@ -773,28 +773,10 @@ def trust_bar(lang, base):
     </section>
 '''
 
-def reviews_block(lang, base):
-    """Блок из 3 скриншотов Google-отзывов."""
-    u = UI[lang]
-    cells = "\n                ".join(
-        f'''<div class="rounded-2xl overflow-hidden border border-stone-100 bg-white">
-                    <div class="h-[280px] flex items-center justify-center p-2">
-                        <img src="{base}{im}" alt="{u["rev_h"]}" loading="lazy" class="max-h-full max-w-full object-contain">
-                    </div>
-                </div>''' for im in REVIEW_IMGS)
-    return f'''
-    <section class="reveal py-10 px-4 border-b border-stone-100">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="font-serif text-2xl font-bold text-center mb-6" style="color:#1a1a1a;">{u["rev_h"]}</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {cells}
-            </div>
-            <div class="text-center mt-6">
-                <a href="{GMAPS}" target="_blank" class="btn-rose inline-block font-medium py-2.5 px-6 rounded-xl text-sm">{u["rev_cta"]} →</a>
-            </div>
-        </div>
-    </section>
-'''
+def reviews_block(lang, base=""):
+    """Живая карусель реальных Google-отзывов (единый источник seo/reviews_data.py)."""
+    import reviews_data
+    return "\n    " + reviews_data.carousel_section(lang)
 
 def render_catalog(lang, products):
     t = T[lang]

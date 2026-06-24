@@ -244,30 +244,191 @@
     </section>
 
     
+    <!--REVIEWS-START-->
     <section class="reveal py-10 px-4 border-b border-stone-100">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="font-serif text-2xl font-bold text-center mb-6" style="color:#1a1a1a;">Google reviews</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div class="rounded-2xl overflow-hidden border border-stone-100 bg-white">
-                    <div class="h-[280px] flex items-center justify-center p-2">
-                        <img src="../img/site/review-1.webp" alt="Google reviews" loading="lazy" class="max-h-full max-w-full object-contain">
-                    </div>
+        <div class="max-w-6xl mx-auto">
+            <h3 class="font-serif text-2xl font-bold text-center mb-1" style="color:#1a1a1a;">Google reviews</h3>
+            <p class="text-center text-stone-400 text-sm mb-2">Real reviews from our customers</p>
+            <div class="rv-rate"><span class="s">★★★★★</span><span>122 reviews · 5.0</span></div>
+            <style>
+.rv-wrap{position:relative;max-width:72rem;margin:0 auto}
+.rv-top{display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:.25rem}
+.rv-top .rv-g{font-weight:600;color:#1a1a1a}
+.rv-rate{display:flex;align-items:center;justify-content:center;gap:.4rem;color:#9c9490;font-size:.82rem;margin-bottom:1.25rem}
+.rv-rate .s{color:#fbbc04;letter-spacing:1px}
+.rv-track{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:4px 2px 14px;scrollbar-width:none}
+.rv-track::-webkit-scrollbar{display:none}
+.rv-card{scroll-snap-align:start;flex:0 0 300px;max-width:300px;background:#fff;border:1px solid #efeae7;border-radius:1rem;padding:1.15rem 1.2rem;display:flex;flex-direction:column;gap:.65rem;box-shadow:0 1px 3px rgba(0,0,0,.03)}
+@media(min-width:640px){.rv-card{flex-basis:332px;max-width:332px}}
+.rv-head{display:flex;align-items:center;gap:.65rem}
+.rv-ava{width:42px;height:42px;border-radius:50%;color:#fff;font-weight:600;display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex:0 0 auto}
+.rv-meta{flex:1 1 auto;min-width:0}
+.rv-name{font-weight:600;color:#1a1a1a;font-size:.92rem;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rv-date{color:#9c9490;font-size:.75rem;margin-top:2px}
+.rv-stars{color:#fbbc04;font-size:.98rem;letter-spacing:1.5px}
+.rv-text{color:#57514e;font-size:.88rem;line-height:1.55;margin:0;display:-webkit-box;-webkit-line-clamp:9;-webkit-box-orient:vertical;overflow:hidden}
+.rv-nav{position:absolute;top:48%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid #e7e1de;box-shadow:0 2px 8px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#80757a;z-index:5;transition:.2s}
+.rv-nav:hover{color:#c0687a;border-color:#e7c3cd}
+.rv-prev{left:-6px}.rv-next{right:-6px}
+@media(max-width:680px){.rv-nav{display:none}}
+.rv-cta{text-align:center;margin-top:.5rem}
+</style>
+            <div class="rv-wrap">
+                <button class="rv-nav rv-prev" id="rvPrev-en" aria-label="Previous" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+                <div class="rv-track" id="rvTrack-en">
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#7E57C2">Л</div>
+<div class="rv-meta"><div class="rv-name">Лина Зверева</div><div class="rv-date">4 days ago</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">If there were 10 stars I&#x27;d give them all! Well organised, super fast and polite! Thank you so much, my happy child got the surprise. The balloons are great quality — I messaged at 7:40 and they were at our home within 1.5 hours!</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#26A69A">A</div>
+<div class="rv-meta"><div class="rv-name">Anna D.</div><div class="rv-date">2 weeks ago</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">My daughter turned 15 today. I messaged on WhatsApp and ordered a bouquet. They sent a photo of it at the agreed time and delivered quickly. Everything was precise, high quality, on time and affordable. My daughter was delighted. Highly recommend!</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#EF5350">W</div>
+<div class="rv-meta"><div class="rv-name">Wonjin Seo</div><div class="rv-date">3 weeks ago</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">My first time giving flowers in Vietnam. After looking around I ordered from this Russian owner. The flowers were better quality than local shops, and most importantly my girlfriend loved them. I&#x27;ll order here again for her next birthday!</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#5C6BC0">H</div>
+<div class="rv-meta"><div class="rv-name">harrys kalaigidis</div><div class="rv-date">2 months ago</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">Very professional guy, he did everything with detail. Informed me on every step he did. Quick and easy to communicate. Very good prices also.</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#EC407A">П</div>
+<div class="rv-meta"><div class="rv-name">Павел К</div><div class="rv-date">2 weeks ago</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">Excellent service. We agreed quickly, they sent photos of flower and wrapping options and delivered to the hotel right on time. A very pleasant and positive person. Wishing the business success and growth!</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#FF7043">I</div>
+<div class="rv-meta"><div class="rv-name">Iskhak Dzhanov</div><div class="rv-date">2 months ago</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">Great service, I ordered 3 bouquets and balloons — everything was beautifully wrapped, with cards added, and the flowers were fresh. Free delivery to the right place and time.</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#AB47BC">Ю</div>
+<div class="rv-meta"><div class="rv-name">Юля Певлина</div><div class="rv-date">3 months ago</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">Fast and precise delivery of the freshest flowers in Nha Trang. We ordered 51 pink roses. They reply quickly: we messaged in the morning, got photos to choose from within 40 minutes, and 30 minutes later it was delivered to our hotel near Cam Ranh.</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#D81B60">М</div>
+<div class="rv-meta"><div class="rv-name">Марина Бахметьева</div><div class="rv-date">2 months ago</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">Thank you so much! The bouquet is gorgeous! My wife is thrilled!</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#42A5F5">V</div>
+<div class="rv-meta"><div class="rv-name">Vitas Grishov</div><div class="rv-date">3 months ago</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">Big thanks to the team — they helped make my girl happy! Delivered to the room by 6 a.m. Thanks again, you&#x27;re amazing!</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#66BB6A">A</div>
+<div class="rv-meta"><div class="rv-name">Artem Yurin</div><div class="rv-date">2 months ago</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">The best one. Many thanks!</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#8D6E63">А</div>
+<div class="rv-meta"><div class="rv-name">Амелия Емельянова</div><div class="rv-date">2 months ago</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">We ordered two bouquets — red roses and white lilies — for mum&#x27;s birthday. They advised us well, lots of different flowers. The flowers were fresh and beautiful. We loved it!</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#7E57C2">А</div>
+<div class="rv-meta"><div class="rv-name">Андрей Рудиков</div><div class="rv-date">a week ago</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">Excellent service. I just couldn&#x27;t find a flower shop in Nha Trang that was nearby with a good range. Then I found this delivery with great descriptions, bouquet photos and even helium balloons. Ordered at lunch — everything was great!</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#FFA726">M</div>
+<div class="rv-meta"><div class="rv-name">Mad Mike</div><div class="rv-date">3 months ago</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">Amazing work! By 9 a.m. a gorgeous, fresh bouquet was delivered to the hotel!</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#26C6DA">О</div>
+<div class="rv-meta"><div class="rv-name">Оксана Герасимова</div><div class="rv-date">3 weeks ago</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">Beautiful bouquet, fresh roses! Excellent service! Thank you so much!</p>
+</article>
+<article class="rv-card">
+<header class="rv-head">
+<div class="rv-ava" style="background:#5C6BC0">I</div>
+<div class="rv-meta"><div class="rv-name">Iskander Gera</div><div class="rv-date">yesterday</div></div>
+<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+</header>
+<div class="rv-stars" aria-label="5 / 5">★★★★★</div>
+<p class="rv-text">Everything was perfect: the bouquet, the service, the communication. When I needed to tweak the order a little, it was all sorted out. Recommend!</p>
+</article>
                 </div>
-                <div class="rounded-2xl overflow-hidden border border-stone-100 bg-white">
-                    <div class="h-[280px] flex items-center justify-center p-2">
-                        <img src="../img/site/review-2.webp" alt="Google reviews" loading="lazy" class="max-h-full max-w-full object-contain">
-                    </div>
-                </div>
-                <div class="rounded-2xl overflow-hidden border border-stone-100 bg-white">
-                    <div class="h-[280px] flex items-center justify-center p-2">
-                        <img src="../img/site/review-3.webp" alt="Google reviews" loading="lazy" class="max-h-full max-w-full object-contain">
-                    </div>
-                </div>
+                <button class="rv-nav rv-next" id="rvNext-en" aria-label="Next" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
             </div>
-            <div class="text-center mt-6">
-                <a href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" class="btn-rose inline-block font-medium py-2.5 px-6 rounded-xl text-sm">read reviews on Google Maps →</a>
+            <div class="rv-cta">
+                <a href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" class="inline-flex items-center gap-2 font-medium text-xs hover:underline transition" style="color:#c0687a;">
+                    <svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true"><path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.2 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.4-.7-2.9-.7-4.7s.3-3.3.7-4.7l-7.8-6.1C1 16.3 0 20 0 24s1 7.7 2.6 10.8l7.8-6.1z"/><path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>See all reviews on Google
+                </a>
             </div>
         </div>
+        <script>
+        (function(){
+          var t=document.getElementById('rvTrack-en');if(!t)return;
+          function step(d){var c=t.querySelector('.rv-card');if(!c)return;t.scrollBy({left:d*(c.offsetWidth+16),behavior:'smooth'});}
+          var p=document.getElementById('rvPrev-en'),n=document.getElementById('rvNext-en');
+          if(p)p.addEventListener('click',function(){step(-1)});
+          if(n)n.addEventListener('click',function(){step(1)});
+        })();
+        </script>
     </section>
 
 
