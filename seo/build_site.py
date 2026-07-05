@@ -501,6 +501,9 @@ def product_cat(p):
     """Категория для фильтра каталога."""
     s = p["slug"].lower()
     n = p.get("name_ru", "").lower()
+    # Торты — отдельная категория (с 05.07.2026). slug начинается с tort/cake.
+    if s.startswith("tort") or s.startswith("cake"):
+        return "cakes"
     has_balloons = "shar" in s or "шар" in n
     # сначала по числу роз
     if s.startswith("25-"):
@@ -587,8 +590,9 @@ def render_product(p, lang, products):
     slug = p["slug"]
     canonical = f"{DOMAIN}/catalog/{slug}-{lang}.html"
     alts = {l: f"{DOMAIN}/catalog/{slug}-{l}.html" for l in LANGS}
+    _tovar = "тортов" if product_cat(p) == "cakes" else "цветов"
     if lang == "ru":
-        title = f"{name} — русскоязычная доставка цветов в Нячанге"
+        title = f"{name} — русскоязычная доставка {_tovar} в Нячанге"
         meta = f"{name} — русскоязычная доставка по Нячангу день в день. {desc}. Цена {p['price']}. Заказ в WhatsApp и Telegram."
     elif lang == "en":
         title = f"{name} — delivery in Nha Trang | NhaTrang Flowers"
