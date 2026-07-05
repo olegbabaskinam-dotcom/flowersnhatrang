@@ -65,11 +65,15 @@ HOME = {"ru": "index.html", "en": "index-en.html", "ko": "index-kr.html"}
 BALLOONS = {"ru": "balloons.html", "en": "balloons-en.html", "ko": "balloons-kr.html"}
 HREFLANG = {"ru": "ru", "en": "en", "ko": "ko"}
 HTML_LANG = {"ru": "ru", "en": "en", "ko": "ko"}
+# Название бренда по языкам. С 05.07.2026 фокус на русскоязычную аудиторию:
+# на RU везде «Русскоязычная доставка…», EN/KO остаются «NhaTrang Flowers» (дубли).
+BRAND = {"ru": "Русскоязычная доставка цветов и гелиевых шаров в Нячанге",
+         "en": "NhaTrang Flowers", "ko": "NhaTrang Flowers"}
 
 # Подписи интерфейса
 T = {
     "ru": {
-        "site_sub": "Доставка цветов и<br>гелиевых шаров в Нячанге",
+        "site_sub": "Русскоязычная доставка цветов<br>и гелиевых шаров в Нячанге",
         "nav_home": "Главная", "nav_catalog": "Каталог", "nav_articles": "Статьи", "nav_balloons": "🎈 Шары",
         "catalog_h1": "Каталог букетов",
         "catalog_sub": "Свежие букеты и гелиевые шары с доставкой по Нячангу день в день.",
@@ -287,7 +291,7 @@ def head(lang, title, desc, canonical, alts, base, og_image):
     <meta property="og:type" content="website">
     <meta property="og:image" content="{DOMAIN}/{og_image}">
     <meta property="og:url" content="{canonical}">
-    <meta property="og:site_name" content="NhaTrang Flowers">
+    <meta property="og:site_name" content="{html.escape(BRAND[lang])}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{html.escape(title)}">
     <meta name="twitter:description" content="{html.escape(desc)}">
@@ -382,12 +386,12 @@ def header(lang, base, lang_urls=None):
          f'<a href="{lang_urls[l]}" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{flags[l]}</a>')
         for l in LANGS)
     return f'''    <div style="background:#fce8ee; color:#a8566a;" class="text-xs py-2 text-center tracking-widest font-medium uppercase">
-        NhaTrang Flowers
+        {BRAND[lang]}
     </div>
     <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-stone-100">
         <div class="max-w-5xl mx-auto px-4 py-3 hidden md:flex justify-between items-center">
             <a href="{base}{HOME[lang]}" class="flex items-center gap-3">
-                <img src="{base}img/site/logo.webp" alt="NhaTrang Flowers" class="h-12 w-12 rounded-xl object-cover">
+                <img src="{base}img/site/logo.webp" alt="{BRAND[lang]}" class="h-12 w-12 rounded-xl object-cover">
                 <span class="font-medium text-xs leading-tight text-stone-600 tracking-wide">{t["site_sub"]}</span>
             </a>
             <nav class="hidden md:flex items-center gap-1 text-xs font-medium">
@@ -423,7 +427,7 @@ def footer(base, lang="ru"):
     return f'''    <footer class="py-12 px-4 mt-auto" style="background:#fce8ee;">
         <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
             <div class="text-center md:text-left">
-                <div class="font-serif font-bold text-2xl mb-1" style="color:#1a1a1a;">NhaTrang Flowers</div>
+                <div class="font-serif font-bold text-2xl mb-1" style="color:#1a1a1a;">{BRAND[lang]}</div>
                 <div class="text-xs font-medium tracking-widest uppercase" style="color:#a8566a;">{ {"ru":"Качество · Ответственность · Пунктуальность","en":"Quality · Responsibility · Punctuality","ko":"품질 · 책임 · 시간 엄수"}.get(lang,"Качество · Ответственность · Пунктуальность") }</div>
             </div>
             <div class="flex gap-6 text-2xl">
@@ -432,7 +436,7 @@ def footer(base, lang="ru"):
         </div>
         <div class="text-center text-xs mt-8" style="color:#a8566a;">🕖 {HOURS.get(lang, HOURS["ru"])}</div>
         <div class="text-center text-xs mt-6 pt-6" style="border-top: 1px solid #f0d0d8; color:#b08090;">
-            &copy; 2026 NhaTrang Flowers.
+            &copy; 2026 {BRAND[lang]}.
         </div>
     </footer>
 '''
@@ -584,8 +588,8 @@ def render_product(p, lang, products):
     canonical = f"{DOMAIN}/catalog/{slug}-{lang}.html"
     alts = {l: f"{DOMAIN}/catalog/{slug}-{l}.html" for l in LANGS}
     if lang == "ru":
-        title = f"{name} — доставка в Нячанге | NhaTrang Flowers"
-        meta = f"{name} с доставкой по Нячангу день в день. {desc}. Цена {p['price']}. Заказ в WhatsApp и Telegram."
+        title = f"{name} — русскоязычная доставка цветов в Нячанге"
+        meta = f"{name} — русскоязычная доставка по Нячангу день в день. {desc}. Цена {p['price']}. Заказ в WhatsApp и Telegram."
     elif lang == "en":
         title = f"{name} — delivery in Nha Trang | NhaTrang Flowers"
         meta = f"{name} with same-day delivery in Nha Trang. {desc}. Price {price_loc(p['price'], lang)}. Order via WhatsApp or Telegram."
@@ -615,9 +619,9 @@ def render_product(p, lang, products):
     schema = (
         '<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product",'
         '"name":%s,"image":%s,"description":%s,'
-        '"brand":{"@type":"Brand","name":"NhaTrang Flowers"},'
+        '"brand":{"@type":"Brand","name":%s},'
         '"offers":{"@type":"Offer","price":"%s","priceCurrency":"VND","availability":"https://schema.org/InStock","url":%s}}</script>'
-        % (jstr(name), jstr(f"{DOMAIN}/{p['img']}"), jstr(desc), price_num(p["price"]), jstr(canonical))
+        % (jstr(name), jstr(f"{DOMAIN}/{p['img']}"), jstr(desc), jstr(BRAND[lang]), price_num(p["price"]), jstr(canonical))
     )
     faqschema = '<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[%s]}</script>' % faq_schema
     breadcrumbschema = (
@@ -784,7 +788,7 @@ def render_catalog(lang, products):
     canonical = f"{DOMAIN}/catalog-{lang}.html"
     alts = {l: f"{DOMAIN}/catalog-{l}.html" for l in LANGS}
     if lang == "ru":
-        title = "Каталог букетов — доставка цветов в Нячанге | NhaTrang Flowers"
+        title = "Каталог букетов — русскоязычная доставка цветов в Нячанге"
         meta = "Каталог свежих букетов и гелиевых шаров с доставкой по Нячангу день в день. Розы, лилии, корзины. Оплата рублями, донгами, долларами."
     elif lang == "en":
         title = "Bouquet catalog — flower delivery in Nha Trang | NhaTrang Flowers"
@@ -967,10 +971,10 @@ def render_article(art, lang, products, all_articles):
     art_schema = (
         '<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article",'
         '"headline":%s,"description":%s,"image":%s,"datePublished":"%s",'
-        '"author":{"@type":"Organization","name":"NhaTrang Flowers"},'
-        '"publisher":{"@type":"Organization","name":"NhaTrang Flowers"},'
+        '"author":{"@type":"Organization","name":%s},'
+        '"publisher":{"@type":"Organization","name":%s},'
         '"mainEntityOfPage":%s}</script>'
-        % (jstr(a["title"]), jstr(a["meta"]), jstr(f"{DOMAIN}/{og}"), art.get("date",""), jstr(canonical))
+        % (jstr(a["title"]), jstr(a["meta"]), jstr(f"{DOMAIN}/{og}"), art.get("date",""), jstr(BRAND[lang]), jstr(BRAND[lang]), jstr(canonical))
     )
     faqschema = ('<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[%s]}</script>' % faq_schema) if faq else ""
     lang_urls = {l: f"{slug}-{l}.html" for l in LANGS}
@@ -984,7 +988,7 @@ def render_blog(lang):
     canonical = f"{DOMAIN}/blog-{lang}.html"
     alts = {l: f"{DOMAIN}/blog-{l}.html" for l in LANGS}
     if lang == "ru":
-        title = "Статьи о цветах и поводах — NhaTrang Flowers"
+        title = "Статьи о цветах и Вьетнаме — русскоязычная доставка в Нячанге"
         meta = "Полезные статьи о цветах, поводах для подарка и традициях Вьетнама. Доставка букетов по Нячангу."
     elif lang == "en":
         title = "Articles about flowers & occasions — NhaTrang Flowers"
