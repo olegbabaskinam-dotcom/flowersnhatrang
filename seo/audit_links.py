@@ -94,6 +94,76 @@ for f in HTML:
     ni = nav_items(s)
     if ni: navsets.setdefault(lang, {}).setdefault(ni, []).append(f)
 
+# 5) кросс-язык: не-переключательные внутренние ссылки должны оставаться в своём языке
+SPLANG = {"index.html":"ru","index-en.html":"en","index-kr.html":"ko",
+          "balloons.html":"ru","balloons-en.html":"en","balloons-kr.html":"ko"}
+def page_lang(path):
+    b = os.path.basename(path)
+    if b in SPLANG: return SPLANG[b]
+    if b.endswith("-en.html"): return "en"
+    if b.endswith("-ko.html"): return "ko"
+    if b.endswith("-ru.html"): return "ru"
+    return None
+FLAGS = ("🇷🇺","🇬🇧","🇰🇷")
+for f in HTML:
+    L = page_lang(f)
+    if not L: continue
+    base = os.path.dirname(f)
+    s = open(f, encoding="utf-8").read()
+    for m in re.finditer(r'<a\s+href="([^"]+)"[^>]*>(.*?)</a>', s, re.S):
+        u, inner = m.group(1), m.group(2)
+        if is_ext(u) or u.startswith("#") or any(fl in inner for fl in FLAGS):
+            continue  # внешние, якоря, переключатель языка — пропуск
+        page = u.split("#")[0].split("?")[0]
+        if not page: continue
+        tgt = os.path.normpath(os.path.join(base, page))
+        TL = page_lang(tgt)
+        if TL and TL != L:
+            warns.append(f"[КРОСС-ЯЗЫК] {f} ({L}) → {u} ({TL}) — ссылка на другой язык (не переключатель)")
+
+# 6) внутристраничные якоря (#delivery, #catalog…) — есть ли элемент с таким id
+for f in HTML:
+    base = os.path.dirname(f)
+    s = open(f, encoding="utf-8").read()
+    ids = set(re.findall(r'id="([^"]+)"', s))
+    for m in re.finditer(r'href="([^"]*)#([a-zA-Z][\w\-]*)"', s):
+        page, frag = m.group(1), m.group(2)
+        if frag in FILTER_HASHES: continue  # это JS-фильтры каталога, не id
+        tgt = f if page=="" else os.path.normpath(os.path.join(base, page))
+        if not os.path.exists(tgt): continue
+        tids = ids if tgt==f else set(re.findall(r'id="([^"]+)"', open(tgt,encoding="utf-8").read()))
+        if frag not in tids:
+            warns.append(f"[ЯКОРЬ] {f} → {page}#{frag}: нет элемента id=\"{frag}\" на цели")
+
+# 7) мёртвые фильтры каталога: у каждой кнопки data-val есть ≥1 товар с таким data-cat
+for f in ["catalog-ru.html","catalog-en.html","catalog-ko.html"]:
+    if not os.path.exists(f): continue
+    s = open(f, encoding="utf-8").read()
+    cats = set()
+    for dc in re.findall(r'data-cat="([^"]*)"', s):
+        for part in dc.split(): cats.add(part)
+    for val in re.findall(r'data-filter="cat"[^>]*>(.*?)</div>', s, re.S):
+        for fv in re.findall(r'data-val="([^"]+)"', val):
+            if fv and fv not in cats:
+                errors.append(f"[МЁРТВЫЙ ФИЛЬТР] {f}: кнопка data-val=\"{fv}\" — нет ни одного товара этой категории")
+
+# 8) паритет баннеров главной по языкам (Шары/Торты/Статьи должны быть на всех 3)
+HOMES = {"ru":"index.html","en":"index-en.html","ko":"index-kr.html"}
+def btype(h):
+    if "#cakes" in h: return "торты"
+    if "balloons" in h: return "шары"
+    if "blog" in h: return "статьи"
+    return None
+def home_banners(s):
+    hs = re.findall(r'<a href="([^"]+)" class="block rounded-3xl[^"]*" style="height: 340px;">', s)
+    return set(t for t in (btype(h) for h in hs) if t)
+hb = {lang: home_banners(open(hp,encoding="utf-8").read()) for lang,hp in HOMES.items() if os.path.exists(hp)}
+allb = set().union(*hb.values()) if hb else set()
+for lang, ts in hb.items():
+    miss = allb - ts
+    if miss:
+        errors.append(f"[ГЛАВНАЯ {lang}] нет баннеров: {', '.join(sorted(miss))} (есть на других языках)")
+
 print("="*64); print("  АУДИТ ССЫЛОК И НАВИГАЦИИ"); print("="*64)
 print(f"\nПроверено HTML-страниц: {len(HTML)}")
 print(f"\n❌ ОШИБКИ: {len(errors)}")
