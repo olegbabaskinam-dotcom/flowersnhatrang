@@ -63,6 +63,8 @@ LANGS = ["ru", "en", "ko"]
 HOME = {"ru": "index.html", "en": "index-en.html", "ko": "index-kr.html"}
 # имя файла страницы шаров для каждого языка (ru = balloons.html)
 BALLOONS = {"ru": "balloons.html", "en": "balloons-en.html", "ko": "balloons-kr.html"}
+# отдельная страница тортов (с 05.07.2026) — как шары, свой лендинг
+CAKES = {"ru": "torty.html", "en": "torty-en.html", "ko": "torty-kr.html"}
 HREFLANG = {"ru": "ru", "en": "en", "ko": "ko"}
 HTML_LANG = {"ru": "ru", "en": "en", "ko": "ko"}
 # Название бренда по языкам. С 05.07.2026 фокус на русскоязычную аудиторию:
@@ -400,7 +402,7 @@ def header(lang, base, lang_urls=None):
                 <a href="{base}catalog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_catalog"]}</a>
                 <a href="{base}blog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_articles"]}</a>
                 <a href="{base}{BALLOONS[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_balloons"]}</a>
-                <a href="{base}catalog-{lang}.html#cakes" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_cakes"]}</a>
+                <a href="{base}{CAKES[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_cakes"]}</a>
                 <span class="w-px h-4 bg-stone-200 mx-1"></span>
                 {nav_langs}
             </nav>
@@ -413,7 +415,7 @@ def header(lang, base, lang_urls=None):
             <a href="{base}catalog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{t["nav_catalog"]}</a>
             <a href="{base}blog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{t["nav_articles"]}</a>
             <a href="{base}{BALLOONS[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{t["nav_balloons"]}</a>
-            <a href="{base}catalog-{lang}.html#cakes" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{t["nav_cakes"]}</a>
+            <a href="{base}{CAKES[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{t["nav_cakes"]}</a>
             <span class="w-px h-4 bg-stone-200 mx-1"></span>
             {nav_langs_m}
         </div>
