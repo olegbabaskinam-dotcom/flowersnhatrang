@@ -248,6 +248,7 @@ CARD_JS = """<script>/*MARK-CARD-JS*/
         });
       });
     });
+    var _hf=(location.hash||'').replace('#','');if(_hf){var _tf=bar.querySelector('.filt-group[data-filter="cat"] .filt[data-val="'+_hf+'"]');if(_tf)_tf.click();}
   }
   (function(){
     var cf=document.querySelector('.cat-filters'); if(!cf) return;
