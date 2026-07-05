@@ -74,7 +74,7 @@ BRAND = {"ru": "Русскоязычная доставка цветов и ге
 T = {
     "ru": {
         "site_sub": "Русскоязычная доставка цветов<br>и гелиевых шаров в Нячанге",
-        "nav_home": "Главная", "nav_catalog": "Каталог", "nav_articles": "Статьи", "nav_balloons": "🎈 Шары",
+        "nav_home": "Главная", "nav_catalog": "Каталог", "nav_articles": "Статьи", "nav_balloons": "🎈 Шары", "nav_cakes": "🎂 Торты",
         "catalog_h1": "Каталог букетов",
         "catalog_sub": "Свежие букеты и гелиевые шары с доставкой по Нячангу день в день.",
         "order_wa": "заказать в WhatsApp", "order_tg": "заказать в Telegram",
@@ -95,7 +95,7 @@ T = {
     },
     "en": {
         "site_sub": "Flower & balloon delivery<br>in Nha Trang",
-        "nav_home": "Home", "nav_catalog": "Catalog", "nav_articles": "Articles", "nav_balloons": "🎈 Balloons",
+        "nav_home": "Home", "nav_catalog": "Catalog", "nav_articles": "Articles", "nav_balloons": "🎈 Balloons", "nav_cakes": "🎂 Cakes",
         "catalog_h1": "Bouquet catalog",
         "catalog_sub": "Fresh bouquets and helium balloons with same-day delivery in Nha Trang.",
         "order_wa": "order on WhatsApp", "order_tg": "order on Telegram",
@@ -116,7 +116,7 @@ T = {
     },
     "ko": {
         "site_sub": "나트랑 꽃 & 풍선<br>배달 서비스",
-        "nav_home": "홈", "nav_catalog": "카탈로그", "nav_articles": "블로그", "nav_balloons": "🎈 풍선",
+        "nav_home": "홈", "nav_catalog": "카탈로그", "nav_articles": "블로그", "nav_balloons": "🎈 풍선", "nav_cakes": "🎂 케이크",
         "catalog_h1": "꽃다발 카탈로그",
         "catalog_sub": "나트랑 당일 배달, 신선한 꽃다발과 헬륨 풍선.",
         "order_wa": "WhatsApp으로 주문", "order_tg": "Telegram으로 주문",
@@ -400,6 +400,7 @@ def header(lang, base, lang_urls=None):
                 <a href="{base}catalog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_catalog"]}</a>
                 <a href="{base}blog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_articles"]}</a>
                 <a href="{base}{BALLOONS[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_balloons"]}</a>
+                <a href="{base}catalog-{lang}.html#cakes" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_cakes"]}</a>
                 <span class="w-px h-4 bg-stone-200 mx-1"></span>
                 {nav_langs}
             </nav>
@@ -412,6 +413,7 @@ def header(lang, base, lang_urls=None):
             <a href="{base}catalog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{t["nav_catalog"]}</a>
             <a href="{base}blog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{t["nav_articles"]}</a>
             <a href="{base}{BALLOONS[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{t["nav_balloons"]}</a>
+            <a href="{base}catalog-{lang}.html#cakes" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{t["nav_cakes"]}</a>
             <span class="w-px h-4 bg-stone-200 mx-1"></span>
             {nav_langs_m}
         </div>
