@@ -398,9 +398,9 @@ def header(lang, base, lang_urls=None):
                 <span class="font-medium text-xs leading-tight text-stone-600 tracking-wide">{t["site_sub"]}</span>
             </a>
             <nav class="hidden md:flex items-center gap-1 text-xs font-medium">
-                <a href="{base}{HOME[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_home"]}</a>
-                <a href="{base}catalog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_catalog"]}</a>
-                <a href="{base}blog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_articles"]}</a>
+                <a href="{base}{HOME[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🏠 {t["nav_home"]}</a>
+                <a href="{base}catalog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">💐 {t["nav_catalog"]}</a>
+                <a href="{base}blog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">📖 {t["nav_articles"]}</a>
                 <a href="{base}{BALLOONS[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_balloons"]}</a>
                 <a href="{base}{CAKES[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_cakes"]}</a>
                 <span class="w-px h-4 bg-stone-200 mx-1"></span>
@@ -411,9 +411,9 @@ def header(lang, base, lang_urls=None):
             </div>
         </div>
         <div class="md:hidden border-t border-stone-100 px-4 py-2 flex gap-1 text-xs font-medium overflow-x-auto justify-center">
-            <a href="{base}{HOME[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{t["nav_home"]}</a>
-            <a href="{base}catalog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{t["nav_catalog"]}</a>
-            <a href="{base}blog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{t["nav_articles"]}</a>
+            <a href="{base}{HOME[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">🏠 {t["nav_home"]}</a>
+            <a href="{base}catalog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">💐 {t["nav_catalog"]}</a>
+            <a href="{base}blog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">📖 {t["nav_articles"]}</a>
             <a href="{base}{BALLOONS[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{t["nav_balloons"]}</a>
             <a href="{base}{CAKES[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{t["nav_cakes"]}</a>
             <span class="w-px h-4 bg-stone-200 mx-1"></span>
@@ -807,12 +807,12 @@ def render_catalog(lang, products):
         meta = "나트랑 당일 배달 신선한 꽃다발과 헬륨 풍선 카탈로그. 장미, 백합, 바구니. 달러·동·루블 결제."
     cards = "\n            ".join(product_card(p, lang, base, t) for p in products)
     FILT = {
-        "ru": {"cat": [("", "Все"), ("r25", "25 роз"), ("r51", "51 роза"), ("r101", "101+ роз"), ("mixed", "Сборные"), ("balloons", "Шары")],
-               "color": [("", "Все цвета"), ("red", "Красные"), ("white", "Белые"), ("pink", "Розовые")]},
-        "en": {"cat": [("", "All"), ("r25", "25 roses"), ("r51", "51 roses"), ("r101", "101+ roses"), ("mixed", "Mixed"), ("balloons", "Balloons")],
-               "color": [("", "All colors"), ("red", "Red"), ("white", "White"), ("pink", "Pink")]},
-        "ko": {"cat": [("", "전체"), ("r25", "장미 25"), ("r51", "장미 51"), ("r101", "장미 101+"), ("mixed", "혼합"), ("balloons", "풍선")],
-               "color": [("", "전체 색상"), ("red", "레드"), ("white", "화이트"), ("pink", "핑크")]},
+        "ru": {"cat": [("", "🌸 Все"), ("r25", "🌹 25 роз"), ("r51", "🌹 51 роза"), ("r101", "🌹 101+ роз"), ("mixed", "💐 Сборные"), ("balloons", "🎈 Шары"), ("cakes", "🎂 Торты")],
+               "color": [("", "🎨 Все цвета"), ("red", "❤️ Красные"), ("white", "🤍 Белые"), ("pink", "💗 Розовые"), ("purple", "💜 Фиолетовые")]},
+        "en": {"cat": [("", "🌸 All"), ("r25", "🌹 25 roses"), ("r51", "🌹 51 roses"), ("r101", "🌹 101+ roses"), ("mixed", "💐 Mixed"), ("balloons", "🎈 Balloons"), ("cakes", "🎂 Cakes")],
+               "color": [("", "🎨 All colors"), ("red", "❤️ Red"), ("white", "🤍 White"), ("pink", "💗 Pink"), ("purple", "💜 Purple")]},
+        "ko": {"cat": [("", "🌸 전체"), ("r25", "🌹 장미 25"), ("r51", "🌹 장미 51"), ("r101", "🌹 장미 101+"), ("mixed", "💐 혼합"), ("balloons", "🎈 풍선"), ("cakes", "🎂 케이크")],
+               "color": [("", "🎨 전체 색상"), ("red", "❤️ 레드"), ("white", "🤍 화이트"), ("pink", "💗 핑크"), ("purple", "💜 퍼플")]},
     }[lang]
     SORT = {
         "ru": [("asc", "Цена ↑"), ("desc", "Цена ↓")],

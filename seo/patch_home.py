@@ -53,19 +53,21 @@ def build_nav(lang):
         return f'\n            <a href="{B.HOME[l]}" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{FLAGS[l]}</a>'
     I = "                "
     d = ('<nav class="hidden md:flex items-center gap-1 text-xs font-medium"><!--MARK-NAV-->'
-         + lk(B.HOME[lang], t["nav_home"], I)
-         + lk(f"catalog-{lang}.html", t["nav_catalog"], I)
-         + lk(f"blog-{lang}.html", t["nav_articles"], I)
+         + lk(B.HOME[lang], "🏠 " + t["nav_home"], I)
+         + lk(f"catalog-{lang}.html", "💐 " + t["nav_catalog"], I)
+         + lk(f"blog-{lang}.html", "📖 " + t["nav_articles"], I)
          + lk(B.BALLOONS[lang], t["nav_balloons"], I)
+         + lk(B.CAKES[lang], t["nav_cakes"], I)
          + f'\n{I}<span class="w-px h-4 bg-stone-200 mx-1"></span>'
          + "".join(flag(l) for l in B.LANGS)
          + '\n            </nav>')
     Im = "            "
     m = ('<div class="md:hidden border-t border-stone-100 px-4 py-2 flex gap-1 text-xs font-medium overflow-x-auto justify-center"><!--MARK-NAVM-->'
-         + lkm(B.HOME[lang], t["nav_home"], Im)
-         + lkm(f"catalog-{lang}.html", t["nav_catalog"], Im)
-         + lkm(f"blog-{lang}.html", t["nav_articles"], Im)
+         + lkm(B.HOME[lang], "🏠 " + t["nav_home"], Im)
+         + lkm(f"catalog-{lang}.html", "💐 " + t["nav_catalog"], Im)
+         + lkm(f"blog-{lang}.html", "📖 " + t["nav_articles"], Im)
          + lkm(B.BALLOONS[lang], t["nav_balloons"], Im)
+         + lkm(B.CAKES[lang], t["nav_cakes"], Im)
          + f'\n{Im}<span class="w-px h-4 bg-stone-200 mx-1"></span>'
          + "".join(flagm(l) for l in B.LANGS)
          + '\n        </div>')
