@@ -390,6 +390,16 @@ def header(lang, base, lang_urls=None):
          if l == lang else
          f'<a href="{lang_urls[l]}" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{flags[l]}</a>')
         for l in LANGS)
+    # мобильная шапка (компактная: лого + название + контакты + бургер → выпадающее меню)
+    contacts_m = "".join(
+        f'<a href="{u}" target="_blank" aria-label="{lbl}" class="w-9 h-9 flex items-center justify-center rounded-full border border-stone-200 text-stone-500 text-base">{svg}</a>'
+        for u, lbl, svg in contact_links(lang)[:2])
+    mnav_links = (
+        f'<a href="{base}{HOME[lang]}" class="block px-2 py-2.5 rounded-lg text-stone-600 hover:bg-stone-50 transition">🏠 {t["nav_home"]}</a>'
+        f'<a href="{base}catalog-{lang}.html" class="block px-2 py-2.5 rounded-lg text-stone-600 hover:bg-stone-50 transition">💐 {t["nav_catalog"]}</a>'
+        f'<a href="{base}blog-{lang}.html" class="block px-2 py-2.5 rounded-lg text-stone-600 hover:bg-stone-50 transition">📖 {t["nav_articles"]}</a>'
+        f'<a href="{base}{BALLOONS[lang]}" class="block px-2 py-2.5 rounded-lg text-stone-600 hover:bg-stone-50 transition">{t["nav_balloons"]}</a>'
+        f'<a href="{base}{CAKES[lang]}" class="block px-2 py-2.5 rounded-lg text-stone-600 hover:bg-stone-50 transition">{t["nav_cakes"]}</a>')
     return f'''    <div style="background:#fce8ee; color:#a8566a;" class="text-xs py-2 text-center tracking-widest font-medium uppercase">
         {BRAND[lang]}
     </div>
@@ -412,14 +422,19 @@ def header(lang, base, lang_urls=None):
                 {"".join(f'<a href="{u}" target="_blank" class="text-stone-400 hover:text-[#c0687a] transition" aria-label="{lbl}">{svg}</a>' for u, lbl, svg in contact_links(lang))}
             </div>
         </div>
-        <div class="md:hidden border-t border-stone-100 px-4 py-2 flex gap-1 text-xs font-medium overflow-x-auto justify-center">
-            <a href="{base}{HOME[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">🏠 {t["nav_home"]}</a>
-            <a href="{base}catalog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">💐 {t["nav_catalog"]}</a>
-            <a href="{base}blog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">📖 {t["nav_articles"]}</a>
-            <a href="{base}{BALLOONS[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{t["nav_balloons"]}</a>
-            <a href="{base}{CAKES[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 whitespace-nowrap hover:text-[#c0687a] transition">{t["nav_cakes"]}</a>
-            <span class="w-px h-4 bg-stone-200 mx-1"></span>
-            {nav_langs_m}
+        <div class="md:hidden border-t border-stone-100 px-4 py-2.5 flex items-center justify-between gap-2">
+            <a href="{base}{HOME[lang]}" class="flex items-center gap-2 min-w-0">
+                <img src="{base}img/site/logo.webp" alt="{BRAND[lang]}" class="h-9 w-9 rounded-lg object-cover flex-shrink-0">
+                <span class="font-medium text-[11px] leading-tight text-stone-600">{t["site_sub"]}</span>
+            </a>
+            <div class="flex items-center gap-2 flex-shrink-0">
+                {contacts_m}
+                <button type="button" aria-label="Меню" onclick="document.getElementById('mnav').classList.toggle('hidden')" class="w-9 h-9 flex items-center justify-center rounded-lg border border-stone-200 text-stone-600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+            </div>
+        </div>
+        <div id="mnav" class="md:hidden hidden border-t border-stone-100 px-2 py-2 bg-white text-sm font-medium">
+            {mnav_links}
+            <div class="flex gap-2 px-2 pt-2 mt-1 border-t border-stone-100">{nav_langs_m}</div>
         </div>
     </header>
 '''
