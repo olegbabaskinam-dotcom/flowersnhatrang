@@ -292,13 +292,15 @@ def head(lang, title, desc, canonical, alts, base, og_image):
     <meta property="og:title" content="{html.escape(title)}">
     <meta property="og:description" content="{html.escape(desc)}">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="{DOMAIN}/{og_image}">
+    <meta property="og:image" content="{DOMAIN}/img/site/og-default.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:url" content="{canonical}">
     <meta property="og:site_name" content="{html.escape(BRAND[lang])}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{html.escape(title)}">
     <meta name="twitter:description" content="{html.escape(desc)}">
-    <meta name="twitter:image" content="{DOMAIN}/{og_image}">
+    <meta name="twitter:image" content="{DOMAIN}/img/site/og-default.jpg">
     <link rel="icon" href="{base}favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="{base}favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="{base}favicon-16x16.png">
