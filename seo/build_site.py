@@ -149,7 +149,7 @@ UI = {
            "dl_day": "Доставка в тот же день при заказе до 18:00",
            "dl_cam": "Камрань — доставка от 51 розы (600 000 донгов отдельно)",
            "dl_pay": "Оплата: донги, рубли, доллары, USDT, наличные",
-           "st1": "букетов доставлено", "st2": "отзыва на Google", "st3": "оплата при получении",
+           "st1": "букетов доставлено", "st2": "отзывов на Google", "st3": "оплата при получении",
            "rev_h": "отзывы на Google", "rev_cta": "читать отзывы на Google Maps",
            "art_read": "читать", "art_back": "← все статьи", "art_rel_h": "Подходящие букеты",
            "art_cta_h": "Закажите доставку букета в Нячанге",
@@ -776,14 +776,14 @@ GMAPS = "https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic"
 REVIEW_IMGS = ["img/site/review-1.webp", "img/site/review-2.webp", "img/site/review-3.webp"]
 
 def trust_bar(lang, base):
-    """Полоса доверия: 500+ доставлено · 5.0 / отзывы Google · оплата при получении."""
+    """Полоса доверия: 1000+ доставлено · 5.0 / 128 отзывов Google · оплата при получении."""
     u = UI[lang]
     return f'''
     <section class="reveal py-8 px-4 border-b border-stone-100">
         <div class="max-w-4xl mx-auto">
             <div class="grid grid-cols-3 divide-x divide-stone-100">
                 <div class="flex flex-col items-center px-4 py-2 text-center">
-                    <div class="text-2xl md:text-3xl font-bold" style="color:#1a1a1a;">500+</div>
+                    <div class="text-2xl md:text-3xl font-bold" style="color:#1a1a1a;">1000+</div>
                     <div class="text-stone-400 text-xs font-medium mt-1">{u["st1"]}</div>
                 </div>
                 <div class="flex flex-col items-center px-4 py-2 text-center">
@@ -791,7 +791,7 @@ def trust_bar(lang, base):
                         <span class="text-2xl md:text-3xl font-bold" style="color:#1a1a1a;">5.0</span>
                         <span style="color:#f5b301;">{IC_STAR}</span>
                     </div>
-                    <div class="text-stone-400 text-xs font-medium mt-1">122 {u["st2"]}</div>
+                    <div class="text-stone-400 text-xs font-medium mt-1">128 {u["st2"]}</div>
                 </div>
                 <div class="flex flex-col items-center px-4 py-2 text-center">
                     <div class="text-2xl md:text-3xl font-bold" style="color:#1a1a1a;">💵</div>
