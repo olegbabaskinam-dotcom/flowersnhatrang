@@ -65,6 +65,8 @@ HOME = {"ru": "index.html", "en": "index-en.html", "ko": "index-kr.html"}
 BALLOONS = {"ru": "balloons.html", "en": "balloons-en.html", "ko": "balloons-kr.html"}
 # отдельная страница тортов (с 05.07.2026) — как шары, свой лендинг
 CAKES = {"ru": "torty.html", "en": "torty-en.html", "ko": "torty-kr.html"}
+# отдельная страница подарочных наборов (с 14.07.2026) — как торты/шары, свой лендинг
+NABORY = {"ru": "nabory.html", "en": "nabory-en.html", "ko": "nabory-kr.html"}
 HREFLANG = {"ru": "ru", "en": "en", "ko": "ko"}
 HTML_LANG = {"ru": "ru", "en": "en", "ko": "ko"}
 # Название бренда по языкам. С 05.07.2026 фокус на русскоязычную аудиторию:
@@ -76,7 +78,7 @@ BRAND = {"ru": "Русскоязычная доставка цветов и ге
 T = {
     "ru": {
         "site_sub": "Русскоязычная доставка цветов<br>и гелиевых шаров в Нячанге",
-        "nav_home": "Главная", "nav_catalog": "Каталог", "nav_articles": "Статьи", "nav_balloons": "🎈 Шары", "nav_cakes": "🎂 Торты",
+        "nav_home": "Главная", "nav_catalog": "Каталог", "nav_articles": "Статьи", "nav_balloons": "🎈 Шары", "nav_cakes": "🎂 Торты", "nav_nabory": "🎁 Наборы",
         "catalog_h1": "Каталог букетов",
         "catalog_sub": "Свежие букеты и гелиевые шары с доставкой по Нячангу день в день.",
         "order_wa": "заказать в WhatsApp", "order_tg": "заказать в Telegram",
@@ -97,7 +99,7 @@ T = {
     },
     "en": {
         "site_sub": "Flower & balloon delivery<br>in Nha Trang",
-        "nav_home": "Home", "nav_catalog": "Catalog", "nav_articles": "Articles", "nav_balloons": "🎈 Balloons", "nav_cakes": "🎂 Cakes",
+        "nav_home": "Home", "nav_catalog": "Catalog", "nav_articles": "Articles", "nav_balloons": "🎈 Balloons", "nav_cakes": "🎂 Cakes", "nav_nabory": "🎁 Gift sets",
         "catalog_h1": "Bouquet catalog",
         "catalog_sub": "Fresh bouquets and helium balloons with same-day delivery in Nha Trang.",
         "order_wa": "order on WhatsApp", "order_tg": "order on Telegram",
@@ -118,7 +120,7 @@ T = {
     },
     "ko": {
         "site_sub": "나트랑 꽃 & 풍선<br>배달 서비스",
-        "nav_home": "홈", "nav_catalog": "카탈로그", "nav_articles": "블로그", "nav_balloons": "🎈 풍선", "nav_cakes": "🎂 케이크",
+        "nav_home": "홈", "nav_catalog": "카탈로그", "nav_articles": "블로그", "nav_balloons": "🎈 풍선", "nav_cakes": "🎂 케이크", "nav_nabory": "🎁 선물 세트",
         "catalog_h1": "꽃다발 카탈로그",
         "catalog_sub": "나트랑 당일 배달, 신선한 꽃다발과 헬륨 풍선.",
         "order_wa": "WhatsApp으로 주문", "order_tg": "Telegram으로 주문",
@@ -403,7 +405,8 @@ def header(lang, base, lang_urls=None):
         f'<a href="{base}catalog-{lang}.html" {_mnav}>💐 {t["nav_catalog"]}</a>'
         f'<a href="{base}blog-{lang}.html" {_mnav}>📖 {t["nav_articles"]}</a>'
         f'<a href="{base}{BALLOONS[lang]}" {_mnav}>{t["nav_balloons"]}</a>'
-        f'<a href="{base}{CAKES[lang]}" {_mnav}>{t["nav_cakes"]}</a>')
+        f'<a href="{base}{CAKES[lang]}" {_mnav}>{t["nav_cakes"]}</a>'
+        f'<a href="{base}{NABORY[lang]}" {_mnav}>{t["nav_nabory"]}</a>')
     return f'''    <div style="background:#fce8ee; color:#a8566a;" class="text-xs py-2 text-center tracking-widest font-medium uppercase">
         {BRAND[lang]}
     </div>
@@ -419,6 +422,7 @@ def header(lang, base, lang_urls=None):
                 <a href="{base}blog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">📖 {t["nav_articles"]}</a>
                 <a href="{base}{BALLOONS[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_balloons"]}</a>
                 <a href="{base}{CAKES[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_cakes"]}</a>
+                <a href="{base}{NABORY[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_nabory"]}</a>
                 <span class="w-px h-4 bg-stone-200 mx-1"></span>
                 {nav_langs}
             </nav>
@@ -538,10 +542,13 @@ def product_cat(p):
             cats.append(c)
     has_balloons = ("shar" in s) or ("шар" in n)
     has_cake = s.startswith("tort") or s.startswith("cake") or ("торт" in n) or ("cake" in s)
+    is_nabor = s.startswith("podarochnyy-nabor") or s.startswith("podarok-nabor")
     if has_balloons and "balloons" not in cats:
         cats.append("balloons")
     if has_cake and "cakes" not in cats:
         cats.append("cakes")
+    if is_nabor and "nabory" not in cats:
+        cats.insert(0, "nabory")
     if not cats:
         cats = ["mixed"]
     return " ".join(cats)
@@ -549,6 +556,8 @@ def product_cat(p):
 def product_color(p):
     """Цвет роз для фильтра (red/white/pink/'')."""
     s = p["slug"].lower()
+    if s.startswith("podarochnyy-nabor") or s.startswith("podarok-nabor") or s.startswith("tort"):
+        return ""  # у подарочных наборов и тортов цвета роз нет («krasota» не должно давать red)
     if "belo-rozov" in s:
         return "pink"
     if "kras" in s:
@@ -827,11 +836,11 @@ def render_catalog(lang, products):
         meta = "나트랑 당일 배달 신선한 꽃다발과 헬륨 풍선 카탈로그. 장미, 백합, 바구니. 달러·동·루블 결제."
     cards = "\n            ".join(product_card(p, lang, base, t) for p in products)
     FILT = {
-        "ru": {"cat": [("", "🌸 Все"), ("r25", "🌹 25 роз"), ("r51", "🌹 51 роза"), ("r101", "🌹 101+ роз"), ("mixed", "💐 Сборные"), ("balloons", "🎈 Шары"), ("cakes", "🎂 Торты")],
+        "ru": {"cat": [("", "🌸 Все"), ("r25", "🌹 25 роз"), ("r51", "🌹 51 роза"), ("r101", "🌹 101+ роз"), ("mixed", "💐 Сборные"), ("balloons", "🎈 Шары"), ("cakes", "🎂 Торты"), ("nabory", "🎁 Наборы")],
                "color": [("", "🎨 Все цвета"), ("red", "❤️ Красные"), ("white", "🤍 Белые"), ("pink", "💗 Розовые"), ("purple", "💜 Фиолетовые")]},
-        "en": {"cat": [("", "🌸 All"), ("r25", "🌹 25 roses"), ("r51", "🌹 51 roses"), ("r101", "🌹 101+ roses"), ("mixed", "💐 Mixed"), ("balloons", "🎈 Balloons"), ("cakes", "🎂 Cakes")],
+        "en": {"cat": [("", "🌸 All"), ("r25", "🌹 25 roses"), ("r51", "🌹 51 roses"), ("r101", "🌹 101+ roses"), ("mixed", "💐 Mixed"), ("balloons", "🎈 Balloons"), ("cakes", "🎂 Cakes"), ("nabory", "🎁 Gift sets")],
                "color": [("", "🎨 All colors"), ("red", "❤️ Red"), ("white", "🤍 White"), ("pink", "💗 Pink"), ("purple", "💜 Purple")]},
-        "ko": {"cat": [("", "🌸 전체"), ("r25", "🌹 장미 25"), ("r51", "🌹 장미 51"), ("r101", "🌹 장미 101+"), ("mixed", "💐 혼합"), ("balloons", "🎈 풍선"), ("cakes", "🎂 케이크")],
+        "ko": {"cat": [("", "🌸 전체"), ("r25", "🌹 장미 25"), ("r51", "🌹 장미 51"), ("r101", "🌹 장미 101+"), ("mixed", "💐 혼합"), ("balloons", "🎈 풍선"), ("cakes", "🎂 케이크"), ("nabory", "🎁 선물 세트")],
                "color": [("", "🎨 전체 색상"), ("red", "❤️ 레드"), ("white", "🤍 화이트"), ("pink", "💗 핑크"), ("purple", "💜 퍼플")]},
     }[lang]
     SORT = {

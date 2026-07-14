@@ -36,7 +36,7 @@ for f in HTML:
                 errors.append(f"[БИТАЯ {attr}] {f} → {u}  (нет файла {tgt})")
 
 # 2) якорь-фильтр (#cakes/#balloons/...) — есть ли такой data-val на целевой странице каталога
-FILTER_HASHES = {"cakes","balloons","r25","r51","r101","mixed","red","white","pink","purple"}
+FILTER_HASHES = {"cakes","balloons","nabory","r25","r51","r101","mixed","red","white","pink","purple"}
 for f in HTML:
     base = os.path.dirname(f)
     s = open(f, encoding="utf-8").read()
@@ -62,6 +62,9 @@ SPECIAL = {
     "torty.html": {"ru":"torty.html","en":"torty-en.html","ko":"torty-kr.html"},
     "torty-en.html": {"ru":"torty.html","en":"torty-en.html","ko":"torty-kr.html"},
     "torty-kr.html": {"ru":"torty.html","en":"torty-en.html","ko":"torty-kr.html"},
+    "nabory.html": {"ru":"nabory.html","en":"nabory-en.html","ko":"nabory-kr.html"},
+    "nabory-en.html": {"ru":"nabory.html","en":"nabory-en.html","ko":"nabory-kr.html"},
+    "nabory-kr.html": {"ru":"nabory.html","en":"nabory-en.html","ko":"nabory-kr.html"},
 }
 def sibling(f, want):
     """Ожидаемый файл-сосед на другом языке."""
@@ -92,14 +95,15 @@ def nav_items(s):
 
 navsets = {}
 for f in HTML:
-    lang = "ru" if (f in ("index.html",) or f.endswith("-ru.html") or f in ("catalog-ru.html","blog-ru.html","balloons.html","torty.html")) else ("en" if "-en" in f or f.endswith("index-en.html") else "ko")
+    lang = "ru" if (f in ("index.html",) or f.endswith("-ru.html") or f in ("catalog-ru.html","blog-ru.html","balloons.html","torty.html","nabory.html")) else ("en" if "-en" in f or f.endswith("index-en.html") else "ko")
     s = open(f, encoding="utf-8").read()
     ni = nav_items(s)
     if ni: navsets.setdefault(lang, {}).setdefault(ni, []).append(f)
 
 # 5) кросс-язык: не-переключательные внутренние ссылки должны оставаться в своём языке
 SPLANG = {"index.html":"ru","index-en.html":"en","index-kr.html":"ko",
-          "balloons.html":"ru","balloons-en.html":"en","balloons-kr.html":"ko","torty.html":"ru","torty-en.html":"en","torty-kr.html":"ko"}
+          "balloons.html":"ru","balloons-en.html":"en","balloons-kr.html":"ko","torty.html":"ru","torty-en.html":"en","torty-kr.html":"ko",
+          "nabory.html":"ru","nabory-en.html":"en","nabory-kr.html":"ko"}
 def page_lang(path):
     b = os.path.basename(path)
     if b in SPLANG: return SPLANG[b]
