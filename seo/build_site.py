@@ -524,28 +524,27 @@ def product_imgs(p):
     return imgs
 
 def product_cat(p):
-    """Категория для фильтра каталога."""
+    """Категории для фильтра каталога — МУЛЬТИ (через пробел). Комбо видно во ВСЕХ своих
+    категориях: набор «шары + 25 роз + торт» покажется в Шарах, в 25 розах и в Тортах.
+    Фильтр в каталоге матчит любую метку из data-cat (' '.join)."""
+    import re as _re
     s = p["slug"].lower()
     n = p.get("name_ru", "").lower()
-    # Торты — отдельная категория (с 05.07.2026). slug начинается с tort/cake.
-    if s.startswith("tort") or s.startswith("cake"):
-        return "cakes"
-    has_balloons = "shar" in s or "шар" in n
-    # сначала по числу роз
-    if s.startswith("25-"):
-        base = "r25"
-    elif s.startswith("51-"):
-        base = "r51"
-    elif s.startswith("101-") or s.startswith("151-"):
-        base = "r101"
-    elif has_balloons:
-        return "balloons"
-    else:
-        return "mixed"
-    # комбо «розы+шары» получают обе метки — видны и в розах, и в шарах
-    if has_balloons:
-        return base + " balloons"
-    return base
+    cats = []
+    # числа роз в НАЗВАНИИ (перед словом «роз…»): 25/51/101/151
+    for num in _re.findall(r'(\d+)\s*[а-яё-]*\s*роз', n):
+        c = "r101" if num in ("101", "151") else ("r51" if num == "51" else ("r25" if num == "25" else None))
+        if c and c not in cats:
+            cats.append(c)
+    has_balloons = ("shar" in s) or ("шар" in n)
+    has_cake = s.startswith("tort") or s.startswith("cake") or ("торт" in n) or ("cake" in s)
+    if has_balloons and "balloons" not in cats:
+        cats.append("balloons")
+    if has_cake and "cakes" not in cats:
+        cats.append("cakes")
+    if not cats:
+        cats = ["mixed"]
+    return " ".join(cats)
 
 def product_color(p):
     """Цвет роз для фильтра (red/white/pink/'')."""
