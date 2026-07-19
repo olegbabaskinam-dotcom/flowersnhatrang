@@ -537,7 +537,8 @@ def product_cat(p):
     cats = []
     # числа роз в НАЗВАНИИ (перед словом «роз…»): 25/51/101/151
     for num in _re.findall(r'(\d+)\s*[а-яё-]*\s*роз', n):
-        c = "r101" if num in ("101", "151") else ("r51" if num == "51" else ("r25" if num == "25" else None))
+        _v = int(num)
+        c = "r101" if _v >= 101 else ("r51" if _v == 51 else ("r25" if _v == 25 else None))
         if c and c not in cats:
             cats.append(c)
     has_balloons = ("shar" in s) or ("шар" in n)
