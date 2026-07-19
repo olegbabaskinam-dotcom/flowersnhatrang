@@ -94,20 +94,17 @@
         .gallery-slider{height:24rem;}
         @media(min-width:768px){.gallery-slider{height:30rem;}}
         .gallery-slider .pcard-slide{object-fit:contain;padding:.75rem;}
-        .gallery-slider{height:24rem;}
-        @media(min-width:768px){.gallery-slider{height:30rem;}}
-        .gallery-slider .pcard-slide{object-fit:contain;padding:.75rem;}
         .gallery-slider .pcard-arrow{opacity:1;width:2.5rem;height:2.5rem;font-size:1.6rem;background:rgba(255,255,255,.96);box-shadow:0 2px 8px rgba(0,0,0,.22);z-index:5;}
         .gallery-slider .pcard-dot{width:.45rem;height:.45rem;}
-        .pcard-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.96);border:none;width:2.5rem;height:2.5rem;border-radius:999px;font-size:1.6rem;line-height:1;color:#a8566a;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:1;transition:opacity .2s,background .2s,transform .15s;z-index:5;box-shadow:0 2px 8px rgba(0,0,0,.22);}
-        .pcard-arrow:hover{opacity:1;background:#fff;}
+        .pcard-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.9);border:none;width:2rem;height:2rem;border-radius:999px;font-size:1.2rem;line-height:1;color:#a8566a;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;z-index:2;box-shadow:0 1px 4px rgba(0,0,0,.12);}
+        .pcard-slider:hover .pcard-arrow{opacity:1;}
         .pcard-prev{left:.5rem;} .pcard-next{right:.5rem;}
-        .pcard-dots{position:absolute;bottom:.55rem;left:0;right:0;display:flex;gap:.3rem;justify-content:center;z-index:3;}
-        .pcard-dot{width:.45rem;height:.45rem;border-radius:999px;background:rgba(255,255,255,.6);box-shadow:0 0 2px rgba(0,0,0,.3);transition:background .2s;}
+        .pcard-dots{position:absolute;bottom:.55rem;left:0;right:0;display:flex;gap:.3rem;justify-content:center;z-index:2;}
+        .pcard-dot{width:.4rem;height:.4rem;border-radius:999px;background:rgba(255,255,255,.55);transition:background .2s;}
         .pcard-dot.active{background:#fff;}
+        @media (max-width:767px){.pcard-arrow{opacity:1;}}
         .cat-filters{display:flex;flex-direction:column;gap:.75rem;align-items:center;margin-bottom:2rem;}
         .filt-group{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;}
-        .filt-group.color-hidden{display:none;}
         .filt{background:#fff;border:1px solid #f0e0e5;color:#6b6b6b;font-size:.8rem;font-weight:500;padding:.45rem .9rem;border-radius:999px;cursor:pointer;transition:all .2s;}
         .filt:hover{border-color:var(--rose);color:var(--rose);}
         .filt.active{background:var(--rose);color:#fff;border-color:var(--rose);}
@@ -129,7 +126,8 @@
                 <a href="../catalog-ko.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">💐 카탈로그</a>
                 <a href="../blog-ko.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">📖 블로그</a>
                 <a href="../balloons-kr.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🎈 풍선</a>
-                <a href="../torty-kr.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🎂 케이크</a><a href="../nabory-kr.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🎁 선물 세트</a>
+                <a href="../torty-kr.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🎂 케이크</a>
+                <a href="../nabory-kr.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🎁 선물 세트</a>
                 <span class="w-px h-4 bg-stone-200 mx-1"></span>
                 <a href="tort-love-s-dollarami-klubnika-ru.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🇷🇺 RU</a>
                 <a href="tort-love-s-dollarami-klubnika-en.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🇬🇧 EN</a>
@@ -161,7 +159,7 @@
     <section class="max-w-5xl mx-auto px-6 py-8 grid md:grid-cols-2 gap-10 items-start">
         <div class="reveal">
         <div class="pcard-slider gallery-slider rounded-2xl border border-stone-100">
-            <img src="../img/products/tort-love-s-dollarami-klubnika/1.webp" alt="달러 토퍼와 딸기 머니 크림 케이크 &#x27;Love&#x27;, 나트랑 배달 1" loading="eager" class="pcard-slide active"><img src="../img/products/tort-love-s-dollarami-klubnika/2.webp" alt="달러 토퍼와 딸기 머니 크림 케이크 &#x27;Love&#x27;, 나트랑 배달 2" loading="lazy" class="pcard-slide"><img src="../img/products/tort-love-s-dollarami-klubnika/3.webp" alt="달러 토퍼와 딸기 머니 크림 케이크 &#x27;Love&#x27;, 나트랑 배달 3" loading="lazy" class="pcard-slide"><img src="../img/products/tort-love-s-dollarami-klubnika/4.webp" alt="달러 토퍼와 딸기 머니 크림 케이크 &#x27;Love&#x27;, 나트랑 배달 4" loading="lazy" class="pcard-slide"><img src="../img/products/tort-love-s-dollarami-klubnika/5.webp" alt="달러 토퍼와 딸기 머니 크림 케이크 &#x27;Love&#x27;, 나트랑 배달 5" loading="lazy" class="pcard-slide"><img src="../img/products/tort-love-s-dollarami-klubnika/6.webp" alt="달러 토퍼와 딸기 머니 크림 케이크 &#x27;Love&#x27;, 나트랑 배달 6" loading="lazy" class="pcard-slide"><img src="../img/products/tort-love-s-dollarami-klubnika/7.webp" alt="달러 토퍼와 딸기 머니 크림 케이크 &#x27;Love&#x27;, 나트랑 배달 7" loading="lazy" class="pcard-slide"><img src="../img/products/tort-love-s-dollarami-klubnika/8.webp" alt="달러 토퍼와 딸기 머니 크림 케이크 &#x27;Love&#x27;, 나트랑 배달 8" loading="lazy" class="pcard-slide">
+            <img src="../img/products/tort-love-s-dollarami-klubnika/1.webp" alt="달러 토퍼와 딸기 머니 크림 케이크 &#x27;Love&#x27;, 나트랑 배달" loading="eager" class="pcard-slide active"><img src="../img/products/tort-love-s-dollarami-klubnika/2.webp" alt="달러 토퍼와 딸기 머니 크림 케이크 &#x27;Love&#x27;, 나트랑 배달 2" loading="lazy" class="pcard-slide"><img src="../img/products/tort-love-s-dollarami-klubnika/3.webp" alt="달러 토퍼와 딸기 머니 크림 케이크 &#x27;Love&#x27;, 나트랑 배달 3" loading="lazy" class="pcard-slide"><img src="../img/products/tort-love-s-dollarami-klubnika/4.webp" alt="달러 토퍼와 딸기 머니 크림 케이크 &#x27;Love&#x27;, 나트랑 배달 4" loading="lazy" class="pcard-slide"><img src="../img/products/tort-love-s-dollarami-klubnika/5.webp" alt="달러 토퍼와 딸기 머니 크림 케이크 &#x27;Love&#x27;, 나트랑 배달 5" loading="lazy" class="pcard-slide"><img src="../img/products/tort-love-s-dollarami-klubnika/6.webp" alt="달러 토퍼와 딸기 머니 크림 케이크 &#x27;Love&#x27;, 나트랑 배달 6" loading="lazy" class="pcard-slide"><img src="../img/products/tort-love-s-dollarami-klubnika/7.webp" alt="달러 토퍼와 딸기 머니 크림 케이크 &#x27;Love&#x27;, 나트랑 배달 7" loading="lazy" class="pcard-slide"><img src="../img/products/tort-love-s-dollarami-klubnika/8.webp" alt="달러 토퍼와 딸기 머니 크림 케이크 &#x27;Love&#x27;, 나트랑 배달 8" loading="lazy" class="pcard-slide">
             <button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots"><span class="pcard-dot active"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span></div>
         </div>
         </div>
@@ -518,42 +516,42 @@
     <section class="max-w-5xl mx-auto px-6 py-12">
         <h2 class="font-serif text-2xl font-bold mb-8 text-center" style="color:#1a1a1a;">비슷한 꽃다발</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="r25" data-color="pink">
+            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="r25 balloons cakes" data-color="white">
                 <div class="pcard-slider">
-                    <img src="../img/products/25-rozovyh-roz/1.webp" alt="나트랑 핑크 장미 25송이 배달" loading="lazy" class="pcard-slide active"><img src="../img/products/25-rozovyh-roz/2.webp" alt="나트랑 핑크 장미 25송이 배달" loading="lazy" class="pcard-slide"><img src="../img/products/25-rozovyh-roz/3.webp" alt="나트랑 핑크 장미 25송이 배달" loading="lazy" class="pcard-slide"><img src="../img/products/25-rozovyh-roz/4.webp" alt="나트랑 핑크 장미 25송이 배달" loading="lazy" class="pcard-slide"><img src="../img/products/25-rozovyh-roz/5.webp" alt="나트랑 핑크 장미 25송이 배달" loading="lazy" class="pcard-slide">
-                    <button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots"><span class="pcard-dot active"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span></div>
+                    <img src="../img/products/nabor-shary-cifry-25-belyh-roz-tort/1.webp" alt="숫자 풍선·화이트 장미·케이크 생일 세트, 나트랑 배달" loading="lazy" class="pcard-slide active"><img src="../img/products/nabor-shary-cifry-25-belyh-roz-tort/2.webp" alt="숫자 풍선·화이트 장미·케이크 생일 세트, 나트랑 배달" loading="lazy" class="pcard-slide"><img src="../img/products/nabor-shary-cifry-25-belyh-roz-tort/3.webp" alt="숫자 풍선·화이트 장미·케이크 생일 세트, 나트랑 배달" loading="lazy" class="pcard-slide"><img src="../img/products/nabor-shary-cifry-25-belyh-roz-tort/4.webp" alt="숫자 풍선·화이트 장미·케이크 생일 세트, 나트랑 배달" loading="lazy" class="pcard-slide"><img src="../img/products/nabor-shary-cifry-25-belyh-roz-tort/5.webp" alt="숫자 풍선·화이트 장미·케이크 생일 세트, 나트랑 배달" loading="lazy" class="pcard-slide"><img src="../img/products/nabor-shary-cifry-25-belyh-roz-tort/6.webp" alt="숫자 풍선·화이트 장미·케이크 생일 세트, 나트랑 배달" loading="lazy" class="pcard-slide"><img src="../img/products/nabor-shary-cifry-25-belyh-roz-tort/7.webp" alt="숫자 풍선·화이트 장미·케이크 생일 세트, 나트랑 배달" loading="lazy" class="pcard-slide">
+                    <button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots"><span class="pcard-dot active"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span></div>
                 </div>
-                <a href="../catalog/25-rozovyh-roz-ko.html" class="p-5 flex flex-col flex-grow">
-                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">핑크 장미 25송이</h3>
-                    <p class="text-stone-600 text-xs mb-3 flex-grow">하얀 포장의 부드러운 핑크 장미 — 어떤 자리에도 어울리는 선물</p>
-                    <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">500 000 동</p>
-                    <p class="text-stone-500 text-xs mb-4">≈ $20 · 1 800 ₽</p>
+                <a href="../catalog/nabor-shary-cifry-25-belyh-roz-tort-ko.html" class="p-5 flex flex-col flex-grow">
+                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">생일 세트: 숫자 풍선, 화이트 장미 25송이, 케이크 (5인용)</h3>
+                    <p class="text-stone-600 text-xs mb-3 flex-grow">대형 생일 세트: L 헬륨 풍선 세트 — 골드 숫자 풍선(예: &#x27;39&#x27;)과 하트·&#x27;Happy Birthday&#x27; 풍선 7개 묶음, 화이트 장미 25송이 꽃다발, 5인용 식기가 포함된 선물 상자 크림 케이크. 화려한 올인원 서프라이즈, 나트랑 당일 배달</p>
+                    <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">3 000 000 동</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $120 · 10 400 ₽</p>
                     <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">자세히 →</span>
                 </a>
             </div>
-            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="r25" data-color="white">
+            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="cakes" data-color="">
                 <div class="pcard-slider">
-                    <img src="../img/products/25-belyh-roz/1.webp" alt="나트랑 흰 장미 25송이 배달" loading="lazy" class="pcard-slide active">
-                    
-                </div>
-                <a href="../catalog/25-belyh-roz-ko.html" class="p-5 flex flex-col flex-grow">
-                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">흰 장미 25송이</h3>
-                    <p class="text-stone-600 text-xs mb-3 flex-grow">하얀 포장의 클래식한 흰 장미 — 우아하고 세련된 선물</p>
-                    <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">500 000 동</p>
-                    <p class="text-stone-500 text-xs mb-4">≈ $20 · 1 800 ₽</p>
-                    <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">자세히 →</span>
-                </a>
-            </div>
-            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="r25" data-color="red">
-                <div class="pcard-slider">
-                    <img src="../img/products/25-krasnyh-roz/1.webp" alt="나트랑 빨간 장미 25송이 배달" loading="lazy" class="pcard-slide active"><img src="../img/products/25-krasnyh-roz/2.webp" alt="나트랑 빨간 장미 25송이 배달" loading="lazy" class="pcard-slide"><img src="../img/products/25-krasnyh-roz/3.webp" alt="나트랑 빨간 장미 25송이 배달" loading="lazy" class="pcard-slide"><img src="../img/products/25-krasnyh-roz/4.webp" alt="나트랑 빨간 장미 25송이 배달" loading="lazy" class="pcard-slide"><img src="../img/products/25-krasnyh-roz/5.webp" alt="나트랑 빨간 장미 25송이 배달" loading="lazy" class="pcard-slide"><img src="../img/products/25-krasnyh-roz/6.webp" alt="나트랑 빨간 장미 25송이 배달" loading="lazy" class="pcard-slide">
+                    <img src="../img/products/tort-shokoladnyy-love-serdca/1.webp" alt="하트 초콜릿 케이크 &#x27;Love&#x27;, 나트랑 배달" loading="lazy" class="pcard-slide active"><img src="../img/products/tort-shokoladnyy-love-serdca/2.webp" alt="하트 초콜릿 케이크 &#x27;Love&#x27;, 나트랑 배달" loading="lazy" class="pcard-slide"><img src="../img/products/tort-shokoladnyy-love-serdca/3.webp" alt="하트 초콜릿 케이크 &#x27;Love&#x27;, 나트랑 배달" loading="lazy" class="pcard-slide"><img src="../img/products/tort-shokoladnyy-love-serdca/4.webp" alt="하트 초콜릿 케이크 &#x27;Love&#x27;, 나트랑 배달" loading="lazy" class="pcard-slide"><img src="../img/products/tort-shokoladnyy-love-serdca/5.webp" alt="하트 초콜릿 케이크 &#x27;Love&#x27;, 나트랑 배달" loading="lazy" class="pcard-slide"><img src="../img/products/tort-shokoladnyy-love-serdca/6.webp" alt="하트 초콜릿 케이크 &#x27;Love&#x27;, 나트랑 배달" loading="lazy" class="pcard-slide">
                     <button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots"><span class="pcard-dot active"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span></div>
                 </div>
-                <a href="../catalog/25-krasnyh-roz-ko.html" class="p-5 flex flex-col flex-grow">
-                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">빨간 장미 25송이</h3>
-                    <p class="text-stone-600 text-xs mb-3 flex-grow">화이트 포장의 선명한 빨간 피오니 장미 — 사랑을 전하는 최고의 선물</p>
+                <a href="../catalog/tort-shokoladnyy-love-serdca-ko.html" class="p-5 flex flex-col flex-grow">
+                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">하트 초콜릿 케이크 &#x27;Love&#x27; (5인용)</h3>
+                    <p class="text-stone-600 text-xs mb-3 flex-grow">다크 초콜릿 드립의 초콜릿 크림 케이크 — 초콜릿 &#x27;Love&#x27; 하트, 노란 하트, 초콜릿 별과 격자 장식, 체리, 흰 꽃으로 꾸민 생일·기념일 선물. 선물 상자, 초, 5인용 일회용 식기 포함, 나트랑 당일 배달</p>
                     <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">500 000 동</p>
                     <p class="text-stone-500 text-xs mb-4">≈ $20 · 1 800 ₽</p>
+                    <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">자세히 →</span>
+                </a>
+            </div>
+            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="nabory" data-color="">
+                <div class="pcard-slider">
+                    <img src="../img/products/podarochnyy-nabor-krasota-vietnama-bolshoy/1.webp" alt="베트남의 아름다움 라지 선물 세트, 나트랑 배달" loading="lazy" class="pcard-slide active"><img src="../img/products/podarochnyy-nabor-krasota-vietnama-bolshoy/2.webp" alt="베트남의 아름다움 라지 선물 세트, 나트랑 배달" loading="lazy" class="pcard-slide"><img src="../img/products/podarochnyy-nabor-krasota-vietnama-bolshoy/3.webp" alt="베트남의 아름다움 라지 선물 세트, 나트랑 배달" loading="lazy" class="pcard-slide"><img src="../img/products/podarochnyy-nabor-krasota-vietnama-bolshoy/4.webp" alt="베트남의 아름다움 라지 선물 세트, 나트랑 배달" loading="lazy" class="pcard-slide"><img src="../img/products/podarochnyy-nabor-krasota-vietnama-bolshoy/5.webp" alt="베트남의 아름다움 라지 선물 세트, 나트랑 배달" loading="lazy" class="pcard-slide"><img src="../img/products/podarochnyy-nabor-krasota-vietnama-bolshoy/6.webp" alt="베트남의 아름다움 라지 선물 세트, 나트랑 배달" loading="lazy" class="pcard-slide"><img src="../img/products/podarochnyy-nabor-krasota-vietnama-bolshoy/7.webp" alt="베트남의 아름다움 라지 선물 세트, 나트랑 배달" loading="lazy" class="pcard-slide">
+                    <button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots"><span class="pcard-dot active"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span></div>
+                </div>
+                <a href="../catalog/podarochnyy-nabor-krasota-vietnama-bolshoy-ko.html" class="p-5 flex flex-col flex-grow">
+                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">&#x27;베트남의 아름다움&#x27; 선물 세트 (라지)</h3>
+                    <p class="text-stone-600 text-xs mb-3 flex-grow">예쁜 상자와 전용 백에 담긴 베트남 천연 화장품 선물 세트 — 11종: 라이스 밀크 재스민 비누, 천연 해면 스펀지, 얼굴·바디·헤어 코코넛 오일, 알로에 베라 아이 쿨링 젤, 코코넛 립밤, 릴랙싱 라벤더 밤, 향기 사쉐, 풍수 부적, 향초, 냉장고 자석, 나트랑 엽서. &#x27;베트남을 집으로&#x27; 완성된 선물, 나트랑 당일 배달</p>
+                    <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">1 000 000 동</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $40 · 3 500 ₽</p>
                     <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">자세히 →</span>
                 </a>
             </div>

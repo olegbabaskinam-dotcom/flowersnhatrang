@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko" class="scroll-smooth">
-<head>
+<head><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>나트랑의 장미: 가격, 의미, 송이 수와 관리법</title>
-    <meta name="description" content="나트랑 장미 가격, 색깔의 의미, 몇 송이를 선물할지, 어떤 품종을 고를지, 더위에서 꽃다발을 신선하게 유지하는 법. 당일 배송.">
-    <meta property="og:title" content="나트랑의 장미: 가격, 의미, 송이 수와 관리법">
-    <meta property="og:description" content="나트랑 장미 가격, 색깔의 의미, 몇 송이를 선물할지, 어떤 품종을 고를지, 더위에서 꽃다발을 신선하게 유지하는 법. 당일 배송.">
+    <title>나트랑의 장미: 의미, 관리법과 선물 대상</title>
+    <meta name="description" content="장미와 색깔의 의미, 몇 송이를 선물할지, 누구에게 어울리는지, 나트랑 더위에서 꽃다발을 신선하게 유지하는 법. 시내 당일 장미 배송.">
+    <meta property="og:title" content="나트랑의 장미: 의미, 관리법과 선물 대상">
+    <meta property="og:description" content="장미와 색깔의 의미, 몇 송이를 선물할지, 누구에게 어울리는지, 나트랑 더위에서 꽃다발을 신선하게 유지하는 법. 시내 당일 장미 배송.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://flowers-nha-trang.online/img/site/og-default.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:url" content="https://flowers-nha-trang.online/blog/rozy-v-nyachange-znachenie-uhod-i-komu-darit-ko.html">
     <meta property="og:site_name" content="NhaTrang Flowers">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="나트랑의 장미: 가격, 의미, 송이 수와 관리법">
-    <meta name="twitter:description" content="나트랑 장미 가격, 색깔의 의미, 몇 송이를 선물할지, 어떤 품종을 고를지, 더위에서 꽃다발을 신선하게 유지하는 법. 당일 배송.">
+    <meta name="twitter:title" content="나트랑의 장미: 의미, 관리법과 선물 대상">
+    <meta name="twitter:description" content="장미와 색깔의 의미, 몇 송이를 선물할지, 누구에게 어울리는지, 나트랑 더위에서 꽃다발을 신선하게 유지하는 법. 시내 당일 장미 배송.">
     <meta name="twitter:image" content="https://flowers-nha-trang.online/img/site/og-default.jpg">
     <link rel="icon" href="../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
@@ -39,8 +41,8 @@
         h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
         .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
-        .card-img-wrap { overflow: hidden; }
-        .card-img-wrap img { transition: transform 0.45s ease; }
+        .card-img-wrap { overflow: hidden; height: 12rem; }
+        .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.45s ease; }
         .card-img-wrap:hover img { transform: scale(1.04); }
         .product-card { border: 1px solid #f0e0e5; transition: border-color 0.25s ease, box-shadow 0.25s ease; }
         .product-card:hover { border-color: var(--rose); box-shadow: 0 4px 24px rgba(192, 104, 122, 0.1); }
@@ -89,6 +91,11 @@
         .pcard-slider{position:relative;overflow:hidden;height:16rem;background:#fdf4f7;}
         .pcard-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s ease;}
         .pcard-slide.active{opacity:1;}
+        .gallery-slider{height:24rem;}
+        @media(min-width:768px){.gallery-slider{height:30rem;}}
+        .gallery-slider .pcard-slide{object-fit:contain;padding:.75rem;}
+        .gallery-slider .pcard-arrow{opacity:1;width:2.5rem;height:2.5rem;font-size:1.6rem;background:rgba(255,255,255,.96);box-shadow:0 2px 8px rgba(0,0,0,.22);z-index:5;}
+        .gallery-slider .pcard-dot{width:.45rem;height:.45rem;}
         .pcard-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.9);border:none;width:2rem;height:2rem;border-radius:999px;font-size:1.2rem;line-height:1;color:#a8566a;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;z-index:2;box-shadow:0 1px 4px rgba(0,0,0,.12);}
         .pcard-slider:hover .pcard-arrow{opacity:1;}
         .pcard-prev{left:.5rem;} .pcard-next{right:.5rem;}
@@ -101,11 +108,11 @@
         .filt{background:#fff;border:1px solid #f0e0e5;color:#6b6b6b;font-size:.8rem;font-weight:500;padding:.45rem .9rem;border-radius:999px;cursor:pointer;transition:all .2s;}
         .filt:hover{border-color:var(--rose);color:var(--rose);}
         .filt.active{background:var(--rose);color:#fff;border-color:var(--rose);}
+        .sort-bar{display:flex;justify-content:center;margin-bottom:1rem;}
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://flowers-nha-trang.online/"}, {"@type": "ListItem", "position": 2, "name": "블로그", "item": "https://flowers-nha-trang.online/blog-ko.html"}, {"@type": "ListItem", "position": 3, "name": "나트랑의 장미: 가격, 의미, 송이 수와 관리법", "item": "https://flowers-nha-trang.online/blog/rozy-v-nyachange-znachenie-uhod-i-komu-darit-ko.html"}]}</script>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"나트랑의 장미: 가격, 의미, 송이 수와 관리법","description":"나트랑 장미 가격, 색깔의 의미, 몇 송이를 선물할지, 어떤 품종을 고를지, 더위에서 꽃다발을 신선하게 유지하는 법. 당일 배송.","image":"https://flowers-nha-trang.online/img/blog/rozy-v-nyachange-znachenie-uhod-i-komu-darit.webp","datePublished":"2026-06-07","author":{"@type":"Organization","name":"NhaTrang Flowers"},"publisher":{"@type":"Organization","name":"NhaTrang Flowers"},"mainEntityOfPage":"https://flowers-nha-trang.online/blog/rozy-v-nyachange-znachenie-uhod-i-komu-darit-ko.html"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"나트랑 장미 꽃다발 가격은 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"장미 25송이 — 50만 동(약 $20)부터, 51송이 — 100만 동부터, 바구니 101송이 — 150만 동부터입니다. 최종 가격은 품종과 포장에 따라 달라지며 배송 전 사진을 보내 드립니다."}},{"@type":"Question","name":"장미 색깔은 무슨 의미인가요?","acceptedAnswer":{"@type":"Answer","text":"빨강은 사랑과 열정, 흰색은 순수와 존경, 분홍은 다정함과 감사, 노랑은 기쁨과 우정(이별이 아닙니다), 주황은 에너지와 감탄을 뜻합니다. 믹스는 화사한 선택입니다."}},{"@type":"Question","name":"장미는 몇 송이를 선물해야 하나요?","acceptedAnswer":{"@type":"Answer","text":"작은 꽃다발은 홀수(5, 7, 9, 11)로 — 짝수는 장례용으로 남겨 둡니다. 25송이 이상부터는 송이 수가 의미 없고 하나의 큰 작품으로 봅니다."}},{"@type":"Question","name":"어떤 장미 품종이 가장 좋나요?","acceptedAnswer":{"@type":"Answer","text":"피오니 장미는 가장 로맨틱하고 사진이 잘 나오며, 클래식 장미는 무난하고, 에콰도르 장미는 고급스럽고 오래가며, 스프레이 장미는 가볍고 화사한 믹스에 어울립니다."}},{"@type":"Question","name":"호텔로 장미 배송이 되나요?","acceptedAnswer":{"@type":"Answer","text":"네. 나트랑 모든 호텔로 배송하며 프런트나 사전 협의 시 객실로 전달합니다 — 깜짝 선물에 좋은 방법입니다."}},{"@type":"Question","name":"당일 장미 배송이 가능한가요?","acceptedAnswer":{"@type":"Answer","text":"네, 미리 주문하시면 나트랑 시내 당일 배송이 가능합니다. 성수일(2월 14일, 3월 8일)에는 하루 이틀 전에 주문하시는 것이 좋습니다."}},{"@type":"Question","name":"노란 장미는 이별을 뜻하나요?","acceptedAnswer":{"@type":"Answer","text":"아니요, 그것은 오해입니다. 노란 장미는 기쁨, 우정, 따뜻함을 뜻하며 화사한 선물로 좋습니다."}},{"@type":"Question","name":"더위에서 장미를 어떻게 신선하게 유지하나요?","acceptedAnswer":{"@type":"Answer","text":"줄기를 사선으로 자르고, 물을 매일 갈고, 직사광선과 에어컨 바람·과일을 피하세요. 밤에는 객실에서 가장 시원한 곳에 두면 더 오래갑니다."}}]}</script>    <div style="background:#fce8ee; color:#a8566a;" class="text-xs py-2 text-center tracking-widest font-medium uppercase">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"나트랑의 장미: 의미, 관리법과 선물 대상","description":"장미와 색깔의 의미, 몇 송이를 선물할지, 누구에게 어울리는지, 나트랑 더위에서 꽃다발을 신선하게 유지하는 법. 시내 당일 장미 배송.","image":"https://flowers-nha-trang.online/img/blog/rozy-v-nyachange-znachenie-uhod-i-komu-darit.webp","datePublished":"2026-06-07","author":{"@type":"Organization","name":"NhaTrang Flowers"},"publisher":{"@type":"Organization","name":"NhaTrang Flowers"},"mainEntityOfPage":"https://flowers-nha-trang.online/blog/rozy-v-nyachange-znachenie-uhod-i-komu-darit-ko.html"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"나트랑에서 장미 가격은 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"안내: 장미 25송이 — 50만 동, 51송이 — 100만, 101송이 — 150만. 구체적인 꽃다발 가격은 채팅으로 알려드립니다."}},{"@type":"Question","name":"사랑하는 사람에게는 어떤 장미가 좋나요?","acceptedAnswer":{"@type":"Answer","text":"보통 사랑의 상징인 빨간 장미나 부드러운 화이트·핑크 구성을 고릅니다. 송이 수는 홀수로: 자리에 따라 25, 51 또는 101송이."}},{"@type":"Question","name":"더위에서 장미가 오래 가나요?","acceptedAnswer":{"@type":"Answer","text":"올바르게 관리하면 약 4~7일. 줄기를 자르고 매일 물을 갈며, 직사광선을 피해 그늘지고 시원한 곳에 두세요."}},{"@type":"Question","name":"장미를 얼마나 빨리 배달하나요?","acceptedAnswer":{"@type":"Answer","text":"나트랑 시내는 무료이며 오후 6시 이전 주문 시 당일 배송. 신선하도록 배송 당일에 꽃다발을 제작합니다."}}]}</script>    <div style="background:#fce8ee; color:#a8566a;" class="text-xs py-2 text-center tracking-widest font-medium uppercase">
         NhaTrang Flowers
     </div>
     <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-stone-100">
@@ -119,7 +126,8 @@
                 <a href="../catalog-ko.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">💐 카탈로그</a>
                 <a href="../blog-ko.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">📖 블로그</a>
                 <a href="../balloons-kr.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🎈 풍선</a>
-                <a href="../torty-kr.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🎂 케이크</a><a href="../nabory-kr.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🎁 선물 세트</a>
+                <a href="../torty-kr.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🎂 케이크</a>
+                <a href="../nabory-kr.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🎁 선물 세트</a>
                 <span class="w-px h-4 bg-stone-200 mx-1"></span>
                 <a href="rozy-v-nyachange-znachenie-uhod-i-komu-darit-ru.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🇷🇺 RU</a>
                 <a href="rozy-v-nyachange-znachenie-uhod-i-komu-darit-en.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🇬🇧 EN</a>
@@ -129,21 +137,44 @@
                 <a href="http://pf.kakao.com/_zbwKX" target="_blank" class="text-stone-400 hover:text-[#c0687a] transition" aria-label="KakaoTalk"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M12 3C6.477 3 2 6.463 2 10.74c0 2.74 1.83 5.146 4.59 6.51-.2.74-.73 2.66-.836 3.072-.13.51.187.503.394.366.163-.107 2.6-1.766 3.66-2.487.71.105 1.444.16 2.192.16 5.523 0 10-3.463 10-7.74S17.523 3 12 3z"/></svg></a><a href="https://instagram.com/nhatrang.kkot" target="_blank" class="text-stone-400 hover:text-[#c0687a] transition" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
             </div>
         </div>
-        <div class="md:hidden" style="border-top:1px solid #f5f5f4;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px"><a href="../index-kr.html" style="display:flex;align-items:center;gap:8px;min-width:0;text-decoration:none"><img src="../img/site/logo.webp" alt="logo" style="width:40px;height:40px;border-radius:10px;object-fit:cover;flex-shrink:0"><span style="font-weight:500;font-size:11px;line-height:1.2;color:#57534e">나트랑 꽃 & 풍선<br>배달 서비스</span></a><div style="display:flex;align-items:center;gap:8px;flex-shrink:0"><a href="http://pf.kakao.com/_zbwKX" target="_blank" aria-label="KakaoTalk" style="width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1px solid #e7e5e4;color:#78716c;text-decoration:none;font-size:16px;flex-shrink:0;border-radius:9999px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M12 3C6.477 3 2 6.463 2 10.74c0 2.74 1.83 5.146 4.59 6.51-.2.74-.73 2.66-.836 3.072-.13.51.187.503.394.366.163-.107 2.6-1.766 3.66-2.487.71.105 1.444.16 2.192.16 5.523 0 10-3.463 10-7.74S17.523 3 12 3z"/></svg></a><a href="https://instagram.com/nhatrang.kkot" target="_blank" aria-label="Instagram" style="width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1px solid #e7e5e4;color:#78716c;text-decoration:none;font-size:16px;flex-shrink:0;border-radius:9999px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a><button type="button" aria-label="Меню" onclick="document.getElementById('mnav').classList.toggle('hidden')" style="width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1px solid #e7e5e4;border-radius:10px;color:#57534e;background:#fff;flex-shrink:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button></div></div><div id="mnav" class="md:hidden hidden" style="border-top:1px solid #f5f5f4;padding:8px;background:#fff;font-size:14px;font-weight:500"><a href="../index-kr.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">🏠 홈</a><a href="../catalog-ko.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">💐 카탈로그</a><a href="../blog-ko.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">📖 블로그</a><a href="../balloons-kr.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">🎈 풍선</a><a href="../torty-kr.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">🎂 케이크</a><a href="../nabory-kr.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">🎁 선물 세트</a><div style="display:flex;gap:8px;padding:8px 8px 4px;margin-top:4px;border-top:1px solid #f5f5f4"><span style="padding:4px 12px;border-radius:8px;color:#fff;font-size:12px;background:#c0687a">🇰🇷 KR</span><a href="rozy-v-nyachange-znachenie-uhod-i-komu-darit-ru.html" style="padding:4px 12px;border-radius:8px;color:#78716c;font-size:12px;text-decoration:none">🇷🇺 RU</a><a href="rozy-v-nyachange-znachenie-uhod-i-komu-darit-en.html" style="padding:4px 12px;border-radius:8px;color:#78716c;font-size:12px;text-decoration:none">🇬🇧 EN</a></div></div></header>
+        <div class="md:hidden" style="border-top:1px solid #f5f5f4;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px">
+            <a href="../index-kr.html" style="display:flex;align-items:center;gap:8px;min-width:0;text-decoration:none">
+                <img src="../img/site/logo.webp" alt="NhaTrang Flowers" style="width:40px;height:40px;border-radius:10px;object-fit:cover;flex-shrink:0">
+                <span style="font-weight:500;font-size:11px;line-height:1.2;color:#57534e">나트랑 꽃 & 풍선<br>배달 서비스</span>
+            </a>
+            <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+                <a href="http://pf.kakao.com/_zbwKX" target="_blank" aria-label="KakaoTalk" style="width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1px solid #e7e5e4;color:#78716c;text-decoration:none;font-size:16px;flex-shrink:0;border-radius:9999px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M12 3C6.477 3 2 6.463 2 10.74c0 2.74 1.83 5.146 4.59 6.51-.2.74-.73 2.66-.836 3.072-.13.51.187.503.394.366.163-.107 2.6-1.766 3.66-2.487.71.105 1.444.16 2.192.16 5.523 0 10-3.463 10-7.74S17.523 3 12 3z"/></svg></a><a href="https://instagram.com/nhatrang.kkot" target="_blank" aria-label="Instagram" style="width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1px solid #e7e5e4;color:#78716c;text-decoration:none;font-size:16px;flex-shrink:0;border-radius:9999px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+                <button type="button" aria-label="Меню" onclick="document.getElementById('mnav').classList.toggle('hidden')" style="width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1px solid #e7e5e4;border-radius:10px;color:#57534e;background:#fff;flex-shrink:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+            </div>
+        </div>
+        <div id="mnav" class="md:hidden hidden" style="border-top:1px solid #f5f5f4;padding:8px;background:#fff;font-size:14px;font-weight:500">
+            <a href="../index-kr.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">🏠 홈</a><a href="../catalog-ko.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">💐 카탈로그</a><a href="../blog-ko.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">📖 블로그</a><a href="../balloons-kr.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">🎈 풍선</a><a href="../torty-kr.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">🎂 케이크</a><a href="../nabory-kr.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">🎁 선물 세트</a>
+            <div style="display:flex;gap:8px;padding:8px 8px 4px;margin-top:4px;border-top:1px solid #f5f5f4"><a href="rozy-v-nyachange-znachenie-uhod-i-komu-darit-ru.html" style="padding:4px 12px;border-radius:8px;color:#78716c;font-size:12px;text-decoration:none">🇷🇺 RU</a><a href="rozy-v-nyachange-znachenie-uhod-i-komu-darit-en.html" style="padding:4px 12px;border-radius:8px;color:#78716c;font-size:12px;text-decoration:none">🇬🇧 EN</a><span style="padding:4px 12px;border-radius:8px;color:#fff;font-size:12px;background:#c0687a">🇰🇷 KR</span></div>
+        </div>
+    </header>
     <main class="flex-grow">
     <nav class="max-w-4xl mx-auto px-6 pt-8 pb-2 text-xs text-stone-400">
-        <a href="../blog-ko.html" class="hover:text-[#c0687a]">블로그</a> / <span style="color:#1a1a1a;">나트랑의 장미: 가격, 의미, 송이 수와 관리법</span>
+        <a href="../blog-ko.html" class="hover:text-[#c0687a]">블로그</a> / <span style="color:#1a1a1a;">나트랑의 장미: 의미, 관리법과 선물 대상</span>
     </nav>
     <section class="max-w-4xl mx-auto px-6 pt-8">
         <div class="rounded-3xl overflow-hidden" style="height:340px;">
-            <img src="../img/blog/rozy-v-nyachange-znachenie-uhod-i-komu-darit.webp" alt="나트랑의 장미: 가격, 의미, 송이 수와 관리법" class="w-full h-full object-cover">
+            <img src="../img/blog/rozy-v-nyachange-znachenie-uhod-i-komu-darit.webp" alt="나트랑의 장미: 의미, 관리법과 선물 대상" class="w-full h-full object-cover">
         </div>
     </section>
     <article class="max-w-3xl mx-auto px-6 py-8">
-        <span class="text-xs font-medium" style="color:#c0687a;">꽃 · 8 분 분량</span>
-        <h1 class="font-serif text-3xl md:text-4xl font-bold mt-2 mb-6 leading-tight" style="color:#1a1a1a;">나트랑의 장미: 가격, 의미, 송이 수와 관리법</h1>
-        <p class="text-stone-600 text-lg leading-relaxed mb-2">장미는 가장 보편적인 꽃입니다. 생일, 기념일, 사랑의 표현, 그리고 특별한 이유 없이도 선물하지요. 하지만 아름다운 꽃다발 뒤에는 하나의 언어가 숨어 있습니다 — 색깔, 품종, 송이 수가 카드보다 더 많은 것을 말해 줍니다. 그리고 나트랑에는 한 가지 변수가 더 있습니다. 바로 열대의 더위 속에서 꽃다발을 예쁘게 만드는 것뿐 아니라 신선하게 배달해야 한다는 점입니다. 이 가이드에서는 나트랑의 장미 가격, 색깔의 의미, 몇 송이를 선물할지, 어떤 품종을 고를지, 더위 속에서 꽃을 오래 유지하는 법까지 모두 정리합니다.</p><h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">나트랑 장미 가격은 얼마인가요</h2><p class="text-stone-600 leading-relaxed mb-4">나트랑의 장미 꽃다발 가격은 세 가지로 정해집니다 — 송이 수, 장미 품종, 포장입니다. 수입 피오니 장미와 에콰도르 장미는 현지 장미보다 비싸고, 포장·바구니·박스가 가격을 더합니다. 저희 상품 기준 가격대입니다:</p><ul class="space-y-2 mb-4 text-stone-600"><li>💐 <b>장미 25송이</b> — 50만 동(약 $20)부터: 생일이나 가벼운 선물용 단정한 꽃다발.</li><li>🌹 <b>장미 51송이</b> — 100만 동(약 $40)부터: 눈에 띄는 넉넉한 선물.</li><li>👑 <b>바구니 장미 101송이</b> — 150만 동(약 $60)부터: 기념일·프러포즈용 임팩트 있는 선물.</li></ul><p class="text-stone-600 leading-relaxed mb-4">최종 가격은 시즌과 재고에 따라 달라지므로 채팅으로 확인해 주세요 — 배송 전 실제 꽃다발 사진을 보내 드립니다.</p><h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">장미 색깔의 의미</h2><p class="text-stone-600 leading-relaxed mb-4">장미의 색깔은 곧 메시지입니다. 색을 고르는 것만으로 한마디 말 없이도 마음을 전할 수 있습니다:</p><ul class="space-y-2 mb-4 text-stone-600"><li>❤️ <b>빨강</b> — 사랑과 열정. 연인, 고백, 로맨틱한 깜짝 선물의 클래식.</li><li>🤍 <b>흰색</b> — 순수, 존경, 감탄. 어떤 자리에나 어울리는 우아한 선택.</li><li>💗 <b>분홍</b> — 다정함, 감사, 배려. 어머니·친구·새로운 인연의 시작에 좋습니다.</li><li>💛 <b>노랑</b> — 기쁨, 우정, 따뜻함. 노란 장미가 이별을 뜻한다는 것은 오래된 오해일 뿐입니다.</li><li>🧡 <b>주황</b> — 에너지와 감탄, 밝은 행복의 기원.</li><li>🌈 <b>믹스</b> — 색을 좋아하는 분을 위한 생기 있고 화사한 꽃다발.</li></ul><h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">장미는 몇 송이를 선물할까: 숫자의 언어</h2><p class="text-stone-600 leading-relaxed mb-4">꽃 선물 전통에서는 송이 수만큼 홀수·짝수도 중요합니다. 러시아, 베트남, 한국 모두 생화 꽃다발은 홀수로 선물하고 짝수는 장례용으로 남겨 둡니다. 예외는 50송이 이상의 큰 꽃다발입니다 — 이때는 송이 수를 세지 않고 하나의 큰 작품으로 봅니다.</p><ul class="space-y-2 mb-4 text-stone-600"><li>🌹 <b>11송이까지</b> — 홀수로: 5, 7, 9, 11.</li><li>💐 <b>25송이 이상</b> — 송이 수는 의미가 없고 볼륨이 중요합니다.</li><li>👑 <b>기념일·프러포즈</b> — 51·101송이 큰 꽃다발, 바구니, 박스.</li></ul><h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">장미 품종과 고르는 법</h2><p class="text-stone-600 leading-relaxed mb-4">"장미"라고 해도 실제로는 수십 가지 종류가 있고, 품종에 따라 모양과 가격이 달라집니다. 저희 꽃다발에 자주 쓰이는 품종입니다:</p><ul class="space-y-2 mb-4 text-stone-600"><li>🌸 <b>피오니 장미</b> — 풍성하고 꽃잎이 빽빽해 작약을 닮았습니다. 가장 로맨틱하고 사진이 잘 나와 연인용으로 인기.</li><li>🌹 <b>클래식 장미</b> — 익숙하고 우아한 형태, 어떤 자리에나 무난한 선택.</li><li>🌷 <b>에콰도르 장미</b> — 줄기가 길고 꽃송이가 커 고급스럽고 오래갑니다.</li><li>🪴 <b>스프레이 장미</b> — 한 줄기에 작은 꽃이 여러 송이, 가볍고 화사한 믹스에 좋습니다.</li></ul><h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">누구에게 어떤 자리에 장미를 선물할까</h2><p class="text-stone-600 leading-relaxed mb-4">장미의 장점은 거의 모든 사람에게 어울린다는 점입니다 — 색·품종·크기만 바뀝니다:</p><ul class="space-y-2 mb-4 text-stone-600"><li>💞 <b>아내·여자친구</b> — 기념일·생일·고백에 빨강 또는 화이트핑크 피오니 장미.</li><li>🌷 <b>어머니</b> — 따뜻함과 감사의 표시로 은은한 분홍·흰 장미.</li><li>🤝 <b>동료</b> — 과한 로맨스 없이 절제된 중간 크기의 무난한 꽃다발.</li><li>🎓 <b>선생님</b> — 새 학기와 기념일에 어울리는 클래식하고 화사한 꽃다발.</li><li>🎂 <b>생일</b> — 받는 분이 좋아하는 색이면 무엇이든, 믹스나 피오니 장미가 잘 어울립니다.</li></ul><h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">주요 기념일의 장미: 미리 주문해야 할 날</h2><p class="text-stone-600 leading-relaxed mb-4">장미는 사철 선물하지만, 나트랑에서 수요가 급증하는 날이 있습니다 — 이런 날은 원하는 시간과 품종을 맞추기 위해 미리 주문하는 것이 좋습니다:</p><ul class="space-y-2 mb-4 text-stone-600"><li>💘 <b>2월 14일 발렌타인데이</b> — 로맨틱 주문의 정점, 빨간 장미가 가장 먼저 동납니다.</li><li>🌸 <b>3월 8일 세계 여성의 날</b> — 러시아어권·베트남 고객에게 큰 꽃 선물의 날.</li><li>🍎 <b>11월 20일 베트남 스승의 날</b> — 클래식 꽃다발 수요가 많은 현지 기념일.</li><li>🎄 <b>연말연시</b> — 관광 성수기, 인기 품종이 빠르게 소진됩니다.</li></ul><h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">베트남과 한국의 장미 문화</h2><p class="text-stone-600 leading-relaxed mb-4">나트랑은 국제적인 도시이고, 현지 문화를 이해하면 선물 실수를 피할 수 있습니다. 베트남에서 장미는 로맨스와 깊이 연결되어 있습니다 — 특히 2월 14일과 3월 8일 세계 여성의 날에 많이 선물하며, 빨간 장미는 사랑의 대표 상징입니다. 베트남 문화도 숫자를 신경 쓰고 생화 꽃다발에서 짝수를 피하는데, 이는 러시아 전통과 같습니다.</p><p class="text-stone-600 leading-relaxed mb-4">한국에서 꽃은 졸업, 고백, 기념일에 자주 쓰이는 의미 있는 선물이며, 정성스러운 카드와 함께 전하는 경우가 많습니다. 한국 분들은 섬세하게 스타일링된 꽃다발과 파스텔 톤을 좋아하시지요. 저희는 이를 잘 알기에 한국 고객님께 자리에 어울리는 꽃다발을 골라 드립니다.</p><h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">나트랑 더위에서 장미를 신선하게 유지하는 법</h2><p class="text-stone-600 leading-relaxed mb-4">덥고 습한 기후는 절화의 가장 큰 적입니다. 하지만 간단한 관리만으로 휴가 중에도 장미를 며칠은 거뜬히 즐길 수 있습니다:</p><ul class="space-y-2 mb-4 text-stone-600"><li>✂️ 꽃병에 꽂기 전 흐르는 물에서 줄기를 1~2cm 사선으로 잘라 주세요 — 꽃이 다시 물을 빨아들입니다.</li><li>💧 물은 매일 갈고, 직사광선과 에어컨 바람을 피해 두세요.</li><li>🍌 과일 옆에 두지 마세요 — 시드는 속도가 빨라집니다.</li><li>🏨 호텔 객실에서는 밤에 가장 시원한 곳에 두면 더 오래갑니다.</li></ul><h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">나트랑 장미 배송 주문 방법</h2><p class="text-stone-600 leading-relaxed mb-4">호텔에서 나가지 않고도 몇 분 만에 꽃다발을 주문할 수 있습니다. WhatsApp, Telegram 또는 카카오톡으로 메시지를 보내 주세요 — 자리와 예산에 맞는 색·품종·크기를 골라 드리고 재고 꽃다발 사진을 보내 드립니다. 나트랑 시내 배송은 무료이며, 미리 주문하시면 당일 배송도 가능하고 호텔 객실로의 깜짝 배송도 됩니다.</p>
-        
+        <span class="text-xs font-medium" style="color:#c0687a;">Цветок · 2 분 분량</span>
+        <h1 class="font-serif text-3xl md:text-4xl font-bold mt-2 mb-6 leading-tight" style="color:#1a1a1a;">나트랑의 장미: 의미, 관리법과 선물 대상</h1>
+        <p class="text-stone-600 text-lg leading-relaxed mb-2">장미는 가장 보편적인 꽃입니다 — 생일, 기념일, 사랑의 표시로, 또는 특별한 이유 없이도 선물합니다. 하지만 아름다운 꽃다발 뒤에는 하나의 언어가 있습니다: 장미의 색과 송이 수는 생각보다 많은 것을 말합니다. 이 글에서는 장미의 의미, 누구에게 어울리는지, 그리고 나트랑의 더운 기후에서 꽃다발을 신선하게 유지하는 법을 정리했습니다.</p>
+        <h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">장미 색깔의 의미</h2>
+<p class="text-stone-600 leading-relaxed mb-4">장미의 색은 가장 중요한 메시지입니다. 색조를 고르는 것만으로 카드 없이도 마음을 전할 수 있습니다:</p><ul class="space-y-2 mb-4 text-stone-600"><li>❤️ <b>빨강</b> — 사랑과 열정. 연인, 고백, 로맨틱한 깜짝 선물의 정석.</li><li>🤍 <b>흰색</b> — 순수, 존경, 감탄. 결혼식, 기념일, 진심의 표시로 어울립니다.</li><li>🌸 <b>핑크</b> — 부드러움과 감사. 어머니, 친구, 관계의 시작에 좋은 선택.</li><li>💜 <b>라일락·보라</b> — 감탄과 특별함. 색다른 꽃다발로 놀라게 하고 싶을 때 좋습니다.</li></ul><p class="text-stone-600 leading-relaxed">색을 섞어도 됩니다: 화이트와 핑크 구성은 부드러워 거의 모든 자리에 어울립니다.</p>
+<h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">몇 송이를 선물할까: 송이 수의 의미</h2>
+<p class="text-stone-600 leading-relaxed mb-4">선물 전통에서는 송이 수와 함께 홀수인지 짝수인지가 중요합니다. 꽃다발은 <b>홀수</b>로 선물하며, 짝수는 추모 자리를 위한 것입니다.</p><ul class="space-y-2 mb-4 text-stone-600"><li>💐 <b>25송이</b> — 생일이나 특별한 이유 없이도 어울리는 깔끔하고 무난한 꽃다발.</li><li>🌹 <b>51송이</b> — 확실히 인상을 남기는 넉넉한 선물.</li><li>👑 <b>101송이</b> — 기념일, 고백, 중요한 날을 위한 큰 제스처.</li></ul><p class="text-stone-600 leading-relaxed">고민된다면 자리의 크기에 맞추세요: 의미가 클수록 꽃다발도 커집니다. 호텔 객실로 바로 배달되는 101송이 바구니는 오래 기억에 남는 감동을 만듭니다.</p>
+<h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">누구에게 어떤 자리에 장미를 선물할까</h2>
+<p class="text-stone-600 leading-relaxed mb-4">장미는 거의 모두에게 어울린다는 점이 좋습니다 — 색과 크기만 바뀝니다:</p><ul class="space-y-2 mb-4 text-stone-600"><li>💞 <b>아내·여자친구</b> — 기념일, 생일, 고백에는 빨강 또는 화이트·핑크 장미.</li><li>🌷 <b>어머니</b> — 따뜻함과 감사의 표시로 부드러운 핑크나 흰 장미.</li><li>🤝 <b>친구·동료</b> — 로맨틱함이 과하지 않은 밝은 색조.</li><li>✨ <b>그냥</b> — 이유 없는 작은 꽃다발이 기념일 선물보다 더 큰 기쁨을 줄 때가 많습니다.</li></ul><p class="text-stone-600 leading-relaxed">여행 중 장미는 멋진 깜짝 선물입니다: 공항에서 꽃다발로 맞이하거나, 상대가 해변에 있는 동안 객실로 보내보세요.</p>
+<h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">나트랑 더위에서 장미를 신선하게 유지하는 법</h2>
+<p class="text-stone-600 leading-relaxed mb-4">덥고 습한 기후는 절화의 가장 큰 적입니다. 하지만 간단한 관리만으로 여행 중에도 장미는 며칠씩 거뜬히 유지됩니다:</p><ul class="space-y-2 mb-4 text-stone-600"><li>✂️ 꽃병에 꽂기 전, 흐르는 물에서 줄기를 1~2cm 비스듬히 잘라주세요.</li><li>💧 매일 물을 갈고, 물에 잠기는 잎은 제거하세요.</li><li>❄️ 직사광선을 피하고 에어컨 가까이 두세요 — 시원함이 신선함을 늘려줍니다.</li><li>🌫 더위가 심하면 아침저녁으로 분무기로 꽃봉오리에 물을 뿌려주세요.</li></ul><p class="text-stone-600 leading-relaxed">저희는 배송 당일에 꽃다발을 제작하므로 장미가 최대한 신선하게 도착합니다 — 그다음은 관리에 달려 있습니다.</p>
+<h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">나트랑에서 장미 배송 주문하는 법</h2>
+<p class="text-stone-600 leading-relaxed mb-4">호텔에서 나가지 않고도 몇 분이면 주문할 수 있습니다. 카카오톡, WhatsApp 또는 Telegram으로 메시지를 주세요 — 자리와 예산에 맞는 색과 크기를 도와드립니다.</p><p class="text-stone-600 leading-relaxed mb-4">나트랑 시내 배송은 무료이며 오후 6시 이전 주문 시 당일 배송이 가능합니다. 본인, 받는 분, 또는 호텔로 바로 장미를 배달합니다 — 프런트로, 엘리베이터가 카드 키 없이 작동하면 객실까지. Muong Thanh을 포함한 나트랑·깜라인의 호텔로 배달합니다.</p><p class="text-stone-600 leading-relaxed">결제는 여행자에게 편리합니다: 수령 시 현금 또는 동·루블·달러·USDT 송금. 가격 안내: 장미 25송이 — 50만 동, 51송이 — 100만, 101송이 — 150만.</p>
     </article>
     
     <section class="max-w-5xl mx-auto px-6 py-12">
@@ -151,40 +182,40 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="r25" data-color="red">
                 <div class="pcard-slider">
-                    <img src="../img/products/25-krasnyh-roz/1.webp" alt="나트랑 빨간 장미 25송이 배달" loading="lazy" class="pcard-slide active">
-                    
+                    <img src="../img/products/25-krasnyh-roz/1.webp" alt="나트랑 빨간 장미 25송이 배달" loading="lazy" class="pcard-slide active"><img src="../img/products/25-krasnyh-roz/2.webp" alt="나트랑 빨간 장미 25송이 배달" loading="lazy" class="pcard-slide"><img src="../img/products/25-krasnyh-roz/3.webp" alt="나트랑 빨간 장미 25송이 배달" loading="lazy" class="pcard-slide"><img src="../img/products/25-krasnyh-roz/4.webp" alt="나트랑 빨간 장미 25송이 배달" loading="lazy" class="pcard-slide"><img src="../img/products/25-krasnyh-roz/5.webp" alt="나트랑 빨간 장미 25송이 배달" loading="lazy" class="pcard-slide"><img src="../img/products/25-krasnyh-roz/6.webp" alt="나트랑 빨간 장미 25송이 배달" loading="lazy" class="pcard-slide">
+                    <button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots"><span class="pcard-dot active"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span></div>
                 </div>
                 <a href="../catalog/25-krasnyh-roz-ko.html" class="p-5 flex flex-col flex-grow">
                     <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">빨간 장미 25송이</h3>
                     <p class="text-stone-600 text-xs mb-3 flex-grow">화이트 포장의 선명한 빨간 피오니 장미 — 사랑을 전하는 최고의 선물</p>
                     <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">500 000 동</p>
-                    <p class="text-stone-500 text-xs mb-4">≈ $20 · 28,000원</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $20 · 1 800 ₽</p>
                     <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">자세히 →</span>
                 </a>
             </div>
             <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="r51" data-color="white">
                 <div class="pcard-slider">
-                    <img src="../img/products/51-belaya-roza-s-evkaliptom/1.webp" alt="흰 장미 51송이 + 유칼립투스" loading="lazy" class="pcard-slide active">
-                    
+                    <img src="../img/products/51-belaya-roza-s-evkaliptom/1.webp" alt="흰 장미 51송이 + 유칼립투스" loading="lazy" class="pcard-slide active"><img src="../img/products/51-belaya-roza-s-evkaliptom/2.webp" alt="흰 장미 51송이 + 유칼립투스" loading="lazy" class="pcard-slide"><img src="../img/products/51-belaya-roza-s-evkaliptom/3.webp" alt="흰 장미 51송이 + 유칼립투스" loading="lazy" class="pcard-slide"><img src="../img/products/51-belaya-roza-s-evkaliptom/4.webp" alt="흰 장미 51송이 + 유칼립투스" loading="lazy" class="pcard-slide"><img src="../img/products/51-belaya-roza-s-evkaliptom/5.webp" alt="흰 장미 51송이 + 유칼립투스" loading="lazy" class="pcard-slide"><img src="../img/products/51-belaya-roza-s-evkaliptom/6.webp" alt="흰 장미 51송이 + 유칼립투스" loading="lazy" class="pcard-slide"><img src="../img/products/51-belaya-roza-s-evkaliptom/7.webp" alt="흰 장미 51송이 + 유칼립투스" loading="lazy" class="pcard-slide">
+                    <button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots"><span class="pcard-dot active"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span></div>
                 </div>
                 <a href="../catalog/51-belaya-roza-s-evkaliptom-ko.html" class="p-5 flex flex-col flex-grow">
                     <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">흰 장미 51송이 + 유칼립투스</h3>
                     <p class="text-stone-600 text-xs mb-3 flex-grow">유칼립투스가 더해진 우아한 흰 장미 꽃다발</p>
                     <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">1 000 000 동</p>
-                    <p class="text-stone-500 text-xs mb-4">≈ $40 · 55,000원</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $40 · 3 500 ₽</p>
                     <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">자세히 →</span>
                 </a>
             </div>
             <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="r101" data-color="">
                 <div class="pcard-slider">
-                    <img src="../img/products/101-roza-v-korzine/1.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide active">
-                    
+                    <img src="../img/products/101-roza-v-korzine/1.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide active"><img src="../img/products/101-roza-v-korzine/2.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide"><img src="../img/products/101-roza-v-korzine/3.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide"><img src="../img/products/101-roza-v-korzine/4.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide"><img src="../img/products/101-roza-v-korzine/5.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide"><img src="../img/products/101-roza-v-korzine/6.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide"><img src="../img/products/101-roza-v-korzine/7.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide"><img src="../img/products/101-roza-v-korzine/8.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide">
+                    <button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots"><span class="pcard-dot active"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span></div>
                 </div>
                 <a href="../catalog/101-roza-v-korzine-ko.html" class="p-5 flex flex-col flex-grow">
                     <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">바구니 장미 101송이</h3>
                     <p class="text-stone-600 text-xs mb-3 flex-grow">바구니에 담긴 핑크-코랄 장미 101송이 — 최고의 감동 선물</p>
                     <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">2 000 000 동</p>
-                    <p class="text-stone-500 text-xs mb-4">≈ $80 · 110,000원</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $80 · 6 900 ₽</p>
                     <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">자세히 →</span>
                 </a>
             </div>
@@ -206,24 +237,16 @@
     <section class="max-w-3xl mx-auto px-6 py-8">
         <h2 class="font-serif text-2xl font-bold mb-6 text-center" style="color:#1a1a1a;">자주 묻는 질문</h2>
         <div class="space-y-3">
-            <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 나트랑 장미 꽃다발 가격은 얼마인가요?</h3><p class="text-stone-600 text-sm leading-relaxed">장미 25송이 — 50만 동(약 $20)부터, 51송이 — 100만 동부터, 바구니 101송이 — 150만 동부터입니다. 최종 가격은 품종과 포장에 따라 달라지며 배송 전 사진을 보내 드립니다.</p></div>
-            <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 장미 색깔은 무슨 의미인가요?</h3><p class="text-stone-600 text-sm leading-relaxed">빨강은 사랑과 열정, 흰색은 순수와 존경, 분홍은 다정함과 감사, 노랑은 기쁨과 우정(이별이 아닙니다), 주황은 에너지와 감탄을 뜻합니다. 믹스는 화사한 선택입니다.</p></div>
-            <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 장미는 몇 송이를 선물해야 하나요?</h3><p class="text-stone-600 text-sm leading-relaxed">작은 꽃다발은 홀수(5, 7, 9, 11)로 — 짝수는 장례용으로 남겨 둡니다. 25송이 이상부터는 송이 수가 의미 없고 하나의 큰 작품으로 봅니다.</p></div>
-            <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 어떤 장미 품종이 가장 좋나요?</h3><p class="text-stone-600 text-sm leading-relaxed">피오니 장미는 가장 로맨틱하고 사진이 잘 나오며, 클래식 장미는 무난하고, 에콰도르 장미는 고급스럽고 오래가며, 스프레이 장미는 가볍고 화사한 믹스에 어울립니다.</p></div>
-            <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 호텔로 장미 배송이 되나요?</h3><p class="text-stone-600 text-sm leading-relaxed">네. 나트랑 모든 호텔로 배송하며 프런트나 사전 협의 시 객실로 전달합니다 — 깜짝 선물에 좋은 방법입니다.</p></div>
-            <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 당일 장미 배송이 가능한가요?</h3><p class="text-stone-600 text-sm leading-relaxed">네, 미리 주문하시면 나트랑 시내 당일 배송이 가능합니다. 성수일(2월 14일, 3월 8일)에는 하루 이틀 전에 주문하시는 것이 좋습니다.</p></div>
-            <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 노란 장미는 이별을 뜻하나요?</h3><p class="text-stone-600 text-sm leading-relaxed">아니요, 그것은 오해입니다. 노란 장미는 기쁨, 우정, 따뜻함을 뜻하며 화사한 선물로 좋습니다.</p></div>
-            <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 더위에서 장미를 어떻게 신선하게 유지하나요?</h3><p class="text-stone-600 text-sm leading-relaxed">줄기를 사선으로 자르고, 물을 매일 갈고, 직사광선과 에어컨 바람·과일을 피하세요. 밤에는 객실에서 가장 시원한 곳에 두면 더 오래갑니다.</p></div>
+            <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 나트랑에서 장미 가격은 얼마인가요?</h3><p class="text-stone-600 text-sm leading-relaxed">안내: 장미 25송이 — 50만 동, 51송이 — 100만, 101송이 — 150만. 구체적인 꽃다발 가격은 채팅으로 알려드립니다.</p></div>
+            <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 사랑하는 사람에게는 어떤 장미가 좋나요?</h3><p class="text-stone-600 text-sm leading-relaxed">보통 사랑의 상징인 빨간 장미나 부드러운 화이트·핑크 구성을 고릅니다. 송이 수는 홀수로: 자리에 따라 25, 51 또는 101송이.</p></div>
+            <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 더위에서 장미가 오래 가나요?</h3><p class="text-stone-600 text-sm leading-relaxed">올바르게 관리하면 약 4~7일. 줄기를 자르고 매일 물을 갈며, 직사광선을 피해 그늘지고 시원한 곳에 두세요.</p></div>
+            <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 장미를 얼마나 빨리 배달하나요?</h3><p class="text-stone-600 text-sm leading-relaxed">나트랑 시내는 무료이며 오후 6시 이전 주문 시 당일 배송. 신선하도록 배송 당일에 꽃다발을 제작합니다.</p></div>
         </div>
     </section>
     <section class="max-w-3xl mx-auto px-6 pb-16 text-center">
         <a href="../blog-ko.html" class="btn-rose inline-block font-medium py-2.5 px-6 rounded-xl text-sm">← 모든 글</a>
     </section>
-    <section class="max-w-3xl mx-auto px-6 pb-12">
-<h2 class="font-serif text-xl font-bold mb-4 text-center" style="color:#1a1a1a;">인기 꽃다발</h2>
-<div class="grid grid-cols-2 sm:grid-cols-4 gap-3"><a href="../catalog/101-krasnaya-roza-v-upakovke-ko.html" class="block bg-white border border-stone-100 rounded-xl p-4 text-sm text-stone-700 hover:border-[#c0687a] hover:text-[#c0687a] transition text-center">화이트 포장 레드 장미 101송이 →</a><a href="../catalog/51-pionovidnaya-rozovaya-roza-v-upakovke-ko.html" class="block bg-white border border-stone-100 rounded-xl p-4 text-sm text-stone-700 hover:border-[#c0687a] hover:text-[#c0687a] transition text-center">화이트 포장 피오니 핑크 장미 51송이 →</a><a href="../catalog/25-rozovyh-roz-v-upakovke-ko.html" class="block bg-white border border-stone-100 rounded-xl p-4 text-sm text-stone-700 hover:border-[#c0687a] hover:text-[#c0687a] transition text-center">화이트 포장 핑크 장미 25송이 →</a><a href="../catalog/krasno-bezhevyy-nabor-sharov-s-ko.html" class="block bg-white border border-stone-100 rounded-xl p-4 text-sm text-stone-700 hover:border-[#c0687a] hover:text-[#c0687a] transition text-center">레드-베이지 풍선 세트 S →</a></div>
-</section>
-</main>
+    </main>
     <footer class="py-12 px-4 mt-auto" style="background:#fce8ee;">
         <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
             <div class="text-center md:text-left">
@@ -294,12 +317,35 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"], a[href*="kakao"], 
         b.parentNode.querySelectorAll('.filt').forEach(function(x){x.classList.remove('active');});
         b.classList.add('active');
         document.querySelectorAll('.product-card').forEach(function(c){
-          var ok=(state.cat===''||c.getAttribute('data-cat')===state.cat)&&(state.color===''||c.getAttribute('data-color')===state.color);
+          var dc=' '+(c.getAttribute('data-cat')||'')+' ';
+          var ok=(state.cat===''||dc.indexOf(' '+state.cat+' ')>-1)&&(state.color===''||c.getAttribute('data-color')===state.color);
           c.style.display=ok?'':'none';
         });
       });
     });
+    var _hf=(location.hash||'').replace('#','');if(_hf){var _tf=bar.querySelector('.filt-group[data-filter="cat"] .filt[data-val="'+_hf+'"]');if(_tf)_tf.click();}
   }
+  (function(){
+    var cf=document.querySelector('.cat-filters'); if(!cf) return;
+    var grid=cf.nextElementSibling; if(!grid) return;
+    function price(c){var el=c.querySelector('p.font-bold');return el?parseInt(el.textContent.replace(/[^0-9]/g,'')||'0',10):0;}
+    function sortBy(dir){
+      var cards=Array.prototype.slice.call(grid.querySelectorAll('.product-card'));
+      cards.sort(function(a,b){return dir==='desc'?price(b)-price(a):price(a)-price(b);});
+      cards.forEach(function(c){grid.appendChild(c);});
+    }
+    sortBy('asc');
+    var sg=document.querySelector('.sort-bar .filt-group[data-filter="sort"]');
+    if(sg){
+      sg.querySelectorAll('.filt').forEach(function(b){
+        b.addEventListener('click',function(){
+          sg.querySelectorAll('.filt').forEach(function(x){x.classList.remove('active');});
+          b.classList.add('active');
+          sortBy(b.getAttribute('data-val'));
+        });
+      });
+    }
+  })();
 })();
 </script>
 </body>

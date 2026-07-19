@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko" class="scroll-smooth">
-<head>
+<head><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>나트랑 호텔 꽃 배송: InterContinental과 모든 호텔</title>
-    <meta name="description" content="나트랑 호텔 꽃 배송: InterContinental, Sheraton, Vinpearl 등 모든 호텔. 객실 깜짝 연출, 호텔 목록, 가격과 주문 방법.">
-    <meta property="og:title" content="나트랑 호텔 꽃 배송: InterContinental과 모든 호텔">
-    <meta property="og:description" content="나트랑 호텔 꽃 배송: InterContinental, Sheraton, Vinpearl 등 모든 호텔. 객실 깜짝 연출, 호텔 목록, 가격과 주문 방법.">
+    <title>나트랑 InterContinental 호텔 꽃 배송</title>
+    <meta name="description" content="나트랑 InterContinental 호텔 꽃다발 배송: 프런트 또는 객실로, 시내 무료·당일 배송. 호텔 투숙객을 위한 깜짝 선물 주문 방법을 안내합니다.">
+    <meta property="og:title" content="나트랑 InterContinental 호텔 꽃 배송">
+    <meta property="og:description" content="나트랑 InterContinental 호텔 꽃다발 배송: 프런트 또는 객실로, 시내 무료·당일 배송. 호텔 투숙객을 위한 깜짝 선물 주문 방법을 안내합니다.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://flowers-nha-trang.online/img/site/og-default.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:url" content="https://flowers-nha-trang.online/blog/dostavka-cvetov-v-otel-intercontinental-nyachang-kamran-ko.html">
     <meta property="og:site_name" content="NhaTrang Flowers">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="나트랑 호텔 꽃 배송: InterContinental과 모든 호텔">
-    <meta name="twitter:description" content="나트랑 호텔 꽃 배송: InterContinental, Sheraton, Vinpearl 등 모든 호텔. 객실 깜짝 연출, 호텔 목록, 가격과 주문 방법.">
+    <meta name="twitter:title" content="나트랑 InterContinental 호텔 꽃 배송">
+    <meta name="twitter:description" content="나트랑 InterContinental 호텔 꽃다발 배송: 프런트 또는 객실로, 시내 무료·당일 배송. 호텔 투숙객을 위한 깜짝 선물 주문 방법을 안내합니다.">
     <meta name="twitter:image" content="https://flowers-nha-trang.online/img/site/og-default.jpg">
     <link rel="icon" href="../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
@@ -39,8 +41,8 @@
         h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
         .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
-        .card-img-wrap { overflow: hidden; }
-        .card-img-wrap img { transition: transform 0.45s ease; }
+        .card-img-wrap { overflow: hidden; height: 12rem; }
+        .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.45s ease; }
         .card-img-wrap:hover img { transform: scale(1.04); }
         .product-card { border: 1px solid #f0e0e5; transition: border-color 0.25s ease, box-shadow 0.25s ease; }
         .product-card:hover { border-color: var(--rose); box-shadow: 0 4px 24px rgba(192, 104, 122, 0.1); }
@@ -92,24 +94,25 @@
         .gallery-slider{height:24rem;}
         @media(min-width:768px){.gallery-slider{height:30rem;}}
         .gallery-slider .pcard-slide{object-fit:contain;padding:.75rem;}
-        .pcard-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.96);border:none;width:2.5rem;height:2.5rem;border-radius:999px;font-size:1.6rem;line-height:1;color:#a8566a;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:1;transition:opacity .2s,background .2s,transform .15s;z-index:5;box-shadow:0 2px 8px rgba(0,0,0,.22);}
-        .pcard-arrow:hover{opacity:1;background:#fff;}
+        .gallery-slider .pcard-arrow{opacity:1;width:2.5rem;height:2.5rem;font-size:1.6rem;background:rgba(255,255,255,.96);box-shadow:0 2px 8px rgba(0,0,0,.22);z-index:5;}
+        .gallery-slider .pcard-dot{width:.45rem;height:.45rem;}
+        .pcard-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.9);border:none;width:2rem;height:2rem;border-radius:999px;font-size:1.2rem;line-height:1;color:#a8566a;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;z-index:2;box-shadow:0 1px 4px rgba(0,0,0,.12);}
+        .pcard-slider:hover .pcard-arrow{opacity:1;}
         .pcard-prev{left:.5rem;} .pcard-next{right:.5rem;}
-        .pcard-dots{position:absolute;bottom:.55rem;left:0;right:0;display:flex;gap:.3rem;justify-content:center;z-index:3;}
-        .pcard-dot{width:.45rem;height:.45rem;border-radius:999px;background:rgba(255,255,255,.6);box-shadow:0 0 2px rgba(0,0,0,.3);transition:background .2s;}
+        .pcard-dots{position:absolute;bottom:.55rem;left:0;right:0;display:flex;gap:.3rem;justify-content:center;z-index:2;}
+        .pcard-dot{width:.4rem;height:.4rem;border-radius:999px;background:rgba(255,255,255,.55);transition:background .2s;}
         .pcard-dot.active{background:#fff;}
+        @media (max-width:767px){.pcard-arrow{opacity:1;}}
         .cat-filters{display:flex;flex-direction:column;gap:.75rem;align-items:center;margin-bottom:2rem;}
         .filt-group{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;}
-        .filt-group.color-hidden{display:none;}
         .filt{background:#fff;border:1px solid #f0e0e5;color:#6b6b6b;font-size:.8rem;font-weight:500;padding:.45rem .9rem;border-radius:999px;cursor:pointer;transition:all .2s;}
         .filt:hover{border-color:var(--rose);color:var(--rose);}
         .filt.active{background:var(--rose);color:#fff;border-color:var(--rose);}
-        /*END-CARD-CSS*/
+        .sort-bar{display:flex;justify-content:center;margin-bottom:1rem;}
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://flowers-nha-trang.online/"}, {"@type": "ListItem", "position": 2, "name": "블로그", "item": "https://flowers-nha-trang.online/blog-ko.html"}, {"@type": "ListItem", "position": 3, "name": "나트랑 호텔 꽃 배송: InterContinental과 모든 호텔", "item": "https://flowers-nha-trang.online/blog/dostavka-cvetov-v-otel-intercontinental-nyachang-kamran-ko.html"}]}</script>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"나트랑 호텔 꽃 배송: InterContinental과 모든 호텔","description":"나트랑 호텔 꽃 배송: InterContinental, Sheraton, Vinpearl 등 모든 호텔. 객실 깜짝 연출, 호텔 목록, 가격과 주문 방법.","image":"https://flowers-nha-trang.online/img/blog/dostavka-cvetov-v-otel-intercontinental-nyachang-kamran.webp","datePublished":"2026-06-06","author":{"@type":"Organization","name":"NhaTrang Flowers"},"publisher":{"@type":"Organization","name":"NhaTrang Flowers"},"mainEntityOfPage":"https://flowers-nha-trang.online/blog/dostavka-cvetov-v-otel-intercontinental-nyachang-kamran-ko.html"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"나트랑 호텔로 꽃 배송을 어떻게 주문하나요?","acceptedAnswer":{"@type":"Answer","text":"호텔 이름, 객실 번호나 투숙객 성함, 시간을 보내 주세요. 배달원이 꽃다발을 프런트, 컨시어지 또는 객실로 전달합니다. 배송 전 사진을 보내 드립니다."}},{"@type":"Question","name":"InterContinental Nha Trang으로 배송하나요?","acceptedAnswer":{"@type":"Answer","text":"네, 짠푸 해변가의 익숙한 주소입니다. 꽃다발을 프런트에 맡기거나 협의 시 객실로 전달합니다. 깜짝 선물은 객실 번호와 투숙객 성함만 보내 주세요."}},{"@type":"Question","name":"그 밖에 어느 호텔로 배송하나요?","acceptedAnswer":{"@type":"Answer","text":"나트랑과 근교 모든 호텔: Sheraton, Novotel, Muong Thanh, Vinpearl, Movenpick, Radisson, The Anam, Mia, Fusion, 그리고 깜라인 리조트와 개인 빌라까지요."}},{"@type":"Question","name":"객실에서 바로 깜짝 연출이 되나요?","acceptedAnswer":{"@type":"Answer","text":"네, 미리 호텔과 협의합니다. 체크인에 맞춰 객실을 꽃과 풍선으로 꾸미거나 알맞은 순간에 꽃다발을 가져갑니다. 원하시면 배달원이 보낸 사람을 밝히지 않습니다."}},{"@type":"Question","name":"호텔 배송 비용은 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"나트랑 시내 배송은 보통 포함되거나 소액입니다. 가격은 꽃다발에 따라 달라집니다: 장미 25송이 — 50만 동부터, 바구니 101송이 — 150만 동부터. 먼 깜라인 리조트는 이동 비용이 추가됩니다."}},{"@type":"Question","name":"카드를 추가할 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"네, 카드를 당신의 이름으로 무료로 적어 드립니다 — 다른 나라에서 주문하셔도요."}},{"@type":"Question","name":"얼마나 미리 주문해야 하나요?","acceptedAnswer":{"@type":"Answer","text":"몇 시간 전이 좋고, 깜라인 호텔은 하루 전이 좋습니다. 긴급 주문도 자주 가능합니다 — 메시지를 주시면 시간에 맞출 수 있는지 알려 드립니다."}},{"@type":"Question","name":"호텔로 꽃과 풍선을 함께 주문할 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"네, 꽃과 풍선을 한 주문으로 준비해 함께 가져갑니다 — 생일, 기념일, 손님 맞이에 좋은 선택입니다."}}]}</script>    <div style="background:#fce8ee; color:#a8566a;" class="text-xs py-2 text-center tracking-widest font-medium uppercase">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"나트랑 InterContinental 호텔 꽃 배송","description":"나트랑 InterContinental 호텔 꽃다발 배송: 프런트 또는 객실로, 시내 무료·당일 배송. 호텔 투숙객을 위한 깜짝 선물 주문 방법을 안내합니다.","image":"https://flowers-nha-trang.online/img/blog/dostavka-cvetov-v-otel-intercontinental-nyachang-kamran.webp","datePublished":"2026-06-06","author":{"@type":"Organization","name":"NhaTrang Flowers"},"publisher":{"@type":"Organization","name":"NhaTrang Flowers"},"mainEntityOfPage":"https://flowers-nha-trang.online/blog/dostavka-cvetov-v-otel-intercontinental-nyachang-kamran-ko.html"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"나트랑 InterContinental로 꽃 배달이 되나요?","acceptedAnswer":{"@type":"Answer","text":"네, 호텔로 바로 배달합니다 — 프런트로, 또는 엘리베이터가 키카드 없이 작동하면 객실까지. 나트랑 시내 배송은 무료입니다."}},{"@type":"Question","name":"정확한 시간에 배달할 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"네. 편한 날짜와 시간을 알려주시면 그 시간에 맞춰 도착합니다. 확실히 하려면 미리 주문하시는 것이 좋습니다."}},{"@type":"Question","name":"호텔 주문에는 무엇이 필요한가요?","acceptedAnswer":{"@type":"Answer","text":"호텔 이름과 객실 번호(또는 받는 분 연락처), 날짜와 시간, 그리고 꽃다발이나 예산입니다. 카드 메시지는 선택입니다."}},{"@type":"Question","name":"결제는 어떻게 하나요?","acceptedAnswer":{"@type":"Answer","text":"수령 시 현금과 동·루블·달러·USDT 송금을 받습니다. 방법은 채팅으로 안내해 드립니다."}}]}</script>    <div style="background:#fce8ee; color:#a8566a;" class="text-xs py-2 text-center tracking-widest font-medium uppercase">
         NhaTrang Flowers
     </div>
     <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-stone-100">
@@ -123,7 +126,8 @@
                 <a href="../catalog-ko.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">💐 카탈로그</a>
                 <a href="../blog-ko.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">📖 블로그</a>
                 <a href="../balloons-kr.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🎈 풍선</a>
-                <a href="../torty-kr.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🎂 케이크</a><a href="../nabory-kr.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🎁 선물 세트</a>
+                <a href="../torty-kr.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🎂 케이크</a>
+                <a href="../nabory-kr.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🎁 선물 세트</a>
                 <span class="w-px h-4 bg-stone-200 mx-1"></span>
                 <a href="dostavka-cvetov-v-otel-intercontinental-nyachang-kamran-ru.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🇷🇺 RU</a>
                 <a href="dostavka-cvetov-v-otel-intercontinental-nyachang-kamran-en.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🇬🇧 EN</a>
@@ -133,21 +137,42 @@
                 <a href="http://pf.kakao.com/_zbwKX" target="_blank" class="text-stone-400 hover:text-[#c0687a] transition" aria-label="KakaoTalk"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M12 3C6.477 3 2 6.463 2 10.74c0 2.74 1.83 5.146 4.59 6.51-.2.74-.73 2.66-.836 3.072-.13.51.187.503.394.366.163-.107 2.6-1.766 3.66-2.487.71.105 1.444.16 2.192.16 5.523 0 10-3.463 10-7.74S17.523 3 12 3z"/></svg></a><a href="https://instagram.com/nhatrang.kkot" target="_blank" class="text-stone-400 hover:text-[#c0687a] transition" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
             </div>
         </div>
-        <div class="md:hidden" style="border-top:1px solid #f5f5f4;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px"><a href="../index-kr.html" style="display:flex;align-items:center;gap:8px;min-width:0;text-decoration:none"><img src="../img/site/logo.webp" alt="logo" style="width:40px;height:40px;border-radius:10px;object-fit:cover;flex-shrink:0"><span style="font-weight:500;font-size:11px;line-height:1.2;color:#57534e">나트랑 꽃 & 풍선<br>배달 서비스</span></a><div style="display:flex;align-items:center;gap:8px;flex-shrink:0"><a href="http://pf.kakao.com/_zbwKX" target="_blank" aria-label="KakaoTalk" style="width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1px solid #e7e5e4;color:#78716c;text-decoration:none;font-size:16px;flex-shrink:0;border-radius:9999px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M12 3C6.477 3 2 6.463 2 10.74c0 2.74 1.83 5.146 4.59 6.51-.2.74-.73 2.66-.836 3.072-.13.51.187.503.394.366.163-.107 2.6-1.766 3.66-2.487.71.105 1.444.16 2.192.16 5.523 0 10-3.463 10-7.74S17.523 3 12 3z"/></svg></a><a href="https://instagram.com/nhatrang.kkot" target="_blank" aria-label="Instagram" style="width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1px solid #e7e5e4;color:#78716c;text-decoration:none;font-size:16px;flex-shrink:0;border-radius:9999px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a><button type="button" aria-label="Меню" onclick="document.getElementById('mnav').classList.toggle('hidden')" style="width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1px solid #e7e5e4;border-radius:10px;color:#57534e;background:#fff;flex-shrink:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button></div></div><div id="mnav" class="md:hidden hidden" style="border-top:1px solid #f5f5f4;padding:8px;background:#fff;font-size:14px;font-weight:500"><a href="../index-kr.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">🏠 홈</a><a href="../catalog-ko.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">💐 카탈로그</a><a href="../blog-ko.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">📖 블로그</a><a href="../balloons-kr.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">🎈 풍선</a><a href="../torty-kr.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">🎂 케이크</a><a href="../nabory-kr.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">🎁 선물 세트</a><div style="display:flex;gap:8px;padding:8px 8px 4px;margin-top:4px;border-top:1px solid #f5f5f4"><span style="padding:4px 12px;border-radius:8px;color:#fff;font-size:12px;background:#c0687a">🇰🇷 KR</span><a href="dostavka-cvetov-v-otel-intercontinental-nyachang-kamran-ru.html" style="padding:4px 12px;border-radius:8px;color:#78716c;font-size:12px;text-decoration:none">🇷🇺 RU</a><a href="dostavka-cvetov-v-otel-intercontinental-nyachang-kamran-en.html" style="padding:4px 12px;border-radius:8px;color:#78716c;font-size:12px;text-decoration:none">🇬🇧 EN</a></div></div></header>
+        <div class="md:hidden" style="border-top:1px solid #f5f5f4;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px">
+            <a href="../index-kr.html" style="display:flex;align-items:center;gap:8px;min-width:0;text-decoration:none">
+                <img src="../img/site/logo.webp" alt="NhaTrang Flowers" style="width:40px;height:40px;border-radius:10px;object-fit:cover;flex-shrink:0">
+                <span style="font-weight:500;font-size:11px;line-height:1.2;color:#57534e">나트랑 꽃 & 풍선<br>배달 서비스</span>
+            </a>
+            <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+                <a href="http://pf.kakao.com/_zbwKX" target="_blank" aria-label="KakaoTalk" style="width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1px solid #e7e5e4;color:#78716c;text-decoration:none;font-size:16px;flex-shrink:0;border-radius:9999px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M12 3C6.477 3 2 6.463 2 10.74c0 2.74 1.83 5.146 4.59 6.51-.2.74-.73 2.66-.836 3.072-.13.51.187.503.394.366.163-.107 2.6-1.766 3.66-2.487.71.105 1.444.16 2.192.16 5.523 0 10-3.463 10-7.74S17.523 3 12 3z"/></svg></a><a href="https://instagram.com/nhatrang.kkot" target="_blank" aria-label="Instagram" style="width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1px solid #e7e5e4;color:#78716c;text-decoration:none;font-size:16px;flex-shrink:0;border-radius:9999px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+                <button type="button" aria-label="Меню" onclick="document.getElementById('mnav').classList.toggle('hidden')" style="width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1px solid #e7e5e4;border-radius:10px;color:#57534e;background:#fff;flex-shrink:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+            </div>
+        </div>
+        <div id="mnav" class="md:hidden hidden" style="border-top:1px solid #f5f5f4;padding:8px;background:#fff;font-size:14px;font-weight:500">
+            <a href="../index-kr.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">🏠 홈</a><a href="../catalog-ko.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">💐 카탈로그</a><a href="../blog-ko.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">📖 블로그</a><a href="../balloons-kr.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">🎈 풍선</a><a href="../torty-kr.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">🎂 케이크</a><a href="../nabory-kr.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">🎁 선물 세트</a>
+            <div style="display:flex;gap:8px;padding:8px 8px 4px;margin-top:4px;border-top:1px solid #f5f5f4"><a href="dostavka-cvetov-v-otel-intercontinental-nyachang-kamran-ru.html" style="padding:4px 12px;border-radius:8px;color:#78716c;font-size:12px;text-decoration:none">🇷🇺 RU</a><a href="dostavka-cvetov-v-otel-intercontinental-nyachang-kamran-en.html" style="padding:4px 12px;border-radius:8px;color:#78716c;font-size:12px;text-decoration:none">🇬🇧 EN</a><span style="padding:4px 12px;border-radius:8px;color:#fff;font-size:12px;background:#c0687a">🇰🇷 KR</span></div>
+        </div>
+    </header>
     <main class="flex-grow">
     <nav class="max-w-4xl mx-auto px-6 pt-8 pb-2 text-xs text-stone-400">
-        <a href="../blog-ko.html" class="hover:text-[#c0687a]">블로그</a> / <span style="color:#1a1a1a;">나트랑 호텔 꽃 배송: InterContinental과 모든 호텔</span>
+        <a href="../blog-ko.html" class="hover:text-[#c0687a]">블로그</a> / <span style="color:#1a1a1a;">나트랑 InterContinental 호텔 꽃 배송</span>
     </nav>
     <section class="max-w-4xl mx-auto px-6 pt-8">
         <div class="rounded-3xl overflow-hidden" style="height:340px;">
-            <img src="../img/blog/dostavka-cvetov-v-otel-intercontinental-nyachang-kamran.webp" alt="나트랑 호텔 꽃 배송: InterContinental과 모든 호텔" class="w-full h-full object-cover">
+            <img src="../img/blog/dostavka-cvetov-v-otel-intercontinental-nyachang-kamran.webp" alt="나트랑 InterContinental 호텔 꽃 배송" class="w-full h-full object-cover">
         </div>
     </section>
     <article class="max-w-3xl mx-auto px-6 py-8">
-        <span class="text-xs font-medium" style="color:#c0687a;">호텔 · 7 분 분량</span>
+        <span class="text-xs font-medium" style="color:#c0687a;">Отель · 2 분 분량</span>
         <h1 class="font-serif text-3xl md:text-4xl font-bold mt-2 mb-6 leading-tight" style="color:#1a1a1a;">나트랑 InterContinental 호텔로 꽃 배송</h1>
-        <p class="text-stone-600 text-lg leading-relaxed mb-2">호텔 배송은 나트랑에서 가장 흔한 주문 방식입니다. 여행객은 객실에서 사랑하는 사람을 축하하고, 연인을 놀라게 하거나, 도착하는 손님을 꽃다발로 맞이합니다. 짠푸 해변가의 InterContinental Nha Trang은 이런 주문에서 가장 인기 있는 주소 중 하나이지만, 저희는 시내 모든 호텔로 배송합니다. 이 가이드에서는 호텔 꽃 배송이 어떻게 이루어지는지, 깜짝 선물에 무엇이 필요한지, 나트랑의 어느 호텔로 꽃다발을 가져가는지 설명합니다.</p><h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">호텔 꽃 배송은 어떻게 이루어지나요</h2><p class="text-stone-600 leading-relaxed mb-4">과정은 간단하고 잘 정비되어 있습니다. 꽃다발을 고르고 호텔 이름, 객실 번호나 투숙객 성함, 원하는 시간을 보내 주시면 됩니다. 배달원이 꽃을 가져가 프런트, 컨시어지, 또는 호텔이 허용하면 객실로 직접 전달합니다.</p><p class="text-stone-600 leading-relaxed mb-4">대부분 투숙객 메모와 함께 프런트에 맡깁니다 — 가장 확실한 방법이고 호텔이 직접 손님에게 알려 줍니다. 객실 깜짝 연출을 원하시면 미리 호텔과 협의합니다. 배송 전 꽃다발 사진을 보내 무엇이 호텔로 가는지 확인하실 수 있습니다.</p><ul class="space-y-2 mb-4 text-stone-600"><li>📍 <b>필요한 정보</b>: 호텔 이름, 객실 번호나 투숙객 성함, 시간.</li><li>🛎️ <b>전달 방법</b>: 프런트, 컨시어지 또는 객실 — 미리 협의.</li><li>📷 <b>배송 전</b>: 확인용 꽃다발 사진을 보냅니다.</li><li>💬 <b>카드</b>: 메시지를 무료로 적어 드립니다.</li></ul><h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">InterContinental Nha Trang 배송</h2><p class="text-stone-600 leading-relaxed mb-4">InterContinental은 짠푸 해변가 중심, 시내 해변에서 몇 분 거리에 있습니다. 저희에게 익숙한 주소라 배달원이 가는 길과 전달 장소를 잘 알아 배송이 빠르고 매끄럽습니다. 꽃은 프런트에 맡기거나 협의 시 객실로 올려 드립니다.</p><p class="text-stone-600 leading-relaxed mb-4">InterContinental 깜짝 선물은 객실 번호와 투숙객 성함만 보내 주시면 됩니다. 도착이나 기념일에 맞춰 객실을 꾸미고 싶으시면 풍선과 장식을 더합니다. 손님이 신선한 꽃다발을 맞도록 시간을 맞춥니다.</p><h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">그 밖에 어느 나트랑 호텔로 배송하나요</h2><p class="text-stone-600 leading-relaxed mb-4">대형 리조트부터 부티크 호텔, 아파트까지 시내와 근교 모든 호텔로 배송합니다. 가장 자주 가는 주소입니다:</p><ul class="space-y-2 mb-4 text-stone-600"><li>🏨 <b>짠푸 해변가</b>: InterContinental, Sheraton, Novotel, Muong Thanh, Havana, Premier Havana.</li><li>🌴 <b>빈펄 아일랜드</b>: Vinpearl Resort, Vinpearl Discovery, Vinholidays.</li><li>🏖️ <b>바이다이·북부</b>: Movenpick, Radisson Blu, The Anam, Fusion Resort, Mia Resort.</li><li>🏝️ <b>깜라인(바이다이)</b>: Duyen Ha, Cam Ranh Riviera, Selectum, Alma Resort.</li><li>🏡 <b>안비엔·빌라</b>: 도시 전역의 개인 빌라, 아파트, 게스트하우스.</li></ul><p class="text-stone-600 leading-relaxed mb-4">목록에 호텔이 없어도 괜찮습니다 — 이름만 보내 주시면 배송합니다. 나트랑 시내는 빠르고, 깜라인과 먼 리조트는 약간의 여유 시간을 두며 미리 안내합니다.</p><h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">객실 깜짝 연출: 준비하는 법</h2><p class="text-stone-600 leading-relaxed mb-4">가장 감동적인 시나리오는 꽃다발이 이미 객실에서 기다리거나 딱 맞는 순간에 도착하는 것입니다. 서프라이즈가 성공하려면:</p><ul class="space-y-2 mb-4 text-stone-600"><li>⏰ <b>시간 협의</b> — 체크인, 아침 식사 또는 저녁에 맞춰.</li><li>🎈 <b>풍선 추가</b> — 생일, 기념일, 손님 맞이용.</li><li>✍️ <b>카드</b> — 다른 나라에 계셔도 당신의 이름으로 적어 드립니다.</li><li>🤫 <b>비밀 유지</b> — 원하시면 배달원이 보낸 사람을 밝히지 않습니다.</li></ul><h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">호텔로 꽃을 보내는 경우</h2><p class="text-stone-600 leading-relaxed mb-4">호텔 배송은 로맨스만을 위한 것이 아닙니다. 이유는 다양하고 거의 각각에 어울리는 시나리오가 있습니다:</p><ul class="space-y-2 mb-4 text-stone-600"><li>💕 <b>연인 깜짝 선물</b> — 상대가 해변이나 투어에 간 사이 객실에 꽃다발.</li><li>🎂 <b>여행 중 생일</b> — 아침에 꽃과 풍선이 주인공을 맞이.</li><li>💍 <b>기념일·신혼여행</b> — 두 분 귀실에 맞춘 객실 장식.</li><li>✈️ <b>손님 맞이</b> — 체크인 시 프런트에서 기다리는 꽃다발, 따뜻한 환영.</li><li>🙏 <b>사과·감사</b> — 중요한 말을 전해야 하는데 멀리 있을 때.</li></ul><p class="text-stone-600 leading-relaxed mb-4">이 모든 경우 방식은 같습니다 — 시나리오를 보내 주시면 꽃다발을 골라 알맞은 순간에 호텔로 가져갑니다. 수천 킬로미터 떨어져 계셔도요.</p><h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">카드에 무엇을 쓸까</h2><p class="text-stone-600 leading-relaxed mb-4">카드는 작지만 중요한 디테일입니다 — 꽃이 누구에게서, 왜 왔는지 알려 주니까요. 특히 호텔로 꽃다발이 깜짝 도착해 손님이 배송을 예상하지 못할 때 더욱 그렇습니다. 적을 내용의 몇 가지 아이디어입니다:</p><ul class="space-y-2 mb-4 text-stone-600"><li>🎂 <b>생일</b>: "생일 축하해! 곁에 있지 못해 미안하지만 마음은 늘 함께야."</li><li>💍 <b>기념일</b>: "함께한 세월만큼 앞으로도 그만큼 더. 사랑해."</li><li>✈️ <b>손님 맞이</b>: "나트랑에 오신 걸 환영합니다! 멋진 시간 보내세요."</li><li>❤️ <b>특별한 이유 없이</b>: "이유는 없어 — 오늘 네가 웃길 바라며."</li></ul><p class="text-stone-600 leading-relaxed mb-4">보내 주신 문구 그대로 손으로 적어 드립니다 — 채팅으로 텍스트를 보내 주세요. 원하시면 문구도 함께 다듬어 드립니다.</p><h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">호텔 꽃 배송 비용은 얼마인가요</h2><p class="text-stone-600 leading-relaxed mb-4">나트랑 시내 배송은 보통 포함되거나 소액입니다 — 주문 시 안내합니다. 가격은 주로 꽃다발 자체에 따라 달라집니다:</p><ul class="space-y-2 mb-4 text-stone-600"><li>💐 <b>장미 25송이</b> — 50만 동(약 $20)부터.</li><li>🤍 <b>유칼립투스 흰 장미</b> — 70만 동(약 $28)부터: 세련된 미니멀.</li><li>👑 <b>바구니 장미 101송이</b> — 150만 동(약 $60)부터: 객실용 임팩트 깜짝 선물.</li><li>🎈 <b>장식용 풍선</b> — 20만 동(약 $8)부터.</li></ul><p class="text-stone-600 leading-relaxed mb-4">깜라인의 먼 리조트는 이동 비용이 추가되며, 청구서에 놀람 없이 미리 알려 드립니다.</p><h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">언제 주문하나요</h2><p class="text-stone-600 leading-relaxed mb-4">몇 시간 전이 좋고, 먼 깜라인 호텔은 하루 전이 좋습니다 — 배달원이 제시간에 도착할 수 있도록요. 긴급 주문도 자주 가능합니다 — 메시지를 주시면 원하는 시간에 맞출 수 있는지 알려 드립니다.</p><p class="text-stone-600 leading-relaxed mb-4">호텔 배송을 주문하시려면 WhatsApp, Telegram 또는 카카오톡으로 호텔 이름, 객실 번호나 투숙객 성함, 원하는 시간을 보내 주세요. 꽃다발을 골라 카드를 더하고 서프라이즈가 성공하도록 준비해 드립니다.</p>
-        
+        <p class="text-stone-600 text-lg leading-relaxed mb-2">InterContinental은 나트랑 중심부 해변가에 위치한 잘 알려진 호텔 중 하나입니다. 소중한 분이 이곳에 머문다면 꽃은 환영 인사나 여행 중 깜짝 선물로 아주 좋습니다. 이 글에서는 호텔 꽃 배송이 어떻게 진행되는지, 주문 시 무엇을 보내면 되는지, 비용은 얼마인지 정리했습니다.</p>
+        <h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">InterContinental로 꽃다발을 배달하는 방법</h2>
+<p class="text-stone-600 leading-relaxed mb-4">배송 시간은 원하시는 대로 맞춥니다: 도착 시, 저녁 식사 전, 또는 아침 일찍. 배달원이 호텔로 가서 깜짝 선물이 들키지 않도록 조심스럽게 전달합니다.</p><ul class="space-y-2 mb-4 text-stone-600"><li>🛎 <b>프런트로</b> — 기본 방식: 직원이 투숙객에게 전달하거나 알려드립니다.</li><li>🚪 <b>객실로</b> — 엘리베이터가 키카드 없이 작동하고 호텔이 배달원의 출입을 허용하는 경우.</li><li>⏰ <b>정해진 시간에</b> — 원하는 시간에 맞춰 도착, 로맨틱한 저녁에 좋습니다.</li></ul><p class="text-stone-600 leading-relaxed">어떤 방법이 좋을지 모르시면 메시지를 주세요. 상황에 맞게 안내해 드립니다.</p>
+<h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">호텔 배송으로 많이 주문하는 꽃다발</h2>
+<p class="text-stone-600 leading-relaxed mb-4">호텔에는 꽃병이 필요 없고 보기 좋은 화려한 구성을 많이 고릅니다:</p><ul class="space-y-2 mb-4 text-stone-600"><li>🧺 <b>장미 101송이 바구니</b> — 객실에서 바로 와우 순간을 만듭니다.</li><li>🤍 <b>유칼립투스를 곁들인 흰 장미 51송이</b> — 우아하고 차분합니다.</li><li>💐 <b>세련된 혼합 꽃다발</b> — 따뜻한 기념일에 어울리는 부드러운 선택.</li></ul><p class="text-stone-600 leading-relaxed">풍선을 더하면 완성된 축제 연출과 멋진 포토존이 됩니다.</p>
+<h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">주문할 때 보낼 정보</h2>
+<p class="text-stone-600 leading-relaxed mb-4">배송이 매끄럽게 진행되도록 몇 가지를 보내주세요:</p><ul class="space-y-2 mb-4 text-stone-600"><li>호텔 이름(InterContinental)과 객실 번호, 또는 받는 분 연락처.</li><li>편한 배송 날짜와 시간.</li><li>사이트에서 마음에 든 꽃다발 또는 대략적인 예산.</li><li>필요하면 카드 메시지.</li></ul><p class="text-stone-600 leading-relaxed">러시아어, 영어, 한국어로 응대하니 편한 언어로 주문하실 수 있습니다 — KakaoTalk, WhatsApp 또는 Telegram.</p>
+<h2 class="font-serif text-2xl font-bold mt-10 mb-4" style="color:#1a1a1a;">배송 시점과 결제</h2>
+<p class="text-stone-600 leading-relaxed mb-4">나트랑 시내 배송은 무료이며 오후 6시 이전 주문 시 당일 배송이 가능합니다. 꽃은 신선하도록 배송 당일에 만듭니다. 정확한 시간이 필요하면 미리 연락 주세요.</p><p class="text-stone-600 leading-relaxed">결제는 여행자에게 편리합니다: 수령 시 현금, 또는 동·루블·달러·USDT 송금. 메시지를 주시면 꽃 선택을 돕고 호텔로 바로 배달해 드립니다.</p>
     </article>
     
     <section class="max-w-5xl mx-auto px-6 py-12">
@@ -155,27 +180,27 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="r101" data-color="">
                 <div class="pcard-slider">
-                    <img src="../img/products/101-roza-v-korzine/1.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide active">
-                    
+                    <img src="../img/products/101-roza-v-korzine/1.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide active"><img src="../img/products/101-roza-v-korzine/2.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide"><img src="../img/products/101-roza-v-korzine/3.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide"><img src="../img/products/101-roza-v-korzine/4.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide"><img src="../img/products/101-roza-v-korzine/5.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide"><img src="../img/products/101-roza-v-korzine/6.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide"><img src="../img/products/101-roza-v-korzine/7.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide"><img src="../img/products/101-roza-v-korzine/8.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide">
+                    <button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots"><span class="pcard-dot active"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span></div>
                 </div>
                 <a href="../catalog/101-roza-v-korzine-ko.html" class="p-5 flex flex-col flex-grow">
                     <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">바구니 장미 101송이</h3>
                     <p class="text-stone-600 text-xs mb-3 flex-grow">바구니에 담긴 핑크-코랄 장미 101송이 — 최고의 감동 선물</p>
                     <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">2 000 000 동</p>
-                    <p class="text-stone-500 text-xs mb-4">≈ $80 · 110,000원</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $80 · 6 900 ₽</p>
                     <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">자세히 →</span>
                 </a>
             </div>
             <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="r51" data-color="white">
                 <div class="pcard-slider">
-                    <img src="../img/products/51-belaya-roza-s-evkaliptom/1.webp" alt="흰 장미 51송이 + 유칼립투스" loading="lazy" class="pcard-slide active">
-                    
+                    <img src="../img/products/51-belaya-roza-s-evkaliptom/1.webp" alt="흰 장미 51송이 + 유칼립투스" loading="lazy" class="pcard-slide active"><img src="../img/products/51-belaya-roza-s-evkaliptom/2.webp" alt="흰 장미 51송이 + 유칼립투스" loading="lazy" class="pcard-slide"><img src="../img/products/51-belaya-roza-s-evkaliptom/3.webp" alt="흰 장미 51송이 + 유칼립투스" loading="lazy" class="pcard-slide"><img src="../img/products/51-belaya-roza-s-evkaliptom/4.webp" alt="흰 장미 51송이 + 유칼립투스" loading="lazy" class="pcard-slide"><img src="../img/products/51-belaya-roza-s-evkaliptom/5.webp" alt="흰 장미 51송이 + 유칼립투스" loading="lazy" class="pcard-slide"><img src="../img/products/51-belaya-roza-s-evkaliptom/6.webp" alt="흰 장미 51송이 + 유칼립투스" loading="lazy" class="pcard-slide"><img src="../img/products/51-belaya-roza-s-evkaliptom/7.webp" alt="흰 장미 51송이 + 유칼립투스" loading="lazy" class="pcard-slide">
+                    <button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots"><span class="pcard-dot active"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span></div>
                 </div>
                 <a href="../catalog/51-belaya-roza-s-evkaliptom-ko.html" class="p-5 flex flex-col flex-grow">
                     <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">흰 장미 51송이 + 유칼립투스</h3>
                     <p class="text-stone-600 text-xs mb-3 flex-grow">유칼립투스가 더해진 우아한 흰 장미 꽃다발</p>
                     <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">1 000 000 동</p>
-                    <p class="text-stone-500 text-xs mb-4">≈ $40 · 55,000원</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $40 · 3 500 ₽</p>
                     <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">자세히 →</span>
                 </a>
             </div>
@@ -188,7 +213,7 @@
                     <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">화이트 포장 스타일리시 혼합 꽃다발</h3>
                     <p class="text-stone-600 text-xs mb-3 flex-grow">하얀 포장의 핑크와 화이트 꽃으로 만든 세련된 혼합 꽃다발 — 어떤 자리에도 어울리는 화사하고 감동적인 선물, 나트랑 당일 배달</p>
                     <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">1 250 000 동</p>
-                    <p class="text-stone-500 text-xs mb-4">≈ $50 · 69,000원</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $50 · 4 400 ₽</p>
                     <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">자세히 →</span>
                 </a>
             </div>
@@ -210,24 +235,16 @@
     <section class="max-w-3xl mx-auto px-6 py-8">
         <h2 class="font-serif text-2xl font-bold mb-6 text-center" style="color:#1a1a1a;">자주 묻는 질문</h2>
         <div class="space-y-3">
-            <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 나트랑 호텔로 꽃 배송을 어떻게 주문하나요?</h3><p class="text-stone-600 text-sm leading-relaxed">호텔 이름, 객실 번호나 투숙객 성함, 시간을 보내 주세요. 배달원이 꽃다발을 프런트, 컨시어지 또는 객실로 전달합니다. 배송 전 사진을 보내 드립니다.</p></div>
-            <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> InterContinental Nha Trang으로 배송하나요?</h3><p class="text-stone-600 text-sm leading-relaxed">네, 짠푸 해변가의 익숙한 주소입니다. 꽃다발을 프런트에 맡기거나 협의 시 객실로 전달합니다. 깜짝 선물은 객실 번호와 투숙객 성함만 보내 주세요.</p></div>
-            <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 그 밖에 어느 호텔로 배송하나요?</h3><p class="text-stone-600 text-sm leading-relaxed">나트랑과 근교 모든 호텔: Sheraton, Novotel, Muong Thanh, Vinpearl, Movenpick, Radisson, The Anam, Mia, Fusion, 그리고 깜라인 리조트와 개인 빌라까지요.</p></div>
-            <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 객실에서 바로 깜짝 연출이 되나요?</h3><p class="text-stone-600 text-sm leading-relaxed">네, 미리 호텔과 협의합니다. 체크인에 맞춰 객실을 꽃과 풍선으로 꾸미거나 알맞은 순간에 꽃다발을 가져갑니다. 원하시면 배달원이 보낸 사람을 밝히지 않습니다.</p></div>
-            <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 호텔 배송 비용은 얼마인가요?</h3><p class="text-stone-600 text-sm leading-relaxed">나트랑 시내 배송은 보통 포함되거나 소액입니다. 가격은 꽃다발에 따라 달라집니다: 장미 25송이 — 50만 동부터, 바구니 101송이 — 150만 동부터. 먼 깜라인 리조트는 이동 비용이 추가됩니다.</p></div>
-            <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 카드를 추가할 수 있나요?</h3><p class="text-stone-600 text-sm leading-relaxed">네, 카드를 당신의 이름으로 무료로 적어 드립니다 — 다른 나라에서 주문하셔도요.</p></div>
-            <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 얼마나 미리 주문해야 하나요?</h3><p class="text-stone-600 text-sm leading-relaxed">몇 시간 전이 좋고, 깜라인 호텔은 하루 전이 좋습니다. 긴급 주문도 자주 가능합니다 — 메시지를 주시면 시간에 맞출 수 있는지 알려 드립니다.</p></div>
-            <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 호텔로 꽃과 풍선을 함께 주문할 수 있나요?</h3><p class="text-stone-600 text-sm leading-relaxed">네, 꽃과 풍선을 한 주문으로 준비해 함께 가져갑니다 — 생일, 기념일, 손님 맞이에 좋은 선택입니다.</p></div>
+            <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 나트랑 InterContinental로 꽃 배달이 되나요?</h3><p class="text-stone-600 text-sm leading-relaxed">네, 호텔로 바로 배달합니다 — 프런트로, 또는 엘리베이터가 키카드 없이 작동하면 객실까지. 나트랑 시내 배송은 무료입니다.</p></div>
+            <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 정확한 시간에 배달할 수 있나요?</h3><p class="text-stone-600 text-sm leading-relaxed">네. 편한 날짜와 시간을 알려주시면 그 시간에 맞춰 도착합니다. 확실히 하려면 미리 주문하시는 것이 좋습니다.</p></div>
+            <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 호텔 주문에는 무엇이 필요한가요?</h3><p class="text-stone-600 text-sm leading-relaxed">호텔 이름과 객실 번호(또는 받는 분 연락처), 날짜와 시간, 그리고 꽃다발이나 예산입니다. 카드 메시지는 선택입니다.</p></div>
+            <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 결제는 어떻게 하나요?</h3><p class="text-stone-600 text-sm leading-relaxed">수령 시 현금과 동·루블·달러·USDT 송금을 받습니다. 방법은 채팅으로 안내해 드립니다.</p></div>
         </div>
     </section>
     <section class="max-w-3xl mx-auto px-6 pb-16 text-center">
         <a href="../blog-ko.html" class="btn-rose inline-block font-medium py-2.5 px-6 rounded-xl text-sm">← 모든 글</a>
     </section>
-    <section class="max-w-3xl mx-auto px-6 pb-12">
-<h2 class="font-serif text-xl font-bold mb-4 text-center" style="color:#1a1a1a;">인기 꽃다발</h2>
-<div class="grid grid-cols-2 sm:grid-cols-4 gap-3"><a href="../catalog/101-krasnaya-roza-v-upakovke-ko.html" class="block bg-white border border-stone-100 rounded-xl p-4 text-sm text-stone-700 hover:border-[#c0687a] hover:text-[#c0687a] transition text-center">화이트 포장 레드 장미 101송이 →</a><a href="../catalog/51-pionovidnaya-rozovaya-roza-v-upakovke-ko.html" class="block bg-white border border-stone-100 rounded-xl p-4 text-sm text-stone-700 hover:border-[#c0687a] hover:text-[#c0687a] transition text-center">화이트 포장 피오니 핑크 장미 51송이 →</a><a href="../catalog/25-rozovyh-roz-v-upakovke-ko.html" class="block bg-white border border-stone-100 rounded-xl p-4 text-sm text-stone-700 hover:border-[#c0687a] hover:text-[#c0687a] transition text-center">화이트 포장 핑크 장미 25송이 →</a><a href="../catalog/krasno-bezhevyy-nabor-sharov-s-ko.html" class="block bg-white border border-stone-100 rounded-xl p-4 text-sm text-stone-700 hover:border-[#c0687a] hover:text-[#c0687a] transition text-center">레드-베이지 풍선 세트 S →</a></div>
-</section>
-</main>
+    </main>
     <footer class="py-12 px-4 mt-auto" style="background:#fce8ee;">
         <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
             <div class="text-center md:text-left">
@@ -298,12 +315,35 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"], a[href*="kakao"], 
         b.parentNode.querySelectorAll('.filt').forEach(function(x){x.classList.remove('active');});
         b.classList.add('active');
         document.querySelectorAll('.product-card').forEach(function(c){
-          var ok=(state.cat===''||c.getAttribute('data-cat')===state.cat)&&(state.color===''||c.getAttribute('data-color')===state.color);
+          var dc=' '+(c.getAttribute('data-cat')||'')+' ';
+          var ok=(state.cat===''||dc.indexOf(' '+state.cat+' ')>-1)&&(state.color===''||c.getAttribute('data-color')===state.color);
           c.style.display=ok?'':'none';
         });
       });
     });
+    var _hf=(location.hash||'').replace('#','');if(_hf){var _tf=bar.querySelector('.filt-group[data-filter="cat"] .filt[data-val="'+_hf+'"]');if(_tf)_tf.click();}
   }
+  (function(){
+    var cf=document.querySelector('.cat-filters'); if(!cf) return;
+    var grid=cf.nextElementSibling; if(!grid) return;
+    function price(c){var el=c.querySelector('p.font-bold');return el?parseInt(el.textContent.replace(/[^0-9]/g,'')||'0',10):0;}
+    function sortBy(dir){
+      var cards=Array.prototype.slice.call(grid.querySelectorAll('.product-card'));
+      cards.sort(function(a,b){return dir==='desc'?price(b)-price(a):price(a)-price(b);});
+      cards.forEach(function(c){grid.appendChild(c);});
+    }
+    sortBy('asc');
+    var sg=document.querySelector('.sort-bar .filt-group[data-filter="sort"]');
+    if(sg){
+      sg.querySelectorAll('.filt').forEach(function(b){
+        b.addEventListener('click',function(){
+          sg.querySelectorAll('.filt').forEach(function(x){x.classList.remove('active');});
+          b.classList.add('active');
+          sortBy(b.getAttribute('data-val'));
+        });
+      });
+    }
+  })();
 })();
 </script>
 </body>

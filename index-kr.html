@@ -165,7 +165,7 @@
                 <a href="catalog-ko.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">💐 카탈로그</a>
                 <a href="blog-ko.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">📖 블로그</a>
                 <a href="balloons-kr.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🎈 풍선</a>
-                <a href="torty-kr.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🎂 케이크</a><a href="nabory-kr.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🎁 선물 세트</a>
+                <a href="torty-kr.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🎂 케이크</a>
                 <span class="w-px h-4 bg-stone-200 mx-1"></span>
                 <a href="index.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🇷🇺 RU</a>
                 <a href="index-en.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🇬🇧 EN</a>
@@ -534,6 +534,22 @@
             </div>
         </a>
     </section>
+<!--MARK-ARTICLES-->
+    <!-- Сквозной блок: Статьи -->
+    <section class="reveal py-10 px-4 max-w-5xl mx-auto w-full">
+        <a href="blog-ko.html" class="block rounded-3xl overflow-hidden relative group" style="height: 340px;">
+            <img src="img/site/articles-banner.avif" alt="블로그" class="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105">
+            <div class="absolute inset-0 transition-opacity duration-500" style="background: linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 100%);"></div>
+            <div class="absolute inset-0 flex flex-col justify-center px-10 md:px-14">
+                <p class="text-xs tracking-widest uppercase mb-3 font-medium" style="color:#fce8ee; opacity:0.85;">읽어보기</p>
+                <h2 class="font-serif text-4xl md:text-5xl font-medium italic text-white mb-4 leading-tight">블로그</h2>
+                <p class="text-white/80 text-sm mb-6 max-w-xs">꽃, 기념일, 베트남 문화에 대한 유용한 글.</p>
+                <span class="inline-flex items-center gap-2 text-sm font-medium text-white border border-white/50 rounded-xl px-5 py-2.5 self-start transition-all duration-300 group-hover:bg-white group-hover:text-stone-800">블로그 보기 →</span>
+            </div>
+        </a>
+    </section>
+<!--/MARK-ARTICLES-->
+
 <!--MARK-CAKES-->
     <!-- Cakes banner -->
     <section class="reveal py-10 px-4 max-w-5xl mx-auto w-full">
@@ -564,104 +580,88 @@
         </a>
     </section>
 
-<!--MARK-ARTICLES-->
-    <!-- Сквозной блок: Статьи -->
-    <section class="reveal py-10 px-4 max-w-5xl mx-auto w-full">
-        <a href="blog-ko.html" class="block rounded-3xl overflow-hidden relative group" style="height: 340px;">
-            <img src="img/site/articles-banner.avif" alt="블로그" class="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105">
-            <div class="absolute inset-0 transition-opacity duration-500" style="background: linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 100%);"></div>
-            <div class="absolute inset-0 flex flex-col justify-center px-10 md:px-14">
-                <p class="text-xs tracking-widest uppercase mb-3 font-medium" style="color:#fce8ee; opacity:0.85;">읽어보기</p>
-                <h2 class="font-serif text-4xl md:text-5xl font-medium italic text-white mb-4 leading-tight">블로그</h2>
-                <p class="text-white/80 text-sm mb-6 max-w-xs">꽃, 기념일, 베트남 문화에 대한 유용한 글.</p>
-                <span class="inline-flex items-center gap-2 text-sm font-medium text-white border border-white/50 rounded-xl px-5 py-2.5 self-start transition-all duration-300 group-hover:bg-white group-hover:text-stone-800">블로그 보기 →</span>
-            </div>
-        </a>
-    </section>
-<!--/MARK-ARTICLES-->
-
 <!-- 카탈로그 -->
     <section id="catalog" data-mark="MARK-CATALOG" class="py-16 px-4 max-w-5xl mx-auto flex-grow">
         <a href="catalog-ko.html" class="block text-center mb-12 group">
             <h2 class="reveal font-serif text-3xl md:text-4xl font-bold group-hover:text-[#c0687a] transition" style="color:#1a1a1a;">카탈로그</h2>
             <span class="inline-block mt-3 text-sm font-medium" style="color:#c0687a;">더 많은 상품 →</span>
         </a>
-        <div id="featured-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="r25" data-color="pink">
                 <div class="pcard-slider">
-                    <img src="img/products/25-rozovyh-roz/1.webp" alt="나트랑 핑크 장미 25송이 배달" loading="lazy" class="pcard-slide active">
-                    
+                    <img src="img/products/25-rozovyh-roz/1.webp" alt="나트랑 핑크 장미 25송이 배달" loading="lazy" class="pcard-slide active"><img src="img/products/25-rozovyh-roz/2.webp" alt="나트랑 핑크 장미 25송이 배달" loading="lazy" class="pcard-slide"><img src="img/products/25-rozovyh-roz/3.webp" alt="나트랑 핑크 장미 25송이 배달" loading="lazy" class="pcard-slide"><img src="img/products/25-rozovyh-roz/4.webp" alt="나트랑 핑크 장미 25송이 배달" loading="lazy" class="pcard-slide"><img src="img/products/25-rozovyh-roz/5.webp" alt="나트랑 핑크 장미 25송이 배달" loading="lazy" class="pcard-slide">
+                    <button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots"><span class="pcard-dot active"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span></div>
                 </div>
                 <a href="catalog/25-rozovyh-roz-ko.html" class="p-5 flex flex-col flex-grow">
                     <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">핑크 장미 25송이</h3>
                     <p class="text-stone-600 text-xs mb-3 flex-grow">하얀 포장의 부드러운 핑크 장미 — 어떤 자리에도 어울리는 선물</p>
                     <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">500 000 동</p>
-                    <p class="text-stone-500 text-xs mb-4">≈ $20 · 28,000원</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $20 · 1 800 ₽</p>
                     <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">자세히 →</span>
                 </a>
             </div>
             <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="mixed" data-color="">
                 <div class="pcard-slider">
-                    <img src="img/products/7-vetok-liliy/1.webp" alt="나트랑 백합 7가지 배달" loading="lazy" class="pcard-slide active">
-                    
+                    <img src="img/products/7-vetok-liliy/1.webp" alt="나트랑 백합 7가지 배달" loading="lazy" class="pcard-slide active"><img src="img/products/7-vetok-liliy/2.webp" alt="나트랑 백합 7가지 배달" loading="lazy" class="pcard-slide"><img src="img/products/7-vetok-liliy/3.webp" alt="나트랑 백합 7가지 배달" loading="lazy" class="pcard-slide"><img src="img/products/7-vetok-liliy/4.webp" alt="나트랑 백합 7가지 배달" loading="lazy" class="pcard-slide"><img src="img/products/7-vetok-liliy/5.webp" alt="나트랑 백합 7가지 배달" loading="lazy" class="pcard-slide"><img src="img/products/7-vetok-liliy/6.webp" alt="나트랑 백합 7가지 배달" loading="lazy" class="pcard-slide"><img src="img/products/7-vetok-liliy/7.webp" alt="나트랑 백합 7가지 배달" loading="lazy" class="pcard-slide"><img src="img/products/7-vetok-liliy/8.webp" alt="나트랑 백합 7가지 배달" loading="lazy" class="pcard-slide">
+                    <button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots"><span class="pcard-dot active"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span></div>
                 </div>
                 <a href="catalog/7-vetok-liliy-ko.html" class="p-5 flex flex-col flex-grow">
                     <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">백합 7가지</h3>
                     <p class="text-stone-600 text-xs mb-3 flex-grow">하얀 포장의 신선한 흰 백합 — 우아하고 향기로운 꽃다발</p>
                     <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">600 000 동</p>
-                    <p class="text-stone-500 text-xs mb-4">≈ $24 · 33,000원</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $24 · 2 100 ₽</p>
                     <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">자세히 →</span>
                 </a>
             </div>
             <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="r51" data-color="white">
                 <div class="pcard-slider">
-                    <img src="img/products/51-belaya-roza-s-evkaliptom/1.webp" alt="흰 장미 51송이 + 유칼립투스" loading="lazy" class="pcard-slide active">
-                    
+                    <img src="img/products/51-belaya-roza-s-evkaliptom/1.webp" alt="흰 장미 51송이 + 유칼립투스" loading="lazy" class="pcard-slide active"><img src="img/products/51-belaya-roza-s-evkaliptom/2.webp" alt="흰 장미 51송이 + 유칼립투스" loading="lazy" class="pcard-slide"><img src="img/products/51-belaya-roza-s-evkaliptom/3.webp" alt="흰 장미 51송이 + 유칼립투스" loading="lazy" class="pcard-slide"><img src="img/products/51-belaya-roza-s-evkaliptom/4.webp" alt="흰 장미 51송이 + 유칼립투스" loading="lazy" class="pcard-slide"><img src="img/products/51-belaya-roza-s-evkaliptom/5.webp" alt="흰 장미 51송이 + 유칼립투스" loading="lazy" class="pcard-slide"><img src="img/products/51-belaya-roza-s-evkaliptom/6.webp" alt="흰 장미 51송이 + 유칼립투스" loading="lazy" class="pcard-slide"><img src="img/products/51-belaya-roza-s-evkaliptom/7.webp" alt="흰 장미 51송이 + 유칼립투스" loading="lazy" class="pcard-slide">
+                    <button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots"><span class="pcard-dot active"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span></div>
                 </div>
                 <a href="catalog/51-belaya-roza-s-evkaliptom-ko.html" class="p-5 flex flex-col flex-grow">
                     <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">흰 장미 51송이 + 유칼립투스</h3>
                     <p class="text-stone-600 text-xs mb-3 flex-grow">유칼립투스가 더해진 우아한 흰 장미 꽃다발</p>
                     <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">1 000 000 동</p>
-                    <p class="text-stone-500 text-xs mb-4">≈ $40 · 55,000원</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $40 · 3 500 ₽</p>
                     <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">자세히 →</span>
                 </a>
             </div>
             <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="balloons" data-color="">
                 <div class="pcard-slider">
-                    <img src="img/products/nabor-sharov-s/1.webp" alt="나트랑 헬륨 풍선 세트 S" loading="lazy" class="pcard-slide active">
-                    
+                    <img src="img/products/nabor-sharov-s/1.webp" alt="나트랑 헬륨 풍선 세트 S" loading="lazy" class="pcard-slide active"><img src="img/products/nabor-sharov-s/2.webp" alt="나트랑 헬륨 풍선 세트 S" loading="lazy" class="pcard-slide"><img src="img/products/nabor-sharov-s/3.webp" alt="나트랑 헬륨 풍선 세트 S" loading="lazy" class="pcard-slide">
+                    <button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots"><span class="pcard-dot active"></span><span class="pcard-dot"></span><span class="pcard-dot"></span></div>
                 </div>
                 <a href="catalog/nabor-sharov-s-ko.html" class="p-5 flex flex-col flex-grow">
                     <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">풍선 세트 S</h3>
                     <p class="text-stone-600 text-xs mb-3 flex-grow">대형 숫자 2개, 또는 숫자 1개 + 풍선 3개, 또는 호일 풍선 7개</p>
                     <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">1 000 000 동</p>
-                    <p class="text-stone-500 text-xs mb-4">≈ $40 · 55,000원</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $40 · 3 500 ₽</p>
                     <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">자세히 →</span>
                 </a>
             </div>
-            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="r101" data-color="red">
+            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="r101" data-color="">
                 <div class="pcard-slider">
-                    <img src="img/products/101-roza-v-korzine/1.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide active">
-                    
+                    <img src="img/products/101-roza-v-korzine/1.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide active"><img src="img/products/101-roza-v-korzine/2.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide"><img src="img/products/101-roza-v-korzine/3.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide"><img src="img/products/101-roza-v-korzine/4.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide"><img src="img/products/101-roza-v-korzine/5.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide"><img src="img/products/101-roza-v-korzine/6.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide"><img src="img/products/101-roza-v-korzine/7.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide"><img src="img/products/101-roza-v-korzine/8.webp" alt="나트랑 바구니 장미 101송이 배달" loading="lazy" class="pcard-slide">
+                    <button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots"><span class="pcard-dot active"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span></div>
                 </div>
                 <a href="catalog/101-roza-v-korzine-ko.html" class="p-5 flex flex-col flex-grow">
                     <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">바구니 장미 101송이</h3>
                     <p class="text-stone-600 text-xs mb-3 flex-grow">바구니에 담긴 핑크-코랄 장미 101송이 — 최고의 감동 선물</p>
                     <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">2 000 000 동</p>
-                    <p class="text-stone-500 text-xs mb-4">≈ $80 · 110,000원</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $80 · 6 900 ₽</p>
                     <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">자세히 →</span>
                 </a>
             </div>
-            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="r101" data-color="purple">
+            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="r101" data-color="">
                 <div class="pcard-slider">
-                    <img src="img/products/151-fioletovaya-roza/1.webp" alt="나트랑 보라 장미 151송이 배달" loading="lazy" class="pcard-slide active">
-                    
+                    <img src="img/products/151-fioletovaya-roza/1.webp" alt="나트랑 보라 장미 151송이 배달" loading="lazy" class="pcard-slide active"><img src="img/products/151-fioletovaya-roza/2.webp" alt="나트랑 보라 장미 151송이 배달" loading="lazy" class="pcard-slide"><img src="img/products/151-fioletovaya-roza/3.webp" alt="나트랑 보라 장미 151송이 배달" loading="lazy" class="pcard-slide"><img src="img/products/151-fioletovaya-roza/4.webp" alt="나트랑 보라 장미 151송이 배달" loading="lazy" class="pcard-slide"><img src="img/products/151-fioletovaya-roza/5.webp" alt="나트랑 보라 장미 151송이 배달" loading="lazy" class="pcard-slide"><img src="img/products/151-fioletovaya-roza/6.webp" alt="나트랑 보라 장미 151송이 배달" loading="lazy" class="pcard-slide"><img src="img/products/151-fioletovaya-roza/7.webp" alt="나트랑 보라 장미 151송이 배달" loading="lazy" class="pcard-slide">
+                    <button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots"><span class="pcard-dot active"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span></div>
                 </div>
                 <a href="catalog/151-fioletovaya-roza-ko.html" class="p-5 flex flex-col flex-grow">
                     <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">보라 장미 151송이</h3>
                     <p class="text-stone-600 text-xs mb-3 flex-grow">화려한 보라 장미 대형 꽃다발 — 최고의 임팩트</p>
                     <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">2 250 000 동</p>
-                    <p class="text-stone-500 text-xs mb-4">≈ $90 · 124,000원</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $90 · 7 800 ₽</p>
                     <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">자세히 →</span>
                 </a>
             </div>
