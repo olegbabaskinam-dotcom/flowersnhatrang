@@ -935,10 +935,23 @@ function setPoint(la,ln,label){
   setTimeout(()=>lmap.invalidateSize(),150);
   updateFound();
 }
+/* ЗОНЫ ДОСТАВКИ по широте точки (побережье с севера на юг). Границы — ориентировочные, калибруются. */
+function zoneFor(lat){
+  if(lat>=12.18) return {key:'nt', label:'Нячанг', fee:0};
+  if(lat>=12.05) return {key:'near', label:'рядом с Нячангом (юг)', fee:300000};
+  return {key:'camranh', label:'Камрань', fee:600000};
+}
 function updateFound(){
   const box=document.getElementById('foundAddr');
   box.classList.remove('hidden');
-  box.innerHTML="📍 <b>"+(foundLabel||"Точка на карте")+"</b><br><a href='"+mapsLink()+"' target='_blank'>"+mapsLink()+"</a>";
+  var z=zoneFor(latlng.la);
+  window.__delFee=z.fee; window.__delLabel=z.label;
+  var feeTxt=z.fee?('доплата +'+window.fmtMoney(z.fee,'VND')):'бесплатно';
+  var col=z.fee?'#8a6d3b':'#256b3c';
+  box.innerHTML="📍 <b>"+(foundLabel||"Точка на карте")+"</b><br>"+
+    "<a href='"+mapsLink()+"' target='_blank'>"+mapsLink()+"</a>"+
+    "<div style='margin-top:8px;font-weight:600;color:"+col+"'>🚚 Зона доставки: "+z.label+" — "+feeTxt+"</div>"+
+    (z.fee?"<div style='font-size:12px;color:#8a6d3b;margin-top:2px'>В эту зону доставка возможна от 1 000 000 ₫.</div>":"");
 }
 function mapsLink(){ return "https://www.google.com/maps?q="+latlng.la+","+latlng.ln; }
 
@@ -1027,6 +1040,16 @@ form.addEventListener('submit',async e=>{
     if(hc&&!ho){ err.textContent="🎂 Торт можно заказать только вместе с букетом, шарами или набором."; return; }
   }}
   if(!latlng){ err.textContent="Укажите адрес доставки — найдите в поиске или нажмите «Моё местоположение»."; return; }
+  // доставка по зоне + минимум 1 000 000 ₫ в платные зоны
+  var delFee=window.__delFee||0, delLabel=window.__delLabel||'Нячанг';
+  var subtotal=(window.Cart?Cart.total():0);
+  if(delFee>0 && subtotal>0 && subtotal<1000000){
+    err.textContent="В зону «"+delLabel+"» доставка от 1 000 000 ₫ (у вас "+window.fmtMoney(subtotal,'VND')+"). Добавьте товаров.";
+    return;
+  }
+  var amountStr=form.amount.value.trim();
+  if(delFee>0){ amountStr+="  +  доставка "+delLabel+" "+window.fmtMoney(delFee,'VND'); if(subtotal>0) amountStr+="  =  "+window.fmtMoney(subtotal+delFee,'VND'); }
+  else { amountStr+="  ·  доставка Нячанг бесплатно"; }
   const chan=form.querySelector('input[name=chan]:checked').value;
   const addr=form.rcpt.value.trim()+" — "+(foundLabel?foundLabel+", ":"")+form.addrText.value.trim()
            +(form.comment.value.trim()?(" ("+form.comment.value.trim()+")"):"")
@@ -1034,7 +1057,7 @@ form.addEventListener('submit',async e=>{
   const data={
     action:"new",
     items:form.items.value.trim(),
-    amount:form.amount.value.trim(),
+    amount:amountStr,
     delivery:ruDate(form.deliveryDate.value)+", "+form.deliveryTime.value,
     address:addr,
     contact:chan+": "+form.contact.value.trim(),
