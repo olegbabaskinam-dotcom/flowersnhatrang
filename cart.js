@@ -120,10 +120,35 @@
     });
   }
 
+  // ---- пункты меню «Оформить заказ» + «Корзина» (десктоп и мобильное) ----
+  function injectNav() {
+    var nav = document.querySelector("header nav");
+    if (nav && !nav.querySelector(".flw-nav")) {
+      var sep = nav.querySelector("span.w-px");
+      var mk = function (href, label, filled) {
+        var a = document.createElement("a"); a.href = href; a.className = "flw-nav px-3 py-1.5 rounded-lg text-xs font-medium transition";
+        if (filled) { a.style.cssText = "background:" + ROSE + ";color:#fff"; }
+        else { a.className += " text-stone-500 hover:text-[#c0687a] hover:bg-stone-50"; }
+        a.textContent = label; return a;
+      };
+      var l1 = mk("order.html", "🧾 Оформить заказ", true);
+      var l2 = mk("cart.html", "🛒 Корзина", false);
+      if (sep) { nav.insertBefore(l2, sep); nav.insertBefore(l1, l2); }
+      else { nav.appendChild(l1); nav.appendChild(l2); }
+    }
+    var m = document.getElementById("mnav");
+    if (m && !m.querySelector(".flw-mnav")) {
+      var st = "display:block;padding:10px 8px;border-radius:8px;text-decoration:none";
+      var h = '<a href="order.html" class="flw-mnav" style="' + st + ';color:#fff;background:' + ROSE + ';font-weight:700;margin-bottom:4px">🧾 Оформить заказ</a>' +
+              '<a href="cart.html" class="flw-mnav" style="' + st + ';color:#57534e">🛒 Корзина</a>';
+      m.insertAdjacentHTML("afterbegin", h);
+    }
+  }
+
   function refresh() { fab(); }
   document.addEventListener("cart:change", refresh);
   document.addEventListener("DOMContentLoaded", function () {
-    injectButtons(); fab();
+    injectButtons(); injectNav(); fab();
     // каталог может дорисовывать карточки/сортировать — периодически проверяем
     var n = 0; var iv = setInterval(function () { injectButtons(); if (++n > 10) clearInterval(iv); }, 400);
   });
