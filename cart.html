@@ -979,20 +979,10 @@ function setPoint(la,ln,label){
   setTimeout(()=>lmap.invalidateSize(),150);
   updateFound();
 }
-/* ГРАНИЦА зоны доставки (полигон вдоль побережья Нячанг→Камрань). Вне контура — не возим. Калибруется. */
-var AREA=[
-  [12.315,109.175],[12.305,109.215],[12.255,109.225],[12.19,109.225],[12.10,109.215],
-  [12.02,109.20],[11.955,109.19],[11.905,109.175],[11.90,109.135],[11.965,109.14],
-  [12.03,109.155],[12.10,109.165],[12.18,109.165],[12.245,109.16],[12.315,109.155]
-];
-function inArea(lat,lon){
-  var x=lon,y=lat,inside=false,n=AREA.length;
-  for(var i=0,j=n-1;i<n;j=i++){
-    var xi=AREA[i][1],yi=AREA[i][0],xj=AREA[j][1],yj=AREA[j][0];
-    if(((yi>y)!=(yj>y)) && (x<(xj-xi)*(y-yi)/(yj-yi)+xi)) inside=!inside;
-  }
-  return inside;
-}
+/* ГРАНИЦА зоны доставки: прямоугольник вдоль побережья Нячанг→Камрань. Вне — не возим. Калибруется. */
+function inArea(lat,lon){ return lat>=11.86 && lat<=12.34 && lon>=109.13 && lon<=109.28; }
+/* проверка, что координаты вообще в нашем регионе (отсекаем кривой парсинг ссылок) */
+function validGeo(la,ln){ return la>11.6 && la<12.7 && ln>109.0 && ln<109.45; }
 /* ЗОНЫ ДОСТАВКИ по широте точки (внутри контура). Границы калибруются. */
 function zoneFor(lat){
   if(lat>=12.18) return {key:'nt', label:'Нячанг', fee:0};
@@ -1102,13 +1092,13 @@ async function handleGmapLink(){
   var err=document.getElementById('gmapErr'); err.textContent="";
   if(!v) return;
   var c=extractLatLng(v);
-  if(c){ document.getElementById('addrSearch').value=""; setPoint(c[0],c[1],"Точка с карты"); reverseGeo(c[0],c[1]); return; }
+  if(c && validGeo(c[0],c[1])){ document.getElementById('addrSearch').value=""; setPoint(c[0],c[1],"Точка с карты"); reverseGeo(c[0],c[1]); return; }
   err.style.color="#78716c"; err.textContent="Определяем точку…";
   try{
     var r=await fetch(CONFIG.API,{method:"POST",body:new URLSearchParams({action:"geo",url:v})});
     var d=await r.json();
-    if(d && d.ok){ err.textContent=""; setPoint(d.lat,d.lng,"Точка с карты"); reverseGeo(d.lat,d.lng); }
-    else { err.style.color="#9b2c2c"; err.textContent="Не удалось определить координаты по ссылке. Найдите место в поиске выше или вставьте ссылку с цифрами координат."; }
+    if(d && d.ok && validGeo(d.lat,d.lng)){ err.textContent=""; setPoint(d.lat,d.lng,"Точка с карты"); reverseGeo(d.lat,d.lng); }
+    else { err.style.color="#9b2c2c"; err.textContent="Не удалось точно определить место по ссылке. Найдите его в поиске выше (уже ищет и Камрань) или подвиньте булавку на карте."; }
   }catch(_){ err.style.color="#9b2c2c"; err.textContent="Не удалось определить. Попробуйте поиск выше."; }
 }
 document.getElementById('gmapBtn').addEventListener('click',handleGmapLink);
