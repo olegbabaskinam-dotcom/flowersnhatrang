@@ -844,6 +844,10 @@
       box.appendChild(b);
     });
   }
+  function ordersOpen(){
+    try{ var s=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Ho_Chi_Minh',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date()); return s>='2026-07-27'; }catch(e){ return false; }
+  }
+  window.ordersOpen=ordersOpen;
   function render(){
     renderCur();
     var items=Cart.items(), list=document.getElementById("list"), sum=document.getElementById("sumBox");
@@ -870,13 +874,29 @@
     var hasOther=items.some(function(x){return !/(^|\s)cakes(\s|$)/.test(x.cat);});
     var cakeBlocked=hasCake&&!hasOther;
     document.getElementById("cakeWarn").style.display=cakeBlocked?"block":"none";
+    // строка доставки в корзине (если выбран адрес и зона платная)
+    var delFee=(window.__outside?0:(window.__delFee||0));
+    if(delFee>0){
+      var dr=document.createElement("div"); dr.className="ci";
+      dr.innerHTML='<div style="width:66px;height:66px;border-radius:.7rem;background:#fdf2f5;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0">🚚</div>'+
+        '<div style="flex:1"><div style="font-weight:600;font-size:15px;color:#1a1a1a">Доставка · '+(window.__delLabel||"")+'</div>'+
+        '<div style="color:#78716c;font-size:13px;margin-top:2px">'+money(delFee)+'</div></div>';
+      list.appendChild(dr);
+    }
+    var grand=total+delFee, open=ordersOpen();
     sum.innerHTML='<div style="background:#fff;border:1px solid #f0e0e5;border-radius:16px;padding:16px 18px;margin-top:4px">'+
       '<div style="display:flex;justify-content:space-between;padding:4px 0"><span>Товаров</span><span>'+Cart.count()+' шт.</span></div>'+
-      '<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:21px;font-weight:800"><span>Итого</span><span>'+money(total)+'</span></div>'+
-      (CUR!=="VND"?'<div style="display:flex;justify-content:space-between;padding:4px 0;color:#78716c;font-size:13px"><span>В донгах</span><span>'+window.fmtMoney(total,"VND")+'</span></div>':'')+
+      (delFee>0?'<div style="display:flex;justify-content:space-between;padding:4px 0"><span>Доставка · '+(window.__delLabel||"")+'</span><span style="color:#8a6d3b;font-weight:600">'+money(delFee)+'</span></div>':'')+
+      '<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:21px;font-weight:800"><span>Итого</span><span>'+money(grand)+'</span></div>'+
+      (CUR!=="VND"?'<div style="display:flex;justify-content:space-between;padding:4px 0;color:#78716c;font-size:13px"><span>В донгах</span><span>'+window.fmtMoney(grand,"VND")+'</span></div>':'')+
       '</div>'+
-      (cakeBlocked?'<div style="background:#fdf6ec;border:1px solid #f3e2c7;color:#8a6d3b;border-radius:12px;padding:10px 13px;font-size:13px;margin-top:12px">Оформление станет доступно, когда в корзине будет букет, шары или набор.</div>'
-                 :'<button class="flw-btn flw-btn-primary" style="display:block;width:100%;border:none;cursor:pointer;margin-top:16px" onclick="showCheckout()">Оформить заказ ▾</button>')+
+      (!open
+        ? '<div style="background:#fdf6ec;border:1px solid #f3e2c7;color:#8a6d3b;border-radius:12px;padding:12px 15px;font-size:14px;margin-top:14px">🗓 <b>Онлайн-оформление заказов откроется 27 июля.</b> Пока оформить нельзя — напишите нам, поможем и примем заказ: '
+            +'<a href="https://wa.me/37443529162" target="_blank" style="color:#a94f63;font-weight:700">WhatsApp</a> · '
+            +'<a href="https://t.me/babaskin_o" target="_blank" style="color:#a94f63;font-weight:700">Telegram</a> · '
+            +'<a href="https://instagram.com/flowers_vietnam_inst" target="_blank" style="color:#a94f63;font-weight:700">Instagram</a></div>'
+        : (cakeBlocked?'<div style="background:#fdf6ec;border:1px solid #f3e2c7;color:#8a6d3b;border-radius:12px;padding:10px 13px;font-size:13px;margin-top:12px">Оформление станет доступно, когда в корзине будет букет, шары или набор.</div>'
+                     :'<button class="flw-btn flw-btn-primary" style="display:block;width:100%;border:none;cursor:pointer;margin-top:16px" onclick="showCheckout()">Оформить заказ ▾</button>'))+
       '<a class="flw-btn flw-btn-outline" style="display:block;margin-top:10px" href="catalog-ru.html">Добавить ещё товары</a>';
   }
   document.addEventListener("cart:change",render);
@@ -978,6 +998,7 @@ function setPoint(la,ln,label){
   lmap.setView([latlng.la,latlng.ln],16);
   setTimeout(()=>lmap.invalidateSize(),150);
   updateFound();
+  try{ if(typeof render==='function') render(); }catch(e){}   // обновить строку доставки + Итого в корзине
 }
 /* ГРАНИЦА зоны доставки: прямоугольник вдоль побережья Нячанг→Камрань. Вне — не возим. Калибруется. */
 function inArea(lat,lon){ return lat>=11.86 && lat<=12.34 && lon>=109.13 && lon<=109.28; }
@@ -1143,6 +1164,7 @@ form.addEventListener('submit',async e=>{
   if(document.getElementById('website').value) return;
   const btn=document.getElementById('submitBtn'), err=document.getElementById('err1');
   err.textContent="";
+  if(window.ordersOpen && !window.ordersOpen()){ err.textContent="🗓 Онлайн-оформление заказов откроется 27 июля. Напишите нам в мессенджере — примем заказ."; return; }
   if(window.Cart){ var its=Cart.items(); if(its.length){
     var hc=its.some(function(x){return /(^|\s)cakes(\s|$)/.test(x.cat);});
     var ho=its.some(function(x){return !/(^|\s)cakes(\s|$)/.test(x.cat);});
@@ -1343,6 +1365,7 @@ function prefillFromCart(){
 }
 // раскрыть форму (аккордеон) — корзина остаётся выше
 function showCheckout(){
+  if(window.ordersOpen && !window.ordersOpen()){ alert('🗓 Онлайн-оформление заказов откроется 27 июля. Пока напишите нам в мессенджере — примем заказ.'); return; }
   var cf=document.getElementById('coform'); if(!cf) return;
   cf.style.display='block'; prefillFromCart();
   var h=document.getElementById('coHead'); if(h) h.scrollIntoView({behavior:'smooth',block:'start'});
