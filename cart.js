@@ -101,7 +101,7 @@
     var m = a.getAttribute("href").match(/catalog\/(.+?)-(?:ru|en|ko)\.html/);
     var id = m ? m[1] : a.getAttribute("href");
     var h3 = card.querySelector("h3");
-    var priceEl = card.querySelector("a .font-bold");
+    var priceEl = card.querySelector("a p.font-bold") || card.querySelector("a .font-bold"); // цена = <p>, не заголовок
     var img = card.querySelector(".pcard-slide");
     var price = priceEl ? parseInt((priceEl.textContent || "").replace(/[^\d]/g, ""), 10) : 0;
     return { id: id, name: h3 ? h3.textContent.trim() : "Товар", price: price || 0,
@@ -125,6 +125,12 @@
       if (card.querySelector(".flw-add")) return;
       var d = parseCard(card);
       if (!d || !d.price) return;
+      // «подробнее» делаем вторичной кнопкой (контур), чтобы не было двух одинаковых
+      var det = card.querySelector(".btn-rose-filled");
+      if (det) {
+        det.className = "flw-det";
+        det.style.cssText = "display:block;text-align:center;border:1px solid #e3c4cd;color:#a94f63;background:#fff;font-weight:600;padding:10px 16px;border-radius:.75rem;font-size:12px;";
+      }
       card.appendChild(mkBtn(d, false));
     });
   }
@@ -145,8 +151,20 @@
     pb.parentNode.insertBefore(mkBtn(d, true), pb.nextSibling);
   }
 
-  // пункты меню (только мобильное — десктоп не загромождаем: есть баннер/кнопка + плавающий виджет)
+  // пункты меню «Оформить заказ» + «Корзина» (десктоп-nav и мобильное #mnav)
   function injectNav() {
+    var nav = document.querySelector("header nav");
+    if (nav && !nav.querySelector(".flw-nav")) {
+      var sep = nav.querySelector("span.w-px");
+      var mk = function (href, label) {
+        var a = document.createElement("a"); a.href = BASE + href;
+        a.className = "flw-nav px-3 py-1.5 rounded-lg text-xs font-medium text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition";
+        a.textContent = label; return a;
+      };
+      var l1 = mk("order.html", L().order), l2 = mk("cart.html", L().cart);
+      if (sep) { nav.insertBefore(l2, sep); nav.insertBefore(l1, l2); }
+      else { nav.appendChild(l1); nav.appendChild(l2); }
+    }
     var mm = document.getElementById("mnav");
     if (mm && !mm.querySelector(".flw-mnav")) {
       var st = "display:block;padding:10px 8px;border-radius:8px;text-decoration:none;color:#57534e";

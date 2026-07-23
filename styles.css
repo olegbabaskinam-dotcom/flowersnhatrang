@@ -6,3 +6,6 @@
 
 /* логотип-подпись в шапке: 2 строки, не комкать (десктоп) */
 @media (min-width:768px){header .leading-tight{white-space:nowrap;}}
+
+/* шире шапка на десктопе — чтобы влезли пункты Оформить/Корзина без наезда на логотип */
+@media (min-width:768px){header .max-w-5xl{max-width:74rem;}}
