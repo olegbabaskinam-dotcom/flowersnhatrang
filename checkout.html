@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Оформление заказа — Доставка цветов в Нячанге</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  :root{
+    --pink:#c0687a; --pink-d:#a94f63; --ink:#292524; --muted:#78716c;
+    --line:#e7e5e4; --bg:#faf8f6; --card:#fff; --ok:#1f9d55; --warn:#b45309;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    line-height:1.5;-webkit-font-smoothing:antialiased;}
+  .serif{font-family:ui-serif,Georgia,"Times New Roman",serif;}
+  header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10;}
+  header .in{max-width:640px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:10px;}
+  header img{height:34px;width:auto;display:block;border-radius:6px}
+  header a{color:inherit;text-decoration:none;font-weight:600;font-size:15px}
+  .wrap{max-width:640px;margin:0 auto;padding:18px 16px 60px;}
+  h1{font-size:24px;margin:8px 0 4px;font-weight:700;}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 18px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:16px;}
+  label{display:block;font-size:13px;font-weight:600;margin:0 0 6px;}
+  .req::after{content:" *";color:var(--pink)}
+  input,textarea,select{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;
+    font-size:16px;font-family:inherit;background:#fff;color:var(--ink);outline:none;}
+  input:focus,textarea:focus,select:focus{border-color:var(--pink);box-shadow:0 0 0 3px rgba(192,104,122,.14);}
+  textarea{min-height:78px;resize:vertical}
+  .field{margin-bottom:14px}
+  .row{display:flex;gap:10px}.row>*{flex:1}
+  .hint{font-size:12px;color:var(--muted);margin-top:5px}
+  .chan{display:flex;gap:8px;flex-wrap:wrap}
+  .chan label{flex:1;min-width:90px;border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center;
+    font-size:14px;cursor:pointer;margin:0;user-select:none;transition:.15s}
+  .chan input{display:none}
+  .chan input:checked+span{color:var(--pink-d);font-weight:700}
+  .chan label:has(input:checked){border-color:var(--pink);background:#fdf2f5}
+  .btn{display:block;width:100%;border:none;border-radius:14px;padding:15px;font-size:16px;font-weight:700;
+    background:var(--pink);color:#fff;cursor:pointer;transition:.15s;text-align:center}
+  .btn:hover{background:var(--pink-d)}
+  .btn:disabled{opacity:.55;cursor:default}
+  .btn.ghost{background:#fff;color:var(--pink-d);border:1px solid var(--pink)}
+  .note{background:#fdf6ec;border:1px solid #f3e2c7;color:#8a6d3b;border-radius:12px;padding:11px 13px;font-size:13px;margin-bottom:16px}
+  .banner{background:#eef7f0;border:1px solid #cfe9d6;color:#256b3c;border-radius:12px;padding:12px 14px;font-size:14px;margin-bottom:16px;display:flex;gap:10px;align-items:center;justify-content:space-between}
+  .banner button{border:1px solid #256b3c;background:#fff;color:#256b3c;border-radius:9px;padding:7px 11px;font-weight:700;cursor:pointer;font-size:13px}
+  .hidden{display:none!important}
+  .oid{font-family:ui-monospace,Menlo,monospace;font-weight:700;letter-spacing:1px;color:var(--pink-d)}
+  /* payment */
+  .pays{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}
+  .pay{border:1px solid var(--line);border-radius:14px;padding:14px 10px;text-align:center;cursor:pointer;font-weight:600;font-size:14px;background:#fff;transition:.15s}
+  .pay:hover{border-color:var(--pink)}
+  .pay.on{border-color:var(--pink);background:#fdf2f5;color:var(--pink-d)}
+  .pay .em{font-size:22px;display:block;margin-bottom:4px}
+  .details{margin-top:14px}
+  .kv{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line);font-size:15px}
+  .kv:last-child{border-bottom:none}
+  .kv b{font-weight:700;text-align:right;word-break:break-all}
+  .copy{border:1px solid var(--line);background:#fff;border-radius:9px;padding:5px 9px;font-size:12px;cursor:pointer;color:var(--pink-d);font-weight:700;white-space:nowrap}
+  .qr{display:flex;justify-content:center;margin:14px 0}
+  .qr img,.qr canvas,.qr>div{border:1px solid var(--line);border-radius:14px;padding:10px;background:#fff}
+  .warnbox{background:#fff4f4;border:1px solid #f3cccc;color:#9b2c2c;border-radius:12px;padding:10px 13px;font-size:13px;margin-top:12px}
+  .filewrap{border:2px dashed var(--line);border-radius:14px;padding:18px;text-align:center;cursor:pointer;color:var(--muted);font-size:14px}
+  .filewrap.ok{border-color:var(--ok);color:var(--ok);background:#f2fbf5}
+  .prev{max-height:180px;margin:12px auto 0;border-radius:12px;display:none}
+  .done{text-align:center;padding:20px 6px}
+  .done .big{font-size:52px}
+  .spin{display:inline-block;width:18px;height:18px;border:3px solid #fff;border-top-color:transparent;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-3px;margin-right:8px}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  .err{color:#9b2c2c;font-size:14px;margin-top:10px;text-align:center;min-height:18px}
+</style>
+</head>
+<body>
+
+<header><div class="in">
+  <a href="index.html"><img src="img/site/logo.webp" alt="Цветы Нячанг"> Цветы Нячанг</a>
+</div></header>
+
+<div class="wrap">
+
+  <!-- Возобновление незавершённого заказа -->
+  <div id="resume" class="banner hidden">
+    <span>У вас есть незавершённый заказ <span class="oid" id="resumeId"></span>. Догрузить чек оплаты?</span>
+    <button id="resumeBtn">Продолжить</button>
+  </div>
+
+  <!-- ШАГ 1: данные заказа -->
+  <section id="step1">
+    <h1 class="serif">Оформление заказа</h1>
+    <p class="sub">Заполните данные — мы подтвердим заказ в чате.</p>
+
+    <div class="note">🕒 Подтверждаем заказы ежедневно с 06:00 до 21:00, обычно в течение 10 минут. Заказы ночью подтверждаем утром.</div>
+
+    <form id="orderForm" autocomplete="on">
+      <div class="card">
+        <div class="field">
+          <label class="req" for="items">Что заказываете</label>
+          <textarea id="items" name="items" placeholder="Например: 25 красных роз в шляпной коробке" required></textarea>
+        </div>
+        <div class="field">
+          <label class="req" for="amount">Сумма заказа</label>
+          <input id="amount" name="amount" placeholder="Например: 690 000 ₫" required>
+          <div class="hint">Сумму видно на карточке товара. Скоро будет корзина — пока укажите вручную.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="field">
+          <label class="req" for="rcpt">Кому и куда доставить</label>
+          <input id="rcpt" name="rcpt" placeholder="Имя получателя" required style="margin-bottom:10px">
+          <input id="address" name="address" placeholder="Адрес / отель, номер / ресепшн" required>
+        </div>
+        <div class="field">
+          <label class="req" for="slot">Когда доставить</label>
+          <select id="slot" name="slot" required></select>
+          <div class="hint" id="slotHint"></div>
+        </div>
+        <div class="field">
+          <label for="comment">Комментарий (по желанию)</label>
+          <input id="comment" name="comment" placeholder="Открытка, пожелания, сюрприз…">
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="field">
+          <label class="req">Куда вам написать подтверждение?</label>
+          <div class="chan">
+            <label><input type="radio" name="chan" value="WhatsApp" checked><span>WhatsApp</span></label>
+            <label><input type="radio" name="chan" value="Telegram"><span>Telegram</span></label>
+            <label><input type="radio" name="chan" value="Instagram"><span>Instagram</span></label>
+          </div>
+        </div>
+        <div class="field">
+          <label class="req" for="contact">Ваш номер / ник для связи</label>
+          <input id="contact" name="contact" placeholder="+7… / @username" required>
+        </div>
+      </div>
+
+      <!-- honeypot -->
+      <input type="text" name="website" id="website" tabindex="-1" autocomplete="off"
+             style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
+
+      <button type="submit" class="btn" id="submitBtn">Оформить заказ → перейти к оплате</button>
+      <div class="err" id="err1"></div>
+    </form>
+  </section>
+
+  <!-- ШАГ 2: оплата -->
+  <section id="step2" class="hidden">
+    <h1 class="serif">Оплата заказа <span class="oid" id="orderIdShow"></span></h1>
+    <p class="sub">Заявка принята. Выберите способ оплаты, оплатите и загрузите скрин чека.</p>
+
+    <div class="card">
+      <label>Способ оплаты</label>
+      <div class="pays">
+        <div class="pay" data-m="rub"><span class="em">🇷🇺</span>Рубли (СБП)</div>
+        <div class="pay" data-m="vnd"><span class="em">🇻🇳</span>Донги (VND)</div>
+        <div class="pay" data-m="usdt"><span class="em">💠</span>USDT TRC-20</div>
+        <div class="pay" data-m="kzt"><span class="em">🇰🇿</span>Карта Kaspi</div>
+      </div>
+      <div id="payDetails" class="details"></div>
+    </div>
+
+    <div class="card" id="receiptCard" style="display:none">
+      <label class="req">Скрин оплаты (чек)</label>
+      <div class="filewrap" id="fileWrap">📎 Нажмите, чтобы прикрепить скрин чека</div>
+      <input type="file" id="receipt" accept="image/*" class="hidden">
+      <img id="preview" class="prev" alt="чек">
+      <button class="btn" id="sendReceipt" style="margin-top:14px" disabled>Я оплатил — отправить чек</button>
+      <div class="err" id="err2"></div>
+    </div>
+  </section>
+
+  <!-- ГОТОВО -->
+  <section id="stepDone" class="hidden">
+    <div class="card done">
+      <div class="big">🌸</div>
+      <h1 class="serif" style="margin:8px 0">Заявка принята!</h1>
+      <p class="sub" id="doneText"></p>
+      <a href="index.html" class="btn ghost" style="margin-top:8px">Вернуться на сайт</a>
+    </div>
+  </section>
+
+</div>
+
+<script>
+/* ================== КОНФИГ (правится тут) ================== */
+const CONFIG = {
+  API: "https://script.google.com/macros/s/AKfycbzDz8tCuWtC4oIA3ajYgt_m5Ui9fZPTgVRiXzVjJTNVrSiP4vNvaNzblCpWJSELOqVC/exec",
+};
+const PAY = {
+  rub: { title:"Рубли · СБП", rows:[
+      ["Номер телефона","+79627155432","+79627155432"],
+      ["Получатель","Оксана Анатольевна Я.",null],
+      ["Банк","Сбербанк или Тинькофф",null],
+    ], warn:"⚠️ Переводите только в Сбербанк или Тинькофф. На другие банки — не переводить!" },
+  vnd: { title:"Донги · BIDV", rows:[
+      ["Банк","BIDV (PGD Bình Tân)",null],
+      ["Номер счёта","8865888241","8865888241"],
+      ["Получатель","BABASKIN OLEG",null],
+    ], vietqr:"https://img.vietqr.io/image/970418-8865888241-qr_only.png?accountName=BABASKIN%20OLEG" },
+  usdt:{ title:"USDT · TRON (TRC-20)", rows:[
+      ["Сеть","TRON (TRC-20)",null],
+      ["Адрес кошелька","TGniTscazmp3MJrmLxSgDPnNGeZPyMPVhb","TGniTscazmp3MJrmLxSgDPnNGeZPyMPVhb"],
+    ], qrtext:"TGniTscazmp3MJrmLxSgDPnNGeZPyMPVhb",
+       warn:"⚠️ Только сеть TRON (TRC-20). Другая сеть = потеря средств." },
+  kzt: { title:"Карта · Kaspi Bank", rows:[
+      ["Номер карты","4400 4303 0499 7486","4400430304997486"],
+      ["Держатель","Egor Merkulov",null],
+      ["Банк","Kaspi Bank",null],
+    ] },
+};
+const LS = "flw_order"; // localStorage ключ
+
+/* ================== ВРЕМЯ / СЛОТЫ ================== */
+function ntParts(){
+  const f=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Ho_Chi_Minh',
+    year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false});
+  const p={}; f.formatToParts(new Date()).forEach(x=>p[x.type]=x.value);
+  return {y:+p.year,mo:+p.month,d:+p.day,h:+p.hour};
+}
+function pad(n){return n<10?'0'+n:''+n}
+function buildSlots(){
+  const t=ntParts();
+  const today=new Date(Date.UTC(t.y,t.mo-1,t.d));
+  let target=new Date(today), startHour;
+  if(t.h>=6 && t.h<22){ target.setUTCDate(target.getUTCDate()+1); startHour=6; }   // день → завтра
+  else { if(t.h>=22) target.setUTCDate(target.getUTCDate()+1); startHour=9; }        // ночь → ближайшее утро с 09
+  // подпись даты
+  const diff=Math.round((target-today)/86400000);
+  const dayWord=diff===0?"Сегодня":(diff===1?"Завтра":"");
+  const dLabel=pad(target.getUTCDate())+"."+pad(target.getUTCMonth()+1);
+  const sel=document.getElementById('slot'); sel.innerHTML="";
+  for(let h=startHour;h<=21;h++){
+    const o=document.createElement('option');
+    const time=pad(h)+":00";
+    o.value=(dayWord?dayWord+" ":"")+dLabel+", "+time;
+    o.textContent=o.value;
+    sel.appendChild(o);
+  }
+  document.getElementById('slotHint').textContent =
+    "Доставка "+ (dayWord?dayWord.toLowerCase():dLabel) +" с "+pad(startHour)+":00 до 22:00.";
+}
+
+/* ================== ОТПРАВКА ================== */
+async function apiPost(data){
+  const res=await fetch(CONFIG.API,{method:"POST",body:new URLSearchParams(data)});
+  return await res.json();
+}
+
+/* ---- Шаг 1: оформить ---- */
+const form=document.getElementById('orderForm');
+form.addEventListener('submit',async e=>{
+  e.preventDefault();
+  if(document.getElementById('website').value) return; // honeypot
+  const btn=document.getElementById('submitBtn'), err=document.getElementById('err1');
+  err.textContent="";
+  const chan=form.querySelector('input[name=chan]:checked').value;
+  const data={
+    action:"new",
+    items:form.items.value.trim(),
+    amount:form.amount.value.trim(),
+    delivery:form.slot.value,
+    address:form.rcpt.value.trim()+" — "+form.address.value.trim()
+            +(form.comment.value.trim()?(" ("+form.comment.value.trim()+")"):""),
+    contact:chan+": "+form.contact.value.trim(),
+  };
+  btn.disabled=true; const old=btn.innerHTML; btn.innerHTML='<span class="spin"></span>Отправляем…';
+  try{
+    const r=await apiPost(data);
+    if(!r||!r.ok) throw new Error();
+    saveOrder({id:r.orderId, paid:false});
+    goPay(r.orderId);
+  }catch(_){
+    err.textContent="Не удалось отправить. Проверьте интернет и попробуйте ещё раз.";
+    btn.disabled=false; btn.innerHTML=old;
+  }
+});
+
+/* ---- Шаг 2: оплата ---- */
+let currentId=null, receiptB64=null;
+function goPay(id){
+  currentId=id;
+  document.getElementById('orderIdShow').textContent=id;
+  document.getElementById('step1').classList.add('hidden');
+  document.getElementById('resume').classList.add('hidden');
+  document.getElementById('step2').classList.remove('hidden');
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('.pay').forEach(el=>{
+  el.addEventListener('click',()=>{
+    document.querySelectorAll('.pay').forEach(p=>p.classList.remove('on'));
+    el.classList.add('on');
+    renderPay(el.dataset.m);
+    document.getElementById('receiptCard').style.display="block";
+  });
+});
+function renderPay(m){
+  const p=PAY[m], box=document.getElementById('payDetails');
+  let html='<div style="font-weight:700;margin:6px 0 4px">'+p.title+'</div>';
+  p.rows.forEach(r=>{
+    html+='<div class="kv"><span style="color:var(--muted)">'+r[0]+'</span><b>'+r[1]
+        +(r[2]?' <button class="copy" data-c="'+r[2]+'">копировать</button>':'')+'</b></div>';
+  });
+  if(p.warn) html+='<div class="warnbox">'+p.warn+'</div>';
+  html+='<div class="qr" id="qrBox"></div>';
+  box.innerHTML=html;
+  const qr=document.getElementById('qrBox');
+  if(p.vietqr){ const img=new Image(); img.src=p.vietqr; img.alt="QR VietQR"; img.width=220; qr.appendChild(img); }
+  else if(p.qrtext){ new QRCode(qr,{text:p.qrtext,width:200,height:200,correctLevel:QRCode.CorrectLevel.M}); }
+  else qr.remove();
+  box.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',()=>{
+    navigator.clipboard.writeText(b.dataset.c); b.textContent="скопировано ✓";
+    setTimeout(()=>b.textContent="копировать",1500);
+  }));
+}
+
+/* ---- Чек: выбор, сжатие, отправка ---- */
+const fileWrap=document.getElementById('fileWrap'), fileInput=document.getElementById('receipt');
+fileWrap.addEventListener('click',()=>fileInput.click());
+fileInput.addEventListener('change',()=>{
+  const f=fileInput.files[0]; if(!f) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const img=new Image();
+    img.onload=()=>{
+      const max=1200; let w=img.width,h=img.height;
+      if(w>h&&w>max){h=Math.round(h*max/w);w=max;} else if(h>max){w=Math.round(w*max/h);h=max;}
+      const c=document.createElement('canvas'); c.width=w;c.height=h;
+      c.getContext('2d').drawImage(img,0,0,w,h);
+      const url=c.toDataURL('image/jpeg',0.72);
+      receiptB64=url.split(',')[1];
+      const pv=document.getElementById('preview'); pv.src=url; pv.style.display="block";
+      fileWrap.classList.add('ok'); fileWrap.textContent="✓ Чек прикреплён — можно отправлять";
+      document.getElementById('sendReceipt').disabled=false;
+    };
+    img.src=e.target.result;
+  };
+  reader.readAsDataURL(f);
+});
+document.getElementById('sendReceipt').addEventListener('click',async()=>{
+  if(!receiptB64) return;
+  const btn=document.getElementById('sendReceipt'), err=document.getElementById('err2');
+  err.textContent=""; btn.disabled=true; const old=btn.innerHTML;
+  btn.innerHTML='<span class="spin"></span>Отправляем чек…';
+  try{
+    const r=await apiPost({action:"receipt",orderId:currentId,receipt_b64:receiptB64,mime:"image/jpeg"});
+    if(!r||!r.ok) throw new Error();
+    saveOrder({id:currentId,paid:true});
+    finish();
+  }catch(_){
+    err.textContent="Не удалось отправить чек. Попробуйте ещё раз.";
+    btn.disabled=false; btn.innerHTML=old;
+  }
+});
+function finish(){
+  document.getElementById('step2').classList.add('hidden');
+  document.getElementById('stepDone').classList.remove('hidden');
+  document.getElementById('doneText').innerHTML=
+    "Мы получили оплату по заказу <span class='oid'>"+currentId+"</span> и подтвердим его в течение ~10 минут "+
+    "(с 06:00 до 21:00). Спасибо! 🌸";
+  localStorage.removeItem(LS);
+  window.scrollTo(0,0);
+}
+
+/* ================== localStorage / возобновление ================== */
+function saveOrder(o){ try{localStorage.setItem(LS,JSON.stringify(o));}catch(_){} }
+function loadOrder(){ try{return JSON.parse(localStorage.getItem(LS));}catch(_){return null;} }
+(function initResume(){
+  const o=loadOrder();
+  if(o&&o.id&&!o.paid){
+    document.getElementById('resumeId').textContent=o.id;
+    const b=document.getElementById('resume'); b.classList.remove('hidden');
+    document.getElementById('resumeBtn').addEventListener('click',()=>goPay(o.id));
+  }
+})();
+
+buildSlots();
+</script>
+</body>
+</html>
