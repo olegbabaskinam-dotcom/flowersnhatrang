@@ -1015,6 +1015,13 @@ function updateFound(){
   var cur=localStorage.getItem('flw_cur')||'VND';
   var subtotal=(window.Cart?Cart.total():0);
   var feeTxt=z.fee?('доплата +'+window.fmtMoney(z.fee,cur)):'бесплатно';
+  // обновляем поле «Сумма заказа»: товары + доставка = итого
+  var amt=document.getElementById('amount');
+  if(amt && subtotal>0){
+    var gv=window.fmtMoney(subtotal,'VND');
+    amt.value = z.fee ? (gv+' + доставка '+window.fmtMoney(z.fee,'VND')+' = '+window.fmtMoney(subtotal+z.fee,'VND'))
+                      : (gv+' · доставка бесплатно');
+  }
   var breakdown="";
   if(subtotal>0){
     breakdown='<div style="margin-top:11px;background:#fff;border:1px solid #f0e0e5;border-radius:12px;padding:11px 14px;font-size:14px">'+
@@ -1150,9 +1157,7 @@ form.addEventListener('submit',async e=>{
     err.textContent="В зону «"+delLabel+"» доставка от 1 000 000 ₫ (у вас "+window.fmtMoney(subtotal,'VND')+"). Добавьте товаров.";
     return;
   }
-  var amountStr=form.amount.value.trim();
-  if(delFee>0){ amountStr+="  +  доставка "+delLabel+" "+window.fmtMoney(delFee,'VND'); if(subtotal>0) amountStr+="  =  "+window.fmtMoney(subtotal+delFee,'VND'); }
-  else { amountStr+="  ·  доставка Нячанг бесплатно"; }
+  var amountStr=form.amount.value.trim(); // поле уже содержит «товары + доставка = итого»
   const chan=form.querySelector('input[name=chan]:checked').value;
   const addr=form.rcpt.value.trim()+" — "+(foundLabel?foundLabel+", ":"")+form.addrText.value.trim()
            +(form.comment.value.trim()?(" ("+form.comment.value.trim()+")"):"")
