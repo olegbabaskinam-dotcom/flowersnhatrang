@@ -157,16 +157,16 @@
         else a.className += " text-stone-500 hover:text-[#c0687a] hover:bg-stone-50";
         a.textContent = label; return a;
       };
-      var l1 = mk("order.html", L().order, true), l2 = mk("cart.html", L().cart, false);
+      var l1 = mk("order.html", L().order, false), l2 = mk("cart.html", L().cart, false);
       if (sep) { nav.insertBefore(l2, sep); nav.insertBefore(l1, l2); }
       else { nav.appendChild(l1); nav.appendChild(l2); }
     }
     var mm = document.getElementById("mnav");
     if (mm && !mm.querySelector(".flw-mnav")) {
-      var st = "display:block;padding:10px 8px;border-radius:8px;text-decoration:none";
+      var st = "display:block;padding:10px 8px;border-radius:8px;text-decoration:none;color:#57534e";
       mm.insertAdjacentHTML("afterbegin",
-        '<a href="' + BASE + 'order.html" class="flw-mnav" style="' + st + ';color:#fff;background:' + ROSE + ';font-weight:700;margin-bottom:4px">' + L().order + '</a>' +
-        '<a href="' + BASE + 'cart.html" class="flw-mnav" style="' + st + ';color:#57534e">' + L().cart + '</a>');
+        '<a href="' + BASE + 'order.html" class="flw-mnav" style="' + st + '">' + L().order + '</a>' +
+        '<a href="' + BASE + 'cart.html" class="flw-mnav" style="' + st + '">' + L().cart + '</a>');
     }
   }
 

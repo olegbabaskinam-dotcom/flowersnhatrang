@@ -3,3 +3,6 @@
 
 /* fix: на десктопе прятать мобильную шапку (инлайн display:flex перебивал md:hidden) */
 @media (min-width:768px){header>.md\:hidden{display:none !important;}}
+
+/* логотип-подпись в шапке: 2 строки, не комкать (десктоп) */
+@media (min-width:768px){header .leading-tight{white-space:nowrap;}}
