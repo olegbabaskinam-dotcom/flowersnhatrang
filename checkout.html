@@ -231,6 +231,7 @@
 
 </div>
 
+<script src="cart.js"></script>
 <script>
 /* ================== КОНФИГ ================== */
 const CONFIG = {
@@ -413,6 +414,11 @@ form.addEventListener('submit',async e=>{
   if(document.getElementById('website').value) return;
   const btn=document.getElementById('submitBtn'), err=document.getElementById('err1');
   err.textContent="";
+  if(window.Cart){ var its=Cart.items(); if(its.length){
+    var hc=its.some(function(x){return /(^|\s)cakes(\s|$)/.test(x.cat);});
+    var ho=its.some(function(x){return !/(^|\s)cakes(\s|$)/.test(x.cat);});
+    if(hc&&!ho){ err.textContent="🎂 Торт можно заказать только вместе с букетом, шарами или набором."; return; }
+  }}
   if(!latlng){ err.textContent="Укажите адрес доставки — найдите в поиске или нажмите «Моё местоположение»."; return; }
   const chan=form.querySelector('input[name=chan]:checked').value;
   const addr=form.rcpt.value.trim()+" — "+(foundLabel?foundLabel+", ":"")+form.addrText.value.trim()
@@ -432,6 +438,7 @@ form.addEventListener('submit',async e=>{
     const r=await apiPost(data);
     if(!r||!r.ok) throw new Error();
     saveOrder({id:r.orderId, paid:false});
+    try{ if(window.Cart) Cart.clear(); }catch(_){}
     goPay(r.orderId);
   }catch(_){
     err.textContent="Не удалось отправить. Проверьте интернет и попробуйте ещё раз.";
@@ -538,6 +545,20 @@ function loadOrder(){ try{return JSON.parse(localStorage.getItem(LS));}catch(_){
     document.getElementById('resume').classList.remove('hidden');
     document.getElementById('resumeBtn').addEventListener('click',()=>goPay(o.id));
   }
+})();
+
+/* ==== состав и сумма из корзины (если есть) ==== */
+(function fillFromCart(){
+  if(!window.Cart) return;
+  var items=Cart.items(); if(!items.length) return;
+  var cur=localStorage.getItem('flw_cur')||'VND';
+  document.getElementById('items').value=items.map(function(x){return x.name+' ×'+x.qty;}).join('; ');
+  document.getElementById('items').readOnly=true; document.getElementById('items').style.background='#f7f4f2';
+  var total=Cart.total();
+  var amt=window.fmtMoney(total,'VND')+(cur!=='VND'?(' (≈ '+window.fmtMoney(total,cur)+')'):'');
+  var a=document.getElementById('amount'); a.value=amt; a.readOnly=true; a.style.background='#f7f4f2';
+  // подсказки про ручной ввод больше не нужны
+  document.querySelectorAll('#items ~ .hint, #amount ~ .hint').forEach(function(h){ h.textContent='Из вашей корзины.'; });
 })();
 
 initDate();
