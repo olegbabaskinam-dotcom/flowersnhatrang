@@ -528,6 +528,10 @@ function finish(){
 function saveOrder(o){ try{localStorage.setItem(LS,JSON.stringify(o));}catch(_){} }
 function loadOrder(){ try{return JSON.parse(localStorage.getItem(LS));}catch(_){return null;} }
 (function initResume(){
+  // 1) ссылка из письма: ?order=ID → сразу на шаг оплаты этого заказа
+  const urlId=new URLSearchParams(location.search).get('order');
+  if(urlId){ saveOrder({id:urlId,paid:false}); goPay(urlId); return; }
+  // 2) незавершённый заказ в этом браузере
   const o=loadOrder();
   if(o&&o.id&&!o.paid){
     document.getElementById('resumeId').textContent=o.id;
