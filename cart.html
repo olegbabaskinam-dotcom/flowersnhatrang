@@ -300,7 +300,7 @@
             <input id="gmapLink" autocomplete="off" placeholder="Скопируйте из приложения Google Карты и вставьте сюда" style="flex:1">
             <button type="button" class="btn ghost small" id="gmapBtn" style="white-space:nowrap">Найти</button>
           </div>
-          <div class="hint">Откройте место в Google Картах → «Поделиться» → скопировать ссылку → вставьте сюда. Мы определим точку сами.</div>
+          <div class="hint">Если точное место не находится в поиске — откройте Google Карты, <b>зажмите палец</b> на нужной точке (появится красная булавка «Отмеченное место»), нажмите <b>«Поделиться»</b> и скопируйте ссылку сюда. В такой ссылке точные координаты — мы определим место точно.</div>
           <div class="err" id="gmapErr" style="text-align:left"></div>
         </div>
         <div class="field">
@@ -1002,12 +1002,23 @@ function updateFound(){
   window.__outside=false;
   var z=zoneFor(latlng.la);
   window.__delFee=z.fee; window.__delLabel=z.label;
-  var feeTxt=z.fee?('доплата +'+window.fmtMoney(z.fee,'VND')):'бесплатно';
   var col=z.fee?'#8a6d3b':'#256b3c';
+  var cur=localStorage.getItem('flw_cur')||'VND';
+  var subtotal=(window.Cart?Cart.total():0);
+  var feeTxt=z.fee?('доплата +'+window.fmtMoney(z.fee,cur)):'бесплатно';
+  var breakdown="";
+  if(subtotal>0){
+    breakdown='<div style="margin-top:11px;background:#fff;border:1px solid #f0e0e5;border-radius:12px;padding:11px 14px;font-size:14px">'+
+      '<div style="display:flex;justify-content:space-between;padding:3px 0"><span style="color:#78716c">Товары</span><span>'+window.fmtMoney(subtotal,cur)+'</span></div>'+
+      '<div style="display:flex;justify-content:space-between;padding:3px 0"><span style="color:#78716c">Доставка · '+z.label+'</span><span style="font-weight:600;color:'+col+'">'+(z.fee?('+'+window.fmtMoney(z.fee,cur)):'бесплатно')+'</span></div>'+
+      '<div style="display:flex;justify-content:space-between;padding:7px 0 0;margin-top:5px;border-top:1px dashed #eee;font-weight:800;font-size:16px"><span>Итого к оплате</span><span>'+window.fmtMoney(subtotal+z.fee,cur)+'</span></div>'+
+    '</div>';
+  }
   box.innerHTML="📍 <b>"+(foundLabel||"Точка на карте")+"</b><br>"+
     "<a href='"+mapsLink()+"' target='_blank'>"+mapsLink()+"</a>"+
     "<div style='margin-top:8px;font-weight:600;color:"+col+"'>🚚 Зона доставки: "+z.label+" — "+feeTxt+"</div>"+
-    (z.fee?"<div style='font-size:12px;color:#8a6d3b;margin-top:2px'>В эту зону доставка возможна от 1 000 000 ₫.</div>":"");
+    (z.fee?"<div style='font-size:12px;color:#8a6d3b;margin-top:2px'>В эту зону доставка возможна от 1 000 000 ₫.</div>":"")+
+    breakdown;
 }
 function mapsLink(){ return "https://www.google.com/maps?q="+latlng.la+","+latlng.ln; }
 
