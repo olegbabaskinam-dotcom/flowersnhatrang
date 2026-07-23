@@ -292,7 +292,7 @@
             <button type="button" class="btn ghost small" id="geoBtn">📍 Моё местоположение</button>
             <span class="hint" style="margin:0">Не то место? Подвиньте булавку на карте.</span>
           </div>
-          <div class="hint">Начните вводить название — выберите из списка. Не нашли? Вставьте ссылку на Google Карту ниже.</div>
+          <div class="hint">Начните вводить название — выберите из списка. Не нашли? Вставьте ссылку на Google Карту ниже. ✈️ Доставка в аэропорт не осуществляется.</div>
         </div>
         <div class="field">
           <label for="gmapLink">…или вставьте ссылку на Google Карту</label>
@@ -983,15 +983,24 @@ function setPoint(la,ln,label){
 function inArea(lat,lon){ return lat>=11.86 && lat<=12.34 && lon>=109.13 && lon<=109.28; }
 /* проверка, что координаты вообще в нашем регионе (отсекаем кривой парсинг ссылок) */
 function validGeo(la,ln){ return la>11.6 && la<12.7 && ln>109.0 && ln<109.45; }
+/* аэропорт Камрань — доставка НЕ осуществляется */
+function isAirport(la,ln){ return la>=11.97 && la<=12.025 && ln>=109.185 && ln<=109.25; }
 /* ЗОНЫ ДОСТАВКИ по широте точки (внутри контура). Границы калибруются. */
 function zoneFor(lat){
   if(lat>=12.18) return {key:'nt', label:'Нячанг', fee:0};
-  if(lat>=12.05) return {key:'near', label:'рядом с Нячангом (юг)', fee:300000};
-  return {key:'camranh', label:'Камрань', fee:600000};
+  if(lat>=12.14) return {key:'near', label:'рядом с Нячангом (юг)', fee:300000};   // Нячанг → Mia Resort
+  return {key:'camranh', label:'Камрань', fee:600000};                              // от Mia Resort и южнее
 }
 function updateFound(){
   const box=document.getElementById('foundAddr');
   box.classList.remove('hidden');
+  if(isAirport(latlng.la,latlng.ln)){
+    window.__outside=true; window.__delFee=0; window.__delLabel='аэропорт';
+    box.innerHTML="📍 <b>"+(foundLabel||"Точка на карте")+"</b><br>"+
+      "<a href='"+mapsLink()+"' target='_blank'>"+mapsLink()+"</a>"+
+      "<div style='margin-top:8px;font-weight:700;color:#9b2c2c'>✈️❌ Доставка в аэропорт не осуществляется. Укажите адрес отеля или места вне аэропорта.</div>";
+    return;
+  }
   if(!inArea(latlng.la,latlng.ln)){
     window.__outside=true; window.__delFee=0; window.__delLabel='вне зоны';
     box.innerHTML="📍 <b>"+(foundLabel||"Точка на карте")+"</b><br>"+
@@ -1133,7 +1142,7 @@ form.addEventListener('submit',async e=>{
     if(hc&&!ho){ err.textContent="🎂 Торт можно заказать только вместе с букетом, шарами или набором."; return; }
   }}
   if(!latlng){ err.textContent="Укажите адрес доставки — найдите в поиске или нажмите «Моё местоположение»."; return; }
-  if(window.__outside){ err.textContent="Этот адрес вне зоны доставки. Мы возим по Нячангу, южным пригородам и Камрани."; return; }
+  if(window.__outside){ err.textContent=(window.__delLabel==='аэропорт')?"✈️ Доставка в аэропорт не осуществляется. Укажите другой адрес.":"Этот адрес вне зоны доставки. Мы возим по Нячангу, южным пригородам и Камрани."; return; }
   // доставка по зоне + минимум 1 000 000 ₫ в платные зоны
   var delFee=window.__delFee||0, delLabel=window.__delLabel||'Нячанг';
   var subtotal=(window.Cart?Cart.total():0);
