@@ -54,11 +54,21 @@
   .banner button{border:1px solid #256b3c;background:#fff;color:#256b3c;border-radius:9px;padding:7px 11px;font-weight:700;cursor:pointer;font-size:13px}
   .hidden{display:none!important}
   .oid{font-family:ui-monospace,Menlo,monospace;font-weight:700;letter-spacing:1px;color:var(--pink-d)}
+  /* address search */
+  .searchbox{position:relative}
+  .results{position:absolute;left:0;right:0;top:calc(100% + 4px);background:#fff;border:1px solid var(--line);
+    border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.10);z-index:20;overflow:hidden;max-height:280px;overflow-y:auto}
+  .results div{padding:11px 14px;font-size:14px;cursor:pointer;border-bottom:1px solid var(--line);line-height:1.35}
+  .results div:last-child{border-bottom:none}
+  .results div:hover{background:#fdf2f5}
+  .results .rtitle{font-weight:600}
+  .results .rsub{color:var(--muted);font-size:12px}
+  .results .empty{color:var(--muted);cursor:default}
+  .found{margin-top:8px;background:#f2fbf5;border:1px solid #cfe9d6;border-radius:12px;padding:10px 13px;font-size:14px;color:#256b3c}
+  .found a{color:var(--pink-d);font-size:12px;word-break:break-all}
   /* map */
-  #map{height:230px;border-radius:12px;border:1px solid var(--line);margin-top:4px;z-index:1}
-  .maprow{display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap}
-  .pointok{font-size:13px;color:var(--ok);font-weight:600}
-  .maplink{font-size:12px;color:var(--pink-d);word-break:break-all}
+  #map{height:200px;border-radius:12px;border:1px solid var(--line);margin-top:8px;z-index:1}
+  .maprow{display:flex;gap:10px;align-items:center;margin-top:8px;flex-wrap:wrap}
   /* payment */
   .pays{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}
   .pay{border:1px solid var(--line);border-radius:14px;padding:14px 10px;text-align:center;cursor:pointer;font-weight:600;font-size:14px;background:#fff;transition:.15s}
@@ -123,18 +133,22 @@
           <input id="rcpt" name="rcpt" placeholder="Кому вручить букет" required>
         </div>
         <div class="field">
-          <label class="req">Точка доставки на карте</label>
-          <div id="map"></div>
-          <div class="maprow">
-            <button type="button" class="btn ghost small" id="geoBtn">📍 Моё местоположение</button>
-            <span class="pointok" id="pointOk">Точка на карте выставлена ✓</span>
+          <label class="req" for="addrSearch">Адрес доставки</label>
+          <div class="searchbox">
+            <input id="addrSearch" autocomplete="off" placeholder="Отель, улица или место — например: Vesna Hotel">
+            <div id="results" class="results hidden"></div>
           </div>
-          <div class="maplink" id="mapLink"></div>
-          <div class="hint">Перетащите булавку на нужный дом/отель. В заявку уйдёт ссылка на Google Карту.</div>
+          <div id="foundAddr" class="found hidden"></div>
+          <div id="map" class="hidden"></div>
+          <div class="maprow hidden" id="maprow">
+            <button type="button" class="btn ghost small" id="geoBtn">📍 Моё местоположение</button>
+            <span class="hint" style="margin:0">Не то место? Подвиньте булавку на карте.</span>
+          </div>
+          <div class="hint">Начните вводить название — выберите из списка. В заявку уйдёт точный адрес + ссылка на Google Карту.</div>
         </div>
         <div class="field">
-          <label class="req" for="addrText">Детали адреса</label>
-          <input id="addrText" name="addrText" placeholder="Отель / дом, этаж, номер квартиры или комнаты" required>
+          <label class="req" for="addrText">Детали для курьера</label>
+          <input id="addrText" name="addrText" placeholder="Этаж, номер квартиры/комнаты, ресепшн" required>
         </div>
         <div class="field">
           <label class="req" for="deliveryDate">Дата доставки</label>
@@ -276,36 +290,108 @@ function rebuildTimes(){
 }
 function ruDate(iso){ const [y,m,d]=iso.split('-'); return d+"."+m+"."+y.slice(2); }
 
-/* ================== КАРТА ================== */
-let marker=null, latlng=null;
+/* ================== АДРЕС: ПОИСК + КАРТА ================== */
+let marker=null, latlng=null, foundLabel="", lmap=null, micon=null, searchTimer=null;
+const searchInput=document.getElementById('addrSearch'),
+      resultsBox=document.getElementById('results');
+
 function initMap(){
-  const map=L.map('map',{scrollWheelZoom:false}).setView(CONFIG.NHATRANG,13);
+  lmap=L.map('map',{scrollWheelZoom:false}).setView(CONFIG.NHATRANG,14);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    {maxZoom:19,attribution:'© OpenStreetMap'}).addTo(map);
-  const icon=L.icon({
+    {maxZoom:19,attribution:'© OpenStreetMap'}).addTo(lmap);
+  micon=L.icon({
     iconUrl:'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
     iconRetinaUrl:'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
     shadowUrl:'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
     iconSize:[25,41],iconAnchor:[12,41]});
-  marker=L.marker(CONFIG.NHATRANG,{draggable:true,icon:icon}).addTo(map);
-  setPoint(CONFIG.NHATRANG[0],CONFIG.NHATRANG[1]);
-  marker.on('dragend',()=>{const p=marker.getLatLng();setPoint(p.lat,p.lng);});
-  map.on('click',e=>{marker.setLatLng(e.latlng);setPoint(e.latlng.lat,e.latlng.lng);});
-  document.getElementById('geoBtn').addEventListener('click',()=>{
-    if(!navigator.geolocation) return;
-    navigator.geolocation.getCurrentPosition(pos=>{
-      const la=pos.coords.latitude, ln=pos.coords.longitude;
-      map.setView([la,ln],16); marker.setLatLng([la,ln]); setPoint(la,ln);
-    });
-  });
-  setTimeout(()=>map.invalidateSize(),200);
+  document.getElementById('geoBtn').addEventListener('click',useGeo);
 }
-function setPoint(la,ln){
-  latlng={la:+la.toFixed(6),ln:+ln.toFixed(6)};
-  const link="https://www.google.com/maps?q="+latlng.la+","+latlng.ln;
-  document.getElementById('mapLink').innerHTML='🔗 <a href="'+link+'" target="_blank">'+link+'</a>';
+function ensureMarker(la,ln){
+  if(!marker){
+    marker=L.marker([la,ln],{draggable:true,icon:micon}).addTo(lmap);
+    marker.on('dragend',()=>{const p=marker.getLatLng();setPoint(p.lat,p.lng);reverseGeo(p.lat,p.lng);});
+  } else marker.setLatLng([la,ln]);
+}
+function setPoint(la,ln,label){
+  latlng={la:+(+la).toFixed(6),ln:+(+ln).toFixed(6)};
+  if(label!==undefined) foundLabel=label;
+  document.getElementById('map').classList.remove('hidden');
+  document.getElementById('maprow').classList.remove('hidden');
+  ensureMarker(latlng.la,latlng.ln);
+  lmap.setView([latlng.la,latlng.ln],16);
+  setTimeout(()=>lmap.invalidateSize(),150);
+  updateFound();
+}
+function updateFound(){
+  const box=document.getElementById('foundAddr');
+  box.classList.remove('hidden');
+  box.innerHTML="📍 <b>"+(foundLabel||"Точка на карте")+"</b><br><a href='"+mapsLink()+"' target='_blank'>"+mapsLink()+"</a>";
 }
 function mapsLink(){ return "https://www.google.com/maps?q="+latlng.la+","+latlng.ln; }
+
+/* поиск через Photon (OpenStreetMap, без ключа) */
+searchInput.addEventListener('input',()=>{
+  const q=searchInput.value.trim();
+  clearTimeout(searchTimer);
+  if(q.length<3){ resultsBox.classList.add('hidden'); return; }
+  searchTimer=setTimeout(()=>photonSearch(q),350);
+});
+document.addEventListener('click',e=>{ if(!e.target.closest('.searchbox')) resultsBox.classList.add('hidden'); });
+
+function labelOf(p){
+  const a=[]; if(p.name)a.push(p.name);
+  const street=[p.street,p.housenumber].filter(Boolean).join(" "); if(street)a.push(street);
+  const loc=p.district||p.city||p.county; if(loc)a.push(loc);
+  return a;
+}
+async function photonSearch(q){
+  try{
+    const url="https://photon.komoot.io/api/?q="+encodeURIComponent(q)
+      +"&lat="+CONFIG.NHATRANG[0]+"&lon="+CONFIG.NHATRANG[1]+"&limit=6";
+    const r=await fetch(url); const d=await r.json();
+    renderResults(d.features||[]);
+  }catch(_){
+    resultsBox.innerHTML="<div class='empty'>Поиск недоступен — включите карту кнопкой «Моё местоположение» или введите детали ниже</div>";
+    resultsBox.classList.remove('hidden');
+  }
+}
+function renderResults(feats){
+  if(!feats.length){
+    resultsBox.innerHTML="<div class='empty'>Ничего не найдено. Попробуйте иначе или нажмите «Моё местоположение».</div>";
+    resultsBox.classList.remove('hidden'); return;
+  }
+  resultsBox.innerHTML="";
+  feats.forEach(f=>{
+    const p=f.properties, c=f.geometry.coordinates; // [lon,lat]
+    const parts=labelOf(p); const title=parts[0]||"Точка"; const sub=parts.slice(1).join(", ");
+    const div=document.createElement('div');
+    div.innerHTML="<div class='rtitle'>"+title+"</div>"+(sub?"<div class='rsub'>"+sub+"</div>":"");
+    div.addEventListener('click',()=>{
+      searchInput.value=parts.join(", ");
+      resultsBox.classList.add('hidden');
+      setPoint(c[1],c[0],parts.join(", "));
+    });
+    resultsBox.appendChild(div);
+  });
+  resultsBox.classList.remove('hidden');
+}
+async function reverseGeo(la,ln){
+  try{
+    const r=await fetch("https://photon.komoot.io/reverse?lat="+la+"&lon="+ln);
+    const d=await r.json();
+    if(d.features&&d.features[0]){
+      const lbl=labelOf(d.features[0].properties).join(", ");
+      if(lbl){ foundLabel=lbl; searchInput.value=lbl; updateFound(); }
+    }
+  }catch(_){}
+}
+function useGeo(){
+  if(!navigator.geolocation) return;
+  navigator.geolocation.getCurrentPosition(pos=>{
+    setPoint(pos.coords.latitude,pos.coords.longitude,"Моя геолокация");
+    reverseGeo(pos.coords.latitude,pos.coords.longitude);
+  });
+}
 
 /* ================== ОТПРАВКА ================== */
 async function apiPost(data){
@@ -319,8 +405,9 @@ form.addEventListener('submit',async e=>{
   if(document.getElementById('website').value) return;
   const btn=document.getElementById('submitBtn'), err=document.getElementById('err1');
   err.textContent="";
+  if(!latlng){ err.textContent="Укажите адрес доставки — найдите в поиске или нажмите «Моё местоположение»."; return; }
   const chan=form.querySelector('input[name=chan]:checked').value;
-  const addr=form.rcpt.value.trim()+" — "+form.addrText.value.trim()
+  const addr=form.rcpt.value.trim()+" — "+(foundLabel?foundLabel+", ":"")+form.addrText.value.trim()
            +(form.comment.value.trim()?(" ("+form.comment.value.trim()+")"):"")
            +" 📍 "+mapsLink();
   const data={
