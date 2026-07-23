@@ -145,22 +145,8 @@
     pb.parentNode.insertBefore(mkBtn(d, true), pb.nextSibling);
   }
 
-  // пункты меню
+  // пункты меню (только мобильное — десктоп не загромождаем: есть баннер/кнопка + плавающий виджет)
   function injectNav() {
-    var nav = document.querySelector("header nav");
-    if (nav && !nav.querySelector(".flw-nav")) {
-      var sep = nav.querySelector("span.w-px");
-      var mk = function (href, label, filled) {
-        var a = document.createElement("a"); a.href = BASE + href;
-        a.className = "flw-nav px-3 py-1.5 rounded-lg text-xs font-medium transition";
-        if (filled) a.style.cssText = "background:" + ROSE + ";color:#fff";
-        else a.className += " text-stone-500 hover:text-[#c0687a] hover:bg-stone-50";
-        a.textContent = label; return a;
-      };
-      var l1 = mk("order.html", L().order, false), l2 = mk("cart.html", L().cart, false);
-      if (sep) { nav.insertBefore(l2, sep); nav.insertBefore(l1, l2); }
-      else { nav.appendChild(l1); nav.appendChild(l2); }
-    }
     var mm = document.getElementById("mnav");
     if (mm && !mm.querySelector(".flw-mnav")) {
       var st = "display:block;padding:10px 8px;border-radius:8px;text-decoration:none;color:#57534e";
