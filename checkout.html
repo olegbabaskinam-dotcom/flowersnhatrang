@@ -178,6 +178,11 @@
           <label class="req" for="contact">Ваш номер / ник для связи</label>
           <input id="contact" name="contact" placeholder="+7… / @username" required>
         </div>
+        <div class="field">
+          <label for="email">Ваша почта <span style="color:var(--muted);font-weight:400">(необязательно, но очень рекомендуем)</span></label>
+          <input id="email" name="email" type="email" placeholder="you@mail.com">
+          <div class="hint">Пришлём письмо с подтверждением заказа и всей информацией — для вашего спокойствия.</div>
+        </div>
       </div>
 
       <input type="text" name="website" id="website" tabindex="-1" autocomplete="off"
@@ -420,6 +425,7 @@ form.addEventListener('submit',async e=>{
     delivery:ruDate(form.deliveryDate.value)+", "+form.deliveryTime.value,
     address:addr,
     contact:chan+": "+form.contact.value.trim(),
+    email:form.email.value.trim(),
   };
   btn.disabled=true; const old=btn.innerHTML; btn.innerHTML='<span class="spin"></span>Отправляем…';
   try{
