@@ -346,8 +346,11 @@ function labelOf(p){
 }
 async function photonSearch(q){
   try{
+    // жёсткая рамка по Нячангу: minLon,minLat,maxLon,maxLat — вне рамки результаты не выдаются
     const url="https://photon.komoot.io/api/?q="+encodeURIComponent(q)
-      +"&lat="+CONFIG.NHATRANG[0]+"&lon="+CONFIG.NHATRANG[1]+"&limit=6";
+      +"&lat="+CONFIG.NHATRANG[0]+"&lon="+CONFIG.NHATRANG[1]
+      +"&bbox=109.08,12.12,109.28,12.40"
+      +"&lang=en&limit=8";
     const r=await fetch(url); const d=await r.json();
     renderResults(d.features||[]);
   }catch(_){
