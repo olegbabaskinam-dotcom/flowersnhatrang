@@ -883,20 +883,15 @@
         '<div style="color:#78716c;font-size:13px;margin-top:2px">'+money(delFee)+'</div></div>';
       list.appendChild(dr);
     }
-    var grand=total+delFee, open=ordersOpen();
+    var grand=total+delFee;
     sum.innerHTML='<div style="background:#fff;border:1px solid #f0e0e5;border-radius:16px;padding:16px 18px;margin-top:4px">'+
       '<div style="display:flex;justify-content:space-between;padding:4px 0"><span>Товаров</span><span>'+Cart.count()+' шт.</span></div>'+
       (delFee>0?'<div style="display:flex;justify-content:space-between;padding:4px 0"><span>Доставка · '+(window.__delLabel||"")+'</span><span style="color:#8a6d3b;font-weight:600">'+money(delFee)+'</span></div>':'')+
       '<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:21px;font-weight:800"><span>Итого</span><span>'+money(grand)+'</span></div>'+
       (CUR!=="VND"?'<div style="display:flex;justify-content:space-between;padding:4px 0;color:#78716c;font-size:13px"><span>В донгах</span><span>'+window.fmtMoney(grand,"VND")+'</span></div>':'')+
       '</div>'+
-      (!open
-        ? '<div style="background:#fdf6ec;border:1px solid #f3e2c7;color:#8a6d3b;border-radius:12px;padding:12px 15px;font-size:14px;margin-top:14px">🗓 <b>Онлайн-оформление заказов откроется 27 июля.</b> Пока оформить нельзя — напишите нам, поможем и примем заказ: '
-            +'<a href="https://wa.me/37443529162" target="_blank" style="color:#a94f63;font-weight:700">WhatsApp</a> · '
-            +'<a href="https://t.me/babaskin_o" target="_blank" style="color:#a94f63;font-weight:700">Telegram</a> · '
-            +'<a href="https://instagram.com/flowers_vietnam_inst" target="_blank" style="color:#a94f63;font-weight:700">Instagram</a></div>'
-        : (cakeBlocked?'<div style="background:#fdf6ec;border:1px solid #f3e2c7;color:#8a6d3b;border-radius:12px;padding:10px 13px;font-size:13px;margin-top:12px">Оформление станет доступно, когда в корзине будет букет, шары или набор.</div>'
-                     :'<button class="flw-btn flw-btn-primary" style="display:block;width:100%;border:none;cursor:pointer;margin-top:16px" onclick="showCheckout()">Оформить заказ ▾</button>'))+
+      (cakeBlocked?'<div style="background:#fdf6ec;border:1px solid #f3e2c7;color:#8a6d3b;border-radius:12px;padding:10px 13px;font-size:13px;margin-top:12px">Оформление станет доступно, когда в корзине будет букет, шары или набор.</div>'
+                 :'<button class="flw-btn flw-btn-primary" style="display:block;width:100%;border:none;cursor:pointer;margin-top:16px" onclick="showCheckout()">Оформить заказ ▾</button>')+
       '<a class="flw-btn flw-btn-outline" style="display:block;margin-top:10px" href="catalog-ru.html">Добавить ещё товары</a>';
   }
   document.addEventListener("cart:change",render);
@@ -948,6 +943,8 @@ function initDate(){
   if(t.h>=6 && t.h<22){ base.setUTCDate(base.getUTCDate()+1); MIN_START=6; }   // день → завтра
   else { if(t.h>=22) base.setUTCDate(base.getUTCDate()+1); MIN_START=9; }        // ночь → ближайшее утро с 09
   MIN_DATE = base.getUTCFullYear()+"-"+pad(base.getUTCMonth()+1)+"-"+pad(base.getUTCDate());
+  var OPEN_DATE="2026-07-27";                          // доставка/заказы стартуют с 27 июля
+  if(MIN_DATE < OPEN_DATE){ MIN_DATE=OPEN_DATE; MIN_START=6; }
   const inp=document.getElementById('deliveryDate');
   inp.min=MIN_DATE; inp.value=MIN_DATE;
   inp.addEventListener('change',rebuildTimes);
@@ -1164,7 +1161,6 @@ form.addEventListener('submit',async e=>{
   if(document.getElementById('website').value) return;
   const btn=document.getElementById('submitBtn'), err=document.getElementById('err1');
   err.textContent="";
-  if(window.ordersOpen && !window.ordersOpen()){ err.textContent="🗓 Онлайн-оформление заказов откроется 27 июля. Напишите нам в мессенджере — примем заказ."; return; }
   if(window.Cart){ var its=Cart.items(); if(its.length){
     var hc=its.some(function(x){return /(^|\s)cakes(\s|$)/.test(x.cat);});
     var ho=its.some(function(x){return !/(^|\s)cakes(\s|$)/.test(x.cat);});
@@ -1365,7 +1361,6 @@ function prefillFromCart(){
 }
 // раскрыть форму (аккордеон) — корзина остаётся выше
 function showCheckout(){
-  if(window.ordersOpen && !window.ordersOpen()){ alert('🗓 Онлайн-оформление заказов откроется 27 июля. Пока напишите нам в мессенджере — примем заказ.'); return; }
   var cf=document.getElementById('coform'); if(!cf) return;
   cf.style.display='block'; prefillFromCart();
   var h=document.getElementById('coHead'); if(h) h.scrollIntoView({behavior:'smooth',block:'start'});
