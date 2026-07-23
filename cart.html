@@ -339,6 +339,7 @@
     <div class="card">
       <label>Способ оплаты</label>
       <div class="pays">
+        <div class="pay" data-m="cash"><span class="em">💵</span>Наличными при получении</div>
         <div class="pay" data-m="rub"><span class="em">🇷🇺</span>Рубли (СБП)</div>
         <div class="pay" data-m="vnd"><span class="em">🇻🇳</span>Донги (VND)</div>
         <div class="pay" data-m="usdt"><span class="em">💠</span>USDT TRC-20</div>
@@ -354,6 +355,15 @@
       <img id="preview" class="prev" alt="чек">
       <button class="btn" id="sendReceipt" style="margin-top:14px" disabled>Я оплатил — отправить чек</button>
       <div class="err" id="err2"></div>
+    </div>
+
+    <div class="card" id="cashCard" style="display:none">
+      <div class="warnbox" style="font-size:14px;line-height:1.55">
+        ⚠️ <b>Оплата наличными при получении.</b><br>
+        Получатель — это вы (или тот, кто подтвердит заказ). Заказ будет собран и доставлен <b>только после того, как менеджер свяжется с вами</b> по указанным контактам и вы <b>лично подтвердите заказ</b>. Если вы не ответите и не подтвердите заказ менеджеру — заказ, к сожалению, <b>не собирается и не доставляется</b>.
+      </div>
+      <button class="btn" id="cashBtn" style="margin-top:14px">Подтвердить заказ (оплата наличными)</button>
+      <div class="err" id="errCash"></div>
     </div>
   </section>
 
@@ -858,6 +868,7 @@ const CONFIG = {
   NHATRANG: [12.2388, 109.1967],
 };
 const PAY = {
+  cash: { title:"Наличными при получении", cash:true, method:"Наличными при получении" },
   rub: { title:"Рубли · СБП", rows:[
       ["Номер телефона","+79627155432","+79627155432"],
       ["Получатель","Оксана Анатольевна Я.",null],
@@ -1129,16 +1140,21 @@ function goBackToData(){
   var sb=document.getElementById('submitBtn'); if(sb) sb.textContent='Сохранить изменения → к оплате';
   var h=document.getElementById('coHead'); if(h) h.scrollIntoView({behavior:'smooth',block:'start'});
 }
+var METHODS={cash:'Наличными при получении',rub:'Рубли (СБП)',vnd:'Донги (BIDV)',usdt:'USDT TRC-20',kzt:'Карта Kaspi'};
 document.querySelectorAll('.pay').forEach(el=>{
   el.addEventListener('click',()=>{
     document.querySelectorAll('.pay').forEach(p=>p.classList.remove('on'));
     el.classList.add('on');
-    renderPay(el.dataset.m);
-    document.getElementById('receiptCard').style.display="block";
+    var m=el.dataset.m; window.__payMethod=METHODS[m]||m;
+    renderPay(m);
+    var isCash=PAY[m]&&PAY[m].cash;
+    document.getElementById('receiptCard').style.display=isCash?"none":"block";
+    document.getElementById('cashCard').style.display=isCash?"block":"none";
   });
 });
 function renderPay(m){
   const p=PAY[m], box=document.getElementById('payDetails');
+  if(p.cash){ box.innerHTML=''; return; }
   let html='<div style="font-weight:700;margin:6px 0 4px">'+p.title+'</div>';
   p.rows.forEach(r=>{
     html+='<div class="kv"><span style="color:var(--muted)">'+r[0]+'</span><b>'+r[1]
@@ -1185,7 +1201,7 @@ document.getElementById('sendReceipt').addEventListener('click',async()=>{
   err.textContent=""; btn.disabled=true; const old=btn.innerHTML;
   btn.innerHTML='<span class="spin"></span>Отправляем чек…';
   try{
-    const r=await apiPost({action:"receipt",orderId:currentId,receipt_b64:receiptB64,mime:"image/jpeg"});
+    const r=await apiPost({action:"receipt",orderId:currentId,receipt_b64:receiptB64,mime:"image/jpeg",pay:(window.__payMethod||"")});
     if(!r||!r.ok) throw new Error();
     saveOrder({id:currentId,paid:true});
     finish();
@@ -1203,6 +1219,26 @@ function finish(){
   localStorage.removeItem(LS);
   window.scrollTo(0,0);
 }
+// подтверждение заказа с оплатой наличными
+document.getElementById('cashBtn').addEventListener('click',async()=>{
+  const btn=document.getElementById('cashBtn'), err=document.getElementById('errCash');
+  err.textContent=""; btn.disabled=true; const old=btn.innerHTML;
+  btn.innerHTML='<span class="spin"></span>Отправляем…';
+  try{
+    const r=await apiPost({action:"cash",orderId:currentId});
+    if(!r||!r.ok) throw new Error();
+    document.getElementById('step2').classList.add('hidden');
+    document.getElementById('stepDone').classList.remove('hidden');
+    document.getElementById('doneText').innerHTML=
+      "Заявка <span class='oid'>"+currentId+"</span> принята. Оплата — наличными при получении.<br><br>"+
+      "⏳ Наш менеджер свяжется с вами по указанным контактам. Заказ будет собран и доставлен <b>только после того, как вы лично подтвердите его менеджеру</b>. Пожалуйста, будьте на связи 🌸";
+    localStorage.removeItem(LS);
+    window.scrollTo(0,0);
+  }catch(_){
+    err.textContent="Не удалось отправить. Попробуйте ещё раз.";
+    btn.disabled=false; btn.innerHTML=old;
+  }
+});
 
 /* ================== localStorage ================== */
 function saveOrder(o){ try{localStorage.setItem(LS,JSON.stringify(o));}catch(_){} }
