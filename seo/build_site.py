@@ -832,7 +832,7 @@ def trust_bar(lang, base):
 def reviews_block(lang, base=""):
     """Живая карусель реальных Google-отзывов (единый источник seo/reviews_data.py)."""
     import reviews_data
-    return "\n    " + reviews_data.carousel_section(lang)
+    return "\n    " + reviews_data.carousel_section(lang, base)
 
 def render_catalog(lang, products):
     t = T[lang]

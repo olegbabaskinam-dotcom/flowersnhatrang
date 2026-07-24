@@ -25,11 +25,6 @@ R = [
    {"ru":"Невероятный букет! Мгновенное оформление заказа и быстрая доставка. Удобная оплата рублями. Спасибо!",
     "en":"An incredible bouquet! Instant order processing and fast delivery. Convenient payment in rubles. Thank you!",
     "ko":"믿을 수 없는 부케예요! 주문 처리도 즉각적이고 배달도 빨라요. 루블 결제도 편리해요. 감사합니다!"}),
- ("Виталий Олегович","#1E88E5","В",
-   {"ru":"6 дней назад","en":"6 days ago","ko":"6일 전"},
-   {"ru":"Заказ выполнили очень быстро, учитывая, что я поздно спохватился) Жена счастлива получить корзину цветов на юбилей)",
-    "en":"They completed the order very fast, considering I remembered late) My wife was happy to get a basket of flowers for her anniversary)",
-    "ko":"제가 늦게 생각났는데도 주문을 아주 빠르게 처리해 주었어요) 아내가 기념일에 꽃바구니를 받고 행복해했어요)"}),
  ("Semper In Motu","#6D4C41","S",
    {"ru":"6 дней назад","en":"6 days ago","ko":"6일 전"},
    {"ru":"Заказали цветы — всё понравилось, особенно пунктуальность при доставке.",
@@ -122,6 +117,64 @@ R = [
     "ko":"모든 것이 완벽했어요: 부케, 서비스, 소통까지. 주문을 조금 수정해야 했을 때도 다 해결해 주었어요. 추천합니다!"}),
 ]
 
+# Отзывы с фото (Google Maps). Идут ПЕРВЫМИ. Формат: name,color,ini,date{},text{},photo
+IMG = [
+ ("Дмитрий К","#757575","Д",
+   {"ru":"вчера","en":"yesterday","ko":"어제"},
+   {"ru":"Отличные цветы! Хороший сервис, быстрая доставка!",
+    "en":"Great flowers! Good service, fast delivery!",
+    "ko":"꽃이 훌륭해요! 서비스도 좋고 배달도 빨라요!"},
+   "dmitriy"),
+ ("Диана Новикова","#1565C0","Д",
+   {"ru":"2 дня назад","en":"2 days ago","ko":"2일 전"},
+   {"ru":"Шикарный букет!!! Молодцы!!! Огромное спасибо!!!",
+    "en":"Gorgeous bouquet!!! Well done!!! Huge thanks!!!",
+    "ko":"너무 멋진 부케예요!!! 최고예요!!! 정말 감사합니다!!!"},
+   "diana-n"),
+ ("Жанылай Акбаева","#E53935","Ж",
+   {"ru":"3 дня назад","en":"3 days ago","ko":"3일 전"},
+   {"ru":"Даже не думала, что есть возможность заказать цветы у русскоязычного цветочного в Нячанге! Это круто! Доставили свежие розы имениннице оперативно! Спасибо за это вам большое!",
+    "en":"I never imagined I could order flowers from a Russian-speaking florist in Nha Trang! That's awesome! They delivered fresh roses to the birthday girl super fast! Thank you so much!",
+    "ko":"냐짱에서 러시아어를 쓰는 꽃집에 주문할 수 있을 거라곤 생각도 못했어요! 정말 멋져요! 생일 맞은 친구에게 신선한 장미를 신속하게 배달해 주었어요! 정말 감사합니다!"},
+   "zhanylai"),
+ ("Виталий Олегович","#1E88E5","В",
+   {"ru":"4 дня назад","en":"4 days ago","ko":"4일 전"},
+   {"ru":"Заказ выполнили очень быстро, учитывая, что я поздно спохватился) Жена счастлива получить корзину цветов на юбилей)",
+    "en":"They completed the order very fast, considering I remembered late) My wife was happy to get a basket of flowers for her anniversary)",
+    "ko":"제가 늦게 생각났는데도 주문을 아주 빠르게 처리해 주었어요) 아내가 기념일에 꽃바구니를 받고 행복해했어요)"},
+   "vitaliy"),
+ ("Аламеда","#00897B","А",
+   {"ru":"5 дней назад","en":"5 days ago","ko":"5일 전"},
+   {"ru":"Курьер приехал во время, я осталась очень довольна цветами в корзине, 101 роза 🌹",
+    "en":"The courier arrived on time, I was very happy with the flowers in the basket — 101 roses 🌹",
+    "ko":"택배 기사님이 제시간에 도착했고, 바구니에 담긴 101송이 장미에 아주 만족했어요 🌹"},
+   "alameda"),
+ ("Марина Мерзлякова","#F4511E","М",
+   {"ru":"6 дней назад","en":"6 days ago","ko":"6일 전"},
+   {"ru":"Спасибо за доставку! Очень быстро с момента заказа до получения. Привезли к отелю. Розы свежие и красивые! Поздравили дочь с Днём рождения! Была приятно удивлена. Удачи вам в вашем красивом деле!",
+    "en":"Thank you for the delivery! Very fast from order to receipt. Brought it to the hotel. The roses are fresh and beautiful! We wished our daughter a happy birthday! She was pleasantly surprised. Good luck with your beautiful business!",
+    "ko":"배달 감사합니다! 주문부터 수령까지 아주 빨랐어요. 호텔로 가져다 주었어요. 장미가 신선하고 예뻐요! 딸 생일을 축하해 주었어요! 딸이 기분 좋게 놀랐어요. 이 멋진 사업 번창하시길 바랍니다!"},
+   "marina"),
+ ("Диана Сатаева","#90A4AE","Д",
+   {"ru":"неделю назад","en":"a week ago","ko":"1주 전"},
+   {"ru":"Очень красивые и свежие цветочки, имениннице понравилось очень😍 Быстро и оперативно оформили всё, очень рада что нашла этот цветочный магазин. Пусть расцветает бизнес🥰",
+    "en":"Very beautiful and fresh flowers, the birthday girl loved them so much 😍 Everything was arranged quickly and efficiently, I'm so glad I found this flower shop. May your business blossom 🥰",
+    "ko":"정말 예쁘고 신선한 꽃이에요, 생일 맞은 친구가 너무 좋아했어요 😍 모든 걸 빠르고 신속하게 준비해 주었어요. 이 꽃집을 찾아서 정말 기뻐요. 사업이 활짝 피어나길 바라요 🥰"},
+   "diana-s"),
+ ("Евгений Минин","#6D4C41","Е",
+   {"ru":"неделю назад","en":"a week ago","ko":"1주 전"},
+   {"ru":"Заказывал цветы на день рождения жене, всё очень быстро и качественно, через 2 часа цветы уже привезли на ресепшен в отель :) Жене очень понравилось",
+    "en":"I ordered flowers for my wife's birthday, everything was very fast and high quality — within 2 hours the flowers were already at the hotel reception :) My wife loved them",
+    "ko":"아내 생일 꽃을 주문했는데 모든 게 아주 빠르고 품질도 좋았어요. 2시간 만에 호텔 리셉션으로 배달됐어요 :) 아내가 아주 좋아했어요"},
+   "evgeniy-m"),
+ ("Владимир Потапов","#3949AB","В",
+   {"ru":"неделю назад","en":"a week ago","ko":"1주 전"},
+   {"ru":"Брал небольшой букет и шарики сердечки. Обговорили всё минут за 10. Я не мог определиться по времени доставки, тк на отдыхе график ненормированный, в итоге договорились по факту по команде. От команды до доставки около часа.",
+    "en":"I got a small bouquet and heart balloons. We sorted everything out in about 10 minutes. I couldn't pin down a delivery time since my holiday schedule was unpredictable, so we agreed to do it on demand. From my go-ahead to delivery was about an hour.",
+    "ko":"작은 부케와 하트 풍선을 주문했어요. 10분 만에 모든 걸 정했어요. 휴가 일정이 불규칙해서 배달 시간을 정하기 어려웠는데, 요청하는 대로 해주기로 했어요. 요청부터 배달까지 약 1시간 걸렸어요."},
+   "vladimir"),
+]
+
 STAR = '★★★★★'
 GLOGO = ('<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true">'
  '<path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/>'
@@ -135,16 +188,26 @@ L = {
  "ko":{"title":"구글 리뷰","sub":"실제 고객들의 후기","btn":"구글에서 모든 리뷰 보기","prev":"이전","next":"다음","of":"리뷰 136개 · 5.0"},
 }
 
-def card(r, lang):
-    name, color, ini, date, text = r
-    return f'''<article class="rv-card">
+def card(r, lang, base=""):
+    name, color, ini, date, text = r[0], r[1], r[2], r[3], r[4]
+    photo = r[5] if len(r) > 5 else None
+    img = ""
+    txtcls = "rv-text"
+    cardcls = "rv-card"
+    if photo:
+        cardcls = "rv-card rv-card--img"
+        txtcls = "rv-text rv-text--full"
+        img = (f'\n<img class="rv-photo" src="{base}img/site/reviews/{photo}.webp" '
+               f'alt="{html.escape(name)} — отзыв с фото букета, доставка цветов Нячанг" '
+               f'loading="lazy" decoding="async" width="700">')
+    return f'''<article class="{cardcls}">
 <header class="rv-head">
 <div class="rv-ava" style="background:{color}">{html.escape(ini)}</div>
 <div class="rv-meta"><div class="rv-name">{html.escape(name)}</div><div class="rv-date">{html.escape(date[lang])}</div></div>
 {GLOGO}
 </header>
 <div class="rv-stars" aria-label="5 / 5">{STAR}</div>
-<p class="rv-text">{html.escape(text[lang])}</p>
+<p class="{txtcls}">{html.escape(text[lang])}</p>{img}
 </article>'''
 
 STYLE = '''<style>
@@ -164,6 +227,8 @@ STYLE = '''<style>
 .rv-date{color:#9c9490;font-size:.75rem;margin-top:2px}
 .rv-stars{color:#fbbc04;font-size:.98rem;letter-spacing:1.5px}
 .rv-text{color:#57514e;font-size:.88rem;line-height:1.55;margin:0;display:-webkit-box;-webkit-line-clamp:9;-webkit-box-orient:vertical;overflow:hidden}
+.rv-text--full{display:block;-webkit-line-clamp:none;overflow:visible}
+.rv-photo{width:100%;height:200px;object-fit:cover;border-radius:.7rem;margin-top:.15rem;display:block;background:#f3efec}
 .rv-nav{position:absolute;top:48%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid #e7e1de;box-shadow:0 2px 8px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#80757a;z-index:5;transition:.2s}
 .rv-nav:hover{color:#c0687a;border-color:#e7c3cd}
 .rv-prev{left:-6px}.rv-next{right:-6px}
@@ -171,9 +236,9 @@ STYLE = '''<style>
 .rv-cta{text-align:center;margin-top:.5rem}
 </style>'''
 
-def carousel_section(lang):
+def carousel_section(lang, base=""):
     t = L[lang]
-    cards = "\n".join(card(r, lang) for r in R)
+    cards = "\n".join(card(r, lang, base) for r in IMG) + "\n" + "\n".join(card(r, lang) for r in R)
     return f'''<!--REVIEWS-START-->
     <section class="reveal py-10 px-4 border-b border-stone-100">
         <div class="max-w-6xl mx-auto">
