@@ -161,21 +161,24 @@
         a.className = "flw-nav px-3 py-1.5 rounded-lg text-xs font-medium text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition";
         a.textContent = label; return a;
       };
-      var l1 = mk("order.html", L().order), l2 = mk("cart.html", L().cart);
+      var lq = pageLang()!=="ru" ? ("?lang="+pageLang()) : "";
+      var l1 = mk("order.html"+lq, L().order), l2 = mk("cart.html"+lq, L().cart);
       if (sep) { nav.insertBefore(l2, sep); nav.insertBefore(l1, l2); }
       else { nav.appendChild(l1); nav.appendChild(l2); }
     }
     var mm = document.getElementById("mnav");
     if (mm && !mm.querySelector(".flw-mnav")) {
       var st = "display:block;padding:10px 8px;border-radius:8px;text-decoration:none;color:#57534e";
+      var lq2 = pageLang()!=="ru" ? ("?lang="+pageLang()) : "";
       mm.insertAdjacentHTML("afterbegin",
-        '<a href="' + BASE + 'order.html" class="flw-mnav" style="' + st + '">' + L().order + '</a>' +
-        '<a href="' + BASE + 'cart.html" class="flw-mnav" style="' + st + '">' + L().cart + '</a>');
+        '<a href="' + BASE + 'order.html' + lq2 + '" class="flw-mnav" style="' + st + '">' + L().order + '</a>' +
+        '<a href="' + BASE + 'cart.html' + lq2 + '" class="flw-mnav" style="' + st + '">' + L().cart + '</a>');
     }
   }
 
   document.addEventListener("cart:change", fab);
   document.addEventListener("DOMContentLoaded", function () {
+    try { localStorage.setItem("flw_lang", pageLang()); } catch (e) {}
     injectButtons(); injectProductPage(); injectNav(); fab();
     var n = 0, iv = setInterval(function () { injectButtons(); if (++n > 10) clearInterval(iv); }, 400);
   });

@@ -11,6 +11,170 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+/* ===== i18n корзины/заказа (RU/EN/KO) ===== */
+(function(){
+  var q=new URLSearchParams(location.search).get('lang');
+  var l=(q||localStorage.getItem('flw_lang')||'ru').toLowerCase();
+  if(l!=='en'&&l!=='ko') l='ru';
+  try{localStorage.setItem('flw_lang',l);}catch(e){}
+  window.FLW_LANG=l; document.documentElement.lang=l;
+})();
+var I18N_RAW={
+ page_title:{ru:"Корзина — Доставка цветов в Нячанге",en:"Cart — Flower delivery in Nha Trang",ko:"장바구니 — 나트랑 꽃 배달"},
+ strip:{ru:"Качество · Ответственность · Пунктуальность",en:"Quality · Responsibility · Punctuality",ko:"품질 · 책임감 · 시간 엄수"},
+ brand:{ru:"Русскоязычная доставка цветов<br>и гелиевых шаров в Нячанге",en:"Flower &amp; balloon delivery<br>in Nha Trang",ko:"나트랑 꽃·풍선 배달"},
+ nav_home:{ru:"🏠 Главная",en:"🏠 Home",ko:"🏠 홈"},
+ nav_catalog:{ru:"💐 Каталог",en:"💐 Catalog",ko:"💐 카탈로그"},
+ nav_articles:{ru:"📖 Статьи",en:"📖 Articles",ko:"📖 아티클"},
+ nav_balloons:{ru:"🎈 Шары",en:"🎈 Balloons",ko:"🎈 풍선"},
+ nav_cakes:{ru:"🎂 Торты",en:"🎂 Cakes",ko:"🎂 케이크"},
+ nav_nabory:{ru:"🎁 Наборы",en:"🎁 Gift sets",ko:"🎁 선물 세트"},
+ href_home:{ru:"index.html",en:"index-en.html",ko:"index-kr.html"},
+ href_catalog:{ru:"catalog-ru.html",en:"catalog-en.html",ko:"catalog-ko.html"},
+ href_articles:{ru:"blog-ru.html",en:"blog-en.html",ko:"blog-ko.html"},
+ href_balloons:{ru:"balloons.html",en:"balloons-en.html",ko:"balloons-kr.html"},
+ href_cakes:{ru:"torty.html",en:"torty-en.html",ko:"torty-kr.html"},
+ href_nabory:{ru:"nabory.html",en:"nabory-en.html",ko:"nabory-kr.html"},
+ cart_kicker:{ru:"ваш заказ",en:"your order",ko:"주문 내역"},
+ cart_title:{ru:"Корзина",en:"Cart",ko:"장바구니"},
+ empty:{ru:"Корзина пуста.",en:"Your cart is empty.",ko:"장바구니가 비어 있습니다."},
+ goCatalog:{ru:"Перейти в каталог",en:"Go to catalog",ko:"카탈로그로 이동"},
+ del:{ru:"Удалить",en:"Remove",ko:"삭제"},
+ itemsCount:{ru:"Товаров",en:"Items",ko:"상품"},
+ pcs:{ru:"шт.",en:"pcs",ko:"개"},
+ deliveryWord:{ru:"Доставка",en:"Delivery",ko:"배달"},
+ total:{ru:"Итого",en:"Total",ko:"합계"},
+ inVnd:{ru:"В донгах",en:"In dong",ko:"동 기준"},
+ cakeBlockedNote:{ru:"Оформление станет доступно, когда в корзине будет букет, шары или набор.",en:"Checkout will be available once your cart has a bouquet, balloons or a gift set.",ko:"장바구니에 부케·풍선·선물 세트가 있어야 주문할 수 있습니다."},
+ checkoutBtn:{ru:"Оформить заказ ▾",en:"Checkout ▾",ko:"주문하기 ▾"},
+ addMore:{ru:"Добавить ещё товары",en:"Add more items",ko:"상품 더 담기"},
+ cakeWarn:{ru:"🎂 Торт можно заказать только вместе с букетом, шарами или набором. Добавьте к заказу что-то ещё.",en:"🎂 A cake can only be ordered together with a bouquet, balloons or a gift set. Add something else to your order.",ko:"🎂 케이크는 부케·풍선·선물 세트와 함께만 주문할 수 있습니다. 다른 상품을 추가해 주세요."},
+ resume_pre:{ru:"У вас есть незавершённый заказ ",en:"You have an unfinished order ",ko:"미완료 주문이 있습니다 "},
+ resume_post:{ru:". Догрузить чек оплаты?",en:". Upload the payment receipt?",ko:". 결제 영수증을 올리시겠어요?"},
+ resume_btn:{ru:"Продолжить",en:"Continue",ko:"계속"},
+ step_data:{ru:"1 · Данные",en:"1 · Details",ko:"1 · 정보"},
+ step_pay:{ru:"2 · Оплата",en:"2 · Payment",ko:"2 · 결제"},
+ step_data_done:{ru:"1 · Данные ✎",en:"1 · Details ✎",ko:"1 · 정보 ✎"},
+ collapse:{ru:"Свернуть ▴",en:"Collapse ▴",ko:"접기 ▴"},
+ co_title:{ru:"Оформление заказа",en:"Checkout",ko:"주문하기"},
+ co_sub:{ru:"Заполните данные — мы подтвердим заказ в чате.",en:"Fill in the details — we'll confirm the order in chat.",ko:"정보를 입력해 주세요 — 채팅으로 주문을 확정해 드립니다."},
+ note:{ru:"🕒 Подтверждаем заказы ежедневно с 06:00 до 21:00, обычно в течение 10 минут. Заказы ночью подтверждаем утром.",en:"🕒 We confirm orders daily from 06:00 to 21:00, usually within 10 minutes. Night orders are confirmed in the morning.",ko:"🕒 매일 06:00~21:00에 주문을 확인하며 보통 10분 이내입니다. 야간 주문은 아침에 확인해 드립니다."},
+ help:{ru:"💬 Есть вопросы или нужна помощь с выбором и оформлением? Напишите нам лично — ответим быстро:",en:"💬 Questions or need help choosing and ordering? Message us directly — we reply fast:",ko:"💬 궁금한 점이 있거나 선택·주문에 도움이 필요하신가요? 바로 메시지 주세요 — 빠르게 답변드립니다:"},
+ lbl_items:{ru:"Что заказываете",en:"What are you ordering",ko:"주문 상품"},
+ ph_items:{ru:"Например: 25 красных роз · 101 роза в корзине · набор шаров",en:"e.g. 25 red roses · 101 roses in a basket · balloon set",ko:"예: 빨간 장미 25송이 · 바구니 장미 101송이 · 풍선 세트"},
+ hint_items:{ru:"Название букета/набора с сайта. Не уверены — напишите как есть, уточним при подтверждении.",en:"The bouquet/set name from the site. Not sure — just write it as is, we'll clarify on confirmation.",ko:"사이트의 부케/세트 이름을 적어주세요. 확실하지 않으면 그대로 적어주시면 확인 시 조정해 드립니다."},
+ lbl_amount:{ru:"Сумма заказа",en:"Order amount",ko:"주문 금액"},
+ ph_amount:{ru:"Например: 500 000 ₫",en:"e.g. 500,000 ₫",ko:"예: 500,000 ₫"},
+ hint_amount:{ru:"Цена указана на карточке товара. Скоро появится корзина — пока впишите вручную.",en:"The price is shown on the product card. Enter it manually for now.",ko:"가격은 상품 카드에 표시되어 있습니다. 지금은 직접 입력해 주세요."},
+ fromCart:{ru:"Из вашей корзины.",en:"From your cart.",ko:"장바구니에서 가져왔습니다."},
+ lbl_rcpt:{ru:"Имя получателя",en:"Recipient's name",ko:"수령인 이름"},
+ ph_rcpt:{ru:"Кому вручить букет",en:"Who to hand the bouquet to",ko:"부케를 받을 분"},
+ lbl_addr:{ru:"Адрес доставки",en:"Delivery address",ko:"배달 주소"},
+ ph_addrSearch:{ru:"Отель, улица или место — например: Vesna Hotel",en:"Hotel, street or place — e.g. Vesna Hotel",ko:"호텔, 거리 또는 장소 — 예: Vesna Hotel"},
+ geoBtn:{ru:"📍 Моё местоположение",en:"📍 My location",ko:"📍 내 위치"},
+ maprowHint:{ru:"Не то место? Подвиньте булавку на карте.",en:"Wrong spot? Drag the pin on the map.",ko:"위치가 틀렸나요? 지도에서 핀을 옮기세요."},
+ hint_addr:{ru:"Начните вводить название — выберите из списка. Не нашли? Вставьте ссылку на Google Карту ниже. ✈️ Доставка в аэропорт не осуществляется.",en:"Start typing a name and pick from the list. Not found? Paste a Google Maps link below. ✈️ We don't deliver to the airport.",ko:"이름을 입력하고 목록에서 선택하세요. 못 찾으셨나요? 아래에 구글 지도 링크를 붙여넣으세요. ✈️ 공항 배달은 불가합니다."},
+ lbl_gmap:{ru:"…или вставьте ссылку на Google Карту",en:"…or paste a Google Maps link",ko:"…또는 구글 지도 링크 붙여넣기"},
+ ph_gmap:{ru:"Скопируйте из приложения Google Карты и вставьте сюда",en:"Copy from the Google Maps app and paste here",ko:"구글 지도 앱에서 복사해 여기에 붙여넣으세요"},
+ gmapBtn:{ru:"Найти",en:"Find",ko:"찾기"},
+ hint_gmap:{ru:"Если точное место не находится в поиске — откройте Google Карты, <b>зажмите палец</b> на нужной точке (появится красная булавка «Отмеченное место»), нажмите <b>«Поделиться»</b> и скопируйте ссылку сюда. В такой ссылке точные координаты — мы определим место точно.",en:"If the exact spot isn't found in search — open Google Maps, <b>press and hold</b> on the spot (a red 'Dropped pin' appears), tap <b>'Share'</b> and paste the link here. Such a link has exact coordinates — we'll pinpoint the location.",ko:"검색으로 정확한 위치를 못 찾으면 — 구글 지도를 열고 원하는 지점을 <b>길게 누르세요</b>(빨간 '핀'이 표시됩니다). <b>'공유'</b>를 눌러 링크를 여기에 붙여넣으세요. 이런 링크에는 정확한 좌표가 있어 위치를 정확히 찾을 수 있습니다."},
+ lbl_addrText:{ru:"Детали для курьера",en:"Details for the courier",ko:"기사님을 위한 세부사항"},
+ ph_addrText:{ru:"Этаж, номер квартиры/комнаты, ресепшн",en:"Floor, apartment/room number, reception",ko:"층, 호실 번호, 리셉션"},
+ lbl_date:{ru:"Дата доставки",en:"Delivery date",ko:"배달 날짜"},
+ lbl_time:{ru:"Время доставки",en:"Delivery time",ko:"배달 시간"},
+ lbl_comment:{ru:"Комментарий (по желанию)",en:"Comment (optional)",ko:"메모 (선택)"},
+ ph_comment:{ru:"Открытка, пожелания, сюрприз…",en:"Card, wishes, surprise…",ko:"카드, 요청, 서프라이즈…"},
+ lbl_chan:{ru:"Куда вам написать подтверждение?",en:"Where should we send confirmation?",ko:"확인을 어디로 보낼까요?"},
+ lbl_contact:{ru:"Ваш номер / ник для связи",en:"Your number / handle for contact",ko:"연락용 번호 / 아이디"},
+ ph_contact:{ru:"+7… / @username",en:"+1… / @username",ko:"+82… / @username"},
+ lbl_email:{ru:"Ваша почта",en:"Your email",ko:"이메일"},
+ hint_email:{ru:"На почту придёт подтверждение заказа, статус оплаты и вся отчётность. Подтверждать будем и в мессенджере, но почта нужна для фиксации — укажите, пожалуйста.",en:"You'll receive the order confirmation, payment status and all records by email. We'll also confirm in the messenger, but email is needed for the record — please provide it.",ko:"이메일로 주문 확인, 결제 상태 및 모든 내역을 보내드립니다. 메신저로도 확인해 드리지만 기록을 위해 이메일이 필요합니다 — 꼭 입력해 주세요."},
+ submitBtn:{ru:"Оформить заказ → перейти к оплате",en:"Place order → go to payment",ko:"주문하기 → 결제로 이동"},
+ saveBtn:{ru:"Сохранить изменения → к оплате",en:"Save changes → to payment",ko:"변경 저장 → 결제로"},
+ timeHint_morning:{ru:"На ближайшее утро — с 09:00 до 22:00.",en:"For the nearest morning — from 09:00 to 22:00.",ko:"가장 가까운 아침 — 09:00부터 22:00까지."},
+ timeHint_day:{ru:"Доставка с {h}:00 до 22:00.",en:"Delivery from {h}:00 to 22:00.",ko:"배달 {h}:00부터 22:00까지."},
+ backbtn:{ru:"← Вернуться и изменить данные",en:"← Go back and edit details",ko:"← 돌아가서 정보 수정"},
+ pay_title:{ru:"Оплата заказа",en:"Order payment",ko:"주문 결제"},
+ pay_sub:{ru:"Заявка принята. Выберите способ оплаты, оплатите и загрузите скрин чека.",en:"Order received. Choose a payment method, pay and upload a screenshot of the receipt.",ko:"주문이 접수되었습니다. 결제 방법을 선택하고 결제 후 영수증 스크린샷을 올려주세요."},
+ lbl_payMethod:{ru:"Способ оплаты",en:"Payment method",ko:"결제 방법"},
+ pay_opt_cash:{ru:"Наличными при получении",en:"Cash on delivery",ko:"수령 시 현금"},
+ pay_opt_rub:{ru:"Рубли (СБП)",en:"Rubles (SBP)",ko:"루블 (SBP)"},
+ pay_opt_vnd:{ru:"Донги (VND)",en:"Dong (VND)",ko:"동 (VND)"},
+ pay_opt_usdt:{ru:"USDT TRC-20",en:"USDT TRC-20",ko:"USDT TRC-20"},
+ pay_opt_kzt:{ru:"Карта Kaspi",en:"Kaspi card",ko:"Kaspi 카드"},
+ lbl_receipt:{ru:"Скрин оплаты (чек)",en:"Payment screenshot (receipt)",ko:"결제 스크린샷 (영수증)"},
+ fileWrap:{ru:"📎 Нажмите, чтобы прикрепить скрин чека",en:"📎 Tap to attach a receipt screenshot",ko:"📎 눌러서 영수증 스크린샷 첨부"},
+ fileOk:{ru:"✓ Чек прикреплён — можно отправлять",en:"✓ Receipt attached — ready to send",ko:"✓ 영수증 첨부됨 — 전송 가능"},
+ sendReceipt:{ru:"Я оплатил — отправить чек",en:"I've paid — send receipt",ko:"결제했어요 — 영수증 보내기"},
+ sendingReceipt:{ru:"Отправляем чек…",en:"Sending receipt…",ko:"영수증 전송 중…"},
+ cashWarn:{ru:"⚠️ <b>Оплата наличными при получении.</b><br>Получатель — это вы (или тот, кто подтвердит заказ). Заказ будет собран и доставлен <b>только после того, как менеджер свяжется с вами</b> по указанным контактам и вы <b>лично подтвердите заказ</b>. Если вы не ответите и не подтвердите заказ менеджеру — заказ, к сожалению, <b>не собирается и не доставляется</b>.",en:"⚠️ <b>Cash on delivery.</b><br>The recipient is you (or whoever confirms the order). The order will be prepared and delivered <b>only after our manager contacts you</b> via the details you provided and you <b>personally confirm the order</b>. If you don't reply and confirm to the manager, the order unfortunately <b>will not be prepared or delivered</b>.",ko:"⚠️ <b>수령 시 현금 결제.</b><br>수령인은 본인(또는 주문을 확인하는 분)입니다. 매니저가 입력하신 연락처로 <b>연락드린 후 본인이 직접 주문을 확인</b>해야 주문이 준비·배달됩니다. 매니저에게 응답·확인하지 않으시면 유감스럽게도 주문은 <b>준비·배달되지 않습니다</b>."},
+ cashBtn:{ru:"Подтвердить заказ (оплата наличными)",en:"Confirm order (cash payment)",ko:"주문 확정 (현금 결제)"},
+ sending:{ru:"Отправляем…",en:"Sending…",ko:"전송 중…"},
+ pay_rub_title:{ru:"Рубли · СБП",en:"Rubles · SBP",ko:"루블 · SBP"},
+ pay_vnd_title:{ru:"Донги · BIDV",en:"Dong · BIDV",ko:"동 · BIDV"},
+ pay_usdt_title:{ru:"USDT · TRON (TRC-20)",en:"USDT · TRON (TRC-20)",ko:"USDT · TRON (TRC-20)"},
+ pay_kzt_title:{ru:"Карта · Kaspi Bank",en:"Card · Kaspi Bank",ko:"카드 · Kaspi Bank"},
+ pl_phone:{ru:"Номер телефона",en:"Phone number",ko:"전화번호"},
+ pl_recipient:{ru:"Получатель",en:"Recipient",ko:"수취인"},
+ pl_bank:{ru:"Банк",en:"Bank",ko:"은행"},
+ pl_account:{ru:"Номер счёта",en:"Account number",ko:"계좌번호"},
+ pl_network:{ru:"Сеть",en:"Network",ko:"네트워크"},
+ pl_wallet:{ru:"Адрес кошелька",en:"Wallet address",ko:"지갑 주소"},
+ pl_card:{ru:"Номер карты",en:"Card number",ko:"카드 번호"},
+ pl_holder:{ru:"Держатель",en:"Cardholder",ko:"소유자"},
+ pay_rub_warn:{ru:"⚠️ Переводите только в Сбербанк или Тинькофф. На другие банки — не переводить!",en:"⚠️ Transfer only to Sberbank or Tinkoff. Do not transfer to other banks!",ko:"⚠️ Sberbank 또는 Tinkoff로만 송금하세요. 다른 은행으로 송금하지 마세요!"},
+ pay_usdt_warn:{ru:"⚠️ Только сеть TRON (TRC-20). Другая сеть = потеря средств.",en:"⚠️ TRON (TRC-20) network only. Another network = loss of funds.",ko:"⚠️ TRON (TRC-20) 네트워크만 사용하세요. 다른 네트워크 = 자금 손실."},
+ copy:{ru:"копировать",en:"copy",ko:"복사"},
+ copied:{ru:"скопировано ✓",en:"copied ✓",ko:"복사됨 ✓"},
+ done_title:{ru:"Заявка принята!",en:"Order received!",ko:"주문이 접수되었습니다!"},
+ backHome:{ru:"Вернуться на сайт",en:"Back to the site",ko:"사이트로 돌아가기"},
+ done_paid:{ru:"Мы получили оплату по заказу <span class='oid'>{id}</span> и подтвердим его в течение ~10 минут (с 06:00 до 21:00). Спасибо! 🌸",en:"We've received payment for order <span class='oid'>{id}</span> and will confirm it within ~10 minutes (06:00–21:00). Thank you! 🌸",ko:"주문 <span class='oid'>{id}</span>의 결제를 확인했으며 ~10분 이내(06:00~21:00)에 확정해 드립니다. 감사합니다! 🌸"},
+ done_cash:{ru:"Заявка <span class='oid'>{id}</span> принята. Оплата — наличными при получении.<br><br>⏳ Наш менеджер свяжется с вами по указанным контактам. Заказ будет собран и доставлен <b>только после того, как вы лично подтвердите его менеджеру</b>. Пожалуйста, будьте на связи 🌸",en:"Order <span class='oid'>{id}</span> received. Payment — cash on delivery.<br><br>⏳ Our manager will contact you via the details you provided. The order will be prepared and delivered <b>only after you personally confirm it to the manager</b>. Please stay reachable 🌸",ko:"주문 <span class='oid'>{id}</span>이(가) 접수되었습니다. 결제 — 수령 시 현금.<br><br>⏳ 매니저가 입력하신 연락처로 연락드립니다. 본인이 <b>매니저에게 직접 확인</b>해야 주문이 준비·배달됩니다. 연락이 닿게 해주세요 🌸"},
+ zone_nt:{ru:"Нячанг",en:"Nha Trang",ko:"나트랑"},
+ zone_near:{ru:"рядом с Нячангом (юг)",en:"near Nha Trang (south)",ko:"나트랑 인근(남쪽)"},
+ zone_camranh:{ru:"Камрань",en:"Cam Ranh",ko:"깜라인"},
+ pointOnMap:{ru:"Точка на карте",en:"Point on the map",ko:"지도의 위치"},
+ airport_msg:{ru:"✈️❌ Доставка в аэропорт не осуществляется. Укажите адрес отеля или места вне аэропорта.",en:"✈️❌ We don't deliver to the airport. Please enter a hotel or a location outside the airport.",ko:"✈️❌ 공항 배달은 불가합니다. 호텔 또는 공항 외 위치를 입력해 주세요."},
+ outside_msg:{ru:"❌ Адрес вне зоны доставки — оформить нельзя. Возим по Нячангу, южным пригородам и Камрани.",en:"❌ Address is outside the delivery area — can't order. We deliver in Nha Trang, the southern suburbs and Cam Ranh.",ko:"❌ 배달 지역을 벗어난 주소입니다 — 주문할 수 없습니다. 나트랑, 남부 근교, 깜라인까지 배달합니다."},
+ z_goods:{ru:"Товары",en:"Items",ko:"상품"},
+ z_delivery:{ru:"Доставка",en:"Delivery",ko:"배달"},
+ z_free:{ru:"бесплатно",en:"free",ko:"무료"},
+ z_total:{ru:"Итого к оплате",en:"Total to pay",ko:"결제 총액"},
+ zone_prefix:{ru:"🚚 Зона доставки: ",en:"🚚 Delivery zone: ",ko:"🚚 배달 지역: "},
+ surcharge_pre:{ru:"доплата +",en:"surcharge +",ko:"추가 요금 +"},
+ zone_min:{ru:"В эту зону доставка возможна от 1 000 000 ₫.",en:"Delivery to this zone is available from 1,000,000 ₫.",ko:"이 지역 배달은 1,000,000 ₫부터 가능합니다."},
+ amt_delivery:{ru:"доставка",en:"delivery",ko:"배달"},
+ amt_free_full:{ru:"доставка бесплатно",en:"free delivery",ko:"무료 배달"},
+ search_unavail:{ru:"Поиск недоступен — включите карту кнопкой «Моё местоположение» или введите детали ниже",en:"Search unavailable — enable the map via 'My location' or enter the details below",ko:"검색을 사용할 수 없습니다 — '내 위치' 버튼으로 지도를 켜거나 아래에 세부 정보를 입력하세요"},
+ nothing_found:{ru:"Ничего не найдено. Попробуйте иначе или нажмите «Моё местоположение».",en:"Nothing found. Try differently or tap 'My location'.",ko:"검색 결과가 없습니다. 다르게 입력하거나 '내 위치'를 눌러보세요."},
+ point:{ru:"Точка",en:"Point",ko:"위치"},
+ myGeo:{ru:"Моя геолокация",en:"My location",ko:"내 위치"},
+ determining:{ru:"Определяем точку…",en:"Locating…",ko:"위치 확인 중…"},
+ gmap_fail:{ru:"Не удалось точно определить место по ссылке. Найдите его в поиске выше (уже ищет и Камрань) или подвиньте булавку на карте.",en:"Couldn't pinpoint the place from the link. Find it in the search above (Cam Ranh included) or drag the pin on the map.",ko:"링크로 위치를 정확히 찾지 못했습니다. 위 검색에서 찾거나(깜라인 포함) 지도에서 핀을 옮겨주세요."},
+ gmap_fail2:{ru:"Не удалось определить. Попробуйте поиск выше.",en:"Couldn't determine it. Try the search above.",ko:"확인하지 못했습니다. 위 검색을 이용해 주세요."},
+ pointFromMap:{ru:"Точка с карты",en:"Point from map",ko:"지도에서 선택한 위치"},
+ err_cake:{ru:"🎂 Торт можно заказать только вместе с букетом, шарами или набором.",en:"🎂 A cake can only be ordered together with a bouquet, balloons or a gift set.",ko:"🎂 케이크는 부케·풍선·선물 세트와 함께만 주문할 수 있습니다."},
+ err_addr:{ru:"Укажите адрес доставки — найдите в поиске или нажмите «Моё местоположение».",en:"Enter the delivery address — search or tap 'My location'.",ko:"배달 주소를 입력하세요 — 검색하거나 '내 위치'를 누르세요."},
+ err_airport:{ru:"✈️ Доставка в аэропорт не осуществляется. Укажите другой адрес.",en:"✈️ We don't deliver to the airport. Please enter another address.",ko:"✈️ 공항 배달은 불가합니다. 다른 주소를 입력해 주세요."},
+ err_outside:{ru:"Этот адрес вне зоны доставки. Мы возим по Нячангу, южным пригородам и Камрани.",en:"This address is outside the delivery area. We deliver in Nha Trang, the southern suburbs and Cam Ranh.",ko:"이 주소는 배달 지역을 벗어났습니다. 나트랑, 남부 근교, 깜라인까지 배달합니다."},
+ err_min:{ru:"В зону «{label}» доставка от 1 000 000 ₫ (у вас {x}). Добавьте товаров.",en:"Delivery to '{label}' starts from 1,000,000 ₫ (you have {x}). Add more items.",ko:"'{label}' 지역 배달은 1,000,000 ₫부터입니다(현재 {x}). 상품을 추가해 주세요."},
+ err_send:{ru:"Не удалось отправить. Проверьте интернет и попробуйте ещё раз.",en:"Couldn't send. Check your connection and try again.",ko:"전송하지 못했습니다. 인터넷을 확인하고 다시 시도해 주세요."},
+ err_receipt:{ru:"Не удалось отправить чек. Попробуйте ещё раз.",en:"Couldn't send the receipt. Please try again.",ko:"영수증을 전송하지 못했습니다. 다시 시도해 주세요."}
+};
+function tr(k){var o=I18N_RAW[k];if(!o)return k;return o[window.FLW_LANG]||o.ru;}
+window.tr=tr;
+function applyI18n(root){
+  root=root||document;
+  root.querySelectorAll('[data-i18n]').forEach(function(el){var v=tr(el.getAttribute('data-i18n'));if(v!=null)el.textContent=v;});
+  root.querySelectorAll('[data-i18n-html]').forEach(function(el){var v=tr(el.getAttribute('data-i18n-html'));if(v!=null)el.innerHTML=v;});
+  root.querySelectorAll('[data-i18n-ph]').forEach(function(el){var v=tr(el.getAttribute('data-i18n-ph'));if(v!=null)el.setAttribute('placeholder',v);});
+  root.querySelectorAll('[data-i18n-href]').forEach(function(el){var v=tr(el.getAttribute('data-i18n-href'));if(v!=null)el.setAttribute('href',v);});
+  try{document.title=tr('page_title');}catch(e){}
+}
+window.applyI18n=applyI18n;
+document.addEventListener('DOMContentLoaded',function(){applyI18n();});
+</script>
 <style>
         :root {
             --rose: #c0687a;
@@ -206,7 +370,7 @@
 </head>
 <body class="antialiased" style="background:#fff;color:#292524;display:flex;flex-direction:column;min-height:100vh;">
 <div style="background:#fce8ee; color:#a8566a;" class="text-xs py-2 text-center tracking-widest font-medium uppercase">
-        Качество · Ответственность · Пунктуальность
+        <span data-i18n="strip">Качество · Ответственность · Пунктуальность</span>
     </div>
 
     <!-- Шапка -->
@@ -214,14 +378,14 @@
         <div class="max-w-5xl mx-auto px-4 py-3 hidden md:flex justify-between items-center">
             <div class="flex items-center gap-3">
                 <img src="img/site/logo.webp" alt="Русскоязычная доставка цветов и гелиевых шаров в Нячанге" class="h-12 w-12 rounded-xl object-cover">
-                <span class="font-medium text-xs leading-tight text-stone-600 tracking-wide">Русскоязычная доставка цветов<br>и гелиевых шаров в Нячанге</span>
+                <span class="font-medium text-xs leading-tight text-stone-600 tracking-wide" data-i18n-html="brand">Русскоязычная доставка цветов<br>и гелиевых шаров в Нячанге</span>
             </div>
             <nav class="hidden md:flex items-center gap-1 text-xs font-medium"><!--MARK-NAV-->
-                <a href="index.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🏠 Главная</a>
-                <a href="catalog-ru.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">💐 Каталог</a>
-                <a href="blog-ru.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">📖 Статьи</a>
-                <a href="balloons.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🎈 Шары</a>
-                <a href="torty.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🎂 Торты</a>
+                <a href="index.html" data-i18n-href="href_home" data-i18n="nav_home" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🏠 Главная</a>
+                <a href="catalog-ru.html" data-i18n-href="href_catalog" data-i18n="nav_catalog" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">💐 Каталог</a>
+                <a href="blog-ru.html" data-i18n-href="href_articles" data-i18n="nav_articles" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">📖 Статьи</a>
+                <a href="balloons.html" data-i18n-href="href_balloons" data-i18n="nav_balloons" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🎈 Шары</a>
+                <a href="torty.html" data-i18n-href="href_cakes" data-i18n="nav_cakes" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🎂 Торты</a>
                 <span class="w-px h-4 bg-stone-200 mx-1"></span>
                 <span class="px-3 py-1.5 rounded-lg text-white text-xs font-medium" style="background:#c0687a;">🇷🇺 RU</span>
                 <a href="index-en.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🇬🇧 EN</a>
@@ -235,25 +399,25 @@
             </div>
         </div>
         <!-- Мобильная навигация -->
-        <div class="md:hidden" style="border-top:1px solid #f5f5f4;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px"><a href="index.html" style="display:flex;align-items:center;gap:8px;min-width:0;text-decoration:none"><img src="img/site/logo.webp" alt="logo" style="width:40px;height:40px;border-radius:10px;object-fit:cover;flex-shrink:0"><span style="font-weight:500;font-size:11px;line-height:1.2;color:#57534e">Русскоязычная доставка цветов<br>и гелиевых шаров в Нячанге</span></a><div style="display:flex;align-items:center;gap:8px;flex-shrink:0"><a href="https://wa.me/37443529162" target="_blank" aria-label="WhatsApp" style="width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1px solid #e7e5e4;color:#78716c;text-decoration:none;font-size:16px;flex-shrink:0;border-radius:9999px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a><a href="https://t.me/babaskin_o" target="_blank" aria-label="Telegram" style="width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1px solid #e7e5e4;color:#78716c;text-decoration:none;font-size:16px;flex-shrink:0;border-radius:9999px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a><button type="button" aria-label="Меню" onclick="document.getElementById('mnav').classList.toggle('hidden')" style="width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1px solid #e7e5e4;border-radius:10px;color:#57534e;background:#fff;flex-shrink:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button></div></div><div id="mnav" class="md:hidden hidden" style="border-top:1px solid #f5f5f4;padding:8px;background:#fff;font-size:14px;font-weight:500"><a href="index.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">🏠 Главная</a><a href="catalog-ru.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">💐 Каталог</a><a href="blog-ru.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">📖 Статьи</a><a href="balloons.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">🎈 Шары</a><a href="torty.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">🎂 Торты</a><a href="nabory.html" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">🎁 Наборы</a><div style="display:flex;gap:8px;padding:8px 8px 4px;margin-top:4px;border-top:1px solid #f5f5f4"><span style="padding:4px 12px;border-radius:8px;color:#fff;font-size:12px;background:#c0687a">🇷🇺 RU</span><a href="index-en.html" style="padding:4px 12px;border-radius:8px;color:#78716c;font-size:12px;text-decoration:none">🇬🇧 EN</a><a href="index-kr.html" style="padding:4px 12px;border-radius:8px;color:#78716c;font-size:12px;text-decoration:none">🇰🇷 KR</a></div></div></header>
+        <div class="md:hidden" style="border-top:1px solid #f5f5f4;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px"><a href="index.html" style="display:flex;align-items:center;gap:8px;min-width:0;text-decoration:none"><img src="img/site/logo.webp" alt="logo" style="width:40px;height:40px;border-radius:10px;object-fit:cover;flex-shrink:0"><span style="font-weight:500;font-size:11px;line-height:1.2;color:#57534e" data-i18n-html="brand">Русскоязычная доставка цветов<br>и гелиевых шаров в Нячанге</span></a><div style="display:flex;align-items:center;gap:8px;flex-shrink:0"><a href="https://wa.me/37443529162" target="_blank" aria-label="WhatsApp" style="width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1px solid #e7e5e4;color:#78716c;text-decoration:none;font-size:16px;flex-shrink:0;border-radius:9999px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a><a href="https://t.me/babaskin_o" target="_blank" aria-label="Telegram" style="width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1px solid #e7e5e4;color:#78716c;text-decoration:none;font-size:16px;flex-shrink:0;border-radius:9999px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a><button type="button" aria-label="Меню" onclick="document.getElementById('mnav').classList.toggle('hidden')" style="width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1px solid #e7e5e4;border-radius:10px;color:#57534e;background:#fff;flex-shrink:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button></div></div><div id="mnav" class="md:hidden hidden" style="border-top:1px solid #f5f5f4;padding:8px;background:#fff;font-size:14px;font-weight:500"><a href="index.html" data-i18n-href="href_home" data-i18n="nav_home" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">🏠 Главная</a><a href="catalog-ru.html" data-i18n-href="href_catalog" data-i18n="nav_catalog" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">💐 Каталог</a><a href="blog-ru.html" data-i18n-href="href_articles" data-i18n="nav_articles" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">📖 Статьи</a><a href="balloons.html" data-i18n-href="href_balloons" data-i18n="nav_balloons" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">🎈 Шары</a><a href="torty.html" data-i18n-href="href_cakes" data-i18n="nav_cakes" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">🎂 Торты</a><a href="nabory.html" data-i18n-href="href_nabory" data-i18n="nav_nabory" style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none">🎁 Наборы</a><div style="display:flex;gap:8px;padding:8px 8px 4px;margin-top:4px;border-top:1px solid #f5f5f4"><span style="padding:4px 12px;border-radius:8px;color:#fff;font-size:12px;background:#c0687a">🇷🇺 RU</span><a href="index-en.html" style="padding:4px 12px;border-radius:8px;color:#78716c;font-size:12px;text-decoration:none">🇬🇧 EN</a><a href="index-kr.html" style="padding:4px 12px;border-radius:8px;color:#78716c;font-size:12px;text-decoration:none">🇰🇷 KR</a></div></div></header>
 <main style="flex:1 0 auto;">
-<section style="padding:30px 16px 6px;max-width:1024px;margin:0 auto;width:100%;"><div style="position:relative;border-radius:24px;overflow:hidden;height:clamp(220px,34vw,320px);background:#3a3a3a;"><img src="img/site/cart-banner.webp" alt="Корзина" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.62),rgba(0,0,0,.12));"></div><div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 clamp(24px,6vw,56px);"><p style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#fce8ee;opacity:.9;margin:0 0 12px;">ваш заказ</p><h1 class="font-serif" style="font-size:clamp(30px,5.4vw,52px);font-style:italic;color:#fff;line-height:1.08;margin:0;">Корзина</h1></div></div></section><section id="cartView" style="padding:28px 0 6px;"><div class="flw-wrap"><div class="cur" id="curBox" style="display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap;"></div><div id="list"></div><div id="sumBox"></div><div id="cakeWarn" style="display:none;background:#fff4f4;border:1px solid #f3cccc;color:#9b2c2c;border-radius:14px;padding:12px 15px;font-size:15px;margin-top:12px;">🎂 Торт можно заказать только вместе с букетом, шарами или набором. Добавьте к заказу что-то ещё.</div></div></section><div class="wrap" id="coform" style="display:none;max-width:640px;margin:0 auto;"><div id="coHead" style="text-align:right;padding-top:8px;margin-bottom:-6px;"><button type="button" onclick="closeForm()" style="border:1px solid #e7e5e4;background:#fff;border-radius:10px;padding:7px 14px;cursor:pointer;color:#78716c;font-weight:600;font-size:13px">Свернуть ▴</button></div>
+<section style="padding:30px 16px 6px;max-width:1024px;margin:0 auto;width:100%;"><div style="position:relative;border-radius:24px;overflow:hidden;height:clamp(220px,34vw,320px);background:#3a3a3a;"><img src="img/site/cart-banner.webp" alt="Корзина" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.62),rgba(0,0,0,.12));"></div><div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 clamp(24px,6vw,56px);"><p style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#fce8ee;opacity:.9;margin:0 0 12px;" data-i18n="cart_kicker">ваш заказ</p><h1 class="font-serif" style="font-size:clamp(30px,5.4vw,52px);font-style:italic;color:#fff;line-height:1.08;margin:0;" data-i18n="cart_title">Корзина</h1></div></div></section><section id="cartView" style="padding:28px 0 6px;"><div class="flw-wrap"><div class="cur" id="curBox" style="display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap;"></div><div id="list"></div><div id="sumBox"></div><div id="cakeWarn" style="display:none;background:#fff4f4;border:1px solid #f3cccc;color:#9b2c2c;border-radius:14px;padding:12px 15px;font-size:15px;margin-top:12px;" data-i18n="cakeWarn">🎂 Торт можно заказать только вместе с букетом, шарами или набором. Добавьте к заказу что-то ещё.</div></div></section><div class="wrap" id="coform" style="display:none;max-width:640px;margin:0 auto;"><div id="coHead" style="text-align:right;padding-top:8px;margin-bottom:-6px;"><button type="button" onclick="closeForm()" style="border:1px solid #e7e5e4;background:#fff;border-radius:10px;padding:7px 14px;cursor:pointer;color:#78716c;font-weight:600;font-size:13px" data-i18n="collapse">Свернуть ▴</button></div>
 
   <div id="resume" class="banner hidden">
-    <span>У вас есть незавершённый заказ <span class="oid" id="resumeId"></span>. Догрузить чек оплаты?</span>
-    <button id="resumeBtn">Продолжить</button>
+    <span><span data-i18n="resume_pre">У вас есть незавершённый заказ </span><span class="oid" id="resumeId"></span><span data-i18n="resume_post">. Догрузить чек оплаты?</span></span>
+    <button id="resumeBtn" data-i18n="resume_btn">Продолжить</button>
   </div>
 
   <!-- ШАГ 1 -->
   <section id="step1">
-    <div class="stepbar"><span class="st on">1 · Данные</span><span class="stsep">→</span><span class="st">2 · Оплата</span></div>
-    <h1 class="serif">Оформление заказа</h1>
-    <p class="sub">Заполните данные — мы подтвердим заказ в чате.</p>
+    <div class="stepbar"><span class="st on" data-i18n="step_data">1 · Данные</span><span class="stsep">→</span><span class="st" data-i18n="step_pay">2 · Оплата</span></div>
+    <h1 class="serif" data-i18n="co_title">Оформление заказа</h1>
+    <p class="sub" data-i18n="co_sub">Заполните данные — мы подтвердим заказ в чате.</p>
 
-    <div class="note">🕒 Подтверждаем заказы ежедневно с 06:00 до 21:00, обычно в течение 10 минут. Заказы ночью подтверждаем утром.</div>
+    <div class="note" data-i18n="note">🕒 Подтверждаем заказы ежедневно с 06:00 до 21:00, обычно в течение 10 минут. Заказы ночью подтверждаем утром.</div>
 
     <div class="helpbox">
-      💬 Есть вопросы или нужна помощь с выбором и оформлением? Напишите нам лично — ответим быстро:
+      <span data-i18n="help">💬 Есть вопросы или нужна помощь с выбором и оформлением? Напишите нам лично — ответим быстро:</span>
       <div style="display:flex;gap:16px;margin-top:9px;align-items:center">
         <a href="https://wa.me/37443529162" target="_blank" class="hcontact" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
         <a href="https://t.me/babaskin_o" target="_blank" class="hcontact" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
@@ -264,67 +428,67 @@
     <form id="orderForm" autocomplete="on">
       <div class="card">
         <div class="field">
-          <label class="req" for="items">Что заказываете</label>
-          <textarea id="items" name="items" placeholder="Например: 25 красных роз · 101 роза в корзине · набор шаров" required></textarea>
-          <div class="hint">Название букета/набора с сайта. Не уверены — напишите как есть, уточним при подтверждении.</div>
+          <label class="req" for="items" data-i18n="lbl_items">Что заказываете</label>
+          <textarea id="items" name="items" data-i18n-ph="ph_items" placeholder="Например: 25 красных роз · 101 роза в корзине · набор шаров" required></textarea>
+          <div class="hint" data-i18n="hint_items">Название букета/набора с сайта. Не уверены — напишите как есть, уточним при подтверждении.</div>
         </div>
         <div class="field">
-          <label class="req" for="amount">Сумма заказа</label>
-          <input id="amount" name="amount" placeholder="Например: 500 000 ₫" required>
-          <div class="hint">Цена указана на карточке товара. Скоро появится корзина — пока впишите вручную.</div>
+          <label class="req" for="amount" data-i18n="lbl_amount">Сумма заказа</label>
+          <input id="amount" name="amount" data-i18n-ph="ph_amount" placeholder="Например: 500 000 ₫" required>
+          <div class="hint" data-i18n="hint_amount">Цена указана на карточке товара. Скоро появится корзина — пока впишите вручную.</div>
         </div>
       </div>
 
       <div class="card">
         <div class="field">
-          <label class="req" for="rcpt">Имя получателя</label>
-          <input id="rcpt" name="rcpt" placeholder="Кому вручить букет" required>
+          <label class="req" for="rcpt" data-i18n="lbl_rcpt">Имя получателя</label>
+          <input id="rcpt" name="rcpt" data-i18n-ph="ph_rcpt" placeholder="Кому вручить букет" required>
         </div>
         <div class="field">
-          <label class="req" for="addrSearch">Адрес доставки</label>
+          <label class="req" for="addrSearch" data-i18n="lbl_addr">Адрес доставки</label>
           <div class="searchbox">
-            <input id="addrSearch" autocomplete="off" placeholder="Отель, улица или место — например: Vesna Hotel">
+            <input id="addrSearch" autocomplete="off" data-i18n-ph="ph_addrSearch" placeholder="Отель, улица или место — например: Vesna Hotel">
             <div id="results" class="results hidden"></div>
           </div>
           <div id="foundAddr" class="found hidden"></div>
           <div id="map" class="hidden"></div>
           <div class="maprow hidden" id="maprow">
-            <button type="button" class="btn ghost small" id="geoBtn">📍 Моё местоположение</button>
-            <span class="hint" style="margin:0">Не то место? Подвиньте булавку на карте.</span>
+            <button type="button" class="btn ghost small" id="geoBtn" data-i18n="geoBtn">📍 Моё местоположение</button>
+            <span class="hint" style="margin:0" data-i18n="maprowHint">Не то место? Подвиньте булавку на карте.</span>
           </div>
-          <div class="hint">Начните вводить название — выберите из списка. Не нашли? Вставьте ссылку на Google Карту ниже. ✈️ Доставка в аэропорт не осуществляется.</div>
+          <div class="hint" data-i18n="hint_addr">Начните вводить название — выберите из списка. Не нашли? Вставьте ссылку на Google Карту ниже. ✈️ Доставка в аэропорт не осуществляется.</div>
         </div>
         <div class="field">
-          <label for="gmapLink">…или вставьте ссылку на Google Карту</label>
+          <label for="gmapLink" data-i18n="lbl_gmap">…или вставьте ссылку на Google Карту</label>
           <div style="display:flex;gap:8px">
-            <input id="gmapLink" autocomplete="off" placeholder="Скопируйте из приложения Google Карты и вставьте сюда" style="flex:1">
-            <button type="button" class="btn ghost small" id="gmapBtn" style="white-space:nowrap">Найти</button>
+            <input id="gmapLink" autocomplete="off" data-i18n-ph="ph_gmap" placeholder="Скопируйте из приложения Google Карты и вставьте сюда" style="flex:1">
+            <button type="button" class="btn ghost small" id="gmapBtn" style="white-space:nowrap" data-i18n="gmapBtn">Найти</button>
           </div>
-          <div class="hint">Если точное место не находится в поиске — откройте Google Карты, <b>зажмите палец</b> на нужной точке (появится красная булавка «Отмеченное место»), нажмите <b>«Поделиться»</b> и скопируйте ссылку сюда. В такой ссылке точные координаты — мы определим место точно.</div>
+          <div class="hint" data-i18n-html="hint_gmap">Если точное место не находится в поиске — откройте Google Карты, <b>зажмите палец</b> на нужной точке (появится красная булавка «Отмеченное место»), нажмите <b>«Поделиться»</b> и скопируйте ссылку сюда. В такой ссылке точные координаты — мы определим место точно.</div>
           <div class="err" id="gmapErr" style="text-align:left"></div>
         </div>
         <div class="field">
-          <label class="req" for="addrText">Детали для курьера</label>
-          <input id="addrText" name="addrText" placeholder="Этаж, номер квартиры/комнаты, ресепшн" required>
+          <label class="req" for="addrText" data-i18n="lbl_addrText">Детали для курьера</label>
+          <input id="addrText" name="addrText" data-i18n-ph="ph_addrText" placeholder="Этаж, номер квартиры/комнаты, ресепшн" required>
         </div>
         <div class="field">
-          <label class="req" for="deliveryDate">Дата доставки</label>
+          <label class="req" for="deliveryDate" data-i18n="lbl_date">Дата доставки</label>
           <input type="date" id="deliveryDate" name="deliveryDate" required>
         </div>
         <div class="field">
-          <label class="req" for="deliveryTime">Время доставки</label>
+          <label class="req" for="deliveryTime" data-i18n="lbl_time">Время доставки</label>
           <select id="deliveryTime" name="deliveryTime" required></select>
           <div class="hint" id="timeHint"></div>
         </div>
         <div class="field">
-          <label for="comment">Комментарий (по желанию)</label>
-          <input id="comment" name="comment" placeholder="Открытка, пожелания, сюрприз…">
+          <label for="comment" data-i18n="lbl_comment">Комментарий (по желанию)</label>
+          <input id="comment" name="comment" data-i18n-ph="ph_comment" placeholder="Открытка, пожелания, сюрприз…">
         </div>
       </div>
 
       <div class="card">
         <div class="field">
-          <label class="req">Куда вам написать подтверждение?</label>
+          <label class="req" data-i18n="lbl_chan">Куда вам написать подтверждение?</label>
           <div class="chan">
             <label><input type="radio" name="chan" value="WhatsApp" checked>WhatsApp</label>
             <label><input type="radio" name="chan" value="Telegram">Telegram</label>
@@ -332,58 +496,58 @@
           </div>
         </div>
         <div class="field">
-          <label class="req" for="contact">Ваш номер / ник для связи</label>
-          <input id="contact" name="contact" placeholder="+7… / @username" required>
+          <label class="req" for="contact" data-i18n="lbl_contact">Ваш номер / ник для связи</label>
+          <input id="contact" name="contact" data-i18n-ph="ph_contact" placeholder="+7… / @username" required>
         </div>
         <div class="field">
-          <label class="req" for="email">Ваша почта</label>
+          <label class="req" for="email" data-i18n="lbl_email">Ваша почта</label>
           <input id="email" name="email" type="email" placeholder="you@mail.com" required>
-          <div class="hint">На почту придёт подтверждение заказа, статус оплаты и вся отчётность. Подтверждать будем и в мессенджере, но почта нужна для фиксации — укажите, пожалуйста.</div>
+          <div class="hint" data-i18n="hint_email">На почту придёт подтверждение заказа, статус оплаты и вся отчётность. Подтверждать будем и в мессенджере, но почта нужна для фиксации — укажите, пожалуйста.</div>
         </div>
       </div>
 
       <input type="text" name="website" id="website" tabindex="-1" autocomplete="off"
              style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
 
-      <button type="submit" class="btn" id="submitBtn">Оформить заказ → перейти к оплате</button>
+      <button type="submit" class="btn" id="submitBtn" data-i18n="submitBtn">Оформить заказ → перейти к оплате</button>
       <div class="err" id="err1"></div>
     </form>
   </section>
 
   <!-- ШАГ 2 -->
   <section id="step2" class="hidden">
-    <div class="stepbar"><span class="st done" onclick="goBackToData()" style="cursor:pointer">1 · Данные ✎</span><span class="stsep">→</span><span class="st on">2 · Оплата</span></div>
-    <button type="button" onclick="goBackToData()" class="backbtn">← Вернуться и изменить данные</button>
-    <h1 class="serif">Оплата заказа <span class="oid" id="orderIdShow"></span></h1>
-    <p class="sub">Заявка принята. Выберите способ оплаты, оплатите и загрузите скрин чека.</p>
+    <div class="stepbar"><span class="st done" onclick="goBackToData()" style="cursor:pointer" data-i18n="step_data_done">1 · Данные ✎</span><span class="stsep">→</span><span class="st on" data-i18n="step_pay">2 · Оплата</span></div>
+    <button type="button" onclick="goBackToData()" class="backbtn" data-i18n="backbtn">← Вернуться и изменить данные</button>
+    <h1 class="serif"><span data-i18n="pay_title">Оплата заказа</span> <span class="oid" id="orderIdShow"></span></h1>
+    <p class="sub" data-i18n="pay_sub">Заявка принята. Выберите способ оплаты, оплатите и загрузите скрин чека.</p>
 
     <div class="card">
-      <label>Способ оплаты</label>
+      <label data-i18n="lbl_payMethod">Способ оплаты</label>
       <div class="pays">
-        <div class="pay" data-m="cash"><span class="em">💵</span>Наличными при получении</div>
-        <div class="pay" data-m="rub"><span class="em">🇷🇺</span>Рубли (СБП)</div>
-        <div class="pay" data-m="vnd"><span class="em">🇻🇳</span>Донги (VND)</div>
-        <div class="pay" data-m="usdt"><span class="em">💠</span>USDT TRC-20</div>
-        <div class="pay" data-m="kzt"><span class="em">🇰🇿</span>Карта Kaspi</div>
+        <div class="pay" data-m="cash"><span class="em">💵</span><span data-i18n="pay_opt_cash">Наличными при получении</span></div>
+        <div class="pay" data-m="rub"><span class="em">🇷🇺</span><span data-i18n="pay_opt_rub">Рубли (СБП)</span></div>
+        <div class="pay" data-m="vnd"><span class="em">🇻🇳</span><span data-i18n="pay_opt_vnd">Донги (VND)</span></div>
+        <div class="pay" data-m="usdt"><span class="em">💠</span><span data-i18n="pay_opt_usdt">USDT TRC-20</span></div>
+        <div class="pay" data-m="kzt"><span class="em">🇰🇿</span><span data-i18n="pay_opt_kzt">Карта Kaspi</span></div>
       </div>
       <div id="payDetails" class="details"></div>
     </div>
 
     <div class="card" id="receiptCard" style="display:none">
-      <label class="req">Скрин оплаты (чек)</label>
-      <div class="filewrap" id="fileWrap">📎 Нажмите, чтобы прикрепить скрин чека</div>
+      <label class="req" data-i18n="lbl_receipt">Скрин оплаты (чек)</label>
+      <div class="filewrap" id="fileWrap" data-i18n="fileWrap">📎 Нажмите, чтобы прикрепить скрин чека</div>
       <input type="file" id="receipt" accept="image/*" class="hidden">
       <img id="preview" class="prev" alt="чек">
-      <button class="btn" id="sendReceipt" style="margin-top:14px" disabled>Я оплатил — отправить чек</button>
+      <button class="btn" id="sendReceipt" style="margin-top:14px" data-i18n="sendReceipt" disabled>Я оплатил — отправить чек</button>
       <div class="err" id="err2"></div>
     </div>
 
     <div class="card" id="cashCard" style="display:none">
-      <div class="warnbox" style="font-size:14px;line-height:1.55">
+      <div class="warnbox" style="font-size:14px;line-height:1.55" data-i18n-html="cashWarn">
         ⚠️ <b>Оплата наличными при получении.</b><br>
         Получатель — это вы (или тот, кто подтвердит заказ). Заказ будет собран и доставлен <b>только после того, как менеджер свяжется с вами</b> по указанным контактам и вы <b>лично подтвердите заказ</b>. Если вы не ответите и не подтвердите заказ менеджеру — заказ, к сожалению, <b>не собирается и не доставляется</b>.
       </div>
-      <button class="btn" id="cashBtn" style="margin-top:14px">Подтвердить заказ (оплата наличными)</button>
+      <button class="btn" id="cashBtn" style="margin-top:14px" data-i18n="cashBtn">Подтвердить заказ (оплата наличными)</button>
       <div class="err" id="errCash"></div>
     </div>
   </section>
@@ -392,9 +556,9 @@
   <section id="stepDone" class="hidden">
     <div class="card done">
       <div class="big">🌸</div>
-      <h1 class="serif" style="margin:8px 0">Заявка принята!</h1>
+      <h1 class="serif" style="margin:8px 0" data-i18n="done_title">Заявка принята!</h1>
       <p class="sub" id="doneText"></p>
-      <a href="index.html" class="btn ghost">Вернуться на сайт</a>
+      <a href="index.html" data-i18n-href="href_home" class="btn ghost" data-i18n="backHome">Вернуться на сайт</a>
     </div>
   </section>
 
@@ -935,7 +1099,7 @@
     renderCur();
     var items=Cart.items(), list=document.getElementById("list"), sum=document.getElementById("sumBox");
     if(!items.length){
-      list.innerHTML='<div style="text-align:center;color:#78716c;padding:40px 10px;">Корзина пуста.<br><br><a class="flw-btn flw-btn-primary" href="catalog-ru.html">Перейти в каталог</a></div>';
+      list.innerHTML='<div style="text-align:center;color:#78716c;padding:40px 10px;">'+tr('empty')+'<br><br><a class="flw-btn flw-btn-primary" href="'+tr('href_catalog')+'">'+tr('goCatalog')+'</a></div>';
       sum.innerHTML=""; document.getElementById("cakeWarn").style.display="none"; return;
     }
     list.innerHTML="";
@@ -946,7 +1110,7 @@
         '<div style="color:#78716c;font-size:13px;margin-top:2px">'+money(it.price)+' &times; '+it.qty+' = <b style="color:#1a1a1a">'+money(it.price*it.qty)+'</b></div>'+
         '<div style="display:flex;align-items:center;gap:.5rem;margin-top:.55rem"><button class="qbtn" data-m="'+it.id+'">&minus;</button>'+
         '<span style="min-width:22px;text-align:center;font-weight:700">'+it.qty+'</span><button class="qbtn" data-p="'+it.id+'">+</button>'+
-        '<button class="del" data-d="'+it.id+'">Удалить</button></div></div>';
+        '<button class="del" data-d="'+it.id+'">'+tr('del')+'</button></div></div>';
       list.appendChild(d);
     });
     list.querySelectorAll("[data-p]").forEach(function(b){b.onclick=function(){var it=Cart.items().filter(function(x){return x.id===b.dataset.p;})[0];Cart.setQty(b.dataset.p,it.qty+1);render();};});
@@ -962,20 +1126,20 @@
     if(delFee>0){
       var dr=document.createElement("div"); dr.className="ci";
       dr.innerHTML='<div style="width:66px;height:66px;border-radius:.7rem;background:#fdf2f5;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0">🚚</div>'+
-        '<div style="flex:1"><div style="font-weight:600;font-size:15px;color:#1a1a1a">Доставка · '+(window.__delLabel||"")+'</div>'+
+        '<div style="flex:1"><div style="font-weight:600;font-size:15px;color:#1a1a1a">'+tr('deliveryWord')+' · '+(window.__delLabel||"")+'</div>'+
         '<div style="color:#78716c;font-size:13px;margin-top:2px">'+money(delFee)+'</div></div>';
       list.appendChild(dr);
     }
     var grand=total+delFee;
     sum.innerHTML='<div style="background:#fff;border:1px solid #f0e0e5;border-radius:16px;padding:16px 18px;margin-top:4px">'+
-      '<div style="display:flex;justify-content:space-between;padding:4px 0"><span>Товаров</span><span>'+Cart.count()+' шт.</span></div>'+
-      (delFee>0?'<div style="display:flex;justify-content:space-between;padding:4px 0"><span>Доставка · '+(window.__delLabel||"")+'</span><span style="color:#8a6d3b;font-weight:600">'+money(delFee)+'</span></div>':'')+
-      '<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:21px;font-weight:800"><span>Итого</span><span>'+money(grand)+'</span></div>'+
-      (CUR!=="VND"?'<div style="display:flex;justify-content:space-between;padding:4px 0;color:#78716c;font-size:13px"><span>В донгах</span><span>'+window.fmtMoney(grand,"VND")+'</span></div>':'')+
+      '<div style="display:flex;justify-content:space-between;padding:4px 0"><span>'+tr('itemsCount')+'</span><span>'+Cart.count()+' '+tr('pcs')+'</span></div>'+
+      (delFee>0?'<div style="display:flex;justify-content:space-between;padding:4px 0"><span>'+tr('deliveryWord')+' · '+(window.__delLabel||"")+'</span><span style="color:#8a6d3b;font-weight:600">'+money(delFee)+'</span></div>':'')+
+      '<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:21px;font-weight:800"><span>'+tr('total')+'</span><span>'+money(grand)+'</span></div>'+
+      (CUR!=="VND"?'<div style="display:flex;justify-content:space-between;padding:4px 0;color:#78716c;font-size:13px"><span>'+tr('inVnd')+'</span><span>'+window.fmtMoney(grand,"VND")+'</span></div>':'')+
       '</div>'+
-      (cakeBlocked?'<div style="background:#fdf6ec;border:1px solid #f3e2c7;color:#8a6d3b;border-radius:12px;padding:10px 13px;font-size:13px;margin-top:12px">Оформление станет доступно, когда в корзине будет букет, шары или набор.</div>'
-                 :'<button class="flw-btn flw-btn-primary" style="display:block;width:100%;border:none;cursor:pointer;margin-top:16px" onclick="showCheckout()">Оформить заказ ▾</button>')+
-      '<a class="flw-btn flw-btn-outline" style="display:block;margin-top:10px" href="catalog-ru.html">Добавить ещё товары</a>';
+      (cakeBlocked?'<div style="background:#fdf6ec;border:1px solid #f3e2c7;color:#8a6d3b;border-radius:12px;padding:10px 13px;font-size:13px;margin-top:12px">'+tr('cakeBlockedNote')+'</div>'
+                 :'<button class="flw-btn flw-btn-primary" style="display:block;width:100%;border:none;cursor:pointer;margin-top:16px" onclick="showCheckout()">'+tr('checkoutBtn')+'</button>')+
+      '<a class="flw-btn flw-btn-outline" style="display:block;margin-top:10px" href="'+tr('href_catalog')+'">'+tr('addMore')+'</a>';
   }
   document.addEventListener("cart:change",render);
   render();
@@ -987,26 +1151,26 @@ const CONFIG = {
   NHATRANG: [12.2388, 109.1967],
 };
 const PAY = {
-  cash: { title:"Наличными при получении", cash:true, method:"Наличными при получении" },
-  rub: { title:"Рубли · СБП", rows:[
-      ["Номер телефона","+79627155432","+79627155432"],
-      ["Получатель","Оксана Анатольевна Я.",null],
-      ["Банк","Сбербанк или Тинькофф",null],
-    ], warn:"⚠️ Переводите только в Сбербанк или Тинькофф. На другие банки — не переводить!" },
-  vnd: { title:"Донги · BIDV", rows:[
-      ["Банк","BIDV (PGD Bình Tân)",null],
-      ["Номер счёта","8865888241","8865888241"],
-      ["Получатель","BABASKIN OLEG",null],
+  cash: { titleK:"pay_opt_cash", cash:true, method:"Наличными при получении" },
+  rub: { titleK:"pay_rub_title", rows:[
+      ["pl_phone","+79627155432","+79627155432"],
+      ["pl_recipient","Оксана Анатольевна Я.",null],
+      ["pl_bank","Сбербанк или Тинькофф",null],
+    ], warnK:"pay_rub_warn" },
+  vnd: { titleK:"pay_vnd_title", rows:[
+      ["pl_bank","BIDV (PGD Bình Tân)",null],
+      ["pl_account","8865888241","8865888241"],
+      ["pl_recipient","BABASKIN OLEG",null],
     ], vietqr:"https://img.vietqr.io/image/970418-8865888241-qr_only.png?accountName=BABASKIN%20OLEG" },
-  usdt:{ title:"USDT · TRON (TRC-20)", rows:[
-      ["Сеть","TRON (TRC-20)",null],
-      ["Адрес кошелька","TGniTscazmp3MJrmLxSgDPnNGeZPyMPVhb","TGniTscazmp3MJrmLxSgDPnNGeZPyMPVhb"],
+  usdt:{ titleK:"pay_usdt_title", rows:[
+      ["pl_network","TRON (TRC-20)",null],
+      ["pl_wallet","TGniTscazmp3MJrmLxSgDPnNGeZPyMPVhb","TGniTscazmp3MJrmLxSgDPnNGeZPyMPVhb"],
     ], qrtext:"TGniTscazmp3MJrmLxSgDPnNGeZPyMPVhb",
-       warn:"⚠️ Только сеть TRON (TRC-20). Другая сеть = потеря средств." },
-  kzt: { title:"Карта · Kaspi Bank", rows:[
-      ["Номер карты","4400 4303 0499 7486","4400430304997486"],
-      ["Держатель","Egor Merkulov",null],
-      ["Банк","Kaspi Bank",null],
+       warnK:"pay_usdt_warn" },
+  kzt: { titleK:"pay_kzt_title", rows:[
+      ["pl_card","4400 4303 0499 7486","4400430304997486"],
+      ["pl_holder","Egor Merkulov",null],
+      ["pl_bank","Kaspi Bank",null],
     ] },
 };
 const LS = "flw_order";
@@ -1042,8 +1206,8 @@ function rebuildTimes(){
     o.value=pad(h)+":00"; o.textContent=pad(h)+":00"; sel.appendChild(o); }
   document.getElementById('timeHint').textContent=
     (inp.value===MIN_DATE && MIN_START===9)
-      ? "На ближайшее утро — с 09:00 до 22:00."
-      : "Доставка с "+pad(start)+":00 до 22:00.";
+      ? tr('timeHint_morning')
+      : tr('timeHint_day').replace('{h}',pad(start));
 }
 function ruDate(iso){ const [y,m,d]=iso.split('-'); return d+"."+m+"."+y.slice(2); }
 
@@ -1088,25 +1252,25 @@ function validGeo(la,ln){ return la>11.6 && la<12.7 && ln>109.0 && ln<109.45; }
 function isAirport(la,ln){ return la>=11.97 && la<=12.025 && ln>=109.185 && ln<=109.25; }
 /* ЗОНЫ ДОСТАВКИ по широте точки (внутри контура). Границы калибруются. */
 function zoneFor(lat){
-  if(lat>=12.18) return {key:'nt', label:'Нячанг', fee:0};
-  if(lat>=12.14) return {key:'near', label:'рядом с Нячангом (юг)', fee:300000};   // Нячанг → Mia Resort
-  return {key:'camranh', label:'Камрань', fee:600000};                              // от Mia Resort и южнее
+  if(lat>=12.18) return {key:'nt', label:tr('zone_nt'), fee:0};
+  if(lat>=12.14) return {key:'near', label:tr('zone_near'), fee:300000};   // Нячанг → Mia Resort
+  return {key:'camranh', label:tr('zone_camranh'), fee:600000};            // от Mia Resort и южнее
 }
 function updateFound(){
   const box=document.getElementById('foundAddr');
   box.classList.remove('hidden');
   if(isAirport(latlng.la,latlng.ln)){
     window.__outside=true; window.__delFee=0; window.__delLabel='аэропорт';
-    box.innerHTML="📍 <b>"+(foundLabel||"Точка на карте")+"</b><br>"+
+    box.innerHTML="📍 <b>"+(foundLabel||tr('pointOnMap'))+"</b><br>"+
       "<a href='"+mapsLink()+"' target='_blank'>"+mapsLink()+"</a>"+
-      "<div style='margin-top:8px;font-weight:700;color:#9b2c2c'>✈️❌ Доставка в аэропорт не осуществляется. Укажите адрес отеля или места вне аэропорта.</div>";
+      "<div style='margin-top:8px;font-weight:700;color:#9b2c2c'>"+tr('airport_msg')+"</div>";
     return;
   }
   if(!inArea(latlng.la,latlng.ln)){
     window.__outside=true; window.__delFee=0; window.__delLabel='вне зоны';
-    box.innerHTML="📍 <b>"+(foundLabel||"Точка на карте")+"</b><br>"+
+    box.innerHTML="📍 <b>"+(foundLabel||tr('pointOnMap'))+"</b><br>"+
       "<a href='"+mapsLink()+"' target='_blank'>"+mapsLink()+"</a>"+
-      "<div style='margin-top:8px;font-weight:700;color:#9b2c2c'>❌ Адрес вне зоны доставки — оформить нельзя. Возим по Нячангу, южным пригородам и Камрани.</div>";
+      "<div style='margin-top:8px;font-weight:700;color:#9b2c2c'>"+tr('outside_msg')+"</div>";
     return;
   }
   window.__outside=false;
@@ -1115,26 +1279,26 @@ function updateFound(){
   var col=z.fee?'#8a6d3b':'#256b3c';
   var cur=localStorage.getItem('flw_cur')||'VND';
   var subtotal=(window.Cart?Cart.total():0);
-  var feeTxt=z.fee?('доплата +'+window.fmtMoney(z.fee,cur)):'бесплатно';
+  var feeTxt=z.fee?(tr('surcharge_pre')+window.fmtMoney(z.fee,cur)):tr('z_free');
   // обновляем поле «Сумма заказа»: товары + доставка = итого
   var amt=document.getElementById('amount');
   if(amt && subtotal>0){
     var gv=window.fmtMoney(subtotal,'VND');
-    amt.value = z.fee ? (gv+' + доставка '+window.fmtMoney(z.fee,'VND')+' = '+window.fmtMoney(subtotal+z.fee,'VND'))
-                      : (gv+' · доставка бесплатно');
+    amt.value = z.fee ? (gv+' + '+tr('amt_delivery')+' '+window.fmtMoney(z.fee,'VND')+' = '+window.fmtMoney(subtotal+z.fee,'VND'))
+                      : (gv+' · '+tr('amt_free_full'));
   }
   var breakdown="";
   if(subtotal>0){
     breakdown='<div style="margin-top:11px;background:#fff;border:1px solid #f0e0e5;border-radius:12px;padding:11px 14px;font-size:14px">'+
-      '<div style="display:flex;justify-content:space-between;padding:3px 0"><span style="color:#78716c">Товары</span><span>'+window.fmtMoney(subtotal,cur)+'</span></div>'+
-      '<div style="display:flex;justify-content:space-between;padding:3px 0"><span style="color:#78716c">Доставка · '+z.label+'</span><span style="font-weight:600;color:'+col+'">'+(z.fee?('+'+window.fmtMoney(z.fee,cur)):'бесплатно')+'</span></div>'+
-      '<div style="display:flex;justify-content:space-between;padding:7px 0 0;margin-top:5px;border-top:1px dashed #eee;font-weight:800;font-size:16px"><span>Итого к оплате</span><span>'+window.fmtMoney(subtotal+z.fee,cur)+'</span></div>'+
+      '<div style="display:flex;justify-content:space-between;padding:3px 0"><span style="color:#78716c">'+tr('z_goods')+'</span><span>'+window.fmtMoney(subtotal,cur)+'</span></div>'+
+      '<div style="display:flex;justify-content:space-between;padding:3px 0"><span style="color:#78716c">'+tr('z_delivery')+' · '+z.label+'</span><span style="font-weight:600;color:'+col+'">'+(z.fee?('+'+window.fmtMoney(z.fee,cur)):tr('z_free'))+'</span></div>'+
+      '<div style="display:flex;justify-content:space-between;padding:7px 0 0;margin-top:5px;border-top:1px dashed #eee;font-weight:800;font-size:16px"><span>'+tr('z_total')+'</span><span>'+window.fmtMoney(subtotal+z.fee,cur)+'</span></div>'+
     '</div>';
   }
-  box.innerHTML="📍 <b>"+(foundLabel||"Точка на карте")+"</b><br>"+
+  box.innerHTML="📍 <b>"+(foundLabel||tr('pointOnMap'))+"</b><br>"+
     "<a href='"+mapsLink()+"' target='_blank'>"+mapsLink()+"</a>"+
-    "<div style='margin-top:8px;font-weight:600;color:"+col+"'>🚚 Зона доставки: "+z.label+" — "+feeTxt+"</div>"+
-    (z.fee?"<div style='font-size:12px;color:#8a6d3b;margin-top:2px'>В эту зону доставка возможна от 1 000 000 ₫.</div>":"")+
+    "<div style='margin-top:8px;font-weight:600;color:"+col+"'>"+tr('zone_prefix')+z.label+" — "+feeTxt+"</div>"+
+    (z.fee?"<div style='font-size:12px;color:#8a6d3b;margin-top:2px'>"+tr('zone_min')+"</div>":"")+
     breakdown;
 }
 function mapsLink(){ return "https://www.google.com/maps?q="+latlng.la+","+latlng.ln; }
@@ -1164,19 +1328,19 @@ async function photonSearch(q){
     const r=await fetch(url); const d=await r.json();
     renderResults(d.features||[]);
   }catch(_){
-    resultsBox.innerHTML="<div class='empty'>Поиск недоступен — включите карту кнопкой «Моё местоположение» или введите детали ниже</div>";
+    resultsBox.innerHTML="<div class='empty'>"+tr('search_unavail')+"</div>";
     resultsBox.classList.remove('hidden');
   }
 }
 function renderResults(feats){
   if(!feats.length){
-    resultsBox.innerHTML="<div class='empty'>Ничего не найдено. Попробуйте иначе или нажмите «Моё местоположение».</div>";
+    resultsBox.innerHTML="<div class='empty'>"+tr('nothing_found')+"</div>";
     resultsBox.classList.remove('hidden'); return;
   }
   resultsBox.innerHTML="";
   feats.forEach(f=>{
     const p=f.properties, c=f.geometry.coordinates; // [lon,lat]
-    const parts=labelOf(p); const title=parts[0]||"Точка"; const sub=parts.slice(1).join(", ");
+    const parts=labelOf(p); const title=parts[0]||tr('point'); const sub=parts.slice(1).join(", ");
     const div=document.createElement('div');
     div.innerHTML="<div class='rtitle'>"+title+"</div>"+(sub?"<div class='rsub'>"+sub+"</div>":"");
     div.addEventListener('click',()=>{
@@ -1201,7 +1365,7 @@ async function reverseGeo(la,ln){
 function useGeo(){
   if(!navigator.geolocation) return;
   navigator.geolocation.getCurrentPosition(pos=>{
-    setPoint(pos.coords.latitude,pos.coords.longitude,"Моя геолокация");
+    setPoint(pos.coords.latitude,pos.coords.longitude,tr('myGeo'));
     reverseGeo(pos.coords.latitude,pos.coords.longitude);
   });
 }
@@ -1220,14 +1384,14 @@ async function handleGmapLink(){
   var err=document.getElementById('gmapErr'); err.textContent="";
   if(!v) return;
   var c=extractLatLng(v);
-  if(c && validGeo(c[0],c[1])){ document.getElementById('addrSearch').value=""; setPoint(c[0],c[1],"Точка с карты"); reverseGeo(c[0],c[1]); return; }
-  err.style.color="#78716c"; err.textContent="Определяем точку…";
+  if(c && validGeo(c[0],c[1])){ document.getElementById('addrSearch').value=""; setPoint(c[0],c[1],tr('pointFromMap')); reverseGeo(c[0],c[1]); return; }
+  err.style.color="#78716c"; err.textContent=tr('determining');
   try{
     var r=await fetch(CONFIG.API,{method:"POST",body:new URLSearchParams({action:"geo",url:v})});
     var d=await r.json();
-    if(d && d.ok && validGeo(d.lat,d.lng)){ err.textContent=""; setPoint(d.lat,d.lng,"Точка с карты"); reverseGeo(d.lat,d.lng); }
-    else { err.style.color="#9b2c2c"; err.textContent="Не удалось точно определить место по ссылке. Найдите его в поиске выше (уже ищет и Камрань) или подвиньте булавку на карте."; }
-  }catch(_){ err.style.color="#9b2c2c"; err.textContent="Не удалось определить. Попробуйте поиск выше."; }
+    if(d && d.ok && validGeo(d.lat,d.lng)){ err.textContent=""; setPoint(d.lat,d.lng,tr('pointFromMap')); reverseGeo(d.lat,d.lng); }
+    else { err.style.color="#9b2c2c"; err.textContent=tr('gmap_fail'); }
+  }catch(_){ err.style.color="#9b2c2c"; err.textContent=tr('gmap_fail2'); }
 }
 document.getElementById('gmapBtn').addEventListener('click',handleGmapLink);
 document.getElementById('gmapLink').addEventListener('paste',function(){ setTimeout(handleGmapLink,60); });
@@ -1247,15 +1411,15 @@ form.addEventListener('submit',async e=>{
   if(window.Cart){ var its=Cart.items(); if(its.length){
     var hc=its.some(function(x){return /(^|\s)cakes(\s|$)/.test(x.cat);});
     var ho=its.some(function(x){return !/(^|\s)cakes(\s|$)/.test(x.cat);});
-    if(hc&&!ho){ err.textContent="🎂 Торт можно заказать только вместе с букетом, шарами или набором."; return; }
+    if(hc&&!ho){ err.textContent=tr('err_cake'); return; }
   }}
-  if(!latlng){ err.textContent="Укажите адрес доставки — найдите в поиске или нажмите «Моё местоположение»."; return; }
-  if(window.__outside){ err.textContent=(window.__delLabel==='аэропорт')?"✈️ Доставка в аэропорт не осуществляется. Укажите другой адрес.":"Этот адрес вне зоны доставки. Мы возим по Нячангу, южным пригородам и Камрани."; return; }
+  if(!latlng){ err.textContent=tr('err_addr'); return; }
+  if(window.__outside){ err.textContent=(window.__delLabel==='аэропорт')?tr('err_airport'):tr('err_outside'); return; }
   // доставка по зоне + минимум 1 000 000 ₫ в платные зоны
   var delFee=window.__delFee||0, delLabel=window.__delLabel||'Нячанг';
   var subtotal=(window.Cart?Cart.total():0);
   if(delFee>0 && subtotal>0 && subtotal<1000000){
-    err.textContent="В зону «"+delLabel+"» доставка от 1 000 000 ₫ (у вас "+window.fmtMoney(subtotal,'VND')+"). Добавьте товаров.";
+    err.textContent=tr('err_min').replace('{label}',delLabel).replace('{x}',window.fmtMoney(subtotal,'VND'));
     return;
   }
   var amountStr=form.amount.value.trim(); // поле уже содержит «товары + доставка = итого»
@@ -1273,15 +1437,16 @@ form.addEventListener('submit',async e=>{
     address:addr,
     contact:chan+": "+form.contact.value.trim(),
     email:form.email.value.trim(),
+    lang:window.FLW_LANG||'ru',
   };
-  btn.disabled=true; const old=btn.innerHTML; btn.innerHTML='<span class="spin"></span>Отправляем…';
+  btn.disabled=true; const old=btn.innerHTML; btn.innerHTML='<span class="spin"></span>'+tr('sending');
   try{
     const r=await apiPost(data);
     if(!r||!r.ok) throw new Error();
     if(!isUpdate){ saveOrder({id:r.orderId, paid:false}); try{ if(window.Cart) Cart.clear(); }catch(_){} goPay(r.orderId); }
     else { goPay(currentId); }
   }catch(_){
-    err.textContent="Не удалось отправить. Проверьте интернет и попробуйте ещё раз.";
+    err.textContent=tr('err_send');
     btn.disabled=false; btn.innerHTML=old;
   }
 });
@@ -1300,7 +1465,7 @@ function goPay(id){
 function goBackToData(){
   document.getElementById('step2').classList.add('hidden');
   document.getElementById('step1').classList.remove('hidden');
-  var sb=document.getElementById('submitBtn'); if(sb) sb.textContent='Сохранить изменения → к оплате';
+  var sb=document.getElementById('submitBtn'); if(sb) sb.textContent=tr('saveBtn');
   var h=document.getElementById('coHead'); if(h) h.scrollIntoView({behavior:'smooth',block:'start'});
 }
 var METHODS={cash:'Наличными при получении',rub:'Рубли (СБП)',vnd:'Донги (BIDV)',usdt:'USDT TRC-20',kzt:'Карта Kaspi'};
@@ -1318,12 +1483,12 @@ document.querySelectorAll('.pay').forEach(el=>{
 function renderPay(m){
   const p=PAY[m], box=document.getElementById('payDetails');
   if(p.cash){ box.innerHTML=''; return; }
-  let html='<div style="font-weight:700;margin:6px 0 4px">'+p.title+'</div>';
+  let html='<div style="font-weight:700;margin:6px 0 4px">'+tr(p.titleK)+'</div>';
   p.rows.forEach(r=>{
-    html+='<div class="kv"><span style="color:var(--muted)">'+r[0]+'</span><b>'+r[1]
-        +(r[2]?' <button class="copy" data-c="'+r[2]+'">копировать</button>':'')+'</b></div>';
+    html+='<div class="kv"><span style="color:var(--muted)">'+tr(r[0])+'</span><b>'+r[1]
+        +(r[2]?' <button class="copy" data-c="'+r[2]+'">'+tr('copy')+'</button>':'')+'</b></div>';
   });
-  if(p.warn) html+='<div class="warnbox">'+p.warn+'</div>';
+  if(p.warnK) html+='<div class="warnbox">'+tr(p.warnK)+'</div>';
   html+='<div class="qr" id="qrBox"></div>';
   box.innerHTML=html;
   const qr=document.getElementById('qrBox');
@@ -1331,8 +1496,8 @@ function renderPay(m){
   else if(p.qrtext){ new QRCode(qr,{text:p.qrtext,width:200,height:200,correctLevel:QRCode.CorrectLevel.M}); }
   else qr.remove();
   box.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',()=>{
-    navigator.clipboard.writeText(b.dataset.c); b.textContent="скопировано ✓";
-    setTimeout(()=>b.textContent="копировать",1500);
+    navigator.clipboard.writeText(b.dataset.c); b.textContent=tr('copied');
+    setTimeout(()=>b.textContent=tr('copy'),1500);
   }));
 }
 
@@ -1351,7 +1516,7 @@ fileInput.addEventListener('change',()=>{
       const url=c.toDataURL('image/jpeg',0.72);
       receiptB64=url.split(',')[1];
       const pv=document.getElementById('preview'); pv.src=url; pv.style.display="block";
-      fileWrap.classList.add('ok'); fileWrap.textContent="✓ Чек прикреплён — можно отправлять";
+      fileWrap.classList.add('ok'); fileWrap.textContent=tr('fileOk');
       document.getElementById('sendReceipt').disabled=false;
     };
     img.src=e.target.result;
@@ -1362,23 +1527,21 @@ document.getElementById('sendReceipt').addEventListener('click',async()=>{
   if(!receiptB64) return;
   const btn=document.getElementById('sendReceipt'), err=document.getElementById('err2');
   err.textContent=""; btn.disabled=true; const old=btn.innerHTML;
-  btn.innerHTML='<span class="spin"></span>Отправляем чек…';
+  btn.innerHTML='<span class="spin"></span>'+tr('sendingReceipt');
   try{
-    const r=await apiPost({action:"receipt",orderId:currentId,receipt_b64:receiptB64,mime:"image/jpeg",pay:(window.__payMethod||"")});
+    const r=await apiPost({action:"receipt",orderId:currentId,receipt_b64:receiptB64,mime:"image/jpeg",pay:(window.__payMethod||""),lang:(window.FLW_LANG||'ru')});
     if(!r||!r.ok) throw new Error();
     saveOrder({id:currentId,paid:true});
     finish();
   }catch(_){
-    err.textContent="Не удалось отправить чек. Попробуйте ещё раз.";
+    err.textContent=tr('err_receipt');
     btn.disabled=false; btn.innerHTML=old;
   }
 });
 function finish(){
   document.getElementById('step2').classList.add('hidden');
   document.getElementById('stepDone').classList.remove('hidden');
-  document.getElementById('doneText').innerHTML=
-    "Мы получили оплату по заказу <span class='oid'>"+currentId+"</span> и подтвердим его в течение ~10 минут "+
-    "(с 06:00 до 21:00). Спасибо! 🌸";
+  document.getElementById('doneText').innerHTML=tr('done_paid').replace('{id}',currentId);
   localStorage.removeItem(LS);
   window.scrollTo(0,0);
 }
@@ -1386,19 +1549,17 @@ function finish(){
 document.getElementById('cashBtn').addEventListener('click',async()=>{
   const btn=document.getElementById('cashBtn'), err=document.getElementById('errCash');
   err.textContent=""; btn.disabled=true; const old=btn.innerHTML;
-  btn.innerHTML='<span class="spin"></span>Отправляем…';
+  btn.innerHTML='<span class="spin"></span>'+tr('sending');
   try{
-    const r=await apiPost({action:"cash",orderId:currentId});
+    const r=await apiPost({action:"cash",orderId:currentId,lang:(window.FLW_LANG||'ru')});
     if(!r||!r.ok) throw new Error();
     document.getElementById('step2').classList.add('hidden');
     document.getElementById('stepDone').classList.remove('hidden');
-    document.getElementById('doneText').innerHTML=
-      "Заявка <span class='oid'>"+currentId+"</span> принята. Оплата — наличными при получении.<br><br>"+
-      "⏳ Наш менеджер свяжется с вами по указанным контактам. Заказ будет собран и доставлен <b>только после того, как вы лично подтвердите его менеджеру</b>. Пожалуйста, будьте на связи 🌸";
+    document.getElementById('doneText').innerHTML=tr('done_cash').replace('{id}',currentId);
     localStorage.removeItem(LS);
     window.scrollTo(0,0);
   }catch(_){
-    err.textContent="Не удалось отправить. Попробуйте ещё раз.";
+    err.textContent=tr('err_receipt');
     btn.disabled=false; btn.innerHTML=old;
   }
 });
@@ -1430,7 +1591,7 @@ function loadOrder(){ try{return JSON.parse(localStorage.getItem(LS));}catch(_){
   var amt=window.fmtMoney(total,'VND')+(cur!=='VND'?(' (≈ '+window.fmtMoney(total,cur)+')'):'');
   var a=document.getElementById('amount'); a.value=amt; a.readOnly=true; a.style.background='#f7f4f2';
   // подсказки про ручной ввод больше не нужны
-  document.querySelectorAll('#items ~ .hint, #amount ~ .hint').forEach(function(h){ h.textContent='Из вашей корзины.'; });
+  document.querySelectorAll('#items ~ .hint, #amount ~ .hint').forEach(function(h){ h.textContent=tr('fromCart'); h.removeAttribute('data-i18n'); });
 })();
 
 initDate();
