@@ -96,13 +96,15 @@ missing_links, missing_imgs = set(), set()
 for f in ALL_HTML:
     base = os.path.dirname(f)
     html = read(f)
-    for u in re.findall(r'href="([^"]+)"', html):
+    for u in re.findall(r'(?<![\w-])href="([^"]+)"', html):  # (?<![\w-]) — не ловить data-i18n-href=
+        if any(ch in u for ch in "'+("): continue            # JS-шаблоны вида '+tr(...)+' — не ссылки
         u2 = u.split("#")[0].split("?")[0]
         if is_local(u2):
             tgt = os.path.normpath(os.path.join(base, u2))
             if not os.path.exists(tgt):
                 missing_links.add(f"{f} → {u}")
-    for u in re.findall(r'src="([^"]+)"', html):
+    for u in re.findall(r'(?<![\w-])src="([^"]+)"', html):
+        if any(ch in u for ch in "'+("): continue
         u2 = u.split("?")[0]
         if is_local(u2):
             tgt = os.path.normpath(os.path.join(base, u2))
