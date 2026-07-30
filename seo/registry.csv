@@ -91,7 +91,7 @@ id,date,type,category,keyword_ru,title_ru,slug,photo_query_en,status_ru,status_e
 90,2026-08-31,article,Гид,оплата цветов нячанг,"Оплата цветов рублями, донгами и долларами в Нячанге",oplata-cvetov-rublyami-dongami-i-dollarami-v-nyachange,flowers payment cash,todo,todo,todo
 91,2026-09-01,article,Гид,недорогие цветы нячанг,Бюджетные букеты в Нячанге: красиво и недорого,byudzhetnye-bukety-v-nyachange-krasivo-i-nedorogo,budget bouquet,todo,todo,todo
 92,2026-09-02,article,Гид,премиум букеты нячанг,Премиум-букеты в Нячанге: люксовые композиции,premium-bukety-v-nyachange-lyuksovye-kompozicii,luxury arrangement,todo,todo,todo
-93,2026-09-03,article,Гид,цветы и шары нячанг,Цветы и воздушные шары: идеальный подарок-сюрприз,cvety-i-vozdushnye-shary-idealnyy-podarok-syurpriz,flowers helium balloons,todo,todo,todo
+93,2026-09-03,article,Гид,цветы и шары нячанг,Цветы и воздушные шары: идеальный подарок-сюрприз,cvety-i-vozdushnye-shary-idealnyy-podarok-syurpriz,flowers helium balloons,done,done,done
 94,2026-09-04,article,Гид,стойкий букет жара,"Как выбрать букет, который не завянет в дороге",kak-vybrat-buket-kotoryy-ne-zavyanet-v-doroge,durable flowers heat,todo,todo,todo
 95,2026-09-05,article,Гид,популярные букеты нячанг,Топ-10 популярных букетов в Нячанге,top-10-populyarnyh-buketov-v-nyachange,popular bouquets,todo,todo,todo
 96,2026-09-06,article,Гид,сезонные цветы вьетнам,Сезонные цветы во Вьетнаме по месяцам,sezonnye-cvety-vo-vetname-po-mesyacam,seasonal flowers vietnam,todo,todo,todo
@@ -280,7 +280,7 @@ id,date,type,category,keyword_ru,title_ru,slug,photo_query_en,status_ru,status_e
 279,2027-03-08,article,Цена,цены доставки цветов нячанг,Доставка цветов в Нячанге: цены и тарифы,dostavka-cvetov-v-nyachange-ceny-i-tarify,delivery price flowers,todo,todo,todo
 280,2027-03-09,article,Цена,дешёвые цветы нячанг,Дешёвые цветы в Нячанге без потери качества,deshevye-cvety-v-nyachange-bez-poteri-kachestva,affordable flowers,todo,todo,todo
 281,2027-03-10,article,Цена,подарок до 1000 рублей цветы,Подарок до 1000 рублей: цветы в Нячанге,podarok-do-1000-rubley-cvety-v-nyachange,budget gift flowers,todo,todo,todo
-282,2027-03-11,article,Шары,гелиевые шары нячанг,Гелиевые шары в Нячанге: доставка и оформление,gelievye-shary-v-nyachange-dostavka-i-oformlenie,helium balloons party,todo,todo,todo
+282,2027-03-11,article,Шары,гелиевые шары нячанг,Гелиевые шары в Нячанге: доставка и оформление,gelievye-shary-v-nyachange-dostavka-i-oformlenie,helium balloons party,done,done,done
 283,2027-03-12,article,Шары,шары на день рождения нячанг,Шары на день рождения в Нячанге,shary-na-den-rozhdeniya-v-nyachange,birthday balloons,todo,todo,todo
 284,2027-03-13,article,Шары,фотозона из шаров,Фотозона из шаров для праздника,fotozona-iz-sharov-dlya-prazdnika,balloon photo arch,todo,todo,todo
 285,2027-03-14,article,Шары,шары цифры юбилей,Шары-цифры на юбилей,shary-cifry-na-yubiley,number balloons,todo,todo,todo
@@ -368,10 +368,10 @@ id,date,type,category,keyword_ru,title_ru,slug,photo_query_en,status_ru,status_e
 367,2026-06-17,article,История,война вьетнам сша факты,Война Вьетнама и США: интересные факты и что посмотреть,voyna-vietnama-i-ssha-fakty,Vietnam war Cu Chi tunnels museum,done,done,done
 368,2026-06-18,article,Общество,вьетнамская молодёжь образ жизни,Чем живёт вьетнамская молодёжь: образ жизни 2026,chem-zhivet-vietnamskaya-molodezh,Vietnam youth lifestyle cafe,done,done,done
 369,2026-06-19,article,Культура,во что верят вьетнамцы религия,"Во что верят вьетнамцы: религия, традиции, ценности",vo-chto-veryat-vietnamtsy,Vietnam temple ancestor altar,done,done,done
-370,2026-07-06,article,Культура,bia hoi уличное пиво вьетнама,"Bia hơi: культура уличного пива Вьетнама",bia-hoi-vietnamskoe-pivo,Vietnam bia hoi street beer Hanoi,done,done,done
-371,2026-07-07,article,Гид,плавучая деревня чау док меконг,"Плавучая рыбацкая деревня Châu Đốc: жизнь на воде в дельте Меконга",plavuchaya-derevnya-chau-doc,Chau Doc floating village Mekong,done,done,done
-372,2026-07-08,article,Ремёсла,кокосовое волокно ан тхань бенче,"Деревня кокосового волокна An Thạnh: золотые нити дельты Меконга",derevnya-kokosovogo-volokna-an-thanh,An Thanh coconut coir fiber Ben Tre,done,done,done
-373,2026-07-10,article,Культура,пагода чуа тхай театр кукол на воде,"Пагода Chùa Thầy: колыбель легенды о театре кукол на воде",pagoda-chua-thay-teatr-kukol-na-vode,Chua Thay pagoda water puppet,done,done,done
-374,2026-07-11,article,Гид,пляж бай сой нячанг мини халонг,"Пляж Бай Сой в Нячанге: галечный мини-Халонг со скалами",plyazh-bay-soy-nyachang,Bai Soi beach Nha Trang pebble,done,done,done
+370,2026-07-06,article,Культура,bia hoi уличное пиво вьетнама,Bia hơi: культура уличного пива Вьетнама,bia-hoi-vietnamskoe-pivo,Vietnam bia hoi street beer Hanoi,done,done,done
+371,2026-07-07,article,Гид,плавучая деревня чау док меконг,Плавучая рыбацкая деревня Châu Đốc: жизнь на воде в дельте Меконга,plavuchaya-derevnya-chau-doc,Chau Doc floating village Mekong,done,done,done
+372,2026-07-08,article,Ремёсла,кокосовое волокно ан тхань бенче,Деревня кокосового волокна An Thạnh: золотые нити дельты Меконга,derevnya-kokosovogo-volokna-an-thanh,An Thanh coconut coir fiber Ben Tre,done,done,done
+373,2026-07-10,article,Культура,пагода чуа тхай театр кукол на воде,Пагода Chùa Thầy: колыбель легенды о театре кукол на воде,pagoda-chua-thay-teatr-kukol-na-vode,Chua Thay pagoda water puppet,done,done,done
+374,2026-07-11,article,Гид,пляж бай сой нячанг мини халонг,Пляж Бай Сой в Нячанге: галечный мини-Халонг со скалами,plyazh-bay-soy-nyachang,Bai Soi beach Nha Trang pebble,done,done,done
 375,2026-07-20,article,Гид,где купить цветы нячанг доставка,Где купить цветы в Нячанге: рынок или доставка,gde-kupit-cvety-nyachang-dostavka-vs-rynok,where to buy flowers delivery Nha Trang,done,done,done
 376,2026-07-21,article,Гид,сколько роз дарить значение количества,Сколько роз дарить: значение количества 25 51 101,znachenie-kolichestva-roz-25-51-101,how many roses to give meaning,done,done,done
