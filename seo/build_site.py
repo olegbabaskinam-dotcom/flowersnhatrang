@@ -557,12 +557,15 @@ def product_cat(p):
     has_balloons = ("shar" in s) or ("шар" in n)
     has_cake = s.startswith("tort") or s.startswith("cake") or ("торт" in n) or ("cake" in s)
     is_nabor = s.startswith("podarochnyy-nabor") or s.startswith("podarok-nabor")
+    is_prazdnik = s.startswith("nabor-prazdnik") or ("prazdnik" in s)
     if has_balloons and "balloons" not in cats:
         cats.append("balloons")
     if has_cake and "cakes" not in cats:
         cats.append("cakes")
     if is_nabor and "nabory" not in cats:
         cats.insert(0, "nabory")
+    if is_prazdnik and "prazdnik" not in cats:
+        cats.insert(0, "prazdnik")
     if not cats:
         cats = ["mixed"]
     return " ".join(cats)
