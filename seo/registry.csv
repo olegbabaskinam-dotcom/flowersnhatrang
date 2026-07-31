@@ -73,7 +73,7 @@ id,date,type,category,keyword_ru,title_ru,slug,photo_query_en,status_ru,status_e
 72,2026-08-13,article,Цветок,купить ромашки нячанг,Сколько стоят ромашки в Нячанге и как заказать доставку,skolko-stoyat-romashki-v-nyachange-i-kak-zakazat-dostavku,daisies,todo,todo,todo
 73,2026-08-14,article,Цветок,каллы нячанг,"Каллы в Нячанге: значение, уход и кому дарить",kally-v-nyachange-znachenie-uhod-i-komu-darit,calla lily,todo,todo,todo
 74,2026-08-15,article,Цветок,купить каллы нячанг,Сколько стоят каллы в Нячанге и как заказать доставку,skolko-stoyat-kally-v-nyachange-i-kak-zakazat-dostavku,calla lily,todo,todo,todo
-75,2026-08-16,article,Гео,доставка цветов в отель нячанг,Доставка цветов в отели Нячанга — как это работает,dostavka-cvetov-v-oteli-nyachanga-kak-eto-rabotaet,hotel flower delivery,todo,todo,todo
+75,2026-08-16,article,Гео,доставка цветов в отель нячанг,Доставка цветов в отели Нячанга — как это работает,dostavka-cvetov-v-oteli-nyachanga-kak-eto-rabotaet,hotel flower delivery,done,done,done
 76,2026-08-17,article,Гео,доставка цветов камрань,Доставка цветов в Камрань: сроки и зоны,dostavka-cvetov-v-kamran-sroki-i-zony,resort flowers delivery,todo,todo,todo
 77,2026-08-18,article,Гео,цветы в номер отеля,Цветы в номер отеля: сюрприз для второй половинки,cvety-v-nomer-otelya-syurpriz-dlya-vtoroy-polovinki,hotel room flowers,todo,todo,todo
 78,2026-08-19,article,Гео,романтический сюрприз нячанг,Романтический сюрприз в Нячанге: цветы и шары,romanticheskiy-syurpriz-v-nyachange-cvety-i-shary,romantic surprise balloons,todo,todo,todo
@@ -84,7 +84,7 @@ id,date,type,category,keyword_ru,title_ru,slug,photo_query_en,status_ru,status_e
 83,2026-08-24,article,Гео,доставка цветов день в день нячанг,Свежие цветы в Нячанге день в день,svezhie-cvety-v-nyachange-den-v-den,same day delivery flowers,todo,todo,todo
 84,2026-08-25,article,Гео,купить цветы нячанг турист,Где купить цветы в Нячанге туристу,gde-kupit-cvety-v-nyachange-turistu,tourist buying flowers,todo,todo,todo
 85,2026-08-26,article,Гид,как сохранить букет свежим,Как сохранить букет свежим в жарком климате Вьетнама,kak-sohranit-buket-svezhim-v-zharkom-klimate-vetnama,flowers vase care,todo,todo,todo
-86,2026-08-27,article,Гид,значение цвета роз,Значение цвета роз: что означает каждый оттенок,znachenie-cveta-roz-chto-oznachaet-kazhdyy-ottenok,colorful roses,todo,todo,todo
+86,2026-08-27,article,Гид,значение цвета роз,Значение цвета роз: что означает каждый оттенок,znachenie-cveta-roz-chto-oznachaet-kazhdyy-ottenok,colorful roses,done,done,done
 87,2026-08-28,article,Гид,язык цветов значение,Язык цветов: что сказать букетом,yazyk-cvetov-chto-skazat-buketom,flower language,todo,todo,todo
 88,2026-08-29,article,Гид,сколько роз дарить,Сколько роз дарить: значение количества,skolko-roz-darit-znachenie-kolichestva,roses bunch,todo,todo,todo
 89,2026-08-30,article,Гид,заказать цветы whatsapp,Как заказать доставку цветов через WhatsApp,kak-zakazat-dostavku-cvetov-cherez-whatsapp,ordering flowers phone,todo,todo,todo
