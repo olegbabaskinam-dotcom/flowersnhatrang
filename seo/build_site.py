@@ -527,7 +527,7 @@ def order_buttons(name, t, lang, size="full"):
         href = f"{url}?text={msg}" if ("wa.me" in url or "t.me" in url) else url
         rows.append(f'<a href="{href}" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">{svg} {label}</a>')
     btns = "\n                    ".join(rows)
-    return f'''<div class="flex flex-col gap-2">
+    return f'''<div class="flex flex-col gap-4">
                     {btns}
                 </div>'''
 
@@ -940,7 +940,7 @@ def article_cta(lang, base):
             <div class="icon-badge mx-auto mb-4">{IC_FLOWER}</div>
             <h2 class="font-serif text-2xl font-bold mb-2" style="color:#1a1a1a;">{u["art_cta_h"]}</h2>
             <p class="text-stone-600 text-sm mb-6 max-w-xl mx-auto">{u["art_cta_sub"]}</p>
-            <div class="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
+            <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
                 {"".join(f'<a href="{u}" target="_blank" class="{("btn-rose-filled" if i==0 else "btn-rose")} flex items-center justify-center gap-2 font-medium py-3 px-6 rounded-xl text-sm">{svg} {label}</a>' for i, (u, label, svg) in enumerate(order_contacts(lang, t)))}
             </div>
         </div>
