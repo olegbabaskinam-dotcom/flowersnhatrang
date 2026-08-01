@@ -1456,10 +1456,16 @@ form.addEventListener('submit',async e=>{
            +(window.__island?tr('island_addr_note'):"")
            +" 📍 "+mapsLink();
   var isUpdate=!!currentId;
+  var photos="";
+  try{ if(window.Cart){ photos=Cart.items().map(function(x){
+    var u=String(x.img||"").replace(/^(\.\.\/)+/,"").replace(/^\//,"").replace(/\.webp$/i,".jpg");
+    return u?("https://flowers-nha-trang.online/"+u):"";
+  }).filter(Boolean).join("\n"); } }catch(_){}
   const data={
     action: isUpdate?"update":"new",
     orderId: currentId||"",
     items:form.items.value.trim(),
+    photos:photos,
     amount:amountStr,
     delivery:ruDate(form.deliveryDate.value)+", "+form.deliveryTime.value,
     address:addr,
