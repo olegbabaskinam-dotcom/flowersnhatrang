@@ -40,7 +40,7 @@ id,date,type,category,keyword_ru,title_ru,slug,photo_query_en,status_ru,status_e
 39,2026-07-11,article,Повод,цветы просто так,Какие цветы подарить просто так в Нячанге,kakie-cvety-podarit-prosto-tak-v-nyachange,fresh surprise flowers,todo,todo,todo
 40,2026-07-12,article,Повод,букет просто так,Идеи букетов просто так: гид для туриста в Нячанге,idei-buketov-prosto-tak-gid-dlya-turista-v-nyachange,fresh surprise flowers,todo,todo,todo
 41,2026-07-13,article,Получатель,цветы жене,Какие цветы выбрать жене — гид по букетам в Нячанге,kakie-cvety-vybrat-zhene-gid-po-buketam-v-nyachange,wife,todo,todo,todo
-42,2026-07-14,article,Получатель,цветы девушке,Какие цветы выбрать девушке — гид по букетам в Нячанге,kakie-cvety-vybrat-devushke-gid-po-buketam-v-nyachange,girlfriend,todo,todo,todo
+42,2026-07-14,article,Получатель,цветы девушке,Какие цветы выбрать девушке — гид по букетам в Нячанге,kakie-cvety-vybrat-devushke-gid-po-buketam-v-nyachange,girlfriend,done,done,done
 43,2026-07-15,article,Получатель,цветы маме,Какие цветы выбрать маме — гид по букетам в Нячанге,kakie-cvety-vybrat-mame-gid-po-buketam-v-nyachange,mom,todo,todo,todo
 44,2026-07-16,article,Получатель,цветы подруге,Какие цветы выбрать подруге — гид по букетам в Нячанге,kakie-cvety-vybrat-podruge-gid-po-buketam-v-nyachange,friend,todo,todo,todo
 45,2026-07-17,article,Получатель,цветы коллеге,Какие цветы выбрать коллеге — гид по букетам в Нячанге,kakie-cvety-vybrat-kollege-gid-po-buketam-v-nyachange,colleague,todo,todo,todo
@@ -85,7 +85,7 @@ id,date,type,category,keyword_ru,title_ru,slug,photo_query_en,status_ru,status_e
 84,2026-08-25,article,Гео,купить цветы нячанг турист,Где купить цветы в Нячанге туристу,gde-kupit-cvety-v-nyachange-turistu,tourist buying flowers,todo,todo,todo
 85,2026-08-26,article,Гид,как сохранить букет свежим,Как сохранить букет свежим в жарком климате Вьетнама,kak-sohranit-buket-svezhim-v-zharkom-klimate-vetnama,flowers vase care,todo,todo,todo
 86,2026-08-27,article,Гид,значение цвета роз,Значение цвета роз: что означает каждый оттенок,znachenie-cveta-roz-chto-oznachaet-kazhdyy-ottenok,colorful roses,done,done,done
-87,2026-08-28,article,Гид,язык цветов значение,Язык цветов: что сказать букетом,yazyk-cvetov-chto-skazat-buketom,flower language,todo,todo,todo
+87,2026-08-28,article,Гид,язык цветов значение,Язык цветов: что сказать букетом,yazyk-cvetov-chto-skazat-buketom,flower language,done,done,done
 88,2026-08-29,article,Гид,сколько роз дарить,Сколько роз дарить: значение количества,skolko-roz-darit-znachenie-kolichestva,roses bunch,todo,todo,todo
 89,2026-08-30,article,Гид,заказать цветы whatsapp,Как заказать доставку цветов через WhatsApp,kak-zakazat-dostavku-cvetov-cherez-whatsapp,ordering flowers phone,todo,todo,todo
 90,2026-08-31,article,Гид,оплата цветов нячанг,"Оплата цветов рублями, донгами и долларами в Нячанге",oplata-cvetov-rublyami-dongami-i-dollarami-v-nyachange,flowers payment cash,todo,todo,todo
