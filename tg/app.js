@@ -436,7 +436,8 @@ function submitOrder(e) {
     address: addr,
     contact: chan + ": " + contact + tgTag,
     email: email,
-    lang: "ru"
+    lang: "ru",
+    tg_id: (TG_USER && TG_USER.id) ? String(TG_USER.id) : ""
   };
 
   var btn = document.getElementById("submitBtn"), old = btn.innerHTML;
@@ -555,6 +556,7 @@ function finishOrder(note) {
 function restart() { currentId = null; receiptB64 = null; searchQ = ""; document.getElementById("q").value = ""; renderGrid(); show("scrCatalog"); }
 
 /* ---- утилиты ---- */
+function getParam(k) { try { return new URLSearchParams(location.search).get(k) || ""; } catch (_) { return ""; } }
 function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
 function copyText(t) { if (navigator.clipboard) navigator.clipboard.writeText(t); }
 function toast(m) {
@@ -576,4 +578,10 @@ document.addEventListener("DOMContentLoaded", function () {
     var rEl = document.getElementById("rcpt");
     if (TG_USER.first_name && !rEl.value) rEl.placeholder = "Имя получателя (напр. " + TG_USER.first_name + ")";
   }
+  // возврат к оплате по ссылке из бота (?order=ID или startapp=pay_ID)
+  var reopen = getParam("order");
+  if (!reopen && TG && TG.initDataUnsafe && TG.initDataUnsafe.start_param) {
+    reopen = String(TG.initDataUnsafe.start_param).replace(/^pay[_-]?/i, "");
+  }
+  if (reopen) { currentId = reopen; goPay(reopen); }
 });
