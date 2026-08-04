@@ -78,6 +78,12 @@ var I18N_RAW={
  fromCart:{ru:"Из вашей корзины.",en:"From your cart.",ko:"장바구니에서 가져왔습니다."},
  lbl_rcpt:{ru:"Имя получателя",en:"Recipient's name",ko:"수령인 이름"},
  ph_rcpt:{ru:"Кому вручить букет",en:"Who to hand the bouquet to",ko:"부케를 받을 분"},
+ lbl_recip_who:{ru:"Получатель",en:"Recipient",ko:"수취인"},
+ opt_recip_self:{ru:"Я (получаю сам)",en:"Me (I receive it)",ko:"본인 (직접 수령)"},
+ opt_recip_other:{ru:"Другой человек",en:"Someone else",ko:"다른 사람"},
+ lbl_recip_chan:{ru:"Как связаться с получателем",en:"How to reach the recipient",ko:"수령인 연락 방법"},
+ ph_recip_contact:{ru:"+7… / @username получателя",en:"recipient's +… / @username",ko:"수령인 +… / @아이디"},
+ err_recip:{ru:"Укажите контакт получателя",en:"Enter the recipient's contact",ko:"수령인 연락처를 입력하세요"},
  lbl_addr:{ru:"Адрес доставки",en:"Delivery address",ko:"배달 주소"},
  ph_addrSearch:{ru:"Отель, улица или место — например: Vesna Hotel",en:"Hotel, street or place — e.g. Vesna Hotel",ko:"호텔, 거리 또는 장소 — 예: Vesna Hotel"},
  geoBtn:{ru:"📍 Моё местоположение",en:"📍 My location",ko:"📍 내 위치"},
@@ -452,8 +458,24 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
 
       <div class="card">
         <div class="field">
+          <label class="req" data-i18n="lbl_recip_who">Получатель</label>
+          <div class="chan">
+            <label><input type="radio" name="recip_who" value="self" checked><span data-i18n="opt_recip_self">Я (получаю сам)</span></label>
+            <label><input type="radio" name="recip_who" value="other"><span data-i18n="opt_recip_other">Другой человек</span></label>
+          </div>
+        </div>
+        <div class="field">
           <label class="req" for="rcpt" data-i18n="lbl_rcpt">Имя получателя</label>
           <input id="rcpt" name="rcpt" data-i18n-ph="ph_rcpt" placeholder="Кому вручить букет" required>
+        </div>
+        <div class="field" id="recipContactBlock" style="display:none">
+          <label class="req" data-i18n="lbl_recip_chan">Как связаться с получателем</label>
+          <div class="chan">
+            <label><input type="radio" name="recip_chan" value="WhatsApp" checked>WhatsApp</label>
+            <label><input type="radio" name="recip_chan" value="Telegram">Telegram</label>
+            <label><input type="radio" name="recip_chan" value="Instagram">Instagram</label>
+          </div>
+          <input id="recipContact" name="recip_contact" data-i18n-ph="ph_recip_contact" placeholder="+7… / @username получателя" style="margin-top:8px">
         </div>
         <div class="field">
           <label class="req" for="addrSearch" data-i18n="lbl_addr">Адрес доставки</label>
@@ -1430,6 +1452,19 @@ async function apiPost(data){
 }
 
 const form=document.getElementById('orderForm');
+// Получатель: показывать контакт получателя только для «Другой человек»
+(function(){
+  var block=document.getElementById('recipContactBlock');
+  var rc=document.getElementById('recipContact');
+  function upd(){
+    var v=(form.querySelector('input[name=recip_who]:checked')||{}).value||'self';
+    var other=v==='other';
+    block.style.display=other?'':'none';
+    if(rc){ rc.required=other; if(!other) rc.value=''; }
+  }
+  Array.prototype.forEach.call(form.querySelectorAll('input[name=recip_who]'),function(r){r.addEventListener('change',upd);});
+  upd();
+})();
 form.addEventListener('submit',async e=>{
   e.preventDefault();
   if(document.getElementById('website').value) return;
@@ -1449,8 +1484,17 @@ form.addEventListener('submit',async e=>{
     err.textContent=tr('err_min').replace('{label}',delLabel).replace('{x}',window.fmtMoney(subtotal,'VND'));
     return;
   }
+  var recipWho=(form.querySelector('input[name=recip_who]:checked')||{}).value||'self';
+  if(recipWho==='other' && !form.recip_contact.value.trim()){ err.textContent=tr('err_recip'); return; }
   var amountStr=form.amount.value.trim(); // поле уже содержит «товары + доставка = итого»
   const chan=form.querySelector('input[name=chan]:checked').value;
+  var recipStr;
+  if(recipWho==='other'){
+    var rchan=(form.querySelector('input[name=recip_chan]:checked')||{}).value||'WhatsApp';
+    recipStr='Другой — '+form.rcpt.value.trim()+' · '+rchan+': '+form.recip_contact.value.trim();
+  } else {
+    recipStr='Я, сам заказчик · '+chan+': '+form.contact.value.trim();
+  }
   const addr=form.rcpt.value.trim()+" — "+(foundLabel?foundLabel+", ":"")+form.addrText.value.trim()
            +(form.comment.value.trim()?(" ("+form.comment.value.trim()+")"):"")
            +(window.__island?tr('island_addr_note'):"")
@@ -1470,6 +1514,7 @@ form.addEventListener('submit',async e=>{
     delivery:ruDate(form.deliveryDate.value)+", "+form.deliveryTime.value,
     address:addr,
     contact:chan+": "+form.contact.value.trim(),
+    recipient:recipStr,
     email:form.email.value.trim(),
     lang:window.FLW_LANG||'ru',
   };
