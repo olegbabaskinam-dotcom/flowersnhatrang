@@ -535,14 +535,14 @@ function bindReceipt() {
     if (!receiptB64) return;
     var btn = this, err = document.getElementById("err2"), old = btn.innerHTML;
     err.textContent = ""; btn.disabled = true; btn.innerHTML = '<span class="spin"></span>Отправляем чек…';
-    apiPost({ action: "receipt", orderId: currentId, receipt_b64: receiptB64, mime: "image/jpeg", pay: payMethod, lang: "ru" })
+    apiPost({ action: "receipt", orderId: currentId, receipt_b64: receiptB64, mime: "image/jpeg", pay: payMethod, lang: "ru", tg_id: (TG_USER && TG_USER.id) ? String(TG_USER.id) : "" })
       .then(function (r) { if (!r || !r.ok) throw new Error(); finishOrder("💰 Оплата получена"); })
       .catch(function () { err.textContent = "Не удалось отправить чек. Попробуйте ещё раз."; btn.disabled = false; btn.innerHTML = old; });
   };
   document.getElementById("cashBtn").onclick = function () {
     var btn = this, err = document.getElementById("errCash"), old = btn.innerHTML;
     err.textContent = ""; btn.disabled = true; btn.innerHTML = '<span class="spin"></span>Отправляем…';
-    apiPost({ action: "cash", orderId: currentId, lang: "ru" })
+    apiPost({ action: "cash", orderId: currentId, lang: "ru", tg_id: (TG_USER && TG_USER.id) ? String(TG_USER.id) : "" })
       .then(function (r) { if (!r || !r.ok) throw new Error(); finishOrder("💵 Оплата наличными при получении"); })
       .catch(function () { err.textContent = "Ошибка. Попробуйте ещё раз."; btn.disabled = false; btn.innerHTML = old; });
   };
