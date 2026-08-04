@@ -191,8 +191,24 @@ label.fl .req{color:var(--pink-d)}
       <form id="orderForm" autocomplete="on">
         <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px">
 
+        <label class="fl">Получатель <span class="req">*</span></label>
+        <div class="chan" id="recipWho">
+          <label><input type="radio" name="recip_who" value="self" checked><span>Я (получаю сам)</span></label>
+          <label><input type="radio" name="recip_who" value="other"><span>Другой человек</span></label>
+        </div>
+
         <label class="fl">Кому вручить <span class="req">*</span></label>
         <input class="field" id="rcpt" placeholder="Имя получателя" required>
+
+        <div id="recipContactBlock" style="display:none">
+          <label class="fl">Как связаться с получателем <span class="req">*</span></label>
+          <div class="chan" id="recipChan">
+            <label><input type="radio" name="recip_chan" value="WhatsApp" checked><span>WhatsApp</span></label>
+            <label><input type="radio" name="recip_chan" value="Telegram"><span>Telegram</span></label>
+            <label><input type="radio" name="recip_chan" value="Instagram"><span>Instagram</span></label>
+          </div>
+          <input class="field" id="recipContact" placeholder="Контакт получателя: @username / +7…" style="margin-top:6px">
+        </div>
 
         <label class="fl">Адрес доставки <span class="req">*</span></label>
         <div class="searchbox">

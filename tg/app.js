@@ -407,6 +407,16 @@ function submitOrder(e) {
   var contact = document.getElementById("contact").value.trim();
   var email = document.getElementById("email").value.trim();
   if (!rcpt || !addrText || !contact || !email) { err.textContent = "Заполните обязательные поля."; return; }
+  var recipWho = (form.querySelector("input[name=recip_who]:checked") || {}).value || "self";
+  var recipContact = (document.getElementById("recipContact") || {}).value ? document.getElementById("recipContact").value.trim() : "";
+  if (recipWho === "other" && !recipContact) { err.textContent = "Укажите контакт получателя."; return; }
+  var recipStr;
+  if (recipWho === "other") {
+    var rchan = (form.querySelector("input[name=recip_chan]:checked") || {}).value || "WhatsApp";
+    recipStr = "Другой — " + rcpt + " · " + rchan + ": " + recipContact;
+  } else {
+    recipStr = "Я, сам заказчик · " + chan + ": " + contact;
+  }
 
   // строки заказа
   var items = its.map(function (x) { return x.qty + "× " + x.name; }).join("\n");
@@ -435,6 +445,7 @@ function submitOrder(e) {
     delivery: ruDate(document.getElementById("deliveryDate").value) + ", " + document.getElementById("deliveryTime").value,
     address: addr,
     contact: chan + ": " + contact + tgTag,
+    recipient: recipStr,
     email: email,
     lang: "ru",
     tg_id: (TG_USER && TG_USER.id) ? String(TG_USER.id) : ""
@@ -585,3 +596,25 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   if (reopen) { currentId = reopen; goPay(reopen); }
 });
+
+// Получатель: контакт получателя обязателен и виден только для «Другой человек»
+(function () {
+  function wire() {
+    var form = document.getElementById("orderForm");
+    if (!form) return;
+    var block = document.getElementById("recipContactBlock");
+    var rc = document.getElementById("recipContact");
+    var radios = form.querySelectorAll("input[name=recip_who]");
+    if (!block || !radios.length) return;
+    function upd() {
+      var sel = form.querySelector("input[name=recip_who]:checked");
+      var other = sel && sel.value === "other";
+      block.style.display = other ? "" : "none";
+      if (rc) { rc.required = !!other; if (!other) rc.value = ""; }
+    }
+    Array.prototype.forEach.call(radios, function (r) { r.addEventListener("change", upd); });
+    upd();
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", wire);
+  else wire();
+})();
