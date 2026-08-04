@@ -187,7 +187,7 @@ function renderCart() {
       '<img src="/' + it.img + '" alt="">' +
       '<div class="info"><h4>' + esc(it.name) + '</h4>' +
       '<div class="pr">' + money(it.price_vnd) + '</div><div class="sub">' + esc(it.price_sub || "") + '</div>' +
-      '<div class="ctr"><button>−</button><span>' + it.qty + ' шт</span><button>+</button>' +
+      '<div class="ctr"><button class="qbtn">−</button><span>' + it.qty + ' шт</span><button class="qbtn">+</button>' +
       '<button class="rm">удалить</button></div></div>';
     var b = d.querySelectorAll(".ctr button");
     b[0].onclick = function () { cartSet(it.id, it.qty - 1); renderCart(); };
