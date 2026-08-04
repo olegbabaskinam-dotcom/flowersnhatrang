@@ -1118,7 +1118,8 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
   function renderCur(){
     var box=document.getElementById("curBox"); box.innerHTML="";
     window.FLW_CFG.order.forEach(function(c){
-      var b=document.createElement("button"); b.textContent=window.FLW_CFG.sym[c]+" "+window.FLW_CFG.names[c];
+      var nm=(window.FLW_CFG.namesL&&window.FLW_CFG.namesL[window.FLW_LANG])?window.FLW_CFG.namesL[window.FLW_LANG]:window.FLW_CFG.names;
+      var b=document.createElement("button"); b.textContent=window.FLW_CFG.sym[c]+" "+nm[c];
       if(c===CUR) b.className="on";
       b.onclick=function(){ CUR=c; localStorage.setItem("flw_cur",c); render(); };
       box.appendChild(b);
@@ -1703,6 +1704,25 @@ window.addEventListener('load',function(){
 document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"], a[href*="kakao"]').forEach(function(el){
   el.addEventListener('click', function(){ if(typeof gtag==='function') gtag('event','conversion',{'send_to':'AW-18183091777/YJxbCLWUtbIcEMHsr95D','value':1.0,'currency':'VND'}); });
 });
+</script>
+<script>
+/* Переключатель языка в корзине: остаёмся на cart.html, меняем ?lang= (не уходим на главную) */
+(function(){
+  function fix(){
+    var lang=window.FLW_LANG||'ru';
+    var map={ru:'🇷🇺 RU',en:'🇬🇧 EN',ko:'🇰🇷 KR'}, order=['ru','en','ko'];
+    Array.prototype.forEach.call(document.querySelectorAll('#langbar'),function(bar){
+      bar.innerHTML=order.map(function(l){
+        return l===lang
+          ? '<span style="padding:3px 8px;border-radius:8px;color:#fff;font-size:11px;background:#c0687a">'+map[l]+'</span>'
+          : '<a href="cart.html?lang='+l+'" style="padding:3px 8px;border-radius:8px;color:#78716c;font-size:11px;text-decoration:none">'+map[l]+'</a>';
+      }).join('');
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('a[href="index-en.html"]'),function(a){a.setAttribute('href','cart.html?lang=en');});
+    Array.prototype.forEach.call(document.querySelectorAll('a[href="index-kr.html"]'),function(a){a.setAttribute('href','cart.html?lang=ko');});
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',fix); else fix();
+})();
 </script>
 </body>
 </html>

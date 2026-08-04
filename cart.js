@@ -34,7 +34,12 @@
     rates: { VND: 1, USD: 25000, RUB: 290, KZT: 50, KRW: 18.8 },
     sym:   { VND: "₫", USD: "$",  RUB: "₽",  KZT: "₸", KRW: "₩" },
     order: ["VND", "USD", "RUB", "KZT", "KRW"],
-    names: { VND: "Донги", USD: "Доллары", RUB: "Рубли", KZT: "Тенге", KRW: "Воны" }
+    names: { VND: "Донги", USD: "Доллары", RUB: "Рубли", KZT: "Тенге", KRW: "Воны" },
+    namesL: {
+      ru: { VND: "Донги", USD: "Доллары", RUB: "Рубли", KZT: "Тенге", KRW: "Воны" },
+      en: { VND: "Dong", USD: "Dollars", RUB: "Rubles", KZT: "Tenge", KRW: "Won" },
+      ko: { VND: "동", USD: "달러", RUB: "루블", KZT: "텡게", KRW: "원" }
+    }
   };
 
   function read() { try { return JSON.parse(localStorage.getItem(LS)) || []; } catch (_) { return []; } }
@@ -84,7 +89,7 @@
   function fab() {
     var f = document.getElementById("flw-fab");
     if (!f) {
-      f = document.createElement("a"); f.id = "flw-fab"; f.href = BASE + "cart.html";
+      f = document.createElement("a"); f.id = "flw-fab"; f.href = BASE + "cart.html" + (pageLang()!=="ru" ? ("?lang="+pageLang()) : "");
       f.setAttribute("aria-label", "Cart");
       f.style.cssText = "position:fixed;right:16px;bottom:16px;z-index:9998;display:none;align-items:center;gap:8px;background:" + ROSE + ";color:#fff;text-decoration:none;padding:12px 16px;border-radius:999px;font:700 14px system-ui;box-shadow:0 6px 20px rgba(192,104,122,.45)";
       f.innerHTML = '<span style="font-size:18px">🛒</span><span>' + L().fab + '</span><span id="flw-fab-c" style="background:#fff;color:' + ROSE_D + ';border-radius:999px;min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;padding:0 6px"></span>';
