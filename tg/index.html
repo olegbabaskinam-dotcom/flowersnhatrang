@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="robots" content="noindex,nofollow">
+<title>🌸 Цветы Нячанг — каталог</title>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+:root{
+  --pink:#c0687a; --pink-d:#a94f63; --pink-l:#fce8ee;
+  --ink:#1a1a1a; --muted:#78716c; --line:#eee3e6; --bg:#faf7f5;
+  --ok:#256b3c; --warn:#8a6d3b; --err:#9b2c2c; --card:#fff;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  line-height:1.45; -webkit-font-smoothing:antialiased; padding-bottom:84px;
+}
+img{display:block;max-width:100%}
+button{font-family:inherit}
+.hidden{display:none!important}
+a{color:var(--pink-d)}
+
+/* ---------- ХЕДЕР ---------- */
+header{
+  position:sticky; top:0; z-index:30; background:#fff;
+  border-bottom:1px solid var(--line); padding:10px 14px 0;
+}
+.htop{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.htop .logo{width:34px;height:34px;border-radius:9px;object-fit:cover;background:var(--pink-l)}
+.htop b{font-size:16px}
+.htop small{color:var(--muted);font-size:11px;display:block;margin-top:1px}
+.search{display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:9px 12px;margin-bottom:8px}
+.search input{border:none;background:none;outline:none;font-size:15px;width:100%}
+.tabs{display:flex;gap:7px;overflow-x:auto;padding:2px 0 10px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;border:1px solid var(--line);background:#fff;color:var(--muted);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.tab.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+/* ---------- СЕТКА ТОВАРОВ ---------- */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;padding:12px 14px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.pc .ph{position:relative;aspect-ratio:1/1;background:var(--pink-l);overflow:hidden}
+.pc .ph img{width:100%;height:100%;object-fit:cover}
+.pc .ph .nav{position:absolute;inset:0;display:flex;justify-content:space-between;align-items:center;pointer-events:none}
+.pc .ph .nav button{pointer-events:auto;width:26px;height:26px;margin:0 5px;border:none;border-radius:999px;background:rgba(255,255,255,.9);color:var(--pink-d);font-size:16px;line-height:1;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.pc .ph .dots{position:absolute;bottom:6px;left:0;right:0;display:flex;justify-content:center;gap:4px}
+.pc .ph .dots i{width:5px;height:5px;border-radius:999px;background:rgba(255,255,255,.6)}
+.pc .ph .dots i.on{background:#fff}
+.pc .bd{padding:9px 11px 11px;display:flex;flex-direction:column;flex:1}
+.pc h3{font-size:13.5px;margin:0 0 3px;font-weight:600;line-height:1.3}
+.pc .pr{font-weight:800;font-size:14px}
+.pc .sub{color:var(--muted);font-size:11px;margin-top:1px}
+.pc .add{margin-top:9px;border:none;border-radius:10px;background:var(--pink);color:#fff;font-weight:700;font-size:13px;padding:9px;cursor:pointer}
+.pc .add:active{background:var(--pink-d)}
+.pc .qtybox{margin-top:9px;display:flex;align-items:center;justify-content:space-between;background:var(--pink-l);border-radius:10px;padding:4px}
+.pc .qtybox button{width:30px;height:30px;border:none;border-radius:8px;background:#fff;color:var(--pink-d);font-size:18px;font-weight:700;cursor:pointer}
+.pc .qtybox span{font-weight:700}
+
+.empty{padding:40px 20px;text-align:center;color:var(--muted)}
+
+/* ---------- ПЛАВАЮЩАЯ КОРЗИНА ---------- */
+.fab{position:fixed;left:14px;right:14px;bottom:14px;z-index:40;background:var(--pink);color:#fff;border:none;border-radius:14px;padding:14px 18px;font-size:15px;font-weight:700;display:none;align-items:center;justify-content:space-between;box-shadow:0 8px 24px rgba(192,104,122,.4);cursor:pointer}
+.fab.show{display:flex}
+.fab .c{background:#fff;color:var(--pink-d);border-radius:999px;min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;padding:0 6px;margin-left:8px}
+
+/* ---------- ЭКРАНЫ ---------- */
+.screen{display:none}
+.screen.on{display:block}
+.sh{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid var(--line);padding:13px 14px;display:flex;align-items:center;gap:12px}
+.sh button.back{border:none;background:var(--pink-l);color:var(--pink-d);width:36px;height:36px;border-radius:10px;font-size:18px;cursor:pointer}
+.sh b{font-size:16px}
+.wrap{padding:14px;max-width:600px;margin:0 auto}
+
+/* корзина */
+.ci{display:flex;gap:11px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px;margin-bottom:10px}
+.ci img{width:66px;height:66px;border-radius:10px;object-fit:cover;flex:0 0 auto;background:var(--pink-l)}
+.ci .info{flex:1;min-width:0}
+.ci h4{margin:0 0 3px;font-size:13.5px;font-weight:600}
+.ci .pr{font-weight:700;font-size:13.5px}
+.ci .sub{color:var(--muted);font-size:11px}
+.ci .ctr{display:flex;align-items:center;gap:8px;margin-top:7px}
+.ci .ctr button{width:28px;height:28px;border:1px solid var(--line);background:#fff;border-radius:8px;font-size:16px;font-weight:700;color:var(--pink-d);cursor:pointer}
+.ci .rm{margin-left:auto;background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;text-decoration:underline}
+.curbar{display:flex;gap:6px;justify-content:flex-end;margin-bottom:10px}
+.curbar button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:5px 11px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer}
+.curbar button.on{background:var(--pink);border-color:var(--pink);color:#fff}
+.totbox{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 15px;margin:6px 0 14px}
+.totbox .row{display:flex;justify-content:space-between;padding:4px 0;font-size:14px}
+.totbox .grand{border-top:1px dashed var(--line);margin-top:6px;padding-top:9px;font-weight:800;font-size:17px}
+
+/* форма */
+label.fl{display:block;font-size:13px;font-weight:600;margin:14px 0 6px}
+label.fl .req{color:var(--pink-d)}
+.field{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:12px;font-size:16px;background:#fff;outline:none}
+.field:focus{border-color:var(--pink)}
+.hint{color:var(--muted);font-size:12px;margin-top:5px;line-height:1.5}
+.searchbox{position:relative}
+.results{position:absolute;left:0;right:0;top:calc(100% + 4px);background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:20;max-height:260px;overflow:auto}
+.results>div{padding:10px 13px;border-bottom:1px solid var(--bg);cursor:pointer}
+.results .rtitle{font-weight:600;font-size:14px}
+.results .rsub{color:var(--muted);font-size:12px}
+.results .empty{padding:14px;text-align:center;color:var(--muted)}
+#map{height:200px;border-radius:12px;margin-top:9px;border:1px solid var(--line)}
+.found{margin-top:9px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 13px;font-size:14px;word-break:break-word}
+.chan{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.chan label{flex:1;min-width:90px;border:1px solid var(--line);border-radius:10px;padding:9px;text-align:center;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer}
+.chan input{display:none}
+.chan input:checked + span{color:var(--pink-d)}
+.chan label:has(input:checked){border-color:var(--pink);background:var(--pink-l)}
+.gmrow{display:flex;gap:8px;margin-top:8px}
+.gmrow button{flex:0 0 auto;border:1px solid var(--line);background:#fff;border-radius:10px;padding:0 14px;font-weight:600;color:var(--pink-d);cursor:pointer}
+.btn{display:block;width:100%;border:none;border-radius:13px;padding:15px;font-size:16px;font-weight:700;background:var(--pink);color:#fff;cursor:pointer;margin-top:18px;text-align:center}
+.btn:active{background:var(--pink-d)}
+.btn:disabled{opacity:.5}
+.btn.green{background:var(--ok)}
+.err{color:var(--err);font-size:13px;margin-top:10px;min-height:1px}
+.spin{display:inline-block;width:15px;height:15px;border:3px solid #fff;border-top-color:transparent;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px;margin-right:6px}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* оплата */
+.pays{display:flex;gap:8px;flex-wrap:wrap}
+.pay{flex:1;min-width:100px;border:1px solid var(--line);background:#fff;border-radius:12px;padding:12px 10px;text-align:center;font-size:13px;font-weight:600;cursor:pointer}
+.pay.on{border-color:var(--pink);background:var(--pink-l);color:var(--pink-d)}
+.paybox{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:14px}
+.kv{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--bg);font-size:14px}
+.kv:last-child{border-bottom:none}
+.kv .copy{border:1px solid var(--line);background:var(--bg);border-radius:7px;padding:3px 9px;font-size:11px;cursor:pointer;color:var(--pink-d);margin-left:8px}
+.warnbox{background:#fdf6ec;border:1px solid #f3e2c7;color:var(--warn);border-radius:10px;padding:10px 12px;font-size:13px;margin-top:10px}
+.qr{display:flex;justify-content:center;margin-top:12px}
+.qr img,.qr canvas{border-radius:10px}
+.filewrap{border:2px dashed var(--line);border-radius:12px;padding:22px 14px;text-align:center;color:var(--muted);font-size:14px;cursor:pointer;margin-top:6px}
+.filewrap.ok{border-color:var(--ok);color:var(--ok)}
+.prev{max-height:220px;margin:12px auto 0;border-radius:10px;display:none}
+.oid{font-family:ui-monospace,Menlo,monospace;font-weight:800;color:var(--pink-d)}
+.done{text-align:center;padding:50px 24px}
+.done .big{font-size:52px;margin-bottom:10px}
+.done h2{font-size:20px;margin:0 0 10px}
+.done p{color:var(--muted);font-size:15px;line-height:1.6}
+.toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:#292524;color:#fff;padding:11px 18px;border-radius:12px;font-size:14px;z-index:100;opacity:0;transition:.25s;box-shadow:0 6px 20px rgba(0,0,0,.25);max-width:90%;text-align:center}
+.toast.show{opacity:1}
+.cake-note{background:#fdf6ec;border:1px solid #f3e2c7;color:var(--warn);border-radius:12px;padding:11px 14px;font-size:13px;margin-top:12px}
+</style>
+</head>
+<body>
+
+<!-- ============ ЭКРАН 1: КАТАЛОГ ============ -->
+<div id="scrCatalog" class="screen on">
+  <header>
+    <div class="htop">
+      <img class="logo" src="/apple-touch-icon.png" alt="" onerror="this.style.display='none'">
+      <div>
+        <b>Доставка цветов · Нячанг</b>
+        <small>свежие букеты, шары, торты · доставка день в день</small>
+      </div>
+    </div>
+    <div class="search">
+      <span>🔍</span>
+      <input id="q" placeholder="Поиск букета…" autocomplete="off">
+    </div>
+    <div class="tabs" id="tabs"></div>
+  </header>
+  <div class="grid" id="grid"></div>
+  <div class="empty hidden" id="gridEmpty">Ничего не найдено 🌱</div>
+</div>
+
+<!-- ============ ЭКРАН 2: КОРЗИНА + ЗАКАЗ ============ -->
+<div id="scrCart" class="screen">
+  <div class="sh"><button class="back" onclick="showCatalog()">‹</button><b>Корзина и заказ</b></div>
+  <div class="wrap">
+
+    <div id="cartEmpty" class="empty">Корзина пуста 🌸<br><br>
+      <button class="btn" style="max-width:240px;margin:0 auto" onclick="showCatalog()">Перейти в каталог</button>
+    </div>
+
+    <div id="cartFull">
+      <div class="curbar" id="curbar"></div>
+      <div id="cartList"></div>
+
+      <div class="totbox" id="preTot"></div>
+
+      <!-- ФОРМА ЗАКАЗА -->
+      <form id="orderForm" autocomplete="on">
+        <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px">
+
+        <label class="fl">Кому вручить <span class="req">*</span></label>
+        <input class="field" id="rcpt" placeholder="Имя получателя" required>
+
+        <label class="fl">Адрес доставки <span class="req">*</span></label>
+        <div class="searchbox">
+          <input class="field" id="addrSearch" autocomplete="off" placeholder="Отель, улица или место — напр.: Vesna Hotel">
+          <div class="results hidden" id="results"></div>
+        </div>
+        <div class="hint">Начните вводить название — выберите из списка. Не нашли? Вставьте ссылку на Google Карту ниже. ✈️ В аэропорт не возим.</div>
+        <div class="gmrow">
+          <input class="field" id="gmapLink" autocomplete="off" placeholder="Ссылка Google Карт" style="flex:1">
+          <button type="button" id="gmapBtn">Найти</button>
+        </div>
+        <div class="err" id="gmapErr"></div>
+        <div id="map"></div>
+        <div class="found hidden" id="foundAddr"></div>
+
+        <label class="fl">Детали адреса <span class="req">*</span></label>
+        <input class="field" id="addrText" placeholder="Этаж, номер комнаты, ресепшн" required>
+
+        <label class="fl">Дата доставки <span class="req">*</span></label>
+        <input class="field" type="date" id="deliveryDate" required>
+        <label class="fl">Время <span class="req">*</span></label>
+        <select class="field" id="deliveryTime"></select>
+        <div class="hint" id="timeHint"></div>
+
+        <label class="fl">Комментарий</label>
+        <input class="field" id="comment" placeholder="Открытка, пожелания, сюрприз…">
+
+        <label class="fl">Способ связи <span class="req">*</span></label>
+        <div class="chan" id="chan">
+          <label><input type="radio" name="chan" value="Telegram" checked><span>Telegram</span></label>
+          <label><input type="radio" name="chan" value="WhatsApp"><span>WhatsApp</span></label>
+          <label><input type="radio" name="chan" value="Instagram"><span>Instagram</span></label>
+        </div>
+
+        <label class="fl">Ваш контакт <span class="req">*</span></label>
+        <input class="field" id="contact" placeholder="@username / +7…" required>
+
+        <label class="fl">Почта <span class="req">*</span></label>
+        <input class="field" type="email" id="email" placeholder="you@mail.com" required>
+        <div class="hint">На почту придёт подтверждение заказа и вся отчётность. Указывать обязательно.</div>
+
+        <div class="cake-note">🎂 <b>Про торты:</b> торт заказывается только вместе с букетом, шарами или набором — отдельно не доставляем.</div>
+
+        <button type="submit" class="btn" id="submitBtn">Оформить заказ → к оплате</button>
+        <div class="err" id="err1"></div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ЭКРАН 3: ОПЛАТА ============ -->
+<div id="scrPay" class="screen">
+  <div class="sh"><button class="back" onclick="backToData()">‹</button><b>Оплата заказа <span class="oid" id="payOid"></span></b></div>
+  <div class="wrap">
+    <p class="hint" style="font-size:14px">Заявка принята ✓ Выберите способ оплаты, оплатите и загрузите скрин чека.</p>
+    <div class="pays" id="pays"></div>
+    <div class="paybox hidden" id="payDetails"></div>
+
+    <div id="receiptCard" class="hidden">
+      <label class="fl">Скрин оплаты (чек) <span class="req">*</span></label>
+      <div class="filewrap" id="fileWrap">📎 Нажмите, чтобы прикрепить скрин чека</div>
+      <input type="file" id="receipt" accept="image/*" class="hidden">
+      <img id="preview" class="prev" alt="чек">
+      <button class="btn" id="sendReceipt" disabled>Я оплатил — отправить чек</button>
+      <div class="err" id="err2"></div>
+    </div>
+
+    <div id="cashCard" class="hidden">
+      <div class="warnbox">Оплата наличными курьеру при получении. Нажмите — и мы начнём собирать заказ.</div>
+      <button class="btn" id="cashBtn">Подтвердить заказ (наличными)</button>
+      <div class="err" id="errCash"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ЭКРАН 4: ГОТОВО ============ -->
+<div id="scrDone" class="screen">
+  <div class="done">
+    <div class="big">🌸</div>
+    <h2>Спасибо за заказ!</h2>
+    <p id="doneText"></p>
+    <button class="btn" style="max-width:260px;margin:22px auto 0" onclick="restart()">В каталог</button>
+  </div>
+</div>
+
+<button class="fab" id="fab" onclick="showCart()"><span>🛒 Корзина</span><span class="c" id="fabC">0</span></button>
+<div class="toast" id="toast"></div>
+
+<script>
+/* подключаем логику отдельным файлом, чтобы держать разметку чистой */
+</script>
+<script src="app.js"></script>
+</body>
+</html>
