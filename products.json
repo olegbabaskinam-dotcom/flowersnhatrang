@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-04 17:39",
- "count": 99,
+ "generated": "2026-08-06 11:31",
+ "count": 100,
  "categories": [
   {
    "key": "all",
@@ -2301,6 +2301,28 @@
     "img/products/25-belo-rozovyh-roz-shokoladnyy-tort/7.webp",
     "img/products/25-belo-rozovyh-roz-shokoladnyy-tort/8.webp",
     "img/products/25-belo-rozovyh-roz-shokoladnyy-tort/9.webp"
+   ]
+  },
+  {
+   "id": 100,
+   "slug": "25-belyh-roz-krasnaya-upakovka-3-shara",
+   "name": "25 белых роз в красной упаковке + 3 гелиевых шара + открытка",
+   "desc": "нежный букет из 25 белых роз в яркой красной упаковке плюс 3 гелиевых фольгированных шара-сердца — готовое романтичное поздравление с эффектным контрастом белого и красного. В подарок открытка с вашим текстом. Отлично на признание, годовщину или сюрприз. Розы свежие, шары держат объём несколько дней; доставим по Нячангу в день заказа",
+   "alt": "25 белых роз в красной упаковке с 3 гелиевыми шарами-сердцами Нячанг доставка",
+   "price_vnd": 950000,
+   "price": "950 000 донгов",
+   "price_sub": "≈ $38 · 3 000 ₽",
+   "cats": [
+    "r25",
+    "balloons"
+   ],
+   "color": "red",
+   "images": [
+    "img/products/25-belyh-roz-krasnaya-upakovka-3-shara/1.webp",
+    "img/products/25-belyh-roz-krasnaya-upakovka-3-shara/2.webp",
+    "img/products/25-belyh-roz-krasnaya-upakovka-3-shara/3.webp",
+    "img/products/25-belyh-roz-krasnaya-upakovka-3-shara/4.webp",
+    "img/products/25-belyh-roz-krasnaya-upakovka-3-shara/5.webp"
    ]
   }
  ]
