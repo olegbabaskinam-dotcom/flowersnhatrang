@@ -19,7 +19,7 @@ id,date,type,category,keyword_ru,title_ru,slug,photo_query_en,status_ru,status_e
 18,2026-06-20,article,Повод,букет на первое свидание,Идеи букетов на первое свидание: гид для туриста в Нячанге,idei-buketov-na-pervoe-svidanie-gid-dlya-turista-v-nyachange,romantic date flowers,todo,todo,todo
 19,2026-06-21,article,Повод,цветы для признания в любви,Какие цветы подарить для признания в любви в Нячанге,kakie-cvety-podarit-dlya-priznaniya-v-lyubvi-v-nyachange,red roses love,done,done,done
 20,2026-06-22,article,Повод,букет для признания в любви,Идеи букетов для признания в любви: гид для туриста в Нячанге,idei-buketov-dlya-priznaniya-v-lyubvi-gid-dlya-turista-v-nyachang,red roses love,todo,todo,todo
-21,2026-06-23,article,Повод,цветы на юбилей,Какие цветы подарить на юбилей в Нячанге,kakie-cvety-podarit-na-yubiley-v-nyachange,celebration bouquet,todo,todo,todo
+21,2026-06-23,article,Повод,цветы на юбилей,Какие цветы подарить на юбилей в Нячанге,kakie-cvety-podarit-na-yubiley-v-nyachange,celebration bouquet,done,done,done
 22,2026-06-24,article,Повод,букет на юбилей,Идеи букетов на юбилей: гид для туриста в Нячанге,idei-buketov-na-yubiley-gid-dlya-turista-v-nyachange,celebration bouquet,todo,todo,todo
 23,2026-06-25,article,Повод,цветы на новоселье,Какие цветы подарить на новоселье в Нячанге,kakie-cvety-podarit-na-novosele-v-nyachange,housewarming flowers,todo,todo,todo
 24,2026-06-26,article,Повод,букет на новоселье,Идеи букетов на новоселье: гид для туриста в Нячанге,idei-buketov-na-novosele-gid-dlya-turista-v-nyachange,housewarming flowers,todo,todo,todo
@@ -51,7 +51,7 @@ id,date,type,category,keyword_ru,title_ru,slug,photo_query_en,status_ru,status_e
 50,2026-07-22,article,Получатель,цветы учительнице,Какие цветы выбрать учительнице — гид по букетам в Нячанге,kakie-cvety-vybrat-uchitelnice-gid-po-buketam-v-nyachange,teacher,todo,todo,todo
 51,2026-07-23,article,Цветок,розы нячанг,"Розы в Нячанге: значение, уход и кому дарить",rozy-v-nyachange-znachenie-uhod-i-komu-darit,red roses,done,done,done
 52,2026-07-24,article,Цветок,купить розы нячанг,Сколько стоят розы в Нячанге и как заказать доставку,skolko-stoyat-rozy-v-nyachange-i-kak-zakazat-dostavku,red roses,todo,todo,todo
-53,2026-07-25,article,Цветок,пионы нячанг,"Пионы в Нячанге: значение, уход и кому дарить",piony-v-nyachange-znachenie-uhod-i-komu-darit,peonies,todo,todo,todo
+53,2026-07-25,article,Цветок,пионы нячанг,"Пионы в Нячанге: значение, уход и кому дарить",piony-v-nyachange-znachenie-uhod-i-komu-darit,peonies,done,done,done
 54,2026-07-26,article,Цветок,купить пионы нячанг,Сколько стоят пионы в Нячанге и как заказать доставку,skolko-stoyat-piony-v-nyachange-i-kak-zakazat-dostavku,peonies,todo,todo,todo
 55,2026-07-27,article,Цветок,тюльпаны нячанг,"Тюльпаны в Нячанге: значение, уход и кому дарить",tyulpany-v-nyachange-znachenie-uhod-i-komu-darit,tulips,todo,todo,todo
 56,2026-07-28,article,Цветок,купить тюльпаны нячанг,Сколько стоят тюльпаны в Нячанге и как заказать доставку,skolko-stoyat-tyulpany-v-nyachange-i-kak-zakazat-dostavku,tulips,todo,todo,todo
@@ -290,7 +290,7 @@ id,date,type,category,keyword_ru,title_ru,slug,photo_query_en,status_ru,status_e
 289,2027-03-18,article,Шары,шары и цветы нячанг,Шары и цветы вместе: комбо-подарок,shary-i-cvety-vmeste-kombo-podarok,balloons and flowers,todo,todo,todo
 290,2027-03-19,article,Шары,шары гендер пати,Шары для гендер-пати в Нячанге,shary-dlya-gender-pati-v-nyachange,gender reveal balloons,todo,todo,todo
 291,2027-03-20,article,Шары,светящиеся шары led,Светящиеся шары LED в Нячанге,svetyaschiesya-shary-led-v-nyachange,led balloons night,todo,todo,todo
-292,2027-03-21,article,Уход,уход за розами,Как ухаживать за розами в жару Нячанга,kak-uhazhivat-za-rozami-v-zharu-nyachanga,roses care vase,todo,todo,todo
+292,2027-03-21,article,Уход,уход за розами,Как ухаживать за розами в жару Нячанга,kak-uhazhivat-za-rozami-v-zharu-nyachanga,roses care vase,done,done,done
 293,2027-03-22,article,Уход,уход за пионами,Как ухаживать за пионами в жару Нячанга,kak-uhazhivat-za-pionami-v-zharu-nyachanga,peonies care,todo,todo,todo
 294,2027-03-23,article,Уход,уход за тюльпанами,Как ухаживать за тюльпанами в жару Нячанга,kak-uhazhivat-za-tyulpanami-v-zharu-nyachanga,tulips care,todo,todo,todo
 295,2027-03-24,article,Уход,уход за орхидеями,Как ухаживать за орхидеями в жару Нячанга,kak-uhazhivat-za-orhideyami-v-zharu-nyachanga,orchids care,todo,todo,todo
