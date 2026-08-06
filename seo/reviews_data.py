@@ -119,6 +119,30 @@ R = [
 
 # Отзывы с фото (Google Maps). Идут ПЕРВЫМИ. Формат: name,color,ini,date{},text{},photo
 IMG = [
+ ("Алекс Алекс","#7CB342","А",
+   {"ru":"вчера","en":"yesterday","ko":"어제"},
+   {"ru":"Заказал, собрали и привезли ооооочень быстро. Большое спасибо. Заказывал 101 розу. Букет очень красивый. 🤩",
+    "en":"Ordered, they put it together and delivered super fast. Big thanks. I ordered 101 roses. The bouquet is very beautiful. 🤩",
+    "ko":"주문했더니 아주 빠르게 준비해서 배달해 주었어요. 정말 감사합니다. 장미 101송이를 주문했어요. 부케가 아주 예뻐요. 🤩"},
+   "alex"),
+ ("Наталья Валерьевна Елисеева","#5E35B1","Н",
+   {"ru":"2 дня назад","en":"2 days ago","ko":"2일 전"},
+   {"ru":"Благодарю за красивые цветы и быструю доставку. Желаю вам процветания 🙏",
+    "en":"Thank you for the beautiful flowers and fast delivery. I wish you prosperity 🙏",
+    "ko":"예쁜 꽃과 빠른 배달에 감사드립니다. 번창하시길 바랍니다 🙏"},
+   "natalya-e"),
+ ("Елизавета Токмакова","#D81B60","Е",
+   {"ru":"2 дня назад","en":"2 days ago","ko":"2일 전"},
+   {"ru":"Букет шикарный 😍, доставка точно по времени. Цветы стоят очень долго в неизменном виде!! Большое спасибо вам!",
+    "en":"The bouquet is gorgeous 😍, delivery exactly on time. The flowers last a very long time, looking unchanged!! Thank you so much!",
+    "ko":"부케가 정말 멋져요 😍, 배달도 정확히 제시간에. 꽃이 변함없이 아주 오래가요!! 정말 감사합니다!"},
+   "elizaveta-t"),
+ ("Vitaly Smytskoy","#039BE5","V",
+   {"ru":"неделю назад","en":"a week ago","ko":"1주 전"},
+   {"ru":"Полный восторг, всё оперативно и качественно, очень классные цветы!!! Успеха и процветания Вашему делу!!!",
+    "en":"Absolute delight, everything prompt and high quality, really lovely flowers!!! Success and prosperity to your business!!!",
+    "ko":"완전 감동이에요, 모든 게 신속하고 품질도 좋고, 정말 멋진 꽃이에요!!! 사업 번창하시길 바랍니다!!!"},
+   "vitaly-s"),
  ("Дмитрий К","#757575","Д",
    {"ru":"вчера","en":"yesterday","ko":"어제"},
    {"ru":"Отличные цветы! Хороший сервис, быстрая доставка!",
@@ -183,9 +207,9 @@ GLOGO = ('<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" 
  '<path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>')
 
 L = {
- "ru":{"title":"Отзывы на Google","sub":"Настоящие отзывы наших клиентов","btn":"Смотреть все отзывы на Google","prev":"Предыдущий","next":"Следующий","of":"136 отзывов · 5,0"},
- "en":{"title":"Google reviews","sub":"Real reviews from our customers","btn":"See all reviews on Google","prev":"Previous","next":"Next","of":"136 reviews · 5.0"},
- "ko":{"title":"구글 리뷰","sub":"실제 고객들의 후기","btn":"구글에서 모든 리뷰 보기","prev":"이전","next":"다음","of":"리뷰 136개 · 5.0"},
+ "ru":{"title":"Отзывы на Google","sub":"Настоящие отзывы наших клиентов","btn":"Смотреть все отзывы на Google","prev":"Предыдущий","next":"Следующий","of":"144 отзыва · 5,0"},
+ "en":{"title":"Google reviews","sub":"Real reviews from our customers","btn":"See all reviews on Google","prev":"Previous","next":"Next","of":"144 reviews · 5.0"},
+ "ko":{"title":"구글 리뷰","sub":"실제 고객들의 후기","btn":"구글에서 모든 리뷰 보기","prev":"이전","next":"다음","of":"리뷰 144개 · 5.0"},
 }
 
 def card(r, lang, base=""):
