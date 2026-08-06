@@ -227,6 +227,16 @@ label.fl .req{color:var(--pink-d)}
         <label class="fl">Детали адреса <span class="req">*</span></label>
         <input class="field" id="addrText" placeholder="Этаж, номер комнаты, ресепшн" required>
 
+        <label class="fl">Это отель или частный дом? <span class="req">*</span></label>
+        <div class="chan" id="placeType">
+          <label><input type="radio" name="place_type" value="hotel"><span>Отель</span></label>
+          <label><input type="radio" name="place_type" value="house"><span>Частный дом</span></label>
+        </div>
+        <div id="hotelNameBlock" style="display:none">
+          <label class="fl">Название отеля <span class="req">*</span></label>
+          <input class="field" id="hotelName" placeholder="Впишите название отеля">
+        </div>
+
         <label class="fl">Дата доставки <span class="req">*</span></label>
         <input class="field" type="date" id="deliveryDate" required>
         <label class="fl">Время <span class="req">*</span></label>

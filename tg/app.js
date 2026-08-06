@@ -407,6 +407,11 @@ function submitOrder(e) {
   var contact = document.getElementById("contact").value.trim();
   var email = document.getElementById("email").value.trim();
   if (!rcpt || !addrText || !contact || !email) { err.textContent = "Заполните обязательные поля."; return; }
+  var placeType = (form.querySelector("input[name=place_type]:checked") || {}).value || "";
+  if (!placeType) { err.textContent = "Укажите: отель или частный дом."; return; }
+  var hotelName = (document.getElementById("hotelName") || {}).value ? document.getElementById("hotelName").value.trim() : "";
+  if (placeType === "hotel" && !hotelName) { err.textContent = "Впишите название отеля."; return; }
+  var hotel = placeType === "hotel" ? hotelName : "Частный дом";
   var recipWho = (form.querySelector("input[name=recip_who]:checked") || {}).value || "self";
   var recipContact = (document.getElementById("recipContact") || {}).value ? document.getElementById("recipContact").value.trim() : "";
   if (recipWho === "other" && !recipContact) { err.textContent = "Укажите контакт получателя."; return; }
@@ -444,6 +449,7 @@ function submitOrder(e) {
     amount: amountStr,
     delivery: ruDate(document.getElementById("deliveryDate").value) + ", " + document.getElementById("deliveryTime").value,
     address: addr,
+    hotel: hotel,
     contact: chan + ": " + contact + tgTag,
     recipient: recipStr,
     email: email,
@@ -611,6 +617,28 @@ document.addEventListener("DOMContentLoaded", function () {
       var other = sel && sel.value === "other";
       block.style.display = other ? "" : "none";
       if (rc) { rc.required = !!other; if (!other) rc.value = ""; }
+    }
+    Array.prototype.forEach.call(radios, function (r) { r.addEventListener("change", upd); });
+    upd();
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", wire);
+  else wire();
+})();
+
+// Тип адреса: название отеля видно и обязательно только для «Отель»
+(function () {
+  function wire() {
+    var form = document.getElementById("orderForm");
+    if (!form) return;
+    var block = document.getElementById("hotelNameBlock");
+    var hn = document.getElementById("hotelName");
+    var radios = form.querySelectorAll("input[name=place_type]");
+    if (!block || !radios.length) return;
+    function upd() {
+      var sel = form.querySelector("input[name=place_type]:checked");
+      var isHotel = sel && sel.value === "hotel";
+      block.style.display = isHotel ? "" : "none";
+      if (hn) { hn.required = !!isHotel; if (!isHotel) hn.value = ""; }
     }
     Array.prototype.forEach.call(radios, function (r) { r.addEventListener("change", upd); });
     upd();

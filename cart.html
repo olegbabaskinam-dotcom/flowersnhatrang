@@ -95,6 +95,12 @@ var I18N_RAW={
  hint_gmap:{ru:"Если точное место не находится в поиске — откройте Google Карты, <b>зажмите палец</b> на нужной точке (появится красная булавка «Отмеченное место»), нажмите <b>«Поделиться»</b> и скопируйте ссылку сюда. В такой ссылке точные координаты — мы определим место точно.",en:"If the exact spot isn't found in search — open Google Maps, <b>press and hold</b> on the spot (a red 'Dropped pin' appears), tap <b>'Share'</b> and paste the link here. Such a link has exact coordinates — we'll pinpoint the location.",ko:"검색으로 정확한 위치를 못 찾으면 — 구글 지도를 열고 원하는 지점을 <b>길게 누르세요</b>(빨간 '핀'이 표시됩니다). <b>'공유'</b>를 눌러 링크를 여기에 붙여넣으세요. 이런 링크에는 정확한 좌표가 있어 위치를 정확히 찾을 수 있습니다."},
  lbl_addrText:{ru:"Детали для курьера",en:"Details for the courier",ko:"기사님을 위한 세부사항"},
  ph_addrText:{ru:"Этаж, номер квартиры/комнаты, ресепшн",en:"Floor, apartment/room number, reception",ko:"층, 호실 번호, 리셉션"},
+ lbl_place_type:{ru:"Это отель или частный дом?",en:"Is it a hotel or a private home?",ko:"호텔인가요, 개인 주택인가요?"},
+ opt_hotel:{ru:"Отель",en:"Hotel",ko:"호텔"},
+ opt_house:{ru:"Частный дом",en:"Private home",ko:"개인 주택"},
+ lbl_hotel_name:{ru:"Название отеля",en:"Hotel name",ko:"호텔 이름"},
+ ph_hotel_name:{ru:"Впишите название отеля",en:"Enter the hotel name",ko:"호텔 이름을 입력하세요"},
+ err_hotel:{ru:"Впишите название отеля",en:"Enter the hotel name",ko:"호텔 이름을 입력하세요"},
  lbl_date:{ru:"Дата доставки",en:"Delivery date",ko:"배달 날짜"},
  lbl_time:{ru:"Время доставки",en:"Delivery time",ko:"배달 시간"},
  lbl_comment:{ru:"Комментарий (по желанию)",en:"Comment (optional)",ko:"메모 (선택)"},
@@ -503,6 +509,17 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
         <div class="field">
           <label class="req" for="addrText" data-i18n="lbl_addrText">Детали для курьера</label>
           <input id="addrText" name="addrText" data-i18n-ph="ph_addrText" placeholder="Этаж, номер квартиры/комнаты, ресепшн" required>
+        </div>
+        <div class="field">
+          <label class="req" data-i18n="lbl_place_type">Это отель или частный дом?</label>
+          <div class="chan">
+            <label><input type="radio" name="place_type" value="hotel"><span data-i18n="opt_hotel">Отель</span></label>
+            <label><input type="radio" name="place_type" value="house"><span data-i18n="opt_house">Частный дом</span></label>
+          </div>
+        </div>
+        <div class="field" id="hotelNameBlock" style="display:none">
+          <label class="req" for="hotelName" data-i18n="lbl_hotel_name">Название отеля</label>
+          <input id="hotelName" name="hotel_name" data-i18n-ph="ph_hotel_name" placeholder="Впишите название отеля">
         </div>
         <div class="field">
           <label class="req" for="deliveryDate" data-i18n="lbl_date">Дата доставки</label>
@@ -1466,6 +1483,19 @@ const form=document.getElementById('orderForm');
   Array.prototype.forEach.call(form.querySelectorAll('input[name=recip_who]'),function(r){r.addEventListener('change',upd);});
   upd();
 })();
+// Тип адреса: название отеля видно и обязательно только для «Отель»
+(function(){
+  var block=document.getElementById('hotelNameBlock');
+  var hn=document.getElementById('hotelName');
+  function upd(){
+    var sel=form.querySelector('input[name=place_type]:checked');
+    var isHotel=sel&&sel.value==='hotel';
+    block.style.display=isHotel?'':'none';
+    if(hn){ hn.required=!!isHotel; if(!isHotel) hn.value=''; }
+  }
+  Array.prototype.forEach.call(form.querySelectorAll('input[name=place_type]'),function(r){r.addEventListener('change',upd);});
+  upd();
+})();
 form.addEventListener('submit',async e=>{
   e.preventDefault();
   if(document.getElementById('website').value) return;
@@ -1485,6 +1515,10 @@ form.addEventListener('submit',async e=>{
     err.textContent=tr('err_min').replace('{label}',delLabel).replace('{x}',window.fmtMoney(subtotal,'VND'));
     return;
   }
+  var placeType=(form.querySelector('input[name=place_type]:checked')||{}).value||'';
+  if(!placeType){ err.textContent=tr('lbl_place_type'); return; }
+  if(placeType==='hotel' && !form.hotel_name.value.trim()){ err.textContent=tr('err_hotel'); return; }
+  var hotel = placeType==='hotel' ? form.hotel_name.value.trim() : 'Частный дом';
   var recipWho=(form.querySelector('input[name=recip_who]:checked')||{}).value||'self';
   if(recipWho==='other' && !form.recip_contact.value.trim()){ err.textContent=tr('err_recip'); return; }
   var amountStr=form.amount.value.trim(); // поле уже содержит «товары + доставка = итого»
@@ -1514,6 +1548,7 @@ form.addEventListener('submit',async e=>{
     amount:amountStr,
     delivery:ruDate(form.deliveryDate.value)+", "+form.deliveryTime.value,
     address:addr,
+    hotel:hotel,
     contact:chan+": "+form.contact.value.trim(),
     recipient:recipStr,
     email:form.email.value.trim(),
