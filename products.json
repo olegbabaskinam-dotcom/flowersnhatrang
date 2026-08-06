@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-06 11:31",
- "count": 100,
+ "generated": "2026-08-06 11:37",
+ "count": 101,
  "categories": [
   {
    "key": "all",
@@ -2323,6 +2323,31 @@
     "img/products/25-belyh-roz-krasnaya-upakovka-3-shara/3.webp",
     "img/products/25-belyh-roz-krasnaya-upakovka-3-shara/4.webp",
     "img/products/25-belyh-roz-krasnaya-upakovka-3-shara/5.webp"
+   ]
+  },
+  {
+   "id": 101,
+   "slug": "stilnyy-sbornyy-3-buketa-roz",
+   "name": "Стильный сборный букет + 25 розово-персиковых роз + 25 розово-фиолетовых роз",
+   "desc": "большой праздничный комплект из трёх букетов: стильный сборный букет, 25 розово-персиковых роз и 25 розово-фиолетовых роз — нежная пастельная гамма и щедрый объём. Отличный вариант, когда нужно поздравить сразу нескольких или сделать по-настоящему крупный подарок. Розы свежие и ароматные; доставим по Нячангу в день заказа, вложим открытку по желанию",
+   "alt": "стильный сборный букет и 25 розово-персиковых и 25 розово-фиолетовых роз Нячанг доставка",
+   "price_vnd": 2250000,
+   "price": "2 250 000 донгов",
+   "price_sub": "≈ $90 · 7 200 ₽",
+   "cats": [
+    "r25"
+   ],
+   "color": "",
+   "images": [
+    "img/products/stilnyy-sbornyy-3-buketa-roz/1.webp",
+    "img/products/stilnyy-sbornyy-3-buketa-roz/2.webp",
+    "img/products/stilnyy-sbornyy-3-buketa-roz/3.webp",
+    "img/products/stilnyy-sbornyy-3-buketa-roz/4.webp",
+    "img/products/stilnyy-sbornyy-3-buketa-roz/5.webp",
+    "img/products/stilnyy-sbornyy-3-buketa-roz/6.webp",
+    "img/products/stilnyy-sbornyy-3-buketa-roz/7.webp",
+    "img/products/stilnyy-sbornyy-3-buketa-roz/8.webp",
+    "img/products/stilnyy-sbornyy-3-buketa-roz/9.webp"
    ]
   }
  ]
