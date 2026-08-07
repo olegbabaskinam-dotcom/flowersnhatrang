@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-06 11:37",
- "count": 101,
+ "generated": "2026-08-07 08:30",
+ "count": 102,
  "categories": [
   {
    "key": "all",
@@ -2348,6 +2348,28 @@
     "img/products/stilnyy-sbornyy-3-buketa-roz/7.webp",
     "img/products/stilnyy-sbornyy-3-buketa-roz/8.webp",
     "img/products/stilnyy-sbornyy-3-buketa-roz/9.webp"
+   ]
+  },
+  {
+   "id": 102,
+   "slug": "nezhnyy-sbornyy-buket-rozovye-ottenki",
+   "name": "Нежный сборный букет в розовых оттенках + открытка",
+   "desc": "воздушный сборный букет в нежных розовых оттенках: розы и сезонные цветы мягкой пастельной гаммы, собранные в изящную композицию. В подарок открытка с вашим текстом. Романтичный и универсальный букет — на свидание, день рождения, признание или просто без повода. Свежие цветы, доставим по Нячангу в день заказа",
+   "alt": "нежный сборный букет в розовых оттенках с открыткой Нячанг доставка",
+   "price_vnd": 1250000,
+   "price": "1 250 000 донгов",
+   "price_sub": "≈ $50 · 4 000 ₽",
+   "cats": [
+    "mixed"
+   ],
+   "color": "pink",
+   "images": [
+    "img/products/nezhnyy-sbornyy-buket-rozovye-ottenki/1.webp",
+    "img/products/nezhnyy-sbornyy-buket-rozovye-ottenki/2.webp",
+    "img/products/nezhnyy-sbornyy-buket-rozovye-ottenki/3.webp",
+    "img/products/nezhnyy-sbornyy-buket-rozovye-ottenki/4.webp",
+    "img/products/nezhnyy-sbornyy-buket-rozovye-ottenki/5.webp",
+    "img/products/nezhnyy-sbornyy-buket-rozovye-ottenki/6.webp"
    ]
   }
  ]
