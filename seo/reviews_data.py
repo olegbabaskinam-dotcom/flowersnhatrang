@@ -119,6 +119,30 @@ R = [
 
 # Отзывы с фото (Google Maps). Идут ПЕРВЫМИ. Формат: name,color,ini,date{},text{},photo
 IMG = [
+ ("Илона Иванова","#C2185B","И",
+   {"ru":"12 минут назад","en":"12 minutes ago","ko":"12분 전"},
+   {"ru":"Заказала удалённо доставку из России в Нячанг. Курьер мгновенно отвечает, понимает все нюансы, открытка к шикарному букету в подарок. Действительно, если хотите удивить ваших близких и любимых в отпуске — и не важно, рядом вы или нет. Рекомендую этот сервис.",
+    "en":"I ordered delivery remotely from Russia to Nha Trang. The courier replies instantly, understands every detail, and a card came with the gorgeous bouquet as a gift. Truly, if you want to surprise your loved ones on holiday — no matter whether you're there or not. I recommend this service.",
+    "ko":"러시아에서 나트랑으로 원격 배달을 주문했어요. 배송 담당자가 즉시 답하고 모든 디테일을 이해하며, 멋진 부케에 카드까지 선물로 왔어요. 휴가 중인 소중한 사람을 놀라게 하고 싶다면 — 곁에 있든 없든 정말 추천합니다."},
+   "ilona"),
+ ("Данил Мухаметгалиев","#00838F","Д",
+   {"ru":"10 часов назад","en":"10 hours ago","ko":"10시간 전"},
+   {"ru":"Максимально отзывчивая компания, приятное общение, все в сроки были соблюдены. Рекомендую, всё понравилось! Сюрприз удался!",
+    "en":"An extremely responsive company, pleasant communication, all deadlines were met. I recommend it, loved everything! The surprise was a success!",
+    "ko":"정말 응대가 빠른 회사예요, 소통도 즐겁고 약속 시간도 다 지켜졌어요. 추천해요, 모든 게 마음에 들었어요! 서프라이즈 대성공!"},
+   "danil"),
+ ("Валерия Белова","#6A1B9A","В",
+   {"ru":"19 часов назад","en":"19 hours ago","ko":"19시간 전"},
+   {"ru":"Ребята помогли поздравить подругу. Не получалось на сайте выбрать сегодняшнюю дату, написала в телеграм — очень оперативно подсказали, помогли, собрали и доставили буквально за час-полтора ❤️ Замечательный сервис с безумно приятными людьми 🌸 Процветания вам!",
+    "en":"The guys helped me congratulate a friend. I couldn't pick today's date on the site, so I messaged on Telegram — they advised very promptly, helped, put it together and delivered in literally an hour or so ❤️ A wonderful service with incredibly nice people 🌸 Wishing you prosperity!",
+    "ko":"친구를 축하하는 걸 도와주셨어요. 사이트에서 오늘 날짜를 못 골랐는데 텔레그램으로 문의하니 아주 신속하게 안내하고 도와주고, 한 시간 반 만에 만들어 배달해 주었어요 ❤️ 정말 좋은 분들의 훌륭한 서비스예요 🌸 번창하세요!"},
+   "valeria"),
+ ("Yernar Assanov","#455A64","Y",
+   {"ru":"вчера","en":"yesterday","ko":"어제"},
+   {"ru":"Когда оформляла букет из Казахстана, поймала себя на мысли: «Блин, надеюсь, не мошенники» 😄 Но зря переживала. Всё прошло идеально: букет доставили вовремя, сделали фотоотчёт, всё было именно так, как обещали. Очень понравился сервис. Ребятам действительно можно доверять — всё выполняют чётко, вовремя и без лишних переживаний. Спасибо за отличный сервис!",
+    "en":"When ordering a bouquet from Kazakhstan, I caught myself thinking: 'Gosh, I hope they're not scammers' 😄 But I worried for nothing. Everything went perfectly: delivered on time, they sent a photo report, and it was exactly as promised. I really liked the service. You can genuinely trust these guys — everything is done precisely, on time and without any worry. Thank you for the excellent service!",
+    "ko":"카자흐스탄에서 부케를 주문하며 '혹시 사기 아닐까' 생각이 들었어요 😄 하지만 괜한 걱정이었어요. 모든 게 완벽했어요: 제시간에 배달되고 사진 리포트도 보내주고, 약속한 그대로였어요. 서비스가 정말 마음에 들었어요. 정말 믿을 수 있는 분들이에요 — 정확하고 제시간에, 걱정 없이 처리해 줍니다. 훌륭한 서비스 감사합니다!"},
+   "yernar"),
  ("Алекс Алекс","#7CB342","А",
    {"ru":"вчера","en":"yesterday","ko":"어제"},
    {"ru":"Заказал, собрали и привезли ооооочень быстро. Большое спасибо. Заказывал 101 розу. Букет очень красивый. 🤩",
@@ -207,9 +231,9 @@ GLOGO = ('<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" 
  '<path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>')
 
 L = {
- "ru":{"title":"Отзывы на Google","sub":"Настоящие отзывы наших клиентов","btn":"Смотреть все отзывы на Google","prev":"Предыдущий","next":"Следующий","of":"144 отзыва · 5,0"},
- "en":{"title":"Google reviews","sub":"Real reviews from our customers","btn":"See all reviews on Google","prev":"Previous","next":"Next","of":"144 reviews · 5.0"},
- "ko":{"title":"구글 리뷰","sub":"실제 고객들의 후기","btn":"구글에서 모든 리뷰 보기","prev":"이전","next":"다음","of":"리뷰 144개 · 5.0"},
+ "ru":{"title":"Отзывы на Google","sub":"Настоящие отзывы наших клиентов","btn":"Смотреть все отзывы на Google","prev":"Предыдущий","next":"Следующий","of":"148 отзывов · 5,0"},
+ "en":{"title":"Google reviews","sub":"Real reviews from our customers","btn":"See all reviews on Google","prev":"Previous","next":"Next","of":"148 reviews · 5.0"},
+ "ko":{"title":"구글 리뷰","sub":"실제 고객들의 후기","btn":"구글에서 모든 리뷰 보기","prev":"이전","next":"다음","of":"리뷰 148개 · 5.0"},
 }
 
 def card(r, lang, base=""):
