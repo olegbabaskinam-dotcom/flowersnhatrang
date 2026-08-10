@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-08 12:15",
- "count": 103,
+ "generated": "2026-08-10 14:47",
+ "count": 104,
  "categories": [
   {
    "key": "all",
@@ -2393,6 +2393,27 @@
     "img/products/101-korzina-51-nezhno-rozovaya/4.webp",
     "img/products/101-korzina-51-nezhno-rozovaya/5.webp",
     "img/products/101-korzina-51-nezhno-rozovaya/6.webp"
+   ]
+  },
+  {
+   "id": 104,
+   "slug": "sbornyy-buket-belaya-upakovka-7-sharov",
+   "name": "Сборный букет в белой упаковке + 7 фольгированных шаров + открытка",
+   "desc": "нежный сборный букет в белой упаковке плюс связка из 7 фольгированных шаров-сердец и открытка с вашим текстом — готовый праздничный комплект «цветы и шары» с романтичным настроением. Отлично на день рождения, признание или сюрприз. Свежие цветы, шары держат объём несколько дней; доставим по Нячангу в день заказа",
+   "alt": "сборный букет в белой упаковке с 7 фольгированными шарами и открыткой Нячанг доставка",
+   "price_vnd": 2250000,
+   "price": "2 250 000 донгов",
+   "price_sub": "≈ $90 · 7 700 ₽",
+   "cats": [
+    "balloons"
+   ],
+   "color": "white",
+   "images": [
+    "img/products/sbornyy-buket-belaya-upakovka-7-sharov/1.webp",
+    "img/products/sbornyy-buket-belaya-upakovka-7-sharov/2.webp",
+    "img/products/sbornyy-buket-belaya-upakovka-7-sharov/3.webp",
+    "img/products/sbornyy-buket-belaya-upakovka-7-sharov/4.webp",
+    "img/products/sbornyy-buket-belaya-upakovka-7-sharov/5.webp"
    ]
   }
  ]
