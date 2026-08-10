@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-10 14:47",
- "count": 104,
+ "generated": "2026-08-10 14:51",
+ "count": 105,
  "categories": [
   {
    "key": "all",
@@ -2414,6 +2414,32 @@
     "img/products/sbornyy-buket-belaya-upakovka-7-sharov/3.webp",
     "img/products/sbornyy-buket-belaya-upakovka-7-sharov/4.webp",
     "img/products/sbornyy-buket-belaya-upakovka-7-sharov/5.webp"
+   ]
+  },
+  {
+   "id": 105,
+   "slug": "101-belaya-roza-rozovaya-upakovka-cifry-25-sharov",
+   "name": "101 белая роза в розовой упаковке + 2 большие цифры + 25 розовых шаров",
+   "desc": "большой праздничный комплект: пышный букет из 101 белой розы в розовой упаковке, две большие гелиевые цифры (возраст/дата) и 25 розовых резиновых шаров — вау-оформление дня рождения или юбилея под ключ. Розы свежие, шары и цифры держат объём; привезём и расставим по Нячангу в день заказа, вложим открытку по желанию",
+   "alt": "101 белая роза в розовой упаковке с 2 большими цифрами и 25 розовыми шарами Нячанг доставка",
+   "price_vnd": 4250000,
+   "price": "4 250 000 донгов",
+   "price_sub": "≈ $170 · 14 600 ₽",
+   "cats": [
+    "r101",
+    "r25",
+    "balloons"
+   ],
+   "color": "white",
+   "images": [
+    "img/products/101-belaya-roza-rozovaya-upakovka-cifry-25-sharov/1.webp",
+    "img/products/101-belaya-roza-rozovaya-upakovka-cifry-25-sharov/2.webp",
+    "img/products/101-belaya-roza-rozovaya-upakovka-cifry-25-sharov/3.webp",
+    "img/products/101-belaya-roza-rozovaya-upakovka-cifry-25-sharov/4.webp",
+    "img/products/101-belaya-roza-rozovaya-upakovka-cifry-25-sharov/5.webp",
+    "img/products/101-belaya-roza-rozovaya-upakovka-cifry-25-sharov/6.webp",
+    "img/products/101-belaya-roza-rozovaya-upakovka-cifry-25-sharov/7.webp",
+    "img/products/101-belaya-roza-rozovaya-upakovka-cifry-25-sharov/8.webp"
    ]
   }
  ]
