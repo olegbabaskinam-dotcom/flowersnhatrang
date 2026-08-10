@@ -51,8 +51,8 @@ id,date,type,category,keyword_ru,title_ru,slug,photo_query_en,status_ru,status_e
 50,2026-07-22,article,Получатель,цветы учительнице,Какие цветы выбрать учительнице — гид по букетам в Нячанге,kakie-cvety-vybrat-uchitelnice-gid-po-buketam-v-nyachange,teacher,todo,todo,todo
 51,2026-07-23,article,Цветок,розы нячанг,"Розы в Нячанге: значение, уход и кому дарить",rozy-v-nyachange-znachenie-uhod-i-komu-darit,red roses,done,done,done
 52,2026-07-24,article,Цветок,купить розы нячанг,Сколько стоят розы в Нячанге и как заказать доставку,skolko-stoyat-rozy-v-nyachange-i-kak-zakazat-dostavku,red roses,todo,todo,todo
-53,2026-07-25,article,Цветок,пионы нячанг,"Пионы в Нячанге: значение, уход и кому дарить",piony-v-nyachange-znachenie-uhod-i-komu-darit,peonies,done,done,done
-54,2026-07-26,article,Цветок,купить пионы нячанг,Сколько стоят пионы в Нячанге и как заказать доставку,skolko-stoyat-piony-v-nyachange-i-kak-zakazat-dostavku,peonies,todo,todo,todo
+53,2026-07-25,article,Цветок,пионы нячанг,"Пионы в Нячанге: значение, уход и кому дарить",piony-v-nyachange-znachenie-uhod-i-komu-darit,peonies,SKIP-нет-товара,SKIP-нет-товара,SKIP-нет-товара
+54,2026-07-26,article,Цветок,купить пионы нячанг,Сколько стоят пионы в Нячанге и как заказать доставку,skolko-stoyat-piony-v-nyachange-i-kak-zakazat-dostavku,peonies,SKIP-нет-товара,SKIP-нет-товара,SKIP-нет-товара
 55,2026-07-27,article,Цветок,тюльпаны нячанг,"Тюльпаны в Нячанге: значение, уход и кому дарить",tyulpany-v-nyachange-znachenie-uhod-i-komu-darit,tulips,todo,todo,todo
 56,2026-07-28,article,Цветок,купить тюльпаны нячанг,Сколько стоят тюльпаны в Нячанге и как заказать доставку,skolko-stoyat-tyulpany-v-nyachange-i-kak-zakazat-dostavku,tulips,todo,todo,todo
 57,2026-07-29,article,Цветок,орхидеи нячанг,"Орхидеи в Нячанге: значение, уход и кому дарить",orhidei-v-nyachange-znachenie-uhod-i-komu-darit,orchids,todo,todo,todo
@@ -116,7 +116,7 @@ id,date,type,category,keyword_ru,title_ru,slug,photo_query_en,status_ru,status_e
 115,2026-09-25,article,Сезон,цветы в ноябре нячанг,Какие цветы дарить в ноябре в Нячанге,kakie-cvety-darit-v-noyabre-v-nyachange,seasonal bouquet,todo,todo,todo
 116,2026-09-26,article,Сезон,цветы в декабре нячанг,Какие цветы дарить в декабре в Нячанге,kakie-cvety-darit-v-dekabre-v-nyachange,seasonal bouquet,todo,todo,todo
 117,2026-09-27,article,Комбо,букет из роз на день рождения,Букет из роз на день рождения: идеи и доставка в Нячанге,buket-iz-roz-na-den-rozhdeniya-idei-i-dostavka-v-nyachange,roses birthday bouquet,todo,todo,todo
-118,2026-09-28,article,Комбо,букет из пионов на день рождения,Букет из пионов на день рождения: идеи и доставка в Нячанге,buket-iz-pionov-na-den-rozhdeniya-idei-i-dostavka-v-nyachange,peonies birthday bouquet,todo,todo,todo
+118,2026-09-28,article,Комбо,букет из пионов на день рождения,Букет из пионов на день рождения: идеи и доставка в Нячанге,buket-iz-pionov-na-den-rozhdeniya-idei-i-dostavka-v-nyachange,peonies birthday bouquet,SKIP-нет-товара,SKIP-нет-товара,SKIP-нет-товара
 119,2026-09-29,article,Комбо,букет из тюльпанов на день рождения,Букет из тюльпанов на день рождения: идеи и доставка в Нячанге,buket-iz-tyulpanov-na-den-rozhdeniya-idei-i-dostavka-v-nyachange,tulips birthday bouquet,todo,todo,todo
 120,2026-09-30,article,Комбо,букет из орхидей на день рождения,Букет из орхидей на день рождения: идеи и доставка в Нячанге,buket-iz-orhidey-na-den-rozhdeniya-idei-i-dostavka-v-nyachange,orchids birthday bouquet,todo,todo,todo
 121,2026-10-01,article,Комбо,букет из лилий на день рождения,Букет из лилий на день рождения: идеи и доставка в Нячанге,buket-iz-liliy-na-den-rozhdeniya-idei-i-dostavka-v-nyachange,lilies birthday bouquet,todo,todo,todo
@@ -124,7 +124,7 @@ id,date,type,category,keyword_ru,title_ru,slug,photo_query_en,status_ru,status_e
 123,2026-10-03,article,Комбо,букет из хризантем на день рождения,Букет из хризантем на день рождения: идеи и доставка в Нячанге,buket-iz-hrizantem-na-den-rozhdeniya-idei-i-dostavka-v-nyachange,chrysanthemums birthday bouquet,todo,todo,todo
 124,2026-10-04,article,Комбо,букет микс на день рождения,Букет микс на день рождения: идеи и доставка в Нячанге,buket-miks-na-den-rozhdeniya-idei-i-dostavka-v-nyachange,mixed bouquet birthday bouquet,todo,todo,todo
 125,2026-10-05,article,Комбо,букет из роз на годовщину,Букет из роз на годовщину: идеи и доставка в Нячанге,buket-iz-roz-na-godovschinu-idei-i-dostavka-v-nyachange,roses anniversary bouquet,todo,todo,todo
-126,2026-10-06,article,Комбо,букет из пионов на годовщину,Букет из пионов на годовщину: идеи и доставка в Нячанге,buket-iz-pionov-na-godovschinu-idei-i-dostavka-v-nyachange,peonies anniversary bouquet,todo,todo,todo
+126,2026-10-06,article,Комбо,букет из пионов на годовщину,Букет из пионов на годовщину: идеи и доставка в Нячанге,buket-iz-pionov-na-godovschinu-idei-i-dostavka-v-nyachange,peonies anniversary bouquet,SKIP-нет-товара,SKIP-нет-товара,SKIP-нет-товара
 127,2026-10-07,article,Комбо,букет из тюльпанов на годовщину,Букет из тюльпанов на годовщину: идеи и доставка в Нячанге,buket-iz-tyulpanov-na-godovschinu-idei-i-dostavka-v-nyachange,tulips anniversary bouquet,todo,todo,todo
 128,2026-10-08,article,Комбо,букет из орхидей на годовщину,Букет из орхидей на годовщину: идеи и доставка в Нячанге,buket-iz-orhidey-na-godovschinu-idei-i-dostavka-v-nyachange,orchids anniversary bouquet,todo,todo,todo
 129,2026-10-09,article,Комбо,букет из лилий на годовщину,Букет из лилий на годовщину: идеи и доставка в Нячанге,buket-iz-liliy-na-godovschinu-idei-i-dostavka-v-nyachange,lilies anniversary bouquet,todo,todo,todo
@@ -132,7 +132,7 @@ id,date,type,category,keyword_ru,title_ru,slug,photo_query_en,status_ru,status_e
 131,2026-10-11,article,Комбо,букет из хризантем на годовщину,Букет из хризантем на годовщину: идеи и доставка в Нячанге,buket-iz-hrizantem-na-godovschinu-idei-i-dostavka-v-nyachange,chrysanthemums anniversary bouquet,todo,todo,todo
 132,2026-10-12,article,Комбо,букет микс на годовщину,Букет микс на годовщину: идеи и доставка в Нячанге,buket-miks-na-godovschinu-idei-i-dostavka-v-nyachange,mixed bouquet anniversary bouquet,todo,todo,todo
 133,2026-10-13,article,Комбо,букет из роз на 8 марта,Букет из роз на 8 марта: идеи и доставка в Нячанге,buket-iz-roz-na-8-marta-idei-i-dostavka-v-nyachange,roses spring bouquet,todo,todo,todo
-134,2026-10-14,article,Комбо,букет из пионов на 8 марта,Букет из пионов на 8 марта: идеи и доставка в Нячанге,buket-iz-pionov-na-8-marta-idei-i-dostavka-v-nyachange,peonies spring bouquet,todo,todo,todo
+134,2026-10-14,article,Комбо,букет из пионов на 8 марта,Букет из пионов на 8 марта: идеи и доставка в Нячанге,buket-iz-pionov-na-8-marta-idei-i-dostavka-v-nyachange,peonies spring bouquet,SKIP-нет-товара,SKIP-нет-товара,SKIP-нет-товара
 135,2026-10-15,article,Комбо,букет из тюльпанов на 8 марта,Букет из тюльпанов на 8 марта: идеи и доставка в Нячанге,buket-iz-tyulpanov-na-8-marta-idei-i-dostavka-v-nyachange,tulips spring bouquet,todo,todo,todo
 136,2026-10-16,article,Комбо,букет из орхидей на 8 марта,Букет из орхидей на 8 марта: идеи и доставка в Нячанге,buket-iz-orhidey-na-8-marta-idei-i-dostavka-v-nyachange,orchids spring bouquet,todo,todo,todo
 137,2026-10-17,article,Комбо,букет из лилий на 8 марта,Букет из лилий на 8 марта: идеи и доставка в Нячанге,buket-iz-liliy-na-8-marta-idei-i-dostavka-v-nyachange,lilies spring bouquet,todo,todo,todo
@@ -140,7 +140,7 @@ id,date,type,category,keyword_ru,title_ru,slug,photo_query_en,status_ru,status_e
 139,2026-10-19,article,Комбо,букет из хризантем на 8 марта,Букет из хризантем на 8 марта: идеи и доставка в Нячанге,buket-iz-hrizantem-na-8-marta-idei-i-dostavka-v-nyachange,chrysanthemums spring bouquet,todo,todo,todo
 140,2026-10-20,article,Комбо,букет микс на 8 марта,Букет микс на 8 марта: идеи и доставка в Нячанге,buket-miks-na-8-marta-idei-i-dostavka-v-nyachange,mixed bouquet spring bouquet,todo,todo,todo
 141,2026-10-21,article,Комбо,букет из роз на свидание,Букет из роз на свидание: идеи и доставка в Нячанге,buket-iz-roz-na-svidanie-idei-i-dostavka-v-nyachange,roses romantic bouquet,todo,todo,todo
-142,2026-10-22,article,Комбо,букет из пионов на свидание,Букет из пионов на свидание: идеи и доставка в Нячанге,buket-iz-pionov-na-svidanie-idei-i-dostavka-v-nyachange,peonies romantic bouquet,todo,todo,todo
+142,2026-10-22,article,Комбо,букет из пионов на свидание,Букет из пионов на свидание: идеи и доставка в Нячанге,buket-iz-pionov-na-svidanie-idei-i-dostavka-v-nyachange,peonies romantic bouquet,SKIP-нет-товара,SKIP-нет-товара,SKIP-нет-товара
 143,2026-10-23,article,Комбо,букет из тюльпанов на свидание,Букет из тюльпанов на свидание: идеи и доставка в Нячанге,buket-iz-tyulpanov-na-svidanie-idei-i-dostavka-v-nyachange,tulips romantic bouquet,todo,todo,todo
 144,2026-10-24,article,Комбо,букет из орхидей на свидание,Букет из орхидей на свидание: идеи и доставка в Нячанге,buket-iz-orhidey-na-svidanie-idei-i-dostavka-v-nyachange,orchids romantic bouquet,todo,todo,todo
 145,2026-10-25,article,Комбо,букет из лилий на свидание,Букет из лилий на свидание: идеи и доставка в Нячанге,buket-iz-liliy-na-svidanie-idei-i-dostavka-v-nyachange,lilies romantic bouquet,todo,todo,todo
@@ -148,7 +148,7 @@ id,date,type,category,keyword_ru,title_ru,slug,photo_query_en,status_ru,status_e
 147,2026-10-27,article,Комбо,букет из хризантем на свидание,Букет из хризантем на свидание: идеи и доставка в Нячанге,buket-iz-hrizantem-na-svidanie-idei-i-dostavka-v-nyachange,chrysanthemums romantic bouquet,todo,todo,todo
 148,2026-10-28,article,Комбо,букет микс на свидание,Букет микс на свидание: идеи и доставка в Нячанге,buket-miks-na-svidanie-idei-i-dostavka-v-nyachange,mixed bouquet romantic bouquet,todo,todo,todo
 149,2026-10-29,article,Комбо,букет из роз на извинение,Букет из роз на извинение: идеи и доставка в Нячанге,buket-iz-roz-na-izvinenie-idei-i-dostavka-v-nyachange,roses apology bouquet,todo,todo,todo
-150,2026-10-30,article,Комбо,букет из пионов на извинение,Букет из пионов на извинение: идеи и доставка в Нячанге,buket-iz-pionov-na-izvinenie-idei-i-dostavka-v-nyachange,peonies apology bouquet,todo,todo,todo
+150,2026-10-30,article,Комбо,букет из пионов на извинение,Букет из пионов на извинение: идеи и доставка в Нячанге,buket-iz-pionov-na-izvinenie-idei-i-dostavka-v-nyachange,peonies apology bouquet,SKIP-нет-товара,SKIP-нет-товара,SKIP-нет-товара
 151,2026-10-31,article,Комбо,букет из тюльпанов на извинение,Букет из тюльпанов на извинение: идеи и доставка в Нячанге,buket-iz-tyulpanov-na-izvinenie-idei-i-dostavka-v-nyachange,tulips apology bouquet,todo,todo,todo
 152,2026-11-01,article,Комбо,букет из орхидей на извинение,Букет из орхидей на извинение: идеи и доставка в Нячанге,buket-iz-orhidey-na-izvinenie-idei-i-dostavka-v-nyachange,orchids apology bouquet,todo,todo,todo
 153,2026-11-02,article,Комбо,букет из лилий на извинение,Букет из лилий на извинение: идеи и доставка в Нячанге,buket-iz-liliy-na-izvinenie-idei-i-dostavka-v-nyachange,lilies apology bouquet,todo,todo,todo
@@ -156,7 +156,7 @@ id,date,type,category,keyword_ru,title_ru,slug,photo_query_en,status_ru,status_e
 155,2026-11-04,article,Комбо,букет из хризантем на извинение,Букет из хризантем на извинение: идеи и доставка в Нячанге,buket-iz-hrizantem-na-izvinenie-idei-i-dostavka-v-nyachange,chrysanthemums apology bouquet,todo,todo,todo
 156,2026-11-05,article,Комбо,букет микс на извинение,Букет микс на извинение: идеи и доставка в Нячанге,buket-miks-na-izvinenie-idei-i-dostavka-v-nyachange,mixed bouquet apology bouquet,todo,todo,todo
 157,2026-11-06,article,Комбо,букет из роз на признание,Букет из роз на признание: идеи и доставка в Нячанге,buket-iz-roz-na-priznanie-idei-i-dostavka-v-nyachange,roses love bouquet,todo,todo,todo
-158,2026-11-07,article,Комбо,букет из пионов на признание,Букет из пионов на признание: идеи и доставка в Нячанге,buket-iz-pionov-na-priznanie-idei-i-dostavka-v-nyachange,peonies love bouquet,todo,todo,todo
+158,2026-11-07,article,Комбо,букет из пионов на признание,Букет из пионов на признание: идеи и доставка в Нячанге,buket-iz-pionov-na-priznanie-idei-i-dostavka-v-nyachange,peonies love bouquet,SKIP-нет-товара,SKIP-нет-товара,SKIP-нет-товара
 159,2026-11-08,article,Комбо,букет из тюльпанов на признание,Букет из тюльпанов на признание: идеи и доставка в Нячанге,buket-iz-tyulpanov-na-priznanie-idei-i-dostavka-v-nyachange,tulips love bouquet,todo,todo,todo
 160,2026-11-09,article,Комбо,букет из орхидей на признание,Букет из орхидей на признание: идеи и доставка в Нячанге,buket-iz-orhidey-na-priznanie-idei-i-dostavka-v-nyachange,orchids love bouquet,todo,todo,todo
 161,2026-11-10,article,Комбо,букет из лилий на признание,Букет из лилий на признание: идеи и доставка в Нячанге,buket-iz-liliy-na-priznanie-idei-i-dostavka-v-nyachange,lilies love bouquet,todo,todo,todo
@@ -164,7 +164,7 @@ id,date,type,category,keyword_ru,title_ru,slug,photo_query_en,status_ru,status_e
 163,2026-11-12,article,Комбо,букет из хризантем на признание,Букет из хризантем на признание: идеи и доставка в Нячанге,buket-iz-hrizantem-na-priznanie-idei-i-dostavka-v-nyachange,chrysanthemums love bouquet,todo,todo,todo
 164,2026-11-13,article,Комбо,букет микс на признание,Букет микс на признание: идеи и доставка в Нячанге,buket-miks-na-priznanie-idei-i-dostavka-v-nyachange,mixed bouquet love bouquet,todo,todo,todo
 165,2026-11-14,article,Комбо,букет из роз на юбилей,Букет из роз на юбилей: идеи и доставка в Нячанге,buket-iz-roz-na-yubiley-idei-i-dostavka-v-nyachange,roses celebration bouquet,todo,todo,todo
-166,2026-11-15,article,Комбо,букет из пионов на юбилей,Букет из пионов на юбилей: идеи и доставка в Нячанге,buket-iz-pionov-na-yubiley-idei-i-dostavka-v-nyachange,peonies celebration bouquet,todo,todo,todo
+166,2026-11-15,article,Комбо,букет из пионов на юбилей,Букет из пионов на юбилей: идеи и доставка в Нячанге,buket-iz-pionov-na-yubiley-idei-i-dostavka-v-nyachange,peonies celebration bouquet,SKIP-нет-товара,SKIP-нет-товара,SKIP-нет-товара
 167,2026-11-16,article,Комбо,букет из тюльпанов на юбилей,Букет из тюльпанов на юбилей: идеи и доставка в Нячанге,buket-iz-tyulpanov-na-yubiley-idei-i-dostavka-v-nyachange,tulips celebration bouquet,todo,todo,todo
 168,2026-11-17,article,Комбо,букет из орхидей на юбилей,Букет из орхидей на юбилей: идеи и доставка в Нячанге,buket-iz-orhidey-na-yubiley-idei-i-dostavka-v-nyachange,orchids celebration bouquet,todo,todo,todo
 169,2026-11-18,article,Комбо,букет из лилий на юбилей,Букет из лилий на юбилей: идеи и доставка в Нячанге,buket-iz-liliy-na-yubiley-idei-i-dostavka-v-nyachange,lilies celebration bouquet,todo,todo,todo
@@ -172,7 +172,7 @@ id,date,type,category,keyword_ru,title_ru,slug,photo_query_en,status_ru,status_e
 171,2026-11-20,article,Комбо,букет из хризантем на юбилей,Букет из хризантем на юбилей: идеи и доставка в Нячанге,buket-iz-hrizantem-na-yubiley-idei-i-dostavka-v-nyachange,chrysanthemums celebration bouquet,todo,todo,todo
 172,2026-11-21,article,Комбо,букет микс на юбилей,Букет микс на юбилей: идеи и доставка в Нячанге,buket-miks-na-yubiley-idei-i-dostavka-v-nyachange,mixed bouquet celebration bouquet,todo,todo,todo
 173,2026-11-22,article,Комбо,букет из роз на свадьбу,Букет из роз на свадьбу: идеи и доставка в Нячанге,buket-iz-roz-na-svadbu-idei-i-dostavka-v-nyachange,roses wedding bouquet,todo,todo,todo
-174,2026-11-23,article,Комбо,букет из пионов на свадьбу,Букет из пионов на свадьбу: идеи и доставка в Нячанге,buket-iz-pionov-na-svadbu-idei-i-dostavka-v-nyachange,peonies wedding bouquet,todo,todo,todo
+174,2026-11-23,article,Комбо,букет из пионов на свадьбу,Букет из пионов на свадьбу: идеи и доставка в Нячанге,buket-iz-pionov-na-svadbu-idei-i-dostavka-v-nyachange,peonies wedding bouquet,SKIP-нет-товара,SKIP-нет-товара,SKIP-нет-товара
 175,2026-11-24,article,Комбо,букет из тюльпанов на свадьбу,Букет из тюльпанов на свадьбу: идеи и доставка в Нячанге,buket-iz-tyulpanov-na-svadbu-idei-i-dostavka-v-nyachange,tulips wedding bouquet,todo,todo,todo
 176,2026-11-25,article,Комбо,букет из орхидей на свадьбу,Букет из орхидей на свадьбу: идеи и доставка в Нячанге,buket-iz-orhidey-na-svadbu-idei-i-dostavka-v-nyachange,orchids wedding bouquet,todo,todo,todo
 177,2026-11-26,article,Комбо,букет из лилий на свадьбу,Букет из лилий на свадьбу: идеи и доставка в Нячанге,buket-iz-liliy-na-svadbu-idei-i-dostavka-v-nyachange,lilies wedding bouquet,todo,todo,todo
@@ -238,10 +238,10 @@ id,date,type,category,keyword_ru,title_ru,slug,photo_query_en,status_ru,status_e
 237,2027-01-25,article,Связка,розы маме,Розы маме: когда уместно и как заказать в Нячанге,rozy-mame-kogda-umestno-i-kak-zakazat-v-nyachange,roses for mom,todo,todo,todo
 238,2027-01-26,article,Связка,розы девушке,Розы девушке: когда уместно и как заказать в Нячанге,rozy-devushke-kogda-umestno-i-kak-zakazat-v-nyachange,roses for girlfriend,todo,todo,todo
 239,2027-01-27,article,Связка,розы коллеге,Розы коллеге: когда уместно и как заказать в Нячанге,rozy-kollege-kogda-umestno-i-kak-zakazat-v-nyachange,roses for colleague,todo,todo,todo
-240,2027-01-28,article,Связка,пионы жене,Пионы жене: когда уместно и как заказать в Нячанге,piony-zhene-kogda-umestno-i-kak-zakazat-v-nyachange,peonies for wife,todo,todo,todo
-241,2027-01-29,article,Связка,пионы маме,Пионы маме: когда уместно и как заказать в Нячанге,piony-mame-kogda-umestno-i-kak-zakazat-v-nyachange,peonies for mom,todo,todo,todo
-242,2027-01-30,article,Связка,пионы девушке,Пионы девушке: когда уместно и как заказать в Нячанге,piony-devushke-kogda-umestno-i-kak-zakazat-v-nyachange,peonies for girlfriend,todo,todo,todo
-243,2027-01-31,article,Связка,пионы коллеге,Пионы коллеге: когда уместно и как заказать в Нячанге,piony-kollege-kogda-umestno-i-kak-zakazat-v-nyachange,peonies for colleague,todo,todo,todo
+240,2027-01-28,article,Связка,пионы жене,Пионы жене: когда уместно и как заказать в Нячанге,piony-zhene-kogda-umestno-i-kak-zakazat-v-nyachange,peonies for wife,SKIP-нет-товара,SKIP-нет-товара,SKIP-нет-товара
+241,2027-01-29,article,Связка,пионы маме,Пионы маме: когда уместно и как заказать в Нячанге,piony-mame-kogda-umestno-i-kak-zakazat-v-nyachange,peonies for mom,SKIP-нет-товара,SKIP-нет-товара,SKIP-нет-товара
+242,2027-01-30,article,Связка,пионы девушке,Пионы девушке: когда уместно и как заказать в Нячанге,piony-devushke-kogda-umestno-i-kak-zakazat-v-nyachange,peonies for girlfriend,SKIP-нет-товара,SKIP-нет-товара,SKIP-нет-товара
+243,2027-01-31,article,Связка,пионы коллеге,Пионы коллеге: когда уместно и как заказать в Нячанге,piony-kollege-kogda-umestno-i-kak-zakazat-v-nyachange,peonies for colleague,SKIP-нет-товара,SKIP-нет-товара,SKIP-нет-товара
 244,2027-02-01,article,Связка,тюльпаны жене,Тюльпаны жене: когда уместно и как заказать в Нячанге,tyulpany-zhene-kogda-umestno-i-kak-zakazat-v-nyachange,tulips for wife,todo,todo,todo
 245,2027-02-02,article,Связка,тюльпаны маме,Тюльпаны маме: когда уместно и как заказать в Нячанге,tyulpany-mame-kogda-umestno-i-kak-zakazat-v-nyachange,tulips for mom,todo,todo,todo
 246,2027-02-03,article,Связка,тюльпаны девушке,Тюльпаны девушке: когда уместно и как заказать в Нячанге,tyulpany-devushke-kogda-umestno-i-kak-zakazat-v-nyachange,tulips for girlfriend,todo,todo,todo
@@ -291,7 +291,7 @@ id,date,type,category,keyword_ru,title_ru,slug,photo_query_en,status_ru,status_e
 290,2027-03-19,article,Шары,шары гендер пати,Шары для гендер-пати в Нячанге,shary-dlya-gender-pati-v-nyachange,gender reveal balloons,todo,todo,todo
 291,2027-03-20,article,Шары,светящиеся шары led,Светящиеся шары LED в Нячанге,svetyaschiesya-shary-led-v-nyachange,led balloons night,todo,todo,todo
 292,2027-03-21,article,Уход,уход за розами,Как ухаживать за розами в жару Нячанга,kak-uhazhivat-za-rozami-v-zharu-nyachanga,roses care vase,done,done,done
-293,2027-03-22,article,Уход,уход за пионами,Как ухаживать за пионами в жару Нячанга,kak-uhazhivat-za-pionami-v-zharu-nyachanga,peonies care,todo,todo,todo
+293,2027-03-22,article,Уход,уход за пионами,Как ухаживать за пионами в жару Нячанга,kak-uhazhivat-za-pionami-v-zharu-nyachanga,peonies care,SKIP-нет-товара,SKIP-нет-товара,SKIP-нет-товара
 294,2027-03-23,article,Уход,уход за тюльпанами,Как ухаживать за тюльпанами в жару Нячанга,kak-uhazhivat-za-tyulpanami-v-zharu-nyachanga,tulips care,todo,todo,todo
 295,2027-03-24,article,Уход,уход за орхидеями,Как ухаживать за орхидеями в жару Нячанга,kak-uhazhivat-za-orhideyami-v-zharu-nyachanga,orchids care,todo,todo,todo
 296,2027-03-25,article,Уход,уход за лилиями,Как ухаживать за лилиями в жару Нячанга,kak-uhazhivat-za-liliyami-v-zharu-nyachanga,lilies care,todo,todo,todo
