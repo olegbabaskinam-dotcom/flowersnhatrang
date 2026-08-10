@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-10 14:51",
- "count": 105,
+ "generated": "2026-08-10 14:56",
+ "count": 106,
  "categories": [
   {
    "key": "all",
@@ -2440,6 +2440,29 @@
     "img/products/101-belaya-roza-rozovaya-upakovka-cifry-25-sharov/6.webp",
     "img/products/101-belaya-roza-rozovaya-upakovka-cifry-25-sharov/7.webp",
     "img/products/101-belaya-roza-rozovaya-upakovka-cifry-25-sharov/8.webp"
+   ]
+  },
+  {
+   "id": 106,
+   "slug": "tort-shokoladnyy-dollary-butylka-love",
+   "name": "Шоколадный торт с долларами, бутылкой и сердцем Love",
+   "desc": "эффектный шоколадный торт с «денежным» декором: купюры-доллары, шоколадная бутылка, шоколадное сердце с надписью Love, свежие ягоды и фрукты, живая зелень. Стильный подарок на день рождения, юбилей или мужчине — смотрится дорого и с юмором. Свежая выпечка, доставим по Нячангу в день заказа",
+   "alt": "шоколадный торт с долларами бутылкой и шоколадным сердцем Love Нячанг доставка",
+   "price_vnd": 500000,
+   "price": "500 000 донгов",
+   "price_sub": "≈ $20 · 1 700 ₽",
+   "cats": [
+    "cakes"
+   ],
+   "color": "",
+   "images": [
+    "img/products/tort-shokoladnyy-dollary-butylka-love/1.webp",
+    "img/products/tort-shokoladnyy-dollary-butylka-love/2.webp",
+    "img/products/tort-shokoladnyy-dollary-butylka-love/3.webp",
+    "img/products/tort-shokoladnyy-dollary-butylka-love/4.webp",
+    "img/products/tort-shokoladnyy-dollary-butylka-love/5.webp",
+    "img/products/tort-shokoladnyy-dollary-butylka-love/6.webp",
+    "img/products/tort-shokoladnyy-dollary-butylka-love/7.webp"
    ]
   }
  ]
