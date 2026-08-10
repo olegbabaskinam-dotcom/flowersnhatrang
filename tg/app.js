@@ -251,7 +251,9 @@ function ruDate(iso) { var a = iso.split("-"); return a[2] + "." + a[1] + "." + 
 
 /* ============ КАРТА + ЗОНЫ (перенос с сайта) ============ */
 var map, marker, latlng = null, foundLabel = "";
-function inArea(lat, lon) { return lat >= 11.86 && lat <= 12.34 && lon >= 109.13 && lon <= 109.28; }
+/* Южная граница доставки = аэропорт Камрань. Всё ЮЖНЕЕ (широта < AIRPORT_LAT) НЕ возим. */
+var AIRPORT_LAT = 12.03;
+function inArea(lat, lon) { return lat >= AIRPORT_LAT && lat <= 12.34 && lon >= 109.13 && lon <= 109.28; }
 function validGeo(la, ln) { return la > 11.6 && la < 12.7 && ln > 109.0 && ln < 109.45; }
 function isAirport(la, ln) { return la >= 11.97 && la <= 12.025 && ln >= 109.185 && ln <= 109.25; }
 function isIsland(la, ln) { return la >= 12.15 && la <= 12.27 && ln >= 109.215 && ln <= 109.35; }
@@ -288,9 +290,9 @@ function updateFound() {
     refreshZone(); return;
   }
   window.__island = false;
-  if (isAirport(latlng.la, latlng.ln)) {
+  if (isAirport(latlng.la, latlng.ln) || latlng.la < AIRPORT_LAT) {
     window.__outside = true; window.__delFee = 0; window.__delLabel = "аэропорт";
-    box.innerHTML = head + "<div style='margin-top:8px;font-weight:700;color:var(--err)'>✈️❌ Доставка в аэропорт не осуществляется. Укажите адрес отеля вне аэропорта.</div>";
+    box.innerHTML = head + "<div style='margin-top:8px;font-weight:700;color:var(--err)'>✈️❌ Доставка в аэропорт и всё, что южнее аэропорта (за ним), не осуществляется. Возим только севернее — по Нячангу и Камрани (Bãi Dài). Укажите адрес в зоне доставки.</div>";
     refreshZone(); return;
   }
   if (!inArea(latlng.la, latlng.ln)) {
@@ -395,7 +397,7 @@ function submitOrder(e) {
   if (hasCake && !hasOther) { err.textContent = "🎂 Торт заказывается только вместе с букетом, шарами или набором."; return; }
 
   if (!latlng) { err.textContent = "Укажите адрес доставки на карте."; return; }
-  if (window.__outside) { err.textContent = (window.__delLabel === "аэропорт") ? "✈️ В аэропорт доставки нет." : "Адрес вне зоны доставки."; return; }
+  if (window.__outside) { err.textContent = (window.__delLabel === "аэропорт") ? "✈️ В аэропорт и южнее аэропорта доставки нет." : "Адрес вне зоны доставки."; return; }
 
   var sub = cartTotal(), fee = window.__delFee || 0;
   if (fee > 0 && sub < 1000000) { err.textContent = "В зону «" + window.__delLabel + "» доставка от 1 000 000 ₫. Сейчас в корзине " + money(sub, "VND") + "."; return; }

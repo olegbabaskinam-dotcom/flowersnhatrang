@@ -88,7 +88,7 @@ var I18N_RAW={
  ph_addrSearch:{ru:"Отель, улица или место — например: Vesna Hotel",en:"Hotel, street or place — e.g. Vesna Hotel",ko:"호텔, 거리 또는 장소 — 예: Vesna Hotel"},
  geoBtn:{ru:"📍 Моё местоположение",en:"📍 My location",ko:"📍 내 위치"},
  maprowHint:{ru:"Не то место? Подвиньте булавку на карте.",en:"Wrong spot? Drag the pin on the map.",ko:"위치가 틀렸나요? 지도에서 핀을 옮기세요."},
- hint_addr:{ru:"Начните вводить название — выберите из списка. Не нашли? Вставьте ссылку на Google Карту ниже. ✈️ Доставка в аэропорт не осуществляется.",en:"Start typing a name and pick from the list. Not found? Paste a Google Maps link below. ✈️ We don't deliver to the airport.",ko:"이름을 입력하고 목록에서 선택하세요. 못 찾으셨나요? 아래에 구글 지도 링크를 붙여넣으세요. ✈️ 공항 배달은 불가합니다."},
+ hint_addr:{ru:"Начните вводить название — выберите из списка. Не нашли? Вставьте ссылку на Google Карту ниже. ✈️ В аэропорт и южнее аэропорта не возим.",en:"Start typing a name and pick from the list. Not found? Paste a Google Maps link below. ✈️ No delivery to the airport or south of it.",ko:"이름을 입력하고 목록에서 선택하세요. 못 찾으셨나요? 아래에 구글 지도 링크를 붙여넣으세요. ✈️ 공항 및 남쪽 배달 불가."},
  lbl_gmap:{ru:"…или вставьте ссылку на Google Карту",en:"…or paste a Google Maps link",ko:"…또는 구글 지도 링크 붙여넣기"},
  ph_gmap:{ru:"Скопируйте из приложения Google Карты и вставьте сюда",en:"Copy from the Google Maps app and paste here",ko:"구글 지도 앱에서 복사해 여기에 붙여넣으세요"},
  gmapBtn:{ru:"Найти",en:"Find",ko:"찾기"},
@@ -155,7 +155,7 @@ var I18N_RAW={
  zone_near:{ru:"рядом с Нячангом (юг)",en:"near Nha Trang (south)",ko:"나트랑 인근(남쪽)"},
  zone_camranh:{ru:"Камрань",en:"Cam Ranh",ko:"깜라인"},
  pointOnMap:{ru:"Точка на карте",en:"Point on the map",ko:"지도의 위치"},
- airport_msg:{ru:"✈️❌ Доставка в аэропорт не осуществляется. Укажите адрес отеля или места вне аэропорта.",en:"✈️❌ We don't deliver to the airport. Please enter a hotel or a location outside the airport.",ko:"✈️❌ 공항 배달은 불가합니다. 호텔 또는 공항 외 위치를 입력해 주세요."},
+ airport_msg:{ru:"✈️❌ Доставка в аэропорт и всё, что южнее аэропорта (за ним), не осуществляется. Мы возим только севернее аэропорта — по Нячангу и Камрани (Bãi Dài). Укажите адрес в зоне доставки.",en:"✈️❌ We don't deliver to the airport or anywhere south of it (beyond the airport). We only deliver north of the airport — Nha Trang and Cam Ranh (Bãi Dài). Please enter an address within the delivery zone.",ko:"✈️❌ 공항과 공항 남쪽(공항 너머) 지역은 배달 불가합니다. 공항 북쪽 — 나트랑과 깜라인(바이자이)만 배달합니다. 배달 가능 지역 주소를 입력해 주세요."},
  outside_msg:{ru:"❌ Адрес вне зоны доставки — оформить нельзя. Возим по Нячангу, южным пригородам и Камрани.",en:"❌ Address is outside the delivery area — can't order. We deliver in Nha Trang, the southern suburbs and Cam Ranh.",ko:"❌ 배달 지역을 벗어난 주소입니다 — 주문할 수 없습니다. 나트랑, 남부 근교, 깜라인까지 배달합니다."},
  island_msg:{ru:"🏝️ Это остров (Винперл / Хон Че). <b>На остров мы не доставляем — даже за доплату.</b> Но букет можно забрать <b>бесплатно в порту на материке</b>: вы приезжаете на пароме или по канатной дороге, забираете букет и возвращаетесь к себе. Если так удобно — оформляйте заказ, привезём в порт бесплатно. Доставки <b>на сам остров нет</b>.<br><a href='https://maps.app.goo.gl/c5muBjFmnKhqNNGi8' target='_blank' style='color:#8a6d3b;font-weight:700;text-decoration:underline'>📍 Порт на карте →</a>",en:"🏝️ This is the island (Vinpearl / Hòn Tre). <b>We don't deliver to the island — not even for a surcharge.</b> But you can pick up the bouquet <b>for free at the mainland port</b>: come by ferry or cable car, take the bouquet and go back. If that works for you — place the order, we'll bring it to the port for free. There is <b>no delivery onto the island itself</b>.<br><a href='https://maps.app.goo.gl/c5muBjFmnKhqNNGi8' target='_blank' style='color:#8a6d3b;font-weight:700;text-decoration:underline'>📍 Show the port on the map →</a>",ko:"🏝️ 여기는 섬(빈펄 / 혼째)입니다. <b>섬으로는 배달하지 않습니다 — 추가 요금을 내셔도 불가합니다.</b> 대신 <b>본토 항구에서 무료로</b> 부케를 받으실 수 있습니다: 페리나 케이블카로 오셔서 부케를 받고 돌아가시면 됩니다. 괜찮으시면 주문하세요, 항구까지 무료로 가져다드립니다. <b>섬 안으로의 배달은 없습니다.</b><br><a href='https://maps.app.goo.gl/c5muBjFmnKhqNNGi8' target='_blank' style='color:#8a6d3b;font-weight:700;text-decoration:underline'>📍 지도에서 항구 보기 →</a>"},
  island_zone:{ru:"порт (на остров не возим)",en:"port (no island delivery)",ko:"항구 (섬 배달 불가)"},
@@ -179,7 +179,7 @@ var I18N_RAW={
  pointFromMap:{ru:"Точка с карты",en:"Point from map",ko:"지도에서 선택한 위치"},
  err_cake:{ru:"🎂 Торт можно заказать только вместе с букетом, шарами или набором.",en:"🎂 A cake can only be ordered together with a bouquet, balloons or a gift set.",ko:"🎂 케이크는 부케·풍선·선물 세트와 함께만 주문할 수 있습니다."},
  err_addr:{ru:"Укажите адрес доставки — найдите в поиске или нажмите «Моё местоположение».",en:"Enter the delivery address — search or tap 'My location'.",ko:"배달 주소를 입력하세요 — 검색하거나 '내 위치'를 누르세요."},
- err_airport:{ru:"✈️ Доставка в аэропорт не осуществляется. Укажите другой адрес.",en:"✈️ We don't deliver to the airport. Please enter another address.",ko:"✈️ 공항 배달은 불가합니다. 다른 주소를 입력해 주세요."},
+ err_airport:{ru:"✈️ Доставка в аэропорт и южнее аэропорта не осуществляется. Укажите адрес севернее аэропорта.",en:"✈️ We don't deliver to the airport or south of it. Please enter an address north of the airport.",ko:"✈️ 공항 및 공항 남쪽은 배달 불가합니다. 공항 북쪽 주소를 입력해 주세요."},
  err_outside:{ru:"Этот адрес вне зоны доставки. Мы возим по Нячангу, южным пригородам и Камрани.",en:"This address is outside the delivery area. We deliver in Nha Trang, the southern suburbs and Cam Ranh.",ko:"이 주소는 배달 지역을 벗어났습니다. 나트랑, 남부 근교, 깜라인까지 배달합니다."},
  err_min:{ru:"В зону «{label}» доставка от 1 000 000 ₫ (у вас {x}). Добавьте товаров.",en:"Delivery to '{label}' starts from 1,000,000 ₫ (you have {x}). Add more items.",ko:"'{label}' 지역 배달은 1,000,000 ₫부터입니다(현재 {x}). 상품을 추가해 주세요."},
  err_send:{ru:"Не удалось отправить. Проверьте интернет и попробуйте ещё раз.",en:"Couldn't send. Check your connection and try again.",ko:"전송하지 못했습니다. 인터넷을 확인하고 다시 시도해 주세요."},
@@ -495,7 +495,7 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
             <button type="button" class="btn ghost small" id="geoBtn" data-i18n="geoBtn">📍 Моё местоположение</button>
             <span class="hint" style="margin:0" data-i18n="maprowHint">Не то место? Подвиньте булавку на карте.</span>
           </div>
-          <div class="hint" data-i18n="hint_addr">Начните вводить название — выберите из списка. Не нашли? Вставьте ссылку на Google Карту ниже. ✈️ Доставка в аэропорт не осуществляется.</div>
+          <div class="hint" data-i18n="hint_addr">Начните вводить название — выберите из списка. Не нашли? Вставьте ссылку на Google Карту ниже. ✈️ В аэропорт и южнее аэропорта не возим.</div>
         </div>
         <div class="field">
           <label for="gmapLink" data-i18n="lbl_gmap">…или вставьте ссылку на Google Карту</label>
@@ -1376,7 +1376,9 @@ function setPoint(la,ln,label){
   try{ if(typeof render==='function') render(); }catch(e){}   // обновить строку доставки + Итого в корзине
 }
 /* ГРАНИЦА зоны доставки: прямоугольник вдоль побережья Нячанг→Камрань. Вне — не возим. Калибруется. */
-function inArea(lat,lon){ return lat>=11.86 && lat<=12.34 && lon>=109.13 && lon<=109.28; }
+/* Южная граница доставки = аэропорт Камрань. Всё ЮЖНЕЕ аэропорта (широта < AIRPORT_LAT) НЕ возим. */
+var AIRPORT_LAT=12.03;
+function inArea(lat,lon){ return lat>=AIRPORT_LAT && lat<=12.34 && lon>=109.13 && lon<=109.28; }
 /* проверка, что координаты вообще в нашем регионе (отсекаем кривой парсинг ссылок) */
 function validGeo(la,ln){ return la>11.6 && la<12.7 && ln>109.0 && ln<109.45; }
 /* аэропорт Камрань — доставка НЕ осуществляется */
@@ -1406,7 +1408,7 @@ function updateFound(){
     return;
   }
   window.__island=false;
-  if(isAirport(latlng.la,latlng.ln)){
+  if(isAirport(latlng.la,latlng.ln) || latlng.la < AIRPORT_LAT){
     window.__outside=true; window.__delFee=0; window.__delLabel='аэропорт';
     box.innerHTML="📍 <b>"+(foundLabel||tr('pointOnMap'))+"</b><br>"+
       "<a href='"+mapsLink()+"' target='_blank'>"+mapsLink()+"</a>"+
