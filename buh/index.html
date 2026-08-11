@@ -179,7 +179,7 @@
   <button class="back" onclick="openPending()">‹ Назад</button><h2>✅ Оплата заказа</h2>
   <div class="card">
     <div id="cfOrder" class="t" style="font-weight:600;margin-bottom:8px"></div>
-    <label>На какой счёт пришли деньги</label><select id="cfPayWallet"></select>
+    <label>На какой счёт пришли деньги</label><div id="cfPayWallet" class="wsel"></div>
     <label>Сколько получили (₫ донги)</label><input id="cfPayAmount" type="text" inputmode="numeric" class="num">
     <button class="btn" onclick="submitConfirm()">Провести оплату</button>
     <button class="btn ghost" onclick="skipCurrent()">Пропустить заявку</button>
@@ -226,8 +226,8 @@
     <div id="tdText" class="t" style="font-weight:600;margin-bottom:10px"></div>
     <label>Тип операции</label>
     <div class="seg" id="tdType"><button data-t="expense" class="on">Расход</button><button data-t="transfer">Перевод</button></div>
-    <label style="margin-top:10px">Со счёта</label><select id="tdWallet"></select>
-    <div id="tdToWrap" class="hidden"><label>Куда</label><select id="tdTo"></select></div>
+    <label style="margin-top:10px">Со счёта</label><div id="tdWallet" class="wsel"></div>
+    <div id="tdToWrap" class="hidden"><label>Куда</label><div id="tdTo" class="wsel"></div></div>
     <div id="tdCatWrap"><label>Категория</label><select id="tdCat"></select></div>
     <label>Сумма (₫ донги)</label><input id="tdAmount" type="text" inputmode="numeric" class="num">
     <label>Комментарий</label><input id="tdNote" placeholder="напр. на рекламу">
@@ -247,13 +247,13 @@
   </div>
   <div class="card">
     <b>Перекинуть в резерв</b>
-    <label>Откуда</label><select id="rvFundFrom"></select>
+    <label>Откуда</label><div id="rvFundFrom" class="wsel"></div>
     <label>Сумма (₫ донги)</label><input id="rvFundAmt" type="text" inputmode="numeric" class="num">
     <button class="btn" onclick="submitFund()">В резерв</button>
   </div>
   <div class="card">
     <b>Снять из резерва (форс-мажор)</b>
-    <label>Куда</label><select id="rvWdTo"></select>
+    <label>Куда</label><div id="rvWdTo" class="wsel"></div>
     <label>Сумма (₫)</label><input id="rvWdAmt" type="text" inputmode="numeric" class="num">
     <label>Причина</label><input id="rvWdNote" placeholder="на что">
     <button class="btn red" onclick="submitWithdraw()">Снять</button>
@@ -268,7 +268,7 @@
   <div class="card">
     <b>Добавить платёж</b>
     <label>Название</label><input id="rgName" placeholder="напр. Аренда">
-    <label>Кошелёк</label><select id="rgWallet"></select>
+    <label>Кошелёк</label><div id="rgWallet" class="wsel"></div>
     <label>Категория</label><select id="rgCat"></select>
     <label>Сумма</label><input id="rgAmount" type="text" inputmode="numeric" class="num">
     <label>День месяца</label><input id="rgDay" type="number" min="1" max="31" value="1">
@@ -419,6 +419,24 @@ function walletOptions(sel, includeReserve){
     var o=document.createElement('option'); o.value=w.id; o.textContent=w.name+' ('+w.sym+')'; sel.appendChild(o); });
 }
 function catOptions(sel){ sel.innerHTML=''; STATE.expenseCats.forEach(function(c){ var o=document.createElement('option'); o.value=c; o.textContent=c; sel.appendChild(o); }); }
+// Единый выбор кошелька (стиль «как в переводах») — используется ВЕЗДЕ, где выбираем счёт.
+function renderPicker(id, opts){
+  opts=opts||{}; var box=document.getElementById(id); if(!box) return;
+  var sel=box.getAttribute('data-sel')||''; box.innerHTML=''; var any=false;
+  STATE.wallets.forEach(function(w){
+    if(opts.funded && w.balance<=0) return;
+    if(!opts.reserve && w.type==='reserve') return;
+    if(opts.exclude && w.id===opts.exclude) return;
+    any=true;
+    var r=document.createElement('div'); r.className='wrow'+(sel===w.id?' on':'');
+    r.innerHTML='<span class="wnm">'+(w.type==='reserve'?'🏦 ':'')+esc(w.name)+'</span><span class="wa'+(opts.grey?' g':'')+'">'+fmt(w.inBase,STATE.baseSym)+'</span>';
+    r.onclick=function(){ box.setAttribute('data-sel',w.id); renderPicker(id,opts); if(opts.onChange) opts.onChange(w.id); };
+    box.appendChild(r);
+  });
+  if(!any) box.innerHTML='<div class="muted">'+(opts.funded?'Нет кошельков с деньгами':'Нет кошельков')+'</div>';
+}
+function pickerVal(id){ var b=document.getElementById(id); return b?(b.getAttribute('data-sel')||''):''; }
+function pickerReset(id){ var b=document.getElementById(id); if(b) b.setAttribute('data-sel',''); }
 
 // ---------- РАСХОД ----------
 var exFrom=null;
@@ -489,14 +507,15 @@ async function openPending(){
 function openConfirm(p){
   CURRENT_ORDER=p;
   document.getElementById('cfOrder').textContent=p.order;
-  walletOptions(document.getElementById('cfPayWallet'),false);
+  pickerReset('cfPayWallet'); renderPicker('cfPayWallet',{reserve:false});
   document.getElementById('cfPayAmount').value=p.pay?groupNum(p.pay):'';
   document.getElementById('cfErr').textContent='';
   go('confirm');
 }
 async function submitConfirm(){
   var p=CURRENT_ORDER;
-  var res=await api('confirmOrder',{key:p.key, order:p.order, payWallet:document.getElementById('cfPayWallet').value, payAmount:document.getElementById('cfPayAmount').value});
+  if(!pickerVal('cfPayWallet')){ document.getElementById('cfErr').textContent='Выбери счёт'; return; }
+  var res=await api('confirmOrder',{key:p.key, order:p.order, payWallet:pickerVal('cfPayWallet'), payAmount:document.getElementById('cfPayAmount').value});
   if(!res.ok){ document.getElementById('cfErr').textContent=res.error; return; }
   render(res); toast('Оплата проведена'); openPending();
 }
@@ -547,29 +566,33 @@ function renderTasks(res){
 }
 async function submitTask(){ var res=await api('addTask',{text:document.getElementById('tkText').value, amount:document.getElementById('tkAmount').value}); if(!res.ok){ document.getElementById('tkErr').textContent=res.error; return; } STATE=res; renderTasks(res); toast('Задача создана'); }
 async function delTask(id){ if(!confirm('Удалить задачу?')) return; var res=await api('deleteTask',{id:id}); if(res.ok){ STATE=res; renderTasks(res); toast('Удалено'); } }
+function tdRenderTo(){ renderPicker('tdTo',{reserve:true, grey:true, exclude:pickerVal('tdWallet')}); }
+function tdApplyType(){
+  document.getElementById('tdToWrap').classList.toggle('hidden',tdType!=='transfer');
+  document.getElementById('tdCatWrap').classList.toggle('hidden',tdType!=='expense');
+  renderPicker('tdWallet',{funded:true, reserve:(tdType==='transfer'), onChange:function(){ if(tdType==='transfer') tdRenderTo(); }});
+  if(tdType==='transfer') tdRenderTo();
+}
 function openTaskDo(t){
   CUR_TASK=t; tdType='expense';
   document.getElementById('tdText').textContent=t.text;
+  pickerReset('tdWallet'); pickerReset('tdTo');
   var seg=document.getElementById('tdType');
   Array.prototype.forEach.call(seg.children,function(b){
     b.className=(b.getAttribute('data-t')==='expense')?'on':'';
-    b.onclick=function(){ tdType=b.getAttribute('data-t'); Array.prototype.forEach.call(seg.children,function(x){x.className='';}); b.className='on';
-      document.getElementById('tdToWrap').classList.toggle('hidden',tdType!=='transfer');
-      document.getElementById('tdCatWrap').classList.toggle('hidden',tdType!=='expense');
-      walletOptions(document.getElementById('tdWallet'), tdType==='transfer'); };
+    b.onclick=function(){ tdType=b.getAttribute('data-t'); Array.prototype.forEach.call(seg.children,function(x){x.className='';}); b.className='on'; pickerReset('tdWallet'); pickerReset('tdTo'); tdApplyType(); };
   });
-  walletOptions(document.getElementById('tdWallet'), false);
-  walletOptions(document.getElementById('tdTo'), true);
   catOptions(document.getElementById('tdCat'));
-  document.getElementById('tdToWrap').classList.add('hidden');
-  document.getElementById('tdCatWrap').classList.remove('hidden');
+  tdApplyType();
   document.getElementById('tdAmount').value = t.amount>0?groupNum(t.amount):'';
   document.getElementById('tdNote').value=''; document.getElementById('tdErr').textContent='';
   go('taskdo');
 }
 async function submitTaskDo(){
-  var body={id:CUR_TASK.id, opType:tdType, wallet:document.getElementById('tdWallet').value, amount:document.getElementById('tdAmount').value, note:document.getElementById('tdNote').value};
-  if(tdType==='transfer') body.to=document.getElementById('tdTo').value; else body.category=document.getElementById('tdCat').value;
+  if(!pickerVal('tdWallet')){ document.getElementById('tdErr').textContent='Выбери счёт'; return; }
+  if(tdType==='transfer' && !pickerVal('tdTo')){ document.getElementById('tdErr').textContent='Выбери, куда'; return; }
+  var body={id:CUR_TASK.id, opType:tdType, wallet:pickerVal('tdWallet'), amount:document.getElementById('tdAmount').value, note:document.getElementById('tdNote').value};
+  if(tdType==='transfer') body.to=pickerVal('tdTo'); else body.category=document.getElementById('tdCat').value;
   var res=await api('completeTask',body);
   if(!res.ok){ document.getElementById('tdErr').textContent=res.error; return; }
   STATE=res; render(res); go('main'); toast('Задача выполнена');
@@ -580,13 +603,13 @@ function openReserve(){
   document.getElementById('rvActual').textContent=fmt(STATE.reserveActual,STATE.baseSym);
   document.getElementById('rvMonth').textContent=fmt(STATE.reserveMonth,STATE.baseSym);
   document.getElementById('rvYear').textContent=fmt(STATE.reserveYear,STATE.baseSym);
-  walletOptions(document.getElementById('rvFundFrom'),false);
-  walletOptions(document.getElementById('rvWdTo'),false);
+  pickerReset('rvFundFrom'); renderPicker('rvFundFrom',{funded:true,reserve:false});
+  pickerReset('rvWdTo'); renderPicker('rvWdTo',{reserve:false});
   document.getElementById('rvFundAmt').value=''; document.getElementById('rvWdAmt').value=''; document.getElementById('rvWdNote').value=''; document.getElementById('rvErr').textContent='';
   go('reserve');
 }
-async function submitFund(){ var res=await api('addTransfer',{from:document.getElementById('rvFundFrom').value, to:'reserve', amount:document.getElementById('rvFundAmt').value, note:'пополнение резерва'}); if(!res.ok){ document.getElementById('rvErr').textContent=res.error; return; } render(res); toast('В резерв'); openReserve(); }
-async function submitWithdraw(){ var res=await api('reserveWithdraw',{to:document.getElementById('rvWdTo').value, amount:document.getElementById('rvWdAmt').value, note:document.getElementById('rvWdNote').value}); if(!res.ok){ document.getElementById('rvErr').textContent=res.error; return; } render(res); toast('Снято'); openReserve(); }
+async function submitFund(){ if(!pickerVal('rvFundFrom')){ document.getElementById('rvErr').textContent='Выбери, откуда'; return; } var res=await api('addTransfer',{from:pickerVal('rvFundFrom'), to:'reserve', amount:document.getElementById('rvFundAmt').value, note:'пополнение резерва'}); if(!res.ok){ document.getElementById('rvErr').textContent=res.error; return; } render(res); toast('В резерв'); openReserve(); }
+async function submitWithdraw(){ if(!pickerVal('rvWdTo')){ document.getElementById('rvErr').textContent='Выбери, куда'; return; } var res=await api('reserveWithdraw',{to:pickerVal('rvWdTo'), amount:document.getElementById('rvWdAmt').value, note:document.getElementById('rvWdNote').value}); if(!res.ok){ document.getElementById('rvErr').textContent=res.error; return; } render(res); toast('Снято'); openReserve(); }
 
 // ---------- РЕГУЛЯРНЫЕ ----------
 async function openRecurring(){
@@ -599,10 +622,10 @@ async function openRecurring(){
     var b2=document.createElement('button'); b2.className='btn red'; b2.style.margin='0'; b2.textContent='Удалить'; b2.onclick=function(){ delReg(r.id); };
     wrap.appendChild(b1); wrap.appendChild(b2); d.appendChild(wrap); box.appendChild(d); });
   if(!(res.recurring||[]).length) box.innerHTML='<div class="card center muted">Пока нет регулярных платежей</div>';
-  walletOptions(document.getElementById('rgWallet'),false); catOptions(document.getElementById('rgCat'));
+  pickerReset('rgWallet'); renderPicker('rgWallet',{reserve:false}); catOptions(document.getElementById('rgCat'));
   go('recurring');
 }
-async function submitRecurring(){ var res=await api('addRecurring',{name:document.getElementById('rgName').value, wallet:document.getElementById('rgWallet').value, category:document.getElementById('rgCat').value, amount:document.getElementById('rgAmount').value, day:document.getElementById('rgDay').value}); if(!res.ok){ document.getElementById('rgErr').textContent=res.error; return; } document.getElementById('rgName').value=''; document.getElementById('rgAmount').value=''; toast('Добавлено'); openRecurring(); }
+async function submitRecurring(){ if(!pickerVal('rgWallet')){ document.getElementById('rgErr').textContent='Выбери кошелёк'; return; } var res=await api('addRecurring',{name:document.getElementById('rgName').value, wallet:pickerVal('rgWallet'), category:document.getElementById('rgCat').value, amount:document.getElementById('rgAmount').value, day:document.getElementById('rgDay').value}); if(!res.ok){ document.getElementById('rgErr').textContent=res.error; return; } document.getElementById('rgName').value=''; document.getElementById('rgAmount').value=''; toast('Добавлено'); openRecurring(); }
 async function postReg(id){ var res=await api('postRecurring',{id:id}); if(res.ok){ render(res); toast('Проведено'); openRecurring(); } else toast(res.error); }
 async function delReg(id){ var res=await api('deleteRecurring',{id:id}); if(res.ok){ toast('Удалено'); openRecurring(); } }
 
