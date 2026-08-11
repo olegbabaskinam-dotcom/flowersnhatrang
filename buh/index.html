@@ -383,7 +383,7 @@ async function saveStart(){
 
 // ---------- ГЛАВНЫЙ ----------
 function render(res){
-  STATE=res;
+  STATE=res; cacheState(res);
   var seg=document.getElementById('baseSeg'); seg.innerHTML='';
   res.baseChoices.forEach(function(c){ var b=document.createElement('button'); b.textContent=c.sym; if(c.code===res.base)b.className='on';
     b.onclick=function(){ localStorage.setItem('base',c.code); reload(); }; seg.appendChild(b); });
@@ -411,7 +411,8 @@ function render(res){
     var right=fmt(w.inBase,res.baseSym)+(w.currency!==res.base?(' <span class="muted">('+fmt(w.balance,w.sym)+')</span>'):'');
     d.innerHTML='<div class="row"><span>'+(w.type==='reserve'?'🏦 ':'')+esc(w.name)+'</span><span class="amt">'+right+'</span></div>'; list.appendChild(d); });
 }
-async function reload(){ var res=await api('getState',{}); if(res.ok) render(res); }
+async function reload(){ var res=await api('getState',{},true); if(res.ok) render(res); }
+function cacheState(res){ try{ localStorage.setItem('lastState', JSON.stringify(res)); }catch(e){} }
 
 function walletOptions(sel, includeReserve){
   sel.innerHTML='';
@@ -494,15 +495,19 @@ async function submitTransfer(){
 }
 
 // ---------- ЗАЯВКИ ----------
-async function openPending(){
-  var res=await api('listPending',{}); if(!res.ok){ toast(res.error||'Ошибка'); return; }
-  STATE=res; var box=document.getElementById('pendList'); box.innerHTML='';
-  if(!res.pending||!res.pending.length){ box.innerHTML='<div class="card center muted">Новых заявок нет</div>'; go('pending'); return; }
+function renderPending(res){
+  var box=document.getElementById('pendList'); box.innerHTML='';
+  if(!res.pending||!res.pending.length){ box.innerHTML='<div class="card center muted">Новых заявок нет</div>'; return; }
   res.pending.forEach(function(p){ var d=document.createElement('div'); d.className='item';
     d.innerHTML='<div class="t">'+esc(p.order)+'</div><div class="s">'+p.date+' · сумма заказа '+fmt(p.pay,'₫')+'</div>';
     var b=document.createElement('button'); b.className='btn'; b.style.marginTop='9px'; b.textContent='Пришла оплата'; b.onclick=function(){ openConfirm(p); };
     d.appendChild(b); box.appendChild(d); });
-  go('pending');
+}
+async function openPending(){
+  var c=localStorage.getItem('cache_pending'), had=false;
+  if(c){ try{ var r=JSON.parse(c); STATE=r; renderPending(r); go('pending'); had=true; }catch(e){} }
+  var res=await api('listPending',{}, had); if(!res.ok){ if(!had) toast(res.error||'Ошибка'); return; }
+  STATE=res; localStorage.setItem('cache_pending',JSON.stringify(res)); renderPending(res); go('pending');
 }
 function openConfirm(p){
   CURRENT_ORDER=p;
@@ -523,8 +528,13 @@ async function skipCurrent(){ var res=await api('skipOrder',{key:CURRENT_ORDER.k
 
 // ---------- ГОРИЗОНТ ----------
 async function openHorizon(){
-  var res=await api('horizon',{}); if(!res.ok){ toast(res.error||'Ошибка'); return; }
-  STATE=res; var box=document.getElementById('horList'); box.innerHTML='';
+  var c=localStorage.getItem('cache_horizon'), had=false;
+  if(c){ try{ var r=JSON.parse(c); STATE=r; renderHorizon(r); go('horizon'); had=true; }catch(e){} }
+  var res=await api('horizon',{}, had); if(!res.ok){ if(!had) toast(res.error||'Ошибка'); return; }
+  STATE=res; localStorage.setItem('cache_horizon',JSON.stringify(res)); renderHorizon(res); go('horizon');
+}
+function renderHorizon(res){
+  var box=document.getElementById('horList'); box.innerHTML='';
   (res.horizon||[]).forEach(function(day){
     var card=document.createElement('div'); card.className='daycard'+(day.count?'':' empty');
     var head='<div class="dhead"><span class="dwd">'+day.weekday+'</span><span class="ddate">'+day.date+'</span><span class="dcnt">'+day.count+' зак</span><span class="dsum">'+(day.count?fmt(day.total,'₫'):'—')+'</span></div>';
@@ -536,7 +546,6 @@ async function openHorizon(){
     box.appendChild(card);
   });
   if(!(res.horizon||[]).some(function(d){return d.count>0;})) box.innerHTML='<div class="card center muted">На ближайшие 5 дней заказов нет</div>';
-  go('horizon');
 }
 async function askCost(o){
   var cur=o.costVnd||'';
@@ -552,7 +561,11 @@ function openMore(){ document.getElementById('tasksBadge').innerHTML = (STATE&&S
 
 // ---------- ЗАДАЧИ ----------
 var CUR_TASK=null, tdType='expense';
-async function openTasks(){ var res=await api('listTasks',{}); if(!res.ok){ toast(res.error); return; } STATE=res; renderTasks(res); go('tasks'); }
+async function openTasks(){
+  var c=localStorage.getItem('cache_tasks'), had=false;
+  if(c){ try{ var r=JSON.parse(c); STATE=r; renderTasks(r); go('tasks'); had=true; }catch(e){} }
+  var res=await api('listTasks',{}, had); if(!res.ok){ if(!had) toast(res.error); return; } STATE=res; localStorage.setItem('cache_tasks',JSON.stringify(res)); renderTasks(res); go('tasks');
+}
 function renderTasks(res){
   var box=document.getElementById('taskList'); box.innerHTML='';
   (res.tasks||[]).forEach(function(t){ var d=document.createElement('div'); d.className='item';
@@ -630,8 +643,7 @@ async function postReg(id){ var res=await api('postRecurring',{id:id}); if(res.o
 async function delReg(id){ var res=await api('deleteRecurring',{id:id}); if(res.ok){ toast('Удалено'); openRecurring(); } }
 
 // ---------- ИСТОРИЯ ----------
-async function openHistory(){
-  var res=await api('listHistory',{}); if(!res.ok){ toast(res.error); return; } STATE=res;
+function renderHistory(res){
   var box=document.getElementById('histList'); box.innerHTML='';
   (res.history||[]).forEach(function(o){ var d=document.createElement('div'); d.className='item';
     var ic=o.type==='приход'?'🟢':(o.type==='расход'?'🔴':'🔁');
@@ -639,7 +651,12 @@ async function openHistory(){
     d.innerHTML='<div class="row"><span class="t">'+ic+' '+main+'</span></div><div class="s">'+o.date+(o.cat?(' · '+esc(o.cat)):'')+(o.note?(' · '+esc(o.note)):'')+(o.receipt?(' · <a href="'+o.receipt+'" target="_blank">чек</a>'):'')+'</div>';
     d.onclick=function(ev){ if(ev.target.tagName==='A')return; openEdit(o); }; box.appendChild(d); });
   if(!(res.history||[]).length) box.innerHTML='<div class="card center muted">Пока нет операций</div>';
-  go('history');
+}
+async function openHistory(){
+  var c=localStorage.getItem('cache_history'), had=false;
+  if(c){ try{ var r=JSON.parse(c); STATE=r; renderHistory(r); go('history'); had=true; }catch(e){} }
+  var res=await api('listHistory',{}, had); if(!res.ok){ if(!had) toast(res.error); return; } STATE=res;
+  localStorage.setItem('cache_history',JSON.stringify(res)); renderHistory(res); go('history');
 }
 function openEdit(o){
   EDIT_OP=o;
@@ -727,7 +744,17 @@ function drawMonths(months){ var ctx=document.getElementById('chMonths'); if(cha
 function drawCats(cats){ var ctx=document.getElementById('chCats'); if(chart2) chart2.destroy(); if(!cats||!cats.length) return;
   chart2=new Chart(ctx,{type:'doughnut',data:{labels:cats.map(function(c){return c.name;}),datasets:[{data:cats.map(function(c){return c.value;}),backgroundColor:['#7c3aed','#a855f7','#c084fc','#f0abfc','#f9a8d4','#fca5a5','#fdba74','#86efac']}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:11}}}}}}); }
 
-window.addEventListener('load',function(){ var s=localStorage.getItem('pin'); if(s) document.getElementById('pin').value=s; });
+window.addEventListener('load', async function(){
+  var savedPin=localStorage.getItem('pin'); if(savedPin) document.getElementById('pin').value=savedPin;
+  var cached=localStorage.getItem('lastState');
+  if(savedPin && cached){
+    PIN=savedPin;
+    try{ var st=JSON.parse(cached); if(st && st.started){ render(st); go('main'); } }catch(e){}
+    var res=await api('getState',{}, true);           // фоновое обновление, без крутилки
+    if(res && res.ok){ if(res.started){ render(res); if(!document.getElementById('v-pin').classList.contains('hidden')) go('main'); } else { go('pin'); } }
+    else if(res && (res.needId || !res.ok)){ /* доступ изменился — оставим экран как есть, пусть введёт ПИН */ if(!STATE){ go('pin'); } }
+  }
+});
 </script>
 </body>
 </html>
