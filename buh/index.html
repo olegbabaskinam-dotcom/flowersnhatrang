@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<title>💰 Бухгалтерия Цветы</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root{--bg:#faf7ff;--card:#fff;--line:#ece6f5;--ink:#2a2540;--muted:#8b83a3;--accent:#7c3aed;--green:#16a34a;--red:#dc2626;--gold:#b8860b}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;padding:14px 12px 90px}
+  h1{font-size:19px;margin:2px 0 12px;display:flex;align-items:center;gap:8px}
+  h2{font-size:17px;margin:2px 0 12px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;margin-bottom:12px}
+  .muted{color:var(--muted);font-size:13px}
+  .big{font-size:28px;font-weight:800;letter-spacing:-.5px}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .seg{display:flex;gap:6px;background:#f1ecfa;padding:4px;border-radius:12px}
+  .seg button{flex:1;border:none;background:transparent;padding:9px 0;border-radius:9px;font-size:16px;font-weight:700;color:var(--muted)}
+  .seg button.on{background:var(--accent);color:#fff}
+  input,select,textarea{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;font-size:16px;background:#fff;color:var(--ink);font-family:inherit}
+  label{display:block;font-size:13px;color:var(--muted);margin:10px 0 5px}
+  .btn{display:block;width:100%;border:none;background:var(--accent);color:#fff;padding:15px;border-radius:14px;font-size:17px;font-weight:700;margin-top:12px}
+  .btn.ghost{background:#f1ecfa;color:var(--accent)}
+  .btn.red{background:#fee2e2;color:var(--red)}
+  .btn:active{opacity:.85}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}
+  .tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 8px;text-align:center;font-weight:700;font-size:14px}
+  .tile .ic{font-size:22px;display:block;margin-bottom:4px}
+  .tile .badge{display:inline-block;background:var(--red);color:#fff;border-radius:20px;font-size:11px;padding:1px 7px;margin-left:4px}
+  .free{background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;border:none}
+  .free .big,.free .muted{color:#fff}
+  .wal{padding:11px 0;border-bottom:1px solid var(--line)}.wal:last-child{border-bottom:none}
+  .amt{font-weight:700;white-space:nowrap}
+  .resv{color:var(--gold);font-weight:700}
+  .pinbox{max-width:320px;margin:60px auto 0;text-align:center}
+  .pinbox input{text-align:center;letter-spacing:8px;font-size:26px}
+  .err{color:var(--red);font-size:14px;margin-top:8px;min-height:18px}
+  .ok{color:var(--green)}
+  .hint{font-size:12px;color:var(--muted);margin-top:12px;word-break:break-all}
+  .center{text-align:center}.hidden{display:none}
+  .back{background:none;border:none;color:var(--accent);font-size:16px;font-weight:600;padding:0;margin-bottom:6px}
+  .item{border:1px solid var(--line);border-radius:12px;padding:11px 12px;margin-bottom:9px}
+  .item .t{font-weight:600}.item .s{font-size:13px;color:var(--muted);margin-top:2px}
+  .pill{display:inline-block;font-size:12px;padding:2px 8px;border-radius:20px;background:#f1ecfa;color:var(--accent);margin-right:5px}
+  .toast{position:fixed;left:50%;bottom:80px;transform:translateX(-50%);background:#2a2540;color:#fff;padding:11px 18px;border-radius:12px;font-size:14px;opacity:0;transition:.3s;z-index:50;max-width:90%}
+  .toast.show{opacity:1}
+  .loader{position:fixed;inset:0;background:rgba(250,247,255,.6);display:none;align-items:center;justify-content:center;z-index:40}
+  .loader.show{display:flex}.spin{width:34px;height:34px;border:3px solid #e5d9f7;border-top-color:var(--accent);border-radius:50%;animation:sp 1s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  canvas{max-width:100%}
+  a{color:var(--accent)}
+  small.link{color:var(--accent);font-weight:600}
+</style>
+</head>
+<body>
+
+<div class="loader" id="loader"><div class="spin"></div></div>
+<div class="toast" id="toast"></div>
+
+<!-- ПИН -->
+<div id="v-pin" class="pinbox">
+  <div style="font-size:44px">💰</div>
+  <h1 style="justify-content:center">Бухгалтерия</h1>
+  <p class="muted">Введите ПИН-код</p>
+  <input id="pin" type="tel" inputmode="numeric" maxlength="6" placeholder="••••">
+  <button class="btn" onclick="doLogin()">Войти</button>
+  <div id="pinErr" class="err"></div>
+  <div id="idHint" class="hint"></div>
+</div>
+
+<!-- ПЕРВЫЙ ЗАПУСК -->
+<div id="v-start" class="hidden">
+  <h1>🚀 Первый запуск</h1>
+  <div class="card"><p class="muted">Впишите, сколько сейчас реально лежит в каждом кошельке. От этих цифр начнётся учёт.</p><div id="startFields"></div></div>
+  <button class="btn" onclick="saveStart()">Сохранить и запустить</button>
+  <div id="startErr" class="err center"></div>
+</div>
+
+<!-- ГЛАВНЫЙ -->
+<div id="v-main" class="hidden">
+  <h1>💰 Бухгалтерия</h1>
+  <div class="card"><div class="muted">Показывать в валюте</div><div class="seg" id="baseSeg" style="margin-top:8px"></div></div>
+  <div class="card free"><div class="muted">Свободные деньги</div><div class="big" id="mFree">—</div><div class="muted">баланс минус резерв 20%</div></div>
+  <div class="card">
+    <div class="row"><span class="muted">Общий баланс</span><span class="amt" style="font-size:19px" id="mTotal">—</span></div>
+    <div class="row" style="margin-top:9px"><span class="muted">Резерв: лежит / должно</span><span class="resv" id="mReserve">—</span></div>
+  </div>
+  <div class="grid3">
+    <div class="tile" onclick="openIncome()"><span class="ic">🟢</span>Приход</div>
+    <div class="tile" onclick="openExpense()"><span class="ic">🔴</span>Расход</div>
+    <div class="tile" onclick="openTransfer()"><span class="ic">🔁</span>Перевод</div>
+    <div class="tile" onclick="openPending()"><span class="ic">📥</span>Заявки<span id="pendBadge"></span></div>
+    <div class="tile" onclick="openReports()"><span class="ic">📊</span>Отчёты</div>
+    <div class="tile" onclick="openMore()"><span class="ic">⋯</span>Ещё</div>
+  </div>
+  <div class="card" style="margin-top:12px">
+    <div class="row"><b>Кошельки</b><small class="link" onclick="openWallets()">управлять</small></div>
+    <div id="walList" style="margin-top:6px"></div>
+  </div>
+</div>
+
+<!-- ПРИХОД -->
+<div id="v-income" class="hidden">
+  <button class="back" onclick="go('main')">‹ Назад</button><h2>🟢 Приход</h2>
+  <div class="card">
+    <label>Кошелёк</label><select id="inWallet"></select>
+    <label>Сумма</label><input id="inAmount" type="number" inputmode="decimal" placeholder="0">
+    <label>Комментарий (необязательно)</label><input id="inNote" placeholder="напр. заказ, возврат">
+    <button class="btn" onclick="submitIncome()">Добавить приход</button>
+    <div id="inErr" class="err"></div>
+  </div>
+</div>
+
+<!-- РАСХОД -->
+<div id="v-expense" class="hidden">
+  <button class="back" onclick="go('main')">‹ Назад</button><h2>🔴 Расход</h2>
+  <div class="card">
+    <label>Кошелёк</label><select id="exWallet"></select>
+    <label>Категория</label><select id="exCat"></select>
+    <label>Сумма</label><input id="exAmount" type="number" inputmode="decimal" placeholder="0">
+    <label>Комментарий (необязательно)</label><input id="exNote" placeholder="на что">
+    <label>Фото-чек (необязательно)</label><input id="exPhoto" type="file" accept="image/*">
+    <button class="btn" onclick="submitExpense()">Добавить расход</button>
+    <div id="exErr" class="err"></div>
+  </div>
+</div>
+
+<!-- ПЕРЕВОД -->
+<div id="v-transfer" class="hidden">
+  <button class="back" onclick="go('main')">‹ Назад</button><h2>🔁 Перевод между кошельками</h2>
+  <div class="card">
+    <label>Откуда</label><select id="trFrom"></select>
+    <label>Куда</label><select id="trTo"></select>
+    <label>Сумма (в валюте «откуда»)</label><input id="trAmount" type="number" inputmode="decimal" placeholder="0">
+    <label>Комментарий (необязательно)</label><input id="trNote">
+    <button class="btn" onclick="submitTransfer()">Перевести</button>
+    <div id="trErr" class="err"></div>
+  </div>
+</div>
+
+<!-- ЗАЯВКИ -->
+<div id="v-pending" class="hidden">
+  <button class="back" onclick="go('main')">‹ Назад</button><h2>📥 Заявки из Финансов</h2>
+  <div id="pendList"></div>
+</div>
+
+<!-- ПОДТВЕРЖДЕНИЕ ЗАКАЗА -->
+<div id="v-confirm" class="hidden">
+  <button class="back" onclick="openPending()">‹ Назад</button><h2>✅ Подтвердить заказ</h2>
+  <div class="card">
+    <div id="cfOrder" class="t" style="font-weight:600;margin-bottom:8px"></div>
+    <label>Куда пришла оплата</label><select id="cfPayWallet"></select>
+    <label>Сумма оплаты</label><input id="cfPayAmount" type="number" inputmode="decimal">
+    <label>Расходы заказа (закуп+такси+реклама, ₫)</label><input id="cfCostAmount" type="number" inputmode="decimal">
+    <label>С какого кошелька расходы</label><select id="cfCostWallet"></select>
+    <label>Чистая прибыль (₫) — с неё 20% в резерв</label><input id="cfNet" type="number" inputmode="decimal">
+    <div class="muted" id="cfReserveHint" style="margin-top:6px"></div>
+    <button class="btn" onclick="submitConfirm()">Подтвердить и добавить</button>
+    <button class="btn ghost" onclick="skipCurrent()">Пропустить заявку</button>
+    <div id="cfErr" class="err"></div>
+  </div>
+</div>
+
+<!-- ЕЩЁ -->
+<div id="v-more" class="hidden">
+  <button class="back" onclick="go('main')">‹ Назад</button><h2>⋯ Ещё</h2>
+  <div class="grid2">
+    <div class="tile" onclick="openReserve()"><span class="ic">🏦</span>Резерв</div>
+    <div class="tile" onclick="openRecurring()"><span class="ic">🔄</span>Регулярные</div>
+    <div class="tile" onclick="openHistory()"><span class="ic">🕘</span>История</div>
+    <div class="tile" onclick="openWallets()"><span class="ic">👛</span>Кошельки</div>
+  </div>
+</div>
+
+<!-- РЕЗЕРВ -->
+<div id="v-reserve" class="hidden">
+  <button class="back" onclick="openMore()">‹ Назад</button><h2>🏦 Резерв 20%</h2>
+  <div class="card">
+    <div class="row"><span class="muted">Должно быть отложено</span><span class="resv" id="rvTarget">—</span></div>
+    <div class="row" style="margin-top:8px"><span class="muted">Реально лежит</span><span class="amt" id="rvActual">—</span></div>
+  </div>
+  <div class="card">
+    <b>Перекинуть в резерв</b>
+    <label>Откуда</label><select id="rvFundFrom"></select>
+    <label>Сумма</label><input id="rvFundAmt" type="number" inputmode="decimal">
+    <button class="btn" onclick="submitFund()">В резерв</button>
+  </div>
+  <div class="card">
+    <b>Снять из резерва (форс-мажор)</b>
+    <label>Куда</label><select id="rvWdTo"></select>
+    <label>Сумма (₫)</label><input id="rvWdAmt" type="number" inputmode="decimal">
+    <label>Причина</label><input id="rvWdNote" placeholder="на что">
+    <button class="btn red" onclick="submitWithdraw()">Снять</button>
+  </div>
+  <div class="card">
+    <b>Изменить «должно» вручную</b>
+    <label>Новая сумма (₫)</label><input id="rvSetVal" type="number" inputmode="decimal">
+    <button class="btn ghost" onclick="submitSetTarget()">Сохранить</button>
+  </div>
+  <div id="rvErr" class="err"></div>
+</div>
+
+<!-- РЕГУЛЯРНЫЕ -->
+<div id="v-recurring" class="hidden">
+  <button class="back" onclick="openMore()">‹ Назад</button><h2>🔄 Регулярные платежи</h2>
+  <div id="regList"></div>
+  <div class="card">
+    <b>Добавить платёж</b>
+    <label>Название</label><input id="rgName" placeholder="напр. Аренда">
+    <label>Кошелёк</label><select id="rgWallet"></select>
+    <label>Категория</label><select id="rgCat"></select>
+    <label>Сумма</label><input id="rgAmount" type="number" inputmode="decimal">
+    <label>День месяца</label><input id="rgDay" type="number" min="1" max="31" value="1">
+    <button class="btn" onclick="submitRecurring()">Добавить</button>
+    <div id="rgErr" class="err"></div>
+  </div>
+</div>
+
+<!-- ИСТОРИЯ -->
+<div id="v-history" class="hidden">
+  <button class="back" onclick="openMore()">‹ Назад</button><h2>🕘 История</h2>
+  <div id="histList"></div>
+</div>
+
+<!-- ПРАВКА ОПЕРАЦИИ -->
+<div id="v-edit" class="hidden">
+  <button class="back" onclick="openHistory()">‹ Назад</button><h2>✏️ Правка операции</h2>
+  <div class="card">
+    <div id="edInfo" class="muted" style="margin-bottom:8px"></div>
+    <label>Сумма</label><input id="edAmount" type="number" inputmode="decimal">
+    <label id="edCatLbl">Категория</label><select id="edCat"></select>
+    <label>Комментарий</label><input id="edNote">
+    <button class="btn" onclick="submitEdit()">Сохранить</button>
+    <button class="btn red" onclick="submitDelete()">Удалить операцию</button>
+    <div id="edErr" class="err"></div>
+  </div>
+</div>
+
+<!-- КОШЕЛЬКИ -->
+<div id="v-wallets" class="hidden">
+  <button class="back" onclick="go('main')">‹ Назад</button><h2>👛 Кошельки</h2>
+  <div id="walManage"></div>
+  <div class="card">
+    <b>Новый кошелёк / копилка</b>
+    <label>Название</label><input id="nwName" placeholder="напр. Накопить на аренду">
+    <label>Валюта</label><select id="nwCur"><option value="VND">₫ донги</option><option value="USD">$ доллары</option><option value="RUB">₽ рубли</option><option value="KZT">₸ тенге</option></select>
+    <label>Стартовая сумма</label><input id="nwBal" type="number" value="0">
+    <button class="btn" onclick="submitCreateWallet()">Создать</button>
+    <div id="nwErr" class="err"></div>
+  </div>
+</div>
+
+<script>
+var API_URL = 'https://script.google.com/macros/s/AKfycbwpZq-IqWg6bFHBOp0RNf3lmwelIJ1pjNf2x6S8MFZeGpxyWFa4ARqfLGTr4XKYmrCZ/exec';
+
+var tg = window.Telegram ? window.Telegram.WebApp : null;
+if (tg){ tg.ready(); tg.expand(); }
+var PIN='', STATE=null, CURRENT_ORDER=null, EDIT_OP=null, chart1=null, chart2=null;
+
+function initData(){ return (tg && tg.initData) ? tg.initData : ''; }
+function base(){ return localStorage.getItem('base')||'VND'; }
+function loader(on){ document.getElementById('loader').classList.toggle('show', !!on); }
+function toast(msg){ var t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(function(){t.classList.remove('show');},2200); }
+
+async function api(action, extra){
+  loader(true);
+  try{
+    var payload=Object.assign({action:action, initData:initData(), pin:PIN, base:base()}, extra||{});
+    var r=await fetch(API_URL,{method:'POST',body:JSON.stringify(payload)});
+    return await r.json();
+  }catch(e){ return {ok:false, error:'Нет связи с сервером'}; }
+  finally{ loader(false); }
+}
+
+var VIEWS=['pin','start','main','income','expense','transfer','pending','confirm','more','reserve','recurring','history','edit','wallets','reports'];
+function go(v){ VIEWS.forEach(function(x){ var el=document.getElementById('v-'+x); if(el) el.classList.toggle('hidden', x!==v); }); window.scrollTo(0,0); }
+
+// ---------- ВХОД ----------
+async function doLogin(){
+  var err=document.getElementById('pinErr'); err.textContent='';
+  PIN=document.getElementById('pin').value.trim();
+  if(!PIN){ err.textContent='Введите ПИН'; return; }
+  if(API_URL.indexOf('ВСТАВЬ')===0){ err.textContent='Не задан адрес сервера (API_URL)'; return; }
+  var res=await api('getState',{});
+  if(res.needId){ document.getElementById('idHint').textContent='Твой Telegram id: '+res.yourId+' — впиши его в ALLOWED_IDS скрипта.'; err.textContent='Доступ ещё не настроен.'; return; }
+  if(!res.ok){ err.textContent=res.error||'Ошибка входа'; return; }
+  localStorage.setItem('pin',PIN); STATE=res;
+  if(!res.started){ buildStart(res); go('start'); } else { render(res); go('main'); }
+}
+function buildStart(res){
+  var box=document.getElementById('startFields'); box.innerHTML='';
+  res.wallets.forEach(function(w){ if(w.type==='reserve') return;
+    var l=document.createElement('label'); l.textContent=w.name+' ('+w.sym+')';
+    var i=document.createElement('input'); i.type='number'; i.value='0'; i.id='sb_'+w.id;
+    box.appendChild(l); box.appendChild(i); });
+}
+async function saveStart(){
+  var bal={}; STATE.wallets.forEach(function(w){ if(w.type==='reserve')return; var el=document.getElementById('sb_'+w.id); if(el) bal[w.id]=Number(el.value)||0; });
+  var res=await api('setStartBalances',{balances:bal});
+  if(!res.ok){ document.getElementById('startErr').textContent=res.error||'Ошибка'; return; }
+  STATE=res; render(res); go('main'); toast('Учёт запущен');
+}
+
+// ---------- ГЛАВНЫЙ ----------
+function fmt(n,sym){ return (Math.round(Number(n)||0)).toLocaleString('ru-RU')+' '+sym; }
+function render(res){
+  STATE=res;
+  var seg=document.getElementById('baseSeg'); seg.innerHTML='';
+  res.baseChoices.forEach(function(c){ var b=document.createElement('button'); b.textContent=c.sym; if(c.code===res.base)b.className='on';
+    b.onclick=function(){ localStorage.setItem('base',c.code); reload(); }; seg.appendChild(b); });
+  document.getElementById('mFree').textContent=fmt(res.free,res.baseSym);
+  document.getElementById('mTotal').textContent=fmt(res.total,res.baseSym);
+  document.getElementById('mReserve').textContent=fmt(res.reserveActual,res.baseSym)+' / '+fmt(res.reserveTarget,res.baseSym);
+  document.getElementById('pendBadge').innerHTML = res.pendingCount>0 ? ('<span class="badge">'+res.pendingCount+'</span>') : '';
+  var list=document.getElementById('walList'); list.innerHTML='';
+  res.wallets.forEach(function(w){ var d=document.createElement('div'); d.className='wal';
+    var right=fmt(w.balance,w.sym)+(w.currency!==res.base?(' <span class="muted">· '+fmt(w.inBase,res.baseSym)+'</span>'):'');
+    d.innerHTML='<div class="row"><span>'+(w.type==='reserve'?'🏦 ':'')+esc(w.name)+'</span><span class="amt">'+right+'</span></div>'; list.appendChild(d); });
+}
+async function reload(){ var res=await api('getState',{}); if(res.ok) render(res); }
+function esc(s){ return String(s==null?'':s).replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function walletOptions(sel, includeReserve){
+  sel.innerHTML='';
+  STATE.wallets.forEach(function(w){ if(!includeReserve && w.type==='reserve') return;
+    var o=document.createElement('option'); o.value=w.id; o.textContent=w.name+' ('+w.sym+')'; sel.appendChild(o); });
+}
+function catOptions(sel){ sel.innerHTML=''; STATE.expenseCats.forEach(function(c){ var o=document.createElement('option'); o.value=c; o.textContent=c; sel.appendChild(o); }); }
+
+// ---------- ПРИХОД ----------
+function openIncome(){ walletOptions(document.getElementById('inWallet'),false); document.getElementById('inAmount').value=''; document.getElementById('inNote').value=''; document.getElementById('inErr').textContent=''; go('income'); }
+async function submitIncome(){
+  var res=await api('addIncome',{wallet:document.getElementById('inWallet').value, amount:document.getElementById('inAmount').value, note:document.getElementById('inNote').value});
+  if(!res.ok){ document.getElementById('inErr').textContent=res.error; return; }
+  render(res); go('main'); toast('Приход добавлен');
+}
+
+// ---------- РАСХОД ----------
+function openExpense(){ walletOptions(document.getElementById('exWallet'),false); catOptions(document.getElementById('exCat')); document.getElementById('exAmount').value=''; document.getElementById('exNote').value=''; document.getElementById('exPhoto').value=''; document.getElementById('exErr').textContent=''; go('expense'); }
+async function submitExpense(){
+  var photo=await fileToDataUrl(document.getElementById('exPhoto').files[0]);
+  var res=await api('addExpense',{wallet:document.getElementById('exWallet').value, category:document.getElementById('exCat').value, amount:document.getElementById('exAmount').value, note:document.getElementById('exNote').value, photo:photo});
+  if(!res.ok){ document.getElementById('exErr').textContent=res.error; return; }
+  render(res); go('main'); toast('Расход добавлен');
+}
+function fileToDataUrl(file){ return new Promise(function(resolve){ if(!file) return resolve(''); if(file.size>4000000){ toast('Фото большое, пропускаю'); return resolve(''); } var r=new FileReader(); r.onload=function(){resolve(r.result);}; r.onerror=function(){resolve('');}; r.readAsDataURL(file); }); }
+
+// ---------- ПЕРЕВОД ----------
+function openTransfer(){ walletOptions(document.getElementById('trFrom'),true); walletOptions(document.getElementById('trTo'),true); document.getElementById('trAmount').value=''; document.getElementById('trNote').value=''; document.getElementById('trErr').textContent=''; go('transfer'); }
+async function submitTransfer(){
+  var res=await api('addTransfer',{from:document.getElementById('trFrom').value, to:document.getElementById('trTo').value, amount:document.getElementById('trAmount').value, note:document.getElementById('trNote').value});
+  if(!res.ok){ document.getElementById('trErr').textContent=res.error; return; }
+  render(res); go('main'); toast('Перевод выполнен');
+}
+
+// ---------- ЗАЯВКИ ----------
+async function openPending(){
+  var res=await api('listPending',{}); if(!res.ok){ toast(res.error||'Ошибка'); return; }
+  STATE=res; var box=document.getElementById('pendList'); box.innerHTML='';
+  if(!res.pending || !res.pending.length){ box.innerHTML='<div class="card center muted">Новых заявок нет</div>'; go('pending'); return; }
+  res.pending.forEach(function(p){ var d=document.createElement('div'); d.className='item';
+    d.innerHTML='<div class="t">'+esc(p.order)+'</div><div class="s">'+p.date+' · оплата '+fmt(p.pay,'₫')+' · чистая '+fmt(p.net,'₫')+'</div>';
+    var b=document.createElement('button'); b.className='btn'; b.style.marginTop='9px'; b.textContent='Подтвердить'; b.onclick=function(){ openConfirm(p); };
+    d.appendChild(b); box.appendChild(d); });
+  go('pending');
+}
+function openConfirm(p){
+  CURRENT_ORDER=p;
+  document.getElementById('cfOrder').textContent=p.order;
+  walletOptions(document.getElementById('cfPayWallet'),false);
+  walletOptions(document.getElementById('cfCostWallet'),false);
+  document.getElementById('cfPayAmount').value=p.pay;
+  document.getElementById('cfCostAmount').value=(Number(p.buy)+Number(p.taxi)+Number(p.ads))||0;
+  document.getElementById('cfNet').value=p.net;
+  updateReserveHint();
+  document.getElementById('cfNet').oninput=updateReserveHint;
+  document.getElementById('cfErr').textContent='';
+  go('confirm');
+}
+function updateReserveHint(){ var n=Number(document.getElementById('cfNet').value)||0; document.getElementById('cfReserveHint').textContent='В резерв уйдёт: '+fmt(Math.round(n*0.2),'₫'); }
+async function submitConfirm(){
+  var p=CURRENT_ORDER;
+  var res=await api('confirmOrder',{key:p.key, order:p.order, payWallet:document.getElementById('cfPayWallet').value, payAmount:document.getElementById('cfPayAmount').value, costWallet:document.getElementById('cfCostWallet').value, costAmount:document.getElementById('cfCostAmount').value, net:document.getElementById('cfNet').value});
+  if(!res.ok){ document.getElementById('cfErr').textContent=res.error; return; }
+  render(res); toast('Заказ подтверждён'); openPending();
+}
+async function skipCurrent(){ var res=await api('skipOrder',{key:CURRENT_ORDER.key}); if(res.ok){ STATE=res; toast('Пропущено'); openPending(); } }
+
+// ---------- ЕЩЁ ----------
+function openMore(){ go('more'); }
+
+// ---------- РЕЗЕРВ ----------
+function openReserve(){
+  document.getElementById('rvTarget').textContent=fmt(STATE.reserveTarget,STATE.baseSym);
+  document.getElementById('rvActual').textContent=fmt(STATE.reserveActual,STATE.baseSym);
+  walletOptions(document.getElementById('rvFundFrom'),false);
+  walletOptions(document.getElementById('rvWdTo'),false);
+  document.getElementById('rvFundAmt').value=''; document.getElementById('rvWdAmt').value=''; document.getElementById('rvWdNote').value=''; document.getElementById('rvSetVal').value=''; document.getElementById('rvErr').textContent='';
+  go('reserve');
+}
+async function submitFund(){ var res=await api('addTransfer',{from:document.getElementById('rvFundFrom').value, to:'reserve', amount:document.getElementById('rvFundAmt').value, note:'пополнение резерва'}); if(!res.ok){ document.getElementById('rvErr').textContent=res.error; return; } render(res); toast('Переведено в резерв'); openReserve(); }
+async function submitWithdraw(){ var res=await api('reserveWithdraw',{to:document.getElementById('rvWdTo').value, amount:document.getElementById('rvWdAmt').value, note:document.getElementById('rvWdNote').value}); if(!res.ok){ document.getElementById('rvErr').textContent=res.error; return; } render(res); toast('Снято из резерва'); openReserve(); }
+async function submitSetTarget(){ var res=await api('reserveSetTarget',{value:document.getElementById('rvSetVal').value}); if(!res.ok){ document.getElementById('rvErr').textContent=res.error; return; } render(res); toast('Сохранено'); openReserve(); }
+
+// ---------- РЕГУЛЯРНЫЕ ----------
+async function openRecurring(){
+  var res=await api('listRecurring',{}); if(!res.ok){ toast(res.error); return; } STATE=res;
+  var box=document.getElementById('regList'); box.innerHTML='';
+  (res.recurring||[]).forEach(function(r){ var d=document.createElement('div'); d.className='item';
+    d.innerHTML='<div class="row"><span class="t">'+esc(r.name)+'</span><span class="amt">'+fmt(r.amount,symOf(r.cur))+'</span></div><div class="s">'+esc(r.cat)+' · '+r.day+'-е число</div>';
+    var wrap=document.createElement('div'); wrap.className='grid2'; wrap.style.marginTop='8px';
+    var b1=document.createElement('button'); b1.className='btn ghost'; b1.style.margin='0'; b1.textContent='Провести сейчас'; b1.onclick=function(){ postReg(r.id); };
+    var b2=document.createElement('button'); b2.className='btn red'; b2.style.margin='0'; b2.textContent='Удалить'; b2.onclick=function(){ delReg(r.id); };
+    wrap.appendChild(b1); wrap.appendChild(b2); d.appendChild(wrap); box.appendChild(d); });
+  if(!(res.recurring||[]).length) box.innerHTML='<div class="card center muted">Пока нет регулярных платежей</div>';
+  walletOptions(document.getElementById('rgWallet'),false); catOptions(document.getElementById('rgCat'));
+  go('recurring');
+}
+function symOf(cur){ var m={VND:'₫',USD:'$',RUB:'₽',KZT:'₸',KRW:'₩'}; return m[cur]||cur; }
+async function submitRecurring(){ var res=await api('addRecurring',{name:document.getElementById('rgName').value, wallet:document.getElementById('rgWallet').value, category:document.getElementById('rgCat').value, amount:document.getElementById('rgAmount').value, day:document.getElementById('rgDay').value}); if(!res.ok){ document.getElementById('rgErr').textContent=res.error; return; } document.getElementById('rgName').value=''; document.getElementById('rgAmount').value=''; toast('Добавлено'); openRecurring(); }
+async function postReg(id){ var res=await api('postRecurring',{id:id}); if(res.ok){ render(res); toast('Платёж проведён'); openRecurring(); } else toast(res.error); }
+async function delReg(id){ var res=await api('deleteRecurring',{id:id}); if(res.ok){ toast('Удалено'); openRecurring(); } }
+
+// ---------- ИСТОРИЯ ----------
+async function openHistory(){
+  var res=await api('listHistory',{}); if(!res.ok){ toast(res.error); return; } STATE=res;
+  var box=document.getElementById('histList'); box.innerHTML='';
+  (res.history||[]).forEach(function(o){ var d=document.createElement('div'); d.className='item';
+    var ic=o.type==='приход'?'🟢':(o.type==='расход'?'🔴':'🔁');
+    var main = o.type==='перевод' ? (fmt(o.amount,symOf(o.cur))+' '+esc(o.from)+' → '+esc(o.to)) : (fmt(o.amount,symOf(o.cur))+' · '+esc(o.from));
+    d.innerHTML='<div class="row"><span class="t">'+ic+' '+main+'</span></div><div class="s">'+o.date+(o.cat?(' · '+esc(o.cat)):'')+(o.note?(' · '+esc(o.note)):'')+(o.receipt?(' · <a href="'+o.receipt+'" target="_blank">чек</a>'):'')+'</div>';
+    d.onclick=function(ev){ if(ev.target.tagName==='A')return; openEdit(o); };
+    box.appendChild(d); });
+  if(!(res.history||[]).length) box.innerHTML='<div class="card center muted">Пока нет операций</div>';
+  go('history');
+}
+function openEdit(o){
+  EDIT_OP=o;
+  document.getElementById('edInfo').textContent=o.type+' · '+o.date;
+  document.getElementById('edAmount').value=o.amount;
+  var catSel=document.getElementById('edCat'), catLbl=document.getElementById('edCatLbl');
+  if(o.type==='расход'){ catLbl.style.display='block'; catSel.style.display='block'; catOptions(catSel); catSel.value=o.cat; }
+  else { catLbl.style.display='none'; catSel.style.display='none'; }
+  document.getElementById('edNote').value=o.note||'';
+  document.getElementById('edErr').textContent='';
+  go('edit');
+}
+async function submitEdit(){
+  var body={id:EDIT_OP.id, amount:document.getElementById('edAmount').value, note:document.getElementById('edNote').value};
+  if(EDIT_OP.type==='расход') body.category=document.getElementById('edCat').value;
+  var res=await api('editEntry',body);
+  if(!res.ok){ document.getElementById('edErr').textContent=res.error; return; } STATE=res; toast('Сохранено'); openHistory();
+}
+async function submitDelete(){ if(!confirm('Удалить операцию?')) return; var res=await api('deleteEntry',{id:EDIT_OP.id}); if(!res.ok){ document.getElementById('edErr').textContent=res.error; return; } STATE=res; toast('Удалено'); openHistory(); }
+
+// ---------- КОШЕЛЬКИ ----------
+function openWallets(){
+  var box=document.getElementById('walManage'); box.innerHTML='';
+  STATE.wallets.forEach(function(w){ var d=document.createElement('div'); d.className='item';
+    d.innerHTML='<div class="row"><span class="t">'+(w.type==='reserve'?'🏦 ':'')+esc(w.name)+'</span><span class="amt">'+fmt(w.balance,w.sym)+'</span></div>';
+    if(w.type==='custom'){ var wr=document.createElement('div'); wr.className='grid2'; wr.style.marginTop='8px';
+      var b1=document.createElement('button'); b1.className='btn ghost'; b1.style.margin='0'; b1.textContent='Переименовать'; b1.onclick=function(){ renameW(w); };
+      var b2=document.createElement('button'); b2.className='btn red'; b2.style.margin='0'; b2.textContent='Скрыть'; b2.onclick=function(){ archiveW(w); };
+      wr.appendChild(b1); wr.appendChild(b2); d.appendChild(wr); }
+    box.appendChild(d); });
+  document.getElementById('nwName').value=''; document.getElementById('nwBal').value='0'; document.getElementById('nwErr').textContent='';
+  go('wallets');
+}
+async function renameW(w){ var name=prompt('Новое название:', w.name); if(name==null) return; var res=await api('renameWallet',{id:w.id,name:name}); if(res.ok){ render(res); toast('Переименовано'); openWallets(); } else toast(res.error); }
+async function archiveW(w){ if(!confirm('Скрыть кошелёк «'+w.name+'»?')) return; var res=await api('archiveWallet',{id:w.id}); if(res.ok){ render(res); toast('Скрыт'); openWallets(); } else toast(res.error); }
+async function submitCreateWallet(){ var res=await api('createWallet',{name:document.getElementById('nwName').value, currency:document.getElementById('nwCur').value, balance:document.getElementById('nwBal').value}); if(!res.ok){ document.getElementById('nwErr').textContent=res.error; return; } render(res); toast('Кошелёк создан'); openWallets(); }
+
+// ---------- ОТЧЁТЫ ----------
+var repPeriod='month', repFrom='', repTo='';
+function openReports(){
+  var v=document.getElementById('v-reports');
+  if(!v){ v=document.createElement('div'); v.id='v-reports'; document.body.appendChild(v); }
+  v.classList.remove('hidden');
+  v.innerHTML='<button class="back" onclick="go(\'main\')">‹ Назад</button><h2>📊 Отчёты</h2>'+
+    '<div class="card"><div class="seg" id="repSeg"></div>'+
+    '<div id="repCustom" class="hidden"><label>С</label><input type="date" id="repFrom"><label>По</label><input type="date" id="repTo"><button class="btn ghost" onclick="loadReport()">Показать</button></div></div>'+
+    '<div class="card"><div class="row"><span class="muted">Приход</span><span class="ok amt" id="repIncome">—</span></div>'+
+    '<div class="row" style="margin-top:7px"><span class="muted">Расход</span><span class="amt" style="color:var(--red)" id="repExpense">—</span></div>'+
+    '<div class="row" style="margin-top:7px"><span class="muted">Чистая</span><span class="amt" id="repNet">—</span></div>'+
+    '<div class="muted" id="repRange" style="margin-top:6px"></div></div>'+
+    '<div class="card"><b>По месяцам</b><canvas id="chMonths" height="180"></canvas></div>'+
+    '<div class="card"><b>Расходы по категориям</b><canvas id="chCats" height="180"></canvas></div>';
+  go('reports');
+  var seg=document.getElementById('repSeg'); var opts=[['day','День'],['week','Неделя'],['month','Месяц'],['custom','Даты']];
+  seg.innerHTML=''; opts.forEach(function(o){ var b=document.createElement('button'); b.textContent=o[1]; if(o[0]===repPeriod)b.className='on'; b.onclick=function(){ repPeriod=o[0]; document.getElementById('repCustom').classList.toggle('hidden',o[0]!=='custom'); Array.prototype.forEach.call(seg.children,function(c){c.className='';}); b.className='on'; if(o[0]!=='custom') loadReport(); }; seg.appendChild(b); });
+  loadReport();
+}
+async function loadReport(){
+  var body={period:repPeriod};
+  if(repPeriod==='custom'){ body.from=document.getElementById('repFrom').value; body.to=document.getElementById('repTo').value; if(!body.from||!body.to){ toast('Выбери даты'); return; } }
+  var res=await api('report',body); if(!res.ok){ toast(res.error); return; }
+  document.getElementById('repIncome').textContent=fmt(res.income,res.baseSym);
+  document.getElementById('repExpense').textContent=fmt(res.expense,res.baseSym);
+  document.getElementById('repNet').textContent=fmt(res.net,res.baseSym);
+  document.getElementById('repRange').textContent='период: '+res.from+' — '+res.to;
+  drawMonths(res.months,res.baseSym); drawCats(res.byCat,res.baseSym);
+}
+function drawMonths(months,sym){
+  var ctx=document.getElementById('chMonths'); if(chart1) chart1.destroy();
+  chart1=new Chart(ctx,{type:'bar',data:{labels:months.map(function(m){return m.label;}),datasets:[{label:'Приход',data:months.map(function(m){return m.income;}),backgroundColor:'#16a34a'},{label:'Расход',data:months.map(function(m){return m.expense;}),backgroundColor:'#dc2626'}]},options:{responsive:true,plugins:{legend:{labels:{boxWidth:12}}},scales:{y:{beginAtZero:true}}}});
+}
+function drawCats(cats,sym){
+  var ctx=document.getElementById('chCats'); if(chart2) chart2.destroy();
+  if(!cats||!cats.length){ return; }
+  chart2=new Chart(ctx,{type:'doughnut',data:{labels:cats.map(function(c){return c.name;}),datasets:[{data:cats.map(function(c){return c.value;}),backgroundColor:['#7c3aed','#a855f7','#c084fc','#f0abfc','#f9a8d4','#fca5a5','#fdba74','#86efac']}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:11}}}}}});
+}
+
+// автоподстановка ПИН, если уже входили
+window.addEventListener('load',function(){ var s=localStorage.getItem('pin'); if(s) document.getElementById('pin').value=s; });
+</script>
+</body>
+</html>
