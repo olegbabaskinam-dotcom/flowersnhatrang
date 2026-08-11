@@ -62,6 +62,13 @@
   .ocost{font-weight:700;white-space:nowrap;color:var(--ink)}
   .ordrow.unk .ocost{color:#c2410c}
   .dnone{color:var(--muted);font-size:13px;padding:2px 2px 9px}
+  .wsel{margin-top:2px}
+  .wrow{display:flex;justify-content:space-between;align-items:center;padding:13px 13px;border:1px solid var(--line);border-radius:12px;margin-bottom:8px;background:#fff}
+  .wrow.on{border-color:var(--accent);background:#f3ecff;box-shadow:0 0 0 2px rgba(124,58,237,.18)}
+  .wrow.dis{opacity:.35;pointer-events:none}
+  .wrow .wnm{font-weight:600}
+  .wrow .wa{font-weight:700;white-space:nowrap;color:var(--accent)}
+  .wrow .wa.g{color:var(--muted)}
   .toast{position:fixed;left:50%;bottom:80px;transform:translateX(-50%);background:#2a2540;color:#fff;padding:11px 18px;border-radius:12px;font-size:14px;opacity:0;transition:.3s;z-index:50;max-width:90%}
   .toast.show{opacity:1}
   .loader{position:fixed;inset:0;background:rgba(250,247,255,.6);display:none;align-items:center;justify-content:center;z-index:40}
@@ -142,9 +149,12 @@
 <div id="v-transfer" class="hidden">
   <button class="back" onclick="go('main')">‹ Назад</button><h2>🔁 Перевод между кошельками</h2>
   <div class="card">
-    <label>Откуда</label><select id="trFrom"></select>
-    <label>Куда</label><select id="trTo"></select>
-    <label>Сумма (₫ донги)</label><input id="trAmount" type="text" inputmode="numeric" class="num" placeholder="0">
+    <label>Откуда (только где есть деньги)</label>
+    <div id="trFromList" class="wsel"></div>
+    <label style="margin-top:14px">Куда</label>
+    <div id="trToList" class="wsel"></div>
+    <label style="margin-top:14px">Сумма (₫ донги)</label><input id="trAmount" type="text" inputmode="numeric" class="num" placeholder="0">
+    <div id="trAvail" class="muted" style="margin-top:6px"></div>
     <label>Комментарий (необязательно)</label><input id="trNote">
     <button class="btn" onclick="submitTransfer()">Перевести</button>
     <div id="trErr" class="err"></div>
@@ -360,10 +370,35 @@ async function submitExpense(){
 function fileToDataUrl(file){ return new Promise(function(resolve){ if(!file) return resolve(''); if(file.size>4000000){ toast('Фото большое, пропускаю'); return resolve(''); } var r=new FileReader(); r.onload=function(){resolve(r.result);}; r.onerror=function(){resolve('');}; r.readAsDataURL(file); }); }
 
 // ---------- ПЕРЕВОД ----------
-function openTransfer(){ walletOptions(document.getElementById('trFrom'),true); walletOptions(document.getElementById('trTo'),true); document.getElementById('trAmount').value=''; document.getElementById('trNote').value=''; document.getElementById('trErr').textContent=''; go('transfer'); }
+var trFrom=null, trTo=null;
+function walletById(id){ for(var i=0;i<STATE.wallets.length;i++) if(STATE.wallets[i].id===id) return STATE.wallets[i]; return null; }
+function openTransfer(){ trFrom=null; trTo=null; document.getElementById('trAmount').value=''; document.getElementById('trNote').value=''; document.getElementById('trErr').textContent=''; document.getElementById('trAvail').textContent=''; renderTrLists(); go('transfer'); }
+function renderTrLists(){
+  var fromBox=document.getElementById('trFromList'), toBox=document.getElementById('trToList');
+  fromBox.innerHTML=''; toBox.innerHTML='';
+  STATE.wallets.forEach(function(w){
+    if(w.balance>0){
+      var r=document.createElement('div'); r.className='wrow'+(trFrom===w.id?' on':'');
+      r.innerHTML='<span class="wnm">'+(w.type==='reserve'?'🏦 ':'')+esc(w.name)+'</span><span class="wa">'+fmt(w.inBase,STATE.baseSym)+'</span>';
+      r.onclick=function(){ trFrom=w.id; if(trTo===w.id) trTo=null; renderTrLists(); updAvail(); };
+      fromBox.appendChild(r);
+    }
+  });
+  if(!fromBox.children.length) fromBox.innerHTML='<div class="muted">Нет кошельков с деньгами</div>';
+  STATE.wallets.forEach(function(w){
+    var r=document.createElement('div'); r.className='wrow'+(trTo===w.id?' on':'')+(trFrom===w.id?' dis':'');
+    r.innerHTML='<span class="wnm">'+(w.type==='reserve'?'🏦 ':'')+esc(w.name)+'</span><span class="wa g">'+fmt(w.inBase,STATE.baseSym)+'</span>';
+    r.onclick=function(){ if(trFrom===w.id) return; trTo=w.id; renderTrLists(); };
+    toBox.appendChild(r);
+  });
+}
+function updAvail(){ var w=walletById(trFrom); document.getElementById('trAvail').textContent = w ? ('Доступно: '+fmt(w.inBase,STATE.baseSym)) : ''; }
 async function submitTransfer(){
-  var res=await api('addTransfer',{from:document.getElementById('trFrom').value, to:document.getElementById('trTo').value, amount:document.getElementById('trAmount').value, note:document.getElementById('trNote').value});
-  if(!res.ok){ document.getElementById('trErr').textContent=res.error; return; }
+  var err=document.getElementById('trErr'); err.textContent='';
+  if(!trFrom){ err.textContent='Выбери, откуда'; return; }
+  if(!trTo){ err.textContent='Выбери, куда'; return; }
+  var res=await api('addTransfer',{from:trFrom, to:trTo, amount:document.getElementById('trAmount').value, note:document.getElementById('trNote').value});
+  if(!res.ok){ err.textContent=res.error; return; }
   render(res); go('main'); toast('Перевод выполнен');
 }
 
