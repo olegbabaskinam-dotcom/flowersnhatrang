@@ -119,7 +119,7 @@
   <div class="card">
     <label>Кошелёк</label><select id="exWallet"></select>
     <label>Категория</label><select id="exCat"></select>
-    <label>Сумма</label><input id="exAmount" type="number" inputmode="decimal" placeholder="0">
+    <label>Сумма</label><input id="exAmount" type="text" inputmode="numeric" class="num" placeholder="0">
     <label>Комментарий (необязательно)</label><input id="exNote" placeholder="на что">
     <label>Фото-чек (необязательно)</label><input id="exPhoto" type="file" accept="image/*">
     <button class="btn" onclick="submitExpense()">Добавить расход</button>
@@ -133,7 +133,7 @@
   <div class="card">
     <label>Откуда</label><select id="trFrom"></select>
     <label>Куда</label><select id="trTo"></select>
-    <label>Сумма (в валюте «откуда»)</label><input id="trAmount" type="number" inputmode="decimal" placeholder="0">
+    <label>Сумма (в валюте «откуда»)</label><input id="trAmount" type="text" inputmode="numeric" class="num" placeholder="0">
     <label>Комментарий (необязательно)</label><input id="trNote">
     <button class="btn" onclick="submitTransfer()">Перевести</button>
     <div id="trErr" class="err"></div>
@@ -152,7 +152,7 @@
   <div class="card">
     <div id="cfOrder" class="t" style="font-weight:600;margin-bottom:8px"></div>
     <label>На какой счёт пришли деньги</label><select id="cfPayWallet"></select>
-    <label>Сколько получили</label><input id="cfPayAmount" type="number" inputmode="decimal">
+    <label>Сколько получили</label><input id="cfPayAmount" type="text" inputmode="numeric" class="num">
     <button class="btn" onclick="submitConfirm()">Провести оплату</button>
     <button class="btn ghost" onclick="skipCurrent()">Пропустить заявку</button>
     <div id="cfErr" class="err"></div>
@@ -188,13 +188,13 @@
   <div class="card">
     <b>Перекинуть в резерв</b>
     <label>Откуда</label><select id="rvFundFrom"></select>
-    <label>Сумма</label><input id="rvFundAmt" type="number" inputmode="decimal">
+    <label>Сумма</label><input id="rvFundAmt" type="text" inputmode="numeric" class="num">
     <button class="btn" onclick="submitFund()">В резерв</button>
   </div>
   <div class="card">
     <b>Снять из резерва (форс-мажор)</b>
     <label>Куда</label><select id="rvWdTo"></select>
-    <label>Сумма (₫)</label><input id="rvWdAmt" type="number" inputmode="decimal">
+    <label>Сумма (₫)</label><input id="rvWdAmt" type="text" inputmode="numeric" class="num">
     <label>Причина</label><input id="rvWdNote" placeholder="на что">
     <button class="btn red" onclick="submitWithdraw()">Снять</button>
   </div>
@@ -210,7 +210,7 @@
     <label>Название</label><input id="rgName" placeholder="напр. Аренда">
     <label>Кошелёк</label><select id="rgWallet"></select>
     <label>Категория</label><select id="rgCat"></select>
-    <label>Сумма</label><input id="rgAmount" type="number" inputmode="decimal">
+    <label>Сумма</label><input id="rgAmount" type="text" inputmode="numeric" class="num">
     <label>День месяца</label><input id="rgDay" type="number" min="1" max="31" value="1">
     <button class="btn" onclick="submitRecurring()">Добавить</button>
     <div id="rgErr" class="err"></div>
@@ -228,7 +228,7 @@
   <button class="back" onclick="openHistory()">‹ Назад</button><h2>✏️ Правка операции</h2>
   <div class="card">
     <div id="edInfo" class="muted" style="margin-bottom:8px"></div>
-    <label>Сумма</label><input id="edAmount" type="number" inputmode="decimal">
+    <label>Сумма</label><input id="edAmount" type="text" inputmode="numeric" class="num">
     <label id="edCatLbl">Категория</label><select id="edCat"></select>
     <label>Комментарий</label><input id="edNote">
     <button class="btn" onclick="submitEdit()">Сохранить</button>
@@ -245,7 +245,7 @@
     <b>Новый кошелёк / копилка</b>
     <label>Название</label><input id="nwName" placeholder="напр. Накопить на аренду">
     <label>Валюта</label><select id="nwCur"><option value="VND">₫ донги</option><option value="USD">$ доллары</option><option value="RUB">₽ рубли</option><option value="KZT">₸ тенге</option></select>
-    <label>Стартовая сумма</label><input id="nwBal" type="number" value="0">
+    <label>Стартовая сумма</label><input id="nwBal" type="text" inputmode="numeric" class="num" value="0">
     <button class="btn" onclick="submitCreateWallet()">Создать</button>
     <div id="nwErr" class="err"></div>
   </div>
@@ -265,11 +265,15 @@ function toast(m){ var t=document.getElementById('toast'); t.textContent=m; t.cl
 function esc(s){ return String(s==null?'':s).replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function symOf(c){ var m={VND:'₫',USD:'$',RUB:'₽',KZT:'₸',KRW:'₩'}; return m[c]||c; }
 function fmt(n,sym){ return (Math.round(Number(n)||0)).toLocaleString('ru-RU')+' '+sym; }
+function groupNum(v){ v=String(v).replace(/[^\d.]/g,''); var p=v.split('.'); p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,' '); return p.length>1?(p[0]+'.'+p.slice(1).join('')):p[0]; }
+document.addEventListener('input',function(e){ var t=e.target; if(t&&t.classList&&t.classList.contains('num')){ t.value=groupNum(t.value); } });
 
 async function api(action, extra){
   loader(true);
   try{
     var payload=Object.assign({action:action, initData:initData(), pin:PIN, base:base()}, extra||{});
+    var AMT={amount:1,payAmount:1,balance:1,cost:1,value:1};
+    Object.keys(payload).forEach(function(k){ if(AMT[k]&&typeof payload[k]==='string') payload[k]=payload[k].replace(/\s/g,'').replace(',','.'); });
     var r=await fetch(API_URL,{method:'POST',body:JSON.stringify(payload)});
     return await r.json();
   }catch(e){ return {ok:false,error:'Нет связи с сервером'}; }
@@ -294,11 +298,11 @@ function buildStart(res){
   var box=document.getElementById('startFields'); box.innerHTML='';
   res.wallets.forEach(function(w){ if(w.type==='reserve') return;
     var l=document.createElement('label'); l.textContent=w.name+' ('+w.sym+')';
-    var i=document.createElement('input'); i.type='number'; i.value='0'; i.id='sb_'+w.id;
+    var i=document.createElement('input'); i.type='text'; i.inputMode='numeric'; i.className='num'; i.value='0'; i.id='sb_'+w.id;
     box.appendChild(l); box.appendChild(i); });
 }
 async function saveStart(){
-  var bal={}; STATE.wallets.forEach(function(w){ if(w.type==='reserve')return; var el=document.getElementById('sb_'+w.id); if(el) bal[w.id]=Number(el.value)||0; });
+  var bal={}; STATE.wallets.forEach(function(w){ if(w.type==='reserve')return; var el=document.getElementById('sb_'+w.id); if(el) bal[w.id]=Number(String(el.value).replace(/\s/g,''))||0; });
   var res=await api('setStartBalances',{balances:bal});
   if(!res.ok){ document.getElementById('startErr').textContent=res.error||'Ошибка'; return; }
   STATE=res; render(res); go('main'); toast('Учёт запущен');
@@ -365,7 +369,7 @@ function openConfirm(p){
   CURRENT_ORDER=p;
   document.getElementById('cfOrder').textContent=p.order;
   walletOptions(document.getElementById('cfPayWallet'),false);
-  document.getElementById('cfPayAmount').value=p.pay||'';
+  document.getElementById('cfPayAmount').value=p.pay?groupNum(p.pay):'';
   document.getElementById('cfErr').textContent='';
   go('confirm');
 }
@@ -451,7 +455,7 @@ async function openHistory(){
 function openEdit(o){
   EDIT_OP=o;
   document.getElementById('edInfo').textContent=o.type+' · '+o.date;
-  document.getElementById('edAmount').value=o.amount;
+  document.getElementById('edAmount').value=groupNum(o.amount);
   var catSel=document.getElementById('edCat'), catLbl=document.getElementById('edCatLbl');
   if(o.type==='расход'){ catLbl.style.display='block'; catSel.style.display='block'; catOptions(catSel); catSel.value=o.cat; }
   else { catLbl.style.display='none'; catSel.style.display='none'; }
