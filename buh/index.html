@@ -122,7 +122,7 @@
     <div class="tile" onclick="openTransfer()"><span class="ic">🔁</span>Перевод</div>
     <div class="tile" onclick="openHorizon()"><span class="ic">📅</span>Горизонт</div>
     <div class="tile" onclick="openReports()"><span class="ic">📊</span>Отчёты</div>
-    <div class="tile" onclick="openMore()"><span class="ic">⋯</span>Ещё</div>
+    <div class="tile" onclick="openMore()"><span class="ic">⋯</span>Ещё<span id="moreBadge"></span></div>
   </div>
 
   <div class="card" style="margin-top:12px">
@@ -191,10 +191,41 @@
 <div id="v-more" class="hidden">
   <button class="back" onclick="go('main')">‹ Назад</button><h2>⋯ Ещё</h2>
   <div class="grid2">
+    <div class="tile" onclick="openTasks()"><span class="ic">📌</span>Задачи<span id="tasksBadge"></span></div>
     <div class="tile" onclick="openReserve()"><span class="ic">🏦</span>Резерв</div>
     <div class="tile" onclick="openRecurring()"><span class="ic">🔄</span>Регулярные</div>
     <div class="tile" onclick="openHistory()"><span class="ic">🕘</span>История</div>
     <div class="tile" onclick="openWallets()"><span class="ic">👛</span>Кошельки</div>
+  </div>
+</div>
+
+<!-- ЗАДАЧИ -->
+<div id="v-tasks" class="hidden">
+  <button class="back" onclick="openMore()">‹ Назад</button><h2>📌 Задачи</h2>
+  <div id="taskList"></div>
+  <div class="card">
+    <b>Новая задача</b>
+    <label>Что сделать</label><input id="tkText" placeholder="напр. закинуть на рекламу">
+    <label>Сумма (₫, необязательно)</label><input id="tkAmount" type="text" inputmode="numeric" class="num">
+    <button class="btn" onclick="submitTask()">Создать задачу</button>
+    <div id="tkErr" class="err"></div>
+  </div>
+</div>
+
+<!-- ВЫПОЛНИТЬ ЗАДАЧУ -->
+<div id="v-taskdo" class="hidden">
+  <button class="back" onclick="openTasks()">‹ Назад</button><h2>✅ Выполнить задачу</h2>
+  <div class="card">
+    <div id="tdText" class="t" style="font-weight:600;margin-bottom:10px"></div>
+    <label>Тип операции</label>
+    <div class="seg" id="tdType"><button data-t="expense" class="on">Расход</button><button data-t="transfer">Перевод</button></div>
+    <label style="margin-top:10px">Со счёта</label><select id="tdWallet"></select>
+    <div id="tdToWrap" class="hidden"><label>Куда</label><select id="tdTo"></select></div>
+    <div id="tdCatWrap"><label>Категория</label><select id="tdCat"></select></div>
+    <label>Сумма (₫ донги)</label><input id="tdAmount" type="text" inputmode="numeric" class="num">
+    <label>Комментарий</label><input id="tdNote" placeholder="напр. на рекламу">
+    <button class="btn" onclick="submitTaskDo()">Провести и закрыть</button>
+    <div id="tdErr" class="err"></div>
   </div>
 </div>
 
@@ -303,7 +334,7 @@ async function api(action, extra, silent){
 }
 async function refreshReserveNow(){ var res=await api('refreshReserve',{}); if(res&&res.ok){ STATE=res; toast('Резерв обновлён из Финансов'); openReserve(); } else toast(res.error||'Ошибка'); }
 
-var VIEWS=['pin','start','main','expense','transfer','pending','confirm','horizon','more','reserve','recurring','history','edit','wallets','reports'];
+var VIEWS=['pin','start','main','expense','transfer','pending','confirm','horizon','more','reserve','recurring','history','edit','wallets','reports','tasks','taskdo'];
 function go(v){ VIEWS.forEach(function(x){ var el=document.getElementById('v-'+x); if(el) el.classList.toggle('hidden', x!==v); }); window.scrollTo(0,0); }
 
 // ---------- ВХОД ----------
@@ -345,6 +376,7 @@ function render(res){
   document.getElementById('mTotal').textContent=fmt(res.total,res.baseSym);
   document.getElementById('mReserve').textContent=fmt(res.reserveActual,res.baseSym)+' / '+fmt(res.reserveMonth,res.baseSym);
   document.getElementById('pendBadge').innerHTML = res.pendingCount>0 ? ('<span class="badge">'+res.pendingCount+'</span>') : '';
+  document.getElementById('moreBadge').innerHTML = res.tasksCount>0 ? ('<span class="badge">'+res.tasksCount+'</span>') : '';
   var list=document.getElementById('walList'); list.innerHTML='';
   res.wallets.forEach(function(w){ var d=document.createElement('div'); d.className='wal';
     var right=fmt(w.inBase,res.baseSym)+(w.currency!==res.base?(' <span class="muted">('+fmt(w.balance,w.sym)+')</span>'):'');
@@ -456,7 +488,51 @@ async function askCost(o){
 }
 
 // ---------- ЕЩЁ ----------
-function openMore(){ go('more'); }
+function openMore(){ document.getElementById('tasksBadge').innerHTML = (STATE&&STATE.tasksCount>0)?('<span class="badge">'+STATE.tasksCount+'</span>'):''; go('more'); }
+
+// ---------- ЗАДАЧИ ----------
+var CUR_TASK=null, tdType='expense';
+async function openTasks(){ var res=await api('listTasks',{}); if(!res.ok){ toast(res.error); return; } STATE=res; renderTasks(res); go('tasks'); }
+function renderTasks(res){
+  var box=document.getElementById('taskList'); box.innerHTML='';
+  (res.tasks||[]).forEach(function(t){ var d=document.createElement('div'); d.className='item';
+    d.innerHTML='<div class="t">📌 '+esc(t.text)+'</div><div class="s">'+(t.amount>0?('план '+fmt(t.amount,'₫')+' · '):'')+'от '+esc(t.by)+' · '+t.date+'</div>';
+    var wr=document.createElement('div'); wr.className='grid2'; wr.style.marginTop='8px';
+    var b1=document.createElement('button'); b1.className='btn'; b1.style.margin='0'; b1.textContent='Выполнить'; b1.onclick=function(){ openTaskDo(t); };
+    var b2=document.createElement('button'); b2.className='btn red'; b2.style.margin='0'; b2.textContent='Удалить'; b2.onclick=function(){ delTask(t.id); };
+    wr.appendChild(b1); wr.appendChild(b2); d.appendChild(wr); box.appendChild(d); });
+  if(!(res.tasks||[]).length) box.innerHTML='<div class="card center muted">Открытых задач нет</div>';
+  document.getElementById('tkText').value=''; document.getElementById('tkAmount').value=''; document.getElementById('tkErr').textContent='';
+}
+async function submitTask(){ var res=await api('addTask',{text:document.getElementById('tkText').value, amount:document.getElementById('tkAmount').value}); if(!res.ok){ document.getElementById('tkErr').textContent=res.error; return; } STATE=res; renderTasks(res); toast('Задача создана'); }
+async function delTask(id){ if(!confirm('Удалить задачу?')) return; var res=await api('deleteTask',{id:id}); if(res.ok){ STATE=res; renderTasks(res); toast('Удалено'); } }
+function openTaskDo(t){
+  CUR_TASK=t; tdType='expense';
+  document.getElementById('tdText').textContent=t.text;
+  var seg=document.getElementById('tdType');
+  Array.prototype.forEach.call(seg.children,function(b){
+    b.className=(b.getAttribute('data-t')==='expense')?'on':'';
+    b.onclick=function(){ tdType=b.getAttribute('data-t'); Array.prototype.forEach.call(seg.children,function(x){x.className='';}); b.className='on';
+      document.getElementById('tdToWrap').classList.toggle('hidden',tdType!=='transfer');
+      document.getElementById('tdCatWrap').classList.toggle('hidden',tdType!=='expense');
+      walletOptions(document.getElementById('tdWallet'), tdType==='transfer'); };
+  });
+  walletOptions(document.getElementById('tdWallet'), false);
+  walletOptions(document.getElementById('tdTo'), true);
+  catOptions(document.getElementById('tdCat'));
+  document.getElementById('tdToWrap').classList.add('hidden');
+  document.getElementById('tdCatWrap').classList.remove('hidden');
+  document.getElementById('tdAmount').value = t.amount>0?groupNum(t.amount):'';
+  document.getElementById('tdNote').value=''; document.getElementById('tdErr').textContent='';
+  go('taskdo');
+}
+async function submitTaskDo(){
+  var body={id:CUR_TASK.id, opType:tdType, wallet:document.getElementById('tdWallet').value, amount:document.getElementById('tdAmount').value, note:document.getElementById('tdNote').value};
+  if(tdType==='transfer') body.to=document.getElementById('tdTo').value; else body.category=document.getElementById('tdCat').value;
+  var res=await api('completeTask',body);
+  if(!res.ok){ document.getElementById('tdErr').textContent=res.error; return; }
+  STATE=res; renderTasks(res); toast('Задача выполнена'); go('tasks');
+}
 
 // ---------- РЕЗЕРВ ----------
 function openReserve(){
