@@ -48,6 +48,9 @@
   .back{background:none;border:none;color:var(--accent);font-size:16px;font-weight:600;padding:0;margin-bottom:6px}
   .item{border:1px solid var(--line);border-radius:12px;padding:11px 12px;margin-bottom:9px}
   .item .t{font-weight:600}.item .s{font-size:13px;color:var(--muted);margin-top:2px}
+  .mtcard{background:linear-gradient(135deg,#fff7ed,#fef9f4);border:1px solid #fed7aa;border-radius:16px;padding:14px;margin-bottom:12px}
+  .taskrow{padding-top:11px;margin-top:11px;border-top:1px solid #f4e3cf}
+  .taskrow .tt{font-weight:600;line-height:1.3}
   .daycard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 12px 6px;margin-bottom:12px}
   .daycard.empty{opacity:.55}
   .dhead{display:flex;align-items:center;gap:8px;margin-bottom:9px;padding-bottom:9px;border-bottom:1px dashed var(--line)}
@@ -115,6 +118,8 @@
     <div class="row"><span class="muted">Общий баланс</span><span class="amt" style="font-size:19px" id="mTotal">—</span></div>
     <div class="row" style="margin-top:9px"><span class="muted">Резерв: лежит / должно (мес)</span><span class="resv" id="mReserve">—</span></div>
   </div>
+
+  <div id="mainTasks"></div>
 
   <div class="grid3">
     <div class="tile" onclick="openPending()"><span class="ic">📥</span>Заявки<span id="pendBadge"></span></div>
@@ -391,6 +396,16 @@ function render(res){
   document.getElementById('mReserve').textContent=fmt(res.reserveActual,res.baseSym)+' / '+fmt(res.reserveMonth,res.baseSym);
   document.getElementById('pendBadge').innerHTML = res.pendingCount>0 ? ('<span class="badge">'+res.pendingCount+'</span>') : '';
   document.getElementById('moreBadge').innerHTML = res.tasksCount>0 ? ('<span class="badge">'+res.tasksCount+'</span>') : '';
+  var mt=document.getElementById('mainTasks'); mt.innerHTML='';
+  if(res.tasks && res.tasks.length){
+    var card=document.createElement('div'); card.className='mtcard';
+    card.innerHTML='<div class="row"><b>📌 Задачи</b><span class="badge">'+res.tasks.length+'</span></div>';
+    res.tasks.forEach(function(t){ var d=document.createElement('div'); d.className='taskrow';
+      d.innerHTML='<div class="tt">'+esc(t.text)+(t.amount>0?(' <span class="muted">· '+fmt(t.amount,"₫")+'</span>'):'')+'</div>';
+      var b=document.createElement('button'); b.className='btn'; b.style.margin='9px 0 0'; b.style.padding='11px'; b.textContent='✅ Выполнить'; b.onclick=function(){ openTaskDo(t); };
+      d.appendChild(b); card.appendChild(d); });
+    mt.appendChild(card);
+  }
   var list=document.getElementById('walList'); list.innerHTML='';
   res.wallets.forEach(function(w){ var d=document.createElement('div'); d.className='wal';
     var right=fmt(w.inBase,res.baseSym)+(w.currency!==res.base?(' <span class="muted">('+fmt(w.balance,w.sym)+')</span>'):'');
@@ -557,7 +572,7 @@ async function submitTaskDo(){
   if(tdType==='transfer') body.to=document.getElementById('tdTo').value; else body.category=document.getElementById('tdCat').value;
   var res=await api('completeTask',body);
   if(!res.ok){ document.getElementById('tdErr').textContent=res.error; return; }
-  STATE=res; renderTasks(res); toast('Задача выполнена'); go('tasks');
+  STATE=res; render(res); go('main'); toast('Задача выполнена');
 }
 
 // ---------- РЕЗЕРВ ----------
