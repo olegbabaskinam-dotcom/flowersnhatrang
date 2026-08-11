@@ -135,8 +135,10 @@
 <div id="v-expense" class="hidden">
   <button class="back" onclick="go('main')">‹ Назад</button><h2>🔴 Расход</h2>
   <div class="card">
-    <label>Кошелёк</label><select id="exWallet"></select>
-    <label>Категория</label><select id="exCat"></select>
+    <label>Со счёта (где есть деньги)</label>
+    <div id="exFromList" class="wsel"></div>
+    <div id="exAvail" class="muted" style="margin-top:2px"></div>
+    <label style="margin-top:14px">Категория</label><select id="exCat"></select>
     <label>Сумма (₫ донги)</label><input id="exAmount" type="text" inputmode="numeric" class="num" placeholder="0">
     <label>Комментарий (необязательно)</label><input id="exNote" placeholder="на что">
     <label>Фото-чек (необязательно)</label><input id="exPhoto" type="file" accept="image/*">
@@ -293,7 +295,8 @@
 <!-- КОШЕЛЬКИ -->
 <div id="v-wallets" class="hidden">
   <button class="back" onclick="go('main')">‹ Назад</button><h2>👛 Кошельки</h2>
-  <div id="walManage"></div>
+  <button class="btn ghost" style="margin-top:0" onclick="openAdjust()">🛠 Корректировка остатков</button>
+  <div id="walManage" style="margin-top:12px"></div>
   <div class="card">
     <b>Новый кошелёк / копилка</b>
     <label>Название</label><input id="nwName" placeholder="напр. Накопить на аренду">
@@ -302,6 +305,17 @@
     <button class="btn" onclick="submitCreateWallet()">Создать</button>
     <div id="nwErr" class="err"></div>
   </div>
+</div>
+
+<!-- КОРРЕКТИРОВКА ОСТАТКОВ -->
+<div id="v-adjust" class="hidden">
+  <button class="back" onclick="openWallets()">‹ Назад</button><h2>🛠 Корректировка остатков</h2>
+  <div class="card">
+    <p class="muted">Впиши реальные остатки по каждому кошельку (в валюте кошелька). Это перезапишет цифры вручную — на случай ошибок.</p>
+    <div id="adjFields"></div>
+  </div>
+  <button class="btn" onclick="submitAdjust()">Сохранить корректировку</button>
+  <div id="adjErr" class="err center"></div>
 </div>
 
 <script>
@@ -334,7 +348,7 @@ async function api(action, extra, silent){
 }
 async function refreshReserveNow(){ var res=await api('refreshReserve',{}); if(res&&res.ok){ STATE=res; toast('Резерв обновлён из Финансов'); openReserve(); } else toast(res.error||'Ошибка'); }
 
-var VIEWS=['pin','start','main','expense','transfer','pending','confirm','horizon','more','reserve','recurring','history','edit','wallets','reports','tasks','taskdo'];
+var VIEWS=['pin','start','main','expense','transfer','pending','confirm','horizon','more','reserve','recurring','history','edit','wallets','reports','tasks','taskdo','adjust'];
 function go(v){ VIEWS.forEach(function(x){ var el=document.getElementById('v-'+x); if(el) el.classList.toggle('hidden', x!==v); }); window.scrollTo(0,0); }
 
 // ---------- ВХОД ----------
@@ -392,11 +406,23 @@ function walletOptions(sel, includeReserve){
 function catOptions(sel){ sel.innerHTML=''; STATE.expenseCats.forEach(function(c){ var o=document.createElement('option'); o.value=c; o.textContent=c; sel.appendChild(o); }); }
 
 // ---------- РАСХОД ----------
-function openExpense(){ walletOptions(document.getElementById('exWallet'),false); catOptions(document.getElementById('exCat')); document.getElementById('exAmount').value=''; document.getElementById('exNote').value=''; document.getElementById('exPhoto').value=''; document.getElementById('exErr').textContent=''; go('expense'); }
+var exFrom=null;
+function openExpense(){ exFrom=null; renderExList(); catOptions(document.getElementById('exCat')); document.getElementById('exAmount').value=''; document.getElementById('exNote').value=''; document.getElementById('exPhoto').value=''; document.getElementById('exErr').textContent=''; document.getElementById('exAvail').textContent=''; go('expense'); }
+function renderExList(){
+  var box=document.getElementById('exFromList'); box.innerHTML='';
+  STATE.wallets.forEach(function(w){ if(w.balance<=0||w.type==='reserve') return;
+    var r=document.createElement('div'); r.className='wrow'+(exFrom===w.id?' on':'');
+    r.innerHTML='<span class="wnm">'+esc(w.name)+'</span><span class="wa">'+fmt(w.inBase,STATE.baseSym)+'</span>';
+    r.onclick=function(){ exFrom=w.id; renderExList(); var x=walletById(w.id); document.getElementById('exAvail').textContent=x?('Доступно: '+fmt(x.inBase,STATE.baseSym)):''; };
+    box.appendChild(r); });
+  if(!box.children.length) box.innerHTML='<div class="muted">Нет кошельков с деньгами</div>';
+}
 async function submitExpense(){
+  var err=document.getElementById('exErr'); err.textContent='';
+  if(!exFrom){ err.textContent='Выбери счёт'; return; }
   var photo=await fileToDataUrl(document.getElementById('exPhoto').files[0]);
-  var res=await api('addExpense',{wallet:document.getElementById('exWallet').value, category:document.getElementById('exCat').value, amount:document.getElementById('exAmount').value, note:document.getElementById('exNote').value, photo:photo});
-  if(!res.ok){ document.getElementById('exErr').textContent=res.error; return; }
+  var res=await api('addExpense',{wallet:exFrom, category:document.getElementById('exCat').value, amount:document.getElementById('exAmount').value, note:document.getElementById('exNote').value, photo:photo});
+  if(!res.ok){ err.textContent=res.error; return; }
   render(res); go('main'); toast('Расход добавлен');
 }
 function fileToDataUrl(file){ return new Promise(function(resolve){ if(!file) return resolve(''); if(file.size>4000000){ toast('Фото большое, пропускаю'); return resolve(''); } var r=new FileReader(); r.onload=function(){resolve(r.result);}; r.onerror=function(){resolve('');}; r.readAsDataURL(file); }); }
@@ -611,6 +637,21 @@ function openWallets(){
 async function renameW(w){ var name=prompt('Новое название:', w.name); if(name==null) return; var res=await api('renameWallet',{id:w.id,name:name}); if(res.ok){ render(res); toast('Переименовано'); openWallets(); } else toast(res.error); }
 async function archiveW(w){ if(!confirm('Скрыть кошелёк «'+w.name+'»?')) return; var res=await api('archiveWallet',{id:w.id}); if(res.ok){ render(res); toast('Скрыт'); openWallets(); } else toast(res.error); }
 async function submitCreateWallet(){ var res=await api('createWallet',{name:document.getElementById('nwName').value, currency:document.getElementById('nwCur').value, balance:document.getElementById('nwBal').value}); if(!res.ok){ document.getElementById('nwErr').textContent=res.error; return; } render(res); toast('Кошелёк создан'); openWallets(); }
+function openAdjust(){
+  var box=document.getElementById('adjFields'); box.innerHTML='';
+  STATE.wallets.forEach(function(w){
+    var l=document.createElement('label'); l.textContent=(w.type==='reserve'?'🏦 ':'')+w.name+' ('+w.sym+')';
+    var i=document.createElement('input'); i.type='text'; i.inputMode='numeric'; i.className='num'; i.id='adj_'+w.id; i.value=groupNum(w.balance);
+    box.appendChild(l); box.appendChild(i);
+  });
+  document.getElementById('adjErr').textContent=''; go('adjust');
+}
+async function submitAdjust(){
+  var bal={}; STATE.wallets.forEach(function(w){ var el=document.getElementById('adj_'+w.id); if(el) bal[w.id]=Number(String(el.value).replace(/\s/g,''))||0; });
+  var res=await api('adjustWallets',{balances:bal});
+  if(!res.ok){ document.getElementById('adjErr').textContent=res.error||'Ошибка'; return; }
+  render(res); toast('Остатки скорректированы'); openWallets();
+}
 
 // ---------- ОТЧЁТЫ ----------
 var repPeriod='month';
