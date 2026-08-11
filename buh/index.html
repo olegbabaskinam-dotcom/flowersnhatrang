@@ -48,9 +48,20 @@
   .back{background:none;border:none;color:var(--accent);font-size:16px;font-weight:600;padding:0;margin-bottom:6px}
   .item{border:1px solid var(--line);border-radius:12px;padding:11px 12px;margin-bottom:9px}
   .item .t{font-weight:600}.item .s{font-size:13px;color:var(--muted);margin-top:2px}
-  .dayhdr{font-weight:700;margin:14px 0 7px;font-size:15px}
-  .ordrow{display:flex;justify-content:space-between;gap:8px;padding:9px 11px;border:1px solid var(--line);border-radius:11px;margin-bottom:7px}
-  .ordrow.unk{background:#fff7ed;border-color:#fed7aa}
+  .daycard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 12px 6px;margin-bottom:12px}
+  .daycard.empty{opacity:.55}
+  .dhead{display:flex;align-items:center;gap:8px;margin-bottom:9px;padding-bottom:9px;border-bottom:1px dashed var(--line)}
+  .dwd{background:#f1ecfa;color:var(--accent);font-weight:700;border-radius:8px;padding:2px 9px;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+  .ddate{font-weight:700}
+  .dcnt{font-size:12px;color:var(--muted)}
+  .dsum{margin-left:auto;font-weight:800;color:var(--accent)}
+  .ordrow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border-radius:11px;margin-bottom:6px;background:#faf7ff}
+  .ordrow.unk{background:#fff7ed}
+  .ordrow:active{background:#efe7fb}
+  .oname{font-size:14px;line-height:1.25}
+  .ocost{font-weight:700;white-space:nowrap;color:var(--ink)}
+  .ordrow.unk .ocost{color:#c2410c}
+  .dnone{color:var(--muted);font-size:13px;padding:2px 2px 9px}
   .toast{position:fixed;left:50%;bottom:80px;transform:translateX(-50%);background:#2a2540;color:#fff;padding:11px 18px;border-radius:12px;font-size:14px;opacity:0;transition:.3s;z-index:50;max-width:90%}
   .toast.show{opacity:1}
   .loader{position:fixed;inset:0;background:rgba(250,247,255,.6);display:none;align-items:center;justify-content:center;z-index:40}
@@ -119,7 +130,7 @@
   <div class="card">
     <label>Кошелёк</label><select id="exWallet"></select>
     <label>Категория</label><select id="exCat"></select>
-    <label>Сумма</label><input id="exAmount" type="text" inputmode="numeric" class="num" placeholder="0">
+    <label>Сумма (₫ донги)</label><input id="exAmount" type="text" inputmode="numeric" class="num" placeholder="0">
     <label>Комментарий (необязательно)</label><input id="exNote" placeholder="на что">
     <label>Фото-чек (необязательно)</label><input id="exPhoto" type="file" accept="image/*">
     <button class="btn" onclick="submitExpense()">Добавить расход</button>
@@ -133,7 +144,7 @@
   <div class="card">
     <label>Откуда</label><select id="trFrom"></select>
     <label>Куда</label><select id="trTo"></select>
-    <label>Сумма (в валюте «откуда»)</label><input id="trAmount" type="text" inputmode="numeric" class="num" placeholder="0">
+    <label>Сумма (₫ донги)</label><input id="trAmount" type="text" inputmode="numeric" class="num" placeholder="0">
     <label>Комментарий (необязательно)</label><input id="trNote">
     <button class="btn" onclick="submitTransfer()">Перевести</button>
     <div id="trErr" class="err"></div>
@@ -152,7 +163,7 @@
   <div class="card">
     <div id="cfOrder" class="t" style="font-weight:600;margin-bottom:8px"></div>
     <label>На какой счёт пришли деньги</label><select id="cfPayWallet"></select>
-    <label>Сколько получили</label><input id="cfPayAmount" type="text" inputmode="numeric" class="num">
+    <label>Сколько получили (₫ донги)</label><input id="cfPayAmount" type="text" inputmode="numeric" class="num">
     <button class="btn" onclick="submitConfirm()">Провести оплату</button>
     <button class="btn ghost" onclick="skipCurrent()">Пропустить заявку</button>
     <div id="cfErr" class="err"></div>
@@ -189,7 +200,7 @@
   <div class="card">
     <b>Перекинуть в резерв</b>
     <label>Откуда</label><select id="rvFundFrom"></select>
-    <label>Сумма</label><input id="rvFundAmt" type="text" inputmode="numeric" class="num">
+    <label>Сумма (₫ донги)</label><input id="rvFundAmt" type="text" inputmode="numeric" class="num">
     <button class="btn" onclick="submitFund()">В резерв</button>
   </div>
   <div class="card">
@@ -229,7 +240,7 @@
   <button class="back" onclick="openHistory()">‹ Назад</button><h2>✏️ Правка операции</h2>
   <div class="card">
     <div id="edInfo" class="muted" style="margin-bottom:8px"></div>
-    <label>Сумма</label><input id="edAmount" type="text" inputmode="numeric" class="num">
+    <label>Сумма (₫ донги)</label><input id="edAmount" type="text" inputmode="numeric" class="num">
     <label id="edCatLbl">Категория</label><select id="edCat"></select>
     <label>Комментарий</label><input id="edNote">
     <button class="btn" onclick="submitEdit()">Сохранить</button>
@@ -326,7 +337,7 @@ function render(res){
   document.getElementById('pendBadge').innerHTML = res.pendingCount>0 ? ('<span class="badge">'+res.pendingCount+'</span>') : '';
   var list=document.getElementById('walList'); list.innerHTML='';
   res.wallets.forEach(function(w){ var d=document.createElement('div'); d.className='wal';
-    var right=fmt(w.balance,w.sym)+(w.currency!==res.base?(' <span class="muted">· '+fmt(w.inBase,res.baseSym)+'</span>'):'');
+    var right=fmt(w.inBase,res.baseSym)+(w.currency!==res.base?(' <span class="muted">('+fmt(w.balance,w.sym)+')</span>'):'');
     d.innerHTML='<div class="row"><span>'+(w.type==='reserve'?'🏦 ':'')+esc(w.name)+'</span><span class="amt">'+right+'</span></div>'; list.appendChild(d); });
 }
 async function reload(){ var res=await api('getState',{}); if(res.ok) render(res); }
@@ -388,13 +399,14 @@ async function openHorizon(){
   var res=await api('horizon',{}); if(!res.ok){ toast(res.error||'Ошибка'); return; }
   STATE=res; var box=document.getElementById('horList'); box.innerHTML='';
   (res.horizon||[]).forEach(function(day){
-    var h=document.createElement('div'); h.className='dayhdr';
-    h.textContent=day.weekday+' '+day.date+' · '+day.count+' зак · '+fmt(day.total,res.baseSym);
-    box.appendChild(h);
-    if(!day.orders.length){ var e=document.createElement('div'); e.className='muted'; e.style.margin='0 0 6px 2px'; e.textContent='—'; box.appendChild(e); return; }
-    day.orders.forEach(function(o){ var r=document.createElement('div'); r.className='ordrow'+(o.unknown?' unk':'');
-      r.innerHTML='<span>'+esc(o.order)+'</span><span class="amt">'+(o.unknown?'❓ вписать':fmt(o.cost,res.baseSym))+'</span>';
-      r.onclick=function(){ askCost(o); }; box.appendChild(r); });
+    var card=document.createElement('div'); card.className='daycard'+(day.count?'':' empty');
+    var head='<div class="dhead"><span class="dwd">'+day.weekday+'</span><span class="ddate">'+day.date+'</span><span class="dcnt">'+day.count+' зак</span><span class="dsum">'+(day.count?fmt(day.total,'₫'):'—')+'</span></div>';
+    var bodyH='';
+    if(day.count){ day.orders.forEach(function(o){ bodyH+='<div class="ordrow'+(o.unknown?' unk':'')+'" data-k="'+esc(o.key)+'"><span class="oname">'+esc(o.order)+'</span><span class="ocost">'+(o.unknown?'❓ вписать':fmt(o.cost,'₫'))+'</span></div>'; }); }
+    else { bodyH='<div class="dnone">нет доставок</div>'; }
+    card.innerHTML=head+bodyH;
+    Array.prototype.forEach.call(card.querySelectorAll('.ordrow'),function(el){ el.onclick=function(){ var k=el.getAttribute('data-k'),o=null; day.orders.forEach(function(x){ if(String(x.key)===k) o=x; }); if(o) askCost(o); }; });
+    box.appendChild(card);
   });
   if(!(res.horizon||[]).some(function(d){return d.count>0;})) box.innerHTML='<div class="card center muted">На ближайшие 5 дней заказов нет</div>';
   go('horizon');
@@ -448,7 +460,7 @@ async function openHistory(){
   var box=document.getElementById('histList'); box.innerHTML='';
   (res.history||[]).forEach(function(o){ var d=document.createElement('div'); d.className='item';
     var ic=o.type==='приход'?'🟢':(o.type==='расход'?'🔴':'🔁');
-    var main=o.type==='перевод'?(fmt(o.amount,symOf(o.cur))+' '+esc(o.from)+' → '+esc(o.to)):(fmt(o.amount,symOf(o.cur))+' · '+esc(o.from));
+    var main=o.type==='перевод'?(fmt(o.vnd,'₫')+' '+esc(o.from)+' → '+esc(o.to)):(fmt(o.vnd,'₫')+' · '+esc(o.from));
     d.innerHTML='<div class="row"><span class="t">'+ic+' '+main+'</span></div><div class="s">'+o.date+(o.cat?(' · '+esc(o.cat)):'')+(o.note?(' · '+esc(o.note)):'')+(o.receipt?(' · <a href="'+o.receipt+'" target="_blank">чек</a>'):'')+'</div>';
     d.onclick=function(ev){ if(ev.target.tagName==='A')return; openEdit(o); }; box.appendChild(d); });
   if(!(res.history||[]).length) box.innerHTML='<div class="card center muted">Пока нет операций</div>';
@@ -457,7 +469,7 @@ async function openHistory(){
 function openEdit(o){
   EDIT_OP=o;
   document.getElementById('edInfo').textContent=o.type+' · '+o.date;
-  document.getElementById('edAmount').value=groupNum(o.amount);
+  document.getElementById('edAmount').value=groupNum(o.vnd);
   var catSel=document.getElementById('edCat'), catLbl=document.getElementById('edCatLbl');
   if(o.type==='расход'){ catLbl.style.display='block'; catSel.style.display='block'; catOptions(catSel); catSel.value=o.cat; }
   else { catLbl.style.display='none'; catSel.style.display='none'; }
