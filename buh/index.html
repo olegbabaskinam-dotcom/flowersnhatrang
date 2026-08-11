@@ -184,6 +184,7 @@
     <div class="row"><span class="muted">Реально лежит</span><span class="amt" id="rvActual">—</span></div>
     <div class="row" style="margin-top:8px"><span class="muted">Должно (этот месяц)</span><span class="resv" id="rvMonth">—</span></div>
     <div class="row" style="margin-top:8px"><span class="muted">Накоплено за год (справка)</span><span class="muted" id="rvYear">—</span></div>
+    <div class="center" style="margin-top:12px"><small class="link" onclick="refreshReserveNow()">🔄 Обновить из «Финансов» (~30 сек)</small></div>
   </div>
   <div class="card">
     <b>Перекинуть в резерв</b>
@@ -279,7 +280,7 @@ async function api(action, extra, silent){
   }catch(e){ return {ok:false,error:'Нет связи с сервером'}; }
   finally{ if(!silent) loader(false); }
 }
-function refreshReserveBg(){ api('refreshReserve',{},true).then(function(r){ if(r&&r.ok){ STATE=r; if(!document.getElementById('v-main').classList.contains('hidden')) render(r); } }); }
+async function refreshReserveNow(){ var res=await api('refreshReserve',{}); if(res&&res.ok){ STATE=res; toast('Резерв обновлён из Финансов'); openReserve(); } else toast(res.error||'Ошибка'); }
 
 var VIEWS=['pin','start','main','expense','transfer','pending','confirm','horizon','more','reserve','recurring','history','edit','wallets','reports'];
 function go(v){ VIEWS.forEach(function(x){ var el=document.getElementById('v-'+x); if(el) el.classList.toggle('hidden', x!==v); }); window.scrollTo(0,0); }
@@ -293,7 +294,7 @@ async function doLogin(){
   if(res.needId){ document.getElementById('idHint').textContent='Твой Telegram id: '+res.yourId+' — впиши в ALLOWED_IDS.'; err.textContent='Доступ ещё не настроен.'; return; }
   if(!res.ok){ err.textContent=res.error||'Ошибка входа'; return; }
   localStorage.setItem('pin',PIN); STATE=res;
-  if(!res.started){ buildStart(res); go('start'); } else { render(res); go('main'); refreshReserveBg(); }
+  if(!res.started){ buildStart(res); go('start'); } else { render(res); go('main'); }
 }
 function buildStart(res){
   var box=document.getElementById('startFields'); box.innerHTML='';
@@ -306,7 +307,7 @@ async function saveStart(){
   var bal={}; STATE.wallets.forEach(function(w){ if(w.type==='reserve')return; var el=document.getElementById('sb_'+w.id); if(el) bal[w.id]=Number(String(el.value).replace(/\s/g,''))||0; });
   var res=await api('setStartBalances',{balances:bal});
   if(!res.ok){ document.getElementById('startErr').textContent=res.error||'Ошибка'; return; }
-  STATE=res; render(res); go('main'); refreshReserveBg(); toast('Учёт запущен');
+  STATE=res; render(res); go('main'); toast('Учёт запущен');
 }
 
 // ---------- ГЛАВНЫЙ ----------
