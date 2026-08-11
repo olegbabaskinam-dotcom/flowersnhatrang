@@ -268,8 +268,8 @@ function fmt(n,sym){ return (Math.round(Number(n)||0)).toLocaleString('ru-RU')+'
 function groupNum(v){ v=String(v).replace(/[^\d.]/g,''); var p=v.split('.'); p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,' '); return p.length>1?(p[0]+'.'+p.slice(1).join('')):p[0]; }
 document.addEventListener('input',function(e){ var t=e.target; if(t&&t.classList&&t.classList.contains('num')){ t.value=groupNum(t.value); } });
 
-async function api(action, extra){
-  loader(true);
+async function api(action, extra, silent){
+  if(!silent) loader(true);
   try{
     var payload=Object.assign({action:action, initData:initData(), pin:PIN, base:base()}, extra||{});
     var AMT={amount:1,payAmount:1,balance:1,cost:1,value:1};
@@ -277,8 +277,9 @@ async function api(action, extra){
     var r=await fetch(API_URL,{method:'POST',body:JSON.stringify(payload)});
     return await r.json();
   }catch(e){ return {ok:false,error:'Нет связи с сервером'}; }
-  finally{ loader(false); }
+  finally{ if(!silent) loader(false); }
 }
+function refreshReserveBg(){ api('refreshReserve',{},true).then(function(r){ if(r&&r.ok){ STATE=r; if(!document.getElementById('v-main').classList.contains('hidden')) render(r); } }); }
 
 var VIEWS=['pin','start','main','expense','transfer','pending','confirm','horizon','more','reserve','recurring','history','edit','wallets','reports'];
 function go(v){ VIEWS.forEach(function(x){ var el=document.getElementById('v-'+x); if(el) el.classList.toggle('hidden', x!==v); }); window.scrollTo(0,0); }
@@ -292,7 +293,7 @@ async function doLogin(){
   if(res.needId){ document.getElementById('idHint').textContent='Твой Telegram id: '+res.yourId+' — впиши в ALLOWED_IDS.'; err.textContent='Доступ ещё не настроен.'; return; }
   if(!res.ok){ err.textContent=res.error||'Ошибка входа'; return; }
   localStorage.setItem('pin',PIN); STATE=res;
-  if(!res.started){ buildStart(res); go('start'); } else { render(res); go('main'); }
+  if(!res.started){ buildStart(res); go('start'); } else { render(res); go('main'); refreshReserveBg(); }
 }
 function buildStart(res){
   var box=document.getElementById('startFields'); box.innerHTML='';
@@ -305,7 +306,7 @@ async function saveStart(){
   var bal={}; STATE.wallets.forEach(function(w){ if(w.type==='reserve')return; var el=document.getElementById('sb_'+w.id); if(el) bal[w.id]=Number(String(el.value).replace(/\s/g,''))||0; });
   var res=await api('setStartBalances',{balances:bal});
   if(!res.ok){ document.getElementById('startErr').textContent=res.error||'Ошибка'; return; }
-  STATE=res; render(res); go('main'); toast('Учёт запущен');
+  STATE=res; render(res); go('main'); refreshReserveBg(); toast('Учёт запущен');
 }
 
 // ---------- ГЛАВНЫЙ ----------
