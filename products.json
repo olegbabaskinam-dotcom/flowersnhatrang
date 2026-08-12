@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-10 14:56",
- "count": 106,
+ "generated": "2026-08-12 10:45",
+ "count": 107,
  "categories": [
   {
    "key": "all",
@@ -2463,6 +2463,29 @@
     "img/products/tort-shokoladnyy-dollary-butylka-love/5.webp",
     "img/products/tort-shokoladnyy-dollary-butylka-love/6.webp",
     "img/products/tort-shokoladnyy-dollary-butylka-love/7.webp"
+   ]
+  },
+  {
+   "id": 107,
+   "slug": "101-rozovaya-fioletovaya-korzina-shary-serdca",
+   "name": "101 розовая роза с фиолетовым оттенком в корзине + 10 красных гелиевых сердец",
+   "desc": "пышная корзина из 101 розы с нежным розово-фиолетовым оттенком плюс связка из 10 красных фольгированных сердец — двойной подарок «цветы и шары» с максимальным вау-эффектом. Розы стоят во флористической губке и дольше держат форму; идеально на признание, годовщину, 14 февраля или большой сюрприз. Доставим по Нячангу в день заказа, вложим открытку по желанию",
+   "alt": "101 розовая роза с фиолетовым оттенком в корзине и красные гелиевые сердца Нячанг доставка",
+   "price_vnd": 3500000,
+   "price": "3 500 000 донгов",
+   "price_sub": "≈ $140 · 12 000 ₽",
+   "cats": [
+    "r101",
+    "balloons"
+   ],
+   "color": "pink",
+   "images": [
+    "img/products/101-rozovaya-fioletovaya-korzina-shary-serdca/1.webp",
+    "img/products/101-rozovaya-fioletovaya-korzina-shary-serdca/2.webp",
+    "img/products/101-rozovaya-fioletovaya-korzina-shary-serdca/3.webp",
+    "img/products/101-rozovaya-fioletovaya-korzina-shary-serdca/4.webp",
+    "img/products/101-rozovaya-fioletovaya-korzina-shary-serdca/5.webp",
+    "img/products/101-rozovaya-fioletovaya-korzina-shary-serdca/6.webp"
    ]
   }
  ]
