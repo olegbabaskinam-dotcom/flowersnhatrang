@@ -340,15 +340,26 @@ function fmt(n,sym){ return (Math.round(Number(n)||0)).toLocaleString('ru-RU')+'
 function groupNum(v){ v=String(v).replace(/[^\d.]/g,''); var p=v.split('.'); p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,' '); return p.length>1?(p[0]+'.'+p.slice(1).join('')):p[0]; }
 document.addEventListener('input',function(e){ var t=e.target; if(t&&t.classList&&t.classList.contains('num')){ t.value=groupNum(t.value); } });
 
+function sleep(ms){ return new Promise(function(r){ setTimeout(r,ms); }); }
 async function api(action, extra, silent){
   if(!silent) loader(true);
   try{
     var payload=Object.assign({action:action, initData:initData(), pin:PIN, base:base()}, extra||{});
     var AMT={amount:1,payAmount:1,balance:1,cost:1,value:1};
     Object.keys(payload).forEach(function(k){ if(AMT[k]&&typeof payload[k]==='string') payload[k]=payload[k].replace(/\s/g,'').replace(',','.'); });
-    var r=await fetch(API_URL,{method:'POST',body:JSON.stringify(payload)});
-    return await r.json();
-  }catch(e){ return {ok:false,error:'Нет связи с сервером'}; }
+    var body=JSON.stringify(payload), lastErr=null;
+    for(var attempt=1; attempt<=4; attempt++){
+      try{
+        var ctrl=new AbortController(); var to=setTimeout(function(){ try{ctrl.abort();}catch(e){} }, 12000);
+        var r=await fetch(API_URL,{method:'POST',body:body,signal:ctrl.signal,cache:'no-store'});
+        clearTimeout(to);
+        var txt=await r.text();
+        try{ return JSON.parse(txt); }catch(e){ lastErr=e; }   // не JSON (редирект/ошибка) → повтор
+      }catch(e){ lastErr=e; }
+      if(attempt<4) await sleep(500*attempt);
+    }
+    return {ok:false,error:'Нет связи с сервером (сеть тупит, попробуй ещё раз)'};
+  }
   finally{ if(!silent) loader(false); }
 }
 async function refreshReserveNow(){ var res=await api('refreshReserve',{}); if(res&&res.ok){ STATE=res; toast('Резерв обновлён из Финансов'); openReserve(); } else toast(res.error||'Ошибка'); }
