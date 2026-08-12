@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-12 10:45",
- "count": 107,
+ "generated": "2026-08-12 10:51",
+ "count": 108,
  "categories": [
   {
    "key": "all",
@@ -2486,6 +2486,30 @@
     "img/products/101-rozovaya-fioletovaya-korzina-shary-serdca/4.webp",
     "img/products/101-rozovaya-fioletovaya-korzina-shary-serdca/5.webp",
     "img/products/101-rozovaya-fioletovaya-korzina-shary-serdca/6.webp"
+   ]
+  },
+  {
+   "id": 108,
+   "slug": "nezhnyy-sbornyy-25-krasnyh-25-rozovo-persik",
+   "name": "Нежный сборный букет + 25 красных роз + 25 розово-персиковых роз",
+   "desc": "нежный комплект из трёх букетов: авторский сборный букет в пастельных тонах, 25 красных роз и 25 розово-персиковых роз — тройной подарок с богатым выбором оттенков и максимальным вау-эффектом. Свежие цветы, аккуратная упаковка; идеально на день рождения, годовщину, признание или большой сюрприз. Доставим по Нячангу в день заказа, вложим открытку по желанию",
+   "alt": "нежный сборный букет с 25 красными и 25 розово-персиковыми розами Нячанг доставка",
+   "price_vnd": 2250000,
+   "price": "2 250 000 донгов",
+   "price_sub": "≈ $90 · 7 700 ₽",
+   "cats": [
+    "r25"
+   ],
+   "color": "red",
+   "images": [
+    "img/products/nezhnyy-sbornyy-25-krasnyh-25-rozovo-persik/1.webp",
+    "img/products/nezhnyy-sbornyy-25-krasnyh-25-rozovo-persik/2.webp",
+    "img/products/nezhnyy-sbornyy-25-krasnyh-25-rozovo-persik/3.webp",
+    "img/products/nezhnyy-sbornyy-25-krasnyh-25-rozovo-persik/4.webp",
+    "img/products/nezhnyy-sbornyy-25-krasnyh-25-rozovo-persik/5.webp",
+    "img/products/nezhnyy-sbornyy-25-krasnyh-25-rozovo-persik/6.webp",
+    "img/products/nezhnyy-sbornyy-25-krasnyh-25-rozovo-persik/7.webp",
+    "img/products/nezhnyy-sbornyy-25-krasnyh-25-rozovo-persik/8.webp"
    ]
   }
  ]
