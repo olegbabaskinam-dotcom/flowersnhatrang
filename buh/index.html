@@ -376,7 +376,7 @@ async function doLogin(){
   if(res.needId){ document.getElementById('idHint').textContent='Твой Telegram id: '+res.yourId+' — впиши в ALLOWED_IDS.'; err.textContent='Доступ ещё не настроен.'; return; }
   if(!res.ok){ err.textContent=res.error||'Ошибка входа'; return; }
   localStorage.setItem('pin',PIN); STATE=res;
-  if(!res.started){ buildStart(res); go('start'); } else { render(res); go('main'); pullFinanceBg(); }
+  if(!res.started){ buildStart(res); go('start'); } else { render(res); go('main'); }
 }
 function pullFinanceBg(){ api('pullFinance',{},true).then(function(r){ if(r&&r.ok) render(r); }); }
 function buildStart(res){
