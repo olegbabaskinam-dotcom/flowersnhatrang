@@ -452,7 +452,7 @@ function render(res){
   }
   var list=document.getElementById('walList'); list.innerHTML='';
   res.wallets.forEach(function(w){ var d=document.createElement('div'); d.className='wal';
-    var right=fmt(w.vnd,'₫')+(w.currency!=='VND'?(' <span class="muted">('+fmt(w.balance,w.sym)+')</span>'):'');
+    var right=fmt(w.vnd,'₫')+(w.currency!=='VND'?(' <span class="muted">('+fmt(w.native,w.sym)+')</span>'):'');
     d.innerHTML='<div class="row"><span>'+(w.type==='reserve'?'🏦 ':'')+esc(w.name)+'</span><span class="amt">'+right+'</span></div>'; list.appendChild(d); });
 }
 async function reload(){ var res=await api('getState',{},true); if(res.ok) render(res); }
@@ -474,7 +474,7 @@ function renderPicker(id, opts){
     if(opts.exclude && w.id===opts.exclude) return;
     any=true;
     var r=document.createElement('div'); r.className='wrow'+(sel===w.id?' on':'');
-    r.innerHTML='<span class="wnm">'+(w.type==='reserve'?'🏦 ':'')+esc(w.name)+'</span><span class="wa'+(opts.grey?' g':'')+'">'+fmt(w.inBase,STATE.baseSym)+'</span>';
+    r.innerHTML='<span class="wnm">'+(w.type==='reserve'?'🏦 ':'')+esc(w.name)+'</span><span class="wa'+(opts.grey?' g':'')+'">'+fmt(w.vnd,'₫')+'</span>';
     r.onclick=function(){ box.setAttribute('data-sel',w.id); renderPicker(id,opts); if(opts.onChange) opts.onChange(w.id); };
     box.appendChild(r);
   });
@@ -490,8 +490,8 @@ function renderExList(){
   var box=document.getElementById('exFromList'); box.innerHTML='';
   STATE.wallets.forEach(function(w){ if(w.balance<=0||w.type==='reserve') return;
     var r=document.createElement('div'); r.className='wrow'+(exFrom===w.id?' on':'');
-    r.innerHTML='<span class="wnm">'+esc(w.name)+'</span><span class="wa">'+fmt(w.inBase,STATE.baseSym)+'</span>';
-    r.onclick=function(){ exFrom=w.id; renderExList(); var x=walletById(w.id); document.getElementById('exAvail').textContent=x?('Доступно: '+fmt(x.inBase,STATE.baseSym)):''; };
+    r.innerHTML='<span class="wnm">'+esc(w.name)+'</span><span class="wa">'+fmt(w.vnd,'₫')+'</span>';
+    r.onclick=function(){ exFrom=w.id; renderExList(); var x=walletById(w.id); document.getElementById('exAvail').textContent=x?('Доступно: '+fmt(x.vnd,'₫')):''; };
     box.appendChild(r); });
   if(!box.children.length) box.innerHTML='<div class="muted">Нет кошельков с деньгами</div>';
 }
@@ -515,7 +515,7 @@ function renderTrLists(){
   STATE.wallets.forEach(function(w){
     if(w.balance>0){
       var r=document.createElement('div'); r.className='wrow'+(trFrom===w.id?' on':'');
-      r.innerHTML='<span class="wnm">'+(w.type==='reserve'?'🏦 ':'')+esc(w.name)+'</span><span class="wa">'+fmt(w.inBase,STATE.baseSym)+'</span>';
+      r.innerHTML='<span class="wnm">'+(w.type==='reserve'?'🏦 ':'')+esc(w.name)+'</span><span class="wa">'+fmt(w.vnd,'₫')+'</span>';
       r.onclick=function(){ trFrom=w.id; if(trTo===w.id) trTo=null; renderTrLists(); updAvail(); };
       fromBox.appendChild(r);
     }
@@ -523,12 +523,12 @@ function renderTrLists(){
   if(!fromBox.children.length) fromBox.innerHTML='<div class="muted">Нет кошельков с деньгами</div>';
   STATE.wallets.forEach(function(w){
     var r=document.createElement('div'); r.className='wrow'+(trTo===w.id?' on':'')+(trFrom===w.id?' dis':'');
-    r.innerHTML='<span class="wnm">'+(w.type==='reserve'?'🏦 ':'')+esc(w.name)+'</span><span class="wa g">'+fmt(w.inBase,STATE.baseSym)+'</span>';
+    r.innerHTML='<span class="wnm">'+(w.type==='reserve'?'🏦 ':'')+esc(w.name)+'</span><span class="wa g">'+fmt(w.vnd,'₫')+'</span>';
     r.onclick=function(){ if(trFrom===w.id) return; trTo=w.id; renderTrLists(); };
     toBox.appendChild(r);
   });
 }
-function updAvail(){ var w=walletById(trFrom); document.getElementById('trAvail').textContent = w ? ('Доступно: '+fmt(w.inBase,STATE.baseSym)) : ''; }
+function updAvail(){ var w=walletById(trFrom); document.getElementById('trAvail').textContent = w ? ('Доступно: '+fmt(w.vnd,'₫')) : ''; }
 async function submitTransfer(){
   var err=document.getElementById('trErr'); err.textContent='';
   if(!trFrom){ err.textContent='Выбери, откуда'; return; }
@@ -753,7 +753,7 @@ async function submitDelete(){ if(!confirm('Удалить операцию?')) 
 function openWallets(){
   var box=document.getElementById('walManage'); box.innerHTML='';
   STATE.wallets.forEach(function(w){ var d=document.createElement('div'); d.className='item';
-    var r2=fmt(w.vnd,'₫')+(w.currency!=='VND'?(' <span class="muted">('+fmt(w.balance,w.sym)+')</span>'):'');
+    var r2=fmt(w.vnd,'₫')+(w.currency!=='VND'?(' <span class="muted">('+fmt(w.native,w.sym)+')</span>'):'');
     d.innerHTML='<div class="row"><span class="t">'+(w.type==='reserve'?'🏦 ':'')+esc(w.name)+'</span><span class="amt">'+r2+'</span></div>';
     if(w.type==='custom'){ var wr=document.createElement('div'); wr.className='grid2'; wr.style.marginTop='8px';
       var b1=document.createElement('button'); b1.className='btn ghost'; b1.style.margin='0'; b1.textContent='Переименовать'; b1.onclick=function(){ renameW(w); };
