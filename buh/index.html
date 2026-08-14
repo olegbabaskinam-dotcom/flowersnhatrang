@@ -382,7 +382,7 @@ function pullFinanceBg(){ api('pullFinance',{},true).then(function(r){ if(r&&r.o
 function buildStart(res){
   var box=document.getElementById('startFields'); box.innerHTML='';
   res.wallets.forEach(function(w){ if(w.type==='reserve') return;
-    var l=document.createElement('label'); l.textContent=w.name+' ('+w.sym+')';
+    var l=document.createElement('label'); l.textContent=w.name+' (₫ донги)';
     var i=document.createElement('input'); i.type='text'; i.inputMode='numeric'; i.className='num'; i.value='0'; i.id='sb_'+w.id;
     box.appendChild(l); box.appendChild(i); });
 }
@@ -420,7 +420,7 @@ function render(res){
   }
   var list=document.getElementById('walList'); list.innerHTML='';
   res.wallets.forEach(function(w){ var d=document.createElement('div'); d.className='wal';
-    var right=fmt(w.inBase,res.baseSym)+(w.currency!==res.base?(' <span class="muted">('+fmt(w.balance,w.sym)+')</span>'):'');
+    var right=fmt(w.vnd,'₫')+(w.currency!=='VND'?(' <span class="muted">('+fmt(w.balance,w.sym)+')</span>'):'');
     d.innerHTML='<div class="row"><span>'+(w.type==='reserve'?'🏦 ':'')+esc(w.name)+'</span><span class="amt">'+right+'</span></div>'; list.appendChild(d); });
 }
 async function reload(){ var res=await api('getState',{},true); if(res.ok) render(res); }
@@ -692,7 +692,8 @@ async function submitDelete(){ if(!confirm('Удалить операцию?')) 
 function openWallets(){
   var box=document.getElementById('walManage'); box.innerHTML='';
   STATE.wallets.forEach(function(w){ var d=document.createElement('div'); d.className='item';
-    d.innerHTML='<div class="row"><span class="t">'+(w.type==='reserve'?'🏦 ':'')+esc(w.name)+'</span><span class="amt">'+fmt(w.balance,w.sym)+'</span></div>';
+    var r2=fmt(w.vnd,'₫')+(w.currency!=='VND'?(' <span class="muted">('+fmt(w.balance,w.sym)+')</span>'):'');
+    d.innerHTML='<div class="row"><span class="t">'+(w.type==='reserve'?'🏦 ':'')+esc(w.name)+'</span><span class="amt">'+r2+'</span></div>';
     if(w.type==='custom'){ var wr=document.createElement('div'); wr.className='grid2'; wr.style.marginTop='8px';
       var b1=document.createElement('button'); b1.className='btn ghost'; b1.style.margin='0'; b1.textContent='Переименовать'; b1.onclick=function(){ renameW(w); };
       var b2=document.createElement('button'); b2.className='btn red'; b2.style.margin='0'; b2.textContent='Скрыть'; b2.onclick=function(){ archiveW(w); };
@@ -707,8 +708,8 @@ async function submitCreateWallet(){ var res=await api('createWallet',{name:docu
 function openAdjust(){
   var box=document.getElementById('adjFields'); box.innerHTML='';
   STATE.wallets.forEach(function(w){
-    var l=document.createElement('label'); l.textContent=(w.type==='reserve'?'🏦 ':'')+w.name+' ('+w.sym+')';
-    var i=document.createElement('input'); i.type='text'; i.inputMode='numeric'; i.className='num'; i.id='adj_'+w.id; i.value=groupNum(w.balance);
+    var l=document.createElement('label'); l.textContent=(w.type==='reserve'?'🏦 ':'')+w.name+' (₫ донги)';
+    var i=document.createElement('input'); i.type='text'; i.inputMode='numeric'; i.className='num'; i.id='adj_'+w.id; i.value=groupNum(w.vnd);
     box.appendChild(l); box.appendChild(i);
   });
   document.getElementById('adjErr').textContent=''; go('adjust');
