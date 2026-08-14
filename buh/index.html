@@ -469,8 +469,9 @@ function renderPicker(id, opts){
   opts=opts||{}; var box=document.getElementById(id); if(!box) return;
   var sel=box.getAttribute('data-sel')||''; box.innerHTML=''; var any=false;
   STATE.wallets.forEach(function(w){
-    if(opts.funded && w.balance<=0) return;
+    if(opts.funded && w.vnd<=0) return;
     if(!opts.reserve && w.type==='reserve') return;
+    if(!opts.goal && w.type==='goal') return;
     if(opts.exclude && w.id===opts.exclude) return;
     any=true;
     var r=document.createElement('div'); r.className='wrow'+(sel===w.id?' on':'');
@@ -488,7 +489,7 @@ var exFrom=null;
 function openExpense(){ exFrom=null; renderExList(); catOptions(document.getElementById('exCat')); document.getElementById('exAmount').value=''; document.getElementById('exNote').value=''; document.getElementById('exPhoto').value=''; document.getElementById('exErr').textContent=''; document.getElementById('exAvail').textContent=''; go('expense'); }
 function renderExList(){
   var box=document.getElementById('exFromList'); box.innerHTML='';
-  STATE.wallets.forEach(function(w){ if(w.balance<=0||w.type==='reserve') return;
+  STATE.wallets.forEach(function(w){ if(w.vnd<=0||w.type==='reserve'||w.type==='goal') return;
     var r=document.createElement('div'); r.className='wrow'+(exFrom===w.id?' on':'');
     r.innerHTML='<span class="wnm">'+esc(w.name)+'</span><span class="wa">'+fmt(w.vnd,'₫')+'</span>';
     r.onclick=function(){ exFrom=w.id; renderExList(); var x=walletById(w.id); document.getElementById('exAvail').textContent=x?('Доступно: '+fmt(x.vnd,'₫')):''; };
@@ -513,7 +514,7 @@ function renderTrLists(){
   var fromBox=document.getElementById('trFromList'), toBox=document.getElementById('trToList');
   fromBox.innerHTML=''; toBox.innerHTML='';
   STATE.wallets.forEach(function(w){
-    if(w.balance>0){
+    if(w.vnd>0){
       var r=document.createElement('div'); r.className='wrow'+(trFrom===w.id?' on':'');
       r.innerHTML='<span class="wnm">'+(w.type==='reserve'?'🏦 ':'')+esc(w.name)+'</span><span class="wa">'+fmt(w.vnd,'₫')+'</span>';
       r.onclick=function(){ trFrom=w.id; if(trTo===w.id) trTo=null; renderTrLists(); updAvail(); };
@@ -697,7 +698,7 @@ function openPayBill(r){
   document.getElementById('pbName').textContent='🔄 '+r.name;
   document.getElementById('pbProg').textContent='Накоплено '+fmt(r.saved,STATE.baseSym)+' из '+fmt(r.target,STATE.baseSym);
   var box=document.getElementById('pbWallet'); box.setAttribute('data-sel', r.goalWallet||'');
-  renderPicker('pbWallet',{reserve:true});
+  renderPicker('pbWallet',{reserve:true,goal:true});
   document.getElementById('pbAmount').value=groupNum(r.target);
   document.getElementById('pbErr').textContent='';
   go('paybill');
