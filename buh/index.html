@@ -48,6 +48,13 @@
   .back{background:none;border:none;color:var(--accent);font-size:16px;font-weight:600;padding:0;margin-bottom:6px}
   .item{border:1px solid var(--line);border-radius:12px;padding:11px 12px;margin-bottom:9px}
   .item .t{font-weight:600}.item .s{font-size:13px;color:var(--muted);margin-top:2px}
+  .pbar{height:9px;background:#ece6f5;border-radius:6px;overflow:hidden;margin-top:6px}
+  .pbar > i{display:block;height:100%;width:0;background:var(--accent);transition:width .4s}
+  .pbar.full > i{background:var(--green)}
+  .regcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px}
+  .regcard.due{border-color:#fca5a5;background:#fff5f5}
+  .regcard .rl{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  .regduetag{color:var(--red);font-weight:700;font-size:12px}
   .mtcard{background:linear-gradient(135deg,#fff7ed,#fef9f4);border:1px solid #fed7aa;border-radius:16px;padding:14px;margin-bottom:12px}
   .taskrow{padding-top:11px;margin-top:11px;border-top:1px solid #f4e3cf}
   .taskrow .tt{font-weight:600;line-height:1.3}
@@ -117,8 +124,11 @@
   <div class="card">
     <div class="row"><span class="muted">Общий баланс</span><span class="amt" style="font-size:19px" id="mTotal">—</span></div>
     <div class="row" style="margin-top:9px"><span class="muted">Резерв: лежит / должно (мес)</span><span class="resv" id="mReserve">—</span></div>
+    <div class="pbar" id="rvBarWrap" style="margin-top:8px"><i id="rvBar"></i></div>
+    <div class="muted" id="rvBarNote" style="margin-top:4px"></div>
   </div>
 
+  <div id="mainReg"></div>
   <div id="mainTasks"></div>
 
   <div class="grid3">
@@ -229,7 +239,7 @@
     <label style="margin-top:10px">Со счёта</label><div id="tdWallet" class="wsel"></div>
     <div id="tdToWrap" class="hidden"><label>Куда</label><div id="tdTo" class="wsel"></div></div>
     <div id="tdCatWrap"><label>Категория</label><select id="tdCat"></select></div>
-    <label>Сумма (₫ донги)</label><input id="tdAmount" type="text" inputmode="numeric" class="num">
+    <label>Сумма (₫, необязательно — пусто = закрыть без денег)</label><input id="tdAmount" type="text" inputmode="numeric" class="num">
     <label>Комментарий</label><input id="tdNote" placeholder="напр. на рекламу">
     <button class="btn" onclick="submitTaskDo()">Провести и закрыть</button>
     <div id="tdErr" class="err"></div>
@@ -267,13 +277,26 @@
   <div id="regList"></div>
   <div class="card">
     <b>Добавить платёж</b>
+    <p class="muted">Создастся отдельная копилка с этим названием — в неё копишь деньги к дате платежа.</p>
     <label>Название</label><input id="rgName" placeholder="напр. Аренда">
-    <label>Кошелёк</label><div id="rgWallet" class="wsel"></div>
     <label>Категория</label><select id="rgCat"></select>
-    <label>Сумма</label><input id="rgAmount" type="text" inputmode="numeric" class="num">
+    <label>Сумма (₫)</label><input id="rgAmount" type="text" inputmode="numeric" class="num">
     <label>День месяца</label><input id="rgDay" type="number" min="1" max="31" value="1">
     <button class="btn" onclick="submitRecurring()">Добавить</button>
     <div id="rgErr" class="err"></div>
+  </div>
+</div>
+
+<!-- ОПЛАТА РЕГУЛЯРНОГО -->
+<div id="v-paybill" class="hidden">
+  <button class="back" onclick="openMore()">‹ Назад</button><h2>💸 Оплатить платёж</h2>
+  <div class="card">
+    <div id="pbName" class="t" style="font-weight:600;margin-bottom:4px"></div>
+    <div class="muted" id="pbProg" style="margin-bottom:10px"></div>
+    <label>С какого счёта</label><div id="pbWallet" class="wsel"></div>
+    <label>Сумма (₫)</label><input id="pbAmount" type="text" inputmode="numeric" class="num">
+    <button class="btn" onclick="submitPayBill()">Оплатить</button>
+    <div id="pbErr" class="err"></div>
   </div>
 </div>
 
@@ -364,7 +387,7 @@ async function api(action, extra, silent){
 }
 async function refreshReserveNow(){ var res=await api('refreshReserve',{}); if(res&&res.ok){ STATE=res; toast('Резерв обновлён из Финансов'); openReserve(); } else toast(res.error||'Ошибка'); }
 
-var VIEWS=['pin','start','main','expense','transfer','pending','confirm','horizon','more','reserve','recurring','history','edit','wallets','reports','tasks','taskdo','adjust'];
+var VIEWS=['pin','start','main','expense','transfer','pending','confirm','horizon','more','reserve','recurring','history','edit','wallets','reports','tasks','taskdo','adjust','paybill'];
 function go(v){ VIEWS.forEach(function(x){ var el=document.getElementById('v-'+x); if(el) el.classList.toggle('hidden', x!==v); }); window.scrollTo(0,0); }
 
 // ---------- ВХОД ----------
@@ -406,6 +429,15 @@ function render(res){
   document.getElementById('mFree').textContent=fmt(res.free,res.baseSym);
   document.getElementById('mTotal').textContent=fmt(res.total,res.baseSym);
   document.getElementById('mReserve').textContent=fmt(res.reserveActual,res.baseSym)+' / '+fmt(res.reserveMonth,res.baseSym);
+  var rp=res.reservePct||0; document.getElementById('rvBar').style.width=rp+'%';
+  document.getElementById('rvBarWrap').className='pbar'+(rp>=100?' full':'');
+  document.getElementById('rvBarNote').textContent = rp>=100 ? '✅ Отложено сколько нужно за месяц' : ('Отложено '+rp+'% от месячной нормы');
+  var mr=document.getElementById('mainReg'); mr.innerHTML='';
+  (res.recurring||[]).forEach(function(r){ var card=document.createElement('div'); card.className='regcard'+(r.due?' due':'');
+    var head='<div class="rl"><b>🔄 '+esc(r.name)+'</b><span class="muted">'+fmt(r.saved,res.baseSym)+' / '+fmt(r.target,res.baseSym)+'</span></div>';
+    var due=r.due?'<div class="regduetag">⚠️ пора оплатить · '+r.day+'-е число</div>':(r.paid?'<div class="muted" style="font-size:12px">оплачено в этом месяце</div>':'');
+    card.innerHTML=head+due+'<div class="pbar'+(r.pct>=100?' full':'')+'" style="margin-top:6px"><i style="width:'+r.pct+'%"></i></div>';
+    card.onclick=function(){ openPayBill(r); }; mr.appendChild(card); });
   document.getElementById('pendBadge').innerHTML = res.pendingCount>0 ? ('<span class="badge">'+res.pendingCount+'</span>') : '';
   document.getElementById('moreBadge').innerHTML = res.tasksCount>0 ? ('<span class="badge">'+res.tasksCount+'</span>') : '';
   var mt=document.getElementById('mainTasks'); mt.innerHTML='';
@@ -614,10 +646,15 @@ function openTaskDo(t){
   go('taskdo');
 }
 async function submitTaskDo(){
-  if(!pickerVal('tdWallet')){ document.getElementById('tdErr').textContent='Выбери счёт'; return; }
-  if(tdType==='transfer' && !pickerVal('tdTo')){ document.getElementById('tdErr').textContent='Выбери, куда'; return; }
-  var body={id:CUR_TASK.id, opType:tdType, wallet:pickerVal('tdWallet'), amount:document.getElementById('tdAmount').value, note:document.getElementById('tdNote').value};
-  if(tdType==='transfer') body.to=pickerVal('tdTo'); else body.category=document.getElementById('tdCat').value;
+  var raw=document.getElementById('tdAmount').value;
+  var amt=Number(String(raw).replace(/\s/g,''))||0;
+  var body={id:CUR_TASK.id, note:document.getElementById('tdNote').value};
+  if(amt>0){
+    if(!pickerVal('tdWallet')){ document.getElementById('tdErr').textContent='Выбери счёт (или очисти сумму — закрыть без денег)'; return; }
+    if(tdType==='transfer' && !pickerVal('tdTo')){ document.getElementById('tdErr').textContent='Выбери, куда'; return; }
+    body.opType=tdType; body.wallet=pickerVal('tdWallet'); body.amount=raw;
+    if(tdType==='transfer') body.to=pickerVal('tdTo'); else body.category=document.getElementById('tdCat').value;
+  }
   var res=await api('completeTask',body);
   if(!res.ok){ document.getElementById('tdErr').textContent=res.error; return; }
   STATE=res; render(res); go('main'); toast('Задача выполнена');
@@ -640,19 +677,37 @@ async function submitWithdraw(){ if(!pickerVal('rvWdTo')){ document.getElementBy
 async function openRecurring(){
   var res=await api('listRecurring',{}); if(!res.ok){ toast(res.error); return; } STATE=res;
   var box=document.getElementById('regList'); box.innerHTML='';
-  (res.recurring||[]).forEach(function(r){ var d=document.createElement('div'); d.className='item';
-    d.innerHTML='<div class="row"><span class="t">'+esc(r.name)+'</span><span class="amt">'+fmt(r.amount,symOf(r.cur))+'</span></div><div class="s">'+esc(r.cat)+' · '+r.day+'-е число</div>';
-    var wrap=document.createElement('div'); wrap.className='grid2'; wrap.style.marginTop='8px';
-    var b1=document.createElement('button'); b1.className='btn ghost'; b1.style.margin='0'; b1.textContent='Провести сейчас'; b1.onclick=function(){ postReg(r.id); };
+  (res.recurring||[]).forEach(function(r){ var d=document.createElement('div'); d.className='regcard'+(r.due?' due':'');
+    var head='<div class="rl"><b>'+esc(r.name)+'</b><span class="muted">'+fmt(r.saved,res.baseSym)+' / '+fmt(r.target,res.baseSym)+'</span></div>';
+    var due=r.due?'<div class="regduetag">⚠️ пора оплатить · '+r.day+'-е</div>':(r.paid?'<div class="muted" style="font-size:12px">оплачено в этом месяце</div>':'<div class="muted" style="font-size:12px">'+r.day+'-е число</div>');
+    d.innerHTML=head+due+'<div class="pbar'+(r.pct>=100?' full':'')+'" style="margin:6px 0"><i style="width:'+r.pct+'%"></i></div>';
+    var wrap=document.createElement('div'); wrap.className='grid2';
+    var b1=document.createElement('button'); b1.className='btn'; b1.style.margin='0'; b1.textContent='Оплатить'; b1.onclick=function(){ openPayBill(r); };
     var b2=document.createElement('button'); b2.className='btn red'; b2.style.margin='0'; b2.textContent='Удалить'; b2.onclick=function(){ delReg(r.id); };
     wrap.appendChild(b1); wrap.appendChild(b2); d.appendChild(wrap); box.appendChild(d); });
   if(!(res.recurring||[]).length) box.innerHTML='<div class="card center muted">Пока нет регулярных платежей</div>';
-  pickerReset('rgWallet'); renderPicker('rgWallet',{reserve:false}); catOptions(document.getElementById('rgCat'));
+  catOptions(document.getElementById('rgCat'));
   go('recurring');
 }
-async function submitRecurring(){ if(!pickerVal('rgWallet')){ document.getElementById('rgErr').textContent='Выбери кошелёк'; return; } var res=await api('addRecurring',{name:document.getElementById('rgName').value, wallet:pickerVal('rgWallet'), category:document.getElementById('rgCat').value, amount:document.getElementById('rgAmount').value, day:document.getElementById('rgDay').value}); if(!res.ok){ document.getElementById('rgErr').textContent=res.error; return; } document.getElementById('rgName').value=''; document.getElementById('rgAmount').value=''; toast('Добавлено'); openRecurring(); }
-async function postReg(id){ var res=await api('postRecurring',{id:id}); if(res.ok){ render(res); toast('Проведено'); openRecurring(); } else toast(res.error); }
-async function delReg(id){ var res=await api('deleteRecurring',{id:id}); if(res.ok){ toast('Удалено'); openRecurring(); } }
+async function submitRecurring(){ var res=await api('addRecurring',{name:document.getElementById('rgName').value, category:document.getElementById('rgCat').value, amount:document.getElementById('rgAmount').value, day:document.getElementById('rgDay').value}); if(!res.ok){ document.getElementById('rgErr').textContent=res.error; return; } document.getElementById('rgName').value=''; document.getElementById('rgAmount').value=''; toast('Добавлено, копилка создана'); openRecurring(); }
+async function delReg(id){ if(!confirm('Удалить платёж? (копилка с деньгами останется)')) return; var res=await api('deleteRecurring',{id:id}); if(res.ok){ STATE=res; toast('Удалено'); openRecurring(); } }
+var CUR_BILL=null;
+function openPayBill(r){
+  CUR_BILL=r;
+  document.getElementById('pbName').textContent='🔄 '+r.name;
+  document.getElementById('pbProg').textContent='Накоплено '+fmt(r.saved,STATE.baseSym)+' из '+fmt(r.target,STATE.baseSym);
+  var box=document.getElementById('pbWallet'); box.setAttribute('data-sel', r.goalWallet||'');
+  renderPicker('pbWallet',{reserve:true});
+  document.getElementById('pbAmount').value=groupNum(r.target);
+  document.getElementById('pbErr').textContent='';
+  go('paybill');
+}
+async function submitPayBill(){
+  if(!pickerVal('pbWallet')){ document.getElementById('pbErr').textContent='Выбери счёт'; return; }
+  var res=await api('payRecurring',{id:CUR_BILL.id, wallet:pickerVal('pbWallet'), amount:document.getElementById('pbAmount').value});
+  if(!res.ok){ document.getElementById('pbErr').textContent=res.error; return; }
+  render(res); go('main'); toast('Оплачено');
+}
 
 // ---------- ИСТОРИЯ ----------
 function renderHistory(res){
