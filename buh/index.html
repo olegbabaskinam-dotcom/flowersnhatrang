@@ -658,6 +658,12 @@ async function delReg(id){ var res=await api('deleteRecurring',{id:id}); if(res.
 function renderHistory(res){
   var box=document.getElementById('histList'); box.innerHTML='';
   (res.history||[]).forEach(function(o){ var d=document.createElement('div'); d.className='item';
+    if(o.kind==='task'){
+      var tic=o.event==='created'?'📌':'✅';
+      var tlbl=o.event==='created'?'Задача создана':'Задача выполнена';
+      d.innerHTML='<div class="row"><span class="t">'+tic+' '+tlbl+': '+esc(o.text)+'</span></div><div class="s">'+o.date+((o.event==='created'&&o.amount>0)?(' · план '+fmt(o.amount,'₫')):'')+(o.author?(' · '+esc(o.author)):'')+'</div>';
+      box.appendChild(d); return;
+    }
     var ic=o.type==='приход'?'🟢':(o.type==='расход'?'🔴':'🔁');
     var main=o.type==='перевод'?(fmt(o.vnd,'₫')+' '+esc(o.from)+' → '+esc(o.to)):(fmt(o.vnd,'₫')+' · '+esc(o.from));
     d.innerHTML='<div class="row"><span class="t">'+ic+' '+main+'</span></div><div class="s">'+o.date+(o.cat?(' · '+esc(o.cat)):'')+(o.note?(' · '+esc(o.note)):'')+(o.receipt?(' · <a href="'+o.receipt+'" target="_blank">чек</a>'):'')+'</div>';
