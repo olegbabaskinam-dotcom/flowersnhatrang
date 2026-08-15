@@ -405,13 +405,13 @@ async function doLogin(){
 function pullFinanceBg(){ api('pullFinance',{},true).then(function(r){ if(r&&r.ok) render(r); }); }
 function buildStart(res){
   var box=document.getElementById('startFields'); box.innerHTML='';
-  res.wallets.forEach(function(w){ if(w.type==='reserve') return;
+  res.wallets.forEach(function(w){ if(w.type==='reserve'||w.type==='goal') return;
     var l=document.createElement('label'); l.textContent=w.name+' (₫ донги)';
     var i=document.createElement('input'); i.type='text'; i.inputMode='numeric'; i.className='num'; i.value='0'; i.id='sb_'+w.id;
     box.appendChild(l); box.appendChild(i); });
 }
 async function saveStart(){
-  var bal={}; STATE.wallets.forEach(function(w){ if(w.type==='reserve')return; var el=document.getElementById('sb_'+w.id); if(el) bal[w.id]=Number(String(el.value).replace(/\s/g,''))||0; });
+  var bal={}; STATE.wallets.forEach(function(w){ if(w.type==='reserve'||w.type==='goal')return; var el=document.getElementById('sb_'+w.id); if(el) bal[w.id]=Number(String(el.value).replace(/\s/g,''))||0; });
   var res=await api('setStartBalances',{balances:bal});
   if(!res.ok){ document.getElementById('startErr').textContent=res.error||'Ошибка'; return; }
   STATE=res; render(res); go('main'); toast('Учёт запущен');
@@ -452,9 +452,9 @@ function render(res){
     mt.appendChild(card);
   }
   var list=document.getElementById('walList'); list.innerHTML='';
-  res.wallets.forEach(function(w){ var d=document.createElement('div'); d.className='wal';
+  res.wallets.forEach(function(w){ if(w.type==='goal') return; var d=document.createElement('div'); d.className='wal';
     var right=fmt(w.vnd,'₫')+(w.currency!=='VND'?(' <span class="muted">('+fmt(w.native,w.sym)+')</span>'):'');
-    d.innerHTML='<div class="row"><span>'+(w.type==='reserve'?'🏦 ':'')+esc(w.name)+'</span><span class="amt">'+right+'</span></div>'; list.appendChild(d); });
+    d.innerHTML='<div class="row"><span>'+(w.type==='reserve'?'🏦 ':(w.type==='goal'?'🎯 ':''))+esc(w.name)+'</span><span class="amt">'+right+'</span></div>'; list.appendChild(d); });
 }
 async function reload(){ var res=await api('getState',{},true); if(res.ok) render(res); }
 function cacheState(res){ try{ localStorage.setItem('lastState', JSON.stringify(res)); }catch(e){} }
@@ -476,7 +476,7 @@ function renderPicker(id, opts){
     if(opts.exclude && w.id===opts.exclude) return;
     any=true;
     var r=document.createElement('div'); r.className='wrow'+(sel===w.id?' on':'');
-    r.innerHTML='<span class="wnm">'+(w.type==='reserve'?'🏦 ':'')+esc(w.name)+'</span><span class="wa'+(opts.grey?' g':'')+'">'+fmt(w.vnd,'₫')+'</span>';
+    r.innerHTML='<span class="wnm">'+(w.type==='reserve'?'🏦 ':(w.type==='goal'?'🎯 ':''))+esc(w.name)+'</span><span class="wa'+(opts.grey?' g':'')+'">'+fmt(w.vnd,'₫')+'</span>';
     r.onclick=function(){ box.setAttribute('data-sel',w.id); renderPicker(id,opts); if(opts.onChange) opts.onChange(w.id); };
     box.appendChild(r);
   });
@@ -517,7 +517,7 @@ function renderTrLists(){
   STATE.wallets.forEach(function(w){
     if(w.vnd>0){
       var r=document.createElement('div'); r.className='wrow'+(trFrom===w.id?' on':'');
-      r.innerHTML='<span class="wnm">'+(w.type==='reserve'?'🏦 ':'')+esc(w.name)+'</span><span class="wa">'+fmt(w.vnd,'₫')+'</span>';
+      r.innerHTML='<span class="wnm">'+(w.type==='reserve'?'🏦 ':(w.type==='goal'?'🎯 ':''))+esc(w.name)+'</span><span class="wa">'+fmt(w.vnd,'₫')+'</span>';
       r.onclick=function(){ trFrom=w.id; if(trTo===w.id) trTo=null; renderTrLists(); updAvail(); };
       fromBox.appendChild(r);
     }
@@ -525,7 +525,7 @@ function renderTrLists(){
   if(!fromBox.children.length) fromBox.innerHTML='<div class="muted">Нет кошельков с деньгами</div>';
   STATE.wallets.forEach(function(w){
     var r=document.createElement('div'); r.className='wrow'+(trTo===w.id?' on':'')+(trFrom===w.id?' dis':'');
-    r.innerHTML='<span class="wnm">'+(w.type==='reserve'?'🏦 ':'')+esc(w.name)+'</span><span class="wa g">'+fmt(w.vnd,'₫')+'</span>';
+    r.innerHTML='<span class="wnm">'+(w.type==='reserve'?'🏦 ':(w.type==='goal'?'🎯 ':''))+esc(w.name)+'</span><span class="wa g">'+fmt(w.vnd,'₫')+'</span>';
     r.onclick=function(){ if(trFrom===w.id) return; trTo=w.id; renderTrLists(); };
     toBox.appendChild(r);
   });
@@ -698,7 +698,7 @@ async function openRecurring(){
   go('recurring');
 }
 async function submitRecurring(){ var res=await api('addRecurring',{name:document.getElementById('rgName').value, category:document.getElementById('rgCat').value, amount:document.getElementById('rgAmount').value, day:document.getElementById('rgDay').value}); if(!res.ok){ document.getElementById('rgErr').textContent=res.error; return; } document.getElementById('rgName').value=''; document.getElementById('rgAmount').value=''; toast('Добавлено, копилка создана'); openRecurring(); }
-async function delReg(id){ if(!confirm('Удалить платёж? (копилка с деньгами останется)')) return; var res=await api('deleteRecurring',{id:id}); if(res.ok){ STATE=res; toast('Удалено'); openRecurring(); } }
+async function delReg(id){ if(!confirm('Удалить платёж и его копилку? Накопленное вернётся в «Наличные донги».')) return; var res=await api('deleteRecurring',{id:id}); if(res.ok){ STATE=res; toast('Удалено'); openRecurring(); } }
 var CUR_BILL=null;
 function openPayBill(r){
   CUR_BILL=r;
@@ -776,9 +776,9 @@ async function undoTaskEntry(o){
 // ---------- КОШЕЛЬКИ ----------
 function openWallets(){
   var box=document.getElementById('walManage'); box.innerHTML='';
-  STATE.wallets.forEach(function(w){ var d=document.createElement('div'); d.className='item';
+  STATE.wallets.forEach(function(w){ if(w.type==='goal') return; var d=document.createElement('div'); d.className='item';
     var r2=fmt(w.vnd,'₫')+(w.currency!=='VND'?(' <span class="muted">('+fmt(w.native,w.sym)+')</span>'):'');
-    d.innerHTML='<div class="row"><span class="t">'+(w.type==='reserve'?'🏦 ':'')+esc(w.name)+'</span><span class="amt">'+r2+'</span></div>';
+    d.innerHTML='<div class="row"><span class="t">'+(w.type==='reserve'?'🏦 ':(w.type==='goal'?'🎯 ':''))+esc(w.name)+'</span><span class="amt">'+r2+'</span></div>';
     if(w.type==='custom'){ var wr=document.createElement('div'); wr.className='grid2'; wr.style.marginTop='8px';
       var b1=document.createElement('button'); b1.className='btn ghost'; b1.style.margin='0'; b1.textContent='Переименовать'; b1.onclick=function(){ renameW(w); };
       var b2=document.createElement('button'); b2.className='btn red'; b2.style.margin='0'; b2.textContent='Скрыть'; b2.onclick=function(){ archiveW(w); };
@@ -793,6 +793,7 @@ async function submitCreateWallet(){ var res=await api('createWallet',{name:docu
 function openAdjust(){
   var box=document.getElementById('adjFields'); box.innerHTML='';
   STATE.wallets.forEach(function(w){
+    if(w.type==='goal') return;
     var l=document.createElement('label'); l.textContent=(w.type==='reserve'?'🏦 ':'')+w.name+' (₫ донги)';
     var i=document.createElement('input'); i.type='text'; i.inputMode='numeric'; i.className='num'; i.id='adj_'+w.id; i.value=groupNum(w.vnd);
     box.appendChild(l); box.appendChild(i);
