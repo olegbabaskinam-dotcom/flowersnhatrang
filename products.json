@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-15 13:13",
- "count": 109,
+ "generated": "2026-08-15 16:27",
+ "count": 110,
  "categories": [
   {
    "key": "all",
@@ -2533,6 +2533,29 @@
     "img/products/51-nezhno-rozovaya-roza-pod-lentu-otkrytka/5.webp",
     "img/products/51-nezhno-rozovaya-roza-pod-lentu-otkrytka/6.webp",
     "img/products/51-nezhno-rozovaya-roza-pod-lentu-otkrytka/7.webp"
+   ]
+  },
+  {
+   "id": 110,
+   "slug": "101-belo-rozovaya-roza-korzina-rozovaya-lenta",
+   "name": "101 бело-розовая роза в корзине с розовой лентой",
+   "desc": "пышная корзина из 101 бело-розовой розы с нежным переходом оттенков, декорированная атласной розовой лентой — роскошный подарок с вау-эффектом. Розы стоят во флористической губке и дольше держат форму; идеально на день рождения, годовщину, признание или большой сюрприз. Доставим по Нячангу в день заказа, вложим открытку по желанию",
+   "alt": "101 бело-розовая роза в корзине с розовой лентой Нячанг доставка",
+   "price_vnd": 2000000,
+   "price": "2 000 000 донгов",
+   "price_sub": "≈ $80 · 6 800 ₽",
+   "cats": [
+    "r101"
+   ],
+   "color": "pink",
+   "images": [
+    "img/products/101-belo-rozovaya-roza-korzina-rozovaya-lenta/1.webp",
+    "img/products/101-belo-rozovaya-roza-korzina-rozovaya-lenta/2.webp",
+    "img/products/101-belo-rozovaya-roza-korzina-rozovaya-lenta/3.webp",
+    "img/products/101-belo-rozovaya-roza-korzina-rozovaya-lenta/4.webp",
+    "img/products/101-belo-rozovaya-roza-korzina-rozovaya-lenta/5.webp",
+    "img/products/101-belo-rozovaya-roza-korzina-rozovaya-lenta/6.webp",
+    "img/products/101-belo-rozovaya-roza-korzina-rozovaya-lenta/7.webp"
    ]
   }
  ]
