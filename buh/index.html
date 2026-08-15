@@ -180,7 +180,8 @@
 
 <!-- ЗАЯВКИ -->
 <div id="v-pending" class="hidden">
-  <button class="back" onclick="go('main')">‹ Назад</button><h2>📥 Заявки — деньги за заказ</h2>
+  <button class="back" onclick="go('main')">‹ Назад</button>
+  <div class="row" style="margin-bottom:12px"><h2 style="margin:0">📥 Заявки — деньги за заказ</h2><small class="link" onclick="refreshPending()">🔄 Обновить</small></div>
   <div id="pendList"></div>
 </div>
 
@@ -315,7 +316,7 @@
     <label id="edCatLbl">Категория</label><select id="edCat"></select>
     <label>Комментарий</label><input id="edNote">
     <button class="btn" onclick="submitEdit()">Сохранить</button>
-    <button class="btn red" onclick="submitDelete()">Удалить операцию</button>
+    <button class="btn red" onclick="submitDelete()">↩️ Отменить операцию (вернуть как было)</button>
     <div id="edErr" class="err"></div>
   </div>
 </div>
@@ -554,6 +555,12 @@ async function openPending(){
   var res=await api('listPending',{}, had); if(!res.ok){ if(!had) toast(res.error||'Ошибка'); return; }
   STATE=res; localStorage.setItem('cache_pending',JSON.stringify(res)); renderPending(res); go('pending');
 }
+// Кнопка «Обновить»: заново перечитывает Финансы, добавляет новые заказы, убирает исчезнувшие.
+async function refreshPending(){
+  var res=await api('listPending',{}); if(!res.ok){ toast(res.error||'Ошибка'); return; }
+  STATE=res; localStorage.setItem('cache_pending',JSON.stringify(res)); renderPending(res);
+  var n=(res.pending||[]).length; toast(n?('Заявок к оплате: '+n):'Новых заявок нет');
+}
 function openConfirm(p){
   CURRENT_ORDER=p;
   document.getElementById('cfOrder').textContent=p.order;
@@ -717,7 +724,8 @@ function renderHistory(res){
     if(o.kind==='task'){
       var tic=o.event==='created'?'📌':'✅';
       var tlbl=o.event==='created'?'Задача создана':'Задача выполнена';
-      d.innerHTML='<div class="row"><span class="t">'+tic+' '+tlbl+': '+esc(o.text)+'</span></div><div class="s">'+o.date+((o.event==='created'&&o.amount>0)?(' · план '+fmt(o.amount,'₫')):'')+(o.author?(' · '+esc(o.author)):'')+'</div>';
+      d.innerHTML='<div class="row"><span class="t">'+tic+' '+tlbl+': '+esc(o.text)+'</span></div><div class="s">'+o.date+((o.event==='created'&&o.amount>0)?(' · план '+fmt(o.amount,'₫')):'')+(o.author?(' · '+esc(o.author)):'')+' · <span class="muted">нажми, чтобы отменить</span></div>';
+      d.onclick=function(){ undoTaskEntry(o); };
       box.appendChild(d); return;
     }
     var ic=o.type==='приход'?'🟢':(o.type==='расход'?'🔴':'🔁');
@@ -746,9 +754,24 @@ async function submitEdit(){
   var body={id:EDIT_OP.id, amount:document.getElementById('edAmount').value, note:document.getElementById('edNote').value};
   if(EDIT_OP.type==='расход') body.category=document.getElementById('edCat').value;
   var res=await api('editEntry',body);
-  if(!res.ok){ document.getElementById('edErr').textContent=res.error; return; } STATE=res; toast('Сохранено'); openHistory();
+  if(!res.ok){ document.getElementById('edErr').textContent=res.error; return; }
+  STATE=res; cacheState(res); localStorage.setItem('cache_history',JSON.stringify(res)); renderHistory(res); go('history'); toast('Сохранено');
 }
-async function submitDelete(){ if(!confirm('Удалить операцию?')) return; var res=await api('deleteEntry',{id:EDIT_OP.id}); if(!res.ok){ document.getElementById('edErr').textContent=res.error; return; } STATE=res; toast('Удалено'); openHistory(); }
+async function submitDelete(){
+  if(!confirm('Отменить операцию? Баланс и связанные заказы/задачи вернутся как было.')) return;
+  var res=await api('deleteEntry',{id:EDIT_OP.id});
+  if(!res.ok){ document.getElementById('edErr').textContent=res.error; return; }
+  STATE=res; cacheState(res); localStorage.setItem('cache_history',JSON.stringify(res)); renderHistory(res); go('history'); toast('Отменено, состояние восстановлено');
+}
+// Отмена действий с задачами прямо из истории
+async function undoTaskEntry(o){
+  if(!o.id) return;
+  var msg=o.event==='done' ? 'Отменить выполнение задачи? Деньги (если списывались) вернутся, задача снова станет открытой.' : 'Удалить эту задачу?';
+  if(!confirm(msg)) return;
+  var res=await api(o.event==='done'?'reopenTask':'deleteTaskEntry',{id:o.id});
+  if(!res.ok){ toast(res.error||'Ошибка'); return; }
+  STATE=res; cacheState(res); localStorage.setItem('cache_history',JSON.stringify(res)); renderHistory(res); toast('Готово');
+}
 
 // ---------- КОШЕЛЬКИ ----------
 function openWallets(){
