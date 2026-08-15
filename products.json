@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-12 10:51",
- "count": 108,
+ "generated": "2026-08-15 13:13",
+ "count": 109,
  "categories": [
   {
    "key": "all",
@@ -2510,6 +2510,29 @@
     "img/products/nezhnyy-sbornyy-25-krasnyh-25-rozovo-persik/6.webp",
     "img/products/nezhnyy-sbornyy-25-krasnyh-25-rozovo-persik/7.webp",
     "img/products/nezhnyy-sbornyy-25-krasnyh-25-rozovo-persik/8.webp"
+   ]
+  },
+  {
+   "id": 109,
+   "slug": "51-nezhno-rozovaya-roza-pod-lentu-otkrytka",
+   "name": "51 нежно-розовая роза под ленту + открытка",
+   "desc": "элегантный монобукет из 51 нежно-розовой розы, собранный под ленту, с открыткой для вашего текста — благородный и романтичный подарок в пастельных тонах. Крупные свежие бутоны, аккуратная сборка; идеально на день рождения, годовщину, признание или просто без повода. Доставим по Нячангу в день заказа, вложим открытку по желанию",
+   "alt": "51 нежно-розовая роза под ленту с открыткой Нячанг доставка",
+   "price_vnd": 1000000,
+   "price": "1 000 000 донгов",
+   "price_sub": "≈ $40 · 3 400 ₽",
+   "cats": [
+    "r51"
+   ],
+   "color": "pink",
+   "images": [
+    "img/products/51-nezhno-rozovaya-roza-pod-lentu-otkrytka/1.webp",
+    "img/products/51-nezhno-rozovaya-roza-pod-lentu-otkrytka/2.webp",
+    "img/products/51-nezhno-rozovaya-roza-pod-lentu-otkrytka/3.webp",
+    "img/products/51-nezhno-rozovaya-roza-pod-lentu-otkrytka/4.webp",
+    "img/products/51-nezhno-rozovaya-roza-pod-lentu-otkrytka/5.webp",
+    "img/products/51-nezhno-rozovaya-roza-pod-lentu-otkrytka/6.webp",
+    "img/products/51-nezhno-rozovaya-roza-pod-lentu-otkrytka/7.webp"
    ]
   }
  ]
