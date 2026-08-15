@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-15 16:31",
- "count": 111,
+ "generated": "2026-08-15 16:36",
+ "count": 112,
  "categories": [
   {
    "key": "all",
@@ -2578,6 +2578,29 @@
     "img/products/35-serebristo-chernyh-gelievyh-sharov-pod-potolok/4.webp",
     "img/products/35-serebristo-chernyh-gelievyh-sharov-pod-potolok/5.webp",
     "img/products/35-serebristo-chernyh-gelievyh-sharov-pod-potolok/6.webp"
+   ]
+  },
+  {
+   "id": 112,
+   "slug": "tort-pirozhnoe-shokoladnyy-rozovaya-roza",
+   "name": "Шоколадное пирожное с розовой кремовой розой",
+   "desc": "нежное шоколадное пирожное с белым кремом, шоколадным дрип-декором и большой кремовой розой в розовых тонах — маленький, но эффектный десерт. Порция на одного, в комплекте ложечка, всё в красивой подарочной коробке — удобно доставить и красиво подарить. Свежая выпечка, доставим по Нячангу в день заказа",
+   "alt": "шоколадное пирожное с розовой кремовой розой Нячанг доставка",
+   "price_vnd": 100000,
+   "price": "100 000 донгов",
+   "price_sub": "≈ $4 · 300 ₽",
+   "cats": [
+    "cakes"
+   ],
+   "color": "",
+   "images": [
+    "img/products/tort-pirozhnoe-shokoladnyy-rozovaya-roza/1.webp",
+    "img/products/tort-pirozhnoe-shokoladnyy-rozovaya-roza/2.webp",
+    "img/products/tort-pirozhnoe-shokoladnyy-rozovaya-roza/3.webp",
+    "img/products/tort-pirozhnoe-shokoladnyy-rozovaya-roza/4.webp",
+    "img/products/tort-pirozhnoe-shokoladnyy-rozovaya-roza/5.webp",
+    "img/products/tort-pirozhnoe-shokoladnyy-rozovaya-roza/6.webp",
+    "img/products/tort-pirozhnoe-shokoladnyy-rozovaya-roza/7.webp"
    ]
   }
  ]
