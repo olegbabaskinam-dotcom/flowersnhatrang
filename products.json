@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-15 16:27",
- "count": 110,
+ "generated": "2026-08-15 16:31",
+ "count": 111,
  "categories": [
   {
    "key": "all",
@@ -2556,6 +2556,28 @@
     "img/products/101-belo-rozovaya-roza-korzina-rozovaya-lenta/5.webp",
     "img/products/101-belo-rozovaya-roza-korzina-rozovaya-lenta/6.webp",
     "img/products/101-belo-rozovaya-roza-korzina-rozovaya-lenta/7.webp"
+   ]
+  },
+  {
+   "id": 111,
+   "slug": "35-serebristo-chernyh-gelievyh-sharov-pod-potolok",
+   "name": "35 серебристо-чёрных резиновых гелиевых шаров под потолок",
+   "desc": "связка из 35 гелиевых резиновых шаров в стильных серебристо-чёрных оттенках, запускаются под потолок с блестящими лентами — эффектное оформление дня рождения, вечеринки или юбилея. Шары держат объём несколько дней; привезём и запустим по Нячангу в день заказа",
+   "alt": "35 серебристо-чёрных гелиевых шаров под потолок Нячанг доставка",
+   "price_vnd": 2450000,
+   "price": "2 450 000 донгов",
+   "price_sub": "≈ $100 · 8 400 ₽",
+   "cats": [
+    "balloons"
+   ],
+   "color": "",
+   "images": [
+    "img/products/35-serebristo-chernyh-gelievyh-sharov-pod-potolok/1.webp",
+    "img/products/35-serebristo-chernyh-gelievyh-sharov-pod-potolok/2.webp",
+    "img/products/35-serebristo-chernyh-gelievyh-sharov-pod-potolok/3.webp",
+    "img/products/35-serebristo-chernyh-gelievyh-sharov-pod-potolok/4.webp",
+    "img/products/35-serebristo-chernyh-gelievyh-sharov-pod-potolok/5.webp",
+    "img/products/35-serebristo-chernyh-gelievyh-sharov-pod-potolok/6.webp"
    ]
   }
  ]
