@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-15 16:36",
- "count": 112,
+ "generated": "2026-08-15 16:40",
+ "count": 113,
  "categories": [
   {
    "key": "all",
@@ -2601,6 +2601,30 @@
     "img/products/tort-pirozhnoe-shokoladnyy-rozovaya-roza/5.webp",
     "img/products/tort-pirozhnoe-shokoladnyy-rozovaya-roza/6.webp",
     "img/products/tort-pirozhnoe-shokoladnyy-rozovaya-roza/7.webp"
+   ]
+  },
+  {
+   "id": 113,
+   "slug": "tort-shokoladnyy-dollary-klubnika-serdce-love",
+   "name": "Шоколадный торт с долларами, клубникой и сердцем Love",
+   "desc": "эффектный шоколадный торт с «денежным» декором: купюры-доллары, шоколадное сердце с надписью Love, свежая клубника и живая зелень, шоколадная крошка. Стильный подарок на день рождения, юбилей или признание — смотрится дорого и с настроением. Рассчитан на 5 человек, в комплекте тарелочки, вилки и ножи, всё в красивой коробке — удобно доставить и красиво подарить. Свежая выпечка, доставим по Нячангу в день заказа",
+   "alt": "шоколадный торт с долларами клубникой и сердцем Love Нячанг доставка",
+   "price_vnd": 500000,
+   "price": "500 000 донгов",
+   "price_sub": "≈ $20 · 1 700 ₽",
+   "cats": [
+    "cakes"
+   ],
+   "color": "",
+   "images": [
+    "img/products/tort-shokoladnyy-dollary-klubnika-serdce-love/1.webp",
+    "img/products/tort-shokoladnyy-dollary-klubnika-serdce-love/2.webp",
+    "img/products/tort-shokoladnyy-dollary-klubnika-serdce-love/3.webp",
+    "img/products/tort-shokoladnyy-dollary-klubnika-serdce-love/4.webp",
+    "img/products/tort-shokoladnyy-dollary-klubnika-serdce-love/5.webp",
+    "img/products/tort-shokoladnyy-dollary-klubnika-serdce-love/6.webp",
+    "img/products/tort-shokoladnyy-dollary-klubnika-serdce-love/7.webp",
+    "img/products/tort-shokoladnyy-dollary-klubnika-serdce-love/8.webp"
    ]
   }
  ]
