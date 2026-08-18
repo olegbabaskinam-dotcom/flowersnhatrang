@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-18 13:50",
- "count": 114,
+ "generated": "2026-08-18 21:09",
+ "count": 115,
  "categories": [
   {
    "key": "all",
@@ -293,7 +293,7 @@
    "cats": [
     "r101"
    ],
-   "color": "",
+   "color": "purple",
    "images": [
     "img/products/151-fioletovaya-roza/1.webp",
     "img/products/151-fioletovaya-roza/2.webp",
@@ -570,7 +570,7 @@
    "cats": [
     "r101"
    ],
-   "color": "",
+   "color": "purple",
    "images": [
     "img/products/101-fioletovaya-roza-v-upakovke/1.webp",
     "img/products/101-fioletovaya-roza-v-upakovke/2.webp",
@@ -643,7 +643,7 @@
    "cats": [
     "r51"
    ],
-   "color": "",
+   "color": "purple",
    "images": [
     "img/products/51-fioletovaya-roza-v-upakovke/1.webp",
     "img/products/51-fioletovaya-roza-v-upakovke/2.webp",
@@ -2653,6 +2653,31 @@
     "img/products/nabor-sharov-l-101-krasnaya-51-belaya-25-rozovyh/7.webp",
     "img/products/nabor-sharov-l-101-krasnaya-51-belaya-25-rozovyh/8.webp",
     "img/products/nabor-sharov-l-101-krasnaya-51-belaya-25-rozovyh/9.webp"
+   ]
+  },
+  {
+   "id": 115,
+   "slug": "101-fioletovaya-roza-shokoladnyy-tort",
+   "name": "101 фиолетовая роза + шоколадный торт",
+   "desc": "большой готовый подарок: пышный букет из 101 фиолетовой розы в сиреневой упаковке и шоколадный торт с декором из долларовых купюр, клубники, зелени и шоколадного сердца Love. Торт в подарочной коробке, в комплекте свечи и набор для сервировки — всё для красивого сюрприза без лишних приготовлений. Доставим по Нячангу в день заказа",
+   "alt": "101 фиолетовая роза и шоколадный торт Нячанг доставка",
+   "price_vnd": 2000000,
+   "price": "2 000 000 донгов",
+   "price_sub": "≈ $80 · 6 800 ₽",
+   "cats": [
+    "r101",
+    "cakes"
+   ],
+   "color": "purple",
+   "images": [
+    "img/products/101-fioletovaya-roza-shokoladnyy-tort/1.webp",
+    "img/products/101-fioletovaya-roza-shokoladnyy-tort/2.webp",
+    "img/products/101-fioletovaya-roza-shokoladnyy-tort/3.webp",
+    "img/products/101-fioletovaya-roza-shokoladnyy-tort/4.webp",
+    "img/products/101-fioletovaya-roza-shokoladnyy-tort/5.webp",
+    "img/products/101-fioletovaya-roza-shokoladnyy-tort/6.webp",
+    "img/products/101-fioletovaya-roza-shokoladnyy-tort/7.webp",
+    "img/products/101-fioletovaya-roza-shokoladnyy-tort/8.webp"
    ]
   }
  ]

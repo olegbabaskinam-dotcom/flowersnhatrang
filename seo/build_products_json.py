@@ -54,6 +54,7 @@ def product_color(slug):
     if "kras" in s:       return "red"
     if "bel" in s:        return "white"
     if "rozov" in s:      return "pink"
+    if "fiolet" in s:     return "purple"
     return ""
 
 # ---- все фото товара: 1.webp главное + 2..40.webp ----

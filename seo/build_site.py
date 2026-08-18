@@ -571,7 +571,7 @@ def product_cat(p):
     return " ".join(cats)
 
 def product_color(p):
-    """Цвет роз для фильтра (red/white/pink/'')."""
+    """Цвет роз для фильтра (red/white/pink/purple/'')."""
     s = p["slug"].lower()
     if s.startswith("podarochnyy-nabor") or s.startswith("podarok-nabor") or s.startswith("tort"):
         return ""  # у подарочных наборов и тортов цвета роз нет («krasota» не должно давать red)
@@ -583,6 +583,8 @@ def product_color(p):
         return "white"
     if "rozov" in s:
         return "pink"
+    if "fiolet" in s:
+        return "purple"
     return ""
 
 def product_card(p, lang, base, t):
