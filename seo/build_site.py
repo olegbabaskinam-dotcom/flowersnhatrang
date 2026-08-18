@@ -575,6 +575,8 @@ def product_color(p):
     s = p["slug"].lower()
     if s.startswith("podarochnyy-nabor") or s.startswith("podarok-nabor") or s.startswith("tort"):
         return ""  # у подарочных наборов и тортов цвета роз нет («krasota» не должно давать red)
+    if s.startswith("151-rozovaya-roza-fioletovyy-ottenok"):
+        return "pink"
     if "belo-rozov" in s:
         return "pink"
     if "kras" in s:

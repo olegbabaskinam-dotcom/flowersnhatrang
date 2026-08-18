@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-18 21:09",
- "count": 115,
+ "generated": "2026-08-18 21:25",
+ "count": 116,
  "categories": [
   {
    "key": "all",
@@ -2678,6 +2678,29 @@
     "img/products/101-fioletovaya-roza-shokoladnyy-tort/6.webp",
     "img/products/101-fioletovaya-roza-shokoladnyy-tort/7.webp",
     "img/products/101-fioletovaya-roza-shokoladnyy-tort/8.webp"
+   ]
+  },
+  {
+   "id": 116,
+   "slug": "151-rozovaya-roza-fioletovyy-ottenok-belaya-upakovka",
+   "name": "151 розовая роза с фиолетовым оттенком в белой упаковке",
+   "desc": "огромный букет из 151 розы нежного розового цвета с лёгким фиолетовым оттенком в белой упаковке — роскошный и объёмный подарок с сильным вау-эффектом. Идеально на день рождения, годовщину, свадьбу или большое признание в любви. Доставим по Нячангу в день заказа, вложим открытку по желанию",
+   "alt": "151 розовая роза с фиолетовым оттенком в белой упаковке Нячанг доставка",
+   "price_vnd": 2250000,
+   "price": "2 250 000 донгов",
+   "price_sub": "≈ $90 · 7 700 ₽",
+   "cats": [
+    "r101"
+   ],
+   "color": "pink",
+   "images": [
+    "img/products/151-rozovaya-roza-fioletovyy-ottenok-belaya-upakovka/1.webp",
+    "img/products/151-rozovaya-roza-fioletovyy-ottenok-belaya-upakovka/2.webp",
+    "img/products/151-rozovaya-roza-fioletovyy-ottenok-belaya-upakovka/3.webp",
+    "img/products/151-rozovaya-roza-fioletovyy-ottenok-belaya-upakovka/4.webp",
+    "img/products/151-rozovaya-roza-fioletovyy-ottenok-belaya-upakovka/5.webp",
+    "img/products/151-rozovaya-roza-fioletovyy-ottenok-belaya-upakovka/6.webp",
+    "img/products/151-rozovaya-roza-fioletovyy-ottenok-belaya-upakovka/7.webp"
    ]
   }
  ]

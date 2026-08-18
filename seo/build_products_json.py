@@ -50,6 +50,8 @@ def product_color(slug):
     s = slug.lower()
     if s.startswith("podarochnyy-nabor") or s.startswith("podarok-nabor") or s.startswith("tort"):
         return ""
+    if s.startswith("151-rozovaya-roza-fioletovyy-ottenok"):
+        return "pink"
     if "belo-rozov" in s: return "pink"
     if "kras" in s:       return "red"
     if "bel" in s:        return "white"
