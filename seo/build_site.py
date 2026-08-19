@@ -20,6 +20,7 @@ WA = "https://wa.me/37443529162"
 TG = "https://t.me/babaskin_o"
 # Корейская аудитория не пользуется WhatsApp/Telegram — только KakaoTalk + KO Instagram
 KAKAO = "http://pf.kakao.com/_zbwKX"
+KAKAO_DIRECT = "https://open.kakao.com/o/seD8jkIi"
 IG_KO = "https://instagram.com/nhatrang.kkot"
 DOMAIN = "https://flowers-nha-trang.online"
 
@@ -36,6 +37,7 @@ WA_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="curr
 TG_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>'
 IG_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>'
 KAKAO_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M12 3C6.477 3 2 6.463 2 10.74c0 2.74 1.83 5.146 4.59 6.51-.2.74-.73 2.66-.836 3.072-.13.51.187.503.394.366.163-.107 2.6-1.766 3.66-2.487.71.105 1.444.16 2.192.16 5.523 0 10-3.463 10-7.74S17.523 3 12 3z"/></svg>'
+ORDER_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 328c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg>'
 
 def contact_links(lang):
     """Иконки соцсетей для шапки/футера по языку (KO: Kakao + KO Instagram)."""
@@ -521,6 +523,18 @@ __CARD_JS__
 SCRIPTS = SCRIPTS.replace("__CARD_JS__", CARD_JS)
 
 def order_buttons(name, t, lang, size="full"):
+    if lang == "ko":
+        links = [
+            ("../order.html", "온라인 주문하기", ORDER_SVG, False),
+            (KAKAO_DIRECT, "카카오톡으로 주문", KAKAO_SVG, True),
+            (KAKAO, "카카오톡 채널", KAKAO_SVG, True),
+            (IG_KO, "인스타그램으로 주문", IG_SVG, True),
+        ]
+        rows = []
+        for url, label, svg, external in links:
+            target = ' target="_blank"' if external else ""
+            rows.append(f'<a href="{url}"{target} class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">{svg} {label}</a>')
+        return '<div class="flex flex-col gap-4">\n                    ' + "\n                    ".join(rows) + "\n                </div>"
     msg = name.replace(" ", "%20")
     rows = []
     for url, label, svg in order_contacts(lang, t):
@@ -653,8 +667,8 @@ def render_product(p, lang, products):
         title = f"{name} — delivery in Nha Trang | NhaTrang Flowers"
         meta = f"{name} with same-day delivery in Nha Trang. {desc}. Price {price_loc(p['price'], lang)}. Order via WhatsApp or Telegram."
     else:
-        title = f"{name} — 나트랑 배달 | NhaTrang Flowers"
-        meta = f"{name} 나트랑 당일 배달. {desc}. 가격 {price_loc(p['price'], lang)}. WhatsApp·Telegram 주문."
+        title = f"{name} — 나트랑 꽃배달·당일배달"
+        meta = f"{name} 나트랑 꽃배달 당일 배달. {desc}. 가격 {price_loc(p['price'], lang)}. 온라인·카카오톡·인스타그램 주문."
     # ограничение длины meta-description под лимиты Google (~160 симв), обрезка по границе слова
     if len(meta) > 160:
         meta = meta[:158].rsplit(" ", 1)[0].rstrip(" .,;—-") + "…"

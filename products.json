@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-19 10:26",
- "count": 117,
+ "generated": "2026-08-19 11:13",
+ "count": 118,
  "categories": [
   {
    "key": "all",
@@ -2725,6 +2725,30 @@
     "img/products/tort-belo-goluboy-dollary-frukty-happy-birthday/6.webp",
     "img/products/tort-belo-goluboy-dollary-frukty-happy-birthday/7.webp",
     "img/products/tort-belo-goluboy-dollary-frukty-happy-birthday/8.webp"
+   ]
+  },
+  {
+   "id": 118,
+   "slug": "101-rozovaya-roza-korzina-bukva-n",
+   "name": "101 розовая роза в корзине с буквой «Н» в центре",
+   "desc": "пышная композиция из 101 нежно-розовой розы в белой плетёной корзине, с буквой «Н» из белых роз в центре и атласным розовым бантом — эффектный персональный подарок с вау-эффектом. Розы стоят во флористической губке и дольше сохраняют форму; идеально для дня рождения, годовщины или признания. Доставим по Нячангу в день заказа, вложим открытку по желанию",
+   "alt": "101 розовая роза в корзине с буквой Н Нячанг доставка",
+   "price_vnd": 2500000,
+   "price": "2 500 000 донгов",
+   "price_sub": "≈ $100 · 8 600 ₽",
+   "cats": [
+    "r101"
+   ],
+   "color": "pink",
+   "images": [
+    "img/products/101-rozovaya-roza-korzina-bukva-n/1.webp",
+    "img/products/101-rozovaya-roza-korzina-bukva-n/2.webp",
+    "img/products/101-rozovaya-roza-korzina-bukva-n/3.webp",
+    "img/products/101-rozovaya-roza-korzina-bukva-n/4.webp",
+    "img/products/101-rozovaya-roza-korzina-bukva-n/5.webp",
+    "img/products/101-rozovaya-roza-korzina-bukva-n/6.webp",
+    "img/products/101-rozovaya-roza-korzina-bukva-n/7.webp",
+    "img/products/101-rozovaya-roza-korzina-bukva-n/8.webp"
    ]
   }
  ]
