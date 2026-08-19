@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-18 21:25",
- "count": 116,
+ "generated": "2026-08-19 10:26",
+ "count": 117,
  "categories": [
   {
    "key": "all",
@@ -2701,6 +2701,30 @@
     "img/products/151-rozovaya-roza-fioletovyy-ottenok-belaya-upakovka/5.webp",
     "img/products/151-rozovaya-roza-fioletovyy-ottenok-belaya-upakovka/6.webp",
     "img/products/151-rozovaya-roza-fioletovyy-ottenok-belaya-upakovka/7.webp"
+   ]
+  },
+  {
+   "id": 117,
+   "slug": "tort-belo-goluboy-dollary-frukty-happy-birthday",
+   "name": "Бело-голубой торт с долларами, фруктами и топпером Happy Birthday",
+   "desc": "праздничный бело-голубой торт с шоколадным дрипом, денежным декором, фруктовой композицией, кремовыми цветами и серебристым топпером Happy Birthday. Рассчитан на 5 человек; в комплекте свечи и набор для сервировки, всё упаковано в подарочную коробку. Свежая выпечка, доставим по Нячангу в день заказа",
+   "alt": "бело-голубой торт с долларами фруктами и топпером Happy Birthday Нячанг доставка",
+   "price_vnd": 500000,
+   "price": "500 000 донгов",
+   "price_sub": "≈ $20 · 1 700 ₽",
+   "cats": [
+    "cakes"
+   ],
+   "color": "",
+   "images": [
+    "img/products/tort-belo-goluboy-dollary-frukty-happy-birthday/1.webp",
+    "img/products/tort-belo-goluboy-dollary-frukty-happy-birthday/2.webp",
+    "img/products/tort-belo-goluboy-dollary-frukty-happy-birthday/3.webp",
+    "img/products/tort-belo-goluboy-dollary-frukty-happy-birthday/4.webp",
+    "img/products/tort-belo-goluboy-dollary-frukty-happy-birthday/5.webp",
+    "img/products/tort-belo-goluboy-dollary-frukty-happy-birthday/6.webp",
+    "img/products/tort-belo-goluboy-dollary-frukty-happy-birthday/7.webp",
+    "img/products/tort-belo-goluboy-dollary-frukty-happy-birthday/8.webp"
    ]
   }
  ]
