@@ -39,6 +39,8 @@ def product_cats(slug, name_ru):
     is_prazdnik  = s.startswith("nabor-prazdnik") or ("prazdnik" in s)
     if has_balloons and "balloons" not in cats: cats.append("balloons")
     if has_cake and "cakes" not in cats:        cats.append("cakes")
+    if s == "yarkiy-sbornyy-buket-tort-happy-birthday" and "mixed" not in cats:
+        cats.insert(0, "mixed")
     if is_nabor and "nabory" not in cats:       cats.insert(0, "nabory")
     if is_prazdnik and "prazdnik" not in cats:  cats.insert(0, "prazdnik")
     if not cats:

@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-20 13:07",
- "count": 118,
+ "generated": "2026-08-20 14:24",
+ "count": 119,
  "categories": [
   {
    "key": "all",
@@ -2749,6 +2749,30 @@
     "img/products/101-rozovaya-roza-korzina-bukva-n/6.webp",
     "img/products/101-rozovaya-roza-korzina-bukva-n/7.webp",
     "img/products/101-rozovaya-roza-korzina-bukva-n/8.webp"
+   ]
+  },
+  {
+   "id": 119,
+   "slug": "yarkiy-sbornyy-buket-tort-happy-birthday",
+   "name": "Яркий сборный букет + торт «Happy Birthday»",
+   "desc": "яркий праздничный комплект: пышный сборный букет в розовых, малиновых, белых и фиолетовых оттенках с герберами, розами и хризантемами, а также бело-голубой торт с шоколадным дрипом, фруктовым и денежным декором и топпером Happy Birthday. Торт рассчитан на 5 человек; в комплекте свечи и набор для сервировки, всё упаковано в подарочную коробку. Готовый сюрприз на день рождения, доставим по Нячангу в день заказа",
+   "alt": "яркий сборный букет и торт Happy Birthday Нячанг доставка",
+   "price_vnd": 1750000,
+   "price": "1 750 000 донгов",
+   "price_sub": "≈ $70 · 6 300 ₽",
+   "cats": [
+    "mixed",
+    "cakes"
+   ],
+   "color": "",
+   "images": [
+    "img/products/yarkiy-sbornyy-buket-tort-happy-birthday/1.webp",
+    "img/products/yarkiy-sbornyy-buket-tort-happy-birthday/2.webp",
+    "img/products/yarkiy-sbornyy-buket-tort-happy-birthday/3.webp",
+    "img/products/yarkiy-sbornyy-buket-tort-happy-birthday/4.webp",
+    "img/products/yarkiy-sbornyy-buket-tort-happy-birthday/5.webp",
+    "img/products/yarkiy-sbornyy-buket-tort-happy-birthday/6.webp",
+    "img/products/yarkiy-sbornyy-buket-tort-happy-birthday/7.webp"
    ]
   }
  ]
