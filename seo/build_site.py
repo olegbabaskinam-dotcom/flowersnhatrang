@@ -200,10 +200,21 @@ CUR = {"ru": "донгов", "en": "VND", "ko": "동"}
 def price_loc(price, lang):
     return price.replace("донгов", CUR[lang])
 
-def sub_loc(sub, lang):
-    """price_sub локализуется: RU — как есть (≈ $N · NNN ₽); EN — только $N; KO — воны ($×1380, округл. до тысяч)."""
+RUB_VND_RATE = 280
+
+def rub_price(price):
+    """VND → RUB по курсу, всегда вверх до ближайших 100 ₽."""
+    vnd = int(price_num(price))
+    return ((vnd + RUB_VND_RATE * 100 - 1) // (RUB_VND_RATE * 100)) * 100
+
+def sub_loc(sub, lang, price=None):
+    """price_sub локализуется: RU — $ + ₽ по курсу; EN — только $; KO — воны."""
     if lang == "ru":
-        return sub
+        if price is None:
+            return sub
+        m = re.match(r'≈ \$(\d+)', sub)
+        dollars = f"≈ ${m.group(1)} · " if m else "≈ "
+        return f"{dollars}{rub_price(price):,} ₽".replace(",", " ")
     m = re.match(r'≈ \$(\d+)', sub)
     if not m:
         return sub
@@ -627,7 +638,7 @@ def product_card(p, lang, base, t):
                     <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">{html.escape(name)}</h3>
                     <p class="text-stone-600 text-xs mb-3 flex-grow">{html.escape(desc)}</p>
                     <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">{html.escape(price_loc(p['price'], lang))}</p>
-                    <p class="text-stone-500 text-xs mb-4">{html.escape(sub_loc(p['price_sub'], lang))}</p>
+                    <p class="text-stone-500 text-xs mb-4">{html.escape(sub_loc(p['price_sub'], lang, p['price']))}</p>
                     <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">{t["details"]} →</span>
                 </a>
             </div>'''
@@ -722,7 +733,7 @@ def render_product(p, lang, products):
             <p class="text-stone-600 mb-6 leading-relaxed">{html.escape(desc)}.</p>
             <div class="price-box mb-6">
                 <p class="font-bold text-3xl mb-1" style="color:#1a1a1a;">{html.escape(price_loc(p['price'], lang))}</p>
-                <p class="text-stone-500 text-sm">{html.escape(sub_loc(p['price_sub'], lang))}</p>
+                <p class="text-stone-500 text-sm">{html.escape(sub_loc(p['price_sub'], lang, p['price']))}</p>
             </div>
             {order_buttons(name, t, lang)}
             <div class="flex flex-wrap gap-2 mt-5">
