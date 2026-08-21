@@ -600,6 +600,8 @@ def product_cat(p):
 def product_color(p):
     """Цвет роз для фильтра (red/white/pink/purple/'')."""
     s = p["slug"].lower()
+    if s == "151-krasnaya-roza-belaya-upakovka-101-belo-rozovaya-korzina":
+        return "red"
     if s.startswith("podarochnyy-nabor") or s.startswith("podarok-nabor") or s.startswith("tort"):
         return ""  # у подарочных наборов и тортов цвета роз нет («krasota» не должно давать red)
     if s.startswith("151-rozovaya-roza-fioletovyy-ottenok"):

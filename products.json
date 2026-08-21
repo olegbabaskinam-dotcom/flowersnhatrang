@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-20 14:24",
- "count": 119,
+ "generated": "2026-08-21 15:55",
+ "count": 120,
  "categories": [
   {
    "key": "all",
@@ -2773,6 +2773,28 @@
     "img/products/yarkiy-sbornyy-buket-tort-happy-birthday/5.webp",
     "img/products/yarkiy-sbornyy-buket-tort-happy-birthday/6.webp",
     "img/products/yarkiy-sbornyy-buket-tort-happy-birthday/7.webp"
+   ]
+  },
+  {
+   "id": 120,
+   "slug": "151-krasnaya-roza-belaya-upakovka-101-belo-rozovaya-korzina",
+   "name": "151 красная роза в белой упаковке + 101 бело-розовая роза в корзине",
+   "desc": "роскошный комплект из двух больших композиций: круглый букет из 151 насыщенно-красной розы в белой упаковке и 101 бело-розовая роза в белой плетёной корзине с пышной зеленью и розовой лентой. Эффектный подарок с максимальным вау-эффектом для дня рождения, годовщины, свадьбы или большого признания. Доставим оба букета по Нячангу в день заказа, вложим открытку по желанию",
+   "alt": "151 красная роза в белой упаковке и 101 бело-розовая роза в корзине Нячанг доставка",
+   "price_vnd": 4250000,
+   "price": "4 250 000 донгов",
+   "price_sub": "≈ $170 · 15 200 ₽",
+   "cats": [
+    "r101"
+   ],
+   "color": "red",
+   "images": [
+    "img/products/151-krasnaya-roza-belaya-upakovka-101-belo-rozovaya-korzina/1.webp",
+    "img/products/151-krasnaya-roza-belaya-upakovka-101-belo-rozovaya-korzina/2.webp",
+    "img/products/151-krasnaya-roza-belaya-upakovka-101-belo-rozovaya-korzina/3.webp",
+    "img/products/151-krasnaya-roza-belaya-upakovka-101-belo-rozovaya-korzina/4.webp",
+    "img/products/151-krasnaya-roza-belaya-upakovka-101-belo-rozovaya-korzina/5.webp",
+    "img/products/151-krasnaya-roza-belaya-upakovka-101-belo-rozovaya-korzina/6.webp"
    ]
   }
  ]
