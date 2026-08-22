@@ -114,6 +114,20 @@ def replace_business_copy(text: str) -> str:
     return text.replace("\x02", "")
 
 
+def limit_operator_sameday_to_home(path: Path, text: str) -> str:
+    """Срочная доставка через оператора рекламируется только на трёх главных."""
+    if path.parent == ROOT and path.name in {"index.html", "index-en.html", "index-kr.html"}:
+        return text
+    replacements = [
+        ("онлайн-заказы — со следующего дня; срочная доставка сегодня — через оператора до 18:00.", "онлайн-доставка со следующего дня."),
+        ("online orders start next day; urgent delivery today is available via an operator until 18:00.", "online delivery starts from the next day."),
+        ("온라인 주문은 다음 날부터; 오늘 긴급 배송은 18:00까지 상담원을 통해 주문할 수 있습니다.", "온라인 주문은 다음 날부터 배달합니다."),
+    ]
+    for old, new in replacements:
+        text = text.replace(old, new)
+    return text
+
+
 def fix_ko_payment_copy(text: str) -> str:
     replacements = [
         ("결제: 동, 달러, 루블, USDT, 현금", "결제: 수령 시 현금 또는 암호화폐 송금"),
@@ -532,13 +546,16 @@ def main() -> None:
     changed = 0
     changed_paths: list[str] = []
     for path in files:
-        if path.suffix.lower() not in {".html", ".js", ".json", ".csv", ".py", ".xml", ".txt", ".md"}:
+        # Python-сценарии не прогоняем через текстовые замены: иначе скрипт
+        # может переписать собственные шаблоны и правила проверки.
+        if path.suffix.lower() not in {".html", ".js", ".json", ".csv", ".xml", ".txt", ".md"}:
             continue
         try:
             old = path.read_text(encoding="utf-8")
         except UnicodeDecodeError:
             continue
         new = fix_ko_payment_copy(replace_business_copy(old))
+        new = limit_operator_sameday_to_home(path, new)
         if path.suffix.lower() == ".html":
             new = fix_ko_language_leaks(path, new)
             new = ensure_utility_noindex(path, new)

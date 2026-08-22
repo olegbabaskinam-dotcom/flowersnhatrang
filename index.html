@@ -138,7 +138,7 @@
       "@type": "LocalBusiness",
       "@id": "https://flowers-nha-trang.online/",
       "name": "Русскоязычная доставка цветов и гелиевых шаров в Нячанге",
-      "description": "Доставка цветов и гелиевых шаров в Нячанге. Бесплатная доставка по городу. Со следующего дня до 18:00.",
+      "description": "Доставка цветов и гелиевых шаров в Нячанге. Онлайн-заказы — со следующего дня; срочная доставка сегодня — через оператора до 18:00.",
       "url": "https://flowers-nha-trang.online/",
       "telephone": "+37443529162",
       "image": "img/site/og-default.webp",
@@ -194,12 +194,12 @@
                     Русскоязычная доставка цветов и шаров в Нячанге
                 </h1>
                 <p class="text-stone-700 text-sm md:text-base mb-2 hero-animate-delay">
-                    Бесплатная доставка по городу. Онлайн-заказы доставляем со следующего дня.
+                    Бесплатная доставка по городу. Онлайн-заказ — со следующего дня; срочная доставка сегодня — через оператора до 18:00.
                 </p>
                 <p class="text-xs mb-1 hero-animate-delay" style="color:#c0687a;">
                     🕐 работаем с 6:00 до 22:00
                 </p>
-                <p id="countdown" style="display:none; color:#c0687a;" class="text-xs mb-6"></p>
+                <p id="countdown" aria-live="polite" style="min-height:1.25rem;color:#c0687a;" class="text-xs mb-6">⏱ Срочная доставка сегодня — через оператора до 18:00.</p>
 
                 <div class="flex flex-col gap-4 mt-6 hero-animate-delay2"><a href="order.html" class="btn-rose flex items-center justify-center gap-2 font-medium py-3 px-5 rounded-xl text-sm">
                         🛒 Оформить онлайн доставку
@@ -899,7 +899,7 @@
                         <h4 class="font-bold text-base mb-3" style="color:#1a1a1a;">условия доставки</h4>
                         <ul class="space-y-2 text-stone-500 text-sm">
                             <li class="flex gap-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg> бесплатная доставка по Нячангу.</li>
-                            <li class="flex gap-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg> онлайн-доставка со следующего дня при заказе до 18:00.</li>
+                            <li class="flex gap-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg> онлайн-заказы — со следующего дня; срочная доставка сегодня — через оператора до 18:00.</li>
                             <li class="p-3 rounded-xl mt-3 text-xs" style="background:#fce8ee; color:#a8566a;">камрань: доставка от 51 розы — 600 000 донгов (оплачивается отдельно).</li>
                         </ul>
                     </div>
@@ -982,16 +982,27 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"]').forEach(function(
 (function(){
     var el = document.getElementById('countdown');
     if(!el) return;
-    function update(){
-        var now = new Date(), h = now.getHours();
-        if(h < 6 || h >= 18){ el.style.display='none'; return; }
+    var p=function(n){return('0'+n).slice(-2);};
+    function render(h,m,s){
         el.style.display = '';
-        var d = new Date(now); d.setHours(18,0,0,0);
-        var diff = d - now;
-        var hh=Math.floor(diff/3600000), mm=Math.floor((diff%3600000)/60000), ss=Math.floor((diff%60000)/1000);
-        var p=function(n){return('0'+n).slice(-2);};
-        el.textContent = '⏱ до 18:00 осталось: ' + p(hh) + ':' + p(mm) + ':' + p(ss);
+        if(h < 6){
+            el.textContent = '⏱ Срочная доставка сегодня через оператора доступна с 06:00 до 18:00.';
+            return;
+        }
+        if(h >= 18){
+            el.textContent = '⏱ Приём срочных заказов на сегодня завершён. Онлайн-заказ — со следующего дня.';
+            return;
+        }
+        var diff=(18*3600)-(h*3600+m*60+s);
+        var hh=Math.floor(diff/3600), mm=Math.floor((diff%3600)/60), ss=diff%60;
+        el.textContent = '⏱ Срочная доставка сегодня через оператора: до 18:00 осталось ' + p(hh) + ':' + p(mm) + ':' + p(ss);
     }
+    function update(){
+        var parts={}, fmt=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Ho_Chi_Minh',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+        fmt.formatToParts(new Date()).forEach(function(x){parts[x.type]=x.value;});
+        render(+parts.hour,+parts.minute,+parts.second);
+    }
+    window.__renderOperatorCountdown=render;
     update(); setInterval(update,1000);
 })();
 </script>
