@@ -34,7 +34,7 @@
       },
       {
         "h2": "Доставка и заказ",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">По Нячангу доставка бесплатная, день в день — в отель, на виллу или ресепшен. Привезём к нужному времени и вложим открытку по желанию.</p><p class=\"text-stone-600 leading-relaxed\">Напишите нам в WhatsApp или Telegram — подберём букет, покажем фото и назовём цену в вашей валюте.</p>"
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">По Нячангу доставка бесплатная, со следующего дня — в отель, на виллу или ресепшен. Привезём к нужному времени и вложим открытку по желанию.</p><p class=\"text-stone-600 leading-relaxed\">Напишите нам в WhatsApp или Telegram — подберём букет, покажем фото и назовём цену в вашей валюте.</p>"
       }
     ],
     "faq": [
@@ -52,7 +52,7 @@
       ],
       [
         "Нужно ли платить за доставку?",
-        "По Нячангу доставка бесплатная, день в день. Оплату принимаем удобным вам способом, подтверждаем заказ обычно за 10 минут."
+        "По Нячангу доставка бесплатная, со следующего дня. Оплату принимаем удобным вам способом, подтверждаем заказ обычно за 10 минут."
       ]
     ]
   },
@@ -81,7 +81,7 @@
       },
       {
         "h2": "Delivery and ordering",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Delivery within Nha Trang is free and same-day — to a hotel, villa or front desk. We bring it at the right time and add a card on request.</p><p class=\"text-stone-600 leading-relaxed\">Message us on WhatsApp or Telegram — we will pick a bouquet, show photos and quote the price in your currency.</p>"
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Delivery within Nha Trang is free and next-day — to a hotel, villa or front desk. We bring it at the right time and add a card on request.</p><p class=\"text-stone-600 leading-relaxed\">Message us on WhatsApp or Telegram — we will pick a bouquet, show photos and quote the price in your currency.</p>"
       }
     ],
     "faq": [
@@ -99,54 +99,50 @@
       ],
       [
         "Is there a delivery fee?",
-        "Delivery within Nha Trang is free and same-day. We accept payment by your preferred method and usually confirm within 10 minutes."
+        "Delivery within Nha Trang is free and next-day. We accept payment by your preferred method and usually confirm within 10 minutes."
       ]
     ]
   },
   "ko": {
-    "title": "나트랑 꽃값 결제: 루블·동·달러",
-    "h1": "나트랑에서 꽃값 결제하는 법",
-    "meta": "나트랑 꽃 배달 결제 방법: 루블(SBP), 동(이체/QR), 달러, USDT, 카자흐 카드, 현금. 여행자에게 편리, 10분 내 확정.",
-    "excerpt": "여행자에게 편리한 모든 결제 방법: 루블·동·달러·USDT·현금 — 다른 나라에서 원격으로도 편하게 결제하세요.",
-    "intro": "여행자가 현지 가게보다 저희에게 주문하는 흔한 이유 중 하나는 편리한 결제입니다. 환전소를 찾거나 동을 인출할 필요 없이 루블·달러·암호화폐·현금으로 결제하세요. 멀리서 주문하는 경우를 포함해 모든 방법을 알려드립니다.",
+    "title": "나트랑 꽃 배달 결제 안내: 현금·암호화폐",
+    "h1": "나트랑 꽃 배달 결제 방법",
+    "meta": "한국 고객을 위한 나트랑 꽃 배달 결제 안내. 수령 시 현금 또는 암호화폐 송금으로 결제하며 카카오톡에서 금액과 방법을 확정합니다.",
+    "excerpt": "한국 고객은 수령 시 현금 또는 암호화폐 송금으로 결제할 수 있습니다. 주문 전에 카카오톡으로 정확한 금액과 방법을 안내합니다.",
+    "intro": "한국 고객의 주문은 간단합니다. 카카오톡에서 상품과 배달 정보를 확인한 뒤 수령 시 현금 또는 안내받은 암호화폐 지갑으로 결제합니다. 주문 확정 전에 최종 금액과 결제 절차를 명확히 알려드립니다.",
     "sections": [
       {
-        "h2": "가능한 결제 수단",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">편하신 방법으로 결제하실 수 있습니다:</p><ul class=\"space-y-2 mb-4 text-stone-600\"><li>🇷🇺 <b>루블</b> — 러시아 카드로 SBP 이체.</li><li>🇻🇳 <b>동(VND)</b> — 이체 또는 Dong QR (BIDV 은행).</li><li>💵 <b>달러</b> — 현금 또는 이체.</li><li>💠 <b>USDT</b> — 암호화폐 이체 (TRC-20).</li><li>💳 <b>카자흐 카드 (Kaspi)</b> — 카자흐스탄 고객용.</li><li>💰 <b>현금</b> — 수령 시 동 또는 달러.</li></ul><p class=\"text-stone-600 leading-relaxed\">환율은 정직하게 계산하고 금액을 미리 알려드려 놀랄 일이 없습니다.</p>"
+        "h2": "이용 가능한 결제 수단",
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">한국 고객은 <b>수령 시 현금</b> 또는 <b>암호화폐 송금</b>으로 결제할 수 있습니다.</p><p class=\"text-stone-600 leading-relaxed\">암호화폐를 선택하면 주문 확정 전에 담당자가 정확한 지갑 주소와 네트워크를 안내합니다. 안내를 확인하기 전에는 송금하지 마세요.</p>"
       },
       {
-        "h2": "루블·달러로 얼마인가요",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">원하시는 통화로 가격을 알려드립니다. 기준: 1달러 ≈ 25,000동, 1루블 = 280동이며 루블 금액은 100루블 단위로 올림합니다. 한국 고객께는 원화로도 표시합니다.</p><p class=\"text-stone-600 leading-relaxed\">사이트 장바구니에 통화 전환 기능이 있어 ₫·$·₽·₸·₩로 바로 확인할 수 있습니다.</p>"
+        "h2": "가격은 어떻게 확인하나요",
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">기본 가격은 베트남 동(VND) 기준이며, 사이트의 원화 표시는 비교를 위한 참고 금액입니다.</p><p class=\"text-stone-600 leading-relaxed\">최종 결제 금액은 주문 확정 전에 카카오톡으로 다시 안내해 드립니다.</p>"
       },
       {
-        "h2": "원격 주문 시 결제",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">다른 나라에 있어도 나트랑의 소중한 사람에게 꽃을 주문할 수 있습니다: 루블(SBP)·달러·USDT로 결제하면 현지에서 준비·배달합니다. 배달 전 부케 사진을 보내드립니다.</p><p class=\"text-stone-600 leading-relaxed\">베트남에서 멀리 있어도 서프라이즈를 할 수 있는 편리한 방법입니다.</p>"
+        "h2": "다른 나라에서 주문하는 경우",
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">해외에서도 나트랑에 있는 가족이나 친구에게 꽃을 주문할 수 있습니다. 카카오톡으로 상품, 받는 분 정보와 날짜를 보내 주세요.</p><p class=\"text-stone-600 leading-relaxed\">배달 전 완성된 꽃다발 사진을 보내드립니다.</p>"
       },
       {
-        "h2": "언제 결제하고 주문은 어떻게 확정되나요",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">부케와 금액을 정하고 편한 방법으로 결제 후 스크린샷을 보내주시면 주문 확정입니다. 현금 결제 시에는 제작 전 매니저가 연락드리고 본인이 직접 확인합니다.</p><p class=\"text-stone-600 leading-relaxed\">영업시간 기준 보통 10분 이내에 확정됩니다.</p>"
-      },
-      {
-        "h2": "배달과 주문",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">나트랑 시내 배달은 무료, 당일 — 호텔·빌라·프런트로. 원하는 시간에 배달하고 요청 시 카드를 동봉합니다.</p><p class=\"text-stone-600 leading-relaxed\">WhatsApp이나 Telegram으로 연락 주세요 — 꽃다발을 골라 사진을 보내고 원하시는 통화로 가격을 알려드립니다.</p>"
+        "h2": "주문 확정과 배달",
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">온라인 주문은 다음 날부터 배달할 수 있습니다. 나트랑 시내는 무료이며, 남부 외곽은 300,000동, 바이다이·깜라인 북부는 600,000동입니다.</p><p class=\"text-stone-600 leading-relaxed\">섬 지역, 깜라인 공항 및 공항 남쪽 지역은 배달하지 않습니다. 주문은 카카오톡에서 최종 확인 후 확정됩니다.</p>"
       }
     ],
     "faq": [
       [
-        "루블로 결제할 수 있나요?",
-        "네, 러시아 카드로 SBP 이체가 가능합니다. 동, 달러, USDT, 카자흐 카드(Kaspi), 수령 시 현금도 받습니다."
+        "한국 카드로 결제할 수 있나요?",
+        "현재 한국 고객은 수령 시 현금 또는 암호화폐 송금으로 결제할 수 있습니다."
       ],
       [
-        "다른 나라에서 주문·결제할 수 있나요?",
-        "네. 루블·달러·USDT로 원격 결제하시면 나트랑에서 준비·배달하고, 배달 전 부케 사진을 보내드립니다."
+        "암호화폐는 어디로 보내나요?",
+        "주문 확정 전에 카카오톡 담당자가 정확한 지갑 주소와 네트워크를 안내합니다."
       ],
       [
-        "환율은 어떻게 적용하나요?",
-        "기준: 1달러 ≈ 25,000₫, 1루블 = 280₫이며 루블 금액은 100루블 단위로 올림합니다. 장바구니에 ₫/$/₽/₸/₩ 전환 기능이 있습니다."
+        "원화 가격이 최종 금액인가요?",
+        "사이트의 원화 표시는 참고용입니다. 최종 금액은 주문 확정 전에 카카오톡으로 안내합니다."
       ],
       [
-        "배달비가 있나요?",
-        "나트랑 시내 배달은 무료, 당일입니다. 편한 방법으로 결제받고 보통 10분 이내 확정합니다."
+        "배달은 언제부터 가능한가요?",
+        "온라인 주문은 다음 날부터 가능하며 나트랑 시내 배달은 무료입니다."
       ]
     ]
   }

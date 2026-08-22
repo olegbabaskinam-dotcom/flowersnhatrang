@@ -7,11 +7,11 @@
 Ловит «тупые» логические баги навигации. Только читает, ничего не меняет.
 Запуск из new-site:  python3 seo/audit_links.py
 """
-import os, re, glob
+import os, re, glob, subprocess
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
 
-HTML = sorted(glob.glob("*.html") + glob.glob("catalog/*.html") + glob.glob("blog/*.html"))
+HTML = sorted(p for p in subprocess.check_output(["git", "ls-files", "-z", "*.html"]).decode().split("\0") if p)
 EXIST = set(os.path.normpath(f) for f in glob.glob("**/*", recursive=True))
 
 def is_ext(u):
@@ -24,14 +24,14 @@ for f in HTML:
     base = os.path.dirname(f)
     s = open(f, encoding="utf-8").read()
     for attr in ("href", "src"):
-        for m in re.finditer(attr + r'="([^"]+)"', s):
+        for m in re.finditer(r'(?<![\w-])' + attr + r'="([^"]+)"', s):
             u = m.group(1).strip()
-            if not u or is_ext(u) or u.startswith("#"):
+            if not u or is_ext(u) or u.startswith("#") or "'+" in u or u.startswith("href_"):
                 continue
             page = u.split("#")[0].split("?")[0]
             if not page:
                 continue
-            tgt = os.path.normpath(os.path.join(base, page))
+            tgt = os.path.normpath(page.lstrip("/") if page.startswith("/") else os.path.join(base, page))
             if tgt not in EXIST and not os.path.exists(tgt):
                 errors.append(f"[БИТАЯ {attr}] {f} → {u}  (нет файла {tgt})")
 
@@ -65,6 +65,9 @@ SPECIAL = {
     "nabory.html": {"ru":"nabory.html","en":"nabory-en.html","ko":"nabory-kr.html"},
     "nabory-en.html": {"ru":"nabory.html","en":"nabory-en.html","ko":"nabory-kr.html"},
     "nabory-kr.html": {"ru":"nabory.html","en":"nabory-en.html","ko":"nabory-kr.html"},
+    "prazdnik.html": {"ru":"prazdnik.html","en":"prazdnik-en.html","ko":"prazdnik-kr.html"},
+    "prazdnik-en.html": {"ru":"prazdnik.html","en":"prazdnik-en.html","ko":"prazdnik-kr.html"},
+    "prazdnik-kr.html": {"ru":"prazdnik.html","en":"prazdnik-en.html","ko":"prazdnik-kr.html"},
 }
 def sibling(f, want):
     """Ожидаемый файл-сосед на другом языке."""
@@ -79,6 +82,8 @@ def sibling(f, want):
     return None
 
 for f in HTML:
+    if f in {"cart.html", "order.html", "checkout.html", "zakaz.html", "Dialog.html", "buh/index.html", "tg/index.html"}:
+        continue
     if os.path.basename(f) not in SPECIAL and not re.search(r'-(ru|en|ko)\.html$', f):
         continue
     s = open(f, encoding="utf-8").read()
@@ -95,7 +100,9 @@ def nav_items(s):
 
 navsets = {}
 for f in HTML:
-    lang = "ru" if (f in ("index.html",) or f.endswith("-ru.html") or f in ("catalog-ru.html","blog-ru.html","balloons.html","torty.html","nabory.html")) else ("en" if "-en" in f or f.endswith("index-en.html") else "ko")
+    if f in {"cart.html", "order.html", "checkout.html", "zakaz.html", "Dialog.html"}:
+        continue
+    lang = "ru" if (f in ("index.html",) or f.endswith("-ru.html") or f in ("catalog-ru.html","blog-ru.html","balloons.html","torty.html","nabory.html","prazdnik.html")) else ("en" if "-en" in f or f.endswith("index-en.html") else "ko")
     s = open(f, encoding="utf-8").read()
     ni = nav_items(s)
     if ni: navsets.setdefault(lang, {}).setdefault(ni, []).append(f)
@@ -103,7 +110,7 @@ for f in HTML:
 # 5) кросс-язык: не-переключательные внутренние ссылки должны оставаться в своём языке
 SPLANG = {"index.html":"ru","index-en.html":"en","index-kr.html":"ko",
           "balloons.html":"ru","balloons-en.html":"en","balloons-kr.html":"ko","torty.html":"ru","torty-en.html":"en","torty-kr.html":"ko",
-          "nabory.html":"ru","nabory-en.html":"en","nabory-kr.html":"ko"}
+          "nabory.html":"ru","nabory-en.html":"en","nabory-kr.html":"ko","prazdnik.html":"ru","prazdnik-en.html":"en","prazdnik-kr.html":"ko"}
 def page_lang(path):
     b = os.path.basename(path)
     if b in SPLANG: return SPLANG[b]

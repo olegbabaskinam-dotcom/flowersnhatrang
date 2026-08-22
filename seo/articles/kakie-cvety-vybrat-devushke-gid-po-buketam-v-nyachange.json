@@ -34,7 +34,7 @@
       },
       {
         "h2": "Как заказать и оплатить",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Напишите нам в WhatsApp или Telegram, расскажите про повод и вкусы девушки — предложим букет, покажем фото и назовём цену. Подтверждаем обычно за 10 минут.</p><p class=\"text-stone-600 leading-relaxed\">Оплата удобная для туриста: донги, рубли, доллары, USDT или наличные. По Нячангу доставка бесплатная, можно день в день.</p>"
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Напишите нам в WhatsApp или Telegram, расскажите про повод и вкусы девушки — предложим букет, покажем фото и назовём цену. Подтверждаем обычно за 10 минут.</p><p class=\"text-stone-600 leading-relaxed\">Оплата удобная для туриста: донги, рубли, доллары, USDT или наличные. По Нячангу доставка бесплатная, можно со следующего дня.</p>"
       }
     ],
     "faq": [
@@ -52,7 +52,7 @@
       ],
       [
         "Как быстро подтвердите заказ?",
-        "Обычно за 10 минут в рабочее время. Напишите в WhatsApp или Telegram — подберём букет и подскажем оплату. Доставка по городу бесплатная, день в день."
+        "Обычно за 10 минут в рабочее время. Напишите в WhatsApp или Telegram — подберём букет и подскажем оплату. Доставка по городу бесплатная, со следующего дня."
       ]
     ]
   },
@@ -81,7 +81,7 @@
       },
       {
         "h2": "How to order and pay",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Message us on WhatsApp or Telegram, tell us the occasion and her taste — we will suggest a bouquet, show photos and name a price. We usually confirm within 10 minutes.</p><p class=\"text-stone-600 leading-relaxed\">Payment is easy for travellers: dong, roubles, dollars, USDT or cash. Delivery within Nha Trang is free and available same-day.</p>"
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Message us on WhatsApp or Telegram, tell us the occasion and her taste — we will suggest a bouquet, show photos and name a price. We usually confirm within 10 minutes.</p><p class=\"text-stone-600 leading-relaxed\">Payment is easy for travellers: dong, roubles, dollars, USDT or cash. Delivery within Nha Trang is free and available next-day.</p>"
       }
     ],
     "faq": [
@@ -99,7 +99,7 @@
       ],
       [
         "How fast do you confirm the order?",
-        "Usually within 10 minutes during working hours. Message us on WhatsApp or Telegram — we will pick the bouquet and advise on payment. City delivery is free and same-day."
+        "Usually within 10 minutes during working hours. Message us on WhatsApp or Telegram — we will pick the bouquet and advise on payment. City delivery is free and next-day."
       ]
     ]
   },
@@ -128,7 +128,7 @@
       },
       {
         "h2": "주문과 결제 방법",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">WhatsApp이나 Telegram으로 상황과 그녀의 취향을 알려 주세요 — 꽃다발을 제안하고 사진과 가격을 보내 드립니다. 보통 10분 안에 확정됩니다.</p><p class=\"text-stone-600 leading-relaxed\">결제는 여행자에게 편리합니다: 동, 루블, 달러, USDT, 현금. 나트랑 시내 배달은 무료이며 당일 가능합니다.</p>"
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">카카오톡으로 상황과 그녀의 취향을 알려 주세요 — 꽃다발을 제안하고 사진과 가격을 보내 드립니다. 보통 10분 안에 확정됩니다.</p><p class=\"text-stone-600 leading-relaxed\">결제는 수령 시 현금 또는 암호화폐 송금입니다. 나트랑 시내 배달은 무료이며 주문 다음 날부터 가능합니다.</p>"
       }
     ],
     "faq": [
@@ -146,7 +146,7 @@
       ],
       [
         "주문 확정은 얼마나 빠른가요?",
-        "보통 영업시간 기준 10분 이내입니다. WhatsApp이나 Telegram으로 연락 주세요 — 꽃다발을 고르고 결제를 안내합니다. 시내 배달은 무료, 당일 가능합니다."
+        "보통 영업시간 기준 10분 이내입니다. 카카오톡으로 연락 주세요 — 꽃다발을 고르고 결제를 안내합니다. 시내 배달은 무료, 주문 다음 날부터 가능합니다."
       ]
     ]
   }

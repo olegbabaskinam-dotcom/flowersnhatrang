@@ -80,8 +80,8 @@ id,date,type,category,keyword_ru,title_ru,slug,photo_query_en,status_ru,status_e
 79,2026-08-20,article,Гео,предложение на пляже нячанг,Предложение руки на пляже Нячанга: оформление цветами,predlozhenie-ruki-na-plyazhe-nyachanga-oformlenie-cvetami,beach proposal flowers,todo,todo,todo
 80,2026-08-21,article,Гео,цветы аэропорт камрань,Цветы в аэропорт Камрань: встреча с букетом,cvety-v-aeroport-kamran-vstrecha-s-buketom,airport welcome flowers,todo,todo,todo
 81,2026-08-22,article,Гео,украшение номера лепестками роз,Украшение номера лепестками роз в Нячанге,ukrashenie-nomera-lepestkami-roz-v-nyachange,rose petals room,todo,todo,todo
-82,2026-08-23,article,Гео,доставка цветов круглосуточно нячанг,Доставка цветов 24/7 в Нячанге: ночные заказы,dostavka-cvetov-247-v-nyachange-nochnye-zakazy,night flower delivery,todo,todo,todo
-83,2026-08-24,article,Гео,доставка цветов день в день нячанг,Свежие цветы в Нячанге день в день,svezhie-cvety-v-nyachange-den-v-den,same day delivery flowers,todo,todo,todo
+82,2026-08-23,article,Гео,доставка цветов круглосуточно нячанг,Доставка цветов ежедневно 06:00–22:00 в Нячанге: ночные заказы,dostavka-cvetov-247-v-nyachange-nochnye-zakazy,night flower delivery,todo,todo,todo
+83,2026-08-24,article,Гео,доставка цветов со следующего дня нячанг,Свежие цветы в Нячанге со следующего дня,svezhie-cvety-v-nyachange-den-v-den,next day delivery flowers,todo,todo,todo
 84,2026-08-25,article,Гео,купить цветы нячанг турист,Где купить цветы в Нячанге туристу,gde-kupit-cvety-v-nyachange-turistu,tourist buying flowers,todo,todo,todo
 85,2026-08-26,article,Гид,как сохранить букет свежим,Как сохранить букет свежим в жарком климате Вьетнама,kak-sohranit-buket-svezhim-v-zharkom-klimate-vetnama,flowers vase care,todo,todo,todo
 86,2026-08-27,article,Гид,значение цвета роз,Значение цвета роз: что означает каждый оттенок,znachenie-cveta-roz-chto-oznachaet-kazhdyy-ottenok,colorful roses,done,done,done
@@ -375,3 +375,43 @@ id,date,type,category,keyword_ru,title_ru,slug,photo_query_en,status_ru,status_e
 374,2026-07-11,article,Гид,пляж бай сой нячанг мини халонг,Пляж Бай Сой в Нячанге: галечный мини-Халонг со скалами,plyazh-bay-soy-nyachang,Bai Soi beach Nha Trang pebble,done,done,done
 375,2026-07-20,article,Гид,где купить цветы нячанг доставка,Где купить цветы в Нячанге: рынок или доставка,gde-kupit-cvety-nyachang-dostavka-vs-rynok,where to buy flowers delivery Nha Trang,done,done,done
 376,2026-07-21,article,Гид,сколько роз дарить значение количества,Сколько роз дарить: значение количества 25 51 101,znachenie-kolichestva-roz-25-51-101,how many roses to give meaning,done,done,done
+377,2026-07-18,article,Повод,buket kollege delovoy podarok nyachang,Букет коллеге и деловой подарок в Нячанге: что подарить и доставка в офис,buket-kollege-delovoy-podarok-nyachang,,done,done,done
+378,2026-07-13,article,Повод,buket na 8 marta nyachang,Букет на 8 Марта в Нячанге: что подарить и онлайн-доставка со следующего дня,buket-na-8-marta-nyachang,,done,done,done
+379,2026-07-17,article,Повод,buket prosto tak nyachang,Букет «просто так» в Нячанге: как удивить без повода и доставка,buket-prosto-tak-nyachang,,done,done,done
+380,2026-07-06,article,Гид,cerkov du sinh dalat,Церковь Du Sinh в Далате: вьетнамский храм среди сосен,cerkov-du-sinh-dalat,,done,done,done
+381,2026-07-12,article,Повод,chto podarit devushke na svidanie nyachang,Что подарить девушке на свидание в Нячанге: цветы и идеи сюрприза,chto-podarit-devushke-na-svidanie-nyachang,,done,done,done
+382,2026-07-12,article,Повод,cvety izvineniya pomiritsya nyachang,Цветы-извинения: как помириться букетом в Нячанге,cvety-izvineniya-pomiritsya-nyachang,,done,done,done
+383,2026-07-16,article,Повод,cvety na 14 fevralya nyachang,Цветы на 14 февраля в Нячанге: что подарить на День влюблённых и доставка,cvety-na-14-fevralya-nyachang,,done,done,done
+384,2026-07-24,article,Праздник,cvety na tet vietnamskiy novyy god nyachang,Цветы на Тет в Нячанге: традиции вьетнамского Нового года и идеи подарка,cvety-na-tet-vietnamskiy-novyy-god-nyachang,,done,done,done
+385,2026-07-17,article,Повод,cvety na vypisku rozhdenie nyachang,Цветы на выписку и рождение ребёнка в Нячанге: что подарить и доставка,cvety-na-vypisku-rozhdenie-nyachang,,done,done,done
+386,2026-07-05,article,Культура,derevnya keramiki bat trang,Бат Чанг: деревня керамики Вьетнама с 700-летней историей,derevnya-keramiki-bat-trang,,done,done,done
+387,2026-07-24,article,Гид,geliyevye shary nyachang idei,Гелиевые шары в Нячанге: идеи оформления и сюрприз с доставкой,geliyevye-shary-nyachang-idei,,done,done,done
+388,2026-06-27,article,География,granitsy vietnama,Границы Вьетнама: три соседа и 3260 км побережья,granitsy-vietnama,,done,done,done
+389,2026-06-28,article,Города,hanoi stolitsa vietnama,Ханой: тысяча лет столице взлетающего дракона,hanoi-stolitsa-vietnama,,done,done,done
+390,2026-06-23,article,Экономика,import i eksport vietnama,Импорт и экспорт Вьетнама: что страна вывозит и ввозит,import-i-eksport-vietnama,,done,done,done
+391,2026-06-23,article,Культура,izvestnye lichnosti vietnama,Самые известные личности Вьетнама: прошлое и настоящее,izvestnye-lichnosti-vietnama,,done,done,done
+392,2026-06-21,article,История,kak vietnam izmenilsya za 15 let,Как Вьетнам изменился за последние 15 лет,kak-vietnam-izmenilsya-za-15-let,,done,done,done
+393,2026-07-24,article,Гид,kak zakazat dostavku cvetov nyachang,Как заказать доставку цветов в Нячанге: пошаговый гид,kak-zakazat-dostavku-cvetov-nyachang,,done,done,done
+394,2026-06-25,article,Здоровье,kak zashchitit kozhu vo vietname,"Как защитить кожу во Вьетнаме: солнце, жара и море",kak-zashchitit-kozhu-vo-vietname,,done,done,done
+395,2026-06-25,article,География,karta vietnama regiony,"Карта Вьетнама: север, центр и юг — три разных мира",karta-vietnama-regiony,,done,done,done
+396,2026-06-22,article,Бизнес,krupneyshie kompanii vietnama,Крупнейшие и самые известные компании Вьетнама,krupneyshie-kompanii-vietnama,,done,done,done
+397,2026-06-27,article,Факты,maloizvestnye fakty o vietname,Малоизвестные факты о Вьетнаме: что вас удивит,maloizvestnye-fakty-o-vietname,,done,done,done
+398,2026-07-24,article,Повод,medovyy mesyats nyachang syurprizy,Медовый месяц в Нячанге: романтические сюрпризы для молодожёнов,medovyy-mesyats-nyachang-syurprizy,,done,done,done
+399,2026-06-21,article,Общество,mify o vietname,"Мифы о Вьетнаме, в которые все верят",mify-o-vietname,,done,done,done
+400,2026-06-29,article,Природа,more vietnama,Море Вьетнама: что оно даёт стране и чем грозит,more-vietnama,,done,done,done
+401,2026-07-01,article,События,motofestivali vietnama,Самые большие мотофестивали Вьетнама,motofestivali-vietnama,,done,done,done
+402,2026-06-16,article,Культура,obekty yunesko vo vietname,Объекты ЮНЕСКО во Вьетнаме,obekty-yunesko-vo-vietname,,done,done,done
+403,2026-06-13,article,Гид,pochemu vietnam stal populyarnym napravleniem,Почему Вьетнам стал популярным направлением,pochemu-vietnam-stal-populyarnym-napravleniem,,done,done,done
+404,2026-06-20,article,Общество,politicheskaya zhizn vietnama,Как устроена политическая жизнь Вьетнама,politicheskaya-zhizn-vietnama,,done,done,done
+405,2026-07-12,article,Повод,predlozhenie ruki i serdca nyachang,Предложение руки и сердца в Нячанге: как всё организовать и какие цветы выбрать,predlozhenie-ruki-i-serdca-nyachang,,done,done,done
+406,2026-06-26,article,Ремёсла,remeslennye derevni vietnama,Деревни мастеров Вьетнама: где вещи рождаются вручную,remeslennye-derevni-vietnama,,done,done,done
+407,2026-06-24,article,Сельское хозяйство,selskoe hozyaystvo vietnama,Сельское хозяйство и животноводство Вьетнама: что выращивают,selskoe-hozyaystvo-vietnama,,done,done,done
+408,2026-06-27,article,История,sssr i vietnam druzhba,СССР и Вьетнам: история большой дружбы,sssr-i-vietnam-druzhba,,done,done,done
+409,2026-07-05,article,История,staryye avtobusy vietnama,Xe đò: история старых автобусов Вьетнама,staryye-avtobusy-vietnama,,done,done,done
+410,2026-06-12,article,Отель,top 50 oteley nyachanga,"Топ-50 отелей Нячанга, куда доставляем цветы",top-50-oteley-nyachanga,,done,done,done
+411,2026-07-24,article,Повод,tort s dostavkoy nyachang,Торт с доставкой в Нячанге: как выбрать и заказать к празднику,tort-s-dostavkoy-nyachang,,done,done,done
+412,2026-06-15,article,История,vietnam vo vremya covid,Вьетнам во время COVID,vietnam-vo-vremya-covid,,done,done,done
+413,2026-07-03,article,Техника,vietnamskaya tehnika,Вьетнамская техника: что страна производит сама,vietnamskaya-tehnika,,done,done,done
+414,2026-06-24,article,Спорт,vietnamskiy futbol,Вьетнамский футбол: как страна заболела игрой №1,vietnamskiy-futbol,,done,done,done
+415,2026-06-30,article,Путешествия,vodopady vietnama,Пять самых красивых водопадов Вьетнама,vodopady-vietnama,,done,done,done
+416,2026-07-04,article,Природа,zhivotnye vietnama,Животные Вьетнама: удивительный животный мир страны,zhivotnye-vietnama,,done,done,done

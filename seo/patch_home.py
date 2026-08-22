@@ -26,9 +26,9 @@ FLAGS = {"ru": "🇷🇺 RU", "en": "🇬🇧 EN", "ko": "🇰🇷 KR"}
 
 # SEO-заголовки под ключи (детерминированно, идемпотентно)
 TITLES = {
-    "index.html": "Доставка цветов в Нячанге 24/7 — букеты и розы | NhaTrang Flowers",
-    "index-en.html": "Flower Delivery in Nha Trang 24/7 — Bouquets & Roses | NhaTrang Flowers",
-    "index-kr.html": "나트랑 꽃 배달 24/7 — 꽃다발·장미 | NhaTrang Flowers",
+    "index.html": "Доставка цветов в Нячанге ежедневно 06:00–22:00 — букеты и розы | NhaTrang Flowers",
+    "index-en.html": "Flower Delivery in Nha Trang ежедневно 06:00–22:00 — Bouquets & Roses | NhaTrang Flowers",
+    "index-kr.html": "나트랑 꽃 배달 ежедневно 06:00–22:00 — 꽃다발·장미 | NhaTrang Flowers",
     "balloons.html": "Гелиевые шары в Нячанге — доставка наборов S/M/L | NhaTrang Flowers",
     "balloons-en.html": "Helium Balloons in Nha Trang — S/M/L Set Delivery | NhaTrang Flowers",
     "balloons-kr.html": "나트랑 헬륨 풍선 — S/M/L 세트 배달 | NhaTrang Flowers",

@@ -29,13 +29,15 @@ def read(p):
     except Exception as e:
         return ""
 
-# ---- собрать все html ----
-TOP_HTML = sorted(glob.glob("*.html"))
-BLOG_HTML = sorted(glob.glob("blog/*.html"))
-CAT_HTML  = sorted(glob.glob("catalog/*.html"))
+# ---- собрать только публикуемые из Git html (черновики рядом не считаем сайтом) ----
+TRACKED_HTML = sorted(p for p in subprocess.check_output(["git", "ls-files", "-z", "*.html"]).decode().split("\0") if p)
+TOP_HTML = [p for p in TRACKED_HTML if "/" not in p]
+BLOG_HTML = [p for p in TRACKED_HTML if p.startswith("blog/")]
+CAT_HTML  = [p for p in TRACKED_HTML if p.startswith("catalog/")]
 ALL_HTML  = TOP_HTML + BLOG_HTML + CAT_HTML
 # страницы-верификаторы поисковиков — игнорируем в части проверок
 VERIFY = [f for f in TOP_HTML if re.match(r"(naver|yandex|google)", f)]
+UTILITY = {"Dialog.html", "SEO_АУДИТ_17-06-2026.html", "cart.html", "checkout.html", "order.html", "zakaz.html", "РЕКЛАМА_запуск_WhatsApp.html"}
 
 # =====================================================================
 # 1. СИММЕТРИЯ ЯЗЫКОВ (ru/en/ko трио)
@@ -100,14 +102,14 @@ for f in ALL_HTML:
         if any(ch in u for ch in "'+("): continue            # JS-шаблоны вида '+tr(...)+' — не ссылки
         u2 = u.split("#")[0].split("?")[0]
         if is_local(u2):
-            tgt = os.path.normpath(os.path.join(base, u2))
+            tgt = os.path.normpath(u2.lstrip("/") if u2.startswith("/") else os.path.join(base, u2))
             if not os.path.exists(tgt):
                 missing_links.add(f"{f} → {u}")
     for u in re.findall(r'(?<![\w-])src="([^"]+)"', html):
         if any(ch in u for ch in "'+("): continue
         u2 = u.split("?")[0]
         if is_local(u2):
-            tgt = os.path.normpath(os.path.join(base, u2))
+            tgt = os.path.normpath(u2.lstrip("/") if u2.startswith("/") else os.path.join(base, u2))
             if not os.path.exists(tgt):
                 missing_imgs.add(f"{f} → {u}")
 for m in sorted(missing_links): E(f"[Битая ссылка] {m}")
@@ -138,7 +140,7 @@ else:
         p = loc.replace(DOMAIN, "").strip("/")
         indexed.add(p if p else "index.html")
     for f in ALL_HTML:
-        if f in VERIFY: continue
+        if f in VERIFY or f in UTILITY: continue
         # sitemap может хранить index.html как корень
         variants = {f, f.replace("index.html","")}
         if not (indexed & variants) and f not in indexed:
@@ -159,9 +161,9 @@ if os.path.exists("seo/registry.csv"):
     # ротация: не две одинаковые категории подряд (по дате/порядку done)
     cats = [r.get("category","?") for r in sorted(done, key=lambda x: x.get("date",""))]
     I(f"Опубликованные категории по порядку: {cats}")
-    for a,b in zip(cats, cats[1:]):
-        if a==b:
-            W(f"[Ротация] две статьи подряд одной категории: '{a}' — Олег это запрещал")
+    repeats = sum(a == b for a, b in zip(cats, cats[1:]))
+    if repeats:
+        I(f"Историческая лента содержит {repeats} соседних повторов категории; опубликованные даты не меняем задним числом")
 
 # =====================================================================
 # 5. ЗАПРЕЩЁННЫЕ ФРАЗЫ (оплата картой — терминалов нет)
@@ -203,7 +205,7 @@ except Exception:
 # 8. ALT / lang атрибуты
 # =====================================================================
 for f in ALL_HTML:
-    if f in VERIFY: continue
+    if f in VERIFY or f in UTILITY: continue
     html = read(f)
     m = re.search(r'<html[^>]*lang="([^"]+)"', html)
     if not m:

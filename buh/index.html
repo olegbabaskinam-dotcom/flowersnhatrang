@@ -730,7 +730,7 @@ function renderHistory(res){
     }
     var ic=o.type==='приход'?'🟢':(o.type==='расход'?'🔴':'🔁');
     var main=o.type==='перевод'?(fmt(o.vnd,'₫')+' '+esc(o.from)+' → '+esc(o.to)):(fmt(o.vnd,'₫')+' · '+esc(o.from));
-    d.innerHTML='<div class="row"><span class="t">'+ic+' '+main+'</span></div><div class="s">'+o.date+(o.cat?(' · '+esc(o.cat)):'')+(o.note?(' · '+esc(o.note)):'')+(o.receipt?(' · <a href="'+o.receipt+'" target="_blank">чек</a>'):'')+'</div>';
+    d.innerHTML='<div class="row"><span class="t">'+ic+' '+main+'</span></div><div class="s">'+o.date+(o.cat?(' · '+esc(o.cat)):'')+(o.note?(' · '+esc(o.note)):'')+(o.receipt?(' · <a href="'+o.receipt+'" target="_blank" rel="noopener noreferrer">чек</a>'):'')+'</div>';
     d.onclick=function(ev){ if(ev.target.tagName==='A')return; openEdit(o); }; box.appendChild(d); });
   if(!(res.history||[]).length) box.innerHTML='<div class="card center muted">Пока нет операций</div>';
 }

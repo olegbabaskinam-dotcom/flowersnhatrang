@@ -293,7 +293,7 @@ function updateFound() {
   window.__island = false;
   if (isAirport(latlng.la, latlng.ln) || latlng.la < AIRPORT_LAT) {
     window.__outside = true; window.__delFee = 0; window.__delLabel = "аэропорт";
-    box.innerHTML = head + "<div style='margin-top:8px;font-weight:700;color:var(--err)'>✈️❌ Доставка в аэропорт и всё, что южнее аэропорта (за ним), не осуществляется. Возим только севернее — по Нячангу и Камрани (Bãi Dài). Укажите адрес в зоне доставки.</div>";
+    box.innerHTML = head + "<div style='margin-top:8px;font-weight:700;color:var(--err)'>✈️❌ Доставка в аэропорт и всё, что южнее аэропорта (за ним), не осуществляется. Возим только севернее — по Нячангу и северной части Камрани (Bãi Dài). Укажите адрес в зоне доставки.</div>";
     refreshZone(); return;
   }
   if (!inArea(latlng.la, latlng.ln)) {

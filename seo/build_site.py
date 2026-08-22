@@ -82,7 +82,7 @@ T = {
         "site_sub": "Русскоязычная доставка цветов<br>и гелиевых шаров в Нячанге",
         "nav_home": "Главная", "nav_catalog": "Каталог", "nav_articles": "Статьи", "nav_balloons": "🎈 Шары", "nav_cakes": "🎂 Торты", "nav_nabory": "🎁 Наборы",
         "catalog_h1": "Каталог букетов",
-        "catalog_sub": "Свежие букеты и гелиевые шары с доставкой по Нячангу день в день.",
+        "catalog_sub": "Свежие букеты и гелиевые шары с доставкой по Нячангу со следующего дня.",
         "order_wa": "заказать в WhatsApp", "order_tg": "заказать в Telegram",
         "order_kakao": "заказать в KakaoTalk", "order_ig": "заказать в Instagram",
         "composition": "Описание", "delivery": "Доставка и оплата",
@@ -90,12 +90,12 @@ T = {
         "back": "← весь каталог", "details": "подробнее",
         "blog_h1": "Статьи", "blog_sub": "Полезные статьи о цветах, поводах и традициях Вьетнама.",
         "blog_soon": "Скоро здесь появятся статьи. Загляните позже 🌸",
-        "del_text": "Бесплатная доставка по Нячангу. День в день при заказе до 18:00. Камрань — доставка от 51 розы (600 000 донгов оплачивается отдельно). Оплата: донги, рубли, доллары, USDT, наличные.",
-        "hotel_text": "Привезём букет в ваш отель — {hotel} и другие отели Нячанга и Камрани. Передаём на ресепшн, а если лифт работает без карты-ключа — поднимем прямо в номер.",
+        "del_text": "Онлайн-заказ — со следующего дня. Нячанг — бесплатно; южные пригороды — +300 000 ₫; Bãi Dài и северная Камрань — +600 000 ₫. В аэропорт, южнее аэропорта и на острова не доставляем.",
+        "hotel_text": "Привезём букет в {hotel} и другие отели Нячанга, Bãi Dài и северной Камрани в пределах зоны. Аэропорт и территории южнее не обслуживаем. По умолчанию передаём на ресепшн.",
         "faq_q1": "Можно ли доставить букет в отель?",
         "faq_a1": "Да, доставляем в отели Нячанга и Камрани, включая {hotel}. По умолчанию передаём букет на ресепшн; если лифт работает без карты-ключа, поднимем прямо в номер.",
-        "faq_q2": "Доставите день в день?",
-        "faq_a2": "Да, при заказе до 18:00 доставим в тот же день. По Нячангу доставка бесплатная.",
+        "faq_q2": "Когда можна ближайшая доставка?",
+        "faq_a2": "Онлайн-форма принимает доставку со следующего дня, слоты — с 06:00 до 21:00. По Нячангу доставка бесплатная.",
         "faq_q3": "Как оплатить?",
         "faq_a3": "Принимаем донги, рубли, доллары, USDT и наличные. Напишите в WhatsApp или Telegram — подскажем удобный способ.",
     },
@@ -103,7 +103,7 @@ T = {
         "site_sub": "Flower & balloon delivery<br>in Nha Trang",
         "nav_home": "Home", "nav_catalog": "Catalog", "nav_articles": "Articles", "nav_balloons": "🎈 Balloons", "nav_cakes": "🎂 Cakes", "nav_nabory": "🎁 Gift sets",
         "catalog_h1": "Bouquet catalog",
-        "catalog_sub": "Fresh bouquets and helium balloons with same-day delivery in Nha Trang.",
+        "catalog_sub": "Fresh bouquets and helium balloons delivered in Nha Trang from the next day.",
         "order_wa": "order on WhatsApp", "order_tg": "order on Telegram",
         "order_kakao": "order on KakaoTalk", "order_ig": "order on Instagram",
         "composition": "Description", "delivery": "Delivery & payment",
@@ -111,12 +111,12 @@ T = {
         "back": "← back to catalog", "details": "details",
         "blog_h1": "Articles", "blog_sub": "Helpful articles about flowers, occasions and Vietnamese traditions.",
         "blog_soon": "Articles are coming soon. Check back later 🌸",
-        "del_text": "Free delivery across Nha Trang. Same-day delivery for orders before 6 PM. Cam Ranh — delivery from 51 roses (600,000 VND charged separately). Payment: VND, USD, RUB, USDT, cash.",
-        "hotel_text": "We bring your bouquet to your hotel — {hotel} and others in Nha Trang and Cam Ranh. We hand it over at the front desk, and if the lift works without a keycard, we bring it up to your room.",
+        "del_text": "Online delivery starts the next day. Nha Trang is free; southern suburbs +300,000 VND; Bãi Dài and northern Cam Ranh +600,000 VND. No delivery to the airport, south of it or to islands.",
+        "hotel_text": "We deliver to {hotel} and other hotels within Nha Trang, Bãi Dài and northern Cam Ranh. The airport and locations south of it are outside our delivery area. We normally hand the order to reception.",
         "faq_q1": "Can you deliver to a hotel?",
         "faq_a1": "Yes, we deliver to hotels in Nha Trang and Cam Ranh, including {hotel}. By default we leave it at the front desk; if the lift works without a keycard, we bring it up to your room.",
-        "faq_q2": "Do you offer same-day delivery?",
-        "faq_a2": "Yes, order before 6 PM and we deliver the same day. Delivery within Nha Trang is free.",
+        "faq_q2": "When is the earliest delivery?",
+        "faq_a2": "Online delivery is available from the next day, with time slots from 06:00 to 21:00. Delivery within Nha Trang is free.",
         "faq_q3": "How can I pay?",
         "faq_a3": "We accept VND, USD, RUB, USDT and cash. Message us on WhatsApp or Telegram and we'll suggest the easiest option.",
     },
@@ -124,7 +124,7 @@ T = {
         "site_sub": "나트랑 꽃 & 풍선<br>배달 서비스",
         "nav_home": "홈", "nav_catalog": "카탈로그", "nav_articles": "블로그", "nav_balloons": "🎈 풍선", "nav_cakes": "🎂 케이크", "nav_nabory": "🎁 선물 세트",
         "catalog_h1": "꽃다발 카탈로그",
-        "catalog_sub": "나트랑 당일 배달, 신선한 꽃다발과 헬륨 풍선.",
+        "catalog_sub": "주문 다음 날부터 나트랑으로 배달하는 신선한 꽃다발과 헬륨 풍선.",
         "order_wa": "WhatsApp으로 주문", "order_tg": "Telegram으로 주문",
         "order_kakao": "카카오톡으로 주문", "order_ig": "인스타그램으로 주문",
         "composition": "상품 설명", "delivery": "배송 및 결제",
@@ -132,62 +132,62 @@ T = {
         "back": "← 카탈로그로", "details": "자세히",
         "blog_h1": "블로그", "blog_sub": "꽃, 기념일, 베트남 문화에 대한 유용한 글.",
         "blog_soon": "곧 블로그 글이 올라옵니다. 다시 방문해 주세요 🌸",
-        "del_text": "나트랑 시내 무료 배송. 오후 6시 이전 주문 시 당일 배송. 깜라인 — 51송이부터 배송(60만 동 별도). 결제: 동, 달러, 루블, USDT, 현금.",
-        "hotel_text": "{hotel} 및 나트랑·깜라인의 호텔로 꽃다발을 배달합니다. 기본적으로 프런트에 전달하며, 엘리베이터가 카드 키 없이 작동하면 객실까지 직접 올려드립니다.",
+        "del_text": "온라인 배달은 주문 다음 날부터 가능합니다. 나트랑 무료, 남부 교외 +300,000동, Bãi Dài·북부 깜라인 +600,000동. 공항·공항 남쪽·섬으로는 배달하지 않습니다.",
+        "hotel_text": "{hotel} 및 나트랑, Bãi Dài, 북부 깜라인의 배달 구역 내 호텔로 배달합니다. 공항과 공항 남쪽은 배달 제외 구역입니다. 기본적으로 프런트에 전달합니다.",
         "faq_q1": "호텔로 배달 가능한가요?",
         "faq_a1": "네, {hotel}을 포함한 나트랑·깜라인 호텔로 배달합니다. 기본적으로 프런트에 전달하고, 엘리베이터가 카드 키 없이 작동하면 객실까지 올려드립니다.",
-        "faq_q2": "당일 배송 되나요?",
-        "faq_a2": "네, 오후 6시 이전에 주문하시면 당일 배송됩니다. 나트랑 시내 배송은 무료입니다.",
+        "faq_q2": "가장 빠른 배달은 언제인가요?",
+        "faq_a2": "온라인 배달은 주문 다음 날부터 가능하며, 배달 시간은 06:00~21:00입니다. 나트랑 시내는 무료입니다.",
         "faq_q3": "결제는 어떻게 하나요?",
-        "faq_a3": "동, 달러, 루블, USDT, 현금을 받습니다. WhatsApp 또는 Telegram으로 문의해 주세요.",
+        "faq_a3": "수령 시 현금 또는 암호화폐 송금으로 결제할 수 있습니다. 카카오톡으로 문의해 주세요.",
     },
 }
 
 UI = {
-    "ru": {"b_fresh": "свежие цветы", "b_day": "день в день",
-           "chip_free": "бесплатно по Нячангу", "chip_day": "доставка день в день", "chip_pay": "наличные / перевод",
+    "ru": {"b_fresh": "свежие цветы", "b_day": "со следующего дня",
+           "chip_free": "бесплатно по Нячангу", "chip_day": "онлайн-доставка со следующего дня", "chip_pay": "наличные / перевод",
            "f1t": "Свежесть", "f1d": "Собираем букет в день доставки",
-           "f2t": "День в день", "f2d": "Доставим до 18:00 в день заказа",
+           "f2t": "По расписанию", "f2d": "Онлайн-доставка со следующего дня, слоты 06:00–21:00",
            "f3t": "Доставка до отеля", "f3d": "Если лифт работает без карты — поднимемся прямо в номер",
            "dl_free": "Бесплатная доставка по всему Нячангу",
-           "dl_day": "Доставка в тот же день при заказе до 18:00",
-           "dl_cam": "Камрань — доставка от 51 розы (600 000 донгов отдельно)",
+           "dl_day": "Онлайн-доставка со следующего дня, слоты 06:00–21:00",
+           "dl_cam": "Южные пригороды +300 000 ₫; Bãi Dài/северная Камрань +600 000 ₫; аэропорт и южнее вне зоны",
            "dl_pay": "Оплата: донги, рубли, доллары, USDT, наличные",
            "st1": "букетов доставлено", "st2": "отзывов на Google", "st3": "оплата при получении",
            "rev_h": "отзывы на Google", "rev_cta": "читать отзывы на Google Maps",
            "art_read": "читать", "art_back": "← все статьи", "art_rel_h": "Подходящие букеты",
            "art_cta_h": "Закажите доставку букета в Нячанге",
-           "art_cta_sub": "Свежие букеты день в день, доставим прямо в отель или на виллу.",
+           "art_cta_sub": "Свежие букеты с онлайн-доставкой со следующего дня в отель или на виллу.",
            "art_faq_h": "Частые вопросы", "art_min": "мин чтения"},
-    "en": {"b_fresh": "fresh flowers", "b_day": "same-day",
-           "chip_free": "free in Nha Trang", "chip_day": "same-day delivery", "chip_pay": "cash / transfer",
+    "en": {"b_fresh": "fresh flowers", "b_day": "from the next day",
+           "chip_free": "free in Nha Trang", "chip_day": "online delivery from the next day", "chip_pay": "cash / transfer",
            "f1t": "Freshness", "f1d": "Bouquet arranged on the delivery day",
-           "f2t": "Same day", "f2d": "Delivered by 6 PM on your order day",
+           "f2t": "Scheduled delivery", "f2d": "Online delivery from the next day, with slots from 06:00 to 21:00",
            "f3t": "Hotel delivery", "f3d": "If the lift works without a keycard, we come up to your room",
            "dl_free": "Free delivery across Nha Trang",
-           "dl_day": "Same-day delivery for orders before 6 PM",
-           "dl_cam": "Cam Ranh — delivery from 51 roses (600,000 VND separately)",
+           "dl_day": "Online delivery from the next day, with slots from 06:00 to 21:00",
+           "dl_cam": "Southern suburbs +300,000 VND; Bãi Dài/northern Cam Ranh +600,000 VND; airport and locations south of it excluded",
            "dl_pay": "Payment: VND, USD, RUB, USDT, cash",
            "st1": "bouquets delivered", "st2": "Google reviews", "st3": "pay on delivery",
            "rev_h": "Google reviews", "rev_cta": "read reviews on Google Maps",
            "art_read": "read", "art_back": "← all articles", "art_rel_h": "Bouquets you may like",
            "art_cta_h": "Order flower delivery in Nha Trang",
-           "art_cta_sub": "Fresh bouquets same day, delivered straight to your hotel or villa.",
+           "art_cta_sub": "Fresh bouquets with online delivery from the next day to your hotel or villa.",
            "art_faq_h": "FAQ", "art_min": "min read"},
-    "ko": {"b_fresh": "신선한 꽃", "b_day": "당일 배송",
-           "chip_free": "나트랑 무료 배송", "chip_day": "당일 배송", "chip_pay": "현금 / 송금",
+    "ko": {"b_fresh": "신선한 꽃", "b_day": "주문 다음 날부터",
+           "chip_free": "나트랑 무료 배송", "chip_day": "온라인 배달은 다음 날부터", "chip_pay": "현금 / 암호화폐",
            "f1t": "신선함", "f1d": "배송 당일에 꽃다발을 제작합니다",
-           "f2t": "당일 배송", "f2d": "주문 당일 오후 6시 이전 배송",
+           "f2t": "예약 배송", "f2d": "온라인 배달은 주문 다음 날부터, 06:00~21:00",
            "f3t": "호텔 배송", "f3d": "엘리베이터가 카드 없이 작동하면 객실까지 직접 올라갑니다",
            "dl_free": "나트랑 전역 무료 배송",
-           "dl_day": "오후 6시 이전 주문 시 당일 배송",
-           "dl_cam": "깜라인 — 51송이부터 배송(60만 동 별도)",
-           "dl_pay": "결제: 동, 달러, 루블, USDT, 현금",
+           "dl_day": "온라인 배달은 주문 다음 날부터, 06:00~21:00",
+           "dl_cam": "남부 교외 +300,000동; Bãi Dài/북부 깜라인 +600,000동; 공항과 남쪽은 배달 제외",
+           "dl_pay": "결제: 수령 시 현금 또는 암호화폐 송금",
            "st1": "꽃다발 배달 완료", "st2": "Google 리뷰", "st3": "수령 시 결제",
            "rev_h": "Google 리뷰", "rev_cta": "Google 지도에서 리뷰 보기",
            "art_read": "읽기", "art_back": "← 모든 글", "art_rel_h": "어울리는 꽃다발",
            "art_cta_h": "나트랑 꽃 배달 주문하기",
-           "art_cta_sub": "신선한 꽃다발 당일 배송, 호텔·빌라로 직접 배달해 드립니다.",
+           "art_cta_sub": "신선한 꽃다발을 주문 다음 날부터 호텔·빌라로 배달해 드립니다.",
            "art_faq_h": "자주 묻는 질문", "art_min": "분 분량"},
 }
 
@@ -403,6 +403,7 @@ def head(lang, title, desc, canonical, alts, base, og_image):
 
 def header(lang, base, lang_urls=None):
     t = T[lang]
+    menu_label = {"ru": "Меню", "en": "Menu", "ko": "메뉴"}[lang]
     # куда ведут переключатели языка (по умолчанию — главная этого языка).
     # для страниц товара/каталога/блога передаётся эквивалент той же страницы.
     if lang_urls is None:
@@ -423,7 +424,7 @@ def header(lang, base, lang_urls=None):
          f'<a href="{lang_urls[l]}" style="padding:4px 12px;border-radius:8px;color:#78716c;font-size:12px;text-decoration:none">{flags[l]}</a>')
         for l in LANGS)
     contacts_m = "".join(
-        f'<a href="{u}" target="_blank" aria-label="{lbl}" style="{_icon};border-radius:9999px">{svg}</a>'
+        f'<a href="{u}" target="_blank" rel="noopener noreferrer" aria-label="{lbl}" style="{_icon};border-radius:9999px">{svg}</a>'
         for u, lbl, svg in contact_links(lang)[:2])
     _mnav = 'style="display:block;padding:10px 8px;border-radius:8px;color:#57534e;text-decoration:none"'
     mnav_links = (
@@ -453,7 +454,7 @@ def header(lang, base, lang_urls=None):
                 {nav_langs}
             </nav>
             <div class="hidden md:flex gap-4 text-xl">
-                {"".join(f'<a href="{u}" target="_blank" class="text-stone-400 hover:text-[#c0687a] transition" aria-label="{lbl}">{svg}</a>' for u, lbl, svg in contact_links(lang))}
+                {"".join(f'<a href="{u}" target="_blank" rel="noopener noreferrer" class="text-stone-400 hover:text-[#c0687a] transition" aria-label="{lbl}">{svg}</a>' for u, lbl, svg in contact_links(lang))}
             </div>
         </div>
         <div class="md:hidden" style="border-top:1px solid #f5f5f4;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px">
@@ -463,7 +464,7 @@ def header(lang, base, lang_urls=None):
             </a>
             <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
                 {contacts_m}
-                <button type="button" aria-label="Меню" onclick="document.getElementById('mnav').classList.toggle('hidden')" style="width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1px solid #e7e5e4;border-radius:10px;color:#57534e;background:#fff;flex-shrink:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+                <button type="button" aria-label="{menu_label}" onclick="document.getElementById('mnav').classList.toggle('hidden')" style="width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1px solid #e7e5e4;border-radius:10px;color:#57534e;background:#fff;flex-shrink:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
             </div>
         </div>
         <div id="mnav" class="md:hidden hidden" style="border-top:1px solid #f5f5f4;padding:8px;background:#fff;font-size:14px;font-weight:500">
@@ -476,7 +477,7 @@ def header(lang, base, lang_urls=None):
 HOURS = {
     "ru": "Работаем ежедневно · Нячанг 06:00–22:00 · Камрань 06:00–21:00",
     "en": "Open daily · Nha Trang 06:00–22:00 · Cam Ranh 06:00–21:00",
-    "ko": "연중무휴 · 나트랑 06:00–22:00 · 깜라인 06:00–21:00",
+    "ko": "매일 운영 · 나트랑 06:00–22:00 · 깜라인 06:00–21:00",
 }
 
 def footer(base, lang="ru"):
@@ -487,7 +488,7 @@ def footer(base, lang="ru"):
                 <div class="text-xs font-medium tracking-widest uppercase" style="color:#a8566a;">{ {"ru":"Качество · Ответственность · Пунктуальность","en":"Quality · Responsibility · Punctuality","ko":"품질 · 책임 · 시간 엄수"}.get(lang,"Качество · Ответственность · Пунктуальность") }</div>
             </div>
             <div class="flex gap-6 text-2xl">
-                {"".join(f'<a href="{u}" target="_blank" style="color:#c0a0a8;" class="hover:text-[#c0687a] transition" aria-label="{lbl}">{svg}</a>' for u, lbl, svg in contact_links(lang))}
+                {"".join(f'<a href="{u}" target="_blank" rel="noopener noreferrer" style="color:#c0a0a8;" class="hover:text-[#c0687a] transition" aria-label="{lbl}">{svg}</a>' for u, lbl, svg in contact_links(lang))}
             </div>
         </div>
         <div class="text-center text-xs mt-8" style="color:#a8566a;">🕖 {HOURS.get(lang, HOURS["ru"])}</div>
@@ -543,14 +544,14 @@ def order_buttons(name, t, lang, size="full"):
         ]
         rows = []
         for url, label, svg, external in links:
-            target = ' target="_blank"' if external else ""
+            target = ' target="_blank" rel="noopener noreferrer"' if external else ""
             rows.append(f'<a href="{url}"{target} class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">{svg} {label}</a>')
         return '<div class="flex flex-col gap-4">\n                    ' + "\n                    ".join(rows) + "\n                </div>"
     msg = name.replace(" ", "%20")
     rows = []
     for url, label, svg in order_contacts(lang, t):
         href = f"{url}?text={msg}" if ("wa.me" in url or "t.me" in url) else url
-        rows.append(f'<a href="{href}" target="_blank" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">{svg} {label}</a>')
+        rows.append(f'<a href="{href}" target="_blank" rel="noopener noreferrer" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">{svg} {label}</a>')
     btns = "\n                    ".join(rows)
     return f'''<div class="flex flex-col gap-4">
                     {btns}
@@ -676,14 +677,14 @@ def render_product(p, lang, products):
     alts = {l: f"{DOMAIN}/catalog/{slug}-{l}.html" for l in LANGS}
     _tovar = "тортов" if product_cat(p) == "cakes" else "цветов"
     if lang == "ru":
-        title = f"{name} — русскоязычная доставка {_tovar} в Нячанге"
-        meta = f"{name} — русскоязычная доставка по Нячангу день в день. {desc}. Цена {p['price']}. Заказ в WhatsApp и Telegram."
+        title = f"{name} — доставка в Нячанге"
+        meta = f"{name}. Онлайн-доставка по Нячангу со следующего дня. Цена {p['price']}. Заказ в WhatsApp и Telegram."
     elif lang == "en":
         title = f"{name} — delivery in Nha Trang | NhaTrang Flowers"
-        meta = f"{name} with same-day delivery in Nha Trang. {desc}. Price {price_loc(p['price'], lang)}. Order via WhatsApp or Telegram."
+        meta = f"{name}. Online delivery in Nha Trang from the next day. Price {price_loc(p['price'], lang)}. Order via WhatsApp or Telegram."
     else:
-        title = f"{name} — 나트랑 꽃배달·당일배달"
-        meta = f"{name} 나트랑 꽃배달 당일 배달. {desc}. 가격 {price_loc(p['price'], lang)}. 온라인·카카오톡·인스타그램 주문."
+        title = f"{name} — 나트랑 꽃배달"
+        meta = f"{name}. 주문 다음 날부터 나트랑 배달. 가격 {price_loc(p['price'], lang)}. 온라인·카카오톡·인스타그램 주문."
     # ограничение длины meta-description под лимиты Google (~160 симв), обрезка по границе слова
     if len(meta) > 160:
         meta = meta[:158].rsplit(" ", 1)[0].rstrip(" .,;—-") + "…"
@@ -834,22 +835,21 @@ GMAPS = "https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic"
 REVIEW_IMGS = ["img/site/review-1.webp", "img/site/review-2.webp", "img/site/review-3.webp"]
 
 def trust_bar(lang, base):
-    """Полоса доверия: 1000+ доставлено · 5.0 / 128 отзывов Google · оплата при получении."""
+    """Полоса доверия без неподтверждённых счётчиков и рейтинга."""
     u = UI[lang]
     return f'''
     <section class="reveal py-8 px-4 border-b border-stone-100">
         <div class="max-w-4xl mx-auto">
             <div class="grid grid-cols-3 divide-x divide-stone-100">
                 <div class="flex flex-col items-center px-4 py-2 text-center">
-                    <div class="text-2xl md:text-3xl font-bold" style="color:#1a1a1a;">1000+</div>
+                    <div class="text-2xl md:text-3xl font-bold" style="color:#1a1a1a;">💐</div>
                     <div class="text-stone-400 text-xs font-medium mt-1">{u["st1"]}</div>
                 </div>
                 <div class="flex flex-col items-center px-4 py-2 text-center">
                     <div class="flex items-center justify-center gap-1">
-                        <span class="text-2xl md:text-3xl font-bold" style="color:#1a1a1a;">5.0</span>
                         <span style="color:#f5b301;">{IC_STAR}</span>
                     </div>
-                    <div class="text-stone-400 text-xs font-medium mt-1">148 {u["st2"]}</div>
+                    <div class="text-stone-400 text-xs font-medium mt-1">{u["rev_h"]}</div>
                 </div>
                 <div class="flex flex-col items-center px-4 py-2 text-center">
                     <div class="text-2xl md:text-3xl font-bold" style="color:#1a1a1a;">💵</div>
@@ -857,7 +857,7 @@ def trust_bar(lang, base):
                 </div>
             </div>
             <div class="text-center mt-4">
-                <a href="{GMAPS}" target="_blank" class="inline-flex items-center gap-2 font-medium text-xs hover:underline transition" style="color:#c0687a;">
+                <a href="{GMAPS}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-medium text-xs hover:underline transition" style="color:#c0687a;">
                     <span style="color:#f5b301;">{IC_STAR}</span> {u["rev_cta"]}
                 </a>
             </div>
@@ -867,6 +867,8 @@ def trust_bar(lang, base):
 
 def reviews_block(lang, base=""):
     """Живая карусель реальных Google-отзывов (единый источник seo/reviews_data.py)."""
+    if lang == "ko":
+        return ""
     import reviews_data
     return "\n    " + reviews_data.carousel_section(lang, base)
 
@@ -877,13 +879,13 @@ def render_catalog(lang, products):
     alts = {l: f"{DOMAIN}/catalog-{l}.html" for l in LANGS}
     if lang == "ru":
         title = "Каталог букетов — русскоязычная доставка цветов в Нячанге"
-        meta = "Каталог свежих букетов и гелиевых шаров с доставкой по Нячангу день в день. Розы, лилии, корзины. Оплата рублями, донгами, долларами."
+        meta = "Каталог свежих букетов и гелиевых шаров. Онлайн-доставка по Нячангу со следующего дня."
     elif lang == "en":
         title = "Bouquet catalog — flower delivery in Nha Trang | NhaTrang Flowers"
-        meta = "Catalog of fresh bouquets and helium balloons with same-day delivery in Nha Trang. Roses, lilies, baskets. Pay in USD, VND, RUB."
+        meta = "Fresh bouquets and helium balloons with online delivery in Nha Trang from the next day. Roses, arrangements, baskets and gifts."
     else:
         title = "꽃다발 카탈로그 — 나트랑 꽃 배달 | NhaTrang Flowers"
-        meta = "나트랑 당일 배달 신선한 꽃다발과 헬륨 풍선 카탈로그. 장미, 백합, 바구니. 달러·동·루블 결제."
+        meta = "주문 다음 날부터 나트랑으로 배달하는 신선한 꽃다발·헬륨 풍선 카탈로그. 현금 또는 암호화폐 결제."
     cards = "\n            ".join(product_card(p, lang, base, t) for p in products)
     FILT = {
         "ru": {"cat": [("", "🌸 Все"), ("r25", "🌹 25 роз"), ("r51", "🌹 51 роза"), ("r101", "🌹 101+ роз"), ("mixed", "💐 Сборные"), ("balloons", "🎈 Шары"), ("cakes", "🎂 Торты"), ("nabory", "🎁 Наборы")],
@@ -974,7 +976,7 @@ def article_cta(lang, base):
             <h2 class="font-serif text-2xl font-bold mb-2" style="color:#1a1a1a;">{u["art_cta_h"]}</h2>
             <p class="text-stone-600 text-sm mb-6 max-w-xl mx-auto">{u["art_cta_sub"]}</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-                {"".join(f'<a href="{u}" target="_blank" class="{("btn-rose-filled" if i==0 else "btn-rose")} flex items-center justify-center gap-2 font-medium py-3 px-6 rounded-xl text-sm">{svg} {label}</a>' for i, (u, label, svg) in enumerate(order_contacts(lang, t)))}
+                {"".join(f'<a href="{u}" target="_blank" rel="noopener noreferrer" class="{("btn-rose-filled" if i==0 else "btn-rose")} flex items-center justify-center gap-2 font-medium py-3 px-6 rounded-xl text-sm">{svg} {label}</a>' for i, (u, label, svg) in enumerate(order_contacts(lang, t)))}
             </div>
         </div>
     </section>

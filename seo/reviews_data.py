@@ -14,7 +14,7 @@ R = [
    {"ru":"5 дней назад","en":"5 days ago","ko":"5일 전"},
    {"ru":"Цветы отличные! Доставили быстро. В 9:15 написал, в 10:00 уже привезли в отель! Удобно, что можно оплатить переводом рублями.",
     "en":"Great flowers! Fast delivery. I messaged at 9:15 and by 10:00 they were already at the hotel! Handy that you can pay by transfer in rubles.",
-    "ko":"꽃이 훌륭해요! 배달도 빨라요. 9시 15분에 연락했는데 10시에 벌써 호텔에 도착했어요! 루블 송금으로 결제할 수 있어서 편리해요."}),
+    "ko":"꽃이 훌륭해요! 배달도 빨라요. 9시 15분에 연락했는데 10시에 벌써 호텔에 도착했어요! 결제는 수령 시 현금 또는 암호화폐 송금입니다."}),
  ("Юлия Медунова","#43A047","Ю",
    {"ru":"5 дней назад","en":"5 days ago","ko":"5일 전"},
    {"ru":"Красивые, свежие, ароматные цветы доставили в отель чётко ко времени! Большое спасибо и пожелание как можно больше благодарных клиентов!",
@@ -24,7 +24,7 @@ R = [
    {"ru":"5 дней назад","en":"5 days ago","ko":"5일 전"},
    {"ru":"Невероятный букет! Мгновенное оформление заказа и быстрая доставка. Удобная оплата рублями. Спасибо!",
     "en":"An incredible bouquet! Instant order processing and fast delivery. Convenient payment in rubles. Thank you!",
-    "ko":"믿을 수 없는 부케예요! 주문 처리도 즉각적이고 배달도 빨라요. 루블 결제도 편리해요. 감사합니다!"}),
+    "ko":"믿을 수 없는 부케예요! 주문 처리도 즉각적이고 배달도 빨라요. 결제는 수령 시 현금 또는 암호화폐 송금입니다. 감사합니다!"}),
  ("Semper In Motu","#6D4C41","S",
    {"ru":"6 дней назад","en":"6 days ago","ko":"6일 전"},
    {"ru":"Заказали цветы — всё понравилось, особенно пунктуальность при доставке.",
@@ -231,13 +231,17 @@ GLOGO = ('<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" 
  '<path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>')
 
 L = {
- "ru":{"title":"Отзывы на Google","sub":"Настоящие отзывы наших клиентов","btn":"Смотреть все отзывы на Google","prev":"Предыдущий","next":"Следующий","of":"148 отзывов · 5,0"},
- "en":{"title":"Google reviews","sub":"Real reviews from our customers","btn":"See all reviews on Google","prev":"Previous","next":"Next","of":"148 reviews · 5.0"},
- "ko":{"title":"구글 리뷰","sub":"실제 고객들의 후기","btn":"구글에서 모든 리뷰 보기","prev":"이전","next":"다음","of":"리뷰 148개 · 5.0"},
+ "ru":{"title":"Отзывы на Google","sub":"Настоящие отзывы наших клиентов","btn":"Смотреть все отзывы на Google","prev":"Предыдущий","next":"Следующий","of":"Отзывы на Google"},
+ "en":{"title":"Google reviews","sub":"Real reviews from our customers","btn":"See all reviews on Google","prev":"Previous","next":"Next","of":"Reviews on Google"},
+ "ko":{"title":"구글 리뷰","sub":"실제 고객들의 후기","btn":"구글에서 모든 리뷰 보기","prev":"이전","next":"다음","of":"Google 리뷰"},
 }
 
 def card(r, lang, base=""):
     name, color, ini, date, text = r[0], r[1], r[2], r[3], r[4]
+    # Google возвращает относительное время ("вчера", "2 дня назад").
+    # В статичном HTML оно быстро становится ложным, поэтому показываем
+    # честную нейтральную подпись и даём ссылку на живой источник.
+    date_label = {"ru": "отзыв на Google", "en": "review on Google", "ko": "Google 리뷰"}[lang]
     photo = r[5] if len(r) > 5 else None
     img = ""
     txtcls = "rv-text"
@@ -251,7 +255,7 @@ def card(r, lang, base=""):
     return f'''<article class="{cardcls}">
 <header class="rv-head">
 <div class="rv-ava" style="background:{color}">{html.escape(ini)}</div>
-<div class="rv-meta"><div class="rv-name">{html.escape(name)}</div><div class="rv-date">{html.escape(date[lang])}</div></div>
+<div class="rv-meta"><div class="rv-name">{html.escape(name)}</div><div class="rv-date">{date_label}</div></div>
 {GLOGO}
 </header>
 <div class="rv-stars" aria-label="5 / 5">{STAR}</div>
