@@ -982,9 +982,28 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"]').forEach(function(
 (function(){
     var el = document.getElementById('countdown');
     if(!el) return;
+    var hoursEl=el.previousElementSibling, introEl=hoursEl&&hoursEl.previousElementSibling;
+    var defaultHours=hoursEl?hoursEl.textContent:'', defaultIntro=introEl?introEl.textContent:'';
     var p=function(n){return('0'+n).slice(-2);};
-    function render(h,m,s){
+    function render(h,m,s,date){
         el.style.display = '';
+        if(hoursEl) hoursEl.textContent=defaultHours;
+        if(introEl) introEl.textContent=defaultIntro;
+        if(date==='2026-09-04'){
+            if(hoursEl) hoursEl.textContent='🕐 4 сентября — выходной';
+            if(introEl) introEl.textContent='Сегодня мы не работаем. С 5 сентября возвращаемся к обычному режиму.';
+            el.textContent='📅 4 сентября заказы и доставка закрыты. Работаем снова с 5 сентября.';
+            return;
+        }
+        if(date==='2026-09-03'){
+            if(hoursEl) hoursEl.textContent='🕐 3 сентября принимаем заказы до 14:00';
+            if(introEl) introEl.textContent='3 сентября заказы принимаем до 14:00. 4 сентября — выходной. С 5 сентября работаем обычно.';
+            if(h < 6){ el.textContent='⏱ 3 сентября принимаем заказы с 06:00 до 14:00.'; return; }
+            if(h >= 14){ el.textContent='📅 Приём заказов завершён. 4 сентября — выходной, работаем снова с 5 сентября.'; return; }
+            var specialDiff=(14*3600)-(h*3600+m*60+s);
+            el.textContent='⏱ До завершения приёма заказов в 14:00 осталось '+p(Math.floor(specialDiff/3600))+':'+p(Math.floor((specialDiff%3600)/60))+':'+p(specialDiff%60);
+            return;
+        }
         if(h < 6){
             el.textContent = '⏱ Срочная доставка сегодня через оператора доступна с 06:00 до 18:00.';
             return;
@@ -998,9 +1017,9 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"]').forEach(function(
         el.textContent = '⏱ Срочная доставка сегодня через оператора: до 18:00 осталось ' + p(hh) + ':' + p(mm) + ':' + p(ss);
     }
     function update(){
-        var parts={}, fmt=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Ho_Chi_Minh',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+        var parts={}, fmt=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Ho_Chi_Minh',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
         fmt.formatToParts(new Date()).forEach(function(x){parts[x.type]=x.value;});
-        render(+parts.hour,+parts.minute,+parts.second);
+        render(+parts.hour,+parts.minute,+parts.second,parts.year+'-'+parts.month+'-'+parts.day);
     }
     window.__renderOperatorCountdown=render;
     update(); setInterval(update,1000);

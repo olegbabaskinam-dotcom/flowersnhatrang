@@ -502,9 +502,28 @@ document.querySelectorAll('a[href*="kakao.com"], a[href*="instagram.com"]').forE
 (function(){
     var el = document.getElementById('countdown');
     if(!el) return;
+    var hoursEl=el.previousElementSibling, introEl=hoursEl&&hoursEl.previousElementSibling;
+    var defaultHours=hoursEl?hoursEl.textContent:'', defaultIntro=introEl?introEl.textContent:'';
     var p=function(n){return('0'+n).slice(-2);};
-    function render(h,m,s){
+    function render(h,m,s,date){
         el.style.display = '';
+        if(hoursEl) hoursEl.textContent=defaultHours;
+        if(introEl) introEl.textContent=defaultIntro;
+        if(date==='2026-09-04'){
+            if(hoursEl) hoursEl.textContent='🕐 9월 4일 — 휴무';
+            if(introEl) introEl.textContent='오늘은 휴무입니다. 9월 5일부터 정상 운영합니다.';
+            el.textContent='📅 9월 4일은 주문과 배달을 하지 않습니다. 9월 5일부터 다시 운영합니다.';
+            return;
+        }
+        if(date==='2026-09-03'){
+            if(hoursEl) hoursEl.textContent='🕐 9월 3일 주문 접수 14:00 마감';
+            if(introEl) introEl.textContent='9월 3일 주문은 14:00까지 접수합니다. 9월 4일은 휴무이며 9월 5일부터 정상 운영합니다.';
+            if(h < 6){ el.textContent='⏱ 9월 3일 주문 접수 시간은 06:00~14:00입니다.'; return; }
+            if(h >= 14){ el.textContent='📅 주문 접수가 마감되었습니다. 9월 4일은 휴무이며 9월 5일부터 다시 운영합니다.'; return; }
+            var specialDiff=(14*3600)-(h*3600+m*60+s);
+            el.textContent='⏱ 14:00 주문 마감까지: '+p(Math.floor(specialDiff/3600))+':'+p(Math.floor((specialDiff%3600)/60))+':'+p(specialDiff%60);
+            return;
+        }
         if(h < 6){
             el.textContent = '⏱ 오늘 긴급 배송은 06:00~18:00에 상담원을 통해 주문할 수 있습니다.';
             return;
@@ -518,9 +537,9 @@ document.querySelectorAll('a[href*="kakao.com"], a[href*="instagram.com"]').forE
         el.textContent = '⏱ 오늘 긴급 배송 상담 마감까지: ' + p(hh) + ':' + p(mm) + ':' + p(ss) + ' (상담원 주문)';
     }
     function update(){
-        var parts={}, fmt=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Ho_Chi_Minh',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+        var parts={}, fmt=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Ho_Chi_Minh',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
         fmt.formatToParts(new Date()).forEach(function(x){parts[x.type]=x.value;});
-        render(+parts.hour,+parts.minute,+parts.second);
+        render(+parts.hour,+parts.minute,+parts.second,parts.year+'-'+parts.month+'-'+parts.day);
     }
     window.__renderOperatorCountdown=render;
     update(); setInterval(update,1000);

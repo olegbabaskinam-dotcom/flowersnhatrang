@@ -934,9 +934,28 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="instagram.com"]').forEach(
 (function(){
     var el = document.getElementById('countdown');
     if(!el) return;
+    var hoursEl=el.previousElementSibling, introEl=hoursEl&&hoursEl.previousElementSibling;
+    var defaultHours=hoursEl?hoursEl.textContent:'', defaultIntro=introEl?introEl.textContent:'';
     var p=function(n){return('0'+n).slice(-2);};
-    function render(h,m,s){
+    function render(h,m,s,date){
         el.style.display = '';
+        if(hoursEl) hoursEl.textContent=defaultHours;
+        if(introEl) introEl.textContent=defaultIntro;
+        if(date==='2026-09-04'){
+            if(hoursEl) hoursEl.textContent='🕐 September 4 — closed';
+            if(introEl) introEl.textContent='We are closed today. Normal service resumes on September 5.';
+            el.textContent='📅 Orders and deliveries are closed on September 4. We reopen September 5.';
+            return;
+        }
+        if(date==='2026-09-03'){
+            if(hoursEl) hoursEl.textContent='🕐 September 3: orders accepted until 14:00';
+            if(introEl) introEl.textContent='Orders are accepted until 14:00 on September 3. We are closed September 4 and return to normal service September 5.';
+            if(h < 6){ el.textContent='⏱ On September 3, orders are accepted from 06:00 to 14:00.'; return; }
+            if(h >= 14){ el.textContent='📅 Ordering is closed. We are closed September 4 and reopen September 5.'; return; }
+            var specialDiff=(14*3600)-(h*3600+m*60+s);
+            el.textContent='⏱ Time left until ordering closes at 14:00: '+p(Math.floor(specialDiff/3600))+':'+p(Math.floor((specialDiff%3600)/60))+':'+p(specialDiff%60);
+            return;
+        }
         if(h < 6){
             el.textContent = '⏱ Urgent delivery today via an operator is available from 06:00 to 18:00.';
             return;
@@ -950,9 +969,9 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="instagram.com"]').forEach(
         el.textContent = '⏱ Urgent delivery today via an operator — time left until 18:00: ' + p(hh) + ':' + p(mm) + ':' + p(ss);
     }
     function update(){
-        var parts={}, fmt=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Ho_Chi_Minh',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+        var parts={}, fmt=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Ho_Chi_Minh',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
         fmt.formatToParts(new Date()).forEach(function(x){parts[x.type]=x.value;});
-        render(+parts.hour,+parts.minute,+parts.second);
+        render(+parts.hour,+parts.minute,+parts.second,parts.year+'-'+parts.month+'-'+parts.day);
     }
     window.__renderOperatorCountdown=render;
     update(); setInterval(update,1000);
