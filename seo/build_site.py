@@ -191,6 +191,36 @@ UI = {
            "art_faq_h": "자주 묻는 질문", "art_min": "분 분량"},
 }
 
+# Тексты для отдельных тортов: на их страницах нельзя называть товар
+# букетом или обещать «свежие цветы». Комбинированные наборы сохраняют
+# универсальные подписи, переопределение применяется только к cat=cakes.
+CAKE_T = {
+    "ru": {
+        "related": "Похожие торты",
+        "hotel_text": "Привезём торт в {hotel} и другие отели Нячанга, Bãi Dài и северной Камрани в пределах зоны. Аэропорт и территории южнее не обслуживаем. По умолчанию передаём заказ на ресепшн.",
+        "faq_q1": "Можно ли доставить торт в отель?",
+        "faq_a1": "Да, доставляем торты в отели Нячанга и Камрани, включая {hotel}. По умолчанию передаём заказ на ресепшн; если лифт работает без карты-ключа, поднимем прямо в номер.",
+    },
+    "en": {
+        "related": "Similar cakes",
+        "hotel_text": "We deliver the cake to {hotel} and other hotels within Nha Trang, Bãi Dài and northern Cam Ranh. The airport and locations south of it are outside our delivery area. We normally hand the order to reception.",
+        "faq_q1": "Can you deliver a cake to a hotel?",
+        "faq_a1": "Yes, we deliver cakes to hotels in Nha Trang and Cam Ranh, including {hotel}. By default we leave the order at the front desk; if the lift works without a keycard, we bring it up to your room.",
+    },
+    "ko": {
+        "related": "비슷한 케이크",
+        "hotel_text": "{hotel} 및 나트랑, Bãi Dài, 북부 깜라인의 배달 구역 내 호텔로 케이크를 배달합니다. 공항과 공항 남쪽은 배달 제외 구역입니다. 기본적으로 주문을 프런트에 전달합니다.",
+        "faq_q1": "호텔로 케이크 배달이 가능한가요?",
+        "faq_a1": "네, {hotel}을 포함한 나트랑·깜라인 호텔로 케이크를 배달합니다. 기본적으로 주문을 프런트에 전달하고, 엘리베이터가 카드 키 없이 작동하면 객실까지 올려드립니다.",
+    },
+}
+
+CAKE_UI = {
+    "ru": {"b_fresh": "свежая выпечка", "f1d": "Готовим торт к дню доставки", "st1": "свежие торты"},
+    "en": {"b_fresh": "freshly baked", "f1d": "Cake prepared for the delivery day", "st1": "fresh cakes"},
+    "ko": {"b_fresh": "갓 구운 케이크", "f1d": "배송일에 맞춰 케이크를 준비합니다", "st1": "신선한 케이크"},
+}
+
 def price_num(price):
     digits = re.sub(r"[^\d]", "", price)
     return digits or "0"
@@ -666,13 +696,16 @@ def gallery(p, base, alt):
         </div>'''
 
 def render_product(p, lang, products):
-    t = T[lang]
+    t = dict(T[lang])
     base = "../"
     name = p[f"name_{lang}"]
     desc = p[f"desc_{lang}"]
     alt = p[f"alt_{lang}"]
     hotel = HOTELS[int(p["id"]) % len(HOTELS)]
     slug = p["slug"]
+    is_cake_only = product_cat(p).split() == ["cakes"]
+    if is_cake_only:
+        t.update(CAKE_T[lang])
     canonical = f"{DOMAIN}/catalog/{slug}-{lang}.html"
     alts = {l: f"{DOMAIN}/catalog/{slug}-{l}.html" for l in LANGS}
     _tovar = "тортов" if product_cat(p) == "cakes" else "цветов"
@@ -683,15 +716,18 @@ def render_product(p, lang, products):
         title = f"{name} — delivery in Nha Trang | NhaTrang Flowers"
         meta = f"{name}. Online delivery in Nha Trang from the next day. Price {price_loc(p['price'], lang)}. Order via WhatsApp or Telegram."
     else:
-        title = f"{name} — 나트랑 꽃배달"
+        title = f"{name} — 나트랑 {'케이크 배달' if is_cake_only else '꽃배달'}"
         meta = f"{name}. 주문 다음 날부터 나트랑 배달. 가격 {price_loc(p['price'], lang)}. 온라인·카카오톡·인스타그램 주문."
     # ограничение длины meta-description под лимиты Google (~160 симв), обрезка по границе слова
     if len(meta) > 160:
         meta = meta[:158].rsplit(" ", 1)[0].rstrip(" .,;—-") + "…"
 
-    # похожие — 3 следующих по кругу
-    idx = products.index(p)
-    related = [products[(idx + k) % len(products)] for k in range(1, 4)]
+    # Похожие — 3 следующих по кругу. Для отдельного торта выбираем именно
+    # другие отдельные торты, чтобы заголовок «Похожие торты» не вёл к розам.
+    related_pool = ([item for item in products if product_cat(item).split() == ["cakes"]]
+                    if is_cake_only else products)
+    idx = related_pool.index(p)
+    related = [related_pool[(idx + k) % len(related_pool)] for k in range(1, 4)]
     rel_cards = "\n            ".join(product_card(r, lang, base, t) for r in related)
 
     hotel_text = t["hotel_text"].format(hotel=hotel)
@@ -720,7 +756,9 @@ def render_product(p, lang, products):
         '{"@type":"ListItem","position":3,"name":%s,"item":%s}]}</script>'
         % (jstr(t["nav_home"]), DOMAIN, jstr(t["nav_catalog"]), DOMAIN, lang, jstr(name), jstr(canonical)))
 
-    u = UI[lang]
+    u = dict(UI[lang])
+    if is_cake_only:
+        u.update(CAKE_UI[lang])
     body = f'''    <main class="flex-grow">
     <nav class="max-w-5xl mx-auto px-6 pt-8 pb-2 text-xs text-stone-400">
         <a href="{base}catalog-{lang}.html" class="hover:text-[#c0687a]">{t["nav_catalog"]}</a> / <span style="color:#1a1a1a;">{html.escape(name)}</span>

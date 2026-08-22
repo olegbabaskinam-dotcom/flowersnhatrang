@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-22 19:55",
- "count": 121,
+ "generated": "2026-08-22 20:14",
+ "count": 122,
  "categories": [
   {
    "key": "all",
@@ -2819,6 +2819,30 @@
     "img/products/101-rozovaya-korzina-k-101-rozovaya-fioletovaya-upakovka-nabor-sharov-s/5.webp",
     "img/products/101-rozovaya-korzina-k-101-rozovaya-fioletovaya-upakovka-nabor-sharov-s/6.webp",
     "img/products/101-rozovaya-korzina-k-101-rozovaya-fioletovaya-upakovka-nabor-sharov-s/7.webp"
+   ]
+  },
+  {
+   "id": 122,
+   "slug": "tort-shokoladnyy-serdca-krasnyy-topper-love",
+   "name": "Шоколадный торт с сердцами и красным топпером Love",
+   "desc": "романтичный шоколадный торт с кремовым покрытием и шоколадной крошкой, украшенный двумя шоколадными сердцами, красным топпером Love, коралловым кремовым цветком, белыми цветочками и зеленью. Рассчитан на 5 человек; в комплекте подарочная коробка, свечи и набор для сервировки с тарелочками, вилками и ножами. Красивый подарок на день рождения, годовщину или признание; свежая выпечка, онлайн-доставка по Нячангу со следующего дня",
+   "alt": "шоколадный торт с сердцами и красным топпером Love Нячанг доставка",
+   "price_vnd": 500000,
+   "price": "500 000 донгов",
+   "price_sub": "≈ $20 · 1 800 ₽",
+   "cats": [
+    "cakes"
+   ],
+   "color": "",
+   "images": [
+    "img/products/tort-shokoladnyy-serdca-krasnyy-topper-love/1.webp",
+    "img/products/tort-shokoladnyy-serdca-krasnyy-topper-love/2.webp",
+    "img/products/tort-shokoladnyy-serdca-krasnyy-topper-love/3.webp",
+    "img/products/tort-shokoladnyy-serdca-krasnyy-topper-love/4.webp",
+    "img/products/tort-shokoladnyy-serdca-krasnyy-topper-love/5.webp",
+    "img/products/tort-shokoladnyy-serdca-krasnyy-topper-love/6.webp",
+    "img/products/tort-shokoladnyy-serdca-krasnyy-topper-love/7.webp",
+    "img/products/tort-shokoladnyy-serdca-krasnyy-topper-love/8.webp"
    ]
   }
  ]

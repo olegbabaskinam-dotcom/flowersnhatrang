@@ -549,7 +549,9 @@ def main() -> None:
     for path in files:
         # Python-сценарии не прогоняем через текстовые замены: иначе скрипт
         # может переписать собственные шаблоны и правила проверки.
-        if path.suffix.lower() not in {".html", ".js", ".json", ".csv", ".xml", ".txt", ".md"}:
+        # Журналы Markdown — исторические документы: массовые замены не должны
+        # переписывать старые цитаты и превращать записи «было → стало» в тавтологию.
+        if path.suffix.lower() not in {".html", ".js", ".json", ".csv", ".xml", ".txt"}:
             continue
         try:
             old = path.read_text(encoding="utf-8")
