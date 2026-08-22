@@ -50,13 +50,24 @@ def main() -> int:
         text = path.read_text(encoding="utf-8")
         rel = path.relative_to(ROOT).as_posix()
         title = re.search(r"<title>(.*?)</title>", text, re.I | re.S)
-        if title and len(html.unescape(title.group(1)).strip()) > 60:
+        title_value = html.unescape(title.group(1)).strip() if title else ""
+        if title_value and len(title_value) > 60:
             title_over += 1
-            errors.append(f"title > 60: {rel}")
-        description = re.search(r'<meta\b[^>]*name=["\']description["\'][^>]*content=["\']([^"\']*)', text, re.I)
-        if description and len(html.unescape(description.group(1)).strip()) > 160:
+        description = re.search(r'<meta\b[^>]*name=["\']description["\'][^>]*content=(["\'])(.*?)\1', text, re.I | re.S)
+        description_value = html.unescape(description.group(2)).strip() if description else ""
+        if description_value and len(description_value) > 160:
             desc_over += 1
-            errors.append(f"description > 160: {rel}")
+        # Google truncates to the device width and does not define a fixed
+        # character limit. A literal source ellipsis, however, means our own
+        # generator removed meaning before the crawler saw the page.
+        if title_value.endswith("…") or description_value.endswith("…"):
+            errors.append(f"искусственно обрезанные метаданные: {rel}")
+        is_noindex = bool(re.search(r'<meta\b[^>]*name=["\']robots["\'][^>]*content=["\'][^"\']*noindex', text, re.I))
+        if '<link rel="canonical"' in text and not is_noindex and (not title_value or not description_value):
+            errors.append(f"нет title/description у индексируемой страницы: {rel}")
+        if rel.endswith("-en.html") or rel in {"index-en.html", "catalog-en.html", "blog-en.html"}:
+            if re.search(r"[А-Яа-яЁё]", title_value + " " + description_value):
+                errors.append(f"кириллица в EN-метаданных: {rel}")
 
         for tag in re.findall(r"<img\b[^>]*>", text, re.I | re.S):
             image_tags += 1
@@ -133,6 +144,29 @@ def main() -> int:
             errors.append(f"не разделены онлайн/срочные заказы на главной: {filename}")
         if 'id="countdown"' not in source or "window.__renderOperatorCountdown=render" not in source or "Asia/Ho_Chi_Minh" not in source:
             errors.append(f"нет рабочего таймера оператора до 18:00: {filename}")
+
+    website_source = (ROOT / "index.html").read_text(encoding="utf-8")
+    if '"@type": "WebSite"' not in website_source or '"name": "NhaTrang Flowers"' not in website_source:
+        errors.append("на главной нет WebSite-разметки с единым названием сайта")
+
+    for stem in ("balloons", "torty", "nabory", "prazdnik"):
+        for suffix in ("", "-en", "-kr"):
+            filename = f"{stem}{suffix}.html"
+            source = (ROOT / filename).read_text(encoding="utf-8")
+            expected = f'https://flowers-nha-trang.online/{filename}'
+            first_schema = re.search(
+                r'<script\b[^>]*type=["\']application/ld\+json["\'][^>]*>\s*(\{.*?\})\s*</script>',
+                source,
+                re.I | re.S,
+            )
+            try:
+                schema = json.loads(first_schema.group(1)) if first_schema else {}
+            except json.JSONDecodeError:
+                schema = {}
+            if schema.get("@type") != "LocalBusiness" or schema.get("@id") != expected or schema.get("url") != expected:
+                errors.append(f"LocalBusiness не соответствует посадочной странице: {filename}")
+            if stem != "balloons" and re.match(r"Доставка гелиевых шаров|Helium balloon delivery|냐짱 헬륨.?풍선", str(schema.get("description", "")), re.I):
+                errors.append(f"чужое описание шаров в JSON-LD: {filename}")
 
     if NODE.exists() and inline_scripts:
         checker = r"""

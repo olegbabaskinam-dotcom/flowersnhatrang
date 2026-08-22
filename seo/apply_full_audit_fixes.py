@@ -213,15 +213,15 @@ def add_noopener(text: str) -> str:
 
 
 def shorten(value: str, limit: int) -> str:
+    """Normalise metadata without cutting a human phrase in the source.
+
+    Search engines truncate snippets to the available device width and don't
+    publish a fixed character limit. Literal ellipses in source metadata left
+    hundreds of titles/descriptions looking broken and also removed useful
+    product details. Length is now monitored by the verifier, while the source
+    keeps complete, page-specific wording.
+    """
     plain = html_lib.unescape(value).strip()
-    if len(plain) <= limit:
-        return value
-    for suffix in (" | NhaTrang Flowers", " — NhaTrang Flowers"):
-        if plain.endswith(suffix):
-            plain = plain[: -len(suffix)].rstrip()
-    if len(plain) > limit:
-        cut = plain[: limit - 1].rsplit(" ", 1)[0].rstrip(" .,—-:;")
-        plain = (cut or plain[: limit - 1]).rstrip() + "…"
     return html_lib.escape(plain, quote=True)
 
 

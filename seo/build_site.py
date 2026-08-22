@@ -81,8 +81,8 @@ T = {
     "ru": {
         "site_sub": "Русскоязычная доставка цветов<br>и гелиевых шаров в Нячанге",
         "nav_home": "Главная", "nav_catalog": "Каталог", "nav_articles": "Статьи", "nav_balloons": "🎈 Шары", "nav_cakes": "🎂 Торты", "nav_nabory": "🎁 Наборы",
-        "catalog_h1": "Каталог букетов",
-        "catalog_sub": "Свежие букеты и гелиевые шары с доставкой по Нячангу со следующего дня.",
+        "catalog_h1": "Каталог цветов и букетов в Нячанге",
+        "catalog_sub": "Розы, букеты, корзины и гелиевые шары с ценами и бесплатной доставкой по Нячангу со следующего дня.",
         "order_wa": "заказать в WhatsApp", "order_tg": "заказать в Telegram",
         "order_kakao": "заказать в KakaoTalk", "order_ig": "заказать в Instagram",
         "composition": "Описание", "delivery": "Доставка и оплата",
@@ -102,8 +102,8 @@ T = {
     "en": {
         "site_sub": "Flower & balloon delivery<br>in Nha Trang",
         "nav_home": "Home", "nav_catalog": "Catalog", "nav_articles": "Articles", "nav_balloons": "🎈 Balloons", "nav_cakes": "🎂 Cakes", "nav_nabory": "🎁 Gift sets",
-        "catalog_h1": "Bouquet catalog",
-        "catalog_sub": "Fresh bouquets and helium balloons delivered in Nha Trang from the next day.",
+        "catalog_h1": "Flower & Bouquet Catalog in Nha Trang",
+        "catalog_sub": "Roses, bouquets, baskets and helium balloons with prices and free Nha Trang delivery from the next day.",
         "order_wa": "order on WhatsApp", "order_tg": "order on Telegram",
         "order_kakao": "order on KakaoTalk", "order_ig": "order on Instagram",
         "composition": "Description", "delivery": "Delivery & payment",
@@ -123,8 +123,8 @@ T = {
     "ko": {
         "site_sub": "나트랑 꽃 & 풍선<br>배달 서비스",
         "nav_home": "홈", "nav_catalog": "카탈로그", "nav_articles": "블로그", "nav_balloons": "🎈 풍선", "nav_cakes": "🎂 케이크", "nav_nabory": "🎁 선물 세트",
-        "catalog_h1": "꽃다발 카탈로그",
-        "catalog_sub": "주문 다음 날부터 나트랑으로 배달하는 신선한 꽃다발과 헬륨 풍선.",
+        "catalog_h1": "나트랑 꽃배달 카탈로그",
+        "catalog_sub": "장미, 꽃다발, 꽃바구니와 헬륨풍선 가격을 확인하고 온라인 주문 다음 날부터 무료 시내 배달을 이용하세요.",
         "order_wa": "WhatsApp으로 주문", "order_tg": "Telegram으로 주문",
         "order_kakao": "카카오톡으로 주문", "order_ig": "인스타그램으로 주문",
         "composition": "상품 설명", "delivery": "배송 및 결제",
@@ -716,16 +716,13 @@ def render_product(p, lang, products):
     _tovar = "тортов" if product_cat(p) == "cakes" else "цветов"
     if lang == "ru":
         title = f"{name} — доставка в Нячанге"
-        meta = f"{name}. Онлайн-доставка по Нячангу со следующего дня. Цена {p['price']}. Заказ в WhatsApp и Telegram."
+        meta = f"{name}. Цена {p['price']}. Бесплатная доставка по Нячангу со следующего дня; заказ онлайн или через оператора."
     elif lang == "en":
-        title = f"{name} — delivery in Nha Trang | NhaTrang Flowers"
-        meta = f"{name}. Online delivery in Nha Trang from the next day. Price {price_loc(p['price'], lang)}. Order via WhatsApp or Telegram."
+        title = f"{name} — Nha Trang Delivery"
+        meta = f"{name}. Price {price_loc(p['price'], lang)}. Free Nha Trang delivery from the next day; order online or via WhatsApp."
     else:
         title = f"{name} — 나트랑 {'케이크 배달' if is_cake_only else '꽃배달'}"
-        meta = f"{name}. 주문 다음 날부터 나트랑 배달. 가격 {price_loc(p['price'], lang)}. 온라인·카카오톡·인스타그램 주문."
-    # ограничение длины meta-description под лимиты Google (~160 симв), обрезка по границе слова
-    if len(meta) > 160:
-        meta = meta[:158].rsplit(" ", 1)[0].rstrip(" .,;—-") + "…"
+        meta = f"{name}. 가격 {price_loc(p['price'], lang)}. 나트랑 시내 무료 배달, 온라인 주문은 다음 날부터; 카카오톡 상담."
 
     # Похожие — 3 следующих по кругу. Для отдельного торта выбираем именно
     # другие отдельные торты, чтобы заголовок «Похожие торты» не вёл к розам.
@@ -921,14 +918,14 @@ def render_catalog(lang, products):
     canonical = f"{DOMAIN}/catalog-{lang}.html"
     alts = {l: f"{DOMAIN}/catalog-{l}.html" for l in LANGS}
     if lang == "ru":
-        title = "Каталог букетов — русскоязычная доставка цветов в Нячанге"
-        meta = "Каталог свежих букетов и гелиевых шаров. Онлайн-доставка по Нячангу со следующего дня."
+        title = "Каталог цветов в Нячанге — цены на букеты и доставку"
+        meta = "Каталог цветов и букетов в Нячанге с ценами от 500 000 ₫. Розы, корзины, шары и наборы; бесплатная онлайн-доставка со следующего дня."
     elif lang == "en":
-        title = "Bouquet catalog — flower delivery in Nha Trang | NhaTrang Flowers"
-        meta = "Fresh bouquets and helium balloons with online delivery in Nha Trang from the next day. Roses, arrangements, baskets and gifts."
+        title = "Flower & Bouquet Catalog Nha Trang — Prices & Delivery"
+        meta = "Browse flowers and bouquets in Nha Trang with prices from 500,000₫. Roses, baskets, balloons and gifts; free city delivery from the next day."
     else:
-        title = "꽃다발 카탈로그 — 나트랑 꽃 배달 | NhaTrang Flowers"
-        meta = "주문 다음 날부터 나트랑으로 배달하는 신선한 꽃다발·헬륨 풍선 카탈로그. 현금 또는 암호화폐 결제."
+        title = "나트랑 꽃배달 카탈로그 — 장미·꽃다발 가격"
+        meta = "나트랑 꽃배달 상품과 가격을 한눈에 확인하세요. 장미·꽃다발·꽃바구니 500,000동부터, 시내 무료 배달은 온라인 주문 다음 날부터 가능합니다."
     cards = "\n            ".join(product_card(p, lang, base, t) for p in products)
     FILT = {
         "ru": {"cat": [("", "🌸 Все"), ("r25", "🌹 25 роз"), ("r51", "🌹 51 роза"), ("r101", "🌹 101+ роз"), ("mixed", "💐 Сборные"), ("balloons", "🎈 Шары"), ("cakes", "🎂 Торты"), ("nabory", "🎁 Наборы")],
