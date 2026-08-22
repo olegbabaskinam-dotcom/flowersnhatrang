@@ -2289,9 +2289,14 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"], a[href*="kakao"], 
     var cf=document.querySelector('.cat-filters'); if(!cf) return;
     var grid=cf.nextElementSibling; if(!grid) return;
     function price(c){var el=c.querySelector('p.font-bold');return el?parseInt(el.textContent.replace(/[^0-9]/g,'')||'0',10):0;}
+    function isCake(c){return (' '+(c.getAttribute('data-cat')||'')+' ').indexOf(' cakes ')>-1;}
     function sortBy(dir){
       var cards=Array.prototype.slice.call(grid.querySelectorAll('.product-card'));
-      cards.sort(function(a,b){return dir==='desc'?price(b)-price(a):price(a)-price(b);});
+      cards.sort(function(a,b){
+        var ac=isCake(a),bc=isCake(b);
+        if(ac!==bc)return ac?1:-1;
+        return dir==='desc'?price(b)-price(a):price(a)-price(b);
+      });
       cards.forEach(function(c){grid.appendChild(c);});
     }
     sortBy('asc');
