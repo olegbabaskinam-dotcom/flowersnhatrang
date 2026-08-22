@@ -268,8 +268,19 @@ function initDate() {
 function rebuildTimes() {
   var inp = document.getElementById("deliveryDate");
   if (inp.value && inp.value < MIN_DATE) inp.value = MIN_DATE;
-  var adjusted = isClosedDeliveryDate(inp.value);
+  var selectedDate = inp.value;
+  var adjusted = isClosedDeliveryDate(selectedDate);
   if (adjusted) inp.value = "2026-09-05";
+  var dateNotice = document.getElementById("dateScheduleNotice");
+  if (dateNotice) {
+    var message = selectedDate === "2026-09-03"
+      ? "Здравствуйте! 3 сентября заказы принимаем только до 14:00. 4 сентября мы не работаем. Спасибо за понимание 🌸"
+      : selectedDate === "2026-09-04"
+        ? "Здравствуйте! 4 сентября у нас полный выходной, поэтому оформить доставку на эту дату нельзя. Календарь перенесён на 5 сентября. Спасибо за понимание 🌸"
+        : "";
+    dateNotice.classList.toggle("hidden", !message);
+    dateNotice.textContent = message;
+  }
   var start = (inp.value === MIN_DATE) ? MIN_START : 6;
   var sel = document.getElementById("deliveryTime"); sel.innerHTML = "";
   for (var h = start; h <= 21; h++) { var o = document.createElement("option"); o.value = pad(h) + ":00"; o.textContent = pad(h) + ":00"; sel.appendChild(o); }
