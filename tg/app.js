@@ -220,31 +220,62 @@ function refreshZone() {
 }
 
 /* ============ ДАТА / ВРЕМЯ (как на сайте) ============ */
-function ntParts() {
-  var f = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Ho_Chi_Minh", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", hour12: false });
-  var p = {}; f.formatToParts(new Date()).forEach(function (x) { p[x.type] = x.value; });
-  return { y: +p.year, mo: +p.month, d: +p.day, h: +p.hour };
+function ntParts(now) {
+  var f = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Ho_Chi_Minh", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false });
+  var p = {}; f.formatToParts(now || new Date()).forEach(function (x) { p[x.type] = x.value; });
+  return { y: +p.year, mo: +p.month, d: +p.day, h: +p.hour, mi: +p.minute };
 }
 function pad(n) { return n < 10 ? "0" + n : "" + n; }
+function isoDate(t) { return t.y + "-" + pad(t.mo) + "-" + pad(t.d); }
+function isClosedDeliveryDate(iso) { return iso === "2026-09-04"; }
+function skipClosedDeliveryDate(base) {
+  while (isClosedDeliveryDate(base.getUTCFullYear() + "-" + pad(base.getUTCMonth() + 1) + "-" + pad(base.getUTCDate()))) base.setUTCDate(base.getUTCDate() + 1);
+  return base;
+}
+function specialOrderClosed(now) {
+  var t = ntParts(now), d = isoDate(t);
+  return d === "2026-09-04" || (d === "2026-09-03" && (t.h > 14 || (t.h === 14 && t.mi >= 0)));
+}
+function updateSpecialOrderUi() {
+  var t = ntParts(), d = isoDate(t), active = d >= "2026-08-22" && d <= "2026-09-04";
+  var notice = document.getElementById("specialScheduleNotice");
+  if (notice) {
+    notice.classList.toggle("hidden", !active);
+    notice.textContent = specialOrderClosed()
+      ? "📅 Онлайн-заказы закрыты до 5 сентября: 4 сентября мы не работаем. С 5 сентября оформление снова доступно."
+      : "📅 Важно: 3 сентября онлайн-заказы принимаем до 14:00. 4 сентября — выходной. С 5 сентября работаем в обычном режиме.";
+  }
+  var btn = document.getElementById("submitBtn"), closed = specialOrderClosed();
+  if (btn) {
+    if (closed) { if (!btn.dataset.normalText) btn.dataset.normalText = btn.textContent; btn.disabled = true; btn.textContent = "Онлайн-заказы закрыты до 5 сентября"; }
+    else if (btn.dataset.normalText) { btn.disabled = false; btn.textContent = btn.dataset.normalText; delete btn.dataset.normalText; }
+  }
+}
 var MIN_DATE, MIN_START;
 function initDate() {
   var t = ntParts(), base = new Date(Date.UTC(t.y, t.mo - 1, t.d));
   if (t.h >= 6 && t.h < 22) { base.setUTCDate(base.getUTCDate() + 1); MIN_START = 6; }
   else { if (t.h >= 22) base.setUTCDate(base.getUTCDate() + 1); MIN_START = 9; }
+  skipClosedDeliveryDate(base);
   MIN_DATE = base.getUTCFullYear() + "-" + pad(base.getUTCMonth() + 1) + "-" + pad(base.getUTCDate());
   var inp = document.getElementById("deliveryDate");
   inp.min = MIN_DATE; inp.value = MIN_DATE;
   inp.addEventListener("change", rebuildTimes);
   rebuildTimes();
+  updateSpecialOrderUi();
+  setInterval(updateSpecialOrderUi, 30000);
 }
 function rebuildTimes() {
   var inp = document.getElementById("deliveryDate");
   if (inp.value && inp.value < MIN_DATE) inp.value = MIN_DATE;
+  var adjusted = isClosedDeliveryDate(inp.value);
+  if (adjusted) inp.value = "2026-09-05";
   var start = (inp.value === MIN_DATE) ? MIN_START : 6;
   var sel = document.getElementById("deliveryTime"); sel.innerHTML = "";
   for (var h = start; h <= 21; h++) { var o = document.createElement("option"); o.value = pad(h) + ":00"; o.textContent = pad(h) + ":00"; sel.appendChild(o); }
-  document.getElementById("timeHint").textContent =
-    (inp.value === MIN_DATE && MIN_START === 9)
+  document.getElementById("timeHint").textContent = adjusted
+    ? "4 сентября мы не работаем. Выберите 5 сентября или другую доступную дату."
+    : (inp.value === MIN_DATE && MIN_START === 9)
       ? "Сегодня приём закрыт — ближайшая доставка завтра с 09:00."
       : "Доставка в этот день с " + pad(start) + ":00 до 21:00.";
 }
@@ -389,6 +420,8 @@ function submitOrder(e) {
   if (document.getElementById("website").value) return;
   var err = document.getElementById("err1"); err.textContent = "";
   var form = e.target;
+  if (specialOrderClosed()) { err.textContent = "Онлайн-заказы закрыты до 5 сентября: 4 сентября мы не работаем. С 5 сентября оформление снова доступно."; updateSpecialOrderUi(); return; }
+  if (isClosedDeliveryDate(document.getElementById("deliveryDate").value)) { err.textContent = "4 сентября мы не работаем. Выберите 5 сентября или другую доступную дату."; return; }
 
   var its = cartRead();
   if (!its.length) { err.textContent = "Корзина пуста."; return; }

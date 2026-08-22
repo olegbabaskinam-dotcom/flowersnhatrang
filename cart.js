@@ -23,9 +23,9 @@
     return "ru";
   }
   var LBL = {
-    ru: { add:"🛒 В корзину", addcake:"🎂 Добавить к заказу", added:"Добавлено ✓", cart:"🛒 Корзина", order:"🧾 Оформить заказ", fab:"Корзина" },
-    en: { add:"🛒 Add to cart", addcake:"🎂 Add to order", added:"Added ✓", cart:"🛒 Cart", order:"🧾 Order online", fab:"Cart" },
-    ko: { add:"🛒 장바구니에 담기", addcake:"🎂 주문에 추가", added:"담김 ✓", cart:"🛒 장바구니", order:"🧾 주문하기", fab:"장바구니" }
+    ru: { add:"🛒 В корзину", addcake:"🎂 Добавить к заказу", added:"Добавлено ✓", cart:"🛒 Корзина", order:"🧾 Оформить заказ", fab:"Корзина", schedule:"📅 Важно: 3 сентября онлайн-заказы принимаем до 14:00. 4 сентября — выходной. С 5 сентября работаем в обычном режиме.", closed:"📅 Онлайн-заказы закрыты до 5 сентября: 4 сентября мы не работаем. С 5 сентября — обычный режим." },
+    en: { add:"🛒 Add to cart", addcake:"🎂 Add to order", added:"Added ✓", cart:"🛒 Cart", order:"🧾 Order online", fab:"Cart", schedule:"📅 Important: online orders are accepted until 14:00 on September 3. We are closed on September 4 and return to normal hours on September 5.", closed:"📅 Online ordering is closed until September 5: we are closed on September 4. Normal hours resume September 5." },
+    ko: { add:"🛒 장바구니에 담기", addcake:"🎂 주문에 추가", added:"담김 ✓", cart:"🛒 장바구니", order:"🧾 주문하기", fab:"장바구니", schedule:"📅 중요: 9월 3일 온라인 주문은 14:00까지 접수합니다. 9월 4일은 휴무이며 9월 5일부터 정상 운영합니다.", closed:"📅 온라인 주문은 9월 5일까지 마감되었습니다. 9월 4일은 휴무이며 9월 5일부터 정상 운영합니다." }
   };
   function L() { return LBL[pageLang()]; }
 
@@ -183,10 +183,33 @@
     }
   }
 
+  // Временный график 3–4 сентября 2026 (время Нячанга). После 5 сентября баннер исчезает сам.
+  function nhaTrangNow() {
+    try {
+      var f = new Intl.DateTimeFormat("en-CA", { timeZone:"Asia/Ho_Chi_Minh", year:"numeric", month:"2-digit", day:"2-digit", hour:"2-digit", minute:"2-digit", hour12:false });
+      var p = {}; f.formatToParts(new Date()).forEach(function (x) { p[x.type] = x.value; });
+      return { date:p.year+"-"+p.month+"-"+p.day, hour:+p.hour, minute:+p.minute };
+    } catch (_) { return null; }
+  }
+  function injectSpecialSchedule() {
+    var t = nhaTrangNow();
+    if (!t || t.date < "2026-08-22" || t.date > "2026-09-04") return;
+    var b = document.getElementById("flw-special-schedule");
+    if (!b) {
+      b = document.createElement("div"); b.id = "flw-special-schedule";
+      b.style.cssText = "position:relative;z-index:49;background:#fff4e8;border-bottom:1px solid #f0d2ad;color:#8a531d;padding:10px 16px;text-align:center;font:700 13px/1.45 system-ui,-apple-system,sans-serif";
+      var header = document.querySelector("header");
+      if (header && header.parentNode) header.parentNode.insertBefore(b, header.nextSibling);
+      else document.body.insertBefore(b, document.body.firstChild);
+    }
+    var closed = t.date === "2026-09-04" || (t.date === "2026-09-03" && (t.hour > 14 || (t.hour === 14 && t.minute >= 0)));
+    b.textContent = closed ? L().closed : L().schedule;
+  }
+
   document.addEventListener("cart:change", fab);
   document.addEventListener("DOMContentLoaded", function () {
     try { localStorage.setItem("flw_lang", pageLang()); } catch (e) {}
-    injectButtons(); injectProductPage(); injectNav(); fab();
+    injectButtons(); injectProductPage(); injectNav(); injectSpecialSchedule(); fab();
     var n = 0, iv = setInterval(function () { injectButtons(); if (++n > 10) clearInterval(iv); }, 400);
   });
 })();

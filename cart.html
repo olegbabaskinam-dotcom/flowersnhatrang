@@ -68,6 +68,10 @@ var I18N_RAW={
  co_title:{ru:"Оформление заказа",en:"Checkout",ko:"주문하기"},
  co_sub:{ru:"Заполните данные — мы подтвердим заказ в чате.",en:"Fill in the details — we'll confirm the order in chat.",ko:"정보를 입력해 주세요 — 채팅으로 주문을 확정해 드립니다."},
  note:{ru:"🕒 Подтверждаем заказы ежедневно с 06:00 до 21:00, обычно в течение 10 минут. Заказы ночью подтверждаем утром.",en:"🕒 We confirm orders daily from 06:00 to 21:00, usually within 10 minutes. Night orders are confirmed in the morning.",ko:"🕒 매일 06:00~21:00에 주문을 확인하며 보통 10분 이내입니다. 야간 주문은 아침에 확인해 드립니다."},
+ special_schedule:{ru:"📅 Важно: 3 сентября онлайн-заказы принимаем до 14:00. 4 сентября — выходной. С 5 сентября работаем в обычном режиме.",en:"📅 Important: online orders are accepted until 14:00 on September 3. We are closed on September 4 and return to normal hours on September 5.",ko:"📅 중요: 9월 3일 온라인 주문은 14:00까지 접수합니다. 9월 4일은 휴무이며 9월 5일부터 정상 운영합니다."},
+ special_closed:{ru:"Онлайн-заказы закрыты до 5 сентября: 4 сентября мы не работаем. С 5 сентября оформление снова доступно.",en:"Online ordering is closed until September 5: we are closed on September 4. Ordering reopens on September 5.",ko:"온라인 주문은 9월 5일까지 마감되었습니다. 9월 4일은 휴무이며 9월 5일부터 다시 주문할 수 있습니다."},
+ special_closed_btn:{ru:"Онлайн-заказы закрыты до 5 сентября",en:"Online ordering closed until September 5",ko:"9월 5일까지 온라인 주문 마감"},
+ special_delivery_closed:{ru:"4 сентября мы не работаем. Выберите 5 сентября или другую доступную дату.",en:"We are closed on September 4. Choose September 5 or another available date.",ko:"9월 4일은 휴무입니다. 9월 5일 또는 다른 가능한 날짜를 선택해 주세요."},
  help:{ru:"💬 Есть вопросы или нужна помощь с выбором и оформлением? Напишите нам лично — ответим быстро:",en:"💬 Questions or need help choosing and ordering? Message us directly — we reply fast:",ko:"💬 궁금한 점이 있거나 선택·주문에 도움이 필요하신가요? 바로 메시지 주세요 — 빠르게 답변드립니다:"},
  lbl_items:{ru:"Что заказываете",en:"What are you ordering",ko:"주문 상품"},
  ph_items:{ru:"Например: 25 красных роз · 101 роза в корзине · набор шаров",en:"e.g. 25 red roses · 101 roses in a basket · balloon set",ko:"예: 빨간 장미 25송이 · 바구니 장미 101송이 · 풍선 세트"},
@@ -476,6 +480,7 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
     <p class="sub" data-i18n="co_sub">Заполните данные — мы подтвердим заказ в чате.</p>
 
     <div class="note" data-i18n="note">🕒 Подтверждаем заказы ежедневно с 06:00 до 21:00, обычно в течение 10 минут. Заказы ночью подтверждаем утром.</div>
+    <div class="note hidden" id="specialScheduleNotice" data-i18n="special_schedule">📅 Важно: 3 сентября онлайн-заказы принимаем до 14:00. 4 сентября — выходной. С 5 сентября работаем в обычном режиме.</div>
 
     <div class="helpbox">
       <span data-i18n="help">💬 Есть вопросы или нужна помощь с выбором и оформлением? Напишите нам лично — ответим быстро:</span>
@@ -777,7 +782,7 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
             &copy; 2026 Русскоязычная доставка цветов и гелиевых шаров в Нячанге. все права защищены.
         </div>
     </footer>
-<script src="cart.js"></script>
+<script src="cart.js?v=20260822-schedule"></script>
 <script>/*MARK-CARD-JS*/
 (function(){
   document.querySelectorAll('.pcard-slider').forEach(function(sl){
@@ -925,19 +930,41 @@ const PAY = {
 const LS = "flw_order";
 
 /* ================== ДАТА / ВРЕМЯ ================== */
-function ntParts(){
+function ntParts(now){
   const f=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Ho_Chi_Minh',
-    year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',hour12:false});
-  const p={}; f.formatToParts(new Date()).forEach(x=>p[x.type]=x.value);
-  return {y:+p.year,mo:+p.month,d:+p.day,h:+p.hour};
+    year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false});
+  const p={}; f.formatToParts(now||new Date()).forEach(x=>p[x.type]=x.value);
+  return {y:+p.year,mo:+p.month,d:+p.day,h:+p.hour,mi:+p.minute};
 }
 function pad(n){return n<10?'0'+n:''+n}
+function isoDate(t){return t.y+'-'+pad(t.mo)+'-'+pad(t.d)}
+function isClosedDeliveryDate(iso){return iso==='2026-09-04'}
+function skipClosedDeliveryDate(base){
+  while(isClosedDeliveryDate(base.getUTCFullYear()+'-'+pad(base.getUTCMonth()+1)+'-'+pad(base.getUTCDate()))) base.setUTCDate(base.getUTCDate()+1);
+  return base;
+}
+function specialOrderClosed(now){
+  const t=ntParts(now), d=isoDate(t);
+  return d==='2026-09-04' || (d==='2026-09-03' && (t.h>14 || (t.h===14 && t.mi>=0)));
+}
+function updateSpecialOrderUi(){
+  const t=ntParts(), d=isoDate(t), active=d>='2026-08-22'&&d<='2026-09-04';
+  const notice=document.getElementById('specialScheduleNotice');
+  if(notice){ notice.classList.toggle('hidden',!active); notice.textContent=specialOrderClosed()?tr('special_closed'):tr('special_schedule'); }
+  const btn=document.getElementById('submitBtn');
+  if(btn&&!currentId){
+    const closed=specialOrderClosed();
+    if(closed){ if(!btn.dataset.normalText) btn.dataset.normalText=btn.textContent; btn.disabled=true; btn.textContent=tr('special_closed_btn'); }
+    else if(btn.dataset.normalText){ btn.disabled=false; btn.textContent=tr('submitBtn'); delete btn.dataset.normalText; }
+  }
+}
 let MIN_DATE, MIN_START; // YYYY-MM-DD и час старта на минимальную дату
 function initDate(){
   const t=ntParts();
   const base=new Date(Date.UTC(t.y,t.mo-1,t.d));
   if(t.h>=6 && t.h<22){ base.setUTCDate(base.getUTCDate()+1); MIN_START=6; }   // день → завтра
   else { if(t.h>=22) base.setUTCDate(base.getUTCDate()+1); MIN_START=9; }        // ночь → ближайшее утро с 09
+  skipClosedDeliveryDate(base);
   MIN_DATE = base.getUTCFullYear()+"-"+pad(base.getUTCMonth()+1)+"-"+pad(base.getUTCDate());
   var OPEN_DATE="2026-07-27";                          // доставка/заказы стартуют с 27 июля
   if(MIN_DATE < OPEN_DATE){ MIN_DATE=OPEN_DATE; MIN_START=6; }
@@ -945,16 +972,21 @@ function initDate(){
   inp.min=MIN_DATE; inp.value=MIN_DATE;
   inp.addEventListener('change',rebuildTimes);
   rebuildTimes();
+  updateSpecialOrderUi();
+  setInterval(updateSpecialOrderUi,30000);
 }
 function rebuildTimes(){
   const inp=document.getElementById('deliveryDate');
   if(inp.value && inp.value<MIN_DATE){ inp.value=MIN_DATE; }
+  const adjusted=isClosedDeliveryDate(inp.value);
+  if(adjusted) inp.value='2026-09-05';
   const start=(inp.value===MIN_DATE)?MIN_START:6;
   const sel=document.getElementById('deliveryTime'); sel.innerHTML="";
   for(let h=start;h<=21;h++){ const o=document.createElement('option');
     o.value=pad(h)+":00"; o.textContent=pad(h)+":00"; sel.appendChild(o); }
-  document.getElementById('timeHint').textContent=
-    (inp.value===MIN_DATE && MIN_START===9)
+  document.getElementById('timeHint').textContent=adjusted
+    ? tr('special_delivery_closed')
+    : (inp.value===MIN_DATE && MIN_START===9)
       ? tr('timeHint_morning')
       : tr('timeHint_day').replace('{h}',pad(start));
 }
@@ -1201,6 +1233,8 @@ form.addEventListener('submit',async e=>{
   if(document.getElementById('website').value) return;
   const btn=document.getElementById('submitBtn'), err=document.getElementById('err1');
   err.textContent="";
+  if(!currentId && specialOrderClosed()){ err.textContent=tr('special_closed'); updateSpecialOrderUi(); return; }
+  if(isClosedDeliveryDate(form.deliveryDate.value)){ err.textContent=tr('special_delivery_closed'); return; }
   if(window.Cart){ var its=Cart.items(); if(its.length){
     var hc=its.some(function(x){return /(^|\s)cakes(\s|$)/.test(x.cat);});
     var ho=its.some(function(x){return !/(^|\s)cakes(\s|$)/.test(x.cat);});
