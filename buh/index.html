@@ -200,7 +200,8 @@
 
 <!-- ГОРИЗОНТ -->
 <div id="v-horizon" class="hidden">
-  <button class="back" onclick="go('main')">‹ Назад</button><h2>📅 Горизонт 5 дней</h2>
+  <button class="back" onclick="go('main')">‹ Назад</button>
+  <div class="row" style="margin-bottom:6px"><h2 style="margin:0">📅 Горизонт 5 дней</h2><small class="link" onclick="refreshHorizon()">🔄 Обновить</small></div>
   <p class="muted">Суммы = себестоимость (на закуп). Тапни заказ, чтобы вписать/поправить себестоимость.</p>
   <div id="horList"></div>
 </div>
@@ -584,6 +585,13 @@ async function openHorizon(){
   if(c){ try{ var r=JSON.parse(c); STATE=r; renderHorizon(r); go('horizon'); had=true; }catch(e){} }
   var res=await api('horizon',{}, had); if(!res.ok){ if(!had) toast(res.error||'Ошибка'); return; }
   STATE=res; localStorage.setItem('cache_horizon',JSON.stringify(res)); renderHorizon(res); go('horizon');
+}
+// Кнопка «Обновить» в горизонте: заново перечитывает актуальные заказы.
+async function refreshHorizon(){
+  var res=await api('horizon',{}); if(!res.ok){ toast(res.error||'Ошибка'); return; }
+  STATE=res; localStorage.setItem('cache_horizon',JSON.stringify(res)); renderHorizon(res);
+  var has=(res.horizon||[]).some(function(d){return d.count>0;});
+  toast(has?'Горизонт обновлён':'На ближайшие 5 дней заказов нет');
 }
 function renderHorizon(res){
   var box=document.getElementById('horList'); box.innerHTML='';
