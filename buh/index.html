@@ -136,7 +136,7 @@
     <div class="tile" onclick="openExpense()"><span class="ic">🔴</span>Расход</div>
     <div class="tile" onclick="openTransfer()"><span class="ic">🔁</span>Перевод</div>
     <div class="tile" onclick="openHorizon()"><span class="ic">📅</span>Горизонт</div>
-    <div class="tile" onclick="openMap()"><span class="ic">🗺️</span>Карта заказов</div>
+    <div class="tile" onclick="openMap(null,true)"><span class="ic">🗺️</span>Карта заказов</div>
     <div class="tile" onclick="openReports()"><span class="ic">📊</span>Отчёты</div>
     <div class="tile" onclick="openMore()"><span class="ic">⋯</span>Ещё<span id="moreBadge"></span></div>
   </div>
@@ -680,13 +680,13 @@ function vnToday(){ try{ return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/
 function addDays(d,n){ var p=String(d).split('-'); var dt=new Date(+p[0],+p[1]-1,+p[2]); dt.setDate(dt.getDate()+n); return dt.getFullYear()+'-'+('0'+(dt.getMonth()+1)).slice(-2)+'-'+('0'+dt.getDate()).slice(-2); }
 function humanDate(d){ var wd=['вс','пн','вт','ср','чт','пт','сб']; var p=String(d).split('-'); var dt=new Date(+p[0],+p[1]-1,+p[2]); return wd[dt.getDay()]+', '+p[2]+'.'+p[1]; }
 
-async function openMap(date){
+async function openMap(date, doSync){
   MAP_DATE = date || MAP_DATE || addDays(vnToday(),1);   // по умолчанию — завтра (сегодня и раньше не грузим)
-  var res=await api('mapState',{date:MAP_DATE});
+  var res=await api('mapState', doSync?{date:MAP_DATE, sync:1}:{date:MAP_DATE});
   if(!res.ok){ toast(res.error||'Ошибка'); return; }
   MAP_LAST=res; renderMap(res); go('map');
 }
-function refreshMap(){ openMap(MAP_DATE); toast('Обновлено'); }
+function refreshMap(){ openMap(MAP_DATE, true); toast('Обновляю…'); }
 function mapDay(delta){ openMap(addDays(MAP_DATE||addDays(vnToday(),1), delta)); }
 function renderMap(res){
   MAP_DATE=res.date;
