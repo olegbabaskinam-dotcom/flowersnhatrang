@@ -1509,6 +1509,9 @@ function showCheckout(){
   var cf=document.getElementById('coform'); if(!cf) return;
   cf.style.display='block'; prefillFromCart();
   var h=document.getElementById('coHead'); if(h) h.scrollIntoView({behavior:'smooth',block:'start'});
+  // карта инициализировалась пока форма была скрыта → пересчитать её размер, чтобы тайлы заполнили весь контейнер
+  setTimeout(function(){ try{ lmap.invalidateSize(); }catch(e){} },300);
+  setTimeout(function(){ try{ lmap.invalidateSize(); }catch(e){} },900);
 }
 // свернуть форму
 function closeForm(){
