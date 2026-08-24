@@ -210,7 +210,7 @@
 <!-- КАРТА ЗАКАЗОВ -->
 <div id="v-map" class="hidden">
   <button class="back" onclick="go('main')">‹ Назад</button>
-  <div class="row" style="margin-bottom:8px"><h2 style="margin:0">🗺️ Карта заказов</h2><small class="link" onclick="openMapExport()">📋 Экспорт дня</small></div>
+  <div class="row" style="margin-bottom:8px"><h2 style="margin:0">🗺️ Карта заказов</h2><span><small class="link" onclick="refreshMap()">🔄 Обновить</small> · <small class="link" onclick="openMapExport()">📋 Экспорт</small></span></div>
   <div class="row" style="margin-bottom:10px">
     <button class="btn ghost" style="width:auto;margin:0;padding:9px 16px" onclick="mapDay(-1)">‹</button>
     <b id="mapDate" style="text-align:center;flex:1">—</b>
@@ -679,12 +679,13 @@ function addDays(d,n){ var p=String(d).split('-'); var dt=new Date(+p[0],+p[1]-1
 function humanDate(d){ var wd=['вс','пн','вт','ср','чт','пт','сб']; var p=String(d).split('-'); var dt=new Date(+p[0],+p[1]-1,+p[2]); return wd[dt.getDay()]+', '+p[2]+'.'+p[1]; }
 
 async function openMap(date){
-  MAP_DATE = date || MAP_DATE || vnToday();
+  MAP_DATE = date || MAP_DATE || addDays(vnToday(),1);   // по умолчанию — завтра (сегодня и раньше не грузим)
   var res=await api('mapState',{date:MAP_DATE});
   if(!res.ok){ toast(res.error||'Ошибка'); return; }
   MAP_LAST=res; renderMap(res); go('map');
 }
-function mapDay(delta){ openMap(addDays(MAP_DATE||vnToday(), delta)); }
+function refreshMap(){ openMap(MAP_DATE); toast('Обновлено'); }
+function mapDay(delta){ openMap(addDays(MAP_DATE||addDays(vnToday(),1), delta)); }
 function renderMap(res){
   MAP_DATE=res.date;
   document.getElementById('mapDate').textContent=humanDate(res.date);
