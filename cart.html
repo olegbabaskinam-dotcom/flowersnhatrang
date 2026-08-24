@@ -91,6 +91,8 @@ var I18N_RAW={
  ph_recip_contact:{ru:"+7… / @username получателя",en:"recipient's +… / @username",ko:"수령인 +… / @아이디"},
  err_recip:{ru:"Укажите контакт получателя",en:"Enter the recipient's contact",ko:"수령인 연락처를 입력하세요"},
  lbl_addr:{ru:"Адрес доставки",en:"Delivery address",ko:"배달 주소"},
+ map_lead:{ru:"В идеале — поставьте точку прямо на карте: нажмите нужное место или перетащите булавку. Так курьер приедет точно.",en:"Best of all — drop a pin right on the map: tap the spot or drag the pin. That way the courier arrives exactly.",ko:"가장 좋은 방법 — 지도에 바로 핀을 찍으세요: 원하는 곳을 탭하거나 핀을 드래그하세요. 그래야 정확히 배달됩니다."},
+ lbl_addr_search:{ru:"Или найдите по названию (если не хотите ставить точку)",en:"Or search by name (if you'd rather not drop a pin)",ko:"또는 이름으로 검색 (핀을 찍지 않으려면)"},
  ph_addrSearch:{ru:"Отель, улица или место — например: Vesna Hotel",en:"Hotel, street or place — e.g. Vesna Hotel",ko:"호텔, 거리 또는 장소 — 예: Vesna Hotel"},
  geoBtn:{ru:"📍 Моё местоположение",en:"📍 My location",ko:"📍 내 위치"},
  maprowHint:{ru:"Не то место? Подвиньте булавку на карте.",en:"Wrong spot? Drag the pin on the map.",ko:"위치가 틀렸나요? 지도에서 핀을 옮기세요."},
@@ -413,7 +415,7 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
   .found{margin-top:8px;background:#f2fbf5;border:1px solid #cfe9d6;border-radius:12px;padding:10px 13px;font-size:14px;color:#256b3c}
   .found a{color:var(--pink-d);font-size:12px;word-break:break-all}
   /* map */
-  #map{height:200px;border-radius:12px;border:1px solid var(--line);margin-top:8px;z-index:1}
+  #map{height:360px;border-radius:12px;border:1px solid var(--line);margin-top:8px;z-index:1}
   .maprow{display:flex;gap:10px;align-items:center;margin-top:8px;flex-wrap:wrap}
   /* payment */
   .pays{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}
@@ -533,20 +535,27 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
           </div>
           <input id="recipContact" name="recip_contact" data-i18n-ph="ph_recip_contact" placeholder="+7… / @username получателя" style="margin-top:8px">
         </div>
+        <!-- 1) КАРТА — главный способ -->
         <div class="field">
-          <label class="req" for="addrSearch" data-i18n="lbl_addr">Адрес доставки</label>
+          <label class="req" data-i18n="lbl_addr">Адрес доставки — поставьте точку на карте</label>
+          <div class="hint" style="margin-bottom:8px" data-i18n="map_lead">В идеале — поставьте точку прямо на карте: нажмите нужное место или перетащите булавку. Так курьер приедет точно.</div>
+          <div id="map"></div>
+          <div class="maprow" id="maprow">
+            <button type="button" class="btn ghost small" id="geoBtn" data-i18n="geoBtn">📍 Моё местоположение</button>
+            <span class="hint" style="margin:0" data-i18n="maprowHint">Нажмите на карту или перетащите булавку на нужное место.</span>
+          </div>
+          <div id="foundAddr" class="found hidden"></div>
+        </div>
+        <!-- 2) ПОИСК ПО НАЗВАНИЮ -->
+        <div class="field">
+          <label for="addrSearch" data-i18n="lbl_addr_search">Или найдите по названию (если не хотите ставить точку)</label>
           <div class="searchbox">
             <input id="addrSearch" autocomplete="off" data-i18n-ph="ph_addrSearch" placeholder="Отель, улица или место — например: Vesna Hotel">
             <div id="results" class="results hidden"></div>
           </div>
-          <div id="foundAddr" class="found hidden"></div>
-          <div id="map" class="hidden"></div>
-          <div class="maprow hidden" id="maprow">
-            <button type="button" class="btn ghost small" id="geoBtn" data-i18n="geoBtn">📍 Моё местоположение</button>
-            <span class="hint" style="margin:0" data-i18n="maprowHint">Не то место? Подвиньте булавку на карте.</span>
-          </div>
           <div class="hint" data-i18n="hint_addr">Начните вводить название — выберите из списка. Не нашли? Вставьте ссылку на Google Карту ниже. ✈️ В аэропорт и южнее аэропорта не возим.</div>
         </div>
+        <!-- 3) ССЫЛКА GOOGLE -->
         <div class="field">
           <label for="gmapLink" data-i18n="lbl_gmap">…или вставьте ссылку на Google Карту</label>
           <div style="display:flex;gap:8px">
@@ -556,10 +565,7 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
           <div class="hint" data-i18n-html="hint_gmap">Если точное место не находится в поиске — откройте Google Карты, <b>зажмите палец</b> на нужной точке (появится красная булавка «Отмеченное место»), нажмите <b>«Поделиться»</b> и скопируйте ссылку сюда. В такой ссылке точные координаты — мы определим место точно.</div>
           <div class="err" id="gmapErr" style="text-align:left"></div>
         </div>
-        <div class="field">
-          <label class="req" for="addrText" data-i18n="lbl_addrText">Детали для курьера</label>
-          <input id="addrText" name="addrText" data-i18n-ph="ph_addrText" placeholder="Этаж, номер квартиры/комнаты, ресепшн" required>
-        </div>
+        <!-- 4) ОТЕЛЬ / ДОМ + НАЗВАНИЕ -->
         <div class="field">
           <label class="req" data-i18n="lbl_place_type">Это отель или частный дом?</label>
           <div class="chan">
@@ -570,6 +576,10 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
         <div class="field" id="hotelNameBlock" style="display:none">
           <label class="req" for="hotelName" data-i18n="lbl_hotel_name">Название отеля</label>
           <input id="hotelName" name="hotel_name" data-i18n-ph="ph_hotel_name" placeholder="Впишите название отеля">
+        </div>
+        <div class="field">
+          <label class="req" for="addrText" data-i18n="lbl_addrText">Детали для курьера</label>
+          <input id="addrText" name="addrText" data-i18n-ph="ph_addrText" placeholder="Этаж, номер квартиры/комнаты, ресепшн" required>
         </div>
         <div class="field">
           <label class="req" for="deliveryDate" data-i18n="lbl_date">Дата доставки</label>
@@ -1032,6 +1042,8 @@ function initMap(){
     shadowUrl:'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
     iconSize:[25,41],iconAnchor:[12,41]});
   document.getElementById('geoBtn').addEventListener('click',useGeo);
+  lmap.on('click',function(e){ setPoint(e.latlng.lat,e.latlng.lng,tr('pointOnMap')); reverseGeo(e.latlng.lat,e.latlng.lng); });
+  setTimeout(function(){ try{ lmap.invalidateSize(); }catch(e){} },250);
 }
 function ensureMarker(la,ln){
   if(!marker){
