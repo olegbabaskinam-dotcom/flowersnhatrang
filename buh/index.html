@@ -774,15 +774,17 @@ async function mapExport(kind){
   var out='';
   if(kind==='courier'){
     out='🚚 Доставки на '+humanDate(res.date)+'\n\n';
-    if(!day.length) out+='Заказов нет.';
     day.forEach(function(b,i){ var end=mMinToHH(mHHtoMin(b.arrive)+(b.slots||2)*15);
       out+='⏰ '+b.arrive+' (до ~'+end+') — '+(b.zoneLabel||'')+'\n💐 '+(b.items||'')+'\n';
       if(b.addr) out+='📍 '+b.addr+'\n';
       if(b.recipient) out+='👤 '+b.recipient+'\n';
       var money=(b.pay==='cash')?('💵 наличные'+(b.amount?(' '+fmt(b.amount,'₫')):'')):(b.pay==='transfer'?'💳 оплачено переводом':'');
       if(money) out+=money+'\n';
-      if(i<day.length-1) out+='\n';
+      out+='\n';
     });
+    var unp=(res.unplaced||[]);
+    if(unp.length){ out+='— ⚠️ Без времени (разложить):\n'; unp.forEach(function(b){ out+='• '+(b.items||'')+(b.zoneLabel?(' ['+b.zoneLabel+']'):'')+(b.amount?(' · '+fmt(b.amount,'₫')):'')+'\n'; }); }
+    if(!day.length && !unp.length) out+='Заказов нет.';
   } else {
     var busy=day.map(function(b){ var s=mHHtoMin(b.arrive); return [s, s+(b.slots||2)*15]; }).filter(function(x){return x[0]!=null;}).sort(function(a,b){return a[0]-b[0];});
     var merged=[]; busy.forEach(function(iv){ if(merged.length && iv[0]<=merged[merged.length-1][1]) merged[merged.length-1][1]=Math.max(merged[merged.length-1][1],iv[1]); else merged.push(iv.slice()); });
