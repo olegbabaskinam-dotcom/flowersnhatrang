@@ -226,8 +226,10 @@
 <!-- КАРТА: добавить / править заказ -->
 <div id="v-mapadd" class="hidden">
   <button class="back" onclick="openMap()">‹ Назад</button>
-  <h2 id="mapAddTitle">Новый заказ</h2>
+  <h2 id="mapAddTitle">Заказ</h2>
+  <div id="mapDoneBtn"></div>
   <div class="card">
+    <div class="muted" style="margin:-2px 0 8px">Вся инфа по заказу — в «Составе». Достаточно выбрать зону и время. Адрес/контакты — по желанию.</div>
     <label>Состав заказа</label><input id="ma_items" placeholder="напр. 51 красная роза">
     <label>Сумма, ₫</label><input id="ma_amount" inputmode="numeric" placeholder="1000000">
     <label>Зона</label><select id="ma_zone" onchange="mapFreeReload()"></select>
@@ -700,9 +702,11 @@ function renderMap(res){
   res.day.forEach(function(b){
     var end=mMinToHH(mHHtoMin(b.arrive)+(b.slots||2)*15);
     var row=document.createElement('div'); row.className='item'; row.style.cursor='pointer'; row.style.borderLeft='5px solid '+b.color;
+    if(b.status==='done') row.style.opacity='.55';
+    var mark=b.status==='done'?'✅':'🟡';
     var pay=b.pay==='transfer'?'💳 перевод':(b.pay==='cash'?'💵 наличные':'');
     var src=b.source==='online'?'🌐':'✍️';
-    row.innerHTML='<div class="row"><b>'+b.arrive+'–'+end+'</b><span class="amt">'+(b.amount?fmt(b.amount,'₫'):'')+'</span></div>'+
+    row.innerHTML='<div class="row"><b>'+mark+' '+b.arrive+'–'+end+'</b><span class="amt">'+(b.amount?fmt(b.amount,'₫'):'')+'</span></div>'+
       '<div class="t" style="margin-top:3px">'+esc(b.items||'')+'</div>'+
       '<div class="s">'+src+' '+esc(b.zoneLabel||'')+(pay?(' · '+pay):'')+(b.addr?(' · '+esc(b.addr)):'')+'</div>';
     row.onclick=function(){ openMapEdit(b); }; box.appendChild(row);
@@ -731,8 +735,14 @@ function openMapEdit(b){
   document.getElementById('ma_buyer').value=b.buyer||''; document.getElementById('ma_pay').value=b.pay||'';
   document.getElementById('ma_note').value=b.note||''; document.getElementById('ma_err').textContent='';
   document.getElementById('mapEditActions').classList.remove('hidden');
+  var db=document.getElementById('mapDoneBtn');
+  if(b.status==='done') db.innerHTML='<button class="btn ghost" onclick="mapUndoneCur()">↩︎ Вернуть в план (не отвезён)</button>';
+  else if(b.arrive) db.innerHTML='<button class="btn" style="background:#1f9d55;color:#fff" onclick="mapDoneCur()">✅ Отметить «отвезён»</button>';
+  else db.innerHTML='';
   go('mapadd'); mapFreeReload(b.arrive||'');
 }
+async function mapDoneCur(){ if(!MAP_EDIT_ID) return; var res=await api('mapDone',{id:MAP_EDIT_ID}); if(res.ok){ toast('Отмечено: отвезён ✅'); openMap(); } else toast(res.error||'Ошибка'); }
+async function mapUndoneCur(){ if(!MAP_EDIT_ID) return; var res=await api('mapUndone',{id:MAP_EDIT_ID}); if(res.ok){ toast('Возвращён в план'); openMap(); } else toast(res.error||'Ошибка'); }
 async function mapFreeReload(preselect){
   var zone=document.getElementById('ma_zone').value, date=document.getElementById('ma_date').value;
   var sel=document.getElementById('ma_time'); sel.innerHTML='<option value="">— не разложен —</option>';
