@@ -786,15 +786,15 @@ async function mapExport(kind){
   } else {
     var busy=day.map(function(b){ var s=mHHtoMin(b.arrive); return [s, s+(b.slots||2)*15]; }).filter(function(x){return x[0]!=null;}).sort(function(a,b){return a[0]-b[0];});
     var merged=[]; busy.forEach(function(iv){ if(merged.length && iv[0]<=merged[merged.length-1][1]) merged[merged.length-1][1]=Math.max(merged[merged.length-1][1],iv[1]); else merged.push(iv.slice()); });
-    out='🌸 Свободное время на '+humanDate(res.date)+'\n\n';
-    if(!merged.length){ out+='Весь день свободен ✅ (06:00–21:00).'; }
-    else {
-      out+='⛔ Занято:\n'; merged.forEach(function(iv){ out+='• '+mMinToHH(iv[0])+'–'+mMinToHH(Math.min(iv[1],1260))+'\n'; });
-      out+='\n✅ Свободно:\n'; var cur=360, freeAny=false;
-      merged.forEach(function(iv){ if(iv[0]>cur){ out+='• '+mMinToHH(cur)+'–'+mMinToHH(iv[0])+'\n'; freeAny=true; } cur=Math.max(cur,iv[1]); });
-      if(cur<1260){ out+='• '+mMinToHH(cur)+'–21:00\n'; freeAny=true; }
-      if(!freeAny) out+='(на этот день всё занято — выберите другой день)\n';
-    }
+    out='🌸 '+humanDate(res.date)+' — свободное время:\n\n';
+    var cur=360, lines=[];
+    merged.forEach(function(iv){ var bs=Math.max(iv[0],360), be=Math.min(iv[1],1260); if(be<=360) return;
+      if(bs>cur){ lines.push('✅ '+mMinToHH(cur)+'–'+mMinToHH(bs)+' свободно'); }
+      var b0=Math.max(bs,cur); if(be>b0){ lines.push('⛔ '+mMinToHH(b0)+'–'+mMinToHH(be)+' занято'); }
+      cur=Math.max(cur,be); });
+    if(cur<1260){ lines.push('✅ '+mMinToHH(cur)+'–21:00 свободно'); }
+    if(!lines.length){ lines.push('✅ 06:00–21:00 свободно (весь день)'); }
+    out+=lines.join('\n');
   }
   document.getElementById('ma_export').value=out;
 }
