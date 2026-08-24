@@ -136,6 +136,7 @@
     <div class="tile" onclick="openExpense()"><span class="ic">🔴</span>Расход</div>
     <div class="tile" onclick="openTransfer()"><span class="ic">🔁</span>Перевод</div>
     <div class="tile" onclick="openHorizon()"><span class="ic">📅</span>Горизонт</div>
+    <div class="tile" onclick="openMap()"><span class="ic">🗺️</span>Карта заказов</div>
     <div class="tile" onclick="openReports()"><span class="ic">📊</span>Отчёты</div>
     <div class="tile" onclick="openMore()"><span class="ic">⋯</span>Ещё<span id="moreBadge"></span></div>
   </div>
@@ -204,6 +205,59 @@
   <div class="row" style="margin-bottom:6px"><h2 style="margin:0">📅 Горизонт 5 дней</h2><small class="link" onclick="refreshHorizon()">🔄 Обновить</small></div>
   <p class="muted">Суммы = себестоимость (на закуп). Тапни заказ, чтобы вписать/поправить себестоимость.</p>
   <div id="horList"></div>
+</div>
+
+<!-- КАРТА ЗАКАЗОВ -->
+<div id="v-map" class="hidden">
+  <button class="back" onclick="go('main')">‹ Назад</button>
+  <div class="row" style="margin-bottom:8px"><h2 style="margin:0">🗺️ Карта заказов</h2><small class="link" onclick="openMapExport()">📋 Экспорт дня</small></div>
+  <div class="row" style="margin-bottom:10px">
+    <button class="btn ghost" style="width:auto;margin:0;padding:9px 16px" onclick="mapDay(-1)">‹</button>
+    <b id="mapDate" style="text-align:center;flex:1">—</b>
+    <button class="btn ghost" style="width:auto;margin:0;padding:9px 16px" onclick="mapDay(1)">›</button>
+  </div>
+  <button class="btn" onclick="openMapAdd()" style="margin-top:0">＋ Добавить заказ</button>
+  <div id="mapUnplacedWrap" class="card hidden" style="margin-top:12px">
+    <b>📦 Не разложенные</b>
+    <div id="mapUnplaced" style="margin-top:8px"></div>
+  </div>
+  <div id="mapList" style="margin-top:12px"></div>
+</div>
+
+<!-- КАРТА: добавить / править заказ -->
+<div id="v-mapadd" class="hidden">
+  <button class="back" onclick="openMap()">‹ Назад</button>
+  <h2 id="mapAddTitle">Новый заказ</h2>
+  <div class="card">
+    <label>Состав заказа</label><input id="ma_items" placeholder="напр. 51 красная роза">
+    <label>Сумма, ₫</label><input id="ma_amount" inputmode="numeric" placeholder="1000000">
+    <label>Зона</label><select id="ma_zone" onchange="mapFreeReload()"></select>
+    <label>Дата</label><input id="ma_date" type="date" onchange="mapFreeReload()">
+    <label>Время прибытия</label><select id="ma_time"></select>
+    <label>Адрес / ссылка на карту</label><input id="ma_addr" placeholder="адрес или ссылка">
+    <label>Контакт получателя</label><input id="ma_recipient" placeholder="имя / телефон">
+    <label>Контакт заказчика</label><input id="ma_buyer" placeholder="как связаться">
+    <label>Оплата</label><select id="ma_pay"><option value="">—</option><option value="transfer">перевод</option><option value="cash">наличные</option></select>
+    <label>Заметка</label><input id="ma_note" placeholder="необязательно">
+  </div>
+  <button class="btn" onclick="saveMapAdd()">Сохранить</button>
+  <div id="mapEditActions" class="hidden">
+    <button class="btn ghost" onclick="mapUnplaceCur()">Снять со слота (в «не разложенные»)</button>
+    <button class="btn red" onclick="mapCancelCur()">Отменить заказ</button>
+  </div>
+  <div id="ma_err" class="err center"></div>
+</div>
+
+<!-- КАРТА: экспорт дня -->
+<div id="v-mapexport" class="hidden">
+  <button class="back" onclick="openMap()">‹ Назад</button>
+  <h2>📋 Экспорт дня <span id="mapExpDate" class="muted"></span></h2>
+  <div class="seg" style="margin-bottom:10px">
+    <button id="expTabCourier" class="on" onclick="mapExport('courier')">Курьеру</button>
+    <button id="expTabClient" onclick="mapExport('client')">Клиенту</button>
+  </div>
+  <textarea id="ma_export" readonly style="min-height:320px;font-family:ui-monospace,Menlo,monospace;font-size:13px"></textarea>
+  <button class="btn" onclick="copyExport()">Скопировать</button>
 </div>
 
 <!-- ЕЩЁ -->
@@ -389,7 +443,7 @@ async function api(action, extra, silent){
 }
 async function refreshReserveNow(){ var res=await api('refreshReserve',{}); if(res&&res.ok){ STATE=res; toast('Резерв обновлён из Финансов'); openReserve(); } else toast(res.error||'Ошибка'); }
 
-var VIEWS=['pin','start','main','expense','transfer','pending','confirm','horizon','more','reserve','recurring','history','edit','wallets','reports','tasks','taskdo','adjust','paybill'];
+var VIEWS=['pin','start','main','expense','transfer','pending','confirm','horizon','map','mapadd','mapexport','more','reserve','recurring','history','edit','wallets','reports','tasks','taskdo','adjust','paybill'];
 function go(v){ VIEWS.forEach(function(x){ var el=document.getElementById('v-'+x); if(el) el.classList.toggle('hidden', x!==v); }); window.scrollTo(0,0); }
 
 // ---------- ВХОД ----------
@@ -615,6 +669,137 @@ async function askCost(o){
   if(!res.ok){ toast(res.error); return; }
   STATE=res; openHorizon();
 }
+
+// ---------- КАРТА ЗАКАЗОВ ----------
+var MAP_DATE=null, MAP_EDIT_ID=null, MAP_LAST=null;
+var MAP_ZONES=[{k:'center',t:'Центр (30 мин)'},{k:'north',t:'Крайний север (1 ч)'},{k:'west',t:'Запад (1 ч)'},{k:'south',t:'Ближний юг (1 ч)'},{k:'camranh',t:'Камрань (1,5 ч)'}];
+function mHHtoMin(s){ var m=String(s||'').match(/^(\d{1,2}):(\d{2})$/); return m?(+m[1]*60+ +m[2]):null; }
+function mMinToHH(x){ var h=Math.floor(x/60), m=x%60; return (h<10?'0':'')+h+':'+(m<10?'0':'')+m; }
+function vnToday(){ try{ return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Ho_Chi_Minh',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date()); }catch(e){ return new Date().toISOString().slice(0,10); } }
+function addDays(d,n){ var p=String(d).split('-'); var dt=new Date(+p[0],+p[1]-1,+p[2]); dt.setDate(dt.getDate()+n); return dt.getFullYear()+'-'+('0'+(dt.getMonth()+1)).slice(-2)+'-'+('0'+dt.getDate()).slice(-2); }
+function humanDate(d){ var wd=['вс','пн','вт','ср','чт','пт','сб']; var p=String(d).split('-'); var dt=new Date(+p[0],+p[1]-1,+p[2]); return wd[dt.getDay()]+', '+p[2]+'.'+p[1]; }
+
+async function openMap(date){
+  MAP_DATE = date || MAP_DATE || vnToday();
+  var res=await api('mapState',{date:MAP_DATE});
+  if(!res.ok){ toast(res.error||'Ошибка'); return; }
+  MAP_LAST=res; renderMap(res); go('map');
+}
+function mapDay(delta){ openMap(addDays(MAP_DATE||vnToday(), delta)); }
+function renderMap(res){
+  MAP_DATE=res.date;
+  document.getElementById('mapDate').textContent=humanDate(res.date);
+  var uw=document.getElementById('mapUnplacedWrap'), ul=document.getElementById('mapUnplaced');
+  if(res.unplaced && res.unplaced.length){ uw.classList.remove('hidden'); ul.innerHTML='';
+    res.unplaced.forEach(function(b){ var d=document.createElement('div'); d.className='item'; d.style.cursor='pointer';
+      d.innerHTML='<div class="t">'+esc(b.items||'(без названия)')+'</div><div class="s">'+esc(b.zoneLabel||'')+(b.amount?(' · '+fmt(b.amount,'₫')):'')+' · нажми, чтобы поставить в слот</div>';
+      d.onclick=function(){ openMapEdit(b); }; ul.appendChild(d); });
+  } else { uw.classList.add('hidden'); ul.innerHTML=''; }
+  var box=document.getElementById('mapList'); box.innerHTML='';
+  if(!res.day || !res.day.length){ box.innerHTML='<div class="card center muted">На этот день заказов нет</div>'; return; }
+  res.day.forEach(function(b){
+    var end=mMinToHH(mHHtoMin(b.arrive)+(b.slots||2)*15);
+    var row=document.createElement('div'); row.className='item'; row.style.cursor='pointer'; row.style.borderLeft='5px solid '+b.color;
+    var pay=b.pay==='transfer'?'💳 перевод':(b.pay==='cash'?'💵 наличные':'');
+    var src=b.source==='online'?'🌐':'✍️';
+    row.innerHTML='<div class="row"><b>'+b.arrive+'–'+end+'</b><span class="amt">'+(b.amount?fmt(b.amount,'₫'):'')+'</span></div>'+
+      '<div class="t" style="margin-top:3px">'+esc(b.items||'')+'</div>'+
+      '<div class="s">'+src+' '+esc(b.zoneLabel||'')+(pay?(' · '+pay):'')+(b.addr?(' · '+esc(b.addr)):'')+'</div>';
+    row.onclick=function(){ openMapEdit(b); }; box.appendChild(row);
+  });
+}
+function fillZoneSel(sel,val){ sel.innerHTML=''; MAP_ZONES.forEach(function(z){ var o=document.createElement('option'); o.value=z.k; o.textContent=z.t; if(z.k===val)o.selected=true; sel.appendChild(o); }); }
+function openMapAdd(){
+  MAP_EDIT_ID=null;
+  document.getElementById('mapAddTitle').textContent='Новый заказ';
+  document.getElementById('ma_items').value=''; document.getElementById('ma_amount').value='';
+  fillZoneSel(document.getElementById('ma_zone'),'center');
+  document.getElementById('ma_date').value=MAP_DATE||vnToday();
+  document.getElementById('ma_addr').value=''; document.getElementById('ma_recipient').value='';
+  document.getElementById('ma_buyer').value=''; document.getElementById('ma_pay').value='';
+  document.getElementById('ma_note').value=''; document.getElementById('ma_err').textContent='';
+  document.getElementById('mapEditActions').classList.add('hidden');
+  go('mapadd'); mapFreeReload();
+}
+function openMapEdit(b){
+  MAP_EDIT_ID=b.id;
+  document.getElementById('mapAddTitle').textContent='Заказ';
+  document.getElementById('ma_items').value=b.items||''; document.getElementById('ma_amount').value=b.amount||'';
+  fillZoneSel(document.getElementById('ma_zone'),b.zone||'center');
+  document.getElementById('ma_date').value=b.ddate||MAP_DATE||vnToday();
+  document.getElementById('ma_addr').value=b.addr||''; document.getElementById('ma_recipient').value=b.recipient||'';
+  document.getElementById('ma_buyer').value=b.buyer||''; document.getElementById('ma_pay').value=b.pay||'';
+  document.getElementById('ma_note').value=b.note||''; document.getElementById('ma_err').textContent='';
+  document.getElementById('mapEditActions').classList.remove('hidden');
+  go('mapadd'); mapFreeReload(b.arrive||'');
+}
+async function mapFreeReload(preselect){
+  var zone=document.getElementById('ma_zone').value, date=document.getElementById('ma_date').value;
+  var sel=document.getElementById('ma_time'); sel.innerHTML='<option value="">— не разложен —</option>';
+  if(!date) return;
+  var res=await api('mapFree',{date:date,zone:zone,exclId:MAP_EDIT_ID||''},true);
+  var free=(res&&res.ok&&res.free)?res.free:[];
+  if(preselect && free.indexOf(preselect)<0) free.unshift(preselect);
+  free.forEach(function(t){ var o=document.createElement('option'); o.value=t; o.textContent=t; if(t===preselect)o.selected=true; sel.appendChild(o); });
+}
+async function saveMapAdd(){
+  var err=document.getElementById('ma_err'); err.textContent='';
+  var items=document.getElementById('ma_items').value.trim();
+  var ddate=document.getElementById('ma_date').value, arrive=document.getElementById('ma_time').value;
+  var base={ items:items, amount:Number(String(document.getElementById('ma_amount').value).replace(/\s/g,''))||0,
+    zone:document.getElementById('ma_zone').value, addr:document.getElementById('ma_addr').value.trim(),
+    recipient:document.getElementById('ma_recipient').value.trim(), buyer:document.getElementById('ma_buyer').value.trim(),
+    pay:document.getElementById('ma_pay').value, note:document.getElementById('ma_note').value.trim() };
+  if(!items){ err.textContent='Впиши состав заказа'; return; }
+  var res;
+  if(MAP_EDIT_ID){
+    res=await api('mapEdit', Object.assign({id:MAP_EDIT_ID}, base));
+    if(res.ok && arrive){ res=await api('mapMove',{id:MAP_EDIT_ID, ddate:ddate, arrive:arrive}); }
+    else if(res.ok && !arrive){ res=await api('mapUnplace',{id:MAP_EDIT_ID}); }
+  } else {
+    res=await api('mapAdd', Object.assign({ddate:ddate, arrive:arrive}, base));
+  }
+  if(!res.ok){ err.textContent=res.error||'Ошибка'; return; }
+  toast('Сохранено'); openMap(ddate||MAP_DATE);
+}
+async function mapUnplaceCur(){ if(!MAP_EDIT_ID) return; var res=await api('mapUnplace',{id:MAP_EDIT_ID}); if(res.ok){ toast('Снято со слота'); openMap(); } else toast(res.error||'Ошибка'); }
+async function mapCancelCur(){ if(!MAP_EDIT_ID) return; if(!confirm('Отменить этот заказ? Слот освободится.')) return; var res=await api('mapCancel',{id:MAP_EDIT_ID}); if(res.ok){ toast('Заказ отменён'); openMap(); } else toast(res.error||'Ошибка'); }
+
+function openMapExport(){ document.getElementById('mapExpDate').textContent=humanDate(MAP_DATE||vnToday()); go('mapexport'); mapExport('courier'); }
+async function mapExport(kind){
+  document.getElementById('expTabCourier').className = kind==='courier'?'on':'';
+  document.getElementById('expTabClient').className = kind==='client'?'on':'';
+  var res=await api('mapState',{date:MAP_DATE||vnToday()});
+  var day=(res&&res.ok&&res.day)?res.day.slice():[];
+  day.sort(function(a,b){ return mHHtoMin(a.arrive)-mHHtoMin(b.arrive); });
+  var out='';
+  if(kind==='courier'){
+    out='🚚 Доставки на '+humanDate(res.date)+'\n\n';
+    if(!day.length) out+='Заказов нет.';
+    day.forEach(function(b,i){ var end=mMinToHH(mHHtoMin(b.arrive)+(b.slots||2)*15);
+      out+='⏰ '+b.arrive+' (до ~'+end+') — '+(b.zoneLabel||'')+'\n💐 '+(b.items||'')+'\n';
+      if(b.addr) out+='📍 '+b.addr+'\n';
+      if(b.recipient) out+='👤 '+b.recipient+'\n';
+      var money=(b.pay==='cash')?('💵 наличные'+(b.amount?(' '+fmt(b.amount,'₫')):'')):(b.pay==='transfer'?'💳 оплачено переводом':'');
+      if(money) out+=money+'\n';
+      if(i<day.length-1) out+='\n';
+    });
+  } else {
+    var busy=day.map(function(b){ var s=mHHtoMin(b.arrive); return [s, s+(b.slots||2)*15]; }).filter(function(x){return x[0]!=null;}).sort(function(a,b){return a[0]-b[0];});
+    var merged=[]; busy.forEach(function(iv){ if(merged.length && iv[0]<=merged[merged.length-1][1]) merged[merged.length-1][1]=Math.max(merged[merged.length-1][1],iv[1]); else merged.push(iv.slice()); });
+    out='🌸 Свободное время на '+humanDate(res.date)+'\n\n';
+    if(!merged.length){ out+='Весь день свободен ✅ (06:00–21:00).'; }
+    else {
+      out+='⛔ Занято:\n'; merged.forEach(function(iv){ out+='• '+mMinToHH(iv[0])+'–'+mMinToHH(Math.min(iv[1],1260))+'\n'; });
+      out+='\n✅ Свободно:\n'; var cur=360, freeAny=false;
+      merged.forEach(function(iv){ if(iv[0]>cur){ out+='• '+mMinToHH(cur)+'–'+mMinToHH(iv[0])+'\n'; freeAny=true; } cur=Math.max(cur,iv[1]); });
+      if(cur<1260){ out+='• '+mMinToHH(cur)+'–21:00\n'; freeAny=true; }
+      if(!freeAny) out+='(на этот день всё занято — выберите другой день)\n';
+    }
+  }
+  document.getElementById('ma_export').value=out;
+}
+function copyExport(){ var t=document.getElementById('ma_export'); t.select(); try{ document.execCommand('copy'); }catch(e){} if(navigator.clipboard){ try{ navigator.clipboard.writeText(t.value); }catch(e){} } toast('Скопировано'); }
 
 // ---------- ЕЩЁ ----------
 function openMore(){ document.getElementById('tasksBadge').innerHTML = (STATE&&STATE.tasksCount>0)?('<span class="badge">'+STATE.tasksCount+'</span>'):''; go('more'); }
