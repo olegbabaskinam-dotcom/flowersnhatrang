@@ -120,11 +120,22 @@ async function loadList(){
       '<div class="muted" style="margin-top:2px">'+(o.contact||'')+'</div>'+
       '<div class="row">'+
         (confirmed?'<span class="muted">Клиенту отправлено подтверждение</span>'
-                  :'<button class="btn sm green" data-id="'+o.id+'">✅ Подтвердить оплату</button>')+
+                  :rej?'<span class="muted">Заказ отклонён</span>'
+                  :'<button class="btn sm green" data-id="'+o.id+'">✅ Подтвердить оплату</button>'+
+                    '<button class="btn sm" data-rej="'+o.id+'" style="background:#fdecec;color:#9b2c2c">✖ Отклонить</button>')+
       '</div>';
     box.appendChild(card);
   });
   box.querySelectorAll('button[data-id]').forEach(b=>b.addEventListener('click',()=>confirmOrder(b.dataset.id,b)));
+  box.querySelectorAll('button[data-rej]').forEach(b=>b.addEventListener('click',()=>rejectOrder(b.dataset.rej,b)));
+}
+async function rejectOrder(q,btn){
+  if(!confirm('Отклонить заказ '+q+'? Слот освободится, клиенту ничего не отправим.')) return;
+  if(btn){btn.disabled=true;btn.innerHTML='<span class="spin"></span>…';}
+  let r;
+  try{ r=await api({action:"reject",orderId:q}); }catch(_){ toast('Ошибка сети'); if(btn)btn.disabled=false; return; }
+  if(r.ok){ toast('Заказ отклонён'); loadList(); }
+  else { toast(r.error==='auth'?'Неверный код':'Не найдено: '+q); if(btn){btn.disabled=false;btn.innerHTML='✖ Отклонить';} }
 }
 
 async function confirmOrder(q,btn){

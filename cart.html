@@ -109,6 +109,11 @@ var I18N_RAW={
  err_hotel:{ru:"Впишите название отеля",en:"Enter the hotel name",ko:"호텔 이름을 입력하세요"},
  lbl_date:{ru:"Дата доставки",en:"Delivery date",ko:"배달 날짜"},
  lbl_time:{ru:"Время доставки",en:"Delivery time",ko:"배달 시간"},
+ time_need_addr:{ru:"Сначала укажите адрес на карте",en:"First set the address on the map",ko:"먼저 지도에서 주소를 지정하세요"},
+ time_loading:{ru:"Загружаем свободное время…",en:"Loading available times…",ko:"이용 가능 시간 불러오는 중…"},
+ time_full:{ru:"На этот день всё занято — выберите другой день",en:"This day is fully booked — choose another day",ko:"이 날은 예약이 꽉 찼습니다 — 다른 날을 선택하세요"},
+ time_pick_hint:{ru:"Выберите удобное время прибытия — доставим в этот интервал ±10–15 мин",en:"Choose a convenient arrival time — we'll deliver within ±10–15 min",ko:"편한 도착 시간을 선택하세요 — ±10~15분 내 배달합니다"},
+ err_time:{ru:"Выберите время доставки",en:"Choose a delivery time",ko:"배달 시간을 선택하세요"},
  lbl_comment:{ru:"Комментарий (по желанию)",en:"Comment (optional)",ko:"메모 (선택)"},
  ph_comment:{ru:"Открытка, пожелания, сюрприз…",en:"Card, wishes, surprise…",ko:"카드, 요청, 서프라이즈…"},
  lbl_chan:{ru:"Куда вам написать подтверждение?",en:"Where should we send confirmation?",ko:"확인을 어디로 보낼까요?"},
@@ -905,6 +910,7 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
 /* ================== КОНФИГ ================== */
 const CONFIG = {
   API: "https://script.google.com/macros/s/AKfycbzDz8tCuWtC4oIA3ajYgt_m5Ui9fZPTgVRiXzVjJTNVrSiP4vNvaNzblCpWJSELOqVC/exec",
+  BUHPROXY: "https://buhproxy.olegbabaskin-am.workers.dev/",
   NHATRANG: [12.2388, 109.1967],
 };
 const PAY = {
@@ -978,7 +984,7 @@ function initDate(){
   updateSpecialOrderUi();
   setInterval(updateSpecialOrderUi,30000);
 }
-function rebuildTimes(){
+async function rebuildTimes(){
   const inp=document.getElementById('deliveryDate');
   if(inp.value && inp.value<MIN_DATE){ inp.value=MIN_DATE; }
   const selectedDate=inp.value;
@@ -990,15 +996,24 @@ function rebuildTimes(){
     dateNotice.classList.toggle('hidden',!key);
     dateNotice.textContent=key?tr(key):'';
   }
-  const start=(inp.value===MIN_DATE)?MIN_START:6;
-  const sel=document.getElementById('deliveryTime'); sel.innerHTML="";
-  for(let h=start;h<=21;h++){ const o=document.createElement('option');
-    o.value=pad(h)+":00"; o.textContent=pad(h)+":00"; sel.appendChild(o); }
-  document.getElementById('timeHint').textContent=adjusted
-    ? tr('special_delivery_closed')
-    : (inp.value===MIN_DATE && MIN_START===9)
-      ? tr('timeHint_morning')
-      : tr('timeHint_day').replace('{h}',pad(start));
+  const sel=document.getElementById('deliveryTime'); const hint=document.getElementById('timeHint');
+  const zone=window.__zoneKey;
+  if(!zone || window.__outside){ sel.innerHTML='<option value="">'+tr('time_need_addr')+'</option>'; hint.textContent=tr('time_need_addr'); return; }
+  const startMin=((inp.value===MIN_DATE)?MIN_START:6)*60;
+  sel.innerHTML='<option value="">'+tr('time_loading')+'</option>'; hint.textContent=tr('time_loading');
+  const myDate=inp.value;
+  try{
+    const r=await fetch(CONFIG.BUHPROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'slotsPublic',date:myDate,zone:zone})}).then(x=>x.json());
+    if(document.getElementById('deliveryDate').value!==myDate) return; // дата успела смениться
+    let free=(r&&r.ok&&r.free)?r.free:[];
+    free=free.filter(function(t){var p2=t.split(':');return (+p2[0]*60+ +p2[1])>=startMin;});
+    if(!free.length){ sel.innerHTML='<option value="">'+tr('time_full')+'</option>'; hint.textContent=tr('time_full'); return; }
+    sel.innerHTML=""; free.forEach(function(t){var o=document.createElement('option');o.value=t;o.textContent=t;sel.appendChild(o);});
+    hint.textContent=tr('time_pick_hint');
+  }catch(e){
+    sel.innerHTML=""; for(var h=Math.ceil(startMin/60);h<=21;h++){var o=document.createElement('option');o.value=pad(h)+":00";o.textContent=pad(h)+":00";sel.appendChild(o);}
+    hint.textContent=tr('time_pick_hint');
+  }
 }
 function ruDate(iso){ const [y,m,d]=iso.split('-'); return d+"."+m+"."+y.slice(2); }
 
@@ -1033,6 +1048,7 @@ function setPoint(la,ln,label){
   lmap.setView([latlng.la,latlng.ln],16);
   setTimeout(()=>lmap.invalidateSize(),150);
   updateFound();
+  try{ rebuildTimes(); }catch(e){}   // пересчитать свободное время под зону выбранной точки
   try{ if(typeof render==='function') render(); }catch(e){}   // обновить строку доставки + Итого в корзине
 }
 /* ГРАНИЦА зоны доставки: прямоугольник вдоль побережья Нячанг→Камрань. Вне — не возим. Калибруется. */
@@ -1260,6 +1276,7 @@ form.addEventListener('submit',async e=>{
   }}
   if(!latlng){ err.textContent=tr('err_addr'); return; }
   if(window.__outside){ err.textContent=(window.__delLabel==='аэропорт')?tr('err_airport'):tr('err_outside'); return; }
+  if(!form.deliveryTime.value){ err.textContent=tr('err_time'); return; }
   // доставка по зоне + минимум 1 000 000 ₫ в платные зоны
   var delFee=window.__delFee||0, delLabel=window.__delLabel||'Нячанг';
   var subtotal=(window.Cart?Cart.total():0);
@@ -1299,6 +1316,11 @@ form.addEventListener('submit',async e=>{
     photos:photos,
     amount:amountStr,
     delivery:ruDate(form.deliveryDate.value)+", "+form.deliveryTime.value,
+    zone:window.__zoneKey||"",
+    ddate:form.deliveryDate.value,
+    arrive:form.deliveryTime.value,
+    lat:latlng?latlng.la:"",
+    lng:latlng?latlng.ln:"",
     address:addr,
     hotel:hotel,
     contact:chan+": "+form.contact.value.trim(),

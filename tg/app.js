@@ -6,6 +6,7 @@
 
 var CONFIG = {
   API: "https://script.google.com/macros/s/AKfycbzDz8tCuWtC4oIA3ajYgt_m5Ui9fZPTgVRiXzVjJTNVrSiP4vNvaNzblCpWJSELOqVC/exec",
+  BUHPROXY: "https://buhproxy.olegbabaskin-am.workers.dev/",
   SOURCE: "Telegram",
   NHATRANG: [12.2388, 109.1967],
   DOMAIN: "https://flowers-nha-trang.online"
@@ -265,7 +266,7 @@ function initDate() {
   updateSpecialOrderUi();
   setInterval(updateSpecialOrderUi, 30000);
 }
-function rebuildTimes() {
+async function rebuildTimes() {
   var inp = document.getElementById("deliveryDate");
   if (inp.value && inp.value < MIN_DATE) inp.value = MIN_DATE;
   var selectedDate = inp.value;
@@ -281,14 +282,24 @@ function rebuildTimes() {
     dateNotice.classList.toggle("hidden", !message);
     dateNotice.textContent = message;
   }
-  var start = (inp.value === MIN_DATE) ? MIN_START : 6;
-  var sel = document.getElementById("deliveryTime"); sel.innerHTML = "";
-  for (var h = start; h <= 21; h++) { var o = document.createElement("option"); o.value = pad(h) + ":00"; o.textContent = pad(h) + ":00"; sel.appendChild(o); }
-  document.getElementById("timeHint").textContent = adjusted
-    ? "4 сентября мы не работаем. Выберите 5 сентября или другую доступную дату."
-    : (inp.value === MIN_DATE && MIN_START === 9)
-      ? "Сегодня приём закрыт — ближайшая доставка завтра с 09:00."
-      : "Доставка в этот день с " + pad(start) + ":00 до 21:00.";
+  var sel = document.getElementById("deliveryTime"); var hint = document.getElementById("timeHint");
+  var zone = window.__zoneKey;
+  if (!zone || window.__outside) { sel.innerHTML = '<option value="">Сначала укажите адрес на карте</option>'; hint.textContent = "Сначала укажите адрес на карте"; return; }
+  var startMin = ((inp.value === MIN_DATE) ? MIN_START : 6) * 60;
+  sel.innerHTML = '<option value="">Загружаем свободное время…</option>'; hint.textContent = "Загружаем свободное время…";
+  var myDate = inp.value;
+  try {
+    var r = await fetch(CONFIG.BUHPROXY, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "slotsPublic", date: myDate, zone: zone }) }).then(function (x) { return x.json(); });
+    if (document.getElementById("deliveryDate").value !== myDate) return;
+    var free = (r && r.ok && r.free) ? r.free : [];
+    free = free.filter(function (t) { var p2 = t.split(":"); return (+p2[0] * 60 + +p2[1]) >= startMin; });
+    if (!free.length) { sel.innerHTML = '<option value="">На этот день всё занято — выберите другой день</option>'; hint.textContent = "На этот день всё занято — выберите другой день"; return; }
+    sel.innerHTML = ""; free.forEach(function (t) { var o = document.createElement("option"); o.value = t; o.textContent = t; sel.appendChild(o); });
+    hint.textContent = "Выберите удобное время прибытия — доставим ±10–15 мин";
+  } catch (e) {
+    sel.innerHTML = ""; for (var h = Math.ceil(startMin / 60); h <= 21; h++) { var o = document.createElement("option"); o.value = pad(h) + ":00"; o.textContent = pad(h) + ":00"; sel.appendChild(o); }
+    hint.textContent = "Выберите удобное время прибытия — доставим ±10–15 мин";
+  }
 }
 function ruDate(iso) { var a = iso.split("-"); return a[2] + "." + a[1] + "." + a[0].slice(2); }
 
@@ -327,9 +338,10 @@ function setPoint(la, ln, label) {
   if (label) foundLabel = label;
   if (!marker) marker = L.marker([la, ln], { draggable: true }).addTo(map);
   else marker.setLatLng([la, ln]);
-  marker.off("dragend").on("dragend", function () { var p = marker.getLatLng(); latlng = { la: p.lat, ln: p.lng }; reverseGeo(p.lat, p.lng); updateFound(); });
+  marker.off("dragend").on("dragend", function () { var p = marker.getLatLng(); latlng = { la: p.lat, ln: p.lng }; reverseGeo(p.lat, p.lng); updateFound(); try { rebuildTimes(); } catch (e) {} });
   map.setView([la, ln], 15);
   updateFound();
+  try { rebuildTimes(); } catch (e) {}
 }
 function updateFound() {
   var box = document.getElementById("foundAddr");
@@ -451,6 +463,7 @@ function submitOrder(e) {
 
   if (!latlng) { err.textContent = "Укажите адрес доставки на карте."; return; }
   if (window.__outside) { err.textContent = (window.__delLabel === "аэропорт") ? "✈️ В аэропорт и южнее аэропорта доставки нет." : "Адрес вне зоны доставки."; return; }
+  if (!document.getElementById("deliveryTime").value) { err.textContent = "Выберите время доставки."; return; }
 
   var sub = cartTotal(), fee = window.__delFee || 0;
   if (fee > 0 && sub < 1000000) { err.textContent = "В зону «" + window.__delLabel + "» доставка от 1 000 000 ₫. Сейчас в корзине " + money(sub, "VND") + "."; return; }
@@ -503,6 +516,11 @@ function submitOrder(e) {
     photos: photos,
     amount: amountStr,
     delivery: ruDate(document.getElementById("deliveryDate").value) + ", " + document.getElementById("deliveryTime").value,
+    zone: window.__zoneKey || "",
+    ddate: document.getElementById("deliveryDate").value,
+    arrive: document.getElementById("deliveryTime").value,
+    lat: latlng ? latlng.la : "",
+    lng: latlng ? latlng.ln : "",
     address: addr,
     hotel: hotel,
     contact: chan + ": " + contact + tgTag,
