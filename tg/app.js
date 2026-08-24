@@ -547,7 +547,7 @@ var PAY = {
   cash: { title: "Наличными при получении", cash: true },
   rub: { title: "Рубли (СБП)", rows: [["Телефон", "+79627155432", "+79627155432"], ["Получатель", "Оксана Анатольевна Я.", null], ["Банк", "Сбербанк или Тинькофф", null]], warn: "Переведите точную сумму и пришлите скрин чека." },
   vnd: { title: "Донги (BIDV)", rows: [["Банк", "BIDV (PGD Bình Tân)", null], ["Счёт", "8865888241", "8865888241"], ["Получатель", "BABASKIN OLEG", null]], vietqr: "https://img.vietqr.io/image/970418-8865888241-qr_only.png?accountName=BABASKIN%20OLEG" },
-  usdt: { title: "USDT (TRC-20)", rows: [["Сеть", "TRON (TRC-20)", null], ["Кошелёк", "TGniTscazmp3MJrmLxSgDPnNGeZPyMPVhb", "TGniTscazmp3MJrmLxSgDPnNGeZPyMPVhb"]], qrtext: "TGniTscazmp3MJrmLxSgDPnNGeZPyMPVhb", warn: "Только сеть TRON (TRC-20)." },
+  usdt: { title: "USDT (TRC-20)", rows: [["Сеть", "TRON (TRC-20)", null], ["Кошелёк", "TGniTscazmp3MJrmLxSgDPnNGeZPyMPVhb", "TGniTscazmp3MJrmLxSgDPnNGeZPyMPVhb"]], qrtext: "TGniTscazmp3MJrmLxSgDPnNGeZPyMPVhb", warn: "Только сеть TRON (TRC-20). 💡 Если переводите из Trust Wallet, иногда бывает ошибка (причина нам неизвестна) — попробуйте оплатить с другого кошелька или приложения, обычно всё проходит. Извините за неудобство 🙏" },
   kzt: { title: "Карта Kaspi", rows: [["Карта", "4400 4303 0499 7486", "4400430304997486"], ["Держатель", "Egor Merkulov", null], ["Банк", "Kaspi Bank", null]] }
 };
 var PAY_ORDER = [["cash", "💵 Наличные"], ["rub", "🇷🇺 Рубли"], ["vnd", "🇻🇳 Донги"], ["usdt", "USDT"], ["kzt", "Kaspi"]];
