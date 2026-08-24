@@ -694,7 +694,7 @@ function renderMap(res){
   var uw=document.getElementById('mapUnplacedWrap'), ul=document.getElementById('mapUnplaced');
   if(res.unplaced && res.unplaced.length){ uw.classList.remove('hidden'); ul.innerHTML='';
     res.unplaced.forEach(function(b){ var d=document.createElement('div'); d.className='item'; d.style.cursor='pointer';
-      d.innerHTML='<div class="t">'+esc(b.items||'(без названия)')+'</div><div class="s">'+esc(b.zoneLabel||'')+(b.amount?(' · '+fmt(b.amount,'₫')):'')+' · нажми, чтобы поставить в слот</div>';
+      d.innerHTML='<div class="t">'+esc(b.items||'(без названия)')+'</div><div class="s">'+(b.paid?'💰 оплачен':'⏳ не оплачен')+' · '+esc(b.zoneLabel||'')+(b.amount?(' · '+fmt(b.amount,'₫')):'')+' · нажми, чтобы поставить в слот</div>';
       d.onclick=function(){ openMapEdit(b); }; ul.appendChild(d); });
   } else { uw.classList.add('hidden'); ul.innerHTML=''; }
   var box=document.getElementById('mapList'); box.innerHTML='';
@@ -706,9 +706,9 @@ function renderMap(res){
     var mark=b.status==='done'?'✅':'🟡';
     var pay=b.pay==='transfer'?'💳 перевод':(b.pay==='cash'?'💵 наличные':'');
     var src=b.source==='online'?'🌐':'✍️';
-    row.innerHTML='<div class="row"><b>'+mark+' '+b.arrive+'–'+end+'</b><span class="amt">'+(b.amount?fmt(b.amount,'₫'):'')+'</span></div>'+
+    row.innerHTML='<div class="row"><b>'+mark+' '+b.arrive+'–'+end+'</b><span class="amt">'+(b.paid?'💰 ':'⏳ ')+(b.amount?fmt(b.amount,'₫'):'')+'</span></div>'+
       '<div class="t" style="margin-top:3px">'+esc(b.items||'')+'</div>'+
-      '<div class="s">'+src+' '+esc(b.zoneLabel||'')+(pay?(' · '+pay):'')+(b.addr?(' · '+esc(b.addr)):'')+'</div>';
+      '<div class="s">'+(b.paid?'💰 оплачен':'⏳ не оплачен')+' · '+src+' '+esc(b.zoneLabel||'')+(pay?(' · '+pay):'')+(b.addr?(' · '+esc(b.addr)):'')+'</div>';
     row.onclick=function(){ openMapEdit(b); }; box.appendChild(row);
   });
 }
