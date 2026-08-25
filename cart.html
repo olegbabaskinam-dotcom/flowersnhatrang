@@ -1338,6 +1338,7 @@ form.addEventListener('submit',async e=>{
     contact:chan+": "+form.contact.value.trim(),
     recipient:recipStr,
     email:form.email.value.trim(),
+    card:(form.comment&&form.comment.value?form.comment.value.trim():""),
     lang:window.FLW_LANG||'ru',
   };
   btn.disabled=true; const old=btn.innerHTML; btn.innerHTML='<span class="spin"></span>'+tr('sending');

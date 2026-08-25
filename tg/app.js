@@ -526,6 +526,7 @@ function submitOrder(e) {
     contact: chan + ": " + contact + tgTag,
     recipient: recipStr,
     email: email,
+    card: comment,
     lang: "ru",
     tg_id: (TG_USER && TG_USER.id) ? String(TG_USER.id) : ""
   };
