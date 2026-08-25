@@ -238,8 +238,9 @@
     <label>Адрес / ссылка на карту</label><input id="ma_addr" placeholder="адрес или ссылка">
     <label>Контакт получателя</label><input id="ma_recipient" placeholder="имя / телефон">
     <label>Контакт заказчика</label><input id="ma_buyer" placeholder="как связаться">
+    <label>Email заказчика</label><input id="ma_email" placeholder="you@mail.com">
     <label>Оплата</label><select id="ma_pay"><option value="">—</option><option value="transfer">перевод</option><option value="cash">наличные</option></select>
-    <label>Заметка</label><input id="ma_note" placeholder="необязательно">
+    <label>Открытка / коммент</label><input id="ma_note" placeholder="текст открытки / пожелания">
   </div>
   <button class="btn" onclick="saveMapAdd()">Сохранить</button>
   <div id="mapEditActions" class="hidden">
@@ -706,9 +707,10 @@ function renderMap(res){
     var mark=b.status==='done'?'✅':'🟡';
     var pay=b.pay==='transfer'?'💳 перевод':(b.pay==='cash'?'💵 наличные':'');
     var src=b.source==='online'?'🌐':'✍️';
+    var extra=(b.recipient?('<div class="s">👤 '+esc(b.recipient)+'</div>'):'')+(b.note?('<div class="s">📝 '+esc(b.note)+'</div>'):'');
     row.innerHTML='<div class="row"><b>'+mark+' '+b.arrive+'–'+end+'</b><span class="amt">'+(b.paid?'💰 ':'⏳ ')+(b.amount?fmt(b.amount,'₫'):'')+'</span></div>'+
       '<div class="t" style="margin-top:3px">'+esc(b.items||'')+'</div>'+
-      '<div class="s">'+(b.paid?'💰 оплачен':'⏳ не оплачен')+' · '+src+' '+esc(b.zoneLabel||'')+(pay?(' · '+pay):'')+(b.addr?(' · '+esc(b.addr)):'')+'</div>';
+      '<div class="s">'+(b.paid?'💰 оплачен':'⏳ не оплачен')+' · '+src+' '+esc(b.zoneLabel||'')+(pay?(' · '+pay):'')+(b.addr?(' · '+esc(b.addr)):'')+'</div>'+extra;
     row.onclick=function(){ openMapEdit(b); }; box.appendChild(row);
   });
 }
@@ -721,6 +723,7 @@ function openMapAdd(){
   document.getElementById('ma_date').value=MAP_DATE||vnToday();
   document.getElementById('ma_addr').value=''; document.getElementById('ma_recipient').value='';
   document.getElementById('ma_buyer').value=''; document.getElementById('ma_pay').value='';
+  document.getElementById('ma_email').value='';
   document.getElementById('ma_note').value=''; document.getElementById('ma_err').textContent='';
   document.getElementById('mapEditActions').classList.add('hidden');
   go('mapadd'); mapFreeReload();
@@ -733,6 +736,7 @@ function openMapEdit(b){
   document.getElementById('ma_date').value=b.ddate||MAP_DATE||vnToday();
   document.getElementById('ma_addr').value=b.addr||''; document.getElementById('ma_recipient').value=b.recipient||'';
   document.getElementById('ma_buyer').value=b.buyer||''; document.getElementById('ma_pay').value=b.pay||'';
+  document.getElementById('ma_email').value=b.email||'';
   document.getElementById('ma_note').value=b.note||''; document.getElementById('ma_err').textContent='';
   document.getElementById('mapEditActions').classList.remove('hidden');
   var db=document.getElementById('mapDoneBtn');
@@ -759,6 +763,7 @@ async function saveMapAdd(){
   var base={ items:items, amount:Number(String(document.getElementById('ma_amount').value).replace(/\s/g,''))||0,
     zone:document.getElementById('ma_zone').value, addr:document.getElementById('ma_addr').value.trim(),
     recipient:document.getElementById('ma_recipient').value.trim(), buyer:document.getElementById('ma_buyer').value.trim(),
+    email:document.getElementById('ma_email').value.trim(),
     pay:document.getElementById('ma_pay').value, note:document.getElementById('ma_note').value.trim() };
   if(!items){ err.textContent='Впиши состав заказа'; return; }
   var res;
@@ -789,6 +794,7 @@ async function mapExport(kind){
       out+='⏰ '+b.arrive+' (до ~'+end+') — '+(b.zoneLabel||'')+'\n💐 '+(b.items||'')+'\n';
       if(b.addr) out+='📍 '+b.addr+'\n';
       if(b.recipient) out+='👤 '+b.recipient+'\n';
+      if(b.note) out+='📝 '+b.note+'\n';
       var money=(b.pay==='cash')?('💵 наличные'+(b.amount?(' '+fmt(b.amount,'₫')):'')):(b.pay==='transfer'?'💳 оплачено переводом':'');
       if(money) out+=money+'\n';
       out+='\n';
