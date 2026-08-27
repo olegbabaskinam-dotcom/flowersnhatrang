@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-27 13:12",
- "count": 125,
+ "generated": "2026-08-27 13:18",
+ "count": 126,
  "categories": [
   {
    "key": "all",
@@ -2910,6 +2910,33 @@
     "img/products/101-nasyshchennaya-rozovaya-roza-fioletovaya-upakovka/4.webp",
     "img/products/101-nasyshchennaya-rozovaya-roza-fioletovaya-upakovka/5.webp",
     "img/products/101-nasyshchennaya-rozovaya-roza-fioletovaya-upakovka/6.webp"
+   ]
+  },
+  {
+   "id": 126,
+   "slug": "101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov",
+   "name": "101 розовая роза в корзине + 25 персиковых роз + 15 резиновых шаров",
+   "desc": "роскошный праздничный комплект: пышная корзина из 101 нежно-розовой розы, отдельный букет из 25 персиковых роз и фонтан из 15 латексных шаров (розовые, серебристые, белые). Максимальный вау-эффект на день рождения, юбилей или большое торжество. Онлайн-доставка по Нячангу со следующего дня, вложим открытку по желанию",
+   "alt": "101 розовая роза в корзине, 25 персиковых роз и 15 резиновых шаров Нячанг доставка",
+   "price_vnd": 3500000,
+   "price": "3 500 000 донгов",
+   "price_sub": "≈ $140 · 12 800 ₽",
+   "cats": [
+    "r101",
+    "r25",
+    "balloons"
+   ],
+   "color": "pink",
+   "images": [
+    "img/products/101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov/1.webp",
+    "img/products/101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov/2.webp",
+    "img/products/101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov/3.webp",
+    "img/products/101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov/4.webp",
+    "img/products/101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov/5.webp",
+    "img/products/101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov/6.webp",
+    "img/products/101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov/7.webp",
+    "img/products/101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov/8.webp",
+    "img/products/101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov/9.webp"
    ]
   }
  ]
