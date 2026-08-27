@@ -16,6 +16,10 @@
 
 ## Дневник
 
+### 2026-08-27 (товар — 101 насыщенная розовая роза в фиолетовой упаковке)
+- **Товар id125** «101 насыщенная розовая роза в фиолетовой упаковке» (1 500 000 ₫ · ≈ $60 · 5 500 ₽, курс 275), 6 фото, RU/EN/KO. slug `101-nasyshchennaya-rozovaya-roza-fioletovaya-upakovka`, **r101** / **pink** (розы фуксия; `rozov` в слаге даёт pink раньше `fiolet` — верно, упаковка не влияет).
+- Пайплайн: 6 webp (≤1200, EXIF) → CSV id125 → gen_one_product RU/EN/KO → карточки ПЕРВЫМИ ×3 → featured.js (125, первым) → products.json (r101=40) → 1.jpg TG → sitemap +3 (594). Дрейф 30 файлов от fixer откачен. Проверки: «Цены по курсу 275: 125», 0 по товару; check_site 0/0; assertions ✅.
+
 ### 2026-08-27 (товар — 51 белая роза + набор шаров S «45»)
 - **Товар id124** «51 белая роза в белой упаковке + набор шаров S (золотые цифры 4 и 5)» (2 000 000 ₫ · ≈ $80 · 7 300 ₽, курс 275), 6 фото, RU/EN/KO. slug `51-belaya-roza-nabor-sharov-s-cifry-45`, комбо **r51 + balloons**, цвет **white** (розы белые, автоцвет верный — правка не нужна).
 - Пайплайн: 6 webp (≤1200, EXIF, 1.webp=букет+«45» без лица) → CSV id124 → gen_one_product RU/EN/KO → карточки ПЕРВЫМИ в 3 каталога (data-cat «r51 balloons») → featured.js (124, первым, node OK) → products.json (r51=21, balloons=36) → 1.jpg TG → sitemap +3 (591 loc, xmllint OK).

@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-27 12:59",
- "count": 124,
+ "generated": "2026-08-27 13:12",
+ "count": 125,
  "categories": [
   {
    "key": "all",
@@ -2888,6 +2888,28 @@
     "img/products/51-belaya-roza-nabor-sharov-s-cifry-45/4.webp",
     "img/products/51-belaya-roza-nabor-sharov-s-cifry-45/5.webp",
     "img/products/51-belaya-roza-nabor-sharov-s-cifry-45/6.webp"
+   ]
+  },
+  {
+   "id": 125,
+   "slug": "101-nasyshchennaya-rozovaya-roza-fioletovaya-upakovka",
+   "name": "101 насыщенная розовая роза в фиолетовой упаковке",
+   "desc": "пышный круглый букет из 101 насыщенно-розовой розы (яркая фуксия) в двухцветной сиренево-розовой упаковке — эффектный и объёмный подарок с сильным вау-эффектом. Идеально на день рождения, годовщину или большое признание в любви. Онлайн-доставка по Нячангу со следующего дня, вложим открытку по желанию",
+   "alt": "101 насыщенная розовая роза в фиолетовой упаковке Нячанг доставка",
+   "price_vnd": 1500000,
+   "price": "1 500 000 донгов",
+   "price_sub": "≈ $60 · 5 500 ₽",
+   "cats": [
+    "r101"
+   ],
+   "color": "pink",
+   "images": [
+    "img/products/101-nasyshchennaya-rozovaya-roza-fioletovaya-upakovka/1.webp",
+    "img/products/101-nasyshchennaya-rozovaya-roza-fioletovaya-upakovka/2.webp",
+    "img/products/101-nasyshchennaya-rozovaya-roza-fioletovaya-upakovka/3.webp",
+    "img/products/101-nasyshchennaya-rozovaya-roza-fioletovaya-upakovka/4.webp",
+    "img/products/101-nasyshchennaya-rozovaya-roza-fioletovaya-upakovka/5.webp",
+    "img/products/101-nasyshchennaya-rozovaya-roza-fioletovaya-upakovka/6.webp"
    ]
   }
  ]
