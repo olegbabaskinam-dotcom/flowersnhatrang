@@ -642,6 +642,8 @@ def product_color(p):
         return ""  # у подарочных наборов и тортов цвета роз нет («krasota» не должно давать red)
     if s.startswith("151-rozovaya-roza-fioletovyy-ottenok"):
         return "pink"
+    if s == "151-nezhno-rozovaya-roza-belaya-upakovka":
+        return "pink"  # цветы нежно-розовые, «belaya» упаковка не должна давать white
     if "belo-rozov" in s:
         return "pink"
     if "kras" in s:

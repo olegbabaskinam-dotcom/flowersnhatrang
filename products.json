@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-22 20:14",
- "count": 122,
+ "generated": "2026-08-27 10:21",
+ "count": 123,
  "categories": [
   {
    "key": "all",
@@ -2843,6 +2843,28 @@
     "img/products/tort-shokoladnyy-serdca-krasnyy-topper-love/6.webp",
     "img/products/tort-shokoladnyy-serdca-krasnyy-topper-love/7.webp",
     "img/products/tort-shokoladnyy-serdca-krasnyy-topper-love/8.webp"
+   ]
+  },
+  {
+   "id": 123,
+   "slug": "151-nezhno-rozovaya-roza-belaya-upakovka",
+   "name": "151 нежно-розовая роза в белой упаковке",
+   "desc": "огромный букет из 151 нежно-розовой розы в белой упаковке — роскошный и объёмный подарок с сильным вау-эффектом. Идеально на день рождения, годовщину, свадьбу или большое признание в любви. Онлайн-доставка по Нячангу со следующего дня, вложим открытку по желанию",
+   "alt": "151 нежно-розовая роза в белой упаковке Нячанг доставка",
+   "price_vnd": 2250000,
+   "price": "2 250 000 донгов",
+   "price_sub": "≈ $90 · 8 100 ₽",
+   "cats": [
+    "r101"
+   ],
+   "color": "pink",
+   "images": [
+    "img/products/151-nezhno-rozovaya-roza-belaya-upakovka/1.webp",
+    "img/products/151-nezhno-rozovaya-roza-belaya-upakovka/2.webp",
+    "img/products/151-nezhno-rozovaya-roza-belaya-upakovka/3.webp",
+    "img/products/151-nezhno-rozovaya-roza-belaya-upakovka/4.webp",
+    "img/products/151-nezhno-rozovaya-roza-belaya-upakovka/5.webp",
+    "img/products/151-nezhno-rozovaya-roza-belaya-upakovka/6.webp"
    ]
   }
  ]
