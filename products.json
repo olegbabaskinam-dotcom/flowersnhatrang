@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-27 13:18",
- "count": 126,
+ "generated": "2026-08-27 17:21",
+ "count": 127,
  "categories": [
   {
    "key": "all",
@@ -2937,6 +2937,29 @@
     "img/products/101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov/7.webp",
     "img/products/101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov/8.webp",
     "img/products/101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov/9.webp"
+   ]
+  },
+  {
+   "id": 127,
+   "slug": "101-rozovaya-roza-korzina-bukva-a",
+   "name": "101 розовая роза в корзине с буквой «А» в центре",
+   "desc": "пышная круглая корзина из 101 нежно-розовой розы с выложенной белыми розами буквой «А» в центре — персональный и роскошный подарок с сильным вау-эффектом. Идеально на день рождения, годовщину или признание тому, чьё имя на «А». Онлайн-доставка по Нячангу со следующего дня, вложим открытку по желанию",
+   "alt": "101 розовая роза в корзине с буквой А в центре Нячанг доставка",
+   "price_vnd": 2500000,
+   "price": "2 500 000 донгов",
+   "price_sub": "≈ $100 · 9 100 ₽",
+   "cats": [
+    "r101"
+   ],
+   "color": "pink",
+   "images": [
+    "img/products/101-rozovaya-roza-korzina-bukva-a/1.webp",
+    "img/products/101-rozovaya-roza-korzina-bukva-a/2.webp",
+    "img/products/101-rozovaya-roza-korzina-bukva-a/3.webp",
+    "img/products/101-rozovaya-roza-korzina-bukva-a/4.webp",
+    "img/products/101-rozovaya-roza-korzina-bukva-a/5.webp",
+    "img/products/101-rozovaya-roza-korzina-bukva-a/6.webp",
+    "img/products/101-rozovaya-roza-korzina-bukva-a/7.webp"
    ]
   }
  ]
