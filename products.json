@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-27 17:29",
- "count": 127,
+ "generated": "2026-08-27 18:07",
+ "count": 128,
  "categories": [
   {
    "key": "all",
@@ -2960,6 +2960,28 @@
     "img/products/101-rozovaya-roza-korzina-bukva-a/5.webp",
     "img/products/101-rozovaya-roza-korzina-bukva-a/6.webp",
     "img/products/101-rozovaya-roza-korzina-bukva-a/7.webp"
+   ]
+  },
+  {
+   "id": 128,
+   "slug": "tort-sirenevyy-s-rozovymi-rozami",
+   "name": "Сиреневый торт с розовыми розами",
+   "desc": "средний торт в нежных сиреневых тонах с кремовыми подтёками, украшен сверху розовыми розами и цветами. Небольшой праздничный тортик на день рождения или юбилей — в комплекте красивая коробка и свечи. Заказывается вместе с букетом, шарами или подарочным набором. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Сиреневый торт с розовыми розами Нячанг доставка",
+   "price_vnd": 250000,
+   "price": "250 000 донгов",
+   "price_sub": "≈ $10 · 1 000 ₽",
+   "cats": [
+    "cakes"
+   ],
+   "color": "",
+   "images": [
+    "img/products/tort-sirenevyy-s-rozovymi-rozami/1.webp",
+    "img/products/tort-sirenevyy-s-rozovymi-rozami/2.webp",
+    "img/products/tort-sirenevyy-s-rozovymi-rozami/3.webp",
+    "img/products/tort-sirenevyy-s-rozovymi-rozami/4.webp",
+    "img/products/tort-sirenevyy-s-rozovymi-rozami/5.webp",
+    "img/products/tort-sirenevyy-s-rozovymi-rozami/6.webp"
    ]
   }
  ]
