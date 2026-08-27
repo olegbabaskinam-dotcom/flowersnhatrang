@@ -230,7 +230,7 @@ CUR = {"ru": "донгов", "en": "VND", "ko": "동"}
 def price_loc(price, lang):
     return price.replace("донгов", CUR[lang])
 
-RUB_VND_RATE = 280
+RUB_VND_RATE = 275
 
 def rub_price(price):
     """VND → RUB по курсу, всегда вверх до ближайших 100 ₽."""

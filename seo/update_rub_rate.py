@@ -2,7 +2,7 @@
 """Обновляет все опубликованные рублёвые цены по products.csv.
 
 Формула: цена VND / курс, затем всегда вверх до ближайших 100 ₽.
-Запуск из корня new-site: python3 seo/update_rub_rate.py 280
+Запуск из корня new-site: python3 seo/update_rub_rate.py 275
 """
 
 import csv
@@ -14,7 +14,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 CSV_PATH = ROOT / "seo" / "products.csv"
-RATE = int(sys.argv[1]) if len(sys.argv) > 1 else 280
+RATE = int(sys.argv[1]) if len(sys.argv) > 1 else 275
 RUB_RE = re.compile(r"(?<!\d)(\d[\d ]{0,8}) ₽")
 
 

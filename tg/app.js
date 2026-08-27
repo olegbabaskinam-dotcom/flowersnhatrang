@@ -21,7 +21,7 @@ if (TG) {
 }
 
 /* ---- деньги (курсы как на сайте) ---- */
-var RATES = { VND: 1, USD: 25000, RUB: 280 };
+var RATES = { VND: 1, USD: 25000, RUB: 275 };
 var SYM   = { VND: "₫", USD: "$", RUB: "₽" };
 var CUR_ORDER = ["VND", "RUB", "USD"];
 var CUR = localStorage.getItem("flw_tg_cur") || "VND";

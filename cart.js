@@ -31,7 +31,7 @@
 
   // Курсы: сколько ДОНГОВ за 1 единицу (базовая — донг).
   window.FLW_CFG = {
-    rates: { VND: 1, USD: 25000, RUB: 280, KZT: 50, KRW: 18.8 },
+    rates: { VND: 1, USD: 25000, RUB: 275, KZT: 50, KRW: 18.8 },
     sym:   { VND: "₫", USD: "$",  RUB: "₽",  KZT: "₸", KRW: "₩" },
     order: ["VND", "USD", "RUB", "KZT", "KRW"],
     names: { VND: "Донги", USD: "Доллары", RUB: "Рубли", KZT: "Тенге", KRW: "Воны" },

@@ -119,11 +119,11 @@ def main() -> int:
     products = list(csv.DictReader((ROOT / "seo/products.csv").open(encoding="utf-8")))
     for row in products:
         vnd = int(re.sub(r"\D", "", row["price"]) or "0")
-        expected = math.ceil((vnd / 280) / 100) * 100
+        expected = math.ceil((vnd / 275) / 100) * 100
         rub_match = re.search(r"(\d[\d ]*) ₽$", row["price_sub"])
         actual = int(re.sub(r"\D", "", rub_match.group(1))) if rub_match else -1
         if actual != expected:
-            errors.append(f"курс 280 нарушен в products.csv: ID {row['id']} — {actual}, ожидается {expected}")
+            errors.append(f"курс 275 нарушен в products.csv: ID {row['id']} — {actual}, ожидается {expected}")
         product_page = ROOT / "catalog" / f"{row['slug']}-ru.html"
         expected_text = f"{expected:,} ₽".replace(",", " ")
         if product_page.exists() and expected_text not in product_page.read_text(encoding="utf-8"):
@@ -195,7 +195,7 @@ process.stdout.write(JSON.stringify(bad));
     print(f"Товарных WebP > 1200px: {len(large_products)}")
     print(f"Опубликованных статей в реестре: {len(done)}")
     print(f"Проверено встроенных JavaScript-блоков: {len(inline_scripts)}")
-    print(f"Цены проверены по курсу 280: {len(products)}")
+    print(f"Цены проверены по курсу 275: {len(products)}")
     print(f"Ошибок полного аудита: {len(errors)}")
     for error in errors[:80]:
         print("  - " + error)

@@ -22,7 +22,7 @@
       },
       {
         "h2": "Сколько это в рублях и долларах",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Цену называем сразу в удобной валюте. Ориентир: доллар — примерно по 25 000 донгов, рубль — по 280 донгов. Рублёвую сумму округляем вверх до ближайших 100 ₽. Для корейских гостей показываем цену и в вонах.</p><p class=\"text-stone-600 leading-relaxed\">На сайте в корзине есть переключатель валют — можно сразу посмотреть цену в ₫, $, ₽, ₸ или ₩.</p>"
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Цену называем сразу в удобной валюте. Ориентир: доллар — примерно по 25 000 донгов, рубль — по 275 донгов. Рублёвую сумму округляем вверх до ближайших 100 ₽. Для корейских гостей показываем цену и в вонах.</p><p class=\"text-stone-600 leading-relaxed\">На сайте в корзине есть переключатель валют — можно сразу посмотреть цену в ₫, $, ₽, ₸ или ₩.</p>"
       },
       {
         "h2": "Оплата, если заказываете удалённо",
@@ -48,7 +48,7 @@
       ],
       [
         "По какому курсу считаете?",
-        "Ориентир: $1 ≈ 25 000 ₫, 1 ₽ = 280 ₫. Рублёвую сумму округляем вверх до ближайших 100 ₽; в корзине на сайте есть переключатель ₫/$/₽/₸/₩."
+        "Ориентир: $1 ≈ 25 000 ₫, 1 ₽ = 275 ₫. Рублёвую сумму округляем вверх до ближайших 100 ₽; в корзине на сайте есть переключатель ₫/$/₽/₸/₩."
       ],
       [
         "Нужно ли платить за доставку?",
@@ -69,7 +69,7 @@
       },
       {
         "h2": "How much is it in rubles and dollars",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">We quote the price in your preferred currency. As a guide: a dollar is about 25,000 dong, a ruble about 280 dong. For Korean guests we also show the price in won.</p><p class=\"text-stone-600 leading-relaxed\">The cart on the site has a currency switcher — see the price in ₫, $, ₽, ₸ or ₩ right away.</p>"
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">We quote the price in your preferred currency. As a guide: a dollar is about 25,000 dong, a ruble about 275 dong. For Korean guests we also show the price in won.</p><p class=\"text-stone-600 leading-relaxed\">The cart on the site has a currency switcher — see the price in ₫, $, ₽, ₸ or ₩ right away.</p>"
       },
       {
         "h2": "Paying when ordering remotely",
@@ -95,7 +95,7 @@
       ],
       [
         "What exchange rate do you use?",
-        "As a guide: $1 ≈ 25,000 ₫, 1 ₽ = 280 ₫. Ruble totals are rounded up to the next 100 ₽; the cart has a ₫/$/₽/₸/₩ switcher."
+        "As a guide: $1 ≈ 25,000 ₫, 1 ₽ = 275 ₫. Ruble totals are rounded up to the next 100 ₽; the cart has a ₫/$/₽/₸/₩ switcher."
       ],
       [
         "Is there a delivery fee?",
