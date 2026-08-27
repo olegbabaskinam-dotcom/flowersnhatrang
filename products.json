@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-27 12:39",
- "count": 123,
+ "generated": "2026-08-27 12:59",
+ "count": 124,
  "categories": [
   {
    "key": "all",
@@ -2865,6 +2865,29 @@
     "img/products/151-nezhno-rozovaya-roza-belaya-upakovka/4.webp",
     "img/products/151-nezhno-rozovaya-roza-belaya-upakovka/5.webp",
     "img/products/151-nezhno-rozovaya-roza-belaya-upakovka/6.webp"
+   ]
+  },
+  {
+   "id": 124,
+   "slug": "51-belaya-roza-nabor-sharov-s-cifry-45",
+   "name": "51 белая роза в белой упаковке + набор шаров S (золотые цифры 4 и 5)",
+   "desc": "букет из 51 белой розы в белой упаковке в паре с набором фольгированных шаров S — золотые цифры «4» и «5». Яркий праздничный комплект на день рождения (45 лет) или юбилей. Онлайн-доставка по Нячангу со следующего дня, вложим открытку по желанию",
+   "alt": "51 белая роза в белой упаковке и набор шаров с цифрами 4 и 5 Нячанг доставка",
+   "price_vnd": 2000000,
+   "price": "2 000 000 донгов",
+   "price_sub": "≈ $80 · 7 300 ₽",
+   "cats": [
+    "r51",
+    "balloons"
+   ],
+   "color": "white",
+   "images": [
+    "img/products/51-belaya-roza-nabor-sharov-s-cifry-45/1.webp",
+    "img/products/51-belaya-roza-nabor-sharov-s-cifry-45/2.webp",
+    "img/products/51-belaya-roza-nabor-sharov-s-cifry-45/3.webp",
+    "img/products/51-belaya-roza-nabor-sharov-s-cifry-45/4.webp",
+    "img/products/51-belaya-roza-nabor-sharov-s-cifry-45/5.webp",
+    "img/products/51-belaya-roza-nabor-sharov-s-cifry-45/6.webp"
    ]
   }
  ]
