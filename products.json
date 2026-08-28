@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-28 17:17",
- "count": 131,
+ "generated": "2026-08-28 17:21",
+ "count": 132,
  "categories": [
   {
    "key": "all",
@@ -3054,6 +3054,28 @@
     "img/products/tort-goluboy-dollary-frukty-love/6.webp",
     "img/products/tort-goluboy-dollary-frukty-love/7.webp",
     "img/products/tort-goluboy-dollary-frukty-love/8.webp"
+   ]
+  },
+  {
+   "id": 132,
+   "slug": "stilnyy-sbornyy-buket-belo-rozovyy",
+   "name": "Стильный сборный букет в бело-розовых оттенках",
+   "desc": "стильный сборный букет в нежных бело-розовых тонах: розовые герберы, белые хризантемы-помпоны, пионовидные розы и эустома в аккуратной белой упаковке. Универсальный и элегантный подарок на день рождения, годовщину или просто так. Онлайн-доставка по Нячангу со следующего дня, вложим открытку по желанию",
+   "alt": "Стильный сборный букет в бело-розовых оттенках Нячанг доставка",
+   "price_vnd": 1250000,
+   "price": "1 250 000 донгов",
+   "price_sub": "≈ $50 · 4 600 ₽",
+   "cats": [
+    "mixed"
+   ],
+   "color": "pink",
+   "images": [
+    "img/products/stilnyy-sbornyy-buket-belo-rozovyy/1.webp",
+    "img/products/stilnyy-sbornyy-buket-belo-rozovyy/2.webp",
+    "img/products/stilnyy-sbornyy-buket-belo-rozovyy/3.webp",
+    "img/products/stilnyy-sbornyy-buket-belo-rozovyy/4.webp",
+    "img/products/stilnyy-sbornyy-buket-belo-rozovyy/5.webp",
+    "img/products/stilnyy-sbornyy-buket-belo-rozovyy/6.webp"
    ]
   }
  ]
