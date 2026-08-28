@@ -22,6 +22,8 @@ TG = "https://t.me/babaskin_o"
 KAKAO = "http://pf.kakao.com/_zbwKX"
 KAKAO_DIRECT = "https://open.kakao.com/o/seD8jkIi"
 IG_KO = "https://instagram.com/nhatrang.kkot"
+IG_RU = "https://instagram.com/flowers_vietnam_inst"
+CART_ARIA = {"ru": "Корзина", "en": "Cart", "ko": "장바구니"}
 DOMAIN = "https://flowers-nha-trang.online"
 
 HOTELS = [
@@ -501,7 +503,7 @@ def header(lang, base, lang_urls=None):
                 {nav_langs}
             </nav>
             <div class="hidden md:flex gap-4 text-xl">
-                {"".join(f'<a href="{u}" target="_blank" rel="noopener noreferrer" class="text-stone-400 hover:text-[#c0687a] transition" aria-label="{lbl}">{svg}</a>' for u, lbl, svg in contact_links(lang))}
+                <a href="{base}cart.html" class="text-stone-400 hover:text-[#c0687a] transition" aria-label="{CART_ARIA[lang]}">{ORDER_SVG}</a>{"".join(f'<a href="{u}" target="_blank" rel="noopener noreferrer" class="text-stone-400 hover:text-[#c0687a] transition" aria-label="{lbl}">{svg}</a>' for u, lbl, svg in contact_links(lang))}{f'<a href="{IG_RU}" target="_blank" rel="noopener noreferrer" class="text-stone-400 hover:text-[#c0687a] transition" aria-label="Instagram">{IG_SVG}</a>' if lang in ("ru", "en") else ""}
             </div>
         </div>
         <div class="md:hidden" style="border-top:1px solid #f5f5f4;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px">
@@ -595,10 +597,12 @@ def order_buttons(name, t, lang, size="full"):
             rows.append(f'<a href="{url}"{target} class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">{svg} {label}</a>')
         return '<div class="flex flex-col gap-4">\n                    ' + "\n                    ".join(rows) + "\n                </div>"
     msg = name.replace(" ", "%20")
-    rows = []
+    online_label = {"ru": "Оформить онлайн заказ", "en": "Order online"}[lang]
+    rows = [f'<a href="../order.html" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">{ORDER_SVG} {online_label}</a>']
     for url, label, svg in order_contacts(lang, t):
         href = f"{url}?text={msg}" if ("wa.me" in url or "t.me" in url) else url
         rows.append(f'<a href="{href}" target="_blank" rel="noopener noreferrer" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">{svg} {label}</a>')
+    rows.append(f'<a href="{IG_RU}" target="_blank" rel="noopener noreferrer" class="btn-rose flex items-center justify-center gap-2 font-medium py-2.5 px-4 rounded-xl text-xs w-full">{IG_SVG} Instagram</a>')
     btns = "\n                    ".join(rows)
     return f'''<div class="flex flex-col gap-4">
                     {btns}
