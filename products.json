@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-28 17:12",
- "count": 130,
+ "generated": "2026-08-28 17:17",
+ "count": 131,
  "categories": [
   {
    "key": "all",
@@ -3030,6 +3030,30 @@
     "img/products/tort-mini-shokoladnyy-oreo/6.webp",
     "img/products/tort-mini-shokoladnyy-oreo/7.webp",
     "img/products/tort-mini-shokoladnyy-oreo/8.webp"
+   ]
+  },
+  {
+   "id": 131,
+   "slug": "tort-goluboy-dollary-frukty-love",
+   "name": "Голубой торт с долларами, вином и фруктами",
+   "desc": "эффектный голубой торт с шоколадными подтёками: украшен долларами, бутылкой вина, свежими фруктами (сливы, виноград, черри), кремовыми розочками, жёлтой надписью LOVE и топпером Happy Birthday. Яркий и щедрый подарок на день рождения. В комплекте свечи, заказывается вместе с букетом, шарами или подарочным набором. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Голубой торт с долларами вином и фруктами LOVE Нячанг доставка",
+   "price_vnd": 500000,
+   "price": "500 000 донгов",
+   "price_sub": "≈ $20 · 1 900 ₽",
+   "cats": [
+    "cakes"
+   ],
+   "color": "",
+   "images": [
+    "img/products/tort-goluboy-dollary-frukty-love/1.webp",
+    "img/products/tort-goluboy-dollary-frukty-love/2.webp",
+    "img/products/tort-goluboy-dollary-frukty-love/3.webp",
+    "img/products/tort-goluboy-dollary-frukty-love/4.webp",
+    "img/products/tort-goluboy-dollary-frukty-love/5.webp",
+    "img/products/tort-goluboy-dollary-frukty-love/6.webp",
+    "img/products/tort-goluboy-dollary-frukty-love/7.webp",
+    "img/products/tort-goluboy-dollary-frukty-love/8.webp"
    ]
   }
  ]
