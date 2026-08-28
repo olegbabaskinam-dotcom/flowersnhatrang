@@ -90,6 +90,19 @@
     <button class="btn ghost" onclick="unplaceCur()">Снять со слота</button>
     <button class="btn red" onclick="cancelCur()">Отменить заказ</button>
   </div>
+  <!-- ОТЧЁТ КУРЬЕРА О ДОСТАВКЕ -->
+  <div id="deliverBox" class="hidden">
+    <div class="card" style="margin-top:10px">
+      <b>✅ Отметить доставку</b>
+      <label>Фото (заказ у получателя / оплата)</label>
+      <input id="dl_photo" type="file" accept="image/*" capture="environment">
+      <label>Принято наличными, ₫</label>
+      <input id="dl_amount" inputmode="numeric" placeholder="напр. 1500000">
+      <label>Комментарий</label>
+      <input id="dl_comment" placeholder="напр. принял оплату">
+      <button class="btn green" onclick="submitDeliver()">✅ Доставлено</button>
+    </div>
+  </div>
   <div id="e_err" class="err"></div>
 </div>
 
@@ -174,6 +187,7 @@ function openCard(b){
   document.getElementById('e_err').textContent='';
   document.getElementById('editTitle').textContent='Заказ';
   var end=b.arrive?m2hh(hh2m(b.arrive)+(b.slots||2)*15):'';
+  document.getElementById('deliverBox').classList.add('hidden');
   if(CAN_EDIT){
     document.getElementById('ro').classList.add('hidden');
     document.getElementById('rw').classList.remove('hidden');
@@ -203,8 +217,39 @@ function openCard(b){
       (b.recipient?('<div class="s">👤 '+esc(b.recipient)+'</div>'):'')+
       (b.buyer?('<div class="s">🧾 '+esc(b.buyer)+'</div>'):'')+
       (b.note?('<div class="s">📝 '+esc(b.note)+'</div>'):'');
+    // курьер отчитывается о доставке (если ещё не отвезён)
+    if(b.status!=='done'){
+      document.getElementById('dl_photo').value='';
+      document.getElementById('dl_amount').value=b.amount||'';
+      document.getElementById('dl_comment').value='';
+      document.getElementById('deliverBox').classList.remove('hidden');
+    }
   }
   show('edit');
+}
+
+function fileToDataUrl(file, maxW, cb){
+  var rd=new FileReader();
+  rd.onload=function(){ var img=new Image(); img.onload=function(){
+    var s=Math.min(1, maxW/Math.max(img.width,img.height));
+    var c=document.createElement('canvas'); c.width=Math.round(img.width*s); c.height=Math.round(img.height*s);
+    c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+    try{ cb(c.toDataURL('image/jpeg',0.7)); }catch(e){ cb(''); }
+  }; img.onerror=function(){ cb(''); }; img.src=rd.result; };
+  rd.onerror=function(){ cb(''); };
+  rd.readAsDataURL(file);
+}
+async function submitDeliver(){
+  if(!CUR) return; var err=document.getElementById('e_err'); err.textContent='';
+  var amount=Number(String(document.getElementById('dl_amount').value).replace(/\s/g,''))||0;
+  var comment=document.getElementById('dl_comment').value.trim();
+  var f=document.getElementById('dl_photo').files[0];
+  var send=async function(photo){
+    var res=await api('mapDeliver',{id:CUR.id, amount:amount, comment:comment, photo:photo||''});
+    if(res.ok){ toast('Доставлено ✅'); openMap(); } else { err.textContent=res.error||'Ошибка'; }
+  };
+  if(f){ toast('Отправляю фото…'); fileToDataUrl(f, 1280, function(du){ send(du); }); }
+  else { if(!confirm('Отметить доставку без фото?')) return; send(''); }
 }
 
 async function freeReload(preselect){
