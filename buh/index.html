@@ -137,6 +137,7 @@
     <div class="tile" onclick="openTransfer()"><span class="ic">🔁</span>Перевод</div>
     <div class="tile" onclick="openHorizon()"><span class="ic">📅</span>Горизонт</div>
     <div class="tile" onclick="openMap(null,true)"><span class="ic">🗺️</span>Карта заказов</div>
+    <div class="tile" onclick="openCouriers()"><span class="ic">🚚</span>Курьеры</div>
     <div class="tile" onclick="openReports()"><span class="ic">📊</span>Отчёты</div>
     <div class="tile" onclick="openMore()"><span class="ic">⋯</span>Ещё<span id="moreBadge"></span></div>
   </div>
@@ -221,6 +222,20 @@
     <div id="mapUnplaced" style="margin-top:8px"></div>
   </div>
   <div id="mapList" style="margin-top:12px"></div>
+</div>
+
+<!-- КУРЬЕРЫ (доступ к курьерской Карте по нику) -->
+<div id="v-couriers" class="hidden">
+  <button class="back" onclick="go('main')">‹ Назад</button>
+  <h2 style="margin:6px 0">🚚 Курьеры</h2>
+  <div class="muted" style="font-size:12px;margin-bottom:10px">Кто может открыть курьерский бот и видеть Карту заказов (только просмотр). Впиши ник Telegram (без @).</div>
+  <div class="card">
+    <div class="row" style="gap:8px">
+      <input id="courNick" placeholder="ivan_courier" style="flex:1;margin:0">
+      <button class="btn" style="width:auto;margin:0;padding:11px 16px" onclick="addCourier()">Добавить</button>
+    </div>
+    <div id="courList" style="margin-top:12px"></div>
+  </div>
 </div>
 
 <!-- КАРТА: добавить / править заказ -->
@@ -445,7 +460,7 @@ async function api(action, extra, silent){
 }
 async function refreshReserveNow(){ var res=await api('refreshReserve',{}); if(res&&res.ok){ STATE=res; toast('Резерв обновлён из Финансов'); openReserve(); } else toast(res.error||'Ошибка'); }
 
-var VIEWS=['pin','start','main','expense','transfer','pending','confirm','horizon','map','mapadd','mapexport','more','reserve','recurring','history','edit','wallets','reports','tasks','taskdo','adjust','paybill'];
+var VIEWS=['pin','start','main','expense','transfer','pending','confirm','horizon','map','mapadd','mapexport','couriers','more','reserve','recurring','history','edit','wallets','reports','tasks','taskdo','adjust','paybill'];
 function go(v){ VIEWS.forEach(function(x){ var el=document.getElementById('v-'+x); if(el) el.classList.toggle('hidden', x!==v); }); window.scrollTo(0,0); }
 
 // ---------- ВХОД ----------
@@ -779,6 +794,18 @@ async function saveMapAdd(){
 }
 async function mapUnplaceCur(){ if(!MAP_EDIT_ID) return; var res=await api('mapUnplace',{id:MAP_EDIT_ID}); if(res.ok){ toast('Снято со слота'); openMap(); } else toast(res.error||'Ошибка'); }
 async function mapCancelCur(){ if(!MAP_EDIT_ID) return; if(!confirm('Отменить этот заказ? Слот освободится.')) return; var res=await api('mapCancel',{id:MAP_EDIT_ID}); if(res.ok){ toast('Заказ отменён'); openMap(); } else toast(res.error||'Ошибка'); }
+
+// ── Курьеры (доступ к курьерской Карте) ──
+async function openCouriers(){ var res=await api('courierList',{}); go('couriers'); renderCouriers((res&&res.couriers)||[]); }
+function renderCouriers(list){
+  var box=document.getElementById('courList');
+  if(!list.length){ box.innerHTML='<div class="muted center" style="padding:8px">Пока никого. Впиши ник и добавь.</div>'; return; }
+  box.innerHTML=''; list.forEach(function(u){ var d=document.createElement('div'); d.className='item';
+    d.innerHTML='<div class="row"><b>@'+esc(u)+'</b><small class="link" style="color:#e0524d" onclick="removeCourier(\''+esc(u)+'\')">удалить</small></div>';
+    box.appendChild(d); });
+}
+async function addCourier(){ var u=document.getElementById('courNick').value.trim(); if(!u){ toast('Впиши ник'); return; } var res=await api('courierAdd',{username:u}); if(res.ok){ document.getElementById('courNick').value=''; renderCouriers(res.couriers||[]); toast('Добавлен'); } else toast(res.error||'Ошибка'); }
+async function removeCourier(u){ var res=await api('courierRemove',{username:u}); if(res.ok){ renderCouriers(res.couriers||[]); toast('Удалён'); } else toast(res.error||'Ошибка'); }
 
 function openMapExport(){ document.getElementById('mapExpDate').textContent=humanDate(MAP_DATE||vnToday()); go('mapexport'); mapExport('courier'); }
 async function mapExport(kind){

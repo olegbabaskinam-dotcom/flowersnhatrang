@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Карта заказов">
+<title>Карта заказов</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+  :root{ --bg:#f6f4fb; --card:#fff; --ink:#221; --muted:#8a8296; --line:#e7e0f2; --accent:#7b4bd6; }
+  *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body{ margin:0; font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif; background:var(--bg); color:var(--ink); padding:12px 12px 40px; }
+  h2{ margin:0; font-size:18px; }
+  .row{ display:flex; align-items:center; justify-content:space-between; gap:8px; }
+  .link{ color:var(--accent); cursor:pointer; font-size:13px; }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px; }
+  .item{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:11px 12px; margin-bottom:9px; }
+  .item .t{ font-weight:600; margin-top:3px; }
+  .item .s{ color:var(--muted); font-size:12px; margin-top:2px; }
+  .amt{ font-weight:700; font-size:13px; }
+  .btn{ width:100%; padding:12px; border:0; border-radius:10px; background:var(--accent); color:#fff; font-weight:700; font-size:15px; cursor:pointer; margin-top:6px; }
+  .btn.ghost{ background:#efe9fb; color:var(--accent); }
+  .btn.green{ background:#1f9d55; color:#fff; }
+  .btn.red{ background:#e0524d; color:#fff; }
+  .navbtn{ width:auto; padding:9px 16px; margin:0; }
+  input,select{ width:100%; padding:10px; font-size:15px; border:1px solid var(--line); border-radius:9px; background:#fff; color:var(--ink); margin-top:3px; }
+  label{ display:block; font-size:12px; color:var(--muted); margin:9px 0 0; }
+  .hidden{ display:none !important; }
+  .center{ text-align:center; }
+  .muted{ color:var(--muted); }
+  .err{ color:#c5221f; font-size:13px; margin-top:8px; }
+  .pinwrap{ display:flex; gap:8px; align-items:center; margin:10px 0; }
+  .pinwrap input{ margin:0; text-align:center; letter-spacing:6px; max-width:120px; }
+  #toast{ position:fixed; left:50%; bottom:26px; transform:translateX(-50%); background:#292433; color:#fff; padding:10px 16px; border-radius:10px; font-size:14px; opacity:0; transition:.25s; z-index:99; }
+  #toast.show{ opacity:1; }
+  pre{ white-space:pre-wrap; word-break:break-word; background:#fff; border:1px solid var(--line); border-radius:10px; padding:12px; font:13px/1.5 -apple-system,Arial; }
+</style>
+</head>
+<body>
+
+<!-- ЛЕНТА -->
+<div id="v-map">
+  <div class="row" style="margin-bottom:8px">
+    <h2>🗺️ Карта заказов</h2>
+    <span><span class="link" onclick="refreshMap()">🔄</span> · <span class="link" onclick="openExport()">📋 Экспорт</span></span>
+  </div>
+  <div class="row" style="margin-bottom:10px">
+    <button class="btn ghost navbtn" onclick="mapDay(-1)">‹</button>
+    <b id="mapDate" style="text-align:center;flex:1">—</b>
+    <button class="btn ghost navbtn" onclick="mapDay(1)">›</button>
+  </div>
+
+  <div id="lockRow" class="pinwrap hidden">
+    <span class="muted" style="font-size:12px">🔒 Правки:</span>
+    <input id="pin" type="tel" inputmode="numeric" maxlength="6" placeholder="ПИН">
+    <button class="btn ghost navbtn" onclick="unlockEdit()">Открыть</button>
+  </div>
+  <div id="editOn" class="muted hidden" style="font-size:12px;margin-bottom:8px">✏️ Режим правок включён</div>
+
+  <div id="unplacedWrap" class="card hidden" style="margin-bottom:12px">
+    <b>📦 Не разложенные</b>
+    <div id="unplaced" style="margin-top:8px"></div>
+  </div>
+  <div id="list"></div>
+  <div id="authErr" class="err center hidden"></div>
+</div>
+
+<!-- ДЕТАЛИ / ПРАВКА -->
+<div id="v-edit" class="hidden">
+  <button class="btn ghost" style="width:auto;padding:8px 14px" onclick="show('map')">‹ Назад</button>
+  <h2 id="editTitle" style="margin:10px 0">Заказ</h2>
+  <div id="doneBtn"></div>
+  <div class="card">
+    <div id="ro" class="hidden"></div>
+    <div id="rw" class="hidden">
+      <label>Состав</label><input id="e_items">
+      <label>Зона</label><select id="e_zone" onchange="freeReload()"></select>
+      <label>Дата</label><input id="e_date" type="date" onchange="freeReload()">
+      <label>Время</label><select id="e_time"></select>
+      <label>Адрес / ссылка</label><input id="e_addr">
+      <label>Контакт получателя</label><input id="e_recipient">
+      <label>Контакт заказчика</label><input id="e_buyer">
+      <label>Открытка / коммент</label><input id="e_note">
+    </div>
+  </div>
+  <div id="rwActions" class="hidden">
+    <button class="btn" onclick="saveEdit()">Сохранить</button>
+    <button class="btn ghost" onclick="unplaceCur()">Снять со слота</button>
+    <button class="btn red" onclick="cancelCur()">Отменить заказ</button>
+  </div>
+  <div id="e_err" class="err"></div>
+</div>
+
+<!-- ЭКСПОРТ -->
+<div id="v-export" class="hidden">
+  <button class="btn ghost" style="width:auto;padding:8px 14px" onclick="show('map')">‹ Назад</button>
+  <h2 style="margin:10px 0">📋 Экспорт — <span id="expDate"></span></h2>
+  <pre id="expText">…</pre>
+  <button class="btn" onclick="copyExport()">Скопировать</button>
+</div>
+
+<div id="toast"></div>
+
+<script>
+var API_URL='https://buhproxy.olegbabaskin-am.workers.dev';
+var tg=window.Telegram?window.Telegram.WebApp:null;
+if(tg){ tg.ready(); tg.expand(); }
+// секрет прямой ссылки (?k=...): для открытия с рабочего стола вне Telegram
+var URL_KEY=(new URLSearchParams(location.search)).get('k')||'';
+var PIN='';                       // вводится вручную для правок
+var CAN_EDIT=false;               // true после верного ПИНа
+var MAP_DATE=null, LAST=null, CUR=null;
+var ZONES=[{k:'center',t:'Центр'},{k:'north',t:'Крайний север'},{k:'west',t:'Запад'},{k:'south',t:'Ближний юг'},{k:'camranh',t:'Камрань'}];
+
+function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function fmt(n){ n=Math.round(Number(n)||0); return n.toLocaleString('ru-RU').replace(/,/g,' ')+' ₫'; }
+function toast(m){ var t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(t._h); t._h=setTimeout(function(){ t.classList.remove('show'); },1800); }
+function show(v){ ['map','edit','export'].forEach(function(x){ document.getElementById('v-'+x).classList.toggle('hidden', x!==v); }); window.scrollTo(0,0); }
+function hh2m(s){ var m=String(s||'').match(/^(\d{1,2}):(\d{2})$/); return m?(+m[1]*60+ +m[2]):null; }
+function m2hh(x){ var h=Math.floor(x/60), m=x%60; return (h<10?'0':'')+h+':'+(m<10?'0':'')+m; }
+function vnToday(){ try{ return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Ho_Chi_Minh',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date()); }catch(e){ return new Date().toISOString().slice(0,10); } }
+function addDays(d,n){ var p=String(d).split('-'); var dt=new Date(+p[0],+p[1]-1,+p[2]); dt.setDate(dt.getDate()+n); return dt.getFullYear()+'-'+('0'+(dt.getMonth()+1)).slice(-2)+'-'+('0'+dt.getDate()).slice(-2); }
+function humanDate(d){ var wd=['вс','пн','вт','ср','чт','пт','сб']; var p=String(d).split('-'); var dt=new Date(+p[0],+p[1]-1,+p[2]); return wd[dt.getDay()]+', '+p[2]+'.'+p[1]; }
+
+async function api(action, extra){
+  var payload=Object.assign({ action:action, initData:(tg&&tg.initData)?tg.initData:'', mapKey:URL_KEY, pin:PIN }, extra||{});
+  try{
+    var r=await fetch(API_URL,{method:'POST',body:JSON.stringify(payload),cache:'no-store'});
+    return await r.json();
+  }catch(e){ return {ok:false,error:'Сеть недоступна'}; }
+}
+
+async function openMap(date, sync){
+  MAP_DATE=date||MAP_DATE||vnToday();
+  var res=await api('mapState', sync?{date:MAP_DATE,sync:1}:{date:MAP_DATE});
+  if(!res.ok){ document.getElementById('authErr').textContent=res.error||'Нет доступа'; document.getElementById('authErr').classList.remove('hidden'); return; }
+  document.getElementById('authErr').classList.add('hidden');
+  LAST=res; renderMap(res); show('map');
+}
+function refreshMap(){ openMap(MAP_DATE,true); toast('Обновляю…'); }
+function mapDay(d){ openMap(addDays(MAP_DATE||vnToday(), d)); }
+
+function renderMap(res){
+  MAP_DATE=res.date;
+  document.getElementById('mapDate').textContent=humanDate(res.date);
+  var uw=document.getElementById('unplacedWrap'), ul=document.getElementById('unplaced');
+  if(res.unplaced && res.unplaced.length){ uw.classList.remove('hidden'); ul.innerHTML='';
+    res.unplaced.forEach(function(b){ var d=document.createElement('div'); d.className='item'; d.style.cursor='pointer';
+      d.innerHTML='<div class="t">'+esc(b.items||'(без названия)')+'</div><div class="s">'+esc(b.zoneLabel||'')+' · '+(b.paid?'💰 оплачен':'⏳ не оплачен')+'</div>';
+      d.onclick=function(){ openCard(b); }; ul.appendChild(d); });
+  } else { uw.classList.add('hidden'); ul.innerHTML=''; }
+  var box=document.getElementById('list'); box.innerHTML='';
+  if(!res.day || !res.day.length){ box.innerHTML='<div class="card center muted">На этот день заказов нет</div>'; return; }
+  res.day.forEach(function(b){
+    var end=m2hh(hh2m(b.arrive)+(b.slots||2)*15);
+    var row=document.createElement('div'); row.className='item'; row.style.cursor='pointer'; row.style.borderLeft='5px solid '+(b.color||'#ccc');
+    if(b.status==='done') row.style.opacity='.55';
+    var mark=b.status==='done'?'✅':'🟡';
+    var pay=b.pay==='transfer'?'💳 перевод':(b.pay==='cash'?'💵 наличные':'');
+    var extra=(b.recipient?('<div class="s">👤 '+esc(b.recipient)+'</div>'):'')+(b.note?('<div class="s">📝 '+esc(b.note)+'</div>'):'');
+    row.innerHTML='<div class="row"><b>'+mark+' '+b.arrive+'–'+end+'</b><span class="amt">'+(b.paid?'💰':'⏳')+'</span></div>'+
+      '<div class="t">'+esc(b.items||'')+'</div>'+
+      '<div class="s">'+esc(b.zoneLabel||'')+(pay?(' · '+pay):'')+(b.addr?(' · '+esc(b.addr)):'')+'</div>'+extra;
+    row.onclick=function(){ openCard(b); }; box.appendChild(row);
+  });
+}
+
+function fillZone(sel,val){ sel.innerHTML=''; ZONES.forEach(function(z){ var o=document.createElement('option'); o.value=z.k; o.textContent=z.t; if(z.k===val)o.selected=true; sel.appendChild(o); }); }
+
+function openCard(b){
+  CUR=b;
+  document.getElementById('e_err').textContent='';
+  document.getElementById('editTitle').textContent='Заказ';
+  var end=b.arrive?m2hh(hh2m(b.arrive)+(b.slots||2)*15):'';
+  if(CAN_EDIT){
+    document.getElementById('ro').classList.add('hidden');
+    document.getElementById('rw').classList.remove('hidden');
+    document.getElementById('rwActions').classList.remove('hidden');
+    document.getElementById('e_items').value=b.items||'';
+    fillZone(document.getElementById('e_zone'), b.zone||'center');
+    document.getElementById('e_date').value=b.ddate||MAP_DATE||vnToday();
+    document.getElementById('e_addr').value=b.addr||'';
+    document.getElementById('e_recipient').value=b.recipient||'';
+    document.getElementById('e_buyer').value=b.buyer||'';
+    document.getElementById('e_note').value=b.note||'';
+    var db=document.getElementById('doneBtn');
+    if(b.status==='done') db.innerHTML='<button class="btn ghost" onclick="doneCur(0)">↩︎ Вернуть в план</button>';
+    else if(b.arrive) db.innerHTML='<button class="btn green" onclick="doneCur(1)">✅ Отметить «отвезён»</button>';
+    else db.innerHTML='';
+    freeReload(b.arrive||'');
+  } else {
+    document.getElementById('rw').classList.add('hidden');
+    document.getElementById('rwActions').classList.add('hidden');
+    document.getElementById('doneBtn').innerHTML='';
+    var ro=document.getElementById('ro'); ro.classList.remove('hidden');
+    ro.innerHTML=
+      (b.arrive?('<div><b>⏰ '+b.arrive+(end?('–'+end):'')+'</b></div>'):'<div><b>без времени</b></div>')+
+      '<div style="margin-top:6px" class="t">'+esc(b.items||'')+'</div>'+
+      '<div class="s">'+esc(b.zoneLabel||'')+' · '+(b.status==='done'?'✅ отвезён':'🟡 не отвезён')+' · '+(b.paid?'💰 оплачен':'⏳ не оплачен')+'</div>'+
+      (b.addr?('<div class="s">📍 '+esc(b.addr)+'</div>'):'')+
+      (b.recipient?('<div class="s">👤 '+esc(b.recipient)+'</div>'):'')+
+      (b.buyer?('<div class="s">🧾 '+esc(b.buyer)+'</div>'):'')+
+      (b.note?('<div class="s">📝 '+esc(b.note)+'</div>'):'');
+  }
+  show('edit');
+}
+
+async function freeReload(preselect){
+  var sel=document.getElementById('e_time'); sel.innerHTML='<option value="">— не разложен —</option>';
+  var zone=document.getElementById('e_zone').value, date=document.getElementById('e_date').value;
+  if(!date) return;
+  var res=await api('mapFree',{date:date,zone:zone,exclId:(CUR&&CUR.id)||''});
+  var free=(res&&res.ok&&res.free)?res.free:[];
+  if(preselect && free.indexOf(preselect)<0) free.unshift(preselect);
+  free.forEach(function(t){ var o=document.createElement('option'); o.value=t; o.textContent=t; if(t===preselect)o.selected=true; sel.appendChild(o); });
+}
+async function saveEdit(){
+  if(!CUR) return; var err=document.getElementById('e_err'); err.textContent='';
+  var base={ items:document.getElementById('e_items').value.trim(), zone:document.getElementById('e_zone').value,
+    addr:document.getElementById('e_addr').value.trim(), recipient:document.getElementById('e_recipient').value.trim(),
+    buyer:document.getElementById('e_buyer').value.trim(), note:document.getElementById('e_note').value.trim() };
+  if(!base.items){ err.textContent='Впиши состав'; return; }
+  var ddate=document.getElementById('e_date').value, arrive=document.getElementById('e_time').value;
+  var res=await api('mapEdit', Object.assign({id:CUR.id}, base));
+  if(res.ok && arrive) res=await api('mapMove',{id:CUR.id,ddate:ddate,arrive:arrive});
+  else if(res.ok && !arrive) res=await api('mapUnplace',{id:CUR.id});
+  if(!res.ok){ err.textContent=res.error||'Ошибка'; return; }
+  toast('Сохранено'); openMap(ddate||MAP_DATE);
+}
+async function doneCur(on){ if(!CUR) return; var res=await api(on?'mapDone':'mapUndone',{id:CUR.id}); if(res.ok){ toast(on?'Отвезён ✅':'В плане'); openMap(); } else toast(res.error||'Ошибка'); }
+async function unplaceCur(){ if(!CUR) return; var res=await api('mapUnplace',{id:CUR.id}); if(res.ok){ toast('Снято'); openMap(); } else toast(res.error||'Ошибка'); }
+async function cancelCur(){ if(!CUR) return; if(!confirm('Отменить заказ? Слот освободится.')) return; var res=await api('mapCancel',{id:CUR.id}); if(res.ok){ toast('Отменён'); openMap(); } else toast(res.error||'Ошибка'); }
+
+async function unlockEdit(){
+  PIN=document.getElementById('pin').value.trim();
+  if(!PIN){ toast('Введи ПИН'); return; }
+  var res=await api('mapState',{date:MAP_DATE||vnToday(), pinCheck:1});
+  if(res.ok && res.canEdit){ CAN_EDIT=true; document.getElementById('lockRow').classList.add('hidden'); document.getElementById('editOn').classList.remove('hidden'); toast('Правки включены'); }
+  else { PIN=''; toast('Неверный ПИН'); }
+}
+
+async function openExport(){
+  document.getElementById('expDate').textContent=humanDate(MAP_DATE||vnToday());
+  show('export');
+  var res=await api('mapState',{date:MAP_DATE||vnToday()});
+  var day=(res&&res.ok&&res.day)?res.day.slice():[];
+  day.sort(function(a,b){ return hh2m(a.arrive)-hh2m(b.arrive); });
+  var out='🚚 Доставки на '+humanDate((res&&res.date)||MAP_DATE)+'\n\n';
+  day.forEach(function(b){ var end=m2hh(hh2m(b.arrive)+(b.slots||2)*15);
+    out+='⏰ '+b.arrive+' (до ~'+end+') — '+(b.zoneLabel||'')+'\n💐 '+(b.items||'')+'\n';
+    if(b.addr) out+='📍 '+b.addr+'\n';
+    if(b.recipient) out+='👤 '+b.recipient+'\n';
+    if(b.note) out+='📝 '+b.note+'\n';
+    var money=(b.pay==='cash')?'💵 наличные':(b.pay==='transfer'?'💳 оплачено переводом':'');
+    if(money) out+=money+'\n';
+    out+='\n';
+  });
+  var unp=(res&&res.unplaced)||[];
+  if(unp.length){ out+='— ⚠️ Без времени:\n'; unp.forEach(function(b){ out+='• '+(b.items||'')+(b.zoneLabel?(' ['+b.zoneLabel+']'):'')+'\n'; }); }
+  if(!day.length && !unp.length) out+='Заказов нет.';
+  document.getElementById('expText').textContent=out;
+}
+function copyExport(){ var t=document.getElementById('expText').textContent; if(navigator.clipboard) navigator.clipboard.writeText(t).then(function(){ toast('Скопировано'); }); else toast('Выдели и скопируй вручную'); }
+
+// старт: показать поле ПИНа для правок только если открыто по прямой ссылке (?k=) — курьерам в боте ПИН не нужен, они смотрят
+if(URL_KEY){ document.getElementById('lockRow').classList.remove('hidden'); }
+openMap(vnToday(), true);
+</script>
+</body>
+</html>
