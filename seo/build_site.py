@@ -275,7 +275,8 @@ CARD_CSS = """/*MARK-CARD-CSS*/
         .filt{background:#fff;border:1px solid #f0e0e5;color:#6b6b6b;font-size:.8rem;font-weight:500;padding:.45rem .9rem;border-radius:999px;cursor:pointer;transition:all .2s;}
         .filt:hover{border-color:var(--rose);color:var(--rose);}
         .filt.active{background:var(--rose);color:#fff;border-color:var(--rose);}
-        .sort-bar{display:flex;justify-content:center;margin-bottom:1rem;}"""
+        .sort-bar{display:flex;justify-content:center;margin-bottom:1rem;}
+        .combo-note{display:inline-flex;align-items:flex-start;gap:.25rem;width:fit-content;max-width:100%;font-size:.68rem;font-weight:600;line-height:1.35;color:#a8566a;background:#fce8ee;border:1px solid #f3d3dc;border-radius:.6rem;padding:.2rem .5rem;margin-bottom:.5rem;}"""
 
 CARD_JS = """<script>/*MARK-CARD-JS*/
 (function(){
@@ -293,49 +294,60 @@ CARD_JS = """<script>/*MARK-CARD-JS*/
     sl.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40){go(dx<0?i+1:i-1);}x0=null;});
   });
   var bar=document.querySelector('.cat-filters');
+  var grid=bar?bar.nextElementSibling:null;
+  var state={cat:'',color:''};
+  var curSort='asc';
+  function price(c){var el=c.querySelector('p.font-bold');return el?parseInt(el.textContent.replace(/[^0-9]/g,'')||'0',10):0;}
+  function cats(c){return (c.getAttribute('data-cat')||'').split(/\s+/).filter(Boolean);}
+  function isCake(c){return cats(c).indexOf('cakes')>-1;}
+  function isCombo(c){return cats(c).filter(function(x){return x!=='nabory'&&x!=='prazdnik';}).length>1;}
+  // «Чистая» позиция для выбранной категории = в ней есть эта категория и это НЕ комбо-набор.
+  function isPure(c,sel){return !!sel&&cats(c).indexOf(sel)>-1&&!isCombo(c);}
+  function applySort(){
+    if(!grid)return;
+    var sel=state.cat;
+    var cards=Array.prototype.slice.call(grid.querySelectorAll('.product-card'));
+    cards.sort(function(a,b){
+      var ac=isCake(a),bc=isCake(b);
+      if(ac!==bc)return ac?1:-1;               // торты всегда в конце
+      var ap=isPure(a,sel),bp=isPure(b,sel);
+      if(ap!==bp)return ap?-1:1;               // чистые одиночные — перед комбо
+      return curSort==='desc'?price(b)-price(a):price(a)-price(b);
+    });
+    cards.forEach(function(c){grid.appendChild(c);});
+  }
+  function applyFilter(){
+    document.querySelectorAll('.product-card').forEach(function(c){
+      var dc=' '+(c.getAttribute('data-cat')||'')+' ';
+      var ok=(state.cat===''||dc.indexOf(' '+state.cat+' ')>-1)&&(state.color===''||c.getAttribute('data-color')===state.color);
+      c.style.display=ok?'':'none';
+    });
+  }
   if(bar){
-    var state={cat:'',color:''};
     bar.querySelectorAll('.filt').forEach(function(b){
       b.addEventListener('click',function(){
         var g=b.parentNode.getAttribute('data-filter');
         state[g]=b.getAttribute('data-val');
         b.parentNode.querySelectorAll('.filt').forEach(function(x){x.classList.remove('active');});
         b.classList.add('active');
-        document.querySelectorAll('.product-card').forEach(function(c){
-          var dc=' '+(c.getAttribute('data-cat')||'')+' ';
-          var ok=(state.cat===''||dc.indexOf(' '+state.cat+' ')>-1)&&(state.color===''||c.getAttribute('data-color')===state.color);
-          c.style.display=ok?'':'none';
-        });
+        applyFilter();
+        applySort();                            // пере-сортировка при смене фильтра
       });
     });
-    var _hf=(location.hash||'').replace('#','');if(_hf){var _tf=bar.querySelector('.filt-group[data-filter="cat"] .filt[data-val="'+_hf+'"]');if(_tf)_tf.click();}
   }
-  (function(){
-    var cf=document.querySelector('.cat-filters'); if(!cf) return;
-    var grid=cf.nextElementSibling; if(!grid) return;
-    function price(c){var el=c.querySelector('p.font-bold');return el?parseInt(el.textContent.replace(/[^0-9]/g,'')||'0',10):0;}
-    function isCake(c){return (' '+(c.getAttribute('data-cat')||'')+' ').indexOf(' cakes ')>-1;}
-    function sortBy(dir){
-      var cards=Array.prototype.slice.call(grid.querySelectorAll('.product-card'));
-      cards.sort(function(a,b){
-        var ac=isCake(a),bc=isCake(b);
-        if(ac!==bc)return ac?1:-1;
-        return dir==='desc'?price(b)-price(a):price(a)-price(b);
+  var sg=document.querySelector('.sort-bar .filt-group[data-filter="sort"]');
+  if(sg){
+    sg.querySelectorAll('.filt').forEach(function(b){
+      b.addEventListener('click',function(){
+        sg.querySelectorAll('.filt').forEach(function(x){x.classList.remove('active');});
+        b.classList.add('active');
+        curSort=b.getAttribute('data-val');
+        applySort();
       });
-      cards.forEach(function(c){grid.appendChild(c);});
-    }
-    sortBy('asc');
-    var sg=document.querySelector('.sort-bar .filt-group[data-filter="sort"]');
-    if(sg){
-      sg.querySelectorAll('.filt').forEach(function(b){
-        b.addEventListener('click',function(){
-          sg.querySelectorAll('.filt').forEach(function(x){x.classList.remove('active');});
-          b.classList.add('active');
-          sortBy(b.getAttribute('data-val'));
-        });
-      });
-    }
-  })();
+    });
+  }
+  applySort();
+  if(bar){var _hf=(location.hash||'').replace('#','');if(_hf){var _tf=bar.querySelector('.filt-group[data-filter="cat"] .filt[data-val="'+_hf+'"]');if(_tf)_tf.click();}}
 })();
 </script>"""
 
@@ -678,6 +690,7 @@ def product_card(p, lang, base, t):
                 </div>
                 <a href="{url}" class="p-5 flex flex-col flex-grow">
                     <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">{html.escape(name)}</h3>
+                    {combo_badge_html(product_cat(p), lang)}
                     <p class="text-stone-600 text-xs mb-3 flex-grow">{html.escape(desc)}</p>
                     <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">{html.escape(price_loc(p['price'], lang))}</p>
                     <p class="text-stone-500 text-xs mb-4">{html.escape(sub_loc(p['price_sub'], lang, p['price']))}</p>
@@ -701,6 +714,27 @@ def gallery(p, base, alt):
             {slides}
             {nav}
         </div>'''
+
+COMBO_PARTS = {
+    "ru": {"r25": "25 роз", "r51": "51 роза", "r101": "101 роза", "balloons": "шары", "cakes": "торт", "mixed": "сборный букет"},
+    "en": {"r25": "25 roses", "r51": "51 roses", "r101": "101 roses", "balloons": "balloons", "cakes": "cake", "mixed": "mixed bouquet"},
+    "ko": {"r25": "장미 25송이", "r51": "장미 51송이", "r101": "장미 101송이", "balloons": "풍선", "cakes": "케이크", "mixed": "혼합 부케"},
+}
+COMBO_LABEL = {"ru": "В наборе", "en": "Includes", "ko": "구성"}
+
+def is_combo(cat):
+    """Комбо = товар входит в несколько категорий (напр. розы + шары)."""
+    return len([c for c in cat.split() if c not in ("nabory", "prazdnik")]) > 1
+
+def combo_badge_html(cat, lang):
+    if not is_combo(cat):
+        return ""
+    parts = [COMBO_PARTS.get(lang, COMBO_PARTS["ru"]).get(c) for c in cat.split()]
+    parts = [x for x in parts if x]
+    if not parts:
+        return ""
+    txt = COMBO_LABEL.get(lang, COMBO_LABEL["ru"]) + ": " + " · ".join(parts)
+    return f'<p class="combo-note">🎁 {html.escape(txt)}</p>'
 
 def format_desc_html(desc, cat, lang):
     """Красиво разбивает описание: строки по предложениям, список «в наборе» для комплектов,
