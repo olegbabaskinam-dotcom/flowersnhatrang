@@ -83,13 +83,36 @@ function renderTabs() {
   });
 }
 
+/* ---- комбо: пометка «🎁 В наборе» + «чистые вперёд» (как на сайте, Каталог 4.2) ---- */
+var COMBO_PARTS = { r25: "25 роз", r51: "51 роза", r101: "101 роза", balloons: "шары", cakes: "торт", mixed: "сборный букет" };
+function catList(p) { return (p.cats || []); }
+function isCombo(p) { return catList(p).filter(function (c) { return c !== "nabory" && c !== "prazdnik"; }).length > 1; }
+function isPure(p, sel) { return !!sel && sel !== "all" && catList(p).indexOf(sel) >= 0 && !isCombo(p); }
+function comboBadge(p) {
+  if (!isCombo(p)) return "";
+  var parts = catList(p).map(function (c) { return COMBO_PARTS[c]; }).filter(Boolean);
+  if (!parts.length) return "";
+  return '<div class="combo-note">🎁 ' + esc("В наборе: " + parts.join(" · ")) + '</div>';
+}
+
 /* ---- карточки товаров ---- */
 function filtered() {
-  return PRODUCTS.filter(function (p) {
+  var list = PRODUCTS.filter(function (p) {
     if (activeCat !== "all" && p.cats.indexOf(activeCat) < 0) return false;
     if (searchQ && p.name.toLowerCase().indexOf(searchQ) < 0) return false;
     return true;
   });
+  // В разделе конкретной категории: сначала чистые одиночные позиции, потом комбо-наборы.
+  if (activeCat !== "all") {
+    list = list.map(function (p, i) { return { p: p, i: i }; });
+    list.sort(function (a, b) {
+      var ap = isPure(a.p, activeCat), bp = isPure(b.p, activeCat);
+      if (ap !== bp) return ap ? -1 : 1;
+      return a.i - b.i; // стабильный порядок внутри групп (как в products.json)
+    });
+    list = list.map(function (x) { return x.p; });
+  }
+  return list;
 }
 function renderGrid() {
   var grid = document.getElementById("grid"), empty = document.getElementById("gridEmpty");
@@ -107,7 +130,7 @@ function renderGrid() {
     card.innerHTML =
       '<div class="ph"><img src="' + imgs[0] + '" alt="" loading="lazy">' + nav + dots + '</div>' +
       '<div class="bd">' +
-        '<h3>' + esc(p.name) + '</h3>' +
+        '<h3>' + esc(p.name) + '</h3>' + comboBadge(p) +
         '<div class="pr">' + money(p.price_vnd) + '</div>' +
         '<div class="sub">' + esc(p.price_sub) + '</div>' +
         '<div class="act"></div>' +
