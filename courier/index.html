@@ -177,7 +177,17 @@ function renderMap(res){
       '<div class="t">'+esc(b.items||'')+'</div>'+
       '<div class="s">'+esc(b.zoneLabel||'')+(pay?(' · '+pay):'')+(b.addr?(' · '+esc(b.addr)):'')+'</div>'+extra;
     row.onclick=function(){ openCard(b); }; box.appendChild(row);
+    if(b.status!=='done'){
+      var qb=document.createElement('button'); qb.textContent='✅ отвезён (без фото)';
+      qb.className='btn green'; qb.style.cssText='width:auto;margin:6px 0 2px;padding:7px 14px;font-size:13px';
+      qb.onclick=(function(bk){ return function(e){ e.stopPropagation(); quickDeliver(bk); }; })(b);
+      box.appendChild(qb);
+    }
   });
+}
+async function quickDeliver(b){
+  var res=await api('mapDeliver',{id:b.id, amount:0, comment:''});
+  if(res.ok){ toast('Отвезён ✅'); openMap(); } else toast(res.error||'Ошибка');
 }
 
 function fillZone(sel,val){ sel.innerHTML=''; ZONES.forEach(function(z){ var o=document.createElement('option'); o.value=z.k; o.textContent=z.t; if(z.k===val)o.selected=true; sel.appendChild(o); }); }
