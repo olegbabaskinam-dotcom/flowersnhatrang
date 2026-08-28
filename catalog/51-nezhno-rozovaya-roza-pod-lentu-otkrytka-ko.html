@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>리본으로 묶은 연핑크 장미 51송이 + 카드 — 나트랑 꽃배달</title>
-    <meta name="description" content="리본으로 묶은 연핑크 장미 51송이 + 카드. 주문 다음 날부터 나트랑 배달. 가격 1 000 000 동. 온라인·카카오톡·인스타그램 주문.">
+    <meta name="description" content="리본으로 묶은 연핑크 장미 51송이 + 카드. 가격 1 000 000 동. 나트랑 시내 무료 배달, 온라인 주문은 다음 날부터; 카카오톡 상담.">
     <meta property="og:title" content="리본으로 묶은 연핑크 장미 51송이 + 카드 — 나트랑 꽃배달">
-    <meta property="og:description" content="리본으로 묶은 연핑크 장미 51송이 + 카드. 주문 다음 날부터 나트랑 배달. 가격 1 000 000 동. 온라인·카카오톡·인스타그램 주문.">
+    <meta property="og:description" content="리본으로 묶은 연핑크 장미 51송이 + 카드. 가격 1 000 000 동. 나트랑 시내 무료 배달, 온라인 주문은 다음 날부터; 카카오톡 상담.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://flowers-nha-trang.online/img/site/og-default.jpg">
     <meta property="og:image:width" content="1200">
@@ -15,7 +15,7 @@
     <meta property="og:site_name" content="NhaTrang Flowers">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="리본으로 묶은 연핑크 장미 51송이 + 카드 — 나트랑 꽃배달">
-    <meta name="twitter:description" content="리본으로 묶은 연핑크 장미 51송이 + 카드. 주문 다음 날부터 나트랑 배달. 가격 1 000 000 동. 온라인·카카오톡·인스타그램 주문.">
+    <meta name="twitter:description" content="리본으로 묶은 연핑크 장미 51송이 + 카드. 가격 1 000 000 동. 나트랑 시내 무료 배달, 온라인 주문은 다음 날부터; 카카오톡 상담.">
     <meta name="twitter:image" content="https://flowers-nha-trang.online/img/site/og-default.jpg">
     <link rel="icon" href="../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
@@ -94,17 +94,20 @@
         .gallery-slider{height:24rem;}
         @media(min-width:768px){.gallery-slider{height:30rem;}}
         .gallery-slider .pcard-slide{object-fit:contain;padding:.75rem;}
+        .gallery-slider{height:24rem;}
+        @media(min-width:768px){.gallery-slider{height:30rem;}}
+        .gallery-slider .pcard-slide{object-fit:contain;padding:.75rem;}
         .gallery-slider .pcard-arrow{opacity:1;width:2.5rem;height:2.5rem;font-size:1.6rem;background:rgba(255,255,255,.96);box-shadow:0 2px 8px rgba(0,0,0,.22);z-index:5;}
         .gallery-slider .pcard-dot{width:.45rem;height:.45rem;}
-        .pcard-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.9);border:none;width:2rem;height:2rem;border-radius:999px;font-size:1.2rem;line-height:1;color:#a8566a;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;z-index:2;box-shadow:0 1px 4px rgba(0,0,0,.12);}
-        .pcard-slider:hover .pcard-arrow{opacity:1;}
+        .pcard-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.96);border:none;width:2.5rem;height:2.5rem;border-radius:999px;font-size:1.6rem;line-height:1;color:#a8566a;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:1;transition:opacity .2s,background .2s,transform .15s;z-index:5;box-shadow:0 2px 8px rgba(0,0,0,.22);}
+        .pcard-arrow:hover{opacity:1;background:#fff;}
         .pcard-prev{left:.5rem;} .pcard-next{right:.5rem;}
-        .pcard-dots{position:absolute;bottom:.55rem;left:0;right:0;display:flex;gap:.3rem;justify-content:center;z-index:2;}
-        .pcard-dot{width:.4rem;height:.4rem;border-radius:999px;background:rgba(255,255,255,.55);transition:background .2s;}
+        .pcard-dots{position:absolute;bottom:.55rem;left:0;right:0;display:flex;gap:.3rem;justify-content:center;z-index:3;}
+        .pcard-dot{width:.45rem;height:.45rem;border-radius:999px;background:rgba(255,255,255,.6);box-shadow:0 0 2px rgba(0,0,0,.3);transition:background .2s;}
         .pcard-dot.active{background:#fff;}
-        @media (max-width:767px){.pcard-arrow{opacity:1;}}
         .cat-filters{display:flex;flex-direction:column;gap:.75rem;align-items:center;margin-bottom:2rem;}
         .filt-group{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;}
+        .filt-group.color-hidden{display:none;}
         .filt{background:#fff;border:1px solid #f0e0e5;color:#6b6b6b;font-size:.8rem;font-weight:500;padding:.45rem .9rem;border-radius:999px;cursor:pointer;transition:all .2s;}
         .filt:hover{border-color:var(--rose);color:var(--rose);}
         .filt.active{background:var(--rose);color:#fff;border-color:var(--rose);}
@@ -153,7 +156,7 @@
     <section class="max-w-5xl mx-auto px-6 py-8 grid md:grid-cols-2 gap-10 items-start">
         <div class="reveal">
         <div class="pcard-slider gallery-slider rounded-2xl border border-stone-100">
-            <img src="../img/products/51-nezhno-rozovaya-roza-pod-lentu-otkrytka/1.webp" alt="리본 연핑크 장미 51송이 카드 나트랑 배달" loading="eager" class="pcard-slide active" width="600" height="800" decoding="async"><img src="../img/products/51-nezhno-rozovaya-roza-pod-lentu-otkrytka/2.webp" alt="리본 연핑크 장미 51송이 카드 나트랑 배달 2" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/51-nezhno-rozovaya-roza-pod-lentu-otkrytka/3.webp" alt="리본 연핑크 장미 51송이 카드 나트랑 배달 3" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/51-nezhno-rozovaya-roza-pod-lentu-otkrytka/4.webp" alt="리본 연핑크 장미 51송이 카드 나트랑 배달 4" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/51-nezhno-rozovaya-roza-pod-lentu-otkrytka/5.webp" alt="리본 연핑크 장미 51송이 카드 나트랑 배달 5" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/51-nezhno-rozovaya-roza-pod-lentu-otkrytka/6.webp" alt="리본 연핑크 장미 51송이 카드 나트랑 배달 6" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/51-nezhno-rozovaya-roza-pod-lentu-otkrytka/7.webp" alt="리본 연핑크 장미 51송이 카드 나트랑 배달 7" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async">
+            <img src="../img/products/51-nezhno-rozovaya-roza-pod-lentu-otkrytka/1.webp" alt="리본 연핑크 장미 51송이 카드 나트랑 배달 1" loading="eager" class="pcard-slide active" width="600" height="800" decoding="async"><img src="../img/products/51-nezhno-rozovaya-roza-pod-lentu-otkrytka/2.webp" alt="리본 연핑크 장미 51송이 카드 나트랑 배달 2" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/51-nezhno-rozovaya-roza-pod-lentu-otkrytka/3.webp" alt="리본 연핑크 장미 51송이 카드 나트랑 배달 3" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/51-nezhno-rozovaya-roza-pod-lentu-otkrytka/4.webp" alt="리본 연핑크 장미 51송이 카드 나트랑 배달 4" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/51-nezhno-rozovaya-roza-pod-lentu-otkrytka/5.webp" alt="리본 연핑크 장미 51송이 카드 나트랑 배달 5" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/51-nezhno-rozovaya-roza-pod-lentu-otkrytka/6.webp" alt="리본 연핑크 장미 51송이 카드 나트랑 배달 6" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/51-nezhno-rozovaya-roza-pod-lentu-otkrytka/7.webp" alt="리본 연핑크 장미 51송이 카드 나트랑 배달 7" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async">
             <button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots"><span class="pcard-dot active"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span></div>
         </div>
         </div>
@@ -163,7 +166,7 @@
                 <span class="badge"><svg viewBox="0 0 512 512" fill="currentColor" width="1em" height="1em"><path d="M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"/></svg> 주문 다음 날부터</span>
             </div>
             <h1 class="font-serif text-3xl md:text-4xl font-bold mb-4 leading-tight" style="color:#1a1a1a;">리본으로 묶은 연핑크 장미 51송이 + 카드</h1>
-            <p class="text-stone-600 mb-6 leading-relaxed">리본으로 묶은 연핑크 장미 51송이의 우아한 모노 부케에 메시지 카드 — 파스텔 톤의 품격 있고 로맨틱한 선물. 크고 신선한 봉오리, 깔끔한 스타일링; 생일, 기념일, 고백 또는 이유 없이도 완벽. 나트랑 주문 다음 날부터 배달, 요청 시 카드 동봉.</p>
+            <div class="text-stone-600 mb-6 leading-relaxed"><span style="display:block;margin-bottom:8px">💐 리본으로 묶은 연핑크 장미 51송이의 우아한 모노 부케에 메시지 카드 — 파스텔 톤의 품격 있고 로맨틱한 선물</span><span style="display:block;margin-bottom:8px">🎁 크고 신선한 봉오리, 깔끔한 스타일링; 생일, 기념일, 고백 또는 이유 없이도 완벽</span><span style="display:block;margin-bottom:8px">🚚 나트랑 주문 다음 날부터 배달, 요청 시 카드 동봉</span></div>
             <div class="price-box mb-6">
                 <p class="font-bold text-3xl mb-1" style="color:#1a1a1a;">1 000 000 동</p>
                 <p class="text-stone-500 text-sm">≈ $40 · 55 000 원</p>
@@ -380,9 +383,14 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"], a[href*="kakao"], 
     var cf=document.querySelector('.cat-filters'); if(!cf) return;
     var grid=cf.nextElementSibling; if(!grid) return;
     function price(c){var el=c.querySelector('p.font-bold');return el?parseInt(el.textContent.replace(/[^0-9]/g,'')||'0',10):0;}
+    function isCake(c){return (' '+(c.getAttribute('data-cat')||'')+' ').indexOf(' cakes ')>-1;}
     function sortBy(dir){
       var cards=Array.prototype.slice.call(grid.querySelectorAll('.product-card'));
-      cards.sort(function(a,b){return dir==='desc'?price(b)-price(a):price(a)-price(b);});
+      cards.sort(function(a,b){
+        var ac=isCake(a),bc=isCake(b);
+        if(ac!==bc)return ac?1:-1;
+        return dir==='desc'?price(b)-price(a):price(a)-price(b);
+      });
       cards.forEach(function(c){grid.appendChild(c);});
     }
     sortBy('asc');

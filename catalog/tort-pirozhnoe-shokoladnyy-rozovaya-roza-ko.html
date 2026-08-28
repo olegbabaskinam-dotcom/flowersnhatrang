@@ -3,10 +3,10 @@
 <head><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>핑크 크림 장미 초콜릿 케이크 (1인용) — 나트랑 꽃배달</title>
-    <meta name="description" content="핑크 크림 장미 초콜릿 케이크 (1인용). 주문 다음 날부터 나트랑 배달. 가격 100 000 동. 온라인·카카오톡·인스타그램 주문.">
-    <meta property="og:title" content="핑크 크림 장미 초콜릿 케이크 (1인용) — 나트랑 꽃배달">
-    <meta property="og:description" content="핑크 크림 장미 초콜릿 케이크 (1인용). 주문 다음 날부터 나트랑 배달. 가격 100 000 동. 온라인·카카오톡·인스타그램 주문.">
+    <title>핑크 크림 장미 초콜릿 케이크 (1인용) — 나트랑 케이크 배달</title>
+    <meta name="description" content="핑크 크림 장미 초콜릿 케이크 (1인용). 가격 100 000 동. 나트랑 시내 무료 배달, 온라인 주문은 다음 날부터; 카카오톡 상담.">
+    <meta property="og:title" content="핑크 크림 장미 초콜릿 케이크 (1인용) — 나트랑 케이크 배달">
+    <meta property="og:description" content="핑크 크림 장미 초콜릿 케이크 (1인용). 가격 100 000 동. 나트랑 시내 무료 배달, 온라인 주문은 다음 날부터; 카카오톡 상담.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://flowers-nha-trang.online/img/site/og-default.jpg">
     <meta property="og:image:width" content="1200">
@@ -14,8 +14,8 @@
     <meta property="og:url" content="https://flowers-nha-trang.online/catalog/tort-pirozhnoe-shokoladnyy-rozovaya-roza-ko.html">
     <meta property="og:site_name" content="NhaTrang Flowers">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="핑크 크림 장미 초콜릿 케이크 (1인용) — 나트랑 꽃배달">
-    <meta name="twitter:description" content="핑크 크림 장미 초콜릿 케이크 (1인용). 주문 다음 날부터 나트랑 배달. 가격 100 000 동. 온라인·카카오톡·인스타그램 주문.">
+    <meta name="twitter:title" content="핑크 크림 장미 초콜릿 케이크 (1인용) — 나트랑 케이크 배달">
+    <meta name="twitter:description" content="핑크 크림 장미 초콜릿 케이크 (1인용). 가격 100 000 동. 나트랑 시내 무료 배달, 온라인 주문은 다음 날부터; 카카오톡 상담.">
     <meta name="twitter:image" content="https://flowers-nha-trang.online/img/site/og-default.jpg">
     <link rel="icon" href="../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
@@ -94,17 +94,20 @@
         .gallery-slider{height:24rem;}
         @media(min-width:768px){.gallery-slider{height:30rem;}}
         .gallery-slider .pcard-slide{object-fit:contain;padding:.75rem;}
+        .gallery-slider{height:24rem;}
+        @media(min-width:768px){.gallery-slider{height:30rem;}}
+        .gallery-slider .pcard-slide{object-fit:contain;padding:.75rem;}
         .gallery-slider .pcard-arrow{opacity:1;width:2.5rem;height:2.5rem;font-size:1.6rem;background:rgba(255,255,255,.96);box-shadow:0 2px 8px rgba(0,0,0,.22);z-index:5;}
         .gallery-slider .pcard-dot{width:.45rem;height:.45rem;}
-        .pcard-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.9);border:none;width:2rem;height:2rem;border-radius:999px;font-size:1.2rem;line-height:1;color:#a8566a;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;z-index:2;box-shadow:0 1px 4px rgba(0,0,0,.12);}
-        .pcard-slider:hover .pcard-arrow{opacity:1;}
+        .pcard-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.96);border:none;width:2.5rem;height:2.5rem;border-radius:999px;font-size:1.6rem;line-height:1;color:#a8566a;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:1;transition:opacity .2s,background .2s,transform .15s;z-index:5;box-shadow:0 2px 8px rgba(0,0,0,.22);}
+        .pcard-arrow:hover{opacity:1;background:#fff;}
         .pcard-prev{left:.5rem;} .pcard-next{right:.5rem;}
-        .pcard-dots{position:absolute;bottom:.55rem;left:0;right:0;display:flex;gap:.3rem;justify-content:center;z-index:2;}
-        .pcard-dot{width:.4rem;height:.4rem;border-radius:999px;background:rgba(255,255,255,.55);transition:background .2s;}
+        .pcard-dots{position:absolute;bottom:.55rem;left:0;right:0;display:flex;gap:.3rem;justify-content:center;z-index:3;}
+        .pcard-dot{width:.45rem;height:.45rem;border-radius:999px;background:rgba(255,255,255,.6);box-shadow:0 0 2px rgba(0,0,0,.3);transition:background .2s;}
         .pcard-dot.active{background:#fff;}
-        @media (max-width:767px){.pcard-arrow{opacity:1;}}
         .cat-filters{display:flex;flex-direction:column;gap:.75rem;align-items:center;margin-bottom:2rem;}
         .filt-group{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;}
+        .filt-group.color-hidden{display:none;}
         .filt{background:#fff;border:1px solid #f0e0e5;color:#6b6b6b;font-size:.8rem;font-weight:500;padding:.45rem .9rem;border-radius:999px;cursor:pointer;transition:all .2s;}
         .filt:hover{border-color:var(--rose);color:var(--rose);}
         .filt.active{background:var(--rose);color:#fff;border-color:var(--rose);}
@@ -112,7 +115,7 @@
     </style>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"핑크 크림 장미 초콜릿 케이크 (1인용)","image":"https://flowers-nha-trang.online/img/products/tort-pirozhnoe-shokoladnyy-rozovaya-roza/1.webp","description":"화이트 크림과 초콜릿 드립, 핑크 톤의 큼직한 크림 장미로 장식한 부드러운 초콜릿 케이크 — 작지만 임팩트 있는 디저트. 1인 분량, 스푼 포함, 예쁜 선물 상자에 담겨 배달과 선물에 편리합니다. 갓 구운 신선함, 나트랑 주문 다음 날부터 배달","brand":{"@type":"Brand","name":"NhaTrang Flowers"},"offers":{"@type":"Offer","price":"100000","priceCurrency":"VND","availability":"https://schema.org/InStock","url":"https://flowers-nha-trang.online/catalog/tort-pirozhnoe-shokoladnyy-rozovaya-roza-ko.html"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"호텔로 배달 가능한가요?","acceptedAnswer":{"@type":"Answer","text":"네, Diamond Bay을 포함한 나트랑·깜라인 호텔로 배달합니다. 기본적으로 프런트에 전달하고, 엘리베이터가 카드 키 없이 작동하면 객실까지 올려드립니다."}},{"@type":"Question","name":"가장 빠른 배달은 언제인가요?","acceptedAnswer":{"@type":"Answer","text":"온라인 배달은 주문 다음 날부터 가능하며, 배달 시간은 06:00~21:00입니다. 나트랑 시내는 무료입니다."}},{"@type":"Question","name":"결제는 어떻게 하나요?","acceptedAnswer":{"@type":"Answer","text":"수령 시 현금 또는 암호화폐 송금으로 결제할 수 있습니다. 카카오톡으로 문의해 주세요."}}]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"홈","item":"https://flowers-nha-trang.online/"},{"@type":"ListItem","position":2,"name":"카탈로그","item":"https://flowers-nha-trang.online/catalog-ko.html"},{"@type":"ListItem","position":3,"name":"핑크 크림 장미 초콜릿 케이크 (1인용)","item":"https://flowers-nha-trang.online/catalog/tort-pirozhnoe-shokoladnyy-rozovaya-roza-ko.html"}]}</script>    <div style="background:#fce8ee; color:#a8566a;" class="text-xs py-2 text-center tracking-widest font-medium uppercase">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"핑크 크림 장미 초콜릿 케이크 (1인용)","image":"https://flowers-nha-trang.online/img/products/tort-pirozhnoe-shokoladnyy-rozovaya-roza/1.webp","description":"화이트 크림과 초콜릿 드립, 핑크 톤의 큼직한 크림 장미로 장식한 부드러운 초콜릿 케이크 — 작지만 임팩트 있는 디저트. 1인 분량, 스푼 포함, 예쁜 선물 상자에 담겨 배달과 선물에 편리합니다. 갓 구운 신선함, 나트랑 주문 다음 날부터 배달","brand":{"@type":"Brand","name":"NhaTrang Flowers"},"offers":{"@type":"Offer","price":"100000","priceCurrency":"VND","availability":"https://schema.org/InStock","url":"https://flowers-nha-trang.online/catalog/tort-pirozhnoe-shokoladnyy-rozovaya-roza-ko.html"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"호텔로 케이크 배달이 가능한가요?","acceptedAnswer":{"@type":"Answer","text":"네, Diamond Bay을 포함한 나트랑·깜라인 호텔로 케이크를 배달합니다. 기본적으로 주문을 프런트에 전달하고, 엘리베이터가 카드 키 없이 작동하면 객실까지 올려드립니다."}},{"@type":"Question","name":"가장 빠른 배달은 언제인가요?","acceptedAnswer":{"@type":"Answer","text":"온라인 배달은 주문 다음 날부터 가능하며, 배달 시간은 06:00~21:00입니다. 나트랑 시내는 무료입니다."}},{"@type":"Question","name":"결제는 어떻게 하나요?","acceptedAnswer":{"@type":"Answer","text":"수령 시 현금 또는 암호화폐 송금으로 결제할 수 있습니다. 카카오톡으로 문의해 주세요."}}]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"홈","item":"https://flowers-nha-trang.online/"},{"@type":"ListItem","position":2,"name":"카탈로그","item":"https://flowers-nha-trang.online/catalog-ko.html"},{"@type":"ListItem","position":3,"name":"핑크 크림 장미 초콜릿 케이크 (1인용)","item":"https://flowers-nha-trang.online/catalog/tort-pirozhnoe-shokoladnyy-rozovaya-roza-ko.html"}]}</script>    <div style="background:#fce8ee; color:#a8566a;" class="text-xs py-2 text-center tracking-widest font-medium uppercase">
         NhaTrang Flowers
     </div>
     <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-stone-100">
@@ -153,17 +156,17 @@
     <section class="max-w-5xl mx-auto px-6 py-8 grid md:grid-cols-2 gap-10 items-start">
         <div class="reveal">
         <div class="pcard-slider gallery-slider rounded-2xl border border-stone-100">
-            <img src="../img/products/tort-pirozhnoe-shokoladnyy-rozovaya-roza/1.webp" alt="핑크 크림 장미 초콜릿 케이크 나트랑 배달" loading="eager" class="pcard-slide active" width="900" height="1200" decoding="async"><img src="../img/products/tort-pirozhnoe-shokoladnyy-rozovaya-roza/2.webp" alt="핑크 크림 장미 초콜릿 케이크 나트랑 배달 2" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-pirozhnoe-shokoladnyy-rozovaya-roza/3.webp" alt="핑크 크림 장미 초콜릿 케이크 나트랑 배달 3" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-pirozhnoe-shokoladnyy-rozovaya-roza/4.webp" alt="핑크 크림 장미 초콜릿 케이크 나트랑 배달 4" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-pirozhnoe-shokoladnyy-rozovaya-roza/5.webp" alt="핑크 크림 장미 초콜릿 케이크 나트랑 배달 5" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-pirozhnoe-shokoladnyy-rozovaya-roza/6.webp" alt="핑크 크림 장미 초콜릿 케이크 나트랑 배달 6" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-pirozhnoe-shokoladnyy-rozovaya-roza/7.webp" alt="핑크 크림 장미 초콜릿 케이크 나트랑 배달 7" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async">
+            <img src="../img/products/tort-pirozhnoe-shokoladnyy-rozovaya-roza/1.webp" alt="핑크 크림 장미 초콜릿 케이크 나트랑 배달 1" loading="eager" class="pcard-slide active" width="900" height="1200" decoding="async"><img src="../img/products/tort-pirozhnoe-shokoladnyy-rozovaya-roza/2.webp" alt="핑크 크림 장미 초콜릿 케이크 나트랑 배달 2" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-pirozhnoe-shokoladnyy-rozovaya-roza/3.webp" alt="핑크 크림 장미 초콜릿 케이크 나트랑 배달 3" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-pirozhnoe-shokoladnyy-rozovaya-roza/4.webp" alt="핑크 크림 장미 초콜릿 케이크 나트랑 배달 4" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-pirozhnoe-shokoladnyy-rozovaya-roza/5.webp" alt="핑크 크림 장미 초콜릿 케이크 나트랑 배달 5" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-pirozhnoe-shokoladnyy-rozovaya-roza/6.webp" alt="핑크 크림 장미 초콜릿 케이크 나트랑 배달 6" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-pirozhnoe-shokoladnyy-rozovaya-roza/7.webp" alt="핑크 크림 장미 초콜릿 케이크 나트랑 배달 7" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async">
             <button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots"><span class="pcard-dot active"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span></div>
         </div>
         </div>
         <div class="reveal flex flex-col">
             <div class="flex gap-2 mb-4">
-                <span class="badge"><svg viewBox="0 0 512 512" fill="currentColor" width="1em" height="1em"><path d="M256 96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm0 320a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zM128 256a64 64 0 1 1 0 128 64 64 0 1 1 0-128zm256 0a64 64 0 1 1 0 128 64 64 0 1 1 0-128zM256 224a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/><path d="M192 96a64 64 0 1 1 128 0A64 64 0 1 1 192 96z"/></svg> 신선한 꽃</span>
+                <span class="badge"><svg viewBox="0 0 512 512" fill="currentColor" width="1em" height="1em"><path d="M256 96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm0 320a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zM128 256a64 64 0 1 1 0 128 64 64 0 1 1 0-128zm256 0a64 64 0 1 1 0 128 64 64 0 1 1 0-128zM256 224a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/><path d="M192 96a64 64 0 1 1 128 0A64 64 0 1 1 192 96z"/></svg> 갓 구운 케이크</span>
                 <span class="badge"><svg viewBox="0 0 512 512" fill="currentColor" width="1em" height="1em"><path d="M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"/></svg> 주문 다음 날부터</span>
             </div>
             <h1 class="font-serif text-3xl md:text-4xl font-bold mb-4 leading-tight" style="color:#1a1a1a;">핑크 크림 장미 초콜릿 케이크 (1인용)</h1>
-            <p class="text-stone-600 mb-6 leading-relaxed">화이트 크림과 초콜릿 드립, 핑크 톤의 큼직한 크림 장미로 장식한 부드러운 초콜릿 케이크 — 작지만 임팩트 있는 디저트. 1인 분량, 스푼 포함, 예쁜 선물 상자에 담겨 배달과 선물에 편리합니다. 갓 구운 신선함, 나트랑 주문 다음 날부터 배달.</p>
+            <div class="text-stone-600 mb-6 leading-relaxed"><span style="display:block;margin-bottom:8px">🎂 화이트 크림과 초콜릿 드립, 핑크 톤의 큼직한 크림 장미로 장식한 부드러운 초콜릿 케이크 — 작지만 임팩트 있는 디저트</span><span style="display:block;margin-bottom:8px">🚚 1인 분량, 스푼 포함, 예쁜 선물 상자에 담겨 배달과 선물에 편리합니다</span><span style="display:block;margin-bottom:8px">🚚 갓 구운 신선함, 나트랑 주문 다음 날부터 배달</span></div>
             <div class="price-box mb-6">
                 <p class="font-bold text-3xl mb-1" style="color:#1a1a1a;">100 000 동</p>
                 <p class="text-stone-500 text-sm">≈ $4 · 6 000 원</p>
@@ -211,7 +214,7 @@
 
     <section class="max-w-5xl mx-auto px-6 py-6">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div class="feature reveal"><div class="icon-badge mx-auto mb-3"><svg viewBox="0 0 512 512" fill="currentColor" width="1em" height="1em"><path d="M256 96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm0 320a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zM128 256a64 64 0 1 1 0 128 64 64 0 1 1 0-128zm256 0a64 64 0 1 1 0 128 64 64 0 1 1 0-128zM256 224a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/><path d="M192 96a64 64 0 1 1 128 0A64 64 0 1 1 192 96z"/></svg></div><h3 class="font-bold text-sm mb-1" style="color:#1a1a1a;">신선함</h3><p class="text-stone-500 text-xs leading-relaxed">배송 당일에 꽃다발을 제작합니다</p></div>
+            <div class="feature reveal"><div class="icon-badge mx-auto mb-3"><svg viewBox="0 0 512 512" fill="currentColor" width="1em" height="1em"><path d="M256 96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm0 320a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zM128 256a64 64 0 1 1 0 128 64 64 0 1 1 0-128zm256 0a64 64 0 1 1 0 128 64 64 0 1 1 0-128zM256 224a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/><path d="M192 96a64 64 0 1 1 128 0A64 64 0 1 1 192 96z"/></svg></div><h3 class="font-bold text-sm mb-1" style="color:#1a1a1a;">신선함</h3><p class="text-stone-500 text-xs leading-relaxed">배송일에 맞춰 케이크를 준비합니다</p></div>
             <div class="feature reveal"><div class="icon-badge mx-auto mb-3"><svg viewBox="0 0 512 512" fill="currentColor" width="1em" height="1em"><path d="M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"/></svg></div><h3 class="font-bold text-sm mb-1" style="color:#1a1a1a;">예약 배송</h3><p class="text-stone-500 text-xs leading-relaxed">온라인 배달은 주문 다음 날부터, 06:00~21:00</p></div>
             <div class="feature reveal"><div class="icon-badge mx-auto mb-3"><svg viewBox="0 0 512 512" fill="currentColor" width="1em" height="1em"><path d="M0 64C0 46.3 14.3 32 32 32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32V448c17.7 0 32 14.3 32 32s-14.3 32-32 32H304V464c0-26.5-21.5-48-48-48s-48 21.5-48 48v48H32c-17.7 0-32-14.3-32-32s14.3-32 32-32V96C14.3 96 0 81.7 0 64zm128 80v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V144c0-8.8-7.2-16-16-16H144c-8.8 0-16 7.2-16 16zm160-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V144c0-8.8-7.2-16-16-16H288zM128 240v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V240c0-8.8-7.2-16-16-16H144c-8.8 0-16 7.2-16 16zm160-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V240c0-8.8-7.2-16-16-16H288z"/></svg></div><h3 class="font-bold text-sm mb-1" style="color:#1a1a1a;">호텔 배송</h3><p class="text-stone-500 text-xs leading-relaxed">엘리베이터가 카드 없이 작동하면 객실까지 직접 올라갑니다</p></div>
         </div>
@@ -223,7 +226,7 @@
                 <div class="icon-badge"><svg viewBox="0 0 512 512" fill="currentColor" width="1em" height="1em"><path d="M256 96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm0 320a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zM128 256a64 64 0 1 1 0 128 64 64 0 1 1 0-128zm256 0a64 64 0 1 1 0 128 64 64 0 1 1 0-128zM256 224a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/><path d="M192 96a64 64 0 1 1 128 0A64 64 0 1 1 192 96z"/></svg></div>
                 <h2 class="font-serif text-2xl font-bold" style="color:#1a1a1a;">상품 설명</h2>
             </div>
-            <p class="text-stone-600 leading-relaxed accent-bar">핑크 크림 장미 초콜릿 케이크 (1인용) — 화이트 크림과 초콜릿 드립, 핑크 톤의 큼직한 크림 장미로 장식한 부드러운 초콜릿 케이크 — 작지만 임팩트 있는 디저트. 1인 분량, 스푼 포함, 예쁜 선물 상자에 담겨 배달과 선물에 편리합니다. 갓 구운 신선함, 나트랑 주문 다음 날부터 배달. Diamond Bay 및 나트랑, Bãi Dài, 북부 깜라인의 배달 구역 내 호텔로 배달합니다. 공항과 공항 남쪽은 배달 제외 구역입니다. 기본적으로 프런트에 전달합니다.</p>
+            <p class="text-stone-600 leading-relaxed accent-bar">핑크 크림 장미 초콜릿 케이크 (1인용) — 화이트 크림과 초콜릿 드립, 핑크 톤의 큼직한 크림 장미로 장식한 부드러운 초콜릿 케이크 — 작지만 임팩트 있는 디저트. 1인 분량, 스푼 포함, 예쁜 선물 상자에 담겨 배달과 선물에 편리합니다. 갓 구운 신선함, 나트랑 주문 다음 날부터 배달. Diamond Bay 및 나트랑, Bãi Dài, 북부 깜라인의 배달 구역 내 호텔로 케이크를 배달합니다. 공항과 공항 남쪽은 배달 제외 구역입니다. 기본적으로 주문을 프런트에 전달합니다.</p>
         </div>
         <div class="sec-card reveal">
             <div class="flex items-center gap-3 mb-4">
@@ -242,7 +245,7 @@
     <section class="max-w-3xl mx-auto px-6 py-8">
         <h2 class="font-serif text-2xl font-bold mb-6 text-center" style="color:#1a1a1a;">자주 묻는 질문</h2>
         <div class="space-y-3">
-            <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 호텔로 배달 가능한가요?</h3><p class="text-stone-600 text-sm leading-relaxed">네, Diamond Bay을 포함한 나트랑·깜라인 호텔로 배달합니다. 기본적으로 프런트에 전달하고, 엘리베이터가 카드 키 없이 작동하면 객실까지 올려드립니다.</p></div>
+            <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 호텔로 케이크 배달이 가능한가요?</h3><p class="text-stone-600 text-sm leading-relaxed">네, Diamond Bay을 포함한 나트랑·깜라인 호텔로 케이크를 배달합니다. 기본적으로 주문을 프런트에 전달하고, 엘리베이터가 카드 키 없이 작동하면 객실까지 올려드립니다.</p></div>
             <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 가장 빠른 배달은 언제인가요?</h3><p class="text-stone-600 text-sm leading-relaxed">온라인 배달은 주문 다음 날부터 가능하며, 배달 시간은 06:00~21:00입니다. 나트랑 시내는 무료입니다.</p></div>
             <div class="faq-item reveal"><h3 class="font-bold text-sm mb-2 flex items-start gap-2" style="color:#1a1a1a;"><span style="color:var(--rose);">Q</span> 결제는 어떻게 하나요?</h3><p class="text-stone-600 text-sm leading-relaxed">수령 시 현금 또는 암호화폐 송금으로 결제할 수 있습니다. 카카오톡으로 문의해 주세요.</p></div>
         </div>
@@ -251,7 +254,7 @@
 
 
     <section class="max-w-5xl mx-auto px-6 py-12">
-        <h2 class="font-serif text-2xl font-bold mb-8 text-center" style="color:#1a1a1a;">비슷한 꽃다발</h2>
+        <h2 class="font-serif text-2xl font-bold mb-8 text-center" style="color:#1a1a1a;">비슷한 케이크</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="cakes" data-color="">
                 <div class="pcard-slider">
@@ -266,29 +269,29 @@
                     <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">자세히 →</span>
                 </a>
             </div>
-            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="r101 r51 r25 balloons" data-color="red">
+            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="cakes" data-color="">
                 <div class="pcard-slider">
-                    <img src="../img/products/nabor-sharov-l-101-krasnaya-51-belaya-25-rozovyh/1.webp" alt="풍선 세트 L 레드 장미 101송이 화이트 장미 51송이 핑크 장미 25송이 나트랑 배달" loading="lazy" class="pcard-slide active" width="600" height="800" decoding="async"><img src="../img/products/nabor-sharov-l-101-krasnaya-51-belaya-25-rozovyh/2.webp" alt="풍선 세트 L 레드 장미 101송이 화이트 장미 51송이 핑크 장미 25송이 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/nabor-sharov-l-101-krasnaya-51-belaya-25-rozovyh/3.webp" alt="풍선 세트 L 레드 장미 101송이 화이트 장미 51송이 핑크 장미 25송이 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/nabor-sharov-l-101-krasnaya-51-belaya-25-rozovyh/4.webp" alt="풍선 세트 L 레드 장미 101송이 화이트 장미 51송이 핑크 장미 25송이 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/nabor-sharov-l-101-krasnaya-51-belaya-25-rozovyh/5.webp" alt="풍선 세트 L 레드 장미 101송이 화이트 장미 51송이 핑크 장미 25송이 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/nabor-sharov-l-101-krasnaya-51-belaya-25-rozovyh/6.webp" alt="풍선 세트 L 레드 장미 101송이 화이트 장미 51송이 핑크 장미 25송이 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/nabor-sharov-l-101-krasnaya-51-belaya-25-rozovyh/7.webp" alt="풍선 세트 L 레드 장미 101송이 화이트 장미 51송이 핑크 장미 25송이 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/nabor-sharov-l-101-krasnaya-51-belaya-25-rozovyh/8.webp" alt="풍선 세트 L 레드 장미 101송이 화이트 장미 51송이 핑크 장미 25송이 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/nabor-sharov-l-101-krasnaya-51-belaya-25-rozovyh/9.webp" alt="풍선 세트 L 레드 장미 101송이 화이트 장미 51송이 핑크 장미 25송이 나트랑 배달" loading="lazy" class="pcard-slide" width="1173" height="1200" decoding="async">
-                    <button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots"><span class="pcard-dot active"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span></div>
+                    <img src="../img/products/tort-belo-goluboy-dollary-frukty-happy-birthday/1.webp" alt="달러 과일 Happy Birthday 토퍼 화이트 블루 케이크 나트랑 배달" loading="lazy" class="pcard-slide active" width="600" height="800" decoding="async"><img src="../img/products/tort-belo-goluboy-dollary-frukty-happy-birthday/2.webp" alt="달러 과일 Happy Birthday 토퍼 화이트 블루 케이크 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-belo-goluboy-dollary-frukty-happy-birthday/3.webp" alt="달러 과일 Happy Birthday 토퍼 화이트 블루 케이크 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-belo-goluboy-dollary-frukty-happy-birthday/4.webp" alt="달러 과일 Happy Birthday 토퍼 화이트 블루 케이크 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-belo-goluboy-dollary-frukty-happy-birthday/5.webp" alt="달러 과일 Happy Birthday 토퍼 화이트 블루 케이크 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-belo-goluboy-dollary-frukty-happy-birthday/6.webp" alt="달러 과일 Happy Birthday 토퍼 화이트 블루 케이크 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-belo-goluboy-dollary-frukty-happy-birthday/7.webp" alt="달러 과일 Happy Birthday 토퍼 화이트 블루 케이크 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-belo-goluboy-dollary-frukty-happy-birthday/8.webp" alt="달러 과일 Happy Birthday 토퍼 화이트 블루 케이크 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async">
+                    <button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots"><span class="pcard-dot active"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span></div>
                 </div>
-                <a href="../catalog/nabor-sharov-l-101-krasnaya-51-belaya-25-rozovyh-ko.html" class="p-5 flex flex-col flex-grow">
-                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">풍선 세트 L + 레드 장미 101송이 + 화이트 장미 51송이 + 핑크 장미 25송이 + 카드 + 부케 용기 2개</h3>
-                    <p class="text-stone-600 text-xs mb-3 flex-grow">대형 축하 세트: 실버 숫자 풍선 39와 레드·실버 하트로 구성된 L 사이즈 풍선 세트, 레드 장미 101송이, 화이트 장미 51송이, 핑크 장미 25송이, 메시지 카드와 장식용 부케 용기 2개 — 최고의 와우 효과를 주는 올인원 서프라이즈. 신선한 꽃과 헬륨 풍선을 레드·실버 톤으로 통일해 나트랑 주문 다음 날부터 배달·세팅</p>
-                    <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">5 000 000 동</p>
-                    <p class="text-stone-500 text-xs mb-4">≈ $200 · 276 000 원</p>
+                <a href="../catalog/tort-belo-goluboy-dollary-frukty-happy-birthday-ko.html" class="p-5 flex flex-col flex-grow">
+                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">달러·과일·Happy Birthday 토퍼 화이트·블루 케이크 (5인용)</h3>
+                    <p class="text-stone-600 text-xs mb-3 flex-grow">초콜릿 드립, 머니 테마 장식, 과일 장식, 크림 꽃과 실버 Happy Birthday 토퍼로 꾸민 화이트·블루 케이크. 5인용이며 초와 서빙 세트가 포함되고 선물 상자에 포장됩니다. 갓 구운 신선함, 나트랑 주문 다음 날부터 배달</p>
+                    <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">500 000 동</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $20 · 28 000 원</p>
                     <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">자세히 →</span>
                 </a>
             </div>
-            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="r101 cakes" data-color="purple">
+            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="cakes" data-color="">
                 <div class="pcard-slider">
-                    <img src="../img/products/101-fioletovaya-roza-shokoladnyy-tort/1.webp" alt="퍼플 장미 101송이 초콜릿 케이크 나트랑 배달" loading="lazy" class="pcard-slide active" width="900" height="1200" decoding="async"><img src="../img/products/101-fioletovaya-roza-shokoladnyy-tort/2.webp" alt="퍼플 장미 101송이 초콜릿 케이크 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/101-fioletovaya-roza-shokoladnyy-tort/3.webp" alt="퍼플 장미 101송이 초콜릿 케이크 나트랑 배달" loading="lazy" class="pcard-slide" width="600" height="800" decoding="async"><img src="../img/products/101-fioletovaya-roza-shokoladnyy-tort/4.webp" alt="퍼플 장미 101송이 초콜릿 케이크 나트랑 배달" loading="lazy" class="pcard-slide" width="600" height="800" decoding="async"><img src="../img/products/101-fioletovaya-roza-shokoladnyy-tort/5.webp" alt="퍼플 장미 101송이 초콜릿 케이크 나트랑 배달" loading="lazy" class="pcard-slide" width="600" height="800" decoding="async"><img src="../img/products/101-fioletovaya-roza-shokoladnyy-tort/6.webp" alt="퍼플 장미 101송이 초콜릿 케이크 나트랑 배달" loading="lazy" class="pcard-slide" width="600" height="800" decoding="async"><img src="../img/products/101-fioletovaya-roza-shokoladnyy-tort/7.webp" alt="퍼플 장미 101송이 초콜릿 케이크 나트랑 배달" loading="lazy" class="pcard-slide" width="600" height="800" decoding="async"><img src="../img/products/101-fioletovaya-roza-shokoladnyy-tort/8.webp" alt="퍼플 장미 101송이 초콜릿 케이크 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async">
+                    <img src="../img/products/tort-shokoladnyy-serdca-krasnyy-topper-love/1.webp" alt="레드 Love 토퍼 하트 초콜릿 케이크 나트랑 배달" loading="lazy" class="pcard-slide active" width="600" height="800" decoding="async"><img src="../img/products/tort-shokoladnyy-serdca-krasnyy-topper-love/2.webp" alt="레드 Love 토퍼 하트 초콜릿 케이크 나트랑 배달" loading="lazy" class="pcard-slide" width="600" height="800" decoding="async"><img src="../img/products/tort-shokoladnyy-serdca-krasnyy-topper-love/3.webp" alt="레드 Love 토퍼 하트 초콜릿 케이크 나트랑 배달" loading="lazy" class="pcard-slide" width="600" height="800" decoding="async"><img src="../img/products/tort-shokoladnyy-serdca-krasnyy-topper-love/4.webp" alt="레드 Love 토퍼 하트 초콜릿 케이크 나트랑 배달" loading="lazy" class="pcard-slide" width="600" height="800" decoding="async"><img src="../img/products/tort-shokoladnyy-serdca-krasnyy-topper-love/5.webp" alt="레드 Love 토퍼 하트 초콜릿 케이크 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-shokoladnyy-serdca-krasnyy-topper-love/6.webp" alt="레드 Love 토퍼 하트 초콜릿 케이크 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-shokoladnyy-serdca-krasnyy-topper-love/7.webp" alt="레드 Love 토퍼 하트 초콜릿 케이크 나트랑 배달" loading="lazy" class="pcard-slide" width="600" height="800" decoding="async"><img src="../img/products/tort-shokoladnyy-serdca-krasnyy-topper-love/8.webp" alt="레드 Love 토퍼 하트 초콜릿 케이크 나트랑 배달" loading="lazy" class="pcard-slide" width="600" height="800" decoding="async">
                     <button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots"><span class="pcard-dot active"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span></div>
                 </div>
-                <a href="../catalog/101-fioletovaya-roza-shokoladnyy-tort-ko.html" class="p-5 flex flex-col flex-grow">
-                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">퍼플 장미 101송이 + 초콜릿 케이크</h3>
-                    <p class="text-stone-600 text-xs mb-3 flex-grow">풍성한 퍼플 장미 101송이 라일락 포장 부케와 달러 지폐, 딸기, 그린 장식, 초콜릿 Love 하트로 꾸민 초콜릿 케이크 세트. 케이크는 선물 상자에 담기며 초와 서빙 세트가 포함되어 별도 준비 없이 완성도 높은 서프라이즈를 선물할 수 있습니다. 나트랑 주문 다음 날부터 배달</p>
-                    <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">2 000 000 동</p>
-                    <p class="text-stone-500 text-xs mb-4">≈ $80 · 110 000 원</p>
+                <a href="../catalog/tort-shokoladnyy-serdca-krasnyy-topper-love-ko.html" class="p-5 flex flex-col flex-grow">
+                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">레드 Love 토퍼 하트 초콜릿 케이크 (5인용)</h3>
+                    <p class="text-stone-600 text-xs mb-3 flex-grow">크림 코팅과 초콜릿 크럼을 더한 로맨틱한 초콜릿 케이크로, 초콜릿 하트 2개와 레드 Love 토퍼, 코랄 크림 플라워, 작은 흰 꽃과 그린 장식으로 완성했습니다. 5인용이며 선물 상자, 초, 접시·포크·나이프 서빙 세트가 포함됩니다. 생일, 기념일, 사랑 고백을 위한 아름다운 선물; 갓 구운 신선함, 나트랑 주문 다음 날부터 배달</p>
+                    <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">500 000 동</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $20 · 28 000 원</p>
                     <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">자세히 →</span>
                 </a>
             </div>
@@ -380,9 +383,14 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"], a[href*="kakao"], 
     var cf=document.querySelector('.cat-filters'); if(!cf) return;
     var grid=cf.nextElementSibling; if(!grid) return;
     function price(c){var el=c.querySelector('p.font-bold');return el?parseInt(el.textContent.replace(/[^0-9]/g,'')||'0',10):0;}
+    function isCake(c){return (' '+(c.getAttribute('data-cat')||'')+' ').indexOf(' cakes ')>-1;}
     function sortBy(dir){
       var cards=Array.prototype.slice.call(grid.querySelectorAll('.product-card'));
-      cards.sort(function(a,b){return dir==='desc'?price(b)-price(a):price(a)-price(b);});
+      cards.sort(function(a,b){
+        var ac=isCake(a),bc=isCake(b);
+        if(ac!==bc)return ac?1:-1;
+        return dir==='desc'?price(b)-price(a):price(a)-price(b);
+      });
       cards.forEach(function(c){grid.appendChild(c);});
     }
     sortBy('asc');

@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>레드 Love 토퍼 하트 초콜릿 케이크 (5인용) — 나트랑 케이크 배달</title>
-    <meta name="description" content="레드 Love 토퍼 하트 초콜릿 케이크 (5인용). 주문 다음 날부터 나트랑 배달. 가격 500 000 동. 온라인·카카오톡·인스타그램 주문.">
+    <meta name="description" content="레드 Love 토퍼 하트 초콜릿 케이크 (5인용). 가격 500 000 동. 나트랑 시내 무료 배달, 온라인 주문은 다음 날부터; 카카오톡 상담.">
     <meta property="og:title" content="레드 Love 토퍼 하트 초콜릿 케이크 (5인용) — 나트랑 케이크 배달">
-    <meta property="og:description" content="레드 Love 토퍼 하트 초콜릿 케이크 (5인용). 주문 다음 날부터 나트랑 배달. 가격 500 000 동. 온라인·카카오톡·인스타그램 주문.">
+    <meta property="og:description" content="레드 Love 토퍼 하트 초콜릿 케이크 (5인용). 가격 500 000 동. 나트랑 시내 무료 배달, 온라인 주문은 다음 날부터; 카카오톡 상담.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://flowers-nha-trang.online/img/site/og-default.jpg">
     <meta property="og:image:width" content="1200">
@@ -15,7 +15,7 @@
     <meta property="og:site_name" content="NhaTrang Flowers">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="레드 Love 토퍼 하트 초콜릿 케이크 (5인용) — 나트랑 케이크 배달">
-    <meta name="twitter:description" content="레드 Love 토퍼 하트 초콜릿 케이크 (5인용). 주문 다음 날부터 나트랑 배달. 가격 500 000 동. 온라인·카카오톡·인스타그램 주문.">
+    <meta name="twitter:description" content="레드 Love 토퍼 하트 초콜릿 케이크 (5인용). 가격 500 000 동. 나트랑 시내 무료 배달, 온라인 주문은 다음 날부터; 카카오톡 상담.">
     <meta name="twitter:image" content="https://flowers-nha-trang.online/img/site/og-default.jpg">
     <link rel="icon" href="../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
@@ -94,17 +94,20 @@
         .gallery-slider{height:24rem;}
         @media(min-width:768px){.gallery-slider{height:30rem;}}
         .gallery-slider .pcard-slide{object-fit:contain;padding:.75rem;}
+        .gallery-slider{height:24rem;}
+        @media(min-width:768px){.gallery-slider{height:30rem;}}
+        .gallery-slider .pcard-slide{object-fit:contain;padding:.75rem;}
         .gallery-slider .pcard-arrow{opacity:1;width:2.5rem;height:2.5rem;font-size:1.6rem;background:rgba(255,255,255,.96);box-shadow:0 2px 8px rgba(0,0,0,.22);z-index:5;}
         .gallery-slider .pcard-dot{width:.45rem;height:.45rem;}
-        .pcard-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.9);border:none;width:2rem;height:2rem;border-radius:999px;font-size:1.2rem;line-height:1;color:#a8566a;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;z-index:2;box-shadow:0 1px 4px rgba(0,0,0,.12);}
-        .pcard-slider:hover .pcard-arrow{opacity:1;}
+        .pcard-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.96);border:none;width:2.5rem;height:2.5rem;border-radius:999px;font-size:1.6rem;line-height:1;color:#a8566a;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:1;transition:opacity .2s,background .2s,transform .15s;z-index:5;box-shadow:0 2px 8px rgba(0,0,0,.22);}
+        .pcard-arrow:hover{opacity:1;background:#fff;}
         .pcard-prev{left:.5rem;} .pcard-next{right:.5rem;}
-        .pcard-dots{position:absolute;bottom:.55rem;left:0;right:0;display:flex;gap:.3rem;justify-content:center;z-index:2;}
-        .pcard-dot{width:.4rem;height:.4rem;border-radius:999px;background:rgba(255,255,255,.55);transition:background .2s;}
+        .pcard-dots{position:absolute;bottom:.55rem;left:0;right:0;display:flex;gap:.3rem;justify-content:center;z-index:3;}
+        .pcard-dot{width:.45rem;height:.45rem;border-radius:999px;background:rgba(255,255,255,.6);box-shadow:0 0 2px rgba(0,0,0,.3);transition:background .2s;}
         .pcard-dot.active{background:#fff;}
-        @media (max-width:767px){.pcard-arrow{opacity:1;}}
         .cat-filters{display:flex;flex-direction:column;gap:.75rem;align-items:center;margin-bottom:2rem;}
         .filt-group{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;}
+        .filt-group.color-hidden{display:none;}
         .filt{background:#fff;border:1px solid #f0e0e5;color:#6b6b6b;font-size:.8rem;font-weight:500;padding:.45rem .9rem;border-radius:999px;cursor:pointer;transition:all .2s;}
         .filt:hover{border-color:var(--rose);color:var(--rose);}
         .filt.active{background:var(--rose);color:#fff;border-color:var(--rose);}
@@ -163,7 +166,7 @@
                 <span class="badge"><svg viewBox="0 0 512 512" fill="currentColor" width="1em" height="1em"><path d="M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"/></svg> 주문 다음 날부터</span>
             </div>
             <h1 class="font-serif text-3xl md:text-4xl font-bold mb-4 leading-tight" style="color:#1a1a1a;">레드 Love 토퍼 하트 초콜릿 케이크 (5인용)</h1>
-            <p class="text-stone-600 mb-6 leading-relaxed">크림 코팅과 초콜릿 크럼을 더한 로맨틱한 초콜릿 케이크로, 초콜릿 하트 2개와 레드 Love 토퍼, 코랄 크림 플라워, 작은 흰 꽃과 그린 장식으로 완성했습니다. 5인용이며 선물 상자, 초, 접시·포크·나이프 서빙 세트가 포함됩니다. 생일, 기념일, 사랑 고백을 위한 아름다운 선물; 갓 구운 신선함, 나트랑 주문 다음 날부터 배달.</p>
+            <div class="text-stone-600 mb-6 leading-relaxed"><span style="display:block;margin-bottom:8px">🎂 크림 코팅과 초콜릿 크럼을 더한 로맨틱한 초콜릿 케이크로, 초콜릿 하트 2개와 레드 Love 토퍼, 코랄 크림 플라워, 작은 흰 꽃과 그린 장식으로 완성했습니다</span><span style="display:block;margin-bottom:8px">5인용이며 선물 상자, 초, 접시·포크·나이프 서빙 세트가 포함됩니다</span><span style="display:block;margin-bottom:8px">🚚 생일, 기념일, 사랑 고백을 위한 아름다운 선물; 갓 구운 신선함, 나트랑 주문 다음 날부터 배달</span></div>
             <div class="price-box mb-6">
                 <p class="font-bold text-3xl mb-1" style="color:#1a1a1a;">500 000 동</p>
                 <p class="text-stone-500 text-sm">≈ $20 · 28 000 원</p>
@@ -187,7 +190,7 @@
             <div class="grid grid-cols-3 divide-x divide-stone-100">
                 <div class="flex flex-col items-center px-4 py-2 text-center">
                     <div class="text-2xl md:text-3xl font-bold" style="color:#1a1a1a;">💐</div>
-                    <div class="text-stone-400 text-xs font-medium mt-1">신선한 케이크</div>
+                    <div class="text-stone-400 text-xs font-medium mt-1">꽃다발 배달 완료</div>
                 </div>
                 <div class="flex flex-col items-center px-4 py-2 text-center">
                     <div class="flex items-center justify-center gap-1">
@@ -223,7 +226,7 @@
                 <div class="icon-badge"><svg viewBox="0 0 512 512" fill="currentColor" width="1em" height="1em"><path d="M256 96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm0 320a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zM128 256a64 64 0 1 1 0 128 64 64 0 1 1 0-128zm256 0a64 64 0 1 1 0 128 64 64 0 1 1 0-128zM256 224a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/><path d="M192 96a64 64 0 1 1 128 0A64 64 0 1 1 192 96z"/></svg></div>
                 <h2 class="font-serif text-2xl font-bold" style="color:#1a1a1a;">상품 설명</h2>
             </div>
-            <p class="text-stone-600 leading-relaxed accent-bar">레드 Love 토퍼 하트 초콜릿 케이크 (5인용) — 크림 코팅과 초콜릿 크럼을 더한 로맨틱한 초콜릿 케이크로, 초콜릿 하트 2개와 레드 Love 토퍼, 코랄 크림 플라워, 작은 흰 꽃과 그린 장식으로 완성했습니다. 5인용이며 선물 상자, 초, 접시·포크·나이프 서빙 세트가 포함됩니다. 생일, 기념일, 사랑 고백을 위한 아름다운 선물; 갓 구운 신선함, 나트랑 주문 다음 날부터 배달. Fusion Resort 및 나트랑, Bãi Dài, 북부 깜라인의 배달 구역 내 호텔로 배달합니다. 공항과 공항 남쪽은 배달 제외 구역입니다. 기본적으로 주문을 프런트에 전달합니다.</p>
+            <p class="text-stone-600 leading-relaxed accent-bar">레드 Love 토퍼 하트 초콜릿 케이크 (5인용) — 크림 코팅과 초콜릿 크럼을 더한 로맨틱한 초콜릿 케이크로, 초콜릿 하트 2개와 레드 Love 토퍼, 코랄 크림 플라워, 작은 흰 꽃과 그린 장식으로 완성했습니다. 5인용이며 선물 상자, 초, 접시·포크·나이프 서빙 세트가 포함됩니다. 생일, 기념일, 사랑 고백을 위한 아름다운 선물; 갓 구운 신선함, 나트랑 주문 다음 날부터 배달. Fusion Resort 및 나트랑, Bãi Dài, 북부 깜라인의 배달 구역 내 호텔로 케이크를 배달합니다. 공항과 공항 남쪽은 배달 제외 구역입니다. 기본적으로 주문을 프런트에 전달합니다.</p>
         </div>
         <div class="sec-card reveal">
             <div class="flex items-center gap-3 mb-4">
@@ -255,6 +258,19 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="cakes" data-color="">
                 <div class="pcard-slider">
+                    <img src="../img/products/tort-sirenevyy-s-rozovymi-rozami/1.webp" alt="핑크 장미 라일락 케이크 나트랑 배달" loading="lazy" class="pcard-slide active" width="900" height="1200" decoding="async"><img src="../img/products/tort-sirenevyy-s-rozovymi-rozami/2.webp" alt="핑크 장미 라일락 케이크 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-sirenevyy-s-rozovymi-rozami/3.webp" alt="핑크 장미 라일락 케이크 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-sirenevyy-s-rozovymi-rozami/4.webp" alt="핑크 장미 라일락 케이크 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-sirenevyy-s-rozovymi-rozami/5.webp" alt="핑크 장미 라일락 케이크 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-sirenevyy-s-rozovymi-rozami/6.webp" alt="핑크 장미 라일락 케이크 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async">
+                    <button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots"><span class="pcard-dot active"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span></div>
+                </div>
+                <a href="../catalog/tort-sirenevyy-s-rozovymi-rozami-ko.html" class="p-5 flex flex-col flex-grow">
+                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">핑크 장미 라일락 케이크</h3>
+                    <p class="text-stone-600 text-xs mb-3 flex-grow">부드러운 라일락 톤에 크림 드립을 두르고 위에 핑크 장미와 꽃으로 장식한 미디엄 케이크. 생일이나 기념일을 위한 작은 축하 케이크 — 예쁜 상자와 초 포함. 꽃다발, 풍선 또는 선물 세트와 함께 주문. 나트랑 주문 다음 날부터 배달</p>
+                    <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">250 000 동</p>
+                    <p class="text-stone-500 text-xs mb-4">≈ $10 · 14 000 원</p>
+                    <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">자세히 →</span>
+                </a>
+            </div>
+            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="cakes" data-color="">
+                <div class="pcard-slider">
                     <img src="../img/products/tort-shokoladnyy-s-dollarami/1.webp" alt="나트랑 머니 초콜릿 케이크 배달" loading="lazy" class="pcard-slide active" width="900" height="1200" decoding="async"><img src="../img/products/tort-shokoladnyy-s-dollarami/2.webp" alt="나트랑 머니 초콜릿 케이크 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-shokoladnyy-s-dollarami/3.webp" alt="나트랑 머니 초콜릿 케이크 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-shokoladnyy-s-dollarami/4.webp" alt="나트랑 머니 초콜릿 케이크 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-shokoladnyy-s-dollarami/5.webp" alt="나트랑 머니 초콜릿 케이크 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-shokoladnyy-s-dollarami/6.webp" alt="나트랑 머니 초콜릿 케이크 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async">
                     <button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots"><span class="pcard-dot active"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span></div>
                 </div>
@@ -276,19 +292,6 @@
                     <p class="text-stone-600 text-xs mb-3 flex-grow">생크림과 초콜릿 줄무늬에 버터크림 장미를 올린 미니 케이크 — 1인용, 스푼 포함, 깔끔한 상자에 담겨 예쁘고 편리</p>
                     <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">100 000 동</p>
                     <p class="text-stone-500 text-xs mb-4">≈ $4 · 6 000 원</p>
-                    <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">자세히 →</span>
-                </a>
-            </div>
-            <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="cakes" data-color="">
-                <div class="pcard-slider">
-                    <img src="../img/products/tort-love-s-dollarami-klubnika/1.webp" alt="달러 토퍼와 딸기 머니 크림 케이크 &#x27;Love&#x27;, 나트랑 배달" loading="lazy" class="pcard-slide active" width="600" height="800" decoding="async"><img src="../img/products/tort-love-s-dollarami-klubnika/2.webp" alt="달러 토퍼와 딸기 머니 크림 케이크 &#x27;Love&#x27;, 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-love-s-dollarami-klubnika/3.webp" alt="달러 토퍼와 딸기 머니 크림 케이크 &#x27;Love&#x27;, 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-love-s-dollarami-klubnika/4.webp" alt="달러 토퍼와 딸기 머니 크림 케이크 &#x27;Love&#x27;, 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-love-s-dollarami-klubnika/5.webp" alt="달러 토퍼와 딸기 머니 크림 케이크 &#x27;Love&#x27;, 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-love-s-dollarami-klubnika/6.webp" alt="달러 토퍼와 딸기 머니 크림 케이크 &#x27;Love&#x27;, 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-love-s-dollarami-klubnika/7.webp" alt="달러 토퍼와 딸기 머니 크림 케이크 &#x27;Love&#x27;, 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async"><img src="../img/products/tort-love-s-dollarami-klubnika/8.webp" alt="달러 토퍼와 딸기 머니 크림 케이크 &#x27;Love&#x27;, 나트랑 배달" loading="lazy" class="pcard-slide" width="900" height="1200" decoding="async">
-                    <button type="button" class="pcard-arrow pcard-prev" aria-label="prev">‹</button><button type="button" class="pcard-arrow pcard-next" aria-label="next">›</button><div class="pcard-dots"><span class="pcard-dot active"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span><span class="pcard-dot"></span></div>
-                </div>
-                <a href="../catalog/tort-love-s-dollarami-klubnika-ko.html" class="p-5 flex flex-col flex-grow">
-                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">머니 크림 케이크 &#x27;Love&#x27; (5인용)</h3>
-                    <p class="text-stone-600 text-xs mb-3 flex-grow">노란 드립의 화사한 크림 케이크 — 초콜릿 &#x27;Love&#x27; 하트, 신선한 딸기, 말린 오렌지, 프레첼, 초콜릿 별, 식용 금박으로 장식하고 달러 토퍼를 올린 생일 선물. 예쁜 상자와 5인용 일회용 식기(접시·포크·냅킨) 포함, 나트랑 주문 다음 날부터 배달</p>
-                    <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">500 000 동</p>
-                    <p class="text-stone-500 text-xs mb-4">≈ $20 · 28 000 원</p>
                     <span class="btn-rose-filled text-center font-medium py-2.5 px-4 rounded-xl text-xs w-full">자세히 →</span>
                 </a>
             </div>
@@ -380,9 +383,14 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"], a[href*="kakao"], 
     var cf=document.querySelector('.cat-filters'); if(!cf) return;
     var grid=cf.nextElementSibling; if(!grid) return;
     function price(c){var el=c.querySelector('p.font-bold');return el?parseInt(el.textContent.replace(/[^0-9]/g,'')||'0',10):0;}
+    function isCake(c){return (' '+(c.getAttribute('data-cat')||'')+' ').indexOf(' cakes ')>-1;}
     function sortBy(dir){
       var cards=Array.prototype.slice.call(grid.querySelectorAll('.product-card'));
-      cards.sort(function(a,b){return dir==='desc'?price(b)-price(a):price(a)-price(b);});
+      cards.sort(function(a,b){
+        var ac=isCake(a),bc=isCake(b);
+        if(ac!==bc)return ac?1:-1;
+        return dir==='desc'?price(b)-price(a):price(a)-price(b);
+      });
       cards.forEach(function(c){grid.appendChild(c);});
     }
     sortBy('asc');

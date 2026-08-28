@@ -702,6 +702,48 @@ def gallery(p, base, alt):
             {nav}
         </div>'''
 
+def format_desc_html(desc, cat, lang):
+    """Красиво разбивает описание: строки по предложениям, список «в наборе» для комплектов,
+    максимум один смайлик на строку (у большинства строк — без смайла, чтобы не пестрило)."""
+    import re as _re
+    s = _re.sub(r'\.\s*$', '', (desc or '').strip())
+    parts = [x.strip().rstrip('.').strip() for x in _re.split(r'(?<=[.!?])\s+', s + '.') if x.strip()]
+    DELIV = {'ru': ['доставим','доставк','привозим','привезём','привезем','по нячангу','следующего дня','вложим открытк','разворачива','в пакетах'],
+             'en': ['delivery','deliver','next day','nha trang','card on request'],
+             'ko': ['배달','나트랑','다음 날','카드','포장']}
+    OCC = {'ru': ['идеаль','на день рожден','годовщин','юбилей','признан','повод','отличный подарок','подарок с'],
+           'en': ['perfect for','birthday','anniversary','declaration','celebration'],
+           'ko': ['생일','기념일','완벽','고백','축하']}
+    dl = DELIV.get(lang, DELIV['ru']); oc = OCC.get(lang, OCC['ru'])
+    first_emoji = '🎂' if 'cakes' in cat else ('🎈' if 'balloons' in cat else ('🎁' if ('prazdnik' in cat or 'nabory' in cat) else '💐'))
+    out = []
+    for i, part in enumerate(parts):
+        low = part.lower()
+        if part.count(',') >= 4:  # набор/комплект → список
+            if ':' in part:
+                head, rest = part.split(':', 1)
+            else:
+                head, rest = '', part
+            items = [it.strip() for it in rest.split(',') if it.strip()]
+            b = ''
+            if head.strip():
+                hh = head.strip(); hh = hh[0].upper() + hh[1:]
+                b += f'<span style="display:block;margin-bottom:6px">{first_emoji} {html.escape(hh)}:</span>'
+            b += '<ul style="margin:0 0 10px;padding:0;list-style:none">'
+            for it in items:
+                it = it[0].upper() + it[1:] if it else it
+                b += f'<li style="margin:3px 0;padding-left:1.2em;position:relative"><span style="position:absolute;left:0;color:var(--rose)">•</span>{html.escape(it)}</li>'
+            b += '</ul>'
+            out.append(b); continue
+        if i == 0:
+            em = first_emoji + ' '; part = part[0].upper() + part[1:] if part else part
+        elif any(w in low for w in dl): em = '🚚 '
+        elif any(w in low for w in oc): em = '🎁 '
+        else: em = ''
+        out.append(f'<span style="display:block;margin-bottom:8px">{em}{html.escape(part)}</span>')
+    return ''.join(out)
+
+
 def render_product(p, lang, products):
     t = dict(T[lang])
     base = "../"
@@ -777,7 +819,7 @@ def render_product(p, lang, products):
                 <span class="badge">{IC_CLOCK} {u["b_day"]}</span>
             </div>
             <h1 class="font-serif text-3xl md:text-4xl font-bold mb-4 leading-tight" style="color:#1a1a1a;">{html.escape(name)}</h1>
-            <p class="text-stone-600 mb-6 leading-relaxed">{html.escape(desc)}.</p>
+            <div class="text-stone-600 mb-6 leading-relaxed">{format_desc_html(desc, product_cat(p), lang)}</div>
             <div class="price-box mb-6">
                 <p class="font-bold text-3xl mb-1" style="color:#1a1a1a;">{html.escape(price_loc(p['price'], lang))}</p>
                 <p class="text-stone-500 text-sm">{html.escape(sub_loc(p['price_sub'], lang, p['price']))}</p>
