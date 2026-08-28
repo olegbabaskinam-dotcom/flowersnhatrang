@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-28 16:55",
- "count": 129,
+ "generated": "2026-08-28 17:12",
+ "count": 130,
  "categories": [
   {
    "key": "all",
@@ -3006,6 +3006,30 @@
     "img/products/tort-futbolnyy-igroki-pole/6.webp",
     "img/products/tort-futbolnyy-igroki-pole/7.webp",
     "img/products/tort-futbolnyy-igroki-pole/8.webp"
+   ]
+  },
+  {
+   "id": 130,
+   "slug": "tort-mini-shokoladnyy-oreo",
+   "name": "Мини-торт шоколадный с Орео",
+   "desc": "небольшой шоколадный торт с блестящими шоколадными подтёками, печеньем Орео, кремовыми розочками и марципановыми фруктами (клубника, ананас). Аккуратный мини-тортик на день рождения или просто в подарок. В комплекте свечи, заказывается вместе с букетом, шарами или подарочным набором. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Мини-торт шоколадный с Орео Нячанг доставка",
+   "price_vnd": 250000,
+   "price": "250 000 донгов",
+   "price_sub": "≈ $10 · 1 000 ₽",
+   "cats": [
+    "cakes"
+   ],
+   "color": "",
+   "images": [
+    "img/products/tort-mini-shokoladnyy-oreo/1.webp",
+    "img/products/tort-mini-shokoladnyy-oreo/2.webp",
+    "img/products/tort-mini-shokoladnyy-oreo/3.webp",
+    "img/products/tort-mini-shokoladnyy-oreo/4.webp",
+    "img/products/tort-mini-shokoladnyy-oreo/5.webp",
+    "img/products/tort-mini-shokoladnyy-oreo/6.webp",
+    "img/products/tort-mini-shokoladnyy-oreo/7.webp",
+    "img/products/tort-mini-shokoladnyy-oreo/8.webp"
    ]
   }
  ]
