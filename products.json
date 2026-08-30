@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-30 10:16",
- "count": 133,
+ "generated": "2026-08-30 10:29",
+ "count": 134,
  "categories": [
   {
    "key": "all",
@@ -3101,6 +3101,31 @@
     "img/products/nabor-prazdnik-den-rozhdeniya-parnya-11-let/7.webp",
     "img/products/nabor-prazdnik-den-rozhdeniya-parnya-11-let/8.webp",
     "img/products/nabor-prazdnik-den-rozhdeniya-parnya-11-let/9.webp"
+   ]
+  },
+  {
+   "id": 134,
+   "slug": "51-malinovaya-roza-belaya-upakovka-prazdnichnyy-tort",
+   "name": "51 малиновая роза в белой упаковке + праздничный торт",
+   "desc": "Роскошный подарочный дуэт на день рождения или годовщину. Пышный букет из 51 коралово-малиновой розы в белой упаковке и праздничный торт с зелёным подтёком, украшенный кремовыми и розовыми розами и гипсофилой. К торту прилагаются свечи, тарелки и вилки. Онлайн-доставка по Нячангу со следующего дня, вложим открытку по желанию",
+   "alt": "51 малиновая роза белая упаковка праздничный торт комбо Нячанг доставка",
+   "price_vnd": 1500000,
+   "price": "1 500 000 донгов",
+   "price_sub": "≈ $60 · 5 500 ₽",
+   "cats": [
+    "r51",
+    "cakes"
+   ],
+   "color": "pink",
+   "images": [
+    "img/products/51-malinovaya-roza-belaya-upakovka-prazdnichnyy-tort/1.webp",
+    "img/products/51-malinovaya-roza-belaya-upakovka-prazdnichnyy-tort/2.webp",
+    "img/products/51-malinovaya-roza-belaya-upakovka-prazdnichnyy-tort/3.webp",
+    "img/products/51-malinovaya-roza-belaya-upakovka-prazdnichnyy-tort/4.webp",
+    "img/products/51-malinovaya-roza-belaya-upakovka-prazdnichnyy-tort/5.webp",
+    "img/products/51-malinovaya-roza-belaya-upakovka-prazdnichnyy-tort/6.webp",
+    "img/products/51-malinovaya-roza-belaya-upakovka-prazdnichnyy-tort/7.webp",
+    "img/products/51-malinovaya-roza-belaya-upakovka-prazdnichnyy-tort/8.webp"
    ]
   }
  ]

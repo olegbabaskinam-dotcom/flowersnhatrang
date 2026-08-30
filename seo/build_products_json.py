@@ -58,6 +58,8 @@ def product_color(slug):
         return "pink"
     if s == "151-nezhno-rozovaya-roza-belaya-upakovka":
         return "pink"  # цветы нежно-розовые, «belaya» упаковка не должна давать white
+    if s == "51-malinovaya-roza-belaya-upakovka-prazdnichnyy-tort":
+        return "pink"  # id134: коралово-малиновые розы, «belaya» упаковка не должна давать white
     if "belo-rozov" in s: return "pink"
     if "kras" in s:       return "red"
     if "bel" in s:        return "white"
