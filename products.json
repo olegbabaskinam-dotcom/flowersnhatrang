@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-30 10:29",
- "count": 134,
+ "generated": "2026-08-30 10:57",
+ "count": 135,
  "categories": [
   {
    "key": "all",
@@ -3126,6 +3126,29 @@
     "img/products/51-malinovaya-roza-belaya-upakovka-prazdnichnyy-tort/6.webp",
     "img/products/51-malinovaya-roza-belaya-upakovka-prazdnichnyy-tort/7.webp",
     "img/products/51-malinovaya-roza-belaya-upakovka-prazdnichnyy-tort/8.webp"
+   ]
+  },
+  {
+   "id": 135,
+   "slug": "tort-belo-zelenyy-rozovye-zheltye-kremovye-rozy",
+   "name": "Бело-зелёный торт с розовыми и жёлтыми кремовыми розами",
+   "desc": "Нежный праздничный торт с белым кремом и мягким зелёным подтёком, украшенный кремовыми розами розового и жёлтого цвета и веточками гипсофилы. Рассчитан примерно на 5 человек. Привозим в красивой коробке с окошком, в комплекте свечи, тарелки и вилки. Торт заказывается онлайн только вместе с букетом, шарами или подарочным набором",
+   "alt": "бело-зелёный торт кремовые розовые жёлтые розы гипсофила Нячанг доставка",
+   "price_vnd": 500000,
+   "price": "500 000 донгов",
+   "price_sub": "≈ $20 · 1 900 ₽",
+   "cats": [
+    "cakes"
+   ],
+   "color": "",
+   "images": [
+    "img/products/tort-belo-zelenyy-rozovye-zheltye-kremovye-rozy/1.webp",
+    "img/products/tort-belo-zelenyy-rozovye-zheltye-kremovye-rozy/2.webp",
+    "img/products/tort-belo-zelenyy-rozovye-zheltye-kremovye-rozy/3.webp",
+    "img/products/tort-belo-zelenyy-rozovye-zheltye-kremovye-rozy/4.webp",
+    "img/products/tort-belo-zelenyy-rozovye-zheltye-kremovye-rozy/5.webp",
+    "img/products/tort-belo-zelenyy-rozovye-zheltye-kremovye-rozy/6.webp",
+    "img/products/tort-belo-zelenyy-rozovye-zheltye-kremovye-rozy/7.webp"
    ]
   }
  ]
