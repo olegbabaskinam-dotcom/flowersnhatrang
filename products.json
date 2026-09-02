@@ -1,6 +1,6 @@
 {
- "generated": "2026-09-02 11:50",
- "count": 137,
+ "generated": "2026-09-02 15:49",
+ "count": 138,
  "categories": [
   {
    "key": "all",
@@ -3196,6 +3196,31 @@
     "img/products/101-krasnaya-roza-korzina-cifra-1/5.webp",
     "img/products/101-krasnaya-roza-korzina-cifra-1/6.webp",
     "img/products/101-krasnaya-roza-korzina-cifra-1/7.webp"
+   ]
+  },
+  {
+   "id": 138,
+   "slug": "51-rozovaya-roza-nabor-sharov-s-7-folgirovannyh",
+   "name": "51 розовая роза + набор шаров S (7 фольгированных шаров)",
+   "desc": "букет из 51 розовой розы в белой упаковке в паре с набором фольгированных шаров S — 7 шаров сиреневых и серебристых оттенков: звёзды, сердца и круг Happy Birthday. Яркий праздничный комплект на день рождения. Онлайн-доставка по Нячангу со следующего дня, вложим открытку по желанию",
+   "alt": "51 розовая роза и набор фольгированных шаров S 7 шаров Нячанг доставка",
+   "price_vnd": 2000000,
+   "price": "2 000 000 донгов",
+   "price_sub": "≈ $80 · 7 300 ₽",
+   "cats": [
+    "r51",
+    "balloons"
+   ],
+   "color": "pink",
+   "images": [
+    "img/products/51-rozovaya-roza-nabor-sharov-s-7-folgirovannyh/1.webp",
+    "img/products/51-rozovaya-roza-nabor-sharov-s-7-folgirovannyh/2.webp",
+    "img/products/51-rozovaya-roza-nabor-sharov-s-7-folgirovannyh/3.webp",
+    "img/products/51-rozovaya-roza-nabor-sharov-s-7-folgirovannyh/4.webp",
+    "img/products/51-rozovaya-roza-nabor-sharov-s-7-folgirovannyh/5.webp",
+    "img/products/51-rozovaya-roza-nabor-sharov-s-7-folgirovannyh/6.webp",
+    "img/products/51-rozovaya-roza-nabor-sharov-s-7-folgirovannyh/7.webp",
+    "img/products/51-rozovaya-roza-nabor-sharov-s-7-folgirovannyh/8.webp"
    ]
   }
  ]
