@@ -578,6 +578,7 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"], a[href*="kakao"], 
 })();
 </script>
 __CARD_JS__
+<script src="__BASE__cart.js?v=20260902" defer></script>
 </body>
 </html>
 '''
@@ -926,7 +927,7 @@ def render_product(p, lang, products):
 '''
     lang_urls = {l: f"{p['slug']}-{l}.html" for l in LANGS}
     return (head(lang, title, meta, canonical, alts, base, p["img"])
-            + schema + faqschema + breadcrumbschema + header(lang, base, lang_urls) + body + footer(base, lang) + SCRIPTS)
+            + schema + faqschema + breadcrumbschema + header(lang, base, lang_urls) + body + footer(base, lang) + SCRIPTS.replace("__BASE__", base))
 
 def jstr(s):
     import json
@@ -1051,7 +1052,7 @@ def render_catalog(lang, products):
     </main>
 '''
     lang_urls = {l: f"catalog-{l}.html" for l in LANGS}
-    return head(lang, title, meta, canonical, alts, base, products[0]["img"]) + header(lang, base, lang_urls) + body + footer(base, lang) + SCRIPTS
+    return head(lang, title, meta, canonical, alts, base, products[0]["img"]) + header(lang, base, lang_urls) + body + footer(base, lang) + SCRIPTS.replace("__BASE__", base)
 
 # ---------- СТАТЬИ (блог) ----------
 ARTICLES_DIR = os.path.join(HERE, "articles")
@@ -1193,7 +1194,7 @@ def render_article(art, lang, products, all_articles):
     faqschema = ('<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[%s]}</script>' % faq_schema) if faq else ""
     lang_urls = {l: f"{slug}-{l}.html" for l in LANGS}
     return (head(lang, a["title"], a["meta"], canonical, alts, base, og)
-            + art_schema + faqschema + header(lang, base, lang_urls) + body + footer(base, lang) + SCRIPTS)
+            + art_schema + faqschema + header(lang, base, lang_urls) + body + footer(base, lang) + SCRIPTS.replace("__BASE__", base))
 
 def render_blog(lang):
     t = T[lang]
@@ -1232,7 +1233,7 @@ def render_blog(lang):
     </main>
 '''
     lang_urls = {l: f"blog-{l}.html" for l in LANGS}
-    return head(lang, title, meta, canonical, alts, base, "img/site/og-default.webp") + header(lang, base, lang_urls) + body + footer(base, lang) + SCRIPTS
+    return head(lang, title, meta, canonical, alts, base, "img/site/og-default.webp") + header(lang, base, lang_urls) + body + footer(base, lang) + SCRIPTS.replace("__BASE__", base)
 
 def main():
     products = list(csv.DictReader(open(PRODUCTS, encoding="utf-8")))
