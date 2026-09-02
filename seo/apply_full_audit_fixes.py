@@ -401,12 +401,8 @@ def neutralise_static_reviews(path: Path, text: str) -> str:
         text = re.sub(r"<!--REVIEWS-START-->.*?</section>", "", text, count=1, flags=re.I | re.S)
     lang_match = re.search(r'<html\b[^>]*\blang=["\']([^"\']+)', text, re.I)
     lang = (lang_match.group(1).lower() if lang_match else "ru")
-    if lang.startswith("ko"):
-        sections = list(re.finditer(r"<section\b[^>]*>.*?</section>", text, re.I | re.S))
-        for section in reversed(sections):
-            if 'class="rv-wrap"' in section.group(0) or "class='rv-wrap'" in section.group(0):
-                text = text[: section.start()] + text[section.end() :]
-        return text
+    # Отзывы теперь показываем и на корейском (каждый на своём языке).
+    # Ниже — только нормализация подписи даты и убор относительного «времени».
     label = "Google 리뷰" if lang.startswith("ko") else ("review on Google" if lang.startswith("en") else "отзыв на Google")
     text = re.sub(
         r'(<div\s+class=["\']rv-date["\']>).*?(</div>)',

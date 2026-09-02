@@ -991,9 +991,8 @@ def trust_bar(lang, base):
 '''
 
 def reviews_block(lang, base=""):
-    """Живая карусель реальных Google-отзывов (единый источник seo/reviews_data.py)."""
-    if lang == "ko":
-        return ""
+    """Живая карусель реальных Google-отзывов (единый источник seo/reviews_data.py).
+    Отзывы показываем на всех языках, каждый на своём: ru/en/ko."""
     import reviews_data
     return "\n    " + reviews_data.carousel_section(lang, base)
 
