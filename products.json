@@ -1,6 +1,6 @@
 {
- "generated": "2026-09-02 15:55",
- "count": 139,
+ "generated": "2026-09-02 20:15",
+ "count": 140,
  "categories": [
   {
    "key": "all",
@@ -3243,6 +3243,29 @@
     "img/products/buket-2-pachki-eustom-belaya-upakovka/4.webp",
     "img/products/buket-2-pachki-eustom-belaya-upakovka/5.webp",
     "img/products/buket-2-pachki-eustom-belaya-upakovka/6.webp"
+   ]
+  },
+  {
+   "id": 140,
+   "slug": "tort-shokoladnyy-dollary-butylka-zheltoe-serdce",
+   "name": "Шоколадный торт с долларами, бутылкой и жёлтым сердцем",
+   "desc": "Эффектный шоколадный торт с шоколадным подтёком, украшенный купюрами по 100 долларов, тёмной бутылкой, свежими фруктами и ягодами, зелёными кремовыми листиками и жёлтым сердцем. Отличный подарок мужчине на день рождения. Рассчитан примерно на 5 человек. Привозим в красивой коробке с окошком, в комплекте свечи, тарелки и вилки. Торт заказывается онлайн только вместе с букетом, шарами или подарочным набором",
+   "alt": "шоколадный торт доллары бутылка фрукты жёлтое сердце Нячанг доставка",
+   "price_vnd": 500000,
+   "price": "500 000 донгов",
+   "price_sub": "≈ $20 · 1 900 ₽",
+   "cats": [
+    "cakes"
+   ],
+   "color": "",
+   "images": [
+    "img/products/tort-shokoladnyy-dollary-butylka-zheltoe-serdce/1.webp",
+    "img/products/tort-shokoladnyy-dollary-butylka-zheltoe-serdce/2.webp",
+    "img/products/tort-shokoladnyy-dollary-butylka-zheltoe-serdce/3.webp",
+    "img/products/tort-shokoladnyy-dollary-butylka-zheltoe-serdce/4.webp",
+    "img/products/tort-shokoladnyy-dollary-butylka-zheltoe-serdce/5.webp",
+    "img/products/tort-shokoladnyy-dollary-butylka-zheltoe-serdce/6.webp",
+    "img/products/tort-shokoladnyy-dollary-butylka-zheltoe-serdce/7.webp"
    ]
   }
  ]
