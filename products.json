@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-30 11:02",
- "count": 136,
+ "generated": "2026-09-02 11:50",
+ "count": 137,
  "categories": [
   {
    "key": "all",
@@ -3173,6 +3173,29 @@
     "img/products/tort-shokoladnyy-dollary-vino-frukty/6.webp",
     "img/products/tort-shokoladnyy-dollary-vino-frukty/7.webp",
     "img/products/tort-shokoladnyy-dollary-vino-frukty/8.webp"
+   ]
+  },
+  {
+   "id": 137,
+   "slug": "101-krasnaya-roza-korzina-cifra-1",
+   "name": "101 красная роза в корзине с цифрой «1» в центре",
+   "desc": "пышная круглая корзина из 101 насыщенной красной розы с выложенной белыми розами цифрой «1» в центре — эффектный и роскошный подарок с сильным вау-эффектом. Идеально на первую годовщину, день рождения или признание в любви. Онлайн-доставка по Нячангу со следующего дня, вложим открытку по желанию",
+   "alt": "101 красная роза в корзине с цифрой 1 в центре Нячанг доставка",
+   "price_vnd": 2500000,
+   "price": "2 500 000 донгов",
+   "price_sub": "≈ $100 · 9 100 ₽",
+   "cats": [
+    "r101"
+   ],
+   "color": "red",
+   "images": [
+    "img/products/101-krasnaya-roza-korzina-cifra-1/1.webp",
+    "img/products/101-krasnaya-roza-korzina-cifra-1/2.webp",
+    "img/products/101-krasnaya-roza-korzina-cifra-1/3.webp",
+    "img/products/101-krasnaya-roza-korzina-cifra-1/4.webp",
+    "img/products/101-krasnaya-roza-korzina-cifra-1/5.webp",
+    "img/products/101-krasnaya-roza-korzina-cifra-1/6.webp",
+    "img/products/101-krasnaya-roza-korzina-cifra-1/7.webp"
    ]
   }
  ]
