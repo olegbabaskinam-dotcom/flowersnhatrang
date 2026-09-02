@@ -16,6 +16,10 @@
 
 ## Дневник
 
+### 2026-09-02 (товар — Букет из 2 пачек эустом)
+- **Товар id139** «Букет из 2 пачек эустом в белой упаковке» (1 200 000 ₫ · ≈ $48 · 4 400 ₽), 6 фото, RU/EN/KO. slug `buket-2-pachki-eustom-belaya-upakovka`, **mixed** / **white** (авто). Аналог id42 (эустома). Генератор сам подключил cart.js ✓.
+- Пайплайн: 6 webp → CSV id139 → gen RU/EN/KO → карточки ×3 каталога → featured (первым) → products.json (mixed=11) → 1.jpg TG → sitemap +3 (636). Дрейф 26 блог откачен. verify 0 по товару, audit_links 0, check_site 0/0.
+
 ### 2026-09-02 (товар — 51 розовая роза + набор шаров S)
 - **Товар id138** «51 розовая роза + набор шаров S (7 фольгированных шаров)» (2 000 000 ₫ · ≈ $80 · 7 300 ₽), 8 фото, RU/EN/KO. slug `51-rozovaya-roza-nabor-sharov-s-7-folgirovannyh`, **комбо r51+balloons** / **pink** (авто). Аналог id124. Первый товар после cart.js-фикса — генератор сам подключил `../cart.js` ✓.
 - Пайплайн: 8 webp → CSV id138 → gen RU/EN/KO → карточки ×3 каталога + ×3 лендинга шаров (balloons) → featured (первым) → products.json (r51=23, balloons=38) → 1.jpg TG → sitemap +3 (633). Дрейф 26 блог откачен. verify 0 по товару, audit_links 0, check_site 0/0.

@@ -1,6 +1,6 @@
 {
- "generated": "2026-09-02 15:49",
- "count": 138,
+ "generated": "2026-09-02 15:55",
+ "count": 139,
  "categories": [
   {
    "key": "all",
@@ -3221,6 +3221,28 @@
     "img/products/51-rozovaya-roza-nabor-sharov-s-7-folgirovannyh/6.webp",
     "img/products/51-rozovaya-roza-nabor-sharov-s-7-folgirovannyh/7.webp",
     "img/products/51-rozovaya-roza-nabor-sharov-s-7-folgirovannyh/8.webp"
+   ]
+  },
+  {
+   "id": 139,
+   "slug": "buket-2-pachki-eustom-belaya-upakovka",
+   "name": "Букет из 2 пачек эустом в белой упаковке",
+   "desc": "пышный букет из двух пачек эустомы (лизиантуса) в белой упаковке — воздушная композиция в бело-сиреневых тонах с зеленью. Нежный и объёмный подарок на любой повод. Онлайн-доставка по Нячангу со следующего дня, вложим открытку по желанию",
+   "alt": "букет из 2 пачек эустомы в белой упаковке Нячанг доставка",
+   "price_vnd": 1200000,
+   "price": "1 200 000 донгов",
+   "price_sub": "≈ $48 · 4 400 ₽",
+   "cats": [
+    "mixed"
+   ],
+   "color": "white",
+   "images": [
+    "img/products/buket-2-pachki-eustom-belaya-upakovka/1.webp",
+    "img/products/buket-2-pachki-eustom-belaya-upakovka/2.webp",
+    "img/products/buket-2-pachki-eustom-belaya-upakovka/3.webp",
+    "img/products/buket-2-pachki-eustom-belaya-upakovka/4.webp",
+    "img/products/buket-2-pachki-eustom-belaya-upakovka/5.webp",
+    "img/products/buket-2-pachki-eustom-belaya-upakovka/6.webp"
    ]
   }
  ]
