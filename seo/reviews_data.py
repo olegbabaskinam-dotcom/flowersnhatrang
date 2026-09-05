@@ -135,7 +135,7 @@ IMG = [
    {"ru":"неделю назад","en":"a week ago","ko":"1주 전"},
    {"ru":"Отличная работа!) Молодцы. Вчера списались, всё обсудили, договорились. Отвечают очень быстро. Готовы к любым просьбам и требованиям). Расчёт переводом ₽, очень удобно! Удачи в вашем красивом бизнесе, который приносит людям улыбки и радость. Так держать!) 👏🔥🚀🎉👍",
     "en":"Great job!) Well done. We messaged yesterday, discussed everything and agreed. They reply very quickly and are ready for any request. Payment by transfer in rubles, very convenient! Good luck with your beautiful business that brings people smiles and joy. Keep it up!) 👏🔥🚀🎉👍",
-    "ko":"훌륭한 일 처리예요!) 멋져요. 어제 연락해서 모든 걸 상의하고 정했어요. 답장이 아주 빠르고 어떤 요청에도 응해줘요. 루블 송금 결제라 정말 편해요! 사람들에게 미소와 기쁨을 주는 멋진 사업, 번창하시길 바라요. 화이팅!) 👏🔥🚀🎉👍"},
+    "ko":"훌륭한 일 처리예요!) 멋져요. 어제 연락해서 모든 걸 상의하고 정했어요. 답장이 아주 빠르고 어떤 요청에도 응해줘요. 결제도 간편해요! 사람들에게 미소와 기쁨을 주는 멋진 사업, 번창하시길 바라요. 화이팅!) 👏🔥🚀🎉👍"},
    "artur"),
  ("Никита Гойнов","#AD1457","Н",
    {"ru":"неделю назад","en":"a week ago","ko":"1주 전"},
@@ -247,6 +247,31 @@ IMG = [
    "vladimir"),
 ]
 
+# Реальные корейские клиенты (не перевод) — их выносим ПЕРВЫМИ на KO и помечаем.
+KR_CUSTOMERS = {"Wonjin Seo"}
+
+# Интринсик-размеры фото отзывов (px) для width/height → без CLS и без ошибок аудита.
+DIMS = {
+ "alameda":(254,356),"alex":(700,486),"alexandra":(591,799),"artur":(591,615),
+ "danil":(700,373),"diana-n":(525,282),"diana-s":(591,510),"dmitriy-ya":(591,468),
+ "dmitriy":(525,346),"elizaveta-t":(700,366),"evgeniy-m":(520,354),"ilona":(700,934),
+ "marina":(520,344),"natalya-e":(700,483),"nikita":(540,345),"valeria":(700,941),
+ "vitaliy":(254,360),"vitaly-s":(700,404),"vladimir":(521,344),"yernar":(700,941),
+ "zhanylai":(520,356),
+}
+
+# Пометка происхождения отзыва (честно): реальный кореец / зарубежный клиент.
+ORIGIN_BADGE = {
+ "ko": {"kr": "🇰🇷 실제 한국 고객", "intl": "🌍 해외 고객 (번역)"},
+}
+
+# Локализованный alt для фото по языку.
+ALT_TXT = {
+ "ru": "{name} — отзыв с фото букета, доставка цветов Нячанг",
+ "en": "{name} — customer review photo, Nha Trang flower delivery",
+ "ko": "{name} — 꽃다발 사진 후기, 나트랑 꽃배달",
+}
+
 STAR = '★★★★★'
 GLOGO = ('<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" aria-hidden="true">'
  '<path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.5 30.1 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.3 17.6 9.5 24 9.5z"/>'
@@ -264,8 +289,16 @@ def card(r, lang, base=""):
     name, color, ini, date, text = r[0], r[1], r[2], r[3], r[4]
     # Google возвращает относительное время ("вчера", "2 дня назад").
     # В статичном HTML оно быстро становится ложным, поэтому показываем
-    # честную нейтральную подпись и даём ссылку на живой источник.
+    # честную нейтральную подпись и даём ЖИВУЮ ссылку на источник (Google Maps).
     date_label = {"ru": "отзыв на Google", "en": "review on Google", "ko": "Google 리뷰"}[lang]
+    date_html = (f'<a class="rv-date rv-glink" href="{MAPS}" target="_blank" '
+                 f'rel="noopener" title="Google">{date_label}</a>')
+    # KO: честная пометка происхождения (реальный кореец / зарубежный клиент).
+    badge = ""
+    if lang == "ko":
+        origin = "kr" if name in KR_CUSTOMERS else "intl"
+        badge = (f'\n<span class="rv-badge rv-badge--{origin}">'
+                 f'{ORIGIN_BADGE["ko"][origin]}</span>')
     photo = r[5] if len(r) > 5 else None
     img = ""
     txtcls = "rv-text"
@@ -273,16 +306,17 @@ def card(r, lang, base=""):
     if photo:
         cardcls = "rv-card rv-card--img"
         txtcls = "rv-text rv-text--full"
+        w, h = DIMS.get(photo, (700, 500))
+        alt = ALT_TXT[lang].format(name=html.escape(name))
         img = (f'\n<img class="rv-photo" src="{base}img/site/reviews/{photo}.webp" '
-               f'alt="{html.escape(name)} — отзыв с фото букета, доставка цветов Нячанг" '
-               f'loading="lazy" decoding="async" width="700">')
+               f'alt="{alt}" loading="lazy" decoding="async" width="{w}" height="{h}">')
     return f'''<article class="{cardcls}">
 <header class="rv-head">
 <div class="rv-ava" style="background:{color}">{html.escape(ini)}</div>
-<div class="rv-meta"><div class="rv-name">{html.escape(name)}</div><div class="rv-date">{date_label}</div></div>
+<div class="rv-meta"><div class="rv-name">{html.escape(name)}</div>{date_html}</div>
 {GLOGO}
 </header>
-<div class="rv-stars" aria-label="5 / 5">{STAR}</div>
+<div class="rv-stars" aria-label="5 / 5">{STAR}</div>{badge}
 <p class="{txtcls}">{html.escape(text[lang])}</p>{img}
 </article>'''
 
@@ -301,6 +335,11 @@ STYLE = '''<style>
 .rv-meta{flex:1 1 auto;min-width:0}
 .rv-name{font-weight:600;color:#1a1a1a;font-size:.92rem;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rv-date{color:#9c9490;font-size:.75rem;margin-top:2px}
+.rv-date.rv-glink{display:inline-block;text-decoration:none}
+.rv-date.rv-glink:hover{color:#c0687a;text-decoration:underline}
+.rv-badge{display:inline-flex;align-items:center;gap:.25rem;font-size:.68rem;font-weight:700;padding:2px 9px;border-radius:999px;width:fit-content;letter-spacing:.2px}
+.rv-badge--kr{background:#e7f4ec;color:#1f7a44;border:1px solid #cfe9d9}
+.rv-badge--intl{background:#f2efec;color:#8a807b;border:1px solid #e7e1de}
 .rv-stars{color:#fbbc04;font-size:.98rem;letter-spacing:1.5px}
 .rv-text{color:#57514e;font-size:.88rem;line-height:1.55;margin:0;display:-webkit-box;-webkit-line-clamp:9;-webkit-box-orient:vertical;overflow:hidden}
 .rv-text--full{display:block;-webkit-line-clamp:none;overflow:visible}
@@ -314,7 +353,16 @@ STYLE = '''<style>
 
 def carousel_section(lang, base=""):
     t = L[lang]
-    cards = "\n".join(card(r, lang, base) for r in IMG) + "\n" + "\n".join(card(r, lang) for r in R)
+    if lang == "ko":
+        # KO: сначала настоящие корейские клиенты, затем фото-отзывы, затем остальные.
+        kr = [r for r in R if r[0] in KR_CUSTOMERS]
+        rest = [r for r in R if r[0] not in KR_CUSTOMERS]
+        seq = ([card(r, lang, base) for r in kr]
+               + [card(r, lang, base) for r in IMG]
+               + [card(r, lang, base) for r in rest])
+        cards = "\n".join(seq)
+    else:
+        cards = "\n".join(card(r, lang, base) for r in IMG) + "\n" + "\n".join(card(r, lang, base) for r in R)
     return f'''<!--REVIEWS-START-->
     <section class="reveal py-10 px-4 border-b border-stone-100">
         <div class="max-w-6xl mx-auto">

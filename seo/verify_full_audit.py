@@ -89,8 +89,10 @@ def main() -> int:
         if (rel.endswith("-ko.html") or rel.endswith("-kr.html") or rel in {"catalog-ko.html", "blog-ko.html", "index-kr.html"}):
             if forbidden_ko_payment.search(text):
                 errors.append(f"запрещённая оплата в KO: {rel}")
-            if 'class="rv-wrap"' in text:
-                errors.append(f"неподходящий блок отзывов в KO: {rel}")
+            # KO-отзывы теперь НАМЕРЕННО показываются на корейском (реальные корейцы
+            # помечены отдельно, зарубежные — с пометкой «번역»). Блок rv-wrap на KO
+            # больше не считается ошибкой; вместо этого запрещаем русские виджеты-рейтинги
+            # (их ловит проверка aggregateRating/1000+/5.0 выше).
             if re.search(r"ежедневно|донгов|aria-label=[\"'](?:Корзина|Меню)[\"']", text):
                 errors.append(f"русский интерфейсный текст в KO: {rel}")
 
