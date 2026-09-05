@@ -1,6 +1,6 @@
 {
- "generated": "2026-09-02 20:15",
- "count": 140,
+ "generated": "2026-09-05 10:30",
+ "count": 142,
  "categories": [
   {
    "key": "all",
@@ -3266,6 +3266,53 @@
     "img/products/tort-shokoladnyy-dollary-butylka-zheltoe-serdce/5.webp",
     "img/products/tort-shokoladnyy-dollary-butylka-zheltoe-serdce/6.webp",
     "img/products/tort-shokoladnyy-dollary-butylka-zheltoe-serdce/7.webp"
+   ]
+  },
+  {
+   "id": 141,
+   "slug": "buket-2-pachki-belyh-liliy-belaya-upakovka",
+   "name": "Букет из 2 пачек белых лилий в белой упаковке",
+   "desc": "Пышный букет из двух пачек белых лилий в белой упаковке — крупные бутоны с нежным ароматом и сочной зеленью. Элегантный и статусный подарок на любой повод. Онлайн-доставка по Нячангу со следующего дня, вложим открытку по желанию",
+   "alt": "букет из 2 пачек белых лилий в белой упаковке Нячанг доставка",
+   "price_vnd": 1200000,
+   "price": "1 200 000 донгов",
+   "price_sub": "≈ $48 · 4 400 ₽",
+   "cats": [
+    "mixed"
+   ],
+   "color": "white",
+   "images": [
+    "img/products/buket-2-pachki-belyh-liliy-belaya-upakovka/1.webp",
+    "img/products/buket-2-pachki-belyh-liliy-belaya-upakovka/2.webp",
+    "img/products/buket-2-pachki-belyh-liliy-belaya-upakovka/3.webp",
+    "img/products/buket-2-pachki-belyh-liliy-belaya-upakovka/4.webp",
+    "img/products/buket-2-pachki-belyh-liliy-belaya-upakovka/5.webp",
+    "img/products/buket-2-pachki-belyh-liliy-belaya-upakovka/6.webp"
+   ]
+  },
+  {
+   "id": 142,
+   "slug": "yarkaya-sbornaya-korzina-15-rozovyh-sharov",
+   "name": "Яркая сборная корзина + 15 насыщенных розовых резиновых шаров",
+   "desc": "Яркая сборная корзина из свежих розовых роз и эустомы с сочной зеленью в плетёной корзине, дополненная связкой из 15 насыщенных розовых резиновых шаров. Эффектный праздничный набор на день рождения или юбилей. Онлайн-доставка по Нячангу со следующего дня, вложим открытку по желанию",
+   "alt": "яркая сборная корзина и 15 розовых резиновых шаров Нячанг доставка",
+   "price_vnd": 3000000,
+   "price": "3 000 000 донгов",
+   "price_sub": "≈ $120 · 11 000 ₽",
+   "cats": [
+    "mixed",
+    "balloons"
+   ],
+   "color": "pink",
+   "images": [
+    "img/products/yarkaya-sbornaya-korzina-15-rozovyh-sharov/1.webp",
+    "img/products/yarkaya-sbornaya-korzina-15-rozovyh-sharov/2.webp",
+    "img/products/yarkaya-sbornaya-korzina-15-rozovyh-sharov/3.webp",
+    "img/products/yarkaya-sbornaya-korzina-15-rozovyh-sharov/4.webp",
+    "img/products/yarkaya-sbornaya-korzina-15-rozovyh-sharov/5.webp",
+    "img/products/yarkaya-sbornaya-korzina-15-rozovyh-sharov/6.webp",
+    "img/products/yarkaya-sbornaya-korzina-15-rozovyh-sharov/7.webp",
+    "img/products/yarkaya-sbornaya-korzina-15-rozovyh-sharov/8.webp"
    ]
   }
  ]
