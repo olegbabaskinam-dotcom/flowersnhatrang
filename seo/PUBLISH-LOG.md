@@ -16,6 +16,14 @@
 
 ## Дневник
 
+### 2026-09-07 (НОВАЯ КАТЕГОРИЯ «доп товары» — апселл на оформлении)
+- **Новый тип товара `addon`** (свой ряд `dop1, dop2…` + общий product id). Появляются НЕ в каталоге, а карточкой в `cart.html` на этапе оформления («✨ Добавьте к заказу», мини-описание «зачем» + кнопка добавить, тап по карточке → полная SEO-страница). Есть SEO-страницы RU/EN/KO + sitemap → поиск подхватывает. В общий каталог / featured / products.json НЕ входят.
+- **id143** «Пластиковая тара для цветов» (dop1, 100 000 ₫ · $4 · 400 ₽, 4 фото) slug `dop-plastikovaya-tara-dlya-cvetov`.
+- **id144** «Фольгированный шар-звезда «Happy Birthday»» (dop2, 150 000 ₫ · $6 · 600 ₽, 5 фото, пудрово-розовая звезда) slug `dop-folgirovannyy-shar-zvezda-happy-birthday`.
+- Механика: `build_site.product_cat`/`product_color` — slug `dop-` → категория `addon` / цвет ''. `build_products_json.py` — строки `dop-` пропускаются (нет в витрине/боте). `cart.html` — блок `#addonBox` + `renderAddons()` + конфиг `ADDONS` (RU/EN/KO), доп-товар не считается «главным» для правила торта (`cakeWarn`).
+- Пайплайн: 9 webp (≤1200) → CSV id143/id144 → gen RU/EN/KO → sitemap +6 (660) → fix_images/add_noopener/fix_metadata точечно на 6 файлов → products.json 142 (dop исключены) → JS-синтаксис addon-блок + cart.js OK → check_site ❌0 (⚠️1 = доп-товары не в featured, это by design) → audit_links ❌0.
+- ⚠️ Исходники фото — `img/_src/ДОП-ТОВАРЫ/dop1-…`, `dop2-…` (gitignored). Папка `img/_src/ДОП-ТОВАРЫ/` создана под будущие доп-товары.
+
 ### 2026-09-02 (торт — Шоколадный с долларами, бутылкой и жёлтым сердцем)
 - **Товар id140** (короткий id торта **id22**) «Шоколадный торт с долларами, бутылкой и жёлтым сердцем» (cakes, 500к · $20 · 1 900 ₽), 7 фото, RU/EN/KO. slug `tort-shokoladnyy-dollary-butylka-zheltoe-serdce`. Название/описание по фото. Коробка-окно + свечи/вилки видны. Аналог id136 (отличие — жёлтое сердце).
 - Пайплайн: 7 webp → CSV id140 → gen RU/EN/KO → карточки ×3 каталога (торты в конце) + лендинги torty ×3 → featured → products.json (cakes=28) → 1.jpg TG → sitemap +3 (639). verify 0 по товару, check_site 0/0.

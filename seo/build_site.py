@@ -625,6 +625,8 @@ def product_cat(p):
     import re as _re
     s = p["slug"].lower()
     n = p.get("name_ru", "").lower()
+    if s.startswith("dop-"):
+        return "addon"  # доп-товары: своя категория, НЕ в общем каталоге
     cats = []
     # числа роз в НАЗВАНИИ (перед словом «роз…»): 25/51/101/151
     for num in _re.findall(r'(\d+)\s*[а-яё-]*\s*роз', n):
@@ -655,6 +657,8 @@ def product_cat(p):
 def product_color(p):
     """Цвет роз для фильтра (red/white/pink/purple/'')."""
     s = p["slug"].lower()
+    if s.startswith("dop-"):
+        return ""  # у доп-товаров цвета роз нет
     if s == "151-krasnaya-roza-belaya-upakovka-101-belo-rozovaya-korzina":
         return "red"
     if s.startswith("podarochnyy-nabor") or s.startswith("podarok-nabor") or s.startswith("tort"):

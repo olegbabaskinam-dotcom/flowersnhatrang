@@ -87,6 +87,8 @@ def main():
             slug = row["slug"].strip()
             if not slug:
                 continue
+            if slug.startswith("dop-"):
+                continue  # доп-товары не в общей витрине/каталоге — только апселл в оформлении
             items.append({
                 "id":        int(row["id"]),
                 "slug":      slug,
