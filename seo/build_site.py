@@ -659,6 +659,9 @@ def product_color(p):
     s = p["slug"].lower()
     if s.startswith("dop-"):
         return ""  # у доп-товаров цвета роз нет
+    if s in ("101-rozovaya-roza-belaya-upakovka-plastikovaya-tara",
+             "25-nezhno-rozovaya-roza-belaya-upakovka-otkrytka"):
+        return "pink"  # id145/id146: розы розовые, «belaya» упаковка не должна давать white
     if s == "151-krasnaya-roza-belaya-upakovka-101-belo-rozovaya-korzina":
         return "red"
     if s.startswith("podarochnyy-nabor") or s.startswith("podarok-nabor") or s.startswith("tort"):

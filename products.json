@@ -1,6 +1,6 @@
 {
- "generated": "2026-09-07 12:14",
- "count": 142,
+ "generated": "2026-09-07 12:35",
+ "count": 144,
  "categories": [
   {
    "key": "all",
@@ -3313,6 +3313,51 @@
     "img/products/yarkaya-sbornaya-korzina-15-rozovyh-sharov/6.webp",
     "img/products/yarkaya-sbornaya-korzina-15-rozovyh-sharov/7.webp",
     "img/products/yarkaya-sbornaya-korzina-15-rozovyh-sharov/8.webp"
+   ]
+  },
+  {
+   "id": 145,
+   "slug": "101-rozovaya-roza-belaya-upakovka-plastikovaya-tara",
+   "name": "101 розовая роза в белой упаковке + пластиковая тара",
+   "desc": "Роскошный букет из 101 нежно-розовой розы в стильной белой упаковке. В комплекте — пластиковая тара под дерево, чтобы букет сразу было куда поставить и он дольше радовал. Эффектный подарок на день рождения, юбилей или признание в любви. Онлайн-доставка по Нячангу со следующего дня, вложим открытку по желанию",
+   "alt": "101 розовая роза в белой упаковке и пластиковая тара Нячанг доставка",
+   "price_vnd": 1600000,
+   "price": "1 600 000 донгов",
+   "price_sub": "≈ $64 · 5 900 ₽",
+   "cats": [
+    "r101"
+   ],
+   "color": "pink",
+   "images": [
+    "img/products/101-rozovaya-roza-belaya-upakovka-plastikovaya-tara/1.webp",
+    "img/products/101-rozovaya-roza-belaya-upakovka-plastikovaya-tara/2.webp",
+    "img/products/101-rozovaya-roza-belaya-upakovka-plastikovaya-tara/3.webp",
+    "img/products/101-rozovaya-roza-belaya-upakovka-plastikovaya-tara/4.webp",
+    "img/products/101-rozovaya-roza-belaya-upakovka-plastikovaya-tara/5.webp",
+    "img/products/101-rozovaya-roza-belaya-upakovka-plastikovaya-tara/6.webp",
+    "img/products/101-rozovaya-roza-belaya-upakovka-plastikovaya-tara/7.webp"
+   ]
+  },
+  {
+   "id": 146,
+   "slug": "25-nezhno-rozovaya-roza-belaya-upakovka-otkrytka",
+   "name": "25 нежно-розовых роз в белой упаковке + открытка",
+   "desc": "Нежный букет из 25 розовых роз в аккуратной белой упаковке с атласной лентой. В комплекте — открытка с тёплыми словами. Изящный знак внимания на день рождения, свидание или просто без повода. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "25 нежно-розовых роз в белой упаковке и открытка Нячанг доставка",
+   "price_vnd": 500000,
+   "price": "500 000 донгов",
+   "price_sub": "≈ $20 · 1 900 ₽",
+   "cats": [
+    "r25"
+   ],
+   "color": "pink",
+   "images": [
+    "img/products/25-nezhno-rozovaya-roza-belaya-upakovka-otkrytka/1.webp",
+    "img/products/25-nezhno-rozovaya-roza-belaya-upakovka-otkrytka/2.webp",
+    "img/products/25-nezhno-rozovaya-roza-belaya-upakovka-otkrytka/3.webp",
+    "img/products/25-nezhno-rozovaya-roza-belaya-upakovka-otkrytka/4.webp",
+    "img/products/25-nezhno-rozovaya-roza-belaya-upakovka-otkrytka/5.webp",
+    "img/products/25-nezhno-rozovaya-roza-belaya-upakovka-otkrytka/6.webp"
    ]
   }
  ]
