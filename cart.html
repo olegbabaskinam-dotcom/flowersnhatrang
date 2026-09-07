@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<script>/* анти-кликджекинг: не даём встроить страницу оплаты в чужой iframe */if(self!==top){try{top.location=self.location;}catch(e){document.addEventListener('DOMContentLoaded',function(){if(document.body)document.body.style.display='none';});}}</script>
 <title>Корзина — Доставка цветов в Нячанге</title>
 <meta name="robots" content="noindex,nofollow">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NNYC00Y4EB"></script>
@@ -17,9 +18,9 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 /* ===== i18n корзины/заказа (RU/EN/KO) ===== */
 (function(){
@@ -504,6 +505,7 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
     </div>
 
     <form id="orderForm" autocomplete="on">
+      <input type="text" name="website" id="hp_website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;opacity:0;pointer-events:none">
       <div class="card">
         <div class="field">
           <label class="req" for="items" data-i18n="lbl_items">Что заказываете</label>
@@ -1391,6 +1393,7 @@ form.addEventListener('submit',async e=>{
     email:form.email.value.trim(),
     card:(form.comment&&form.comment.value?form.comment.value.trim():""),
     lang:window.FLW_LANG||'ru',
+    hp:(form.website&&form.website.value)?form.website.value:"",
   };
   btn.disabled=true; const old=btn.innerHTML; btn.innerHTML='<span class="spin"></span>'+tr('sending');
   try{
