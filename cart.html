@@ -2,6 +2,7 @@
 <html lang="ru" class="scroll-smooth">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Корзина — Доставка цветов в Нячанге</title>
 <meta name="robots" content="noindex,nofollow">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NNYC00Y4EB"></script>
@@ -28,6 +29,8 @@
   try{localStorage.setItem('flw_lang',l);}catch(e){}
   window.FLW_LANG=l; document.documentElement.lang=l;
 })();
+/* безопасное экранирование любых внешних/пользовательских данных перед innerHTML */
+function escHtml(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 var I18N_RAW={
  page_title:{ru:"Корзина — Доставка цветов в Нячанге",en:"Cart — Flower delivery in Nha Trang",ko:"장바구니 — 나트랑 꽃 배달"},
  strip:{ru:"Качество · Ответственность · Пунктуальность",en:"Quality · Responsibility · Punctuality",ko:"품질 · 책임감 · 시간 엄수"},
@@ -1145,7 +1148,7 @@ function updateFound(){
     window.__outside=false; window.__island=true; window.__delFee=0; window.__delLabel=tr('island_zone');
     var amtI=document.getElementById('amount'), stI=(window.Cart?Cart.total():0);
     if(amtI && stI>0) amtI.value=window.fmtMoney(stI,'VND')+' · '+tr('amt_free_full');
-    box.innerHTML="📍 <b>"+(foundLabel||tr('pointOnMap'))+"</b><br>"+
+    box.innerHTML="📍 <b>"+escHtml(foundLabel||tr('pointOnMap'))+"</b><br>"+
       "<a href='"+mapsLink()+"' target='_blank' rel='noopener noreferrer'>"+mapsLink()+"</a>"+
       "<div style='margin-top:8px;padding:11px 13px;background:#fdf6ec;border:1px solid #f3e2c7;border-radius:12px;color:#8a6d3b;font-size:14px;line-height:1.55'>"+tr('island_msg')+"</div>";
     try{ if(typeof render==='function') render(); }catch(e){}
@@ -1154,14 +1157,14 @@ function updateFound(){
   window.__island=false;
   if(isAirport(latlng.la,latlng.ln) || latlng.la < AIRPORT_LAT){
     window.__outside=true; window.__delFee=0; window.__delLabel='аэропорт';
-    box.innerHTML="📍 <b>"+(foundLabel||tr('pointOnMap'))+"</b><br>"+
+    box.innerHTML="📍 <b>"+escHtml(foundLabel||tr('pointOnMap'))+"</b><br>"+
       "<a href='"+mapsLink()+"' target='_blank' rel='noopener noreferrer'>"+mapsLink()+"</a>"+
       "<div style='margin-top:8px;font-weight:700;color:#9b2c2c'>"+tr('airport_msg')+"</div>";
     return;
   }
   if(!inArea(latlng.la,latlng.ln)){
     window.__outside=true; window.__delFee=0; window.__delLabel='вне зоны';
-    box.innerHTML="📍 <b>"+(foundLabel||tr('pointOnMap'))+"</b><br>"+
+    box.innerHTML="📍 <b>"+escHtml(foundLabel||tr('pointOnMap'))+"</b><br>"+
       "<a href='"+mapsLink()+"' target='_blank' rel='noopener noreferrer'>"+mapsLink()+"</a>"+
       "<div style='margin-top:8px;font-weight:700;color:#9b2c2c'>"+tr('outside_msg')+"</div>";
     return;
@@ -1188,7 +1191,7 @@ function updateFound(){
       '<div style="display:flex;justify-content:space-between;padding:7px 0 0;margin-top:5px;border-top:1px dashed #eee;font-weight:800;font-size:16px"><span>'+tr('z_total')+'</span><span>'+window.fmtMoney(subtotal+z.fee,cur)+'</span></div>'+
     '</div>';
   }
-  box.innerHTML="📍 <b>"+(foundLabel||tr('pointOnMap'))+"</b><br>"+
+  box.innerHTML="📍 <b>"+escHtml(foundLabel||tr('pointOnMap'))+"</b><br>"+
     "<a href='"+mapsLink()+"' target='_blank' rel='noopener noreferrer'>"+mapsLink()+"</a>"+
     "<div style='margin-top:8px;font-weight:600;color:"+col+"'>"+tr('zone_prefix')+z.label+" — "+feeTxt+"</div>"+
     (z.fee?"<div style='font-size:12px;color:#8a6d3b;margin-top:2px'>"+tr('zone_min')+"</div>":"")+
@@ -1235,7 +1238,7 @@ function renderResults(feats){
     const p=f.properties, c=f.geometry.coordinates; // [lon,lat]
     const parts=labelOf(p); const title=parts[0]||tr('point'); const sub=parts.slice(1).join(", ");
     const div=document.createElement('div');
-    div.innerHTML="<div class='rtitle'>"+title+"</div>"+(sub?"<div class='rsub'>"+sub+"</div>":"");
+    div.innerHTML="<div class='rtitle'>"+escHtml(title)+"</div>"+(sub?"<div class='rsub'>"+escHtml(sub)+"</div>":"");
     div.addEventListener('click',()=>{
       searchInput.value=parts.join(", ");
       resultsBox.classList.add('hidden');
@@ -1491,7 +1494,7 @@ document.getElementById('sendReceipt').addEventListener('click',async()=>{
 function finish(){
   document.getElementById('step2').classList.add('hidden');
   document.getElementById('stepDone').classList.remove('hidden');
-  document.getElementById('doneText').innerHTML=tr('done_paid').replace('{id}',currentId);
+  document.getElementById('doneText').innerHTML=tr('done_paid').replace('{id}',escHtml(currentId));
   localStorage.removeItem(LS);
   window.scrollTo(0,0);
 }
@@ -1505,7 +1508,7 @@ document.getElementById('cashBtn').addEventListener('click',async()=>{
     if(!r||!r.ok) throw new Error();
     document.getElementById('step2').classList.add('hidden');
     document.getElementById('stepDone').classList.remove('hidden');
-    document.getElementById('doneText').innerHTML=tr('done_cash').replace('{id}',currentId);
+    document.getElementById('doneText').innerHTML=tr('done_cash').replace('{id}',escHtml(currentId));
     localStorage.removeItem(LS);
     window.scrollTo(0,0);
   }catch(_){
@@ -1519,7 +1522,7 @@ function saveOrder(o){ try{localStorage.setItem(LS,JSON.stringify(o));}catch(_){
 function loadOrder(){ try{return JSON.parse(localStorage.getItem(LS));}catch(_){return null;} }
 (function initResume(){
   // 1) ссылка из письма: ?order=ID → сразу на шаг оплаты этого заказа
-  const urlId=new URLSearchParams(location.search).get('order');
+  const urlId=(new URLSearchParams(location.search).get('order')||'').replace(/[^A-Za-z0-9_-]/g,'').slice(0,40);
   if(urlId){ saveOrder({id:urlId,paid:false}); goPay(urlId); return; }
   // 2) незавершённый заказ в этом браузере
   const o=loadOrder();

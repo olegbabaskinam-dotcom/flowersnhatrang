@@ -1,4 +1,16 @@
 # Приватные файлы — НИКОГДА не коммитить
+# 🔐 секреты и бэкенд-исходники (защита от случайного git add)
+.env
+*.env
+seo/.env
+*.gs
+*.sql
+cloudflare_worker*.js
+*.pem
+*.key
+*.p12
+credentials*.json
+service-account*.json
 *.xlsx
 *.xls
 Март_блок_*.txt

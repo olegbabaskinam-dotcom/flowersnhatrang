@@ -663,7 +663,7 @@ function bindReceipt() {
 }
 function finishOrder(note) {
   document.getElementById("doneText").innerHTML =
-    note + " по заказу <span class='oid'>" + currentId + "</span>.<br>Подтвердим в течение ~10 минут (06:00–21:00). 🌸";
+    note + " по заказу <span class='oid'>" + esc(currentId) + "</span>.<br>Подтвердим в течение ~10 минут (06:00–21:00). 🌸";
   localStorage.removeItem(LS);
   show("scrDone");
 }
@@ -697,6 +697,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!reopen && TG && TG.initDataUnsafe && TG.initDataUnsafe.start_param) {
     reopen = String(TG.initDataUnsafe.start_param).replace(/^pay[_-]?/i, "");
   }
+  reopen = String(reopen || "").replace(/[^A-Za-z0-9_-]/g, "").slice(0, 40);
   if (reopen) { currentId = reopen; goPay(reopen); }
 });
 
