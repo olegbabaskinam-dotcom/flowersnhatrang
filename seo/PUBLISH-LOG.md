@@ -16,6 +16,9 @@
 
 ## Дневник
 
+### 2026-09-08 (товар id147 — набор шаров, 2 стойки)
+- **id147** «2 стойки по 7 фольгированных шаров: бежево-серебряная и красные сердца» (balloons, 2 000 000 ₫ · $80 · 7 600 ₽ по курсу 265, 7 фото). slug `2-stoyki-po-7-folgirovannyh-sharov-serdca`. Пайплайн: webp → CSV → gen RU/EN/KO → карточки ×3 каталога + ×3 лендинга шаров → featured → products.json (balloons=40, всего 145) → sitemap +3 (669) → fix_images точечно → 1.jpg TG. verify цены 265:147, check_site ❌0, audit_links ❌0.
+
 ### 2026-09-07 (🔐 аудит безопасности)
 - Проверка 6 углов. Закрыто+задеплоено `0913eebb`: отражённый XSS через `?order=` и гео-подписи (escHtml в cart.html + esc в tg/app.js, белый список id), укреплён `.gitignore`.
 - Готово к ручному деплою: `Заявки_цветы.gs` — `safeCell_` против formula-injection в таблицу.
