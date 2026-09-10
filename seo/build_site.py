@@ -324,6 +324,18 @@ CARD_JS = """<script>/*MARK-CARD-JS*/
       var ok=(state.cat===''||dc.indexOf(' '+state.cat+' ')>-1)&&(state.color===''||c.getAttribute('data-color')===state.color);
       c.style.display=ok?'':'none';
     });
+    updateCount();
+  }
+  function updateCount(){
+    var el=document.getElementById('catCount'); if(!el) return;
+    var n=0, cards=document.querySelectorAll('.product-card');
+    for(var i=0;i<cards.length;i++){ if(cards[i].style.display!=='none') n++; }
+    var parts=(el.getAttribute('data-tpl')||'{n}').split('{n}');
+    el.textContent='';
+    el.appendChild(document.createTextNode(parts[0]||''));
+    var b=document.createElement('b'); b.style.color='#a94f63'; b.style.fontWeight='800'; b.textContent=String(n);
+    el.appendChild(b);
+    if(parts.length>1) el.appendChild(document.createTextNode(parts[1]||''));
   }
   if(bar){
     bar.querySelectorAll('.filt').forEach(function(b){
@@ -349,6 +361,7 @@ CARD_JS = """<script>/*MARK-CARD-JS*/
     });
   }
   applySort();
+  updateCount();
   if(bar){var _hf=(location.hash||'').replace('#','');if(_hf){var _tf=bar.querySelector('.filt-group[data-filter="cat"] .filt[data-val="'+_hf+'"]');if(_tf)_tf.click();}}
 })();
 </script>"""
@@ -1042,7 +1055,11 @@ def render_catalog(lang, products):
         f'<button type="button" class="filt{" active" if v=="asc" else ""}" data-val="{v}">{lbl}</button>'
         for v, lbl in SORT)
     sort_bar = f'<div class="sort-bar"><div class="filt-group" data-filter="sort">{sort_btns}</div></div>'
-    filters = f'{sort_bar}<div class="cat-filters">{filt_group("cat")}{filt_group("color")}</div>'
+    COUNT_TPL = {"ru": "Всего товаров: {n}", "en": "Total products: {n}", "ko": "전체 상품: {n}개"}[lang]
+    COUNT_STYLE = ("font-size:13px;color:#6b6b6b;font-weight:600;background:#fff;"
+                   "border:1px solid #f0e0e5;border-radius:999px;padding:.4rem .95rem;margin-top:.25rem;")
+    count_box = f'<div id="catCount" data-tpl="{COUNT_TPL}" style="{COUNT_STYLE}"></div>'
+    filters = f'{sort_bar}<div class="cat-filters">{filt_group("cat")}{filt_group("color")}{count_box}</div>'
     body = f'''    <main class="flex-grow">
     <section class="py-12 px-4 max-w-5xl mx-auto text-center">
         <h1 class="font-serif text-3xl md:text-4xl font-bold mb-3" style="color:#1a1a1a;">{t["catalog_h1"]}</h1>

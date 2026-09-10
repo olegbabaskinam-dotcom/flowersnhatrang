@@ -182,7 +182,7 @@
     </section>
 
     <section class="pb-16 px-4 max-w-5xl mx-auto pt-12">
-        <div class="sort-bar"><div class="filt-group" data-filter="sort"><button type="button" class="filt active" data-val="asc">Price ↑</button><button type="button" class="filt" data-val="desc">Price ↓</button></div></div><div class="cat-filters"><div class="filt-group" data-filter="cat"><button type="button" class="filt active" data-val="">🌸 All</button><button type="button" class="filt" data-val="r25">🌹 25 roses</button><button type="button" class="filt" data-val="r51">🌹 51 roses</button><button type="button" class="filt" data-val="r101">🌹 101+ roses</button><button type="button" class="filt" data-val="mixed">💐 Mixed</button><button type="button" class="filt" data-val="balloons">🎈 Balloons</button><button type="button" class="filt" data-val="cakes">🎂 Cakes</button><button type="button" class="filt" data-val="nabory">🎁 Gift sets</button></div><div class="filt-group" data-filter="color"><button type="button" class="filt active" data-val="">🎨 All colors</button><button type="button" class="filt" data-val="red">❤️ Red</button><button type="button" class="filt" data-val="white">🤍 White</button><button type="button" class="filt" data-val="pink">💗 Pink</button><button type="button" class="filt" data-val="purple">💜 Purple</button></div></div>
+        <div class="sort-bar"><div class="filt-group" data-filter="sort"><button type="button" class="filt active" data-val="asc">Price ↑</button><button type="button" class="filt" data-val="desc">Price ↓</button></div></div><div class="cat-filters"><div class="filt-group" data-filter="cat"><button type="button" class="filt active" data-val="">🌸 All</button><button type="button" class="filt" data-val="r25">🌹 25 roses</button><button type="button" class="filt" data-val="r51">🌹 51 roses</button><button type="button" class="filt" data-val="r101">🌹 101+ roses</button><button type="button" class="filt" data-val="mixed">💐 Mixed</button><button type="button" class="filt" data-val="balloons">🎈 Balloons</button><button type="button" class="filt" data-val="cakes">🎂 Cakes</button><button type="button" class="filt" data-val="nabory">🎁 Gift sets</button></div><div class="filt-group" data-filter="color"><button type="button" class="filt active" data-val="">🎨 All colors</button><button type="button" class="filt" data-val="red">❤️ Red</button><button type="button" class="filt" data-val="white">🤍 White</button><button type="button" class="filt" data-val="pink">💗 Pink</button><button type="button" class="filt" data-val="purple">💜 Purple</button></div><div id="catCount" data-tpl="Total products: {n}" style="font-size:13px;color:#6b6b6b;font-weight:600;background:#fff;border:1px solid #f0e0e5;border-radius:999px;padding:.4rem .95rem;margin-top:.25rem;"></div></div>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             <div class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group" data-cat="balloons" data-color="">
                 <div class="pcard-slider">
@@ -2788,6 +2788,18 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"], a[href*="kakao"], 
       var ok=(state.cat===''||dc.indexOf(' '+state.cat+' ')>-1)&&(state.color===''||c.getAttribute('data-color')===state.color);
       c.style.display=ok?'':'none';
     });
+    updateCount();
+  }
+  function updateCount(){
+    var el=document.getElementById('catCount'); if(!el) return;
+    var n=0, cards=document.querySelectorAll('.product-card');
+    for(var i=0;i<cards.length;i++){ if(cards[i].style.display!=='none') n++; }
+    var parts=(el.getAttribute('data-tpl')||'{n}').split('{n}');
+    el.textContent='';
+    el.appendChild(document.createTextNode(parts[0]||''));
+    var b=document.createElement('b'); b.style.color='#a94f63'; b.style.fontWeight='800'; b.textContent=String(n);
+    el.appendChild(b);
+    if(parts.length>1) el.appendChild(document.createTextNode(parts[1]||''));
   }
   if(bar){
     bar.querySelectorAll('.filt').forEach(function(b){
@@ -2813,6 +2825,7 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"], a[href*="kakao"], 
     });
   }
   applySort();
+  updateCount();
   if(bar){var _hf=(location.hash||'').replace('#','');if(_hf){var _tf=bar.querySelector('.filt-group[data-filter="cat"] .filt[data-val="'+_hf+'"]');if(_tf)_tf.click();}}
 })();
 </script>
