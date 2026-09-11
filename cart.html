@@ -858,18 +858,36 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
   window.ordersOpen=ordersOpen;
   /* ==== ДОП-ТОВАРЫ (апселл на этапе оформления) ==== */
   var ADDONS=[
-    {id:"dop-plastikovaya-tara-dlya-cvetov", price:100000,
+    {id:"dop-plastikovaya-tara-dlya-cvetov", kind:"vase", price:100000,
      img:"img/products/dop-plastikovaya-tara-dlya-cvetov/1.webp",
      name:{ru:"Пластиковая тара для цветов",en:"Plastic vase for flowers",ko:"꽃용 플라스틱 화병"},
      why:{ru:"Букету сразу есть куда встать — стоит дольше и красиво смотрится дома.",
           en:"Gives the bouquet a place to stand — lasts longer and looks great at home.",
           ko:"부케를 바로 꽂아 둘 수 있어 더 오래 가고 집에서도 예뻐요."}},
-    {id:"dop-folgirovannyy-shar-zvezda-happy-birthday", price:150000,
+    {id:"dop-folgirovannyy-shar-zvezda-happy-birthday", kind:"balloon", price:150000,
      img:"img/products/dop-folgirovannyy-shar-zvezda-happy-birthday/1.webp",
      name:{ru:"Шар-звезда «Happy Birthday»",en:"Star balloon “Happy Birthday”",ko:"별 풍선 “Happy Birthday”"},
-     why:{ru:"Добавит букету праздника — яркий гелиевый акцент на день рождения.",
-          en:"Adds a festive touch — a bright helium accent for a birthday.",
-          ko:"생일에 화사한 헬륨 포인트로 축하 분위기를 더해요."}}
+     why:{ru:"Яркий гелиевый акцент на день рождения.",
+          en:"A bright helium accent for a birthday.",
+          ko:"생일에 화사한 헬륨 포인트."}},
+    {id:"dop-folgirovannyy-shar-krug-happy-birthday-belyy", kind:"balloon", price:150000,
+     img:"img/products/dop-folgirovannyy-shar-krug-happy-birthday-belyy/1.webp",
+     name:{ru:"Круглый шар «Happy Birthday», белый с конфетти",en:"Round balloon “Happy Birthday”, white with confetti",ko:"원형 풍선 “Happy Birthday”, 화이트 컨페티"}},
+    {id:"dop-folgirovannyy-shar-krug-happy-birthday-raduzhnyy", kind:"balloon", price:150000,
+     img:"img/products/dop-folgirovannyy-shar-krug-happy-birthday-raduzhnyy/1.webp",
+     name:{ru:"Круглый шар «Happy Birthday», радужный зигзаг",en:"Round balloon “Happy Birthday”, rainbow chevron",ko:"원형 풍선 “Happy Birthday”, 레인보우 지그재그"}},
+    {id:"dop-folgirovannyy-shar-serdce-i-love-you", kind:"balloon", price:150000,
+     img:"img/products/dop-folgirovannyy-shar-serdce-i-love-you/1.webp",
+     name:{ru:"Шар-сердце «I Love You», чёрный",en:"Heart balloon “I Love You”, black",ko:"하트 풍선 “I Love You”, 블랙"}},
+    {id:"dop-folgirovannyy-shar-serdce-ayvori", kind:"balloon", price:150000,
+     img:"img/products/dop-folgirovannyy-shar-serdce-ayvori/1.webp",
+     name:{ru:"Шар-сердце, цвет айвори",en:"Heart balloon, ivory",ko:"하트 풍선, 아이보리"}},
+    {id:"dop-folgirovannyy-shar-serdce-serebristyy", kind:"balloon", price:150000,
+     img:"img/products/dop-folgirovannyy-shar-serdce-serebristyy/1.webp",
+     name:{ru:"Шар-сердце, серебристый",en:"Heart balloon, silver",ko:"하트 풍선, 실버"}},
+    {id:"dop-folgirovannyy-shar-zvezda-serebristaya", kind:"balloon", price:150000,
+     img:"img/products/dop-folgirovannyy-shar-zvezda-serebristaya/1.webp",
+     name:{ru:"Шар-звезда, серебристый",en:"Star balloon, silver",ko:"별 풍선, 실버"}},
   ];
   function addonLang(){ return (window.FLW_LANG==='en'||window.FLW_LANG==='ko')?window.FLW_LANG:'ru'; }
   function renderAddons(items){
@@ -881,22 +899,44 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
     var subt={ru:'Небольшие приятные дополнения к букету',en:'Small nice extras for your bouquet',ko:'부케에 어울리는 작은 추가 구성'}[L];
     var addw={ru:'＋ Добавить',en:'＋ Add',ko:'＋ 추가'}[L];
     var inc={ru:'в заказе',en:'in order',ko:'담김'}[L];
-    var cards=ADDONS.map(function(a){
-      var url='catalog/'+a.id+'-'+L+'.html';
-      var qty=(items.filter(function(x){return x.id===a.id;})[0]||{}).qty||0;
-      return '<div style="background:#fff;border:1px solid #f0e0e5;border-radius:14px;padding:10px;display:flex;gap:11px;align-items:center">'+
-        '<a href="'+url+'" style="flex-shrink:0;line-height:0"><img src="'+a.img+'" alt="'+a.name[L]+'" loading="lazy" decoding="async" style="width:64px;height:64px;border-radius:10px;object-fit:cover" width="64" height="64"></a>'+
+    var balH={ru:'Гелиевые шары',en:'Helium balloons',ko:'헬륨 풍선'}[L];
+    var swipe={ru:'листайте →',en:'swipe →',ko:'옆으로 넘기기 →'}[L];
+    function qtyOf(id){ return (items.filter(function(x){return x.id===id;})[0]||{}).qty||0; }
+    var vase=ADDONS.filter(function(a){return a.kind==='vase';})[0];
+    var vaseHtml='';
+    if(vase){
+      var vq=qtyOf(vase.id), vu='catalog/'+vase.id+'-'+L+'.html';
+      vaseHtml='<div style="background:#fff;border:1px solid #f0e0e5;border-radius:14px;padding:10px;display:flex;gap:11px;align-items:center">'+
+        '<a href="'+vu+'" style="flex-shrink:0;line-height:0"><img src="'+vase.img+'" alt="'+vase.name[L]+'" loading="lazy" decoding="async" style="width:64px;height:64px;border-radius:10px;object-fit:cover" width="64" height="64"></a>'+
         '<div style="flex:1;min-width:0">'+
-          '<a href="'+url+'" style="text-decoration:none;color:#1a1a1a;font-weight:600;font-size:14px;line-height:1.2;display:block">'+a.name[L]+'</a>'+
-          '<div style="color:#78716c;font-size:12px;margin-top:2px;line-height:1.3">'+a.why[L]+'</div>'+
-          '<div style="color:#1a1a1a;font-weight:700;font-size:13px;margin-top:4px">'+money(a.price)+(qty?' · <span style="color:#a94f63">'+inc+' ('+qty+')</span>':'')+'</div>'+
+          '<a href="'+vu+'" style="text-decoration:none;color:#1a1a1a;font-weight:600;font-size:14px;line-height:1.2;display:block">'+vase.name[L]+'</a>'+
+          '<div style="color:#78716c;font-size:12px;margin-top:2px;line-height:1.3">'+vase.why[L]+'</div>'+
+          '<div style="color:#1a1a1a;font-weight:700;font-size:13px;margin-top:4px">'+money(vase.price)+(vq?' · <span style="color:#a94f63">'+inc+' ('+vq+')</span>':'')+'</div>'+
         '</div>'+
-        '<button type="button" class="addon-add" data-a="'+a.id+'" style="flex-shrink:0;border:none;background:#c0687a;color:#fff;font-weight:700;font-size:12px;padding:9px 12px;border-radius:10px;cursor:pointer">'+addw+'</button>'+
+        '<button type="button" class="addon-add" data-a="'+vase.id+'" style="flex-shrink:0;border:none;background:#c0687a;color:#fff;font-weight:700;font-size:12px;padding:9px 12px;border-radius:10px;cursor:pointer">'+addw+'</button>'+
+      '</div>';
+    }
+    var balloons=ADDONS.filter(function(a){return a.kind==='balloon';});
+    var bCards=balloons.map(function(a){
+      var bq=qtyOf(a.id), bu='catalog/'+a.id+'-'+L+'.html';
+      return '<div style="flex:0 0 auto;width:150px;scroll-snap-align:start;background:#fff;border:1px solid #f0e0e5;border-radius:14px;padding:9px;display:flex;flex-direction:column;gap:6px">'+
+        '<a href="'+bu+'" style="line-height:0;display:block"><img src="'+a.img+'" alt="'+a.name[L]+'" loading="lazy" decoding="async" style="width:100%;height:120px;border-radius:10px;object-fit:cover" width="132" height="120"></a>'+
+        '<a href="'+bu+'" style="text-decoration:none;color:#1a1a1a;font-weight:600;font-size:13px;line-height:1.2;display:block;min-height:31px">'+a.name[L]+'</a>'+
+        '<div style="color:#1a1a1a;font-weight:700;font-size:13px">'+money(a.price)+(bq?' · <span style="color:#a94f63">'+inc+' ('+bq+')</span>':'')+'</div>'+
+        '<button type="button" class="addon-add" data-a="'+a.id+'" style="border:none;background:#c0687a;color:#fff;font-weight:700;font-size:12px;padding:9px 10px;border-radius:10px;cursor:pointer;width:100%">'+addw+'</button>'+
       '</div>';
     }).join('');
-    box.innerHTML='<div style="margin:18px 0 4px"><div style="font-weight:700;font-size:16px;color:#1a1a1a">'+head+'</div>'+
+    var balHtml = balloons.length ? (
+      '<div style="display:flex;align-items:baseline;justify-content:space-between;margin:16px 0 8px">'+
+        '<div style="font-weight:700;font-size:15px;color:#1a1a1a">'+balH+'</div>'+
+        (balloons.length>1?'<div style="color:#a94f63;font-size:12px">'+swipe+'</div>':'')+
+      '</div>'+
+      '<div style="display:flex;gap:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;padding:2px 2px 8px">'+bCards+'</div>'
+    ) : '';
+    box.innerHTML='<div style="margin:18px 0 4px">'+
+      '<div style="font-weight:700;font-size:16px;color:#1a1a1a">'+head+'</div>'+
       '<div style="color:#78716c;font-size:13px;margin:2px 0 10px">'+subt+'</div>'+
-      '<div style="display:flex;flex-direction:column;gap:10px">'+cards+'</div></div>';
+      vaseHtml+balHtml+'</div>';
     box.querySelectorAll('.addon-add').forEach(function(btn){
       btn.onclick=function(){ var a=ADDONS.filter(function(x){return x.id===btn.dataset.a;})[0];
         Cart.add({id:a.id,name:a.name[L],price:a.price,img:a.img,cat:'addon'}); render(); };
