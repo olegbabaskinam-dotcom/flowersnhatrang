@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
 <title>💰 Бухгалтерия Цветы</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#7c3aed">
@@ -462,12 +464,15 @@ if (tg){ tg.ready(); tg.expand(); }
 var PIN='', STATE=null, CURRENT_ORDER=null, EDIT_OP=null, chart1=null, chart2=null;
 // ── Прямая ссылка /buh/?k=<секрет> (иконка на главном экране, вне Telegram) ──
 // Ключ сохраняем на устройстве и СРАЗУ убираем из адреса, чтобы не светился.
-(function(){ try{
-  var q=new URLSearchParams(location.search), k=q.get('k');
-  if(k){ localStorage.setItem('buhKey',k); q.delete('k');
-    history.replaceState(null,'',location.pathname+(q.toString()?('?'+q.toString()):'')); }
+// 🔴 Ключ НАМЕРЕННО остаётся в адресной строке. Раньше он вычищался (replaceState) —
+// и иконка, добавленная на главный экран, сохраняла адрес БЕЗ ключа → «Нет данных входа».
+// Плюс на iOS у приложения с домашнего экрана СВОЁ хранилище, localStorage из Safari туда не переезжает.
+// Поэтому источник правды — URL; localStorage только запасной вариант.
+var URL_KEY='';
+(function(){ try{ URL_KEY=new URLSearchParams(location.search).get('k')||'';
+  if(URL_KEY) localStorage.setItem('buhKey',URL_KEY);
 }catch(e){} })();
-function buhKey(){ try{ return localStorage.getItem('buhKey')||''; }catch(e){ return ''; } }
+function buhKey(){ if(URL_KEY) return URL_KEY; try{ return localStorage.getItem('buhKey')||''; }catch(e){ return ''; } }
 function whoName(){ try{ return localStorage.getItem('who')||''; }catch(e){ return ''; } }
 function linkMode(){ return !(tg && tg.initData) && !!buhKey(); }
 
