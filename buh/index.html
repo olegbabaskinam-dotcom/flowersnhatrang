@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="robots" content="noindex, nofollow">
 <title>💰 Бухгалтерия Цветы</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#7c3aed">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Бухгалтерия">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
@@ -104,6 +111,10 @@
   <div style="font-size:44px">💰</div>
   <h1 style="justify-content:center">Бухгалтерия</h1>
   <p class="muted">Введите ПИН-код</p>
+  <div id="whoBox" class="hidden" style="margin:2px 0 10px">
+    <div class="muted" style="margin-bottom:6px">Кто входит?</div>
+    <div class="seg" id="whoSeg"></div>
+  </div>
   <input id="pin" type="tel" inputmode="numeric" maxlength="6" placeholder="••••">
   <button class="btn" onclick="doLogin()">Войти</button>
   <div id="pinErr" class="err"></div>
@@ -292,6 +303,24 @@
     <div class="tile" onclick="openRecurring()"><span class="ic">🔄</span>Регулярные</div>
     <div class="tile" onclick="openHistory()"><span class="ic">🕘</span>История</div>
     <div class="tile" onclick="openWallets()"><span class="ic">👛</span>Кошельки</div>
+    <div class="tile" onclick="openInstall()"><span class="ic">📲</span>На экран</div>
+  </div>
+</div>
+
+<!-- НА ГЛАВНЫЙ ЭКРАН -->
+<div id="v-install" class="hidden">
+  <button class="back" onclick="openMore()">‹ Назад</button><h2>📲 На главный экран</h2>
+  <div class="card">
+    <p class="muted" style="margin-top:0">Поставь иконку на телефон — бухгалтерия будет открываться одним нажатием, без Telegram.</p>
+    <button class="btn hidden" id="instBtn" onclick="doInstall()">📲 Установить приложение</button>
+    <div id="instSteps" style="font-size:14px;line-height:1.55"></div>
+  </div>
+  <div class="card">
+    <div class="row"><b>Личная ссылка</b><small class="link" onclick="copyLink()">скопировать</small></div>
+    <p class="muted" style="font-size:12px;margin:6px 0 0">Открывать только на своём телефоне. Вход всё равно по ПИНу.</p>
+    <div id="instLink" style="word-break:break-all;font-size:12px;margin-top:8px;color:var(--muted)"></div>
+    <div id="instQr" style="display:flex;justify-content:center;margin-top:12px"></div>
+    <p class="muted" style="font-size:12px;text-align:center;margin:8px 0 0">Наведи камеру другого телефона на QR</p>
   </div>
 </div>
 
@@ -431,6 +460,16 @@ var API_URL = 'https://buhproxy.olegbabaskin-am.workers.dev';
 var tg = window.Telegram ? window.Telegram.WebApp : null;
 if (tg){ tg.ready(); tg.expand(); }
 var PIN='', STATE=null, CURRENT_ORDER=null, EDIT_OP=null, chart1=null, chart2=null;
+// ── Прямая ссылка /buh/?k=<секрет> (иконка на главном экране, вне Telegram) ──
+// Ключ сохраняем на устройстве и СРАЗУ убираем из адреса, чтобы не светился.
+(function(){ try{
+  var q=new URLSearchParams(location.search), k=q.get('k');
+  if(k){ localStorage.setItem('buhKey',k); q.delete('k');
+    history.replaceState(null,'',location.pathname+(q.toString()?('?'+q.toString()):'')); }
+}catch(e){} })();
+function buhKey(){ try{ return localStorage.getItem('buhKey')||''; }catch(e){ return ''; } }
+function whoName(){ try{ return localStorage.getItem('who')||''; }catch(e){ return ''; } }
+function linkMode(){ return !(tg && tg.initData) && !!buhKey(); }
 
 function initData(){ return (tg && tg.initData) ? tg.initData : ''; }
 function base(){ return localStorage.getItem('base')||'VND'; }
@@ -446,7 +485,7 @@ function sleep(ms){ return new Promise(function(r){ setTimeout(r,ms); }); }
 async function api(action, extra, silent){
   if(!silent) loader(true);
   try{
-    var payload=Object.assign({action:action, initData:initData(), pin:PIN, base:base()}, extra||{});
+    var payload=Object.assign({action:action, initData:initData(), buhKey:buhKey(), who:whoName(), pin:PIN, base:base()}, extra||{});
     var AMT={amount:1,payAmount:1,balance:1,cost:1,value:1};
     Object.keys(payload).forEach(function(k){ if(AMT[k]&&typeof payload[k]==='string') payload[k]=payload[k].replace(/\s/g,'').replace(',','.'); });
     var body=JSON.stringify(payload), lastErr=null;
@@ -466,7 +505,7 @@ async function api(action, extra, silent){
 }
 async function refreshReserveNow(){ var res=await api('refreshReserve',{}); if(res&&res.ok){ STATE=res; toast('Резерв обновлён из Финансов'); openReserve(); } else toast(res.error||'Ошибка'); }
 
-var VIEWS=['pin','start','main','expense','transfer','pending','confirm','horizon','map','mapadd','mapexport','couriers','more','reserve','recurring','history','edit','wallets','reports','tasks','taskdo','adjust','paybill'];
+var VIEWS=['pin','start','main','expense','transfer','pending','confirm','horizon','map','mapadd','mapexport','couriers','more','reserve','recurring','history','edit','wallets','reports','tasks','taskdo','adjust','paybill','install'];
 function go(v){ VIEWS.forEach(function(x){ var el=document.getElementById('v-'+x); if(el) el.classList.toggle('hidden', x!==v); }); window.scrollTo(0,0); }
 
 // ---------- ВХОД ----------
@@ -1113,7 +1152,47 @@ function drawMonths(months){ var ctx=document.getElementById('chMonths'); if(cha
 function drawCats(cats){ var ctx=document.getElementById('chCats'); if(chart2) chart2.destroy(); if(!cats||!cats.length) return;
   chart2=new Chart(ctx,{type:'doughnut',data:{labels:cats.map(function(c){return c.name;}),datasets:[{data:cats.map(function(c){return c.value;}),backgroundColor:['#7c3aed','#a855f7','#c084fc','#f0abfc','#f9a8d4','#fca5a5','#fdba74','#86efac']}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:11}}}}}}); }
 
+// ---------- 📲 НА ГЛАВНЫЙ ЭКРАН ----------
+var INSTALL_EVT=null;
+window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); INSTALL_EVT=e;
+  var b=document.getElementById('instBtn'); if(b) b.classList.remove('hidden'); });
+function doInstall(){ if(!INSTALL_EVT){ toast('Браузер не предлагает установку — поставь вручную по инструкции'); return; }
+  INSTALL_EVT.prompt(); INSTALL_EVT.userChoice.then(function(){ INSTALL_EVT=null;
+    var b=document.getElementById('instBtn'); if(b) b.classList.add('hidden'); }); }
+function myLink(){ var k=buhKey(); return location.origin+location.pathname+(k?('?k='+encodeURIComponent(k)):''); }
+function copyLink(){ var t=myLink();
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){ toast('Ссылка скопирована'); },function(){ toast('Скопируй вручную'); }); }
+  else { toast('Скопируй вручную'); } }
+function openInstall(){
+  document.getElementById('instLink').textContent = buhKey() ? myLink() : 'Ссылка появится после входа по ней (сейчас открыто из Telegram)';
+  var ios=/iPad|iPhone|iPod/.test(navigator.userAgent);
+  document.getElementById('instSteps').innerHTML = ios
+    ? '<b>iPhone (Safari):</b><br>1. Открой эту ссылку в <b>Safari</b> (в Chrome на iPhone не работает)<br>2. Внизу кнопка «Поделиться» ⬆️<br>3. «На экран «Домой»» → «Добавить»'
+    : '<b>Android (Chrome):</b><br>1. Открой ссылку в <b>Chrome</b><br>2. Меню ⋮ справа вверху<br>3. «Установить приложение» (или «Добавить на главный экран»)';
+  var box=document.getElementById('instQr'); box.innerHTML='';
+  if(buhKey()){
+    var draw=function(){ try{ new QRCode(box,{text:myLink(),width:190,height:190,correctLevel:QRCode.CorrectLevel.M}); }catch(e){} };
+    if(window.QRCode) draw();
+    else { var sc=document.createElement('script');
+      sc.src='https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+      sc.integrity='sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==';
+      sc.crossOrigin='anonymous'; sc.referrerPolicy='no-referrer'; sc.onload=draw; document.head.appendChild(sc); }
+  }
+  go('install');
+}
+function renderWho(){
+  var box=document.getElementById('whoBox'), seg=document.getElementById('whoSeg');
+  if(!linkMode()){ box.classList.add('hidden'); return; }
+  box.classList.remove('hidden'); seg.innerHTML='';
+  ['Олег','Мама'].forEach(function(n){ var b=document.createElement('button'); b.textContent=n;
+    if(whoName()===n) b.className='on';
+    b.onclick=function(){ try{ localStorage.setItem('who',n); }catch(e){} renderWho(); };
+    seg.appendChild(b); });
+}
+
 window.addEventListener('load', async function(){
+  renderWho();
+  if('serviceWorker' in navigator){ try{ navigator.serviceWorker.register('sw.js'); }catch(e){} }
   var savedPin=localStorage.getItem('pin'); if(savedPin) document.getElementById('pin').value=savedPin;
   var cached=localStorage.getItem('lastState');
   if(savedPin && cached){
