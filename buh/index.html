@@ -55,6 +55,11 @@
   .regcard.due{border-color:#fca5a5;background:#fff5f5}
   .regcard .rl{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
   .regduetag{color:var(--red);font-weight:700;font-size:12px}
+  .adsrow{padding:10px 0;border-bottom:1px solid var(--line)}
+  .adsrow:last-of-type{border-bottom:none}
+  .adsrow.dead{background:#fef2f2;border-radius:10px;padding:10px;margin:6px 0;border-bottom:none}
+  .pbar.dead > i{background:var(--red)}
+  .adsdead{color:var(--red);font-weight:800;font-size:13px;margin-top:6px}
   .mtcard{background:linear-gradient(135deg,#fff7ed,#fef9f4);border:1px solid #fed7aa;border-radius:16px;padding:14px;margin-bottom:12px}
   .taskrow{padding-top:11px;margin-top:11px;border-top:1px solid #f4e3cf}
   .taskrow .tt{font-weight:600;line-height:1.3}
@@ -128,6 +133,7 @@
     <div class="muted" id="rvBarNote" style="margin-top:4px"></div>
   </div>
 
+  <div id="mainAds"></div>
   <div id="mainReg"></div>
   <div id="mainTasks"></div>
 
@@ -477,13 +483,13 @@ async function doLogin(){
 function pullFinanceBg(){ api('pullFinance',{},true).then(function(r){ if(r&&r.ok) render(r); }); }
 function buildStart(res){
   var box=document.getElementById('startFields'); box.innerHTML='';
-  res.wallets.forEach(function(w){ if(w.type==='reserve'||w.type==='goal') return;
+  res.wallets.forEach(function(w){ if(w.type==='reserve'||w.type==='goal'||w.type==='ads') return;
     var l=document.createElement('label'); l.textContent=w.name+' (₫ донги)';
     var i=document.createElement('input'); i.type='text'; i.inputMode='numeric'; i.className='num'; i.value='0'; i.id='sb_'+w.id;
     box.appendChild(l); box.appendChild(i); });
 }
 async function saveStart(){
-  var bal={}; STATE.wallets.forEach(function(w){ if(w.type==='reserve'||w.type==='goal')return; var el=document.getElementById('sb_'+w.id); if(el) bal[w.id]=Number(String(el.value).replace(/\s/g,''))||0; });
+  var bal={}; STATE.wallets.forEach(function(w){ if(w.type==='reserve'||w.type==='goal'||w.type==='ads')return; var el=document.getElementById('sb_'+w.id); if(el) bal[w.id]=Number(String(el.value).replace(/\s/g,''))||0; });
   var res=await api('setStartBalances',{balances:bal});
   if(!res.ok){ document.getElementById('startErr').textContent=res.error||'Ошибка'; return; }
   STATE=res; render(res); go('main'); toast('Учёт запущен');
@@ -505,6 +511,31 @@ function render(res){
   var rp=res.reservePct||0; document.getElementById('rvBar').style.width=rp+'%';
   document.getElementById('rvBarWrap').className='pbar'+(rp>=100?' full':'');
   document.getElementById('rvBarNote').textContent = rp>=100 ? '✅ Отложено сколько нужно за месяц' : ('Отложено '+rp+'% от месячной нормы');
+  // ---- РЕКЛАМА (две полоски: Google / Instagram) ----
+  var ma=document.getElementById('mainAds'); if(ma){ ma.innerHTML='';
+    var ads=res.ads;
+    if(ads && ads.items && ads.items.length){
+      var ac=document.createElement('div'); ac.className='card';
+      var html='<div class="row"><b>\uD83D\uDCE2 Реклама</b><span class="muted">'+fmt(ads.totalDaily,res.baseSym)+' / день</span></div>';
+      ads.items.forEach(function(a){
+        var note = a.dead
+          ? '<div class="adsdead">\u26D4 '+esc(a.name)+' НЕ РАБОТАЕТ — денег нет. Пополни '+fmt(a.week,res.baseSym)+'</div>'
+          : (a.low
+             ? '<div class="regduetag" style="margin-top:6px">\u26A0\uFE0F хватит ещё на '+a.days+' дн. — пора пополнить</div>'
+             : '<div class="muted" style="font-size:12px;margin-top:6px">хватит ещё на '+a.days+' дн.</div>');
+        html+='<div class="adsrow'+(a.dead?' dead':'')+'">'
+          +'<div class="rl"><span>'+esc(a.name)+'</span><span class="amt">'+fmt(a.balance,res.baseSym)+'</span></div>'
+          +'<div class="muted" style="font-size:12px">'+fmt(a.daily,res.baseSym)+' / день</div>'
+          +'<div class="pbar'+(a.dead?' dead':'')+'"><i style="width:'+a.pct+'%"></i></div>'
+          +note+'</div>';
+      });
+      var nm=Number(ads.nextChargeMin)||0, nh=Math.floor(nm/60), nmin=nm%60;
+      html += ads.allDead
+        ? '<div class="adsdead" style="margin-top:10px">\u26D4 Реклама не работает — оба счёта пустые</div>'
+        : '<div class="muted" style="margin-top:10px;font-size:13px">Реклама отработает ещё <b>'+ads.minDays+'</b> дн. \u00B7 до списания '+nh+'ч '+nmin+'м</div>';
+      ac.innerHTML=html; ma.appendChild(ac);
+    }
+  }
   var mr=document.getElementById('mainReg'); mr.innerHTML='';
   (res.recurring||[]).forEach(function(r){ var card=document.createElement('div'); card.className='regcard'+(r.due?' due':'');
     var head='<div class="rl"><b>🔄 '+esc(r.name)+'</b><span class="muted">'+fmt(r.saved,res.baseSym)+' / '+fmt(r.target,res.baseSym)+'</span></div>';
@@ -524,7 +555,7 @@ function render(res){
     mt.appendChild(card);
   }
   var list=document.getElementById('walList'); list.innerHTML='';
-  res.wallets.forEach(function(w){ if(w.type==='goal') return; var d=document.createElement('div'); d.className='wal';
+  res.wallets.forEach(function(w){ if(w.type==='goal'||w.type==='ads') return; var d=document.createElement('div'); d.className='wal';
     var right=fmt(w.vnd,'₫')+(w.currency!=='VND'?(' <span class="muted">('+fmt(w.native,w.sym)+')</span>'):'');
     d.innerHTML='<div class="row"><span>'+(w.type==='reserve'?'🏦 ':(w.type==='goal'?'🎯 ':''))+esc(w.name)+'</span><span class="amt">'+right+'</span></div>'; list.appendChild(d); });
 }
@@ -545,6 +576,7 @@ function renderPicker(id, opts){
     if(opts.funded && w.vnd<=0) return;
     if(!opts.reserve && w.type==='reserve') return;
     if(!opts.goal && w.type==='goal') return;
+    if(!opts.ads && w.type==='ads') return;
     if(opts.exclude && w.id===opts.exclude) return;
     any=true;
     var r=document.createElement('div'); r.className='wrow'+(sel===w.id?' on':'');
@@ -562,7 +594,7 @@ var exFrom=null;
 function openExpense(){ exFrom=null; renderExList(); catOptions(document.getElementById('exCat')); document.getElementById('exAmount').value=''; document.getElementById('exNote').value=''; document.getElementById('exPhoto').value=''; document.getElementById('exErr').textContent=''; document.getElementById('exAvail').textContent=''; go('expense'); }
 function renderExList(){
   var box=document.getElementById('exFromList'); box.innerHTML='';
-  STATE.wallets.forEach(function(w){ if(w.vnd<=0||w.type==='reserve'||w.type==='goal') return;
+  STATE.wallets.forEach(function(w){ if(w.vnd<=0||w.type==='reserve'||w.type==='goal'||w.type==='ads') return;
     var r=document.createElement('div'); r.className='wrow'+(exFrom===w.id?' on':'');
     r.innerHTML='<span class="wnm">'+esc(w.name)+'</span><span class="wa">'+fmt(w.vnd,'₫')+'</span>';
     r.onclick=function(){ exFrom=w.id; renderExList(); var x=walletById(w.id); document.getElementById('exAvail').textContent=x?('Доступно: '+fmt(x.vnd,'₫')):''; };
