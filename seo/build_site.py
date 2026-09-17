@@ -659,6 +659,8 @@ def product_cat(p):
         cats.insert(0, "mixed")
     if s == "yarkaya-sbornaya-korzina-15-rozovyh-sharov" and "mixed" not in cats:
         cats.insert(0, "mixed")  # id142: сборная корзина + шары = комбо (Сборные + Шары)
+    if s in ("yarkaya-sbornaya-korzina-nabor-sharov-l-cifry-29", "stilnaya-sbornaya-korzina-101-rozovaya-25-rozovaya-eustoma") and "mixed" not in cats:
+        cats.insert(0, "mixed")  # id157/id160: сборная корзина в комбо
     if is_nabor and "nabory" not in cats:
         cats.insert(0, "nabory")
     if is_prazdnik and "prazdnik" not in cats:
@@ -675,6 +677,10 @@ def product_color(p):
     if s in ("101-rozovaya-roza-belaya-upakovka-plastikovaya-tara",
              "25-nezhno-rozovaya-roza-belaya-upakovka-otkrytka"):
         return "pink"  # id145/id146: розы розовые, «belaya» упаковка не должна давать white
+    if s in ("51-rozovaya-roza-belaya-upakovka-shokoladnyy-tort-dollary",):
+        return "pink"  # id154: розы розовые, «belaya» упаковка не должна давать white
+    if s in ("27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka", "25-oranzhevaya-roza-belaya-upakovka"):
+        return ""  # id156 шары, id159 оранжевые — фильтра нет, «bel» не должно давать white
     if s == "151-krasnaya-roza-belaya-upakovka-101-belo-rozovaya-korzina":
         return "red"
     if s.startswith("podarochnyy-nabor") or s.startswith("podarok-nabor") or s.startswith("tort"):

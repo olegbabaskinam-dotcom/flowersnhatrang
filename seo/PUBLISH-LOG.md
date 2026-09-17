@@ -256,3 +256,8 @@
 - **Что подарить мужчине в Нячанге: торты, наборы и не только** — slug `chto-podarit-muzhchine-v-nyachange` (пробел в блоге). Мужские торты (доллары/бутылка) + кофейный набор. 5 секций, 4 FAQ, 4 фото.
 - **Букет и торт в подарок: комбо-наборы в Нячанге** — slug `buket-i-tort-kombo-nabory-v-nyachange` (запрос 꽃다발 케이크 배달). Комбо букет+торт, розы+шары+торт, корзина+шары. 5 секций, 4 FAQ, 4 фото.
 - Все RU/EN/KO, JSON в `seo/articles/`, рендер через `render_article`, карточки первыми в blog-{ru,en,ko} (69 трио), sitemap +9 (654), registry 417–419. width/height проставлены точечно (apply_full_audit_fixes НЕ гнали — сайтовый дрейф отзывов). Фото — кадрированные из наших товаров, без людей (правило). Проверки: verify по статьям 0, audit_links 0, check_site 0/0.
+
+### 2026-09-17 (9 новых товаров id154–id162 + Каталог 4.5 RU/EN/KO)
+- id154–id162 по подписям Telegram (названия и цены точно; id162 название уточнено Олегом). WebP 900×1200 → products.csv → gen_one_product ×9 (27 стр.) → add_catalog_card ×9 → лендинги balloons×3 (155/156/157/161), torty×3 (154) → featured.js (154) → products.json (154) → Telegram JPG → sitemap +27 вручную (714). Оверрайды цвета/категорий в build_site.py и build_products_json.py. Курс ₽ 270.
+- Проверки: audit_links ❌0 ⚠️2, check_site ❌0 ⚠️1, node --check featured.js OK.
+- Каталог 4.5 RU/EN/KO: новая обложка, стр.2 «Основная информация» (часы, заказ до 18:00, позиции, карта и доплаты зон из cart.html), содержание стр.3. По 119 стр.
