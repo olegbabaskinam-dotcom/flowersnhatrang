@@ -316,11 +316,12 @@ async function rebuildTimes() {
     if (document.getElementById("deliveryDate").value !== myDate) return;
     var free = (r && r.ok && r.free) ? r.free : [];
     free = free.filter(function (t) { var p2 = t.split(":"); return (+p2[0] * 60 + +p2[1]) >= startMin; });
+    if (window.__zoneKey === "camranh" || (typeof zone !== "undefined" && zone === "camranh")) { free = free.filter(function (t) { var hh = +t.split(":")[0]; return hh >= 7 && hh <= 20; }); } // CAMRANH_HOURS: Камрань 07:00–20:00
     if (!free.length) { sel.innerHTML = '<option value="">На этот день всё занято — выберите другой день</option>'; hint.textContent = "На этот день всё занято — выберите другой день"; return; }
     sel.innerHTML = ""; free.forEach(function (t) { var o = document.createElement("option"); o.value = t; o.textContent = t; sel.appendChild(o); });
     hint.textContent = "Выберите удобное время прибытия — доставим ±10–15 мин";
   } catch (e) {
-    sel.innerHTML = ""; for (var h = Math.ceil(startMin / 60); h <= 21; h++) { var o = document.createElement("option"); o.value = pad(h) + ":00"; o.textContent = pad(h) + ":00"; sel.appendChild(o); }
+    sel.innerHTML = ""; var _cr = (window.__zoneKey === "camranh" || (typeof zone !== "undefined" && zone === "camranh")); for (var h = Math.max(Math.ceil(startMin / 60), _cr ? 7 : 0); h <= (_cr ? 20 : 21); h++) { var o = document.createElement("option"); o.value = pad(h) + ":00"; o.textContent = pad(h) + ":00"; sel.appendChild(o); }
     hint.textContent = "Выберите удобное время прибытия — доставим ±10–15 мин";
   }
 }
