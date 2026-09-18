@@ -1,3 +1,4 @@
+function openZoneImg(src){var o=document.createElement('div');o.style.cssText='position:fixed;inset:0;background:rgba(20,10,14,.82);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;cursor:zoom-out';o.innerHTML='<img src="'+src+'" alt="" style="max-width:100%;max-height:100%;border-radius:14px;box-shadow:0 10px 40px rgba(0,0,0,.4)">';o.onclick=function(){o.remove();};document.body.appendChild(o);}
 /* ============================================================
    Telegram Mini App — витрина «Цветы Нячанг».
    Источник товаров: /products.json (генерится из seo/products.csv).
@@ -394,7 +395,8 @@ function updateFound() {
   var feeTxt = z.fee ? ("доплата +" + money(z.fee)) : "бесплатно";
   box.innerHTML = head +
     "<div style='margin-top:8px;font-weight:600;color:" + col + "'>🚚 Зона: " + z.label + " — " + feeTxt + "</div>" +
-    (z.fee ? "<div style='font-size:12px;color:#8a6d3b;margin-top:2px'>В эту зону доставка возможна от 1 000 000 ₫.</div>" : "");
+    (z.fee ? "<div style='font-size:12px;color:#8a6d3b;margin-top:2px'>В эту зону доставка возможна от 1 000 000 ₫.</div>" : "") +
+    (z.key ? "<div class='zone-card' style='margin:10px 0 2px;max-width:360px;background:#fff;border:1px solid #f0e0e5;border-radius:14px;overflow:hidden'><img src='../img/site/zones/zone-" + z.key + "-ru.webp' alt='' width='900' height='1040' style='display:block;width:100%;height:auto;cursor:zoom-in' onclick='openZoneImg(this.src)'><div style='font-size:12px;color:#9a938f;text-align:center;padding:5px'>Нажмите на карту, чтобы увеличить</div></div>" : "");
   refreshZone();
 }
 

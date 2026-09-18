@@ -33,6 +33,7 @@
 /* безопасное экранирование любых внешних/пользовательских данных перед innerHTML */
 function escHtml(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 var I18N_RAW={
+ zone_tap:{ru:"Нажмите на карту, чтобы увеличить",en:"Tap the map to enlarge",ko:"지도를 누르면 크게 볼 수 있습니다"},
  page_title:{ru:"Корзина — Доставка цветов в Нячанге",en:"Cart — Flower delivery in Nha Trang",ko:"장바구니 — 나트랑 꽃 배달"},
  strip:{ru:"Качество · Ответственность · Пунктуальность",en:"Quality · Responsibility · Punctuality",ko:"품질 · 책임감 · 시간 엄수"},
  brand:{ru:"Русскоязычная доставка цветов<br>и гелиевых шаров в Нячанге",en:"Flower &amp; balloon delivery<br>in Nha Trang",ko:"나트랑 꽃·풍선 배달"},
@@ -202,6 +203,8 @@ var I18N_RAW={
  err_send:{ru:"Не удалось отправить. Проверьте интернет и попробуйте ещё раз.",en:"Couldn't send. Check your connection and try again.",ko:"전송하지 못했습니다. 인터넷을 확인하고 다시 시도해 주세요."},
  err_receipt:{ru:"Не удалось отправить чек. Попробуйте ещё раз.",en:"Couldn't send the receipt. Please try again.",ko:"영수증을 전송하지 못했습니다. 다시 시도해 주세요."}
 };
+
+function openZoneImg(src){var o=document.createElement('div');o.style.cssText='position:fixed;inset:0;background:rgba(20,10,14,.82);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;cursor:zoom-out';o.innerHTML='<img src="'+src+'" alt="" style="max-width:100%;max-height:100%;border-radius:14px;box-shadow:0 10px 40px rgba(0,0,0,.4)">';o.onclick=function(){o.remove();};document.body.appendChild(o);}
 function tr(k){var o=I18N_RAW[k];if(!o)return k;return o[window.FLW_LANG]||o.ru;}
 window.tr=tr;
 function applyI18n(root){
@@ -1237,6 +1240,7 @@ function updateFound(){
     "<a href='"+mapsLink()+"' target='_blank' rel='noopener noreferrer'>"+mapsLink()+"</a>"+
     "<div style='margin-top:8px;font-weight:600;color:"+col+"'>"+tr('zone_prefix')+z.label+" — "+feeTxt+"</div>"+
     (z.fee?"<div style='font-size:12px;color:#8a6d3b;margin-top:2px'>"+tr('zone_min')+"</div>":"")+
+    (z.key?"<div class='zone-card' style='margin:12px 0 4px;max-width:380px;background:#fff;border:1px solid #f0e0e5;border-radius:16px;overflow:hidden;box-shadow:0 4px 18px rgba(169,79,99,.10)'><img src='img/site/zones/zone-"+z.key+"-"+((window.FLW_LANG==='en'||window.FLW_LANG==='ko')?window.FLW_LANG:'ru')+".webp' alt='"+escHtml(z.label)+"' width='900' height='1040' loading='lazy' style='display:block;width:100%;height:auto;cursor:zoom-in' onclick='openZoneImg(this.src)'><div style='font-size:12px;color:#9a938f;text-align:center;padding:6px 8px'>"+tr('zone_tap')+"</div></div>":"")+
     breakdown;
 }
 function mapsLink(){ return "https://www.google.com/maps?q="+latlng.la+","+latlng.ln; }
