@@ -261,3 +261,9 @@
 - id154–id162 по подписям Telegram (названия и цены точно; id162 название уточнено Олегом). WebP 900×1200 → products.csv → gen_one_product ×9 (27 стр.) → add_catalog_card ×9 → лендинги balloons×3 (155/156/157/161), torty×3 (154) → featured.js (154) → products.json (154) → Telegram JPG → sitemap +27 вручную (714). Оверрайды цвета/категорий в build_site.py и build_products_json.py. Курс ₽ 270.
 - Проверки: audit_links ❌0 ⚠️2, check_site ❌0 ⚠️1, node --check featured.js OK.
 - Каталог 4.5 RU/EN/KO: новая обложка, стр.2 «Основная информация» (часы, заказ до 18:00, позиции, карта и доплаты зон из cart.html), содержание стр.3. По 119 стр.
+
+### 2026-09-19 (2 новых товара id163–id164)
+- **id163** «Набор шаров S (связка из 7 розово-фиолетовых шаров)» — 1 000 000 ₫ (≈ $40 · 3 800 ₽), 5 фото. slug `nabor-sharov-s-7-rozovo-fioletovyh`, cat `balloons`, color `""` (точечный оверрайд в build_site.py и build_products_json.py — «rozov» в слаге давало pink, у шаров цветового фильтра нет).
+- **id164** «51 бело-розовая роза + 25 персиковых роз + шар, тара, открытка» — 1 750 000 ₫ (≈ $70 · 6 500 ₽), 7 фото. slug `51-belo-rozovaya-roza-25-persikovyh-roz-shar-tara-otkrytka`, **комбо** cat `r51 r25 balloons`, color `pink` (авто по `belo-rozov`). Чип «🎁 В наборе: 51 роза · 25 роз · шары».
+- Пайплайн: WebP 900×1200 (5/7) → products.csv (164 строки) → gen_one_product ×2 (6 стр. RU/EN/KO) → add_catalog_card ×2 → лендинги balloons ×3 (оба товара) → featured.js (156, новые первыми, node --check OK) → build_products_json (156) → Telegram JPG ×2 → sitemap +6 вручную (720). width/height проставлены точечно (apply_full_audit_fixes НЕ гнали — сайтовый дрейф). PDF не пересобирали.
+- Проверки: audit_links ❌0 ⚠️2, check_site ❌0 ⚠️1 (каталог 156 карточек, sitemap 720 URL).

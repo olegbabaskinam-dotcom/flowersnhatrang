@@ -1,6 +1,6 @@
 {
- "generated": "2026-09-17 08:23",
- "count": 154,
+ "generated": "2026-09-19 07:35",
+ "count": 156,
  "categories": [
   {
    "key": "all",
@@ -3594,6 +3594,52 @@
     "img/products/51-krasnaya-roza-belaya-upakovka-krasnaya-lenta/4.webp",
     "img/products/51-krasnaya-roza-belaya-upakovka-krasnaya-lenta/5.webp",
     "img/products/51-krasnaya-roza-belaya-upakovka-krasnaya-lenta/6.webp"
+   ]
+  },
+  {
+   "id": 163,
+   "slug": "nabor-sharov-s-7-rozovo-fioletovyh",
+   "name": "Набор шаров S (связка из 7 розово-фиолетовых шаров)",
+   "desc": "Набор шаров S: связка из 7 гелиевых шаров в розово-фиолетовой гамме. Праздничное оформление на день рождения, годовщину или сюрприз. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Набор шаров S (связка из 7 розово-фиолетовых шаров) Нячанг доставка",
+   "price_vnd": 1000000,
+   "price": "1 000 000 донгов",
+   "price_sub": "≈ $40 · 3 800 ₽",
+   "cats": [
+    "balloons"
+   ],
+   "color": "",
+   "images": [
+    "img/products/nabor-sharov-s-7-rozovo-fioletovyh/1.webp",
+    "img/products/nabor-sharov-s-7-rozovo-fioletovyh/2.webp",
+    "img/products/nabor-sharov-s-7-rozovo-fioletovyh/3.webp",
+    "img/products/nabor-sharov-s-7-rozovo-fioletovyh/4.webp",
+    "img/products/nabor-sharov-s-7-rozovo-fioletovyh/5.webp"
+   ]
+  },
+  {
+   "id": 164,
+   "slug": "51-belo-rozovaya-roza-25-persikovyh-roz-shar-tara-otkrytka",
+   "name": "51 бело-розовая роза + 25 персиковых роз + шар, тара, открытка",
+   "desc": "Подарочный комплект: букет из 51 бело-розовой розы и букет из 25 персиковых роз, гелиевый шар, пластиковая тара и открытка. Для дня рождения, годовщины или большого поздравления. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "51 бело-розовая роза + 25 персиковых роз + шар, тара, открытка Нячанг доставка",
+   "price_vnd": 1750000,
+   "price": "1 750 000 донгов",
+   "price_sub": "≈ $70 · 6 500 ₽",
+   "cats": [
+    "r51",
+    "r25",
+    "balloons"
+   ],
+   "color": "pink",
+   "images": [
+    "img/products/51-belo-rozovaya-roza-25-persikovyh-roz-shar-tara-otkrytka/1.webp",
+    "img/products/51-belo-rozovaya-roza-25-persikovyh-roz-shar-tara-otkrytka/2.webp",
+    "img/products/51-belo-rozovaya-roza-25-persikovyh-roz-shar-tara-otkrytka/3.webp",
+    "img/products/51-belo-rozovaya-roza-25-persikovyh-roz-shar-tara-otkrytka/4.webp",
+    "img/products/51-belo-rozovaya-roza-25-persikovyh-roz-shar-tara-otkrytka/5.webp",
+    "img/products/51-belo-rozovaya-roza-25-persikovyh-roz-shar-tara-otkrytka/6.webp",
+    "img/products/51-belo-rozovaya-roza-25-persikovyh-roz-shar-tara-otkrytka/7.webp"
    ]
   }
  ]

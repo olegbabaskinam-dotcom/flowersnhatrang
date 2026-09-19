@@ -59,7 +59,7 @@ def product_color(slug):
         return "pink"  # id145/id146: розы розовые, «belaya» упаковка не должна давать white
     if s in ("51-rozovaya-roza-belaya-upakovka-shokoladnyy-tort-dollary",):
         return "pink"  # id154: розы розовые, «belaya» упаковка не должна давать white
-    if s in ("27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka", "25-oranzhevaya-roza-belaya-upakovka"):
+    if s in ("27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka", "25-oranzhevaya-roza-belaya-upakovka", "nabor-sharov-s-7-rozovo-fioletovyh"):
         return ""  # id156 шары, id159 оранжевые — фильтра нет, «bel» не должно давать white
     if s == "151-krasnaya-roza-belaya-upakovka-101-belo-rozovaya-korzina":
         return "red"
