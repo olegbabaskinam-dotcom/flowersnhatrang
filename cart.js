@@ -31,14 +31,14 @@
 
   // Курсы: сколько ДОНГОВ за 1 единицу (базовая — донг).
   window.FLW_CFG = {
-    rates: { VND: 1, USD: 25000, RUB: 270, KZT: 50, KRW: 18.8 },
-    sym:   { VND: "₫", USD: "$",  RUB: "₽",  KZT: "₸", KRW: "₩" },
-    order: ["VND", "USD", "RUB", "KZT", "KRW"],
-    names: { VND: "Донги", USD: "Доллары", RUB: "Рубли", KZT: "Тенге", KRW: "Воны" },
+    rates: { VND: 1, USD: 25000, RUB: 270, KRW: 18.8 },
+    sym:   { VND: "₫", USD: "$",  RUB: "₽",  KRW: "₩" },
+    order: ["VND", "USD", "RUB", "KRW"],
+    names: { VND: "Донги", USD: "Доллары", RUB: "Рубли", KRW: "Воны" },
     namesL: {
-      ru: { VND: "Донги", USD: "Доллары", RUB: "Рубли", KZT: "Тенге", KRW: "Воны" },
-      en: { VND: "Dong", USD: "Dollars", RUB: "Rubles", KZT: "Tenge", KRW: "Won" },
-      ko: { VND: "동", USD: "달러", RUB: "루블", KZT: "텡게", KRW: "원" }
+      ru: { VND: "Донги", USD: "Доллары", RUB: "Рубли", KRW: "Воны" },
+      en: { VND: "Dong", USD: "Dollars", RUB: "Rubles", KRW: "Won" },
+      ko: { VND: "동", USD: "달러", RUB: "루블", KRW: "원" }
     }
   };
 
@@ -68,7 +68,6 @@
     var v = vnd / r;
     var rounded = cur === "VND" ? Math.round(v / 1000) * 1000
                : cur === "USD" ? Math.round(v)
-               : cur === "KZT" ? Math.round(v / 100) * 100
                : cur === "KRW" ? Math.round(v / 100) * 100
                : cur === "RUB" ? Math.ceil(v / 100) * 100
                : Math.round(v / 10) * 10;

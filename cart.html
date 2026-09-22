@@ -140,7 +140,6 @@ var I18N_RAW={
  pay_opt_rub:{ru:"Рубли (СБП)",en:"Rubles (SBP)",ko:"루블 (SBP)"},
  pay_opt_vnd:{ru:"Донги (VND)",en:"Dong (VND)",ko:"동 (VND)"},
  pay_opt_usdt:{ru:"USDT TRC-20",en:"USDT TRC-20",ko:"USDT TRC-20"},
- pay_opt_kzt:{ru:"Карта Kaspi",en:"Kaspi card",ko:"Kaspi 카드"},
  lbl_receipt:{ru:"Скрин оплаты (чек)",en:"Payment screenshot (receipt)",ko:"결제 스크린샷 (영수증)"},
  fileWrap:{ru:"📎 Нажмите, чтобы прикрепить скрин чека",en:"📎 Tap to attach a receipt screenshot",ko:"📎 눌러서 영수증 스크린샷 첨부"},
  fileOk:{ru:"✓ Чек прикреплён — можно отправлять",en:"✓ Receipt attached — ready to send",ko:"✓ 영수증 첨부됨 — 전송 가능"},
@@ -152,7 +151,6 @@ var I18N_RAW={
  pay_rub_title:{ru:"Рубли · СБП",en:"Rubles · SBP",ko:"루블 · SBP"},
  pay_vnd_title:{ru:"Донги · BIDV",en:"Dong · BIDV",ko:"동 · BIDV"},
  pay_usdt_title:{ru:"USDT · TRON (TRC-20)",en:"USDT · TRON (TRC-20)",ko:"USDT · TRON (TRC-20)"},
- pay_kzt_title:{ru:"Карта · Kaspi Bank",en:"Card · Kaspi Bank",ko:"카드 · Kaspi Bank"},
  pl_phone:{ru:"Номер телефона",en:"Phone number",ko:"전화번호"},
  pl_recipient:{ru:"Получатель",en:"Recipient",ko:"수취인"},
  pl_bank:{ru:"Банк",en:"Bank",ko:"은행"},
@@ -647,7 +645,6 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
         <div class="pay" data-m="rub"><span class="em">🇷🇺</span><span data-i18n="pay_opt_rub">Рубли (СБП)</span></div>
         <div class="pay" data-m="vnd"><span class="em">🇻🇳</span><span data-i18n="pay_opt_vnd">Донги (VND)</span></div>
         <div class="pay" data-m="usdt"><span class="em">💠</span><span data-i18n="pay_opt_usdt">USDT TRC-20</span></div>
-        <div class="pay" data-m="kzt"><span class="em">🇰🇿</span><span data-i18n="pay_opt_kzt">Карта Kaspi</span></div>
       </div>
       <div id="payDetails" class="details"></div>
     </div>
@@ -792,7 +789,7 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
             &copy; 2026 Русскоязычная доставка цветов и гелиевых шаров в Нячанге. все права защищены.
         </div>
     </footer>
-<script src="cart.js?v=20260822-schedule"></script>
+<script src="cart.js?v=20260922-nokzt"></script>
 <script>/*MARK-CARD-JS*/
 (function(){
   document.querySelectorAll('.pcard-slider').forEach(function(sl){
@@ -843,7 +840,9 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
 })();
 </script>
 <script>
+  /* тенге (KZT) больше не поддерживаем — у старых посетителей чистим сохранённую валюту */
   var CUR = localStorage.getItem("flw_cur") || "VND";
+  if(!window.FLW_CFG || window.FLW_CFG.order.indexOf(CUR)<0){ CUR="VND"; try{ localStorage.setItem("flw_cur","VND"); }catch(e){} }
   function money(v){ return window.fmtMoney(v, CUR); }
   function renderCur(){
     var box=document.getElementById("curBox"); box.innerHTML="";
@@ -964,7 +963,10 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
     if(!items.length){
       list.innerHTML='<div style="text-align:center;color:#78716c;padding:40px 10px;">'+tr('empty')+'<br><br><a class="flw-btn flw-btn-primary" href="'+tr('href_catalog')+'">'+tr('goCatalog')+'</a></div>';
       sum.innerHTML=""; document.getElementById("cakeWarn").style.display="none";
-      var cfe=document.getElementById("coform"); if(cfe) cfe.style.display="none";
+      var cfe=document.getElementById("coform");
+      var _s2e=document.getElementById("step2");
+      var _onPay=_s2e && !_s2e.classList.contains("hidden");
+      if(cfe && !_onPay) cfe.style.display="none";   // на шаге оплаты форму не скрываем (корзина пуста после отправки)
       var ab=document.getElementById("addonBox"); if(ab) ab.innerHTML=""; return;
     }
     list.innerHTML="";
@@ -988,7 +990,9 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
     var cakeBlocked=hasCake&&!hasOther;
     document.getElementById("cakeWarn").style.display=cakeBlocked?"block":"none";
     var _cf=document.getElementById("coform");
-    if(_cf){ if(!cakeBlocked){ _cf.style.display="block"; try{prefillFromCart();}catch(e){} setTimeout(function(){try{lmap.invalidateSize();}catch(e){}},150);} else { _cf.style.display="none"; } }
+    var _s2b=document.getElementById("step2");
+    var _onPay2=_s2b && !_s2b.classList.contains("hidden");
+    if(_cf){ if(!cakeBlocked||_onPay2){ _cf.style.display="block"; if(!_onPay2){ try{prefillFromCart();}catch(e){} } setTimeout(function(){try{lmap.invalidateSize();}catch(e){}},150);} else { _cf.style.display="none"; } }
     // строка доставки в корзине (если выбран адрес и зона платная)
     var delFee=(window.__outside?0:(window.__delFee||0));
     if(delFee>0){
@@ -1035,11 +1039,6 @@ const PAY = {
       ["pl_wallet","TGniTscazmp3MJrmLxSgDPnNGeZPyMPVhb","TGniTscazmp3MJrmLxSgDPnNGeZPyMPVhb"],
     ], qrtext:"TGniTscazmp3MJrmLxSgDPnNGeZPyMPVhb",
        warnK:"pay_usdt_warn" },
-  kzt: { titleK:"pay_kzt_title", rows:[
-      ["pl_card","4400 4303 0499 7486","4400430304997486"],
-      ["pl_holder","Egor Merkulov",null],
-      ["pl_bank","Kaspi Bank",null],
-    ] },
 };
 const LS = "flw_order";
 
@@ -1455,6 +1454,7 @@ form.addEventListener('submit',async e=>{
 let currentId=null, receiptB64=null;
 function goPay(id){
   currentId=id;
+  var _cfp=document.getElementById('coform'); if(_cfp) _cfp.style.display='block';   // контейнер формы обязан быть виден на шаге оплаты
   document.getElementById('orderIdShow').textContent=id;
   document.getElementById('step1').classList.add('hidden');
   document.getElementById('resume').classList.add('hidden');
@@ -1468,7 +1468,7 @@ function goBackToData(){
   var sb=document.getElementById('submitBtn'); if(sb) sb.textContent=tr('saveBtn');
   var h=document.getElementById('coHead'); if(h) h.scrollIntoView({behavior:'smooth',block:'start'});
 }
-var METHODS={cash:'Наличными при получении',rub:'Рубли (СБП)',vnd:'Донги (BIDV)',usdt:'USDT TRC-20',kzt:'Карта Kaspi'};
+var METHODS={cash:'Наличными при получении',rub:'Рубли (СБП)',vnd:'Донги (BIDV)',usdt:'USDT TRC-20'};
 document.querySelectorAll('.pay').forEach(el=>{
   el.addEventListener('click',()=>{
     document.querySelectorAll('.pay').forEach(p=>p.classList.remove('on'));
