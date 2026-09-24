@@ -276,3 +276,9 @@
 - **id169** «151 фиолетовая роза в фиолетовой упаковке + 25 персиковых роз» — 2 750 000 ₫ (≈ $110 · 10 200 ₽), 8 фото. slug `151-fioletovaya-roza-fioletovaya-upakovka-25-persikovyh-roz`, cat `r101 r25`, color `purple` (авто).
 - Пайплайн: WebP 900×1200 (ImageOps.fit) + 1.jpg для Telegram → products.csv (169 строк) → gen_one_product ×5 (15 стр.) → пост-обработка: шапка 1:1 из id164 (единая шапка аудита 22.09 в генераторе НЕТ), width/height у img, title ≤70 по правилу аудита → каталоги ×3 (новые первыми) → лендинги balloons ×3 (id165–167) → featured.js 161 → products.json 161 → sitemap +15 вручную (735). apply_full_audit_fixes НЕ гнали. PDF не пересобирали.
 - Проверки: audit_links ❌0 ⚠️2, check_site ❌0 ⚠️1, xmllint OK, node --check featured.js OK.
+
+### 2026-09-24 (2 торта id170–id171)
+- **id170** (короткий id торта **id23**) «Мини-торт шоколадный с ананасом, киви и клубникой» — 250 000 ₫ (≈ $10 · 1 000 ₽), 8 фото. slug `tort-mini-shokoladnyy-ananas-kivi-klubnika`, cat `cakes`. Папка `img/_src/ТОРТЫ/id23-…-250k`.
+- **id171** (короткий id торта **id24**) «Шоколадный торт с клубникой и топпером Happy Birthday» — 500 000 ₫ (≈ $20 · 1 900 ₽), ~5 персон, 7 фото. slug `tort-shokoladnyy-klubnika-happy-birthday`, cat `cakes`. Папка `img/_src/ТОРТЫ/id24-…-500k`.
+- Пайплайн как у id165–169 (gen_one_product + пост-обработка шапки/width-height/title) → каталоги ×3 → лендинги torty ×3 → featured 163 → products.json 163 → sitemap +6 (741). PDF не пересобирали.
+- Проверки: audit_links ❌0 ⚠️2, check_site ❌0 ⚠️1, xmllint OK, node --check OK.

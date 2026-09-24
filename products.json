@@ -1,6 +1,6 @@
 {
- "generated": "2026-09-24 05:01",
- "count": 161,
+ "generated": "2026-09-24 05:12",
+ "count": 163,
  "categories": [
   {
    "key": "all",
@@ -3765,6 +3765,53 @@
     "img/products/151-fioletovaya-roza-fioletovaya-upakovka-25-persikovyh-roz/6.webp",
     "img/products/151-fioletovaya-roza-fioletovaya-upakovka-25-persikovyh-roz/7.webp",
     "img/products/151-fioletovaya-roza-fioletovaya-upakovka-25-persikovyh-roz/8.webp"
+   ]
+  },
+  {
+   "id": 170,
+   "slug": "tort-mini-shokoladnyy-ananas-kivi-klubnika",
+   "name": "Мини-торт шоколадный с ананасом, киви и клубникой",
+   "desc": "Небольшой торт с шоколадными подтёками, сверху украшен ананасом, киви, клубникой, розовым сердечком и печеньем Орео. Аккуратный мини-тортик на день рождения или просто в подарок. Привозим в коробке, в комплекте свечи. Заказывается вместе с букетом, шарами или подарочным набором. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Мини-торт шоколадный с ананасом, киви и клубникой Нячанг доставка",
+   "price_vnd": 250000,
+   "price": "250 000 донгов",
+   "price_sub": "≈ $10 · 1 000 ₽",
+   "cats": [
+    "cakes"
+   ],
+   "color": "",
+   "images": [
+    "img/products/tort-mini-shokoladnyy-ananas-kivi-klubnika/1.webp",
+    "img/products/tort-mini-shokoladnyy-ananas-kivi-klubnika/2.webp",
+    "img/products/tort-mini-shokoladnyy-ananas-kivi-klubnika/3.webp",
+    "img/products/tort-mini-shokoladnyy-ananas-kivi-klubnika/4.webp",
+    "img/products/tort-mini-shokoladnyy-ananas-kivi-klubnika/5.webp",
+    "img/products/tort-mini-shokoladnyy-ananas-kivi-klubnika/6.webp",
+    "img/products/tort-mini-shokoladnyy-ananas-kivi-klubnika/7.webp",
+    "img/products/tort-mini-shokoladnyy-ananas-kivi-klubnika/8.webp"
+   ]
+  },
+  {
+   "id": 171,
+   "slug": "tort-shokoladnyy-klubnika-happy-birthday",
+   "name": "Шоколадный торт с клубникой и топпером Happy Birthday",
+   "desc": "Праздничный торт с шоколадными подтёками, шоколадным кремом, клубникой, шоколадными листьями и золотым топпером Happy Birthday. Красивый подарок на день рождения. Рассчитан примерно на 5 человек, в комплекте свечи. Торт заказывается онлайн только вместе с букетом, шарами или подарочным набором. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Шоколадный торт с клубникой и топпером Happy Birthday Нячанг доставка",
+   "price_vnd": 500000,
+   "price": "500 000 донгов",
+   "price_sub": "≈ $20 · 1 900 ₽",
+   "cats": [
+    "cakes"
+   ],
+   "color": "",
+   "images": [
+    "img/products/tort-shokoladnyy-klubnika-happy-birthday/1.webp",
+    "img/products/tort-shokoladnyy-klubnika-happy-birthday/2.webp",
+    "img/products/tort-shokoladnyy-klubnika-happy-birthday/3.webp",
+    "img/products/tort-shokoladnyy-klubnika-happy-birthday/4.webp",
+    "img/products/tort-shokoladnyy-klubnika-happy-birthday/5.webp",
+    "img/products/tort-shokoladnyy-klubnika-happy-birthday/6.webp",
+    "img/products/tort-shokoladnyy-klubnika-happy-birthday/7.webp"
    ]
   }
  ]
