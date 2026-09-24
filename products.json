@@ -1,6 +1,6 @@
 {
- "generated": "2026-09-19 07:35",
- "count": 156,
+ "generated": "2026-09-24 05:01",
+ "count": 161,
  "categories": [
   {
    "key": "all",
@@ -3640,6 +3640,131 @@
     "img/products/51-belo-rozovaya-roza-25-persikovyh-roz-shar-tara-otkrytka/5.webp",
     "img/products/51-belo-rozovaya-roza-25-persikovyh-roz-shar-tara-otkrytka/6.webp",
     "img/products/51-belo-rozovaya-roza-25-persikovyh-roz-shar-tara-otkrytka/7.webp"
+   ]
+  },
+  {
+   "id": 165,
+   "slug": "101-krasnaya-roza-7-krasnyh-serdec-7-serebristo-bezhevyh-sharov-tara",
+   "name": "101 красная роза + 7 красных сердец + 7 серебристо-бежевых шаров + тара",
+   "desc": "Подарочный комплект: букет из 101 красной розы, 7 красных шаров-сердец, 7 серебристо-бежевых гелиевых шаров и пластиковая тара для букета. Для признания в любви, годовщины или дня рождения. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "101 красная роза + 7 красных сердец + 7 серебристо-бежевых шаров + тара Нячанг доставка",
+   "price_vnd": 3600000,
+   "price": "3 600 000 донгов",
+   "price_sub": "≈ $144 · 13 400 ₽",
+   "cats": [
+    "r101",
+    "balloons"
+   ],
+   "color": "red",
+   "images": [
+    "img/products/101-krasnaya-roza-7-krasnyh-serdec-7-serebristo-bezhevyh-sharov-tara/1.webp",
+    "img/products/101-krasnaya-roza-7-krasnyh-serdec-7-serebristo-bezhevyh-sharov-tara/2.webp",
+    "img/products/101-krasnaya-roza-7-krasnyh-serdec-7-serebristo-bezhevyh-sharov-tara/3.webp",
+    "img/products/101-krasnaya-roza-7-krasnyh-serdec-7-serebristo-bezhevyh-sharov-tara/4.webp",
+    "img/products/101-krasnaya-roza-7-krasnyh-serdec-7-serebristo-bezhevyh-sharov-tara/5.webp",
+    "img/products/101-krasnaya-roza-7-krasnyh-serdec-7-serebristo-bezhevyh-sharov-tara/6.webp",
+    "img/products/101-krasnaya-roza-7-krasnyh-serdec-7-serebristo-bezhevyh-sharov-tara/7.webp",
+    "img/products/101-krasnaya-roza-7-krasnyh-serdec-7-serebristo-bezhevyh-sharov-tara/8.webp"
+   ]
+  },
+  {
+   "id": 166,
+   "slug": "25-persikovyh-roz-7-rozovo-bezhevyh-sharov",
+   "name": "25 персиковых роз + 7 розово-бежевых шаров",
+   "desc": "Подарочный комплект: букет из 25 персиковых роз и связка из 7 гелиевых шаров в розово-бежевой гамме. Для дня рождения, свидания или приятного сюрприза. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "25 персиковых роз + 7 розово-бежевых шаров Нячанг доставка",
+   "price_vnd": 1500000,
+   "price": "1 500 000 донгов",
+   "price_sub": "≈ $60 · 5 600 ₽",
+   "cats": [
+    "r25",
+    "balloons"
+   ],
+   "color": "pink",
+   "images": [
+    "img/products/25-persikovyh-roz-7-rozovo-bezhevyh-sharov/1.webp",
+    "img/products/25-persikovyh-roz-7-rozovo-bezhevyh-sharov/2.webp",
+    "img/products/25-persikovyh-roz-7-rozovo-bezhevyh-sharov/3.webp",
+    "img/products/25-persikovyh-roz-7-rozovo-bezhevyh-sharov/4.webp",
+    "img/products/25-persikovyh-roz-7-rozovo-bezhevyh-sharov/5.webp",
+    "img/products/25-persikovyh-roz-7-rozovo-bezhevyh-sharov/6.webp",
+    "img/products/25-persikovyh-roz-7-rozovo-bezhevyh-sharov/7.webp",
+    "img/products/25-persikovyh-roz-7-rozovo-bezhevyh-sharov/8.webp",
+    "img/products/25-persikovyh-roz-7-rozovo-bezhevyh-sharov/9.webp"
+   ]
+  },
+  {
+   "id": 167,
+   "slug": "svyazka-9-rozovo-krasnyh-serdec-25-rozovyh-roz",
+   "name": "Связка из 9 розово-красных сердец + 25 розовых роз",
+   "desc": "Подарочный комплект: связка из 9 гелиевых шаров-сердец в розово-красной гамме и букет из 25 розовых роз. Для признания в любви, годовщины или дня рождения. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Связка из 9 розово-красных сердец + 25 розовых роз Нячанг доставка",
+   "price_vnd": 1800000,
+   "price": "1 800 000 донгов",
+   "price_sub": "≈ $72 · 6 700 ₽",
+   "cats": [
+    "r25",
+    "balloons"
+   ],
+   "color": "pink",
+   "images": [
+    "img/products/svyazka-9-rozovo-krasnyh-serdec-25-rozovyh-roz/1.webp",
+    "img/products/svyazka-9-rozovo-krasnyh-serdec-25-rozovyh-roz/2.webp",
+    "img/products/svyazka-9-rozovo-krasnyh-serdec-25-rozovyh-roz/3.webp",
+    "img/products/svyazka-9-rozovo-krasnyh-serdec-25-rozovyh-roz/4.webp",
+    "img/products/svyazka-9-rozovo-krasnyh-serdec-25-rozovyh-roz/5.webp",
+    "img/products/svyazka-9-rozovo-krasnyh-serdec-25-rozovyh-roz/6.webp",
+    "img/products/svyazka-9-rozovo-krasnyh-serdec-25-rozovyh-roz/7.webp",
+    "img/products/svyazka-9-rozovo-krasnyh-serdec-25-rozovyh-roz/8.webp",
+    "img/products/svyazka-9-rozovo-krasnyh-serdec-25-rozovyh-roz/9.webp"
+   ]
+  },
+  {
+   "id": 168,
+   "slug": "151-rozovaya-roza-fioletovyy-ottenok-otkrytka",
+   "name": "151 розовая роза с фиолетовым оттенком + открытка",
+   "desc": "Большой букет из 151 розовой розы с фиолетовым оттенком и открытка. Для юбилея, годовщины, предложения руки и сердца или большого поздравления. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "151 розовая роза с фиолетовым оттенком + открытка Нячанг доставка",
+   "price_vnd": 2750000,
+   "price": "2 750 000 донгов",
+   "price_sub": "≈ $110 · 10 200 ₽",
+   "cats": [
+    "r101"
+   ],
+   "color": "pink",
+   "images": [
+    "img/products/151-rozovaya-roza-fioletovyy-ottenok-otkrytka/1.webp",
+    "img/products/151-rozovaya-roza-fioletovyy-ottenok-otkrytka/2.webp",
+    "img/products/151-rozovaya-roza-fioletovyy-ottenok-otkrytka/3.webp",
+    "img/products/151-rozovaya-roza-fioletovyy-ottenok-otkrytka/4.webp",
+    "img/products/151-rozovaya-roza-fioletovyy-ottenok-otkrytka/5.webp",
+    "img/products/151-rozovaya-roza-fioletovyy-ottenok-otkrytka/6.webp",
+    "img/products/151-rozovaya-roza-fioletovyy-ottenok-otkrytka/7.webp"
+   ]
+  },
+  {
+   "id": 169,
+   "slug": "151-fioletovaya-roza-fioletovaya-upakovka-25-persikovyh-roz",
+   "name": "151 фиолетовая роза в фиолетовой упаковке + 25 персиковых роз",
+   "desc": "Подарочный комплект: большой букет из 151 фиолетовой розы в фиолетовой упаковке и букет из 25 персиковых роз. Для юбилея, годовщины или большого поздравления. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "151 фиолетовая роза в фиолетовой упаковке + 25 персиковых роз Нячанг доставка",
+   "price_vnd": 2750000,
+   "price": "2 750 000 донгов",
+   "price_sub": "≈ $110 · 10 200 ₽",
+   "cats": [
+    "r101",
+    "r25"
+   ],
+   "color": "purple",
+   "images": [
+    "img/products/151-fioletovaya-roza-fioletovaya-upakovka-25-persikovyh-roz/1.webp",
+    "img/products/151-fioletovaya-roza-fioletovaya-upakovka-25-persikovyh-roz/2.webp",
+    "img/products/151-fioletovaya-roza-fioletovaya-upakovka-25-persikovyh-roz/3.webp",
+    "img/products/151-fioletovaya-roza-fioletovaya-upakovka-25-persikovyh-roz/4.webp",
+    "img/products/151-fioletovaya-roza-fioletovaya-upakovka-25-persikovyh-roz/5.webp",
+    "img/products/151-fioletovaya-roza-fioletovaya-upakovka-25-persikovyh-roz/6.webp",
+    "img/products/151-fioletovaya-roza-fioletovaya-upakovka-25-persikovyh-roz/7.webp",
+    "img/products/151-fioletovaya-roza-fioletovaya-upakovka-25-persikovyh-roz/8.webp"
    ]
   }
  ]

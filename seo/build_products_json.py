@@ -38,6 +38,7 @@ def product_cats(slug, name_ru):
     is_nabor     = s.startswith("podarochnyy-nabor") or s.startswith("podarok-nabor")
     is_prazdnik  = s.startswith("nabor-prazdnik") or ("prazdnik" in s)
     if has_balloons and "balloons" not in cats: cats.append("balloons")
+    if s == "svyazka-9-rozovo-krasnyh-serdec-25-rozovyh-roz" and "balloons" not in cats: cats.append("balloons")  # id167
     if has_cake and "cakes" not in cats:        cats.append("cakes")
     if s == "yarkiy-sbornyy-buket-tort-happy-birthday" and "mixed" not in cats:
         cats.insert(0, "mixed")
@@ -63,6 +64,8 @@ def product_color(slug):
         return ""  # id156 шары, id159 оранжевые — фильтра нет, «bel» не должно давать white
     if s == "151-krasnaya-roza-belaya-upakovka-101-belo-rozovaya-korzina":
         return "red"
+    if s == "svyazka-9-rozovo-krasnyh-serdec-25-rozovyh-roz":
+        return "pink"  # id167
     if s.startswith("podarochnyy-nabor") or s.startswith("podarok-nabor") or s.startswith("tort"):
         return ""
     if s.startswith("151-rozovaya-roza-fioletovyy-ottenok"):
