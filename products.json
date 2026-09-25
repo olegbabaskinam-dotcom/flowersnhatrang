@@ -1,6 +1,6 @@
 {
- "generated": "2026-09-24 05:12",
- "count": 163,
+ "generated": "2026-09-25 05:57",
+ "count": 164,
  "categories": [
   {
    "key": "all",
@@ -3812,6 +3812,27 @@
     "img/products/tort-shokoladnyy-klubnika-happy-birthday/5.webp",
     "img/products/tort-shokoladnyy-klubnika-happy-birthday/6.webp",
     "img/products/tort-shokoladnyy-klubnika-happy-birthday/7.webp"
+   ]
+  },
+  {
+   "id": 185,
+   "slug": "51-korallovaya-roza-belaya-upakovka-rozovaya-lenta",
+   "name": "51 коралловая роза в белой упаковке с розовой лентой",
+   "desc": "Букет из 51 коралловой розы в белой упаковке, перевязанный розовой лентой. Тёплый персиково-коралловый оттенок — яркий подарок на день рождения, годовщину или без повода. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "51 коралловая роза в белой упаковке с розовой лентой Нячанг доставка",
+   "price_vnd": 1000000,
+   "price": "1 000 000 донгов",
+   "price_sub": "≈ $40 · 3 800 ₽",
+   "cats": [
+    "r51"
+   ],
+   "color": "",
+   "images": [
+    "img/products/51-korallovaya-roza-belaya-upakovka-rozovaya-lenta/1.webp",
+    "img/products/51-korallovaya-roza-belaya-upakovka-rozovaya-lenta/2.webp",
+    "img/products/51-korallovaya-roza-belaya-upakovka-rozovaya-lenta/3.webp",
+    "img/products/51-korallovaya-roza-belaya-upakovka-rozovaya-lenta/4.webp",
+    "img/products/51-korallovaya-roza-belaya-upakovka-rozovaya-lenta/5.webp"
    ]
   }
  ]
