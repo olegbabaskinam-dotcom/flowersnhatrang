@@ -101,6 +101,13 @@
   canvas{max-width:100%}
   a{color:var(--accent)}
   small.link{color:var(--accent);font-weight:600}
+  /* 🏍 Байки — свой цвет, чтобы не перепутать с цветами */
+  body.bikes{--accent:#0e7490;--bg:#f3fafc}
+  body.bikes .free{background:linear-gradient(135deg,#0e7490,#0891b2)}
+  body.bikes .seg,body.bikes .btn.ghost{background:#e0f2f7}
+  body.bikes .wrow.on{background:#e6f6fa;box-shadow:0 0 0 2px rgba(14,116,144,.18)}
+  body.bikes .fl-only{display:none!important}
+  .booktag{font-size:13px;font-weight:700;color:#fff;background:var(--accent);border-radius:8px;padding:2px 8px}
 </style>
 </head>
 <body>
@@ -125,18 +132,19 @@
 
 <!-- ПЕРВЫЙ ЗАПУСК -->
 <div id="v-start" class="hidden">
-  <h1>🚀 Первый запуск</h1>
+  <h1>🚀 Первый запуск <span class="booktag" id="startBook"></span></h1>
   <div class="card"><p class="muted">Впишите, сколько сейчас реально лежит в каждом кошельке.</p><div id="startFields"></div></div>
   <button class="btn" onclick="saveStart()">Сохранить и запустить</button>
   <div id="startErr" class="err center"></div>
+  <div class="center" style="margin-top:14px"><small class="link" onclick="switchBook(BOOK==='bikes'?'flowers':'bikes')">⇄ Переключить бухгалтерию (🌸 Цветы / 🏍 Байки)</small></div>
 </div>
 
 <!-- ГЛАВНЫЙ -->
 <div id="v-main" class="hidden">
-  <h1>💰 Бухгалтерия</h1>
-  <div class="card"><div class="muted">Показывать в валюте</div><div class="seg" id="baseSeg" style="margin-top:8px"></div></div>
+  <h1>💰 Бухгалтерия <span class="booktag" id="bookTitle"></span></h1>
+  <div class="card"><div class="muted">Какая бухгалтерия</div><div class="seg" id="bookSeg" style="margin-top:8px"><button data-b="flowers" onclick="switchBook('flowers')">🌸 Цветы</button><button data-b="bikes" onclick="switchBook('bikes')">🏍 Байки</button></div></div>
 
-  <div class="fc" id="fcBlock" onclick="openHorizon()"></div>
+  <div class="fc fl-only" id="fcBlock" onclick="openHorizon()"></div>
 
   <div class="card free"><div class="muted">Свободные деньги</div><div class="big" id="mFree">—</div><div class="muted">всё кроме резерва</div></div>
   <div class="card">
@@ -151,12 +159,13 @@
   <div id="mainTasks"></div>
 
   <div class="grid3">
-    <div class="tile" onclick="openPending()"><span class="ic">📥</span>Заявки<span id="pendBadge"></span></div>
+    <div class="tile fl-only" onclick="openPending()"><span class="ic">📥</span>Заявки<span id="pendBadge"></span></div>
     <div class="tile" onclick="openExpense()"><span class="ic">🔴</span>Расход</div>
     <div class="tile" onclick="openTransfer()"><span class="ic">🔁</span>Перевод</div>
-    <div class="tile" onclick="openHorizon()"><span class="ic">📅</span>Горизонт</div>
-    <div class="tile" onclick="openMap(null,true)"><span class="ic">🗺️</span>Карта заказов</div>
-    <div class="tile" onclick="openCouriers()"><span class="ic">🚚</span>Курьеры</div>
+    <div class="tile" onclick="openXfer()"><span class="ic">🔀</span>Между бух.</div>
+    <div class="tile fl-only" onclick="openHorizon()"><span class="ic">📅</span>Горизонт</div>
+    <div class="tile fl-only" onclick="openMap(null,true)"><span class="ic">🗺️</span>Карта заказов</div>
+    <div class="tile fl-only" onclick="openCouriers()"><span class="ic">🚚</span>Курьеры</div>
     <div class="tile" onclick="openReports()"><span class="ic">📊</span>Отчёты</div>
     <div class="tile" onclick="openMore()"><span class="ic">⋯</span>Ещё<span id="moreBadge"></span></div>
   </div>
@@ -180,6 +189,24 @@
     <label>Фото-чек (необязательно)</label><input id="exPhoto" type="file" accept="image/*">
     <button class="btn" onclick="submitExpense()">Добавить расход</button>
     <div id="exErr" class="err"></div>
+  </div>
+</div>
+
+<!-- 🔀 ПЕРЕВОД МЕЖДУ БУХГАЛТЕРИЯМИ -->
+<div id="v-xfer" class="hidden">
+  <button class="back" onclick="go('main')">‹ Назад</button><h2>🔀 Перевод между бухгалтериями</h2>
+  <div class="card">
+    <label>Направление</label>
+    <div class="seg" id="xfDir"><button data-d="fb" onclick="xfSetDir('flowers','bikes')">🌸 → 🏍</button><button data-d="bf" onclick="xfSetDir('bikes','flowers')">🏍 → 🌸</button></div>
+    <label style="margin-top:14px" id="xfFromLbl">Откуда</label>
+    <div id="xfFromList" class="wsel"></div>
+    <label style="margin-top:14px" id="xfToLbl">Куда</label>
+    <div id="xfToList" class="wsel"></div>
+    <label style="margin-top:14px">Сумма (₫ донги)</label><input id="xfAmount" type="text" inputmode="numeric" class="num" placeholder="0">
+    <div id="xfAvail" class="muted" style="margin-top:6px"></div>
+    <label>Комментарий (необязательно)</label><input id="xfNote">
+    <button class="btn" onclick="submitXfer()">Перевести</button>
+    <div id="xfErr" class="err"></div>
   </div>
 </div>
 
@@ -477,7 +504,27 @@ function whoName(){ try{ return localStorage.getItem('who')||''; }catch(e){ retu
 function linkMode(){ return !(tg && tg.initData) && !!buhKey(); }
 
 function initData(){ return (tg && tg.initData) ? tg.initData : ''; }
-function base(){ return localStorage.getItem('base')||'VND'; }
+function base(){ return 'VND'; }   // смотрим только в донгах (переключатель валют убран 25.09 → вместо него переключатель бухгалтерий)
+// ── 🌸 Цветы / 🏍 Байки: какая бухгалтерия открыта (запоминается на устройстве) ──
+var BOOK=(function(){ try{ return localStorage.getItem('book')==='bikes'?'bikes':'flowers'; }catch(e){ return 'flowers'; } })();
+function bookLabel(b){ return (b||BOOK)==='bikes'?'🏍 Байки':'🌸 Цветы'; }
+function applyBookUi(){
+  document.body.classList.toggle('bikes', BOOK==='bikes');
+  var t=document.getElementById('bookTitle'); if(t) t.textContent=bookLabel();
+  var sb=document.getElementById('startBook'); if(sb) sb.textContent=bookLabel();
+  var seg=document.getElementById('bookSeg'); if(seg) Array.prototype.forEach.call(seg.children,function(x){ x.className=(x.getAttribute('data-b')===BOOK)?'on':''; });
+}
+function ck(k){ return k+(BOOK==='bikes'?'_bikes':''); }   // кэш у каждой бухгалтерии свой
+async function switchBook(b){
+  if(b===BOOK) return;
+  BOOK=b; try{ localStorage.setItem('book',b); }catch(e){}
+  STATE=null; applyBookUi();
+  var res=await api('getState',{});
+  if(!res.ok){ toast(res.error||'Ошибка'); return; }
+  STATE=res; cacheState(res);
+  if(!res.started){ buildStart(res); go('start'); } else { render(res); go('main'); }
+  toast('Открыта бухгалтерия: '+bookLabel());
+}
 function loader(on){ document.getElementById('loader').classList.toggle('show', !!on); }
 function toast(m){ var t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); setTimeout(function(){t.classList.remove('show');},2200); }
 function esc(s){ return String(s==null?'':s).replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
@@ -490,7 +537,7 @@ function sleep(ms){ return new Promise(function(r){ setTimeout(r,ms); }); }
 async function api(action, extra, silent){
   if(!silent) loader(true);
   try{
-    var payload=Object.assign({action:action, initData:initData(), buhKey:buhKey(), who:whoName(), pin:PIN, base:base()}, extra||{});
+    var payload=Object.assign({action:action, initData:initData(), buhKey:buhKey(), who:whoName(), pin:PIN, base:base(), book:BOOK}, extra||{});
     var AMT={amount:1,payAmount:1,balance:1,cost:1,value:1};
     Object.keys(payload).forEach(function(k){ if(AMT[k]&&typeof payload[k]==='string') payload[k]=payload[k].replace(/\s/g,'').replace(',','.'); });
     var body=JSON.stringify(payload), lastErr=null;
@@ -510,7 +557,7 @@ async function api(action, extra, silent){
 }
 async function refreshReserveNow(){ var res=await api('refreshReserve',{}); if(res&&res.ok){ STATE=res; toast('Резерв обновлён из Финансов'); openReserve(); } else toast(res.error||'Ошибка'); }
 
-var VIEWS=['pin','start','main','expense','transfer','pending','confirm','horizon','map','mapadd','mapexport','couriers','more','reserve','recurring','history','edit','wallets','reports','tasks','taskdo','adjust','paybill','install'];
+var VIEWS=['pin','start','main','xfer','expense','transfer','pending','confirm','horizon','map','mapadd','mapexport','couriers','more','reserve','recurring','history','edit','wallets','reports','tasks','taskdo','adjust','paybill','install'];
 function go(v){ VIEWS.forEach(function(x){ var el=document.getElementById('v-'+x); if(el) el.classList.toggle('hidden', x!==v); }); window.scrollTo(0,0); }
 
 // ---------- ВХОД ----------
@@ -526,10 +573,11 @@ async function doLogin(){
 }
 function pullFinanceBg(){ api('pullFinance',{},true).then(function(r){ if(r&&r.ok) render(r); }); }
 function buildStart(res){
+  applyBookUi();
   var box=document.getElementById('startFields'); box.innerHTML='';
   res.wallets.forEach(function(w){ if(w.type==='reserve'||w.type==='goal'||w.type==='ads') return;
     var l=document.createElement('label'); l.textContent=w.name+' (₫ донги)';
-    var i=document.createElement('input'); i.type='text'; i.inputMode='numeric'; i.className='num'; i.value='0'; i.id='sb_'+w.id;
+    var i=document.createElement('input'); i.type='text'; i.inputMode='numeric'; i.className='num'; i.value=groupNum(Math.max(0,Math.round(w.vnd||0))); i.id='sb_'+w.id;
     box.appendChild(l); box.appendChild(i); });
 }
 async function saveStart(){
@@ -541,10 +589,7 @@ async function saveStart(){
 
 // ---------- ГЛАВНЫЙ ----------
 function render(res){
-  STATE=res; cacheState(res);
-  var seg=document.getElementById('baseSeg'); seg.innerHTML='';
-  res.baseChoices.forEach(function(c){ var b=document.createElement('button'); b.textContent=c.sym; if(c.code===res.base)b.className='on';
-    b.onclick=function(){ localStorage.setItem('base',c.code); reload(); }; seg.appendChild(b); });
+  STATE=res; cacheState(res); applyBookUi();
   // прогноз
   var f=res.forecast||{}, fc=document.getElementById('fcBlock');
   fc.className='fc '+(f.enough?'ok':'no');
@@ -604,7 +649,7 @@ function render(res){
     d.innerHTML='<div class="row"><span>'+(w.type==='reserve'?'🏦 ':(w.type==='goal'?'🎯 ':''))+esc(w.name)+'</span><span class="amt">'+right+'</span></div>'; list.appendChild(d); });
 }
 async function reload(){ var res=await api('getState',{},true); if(res.ok) render(res); }
-function cacheState(res){ try{ localStorage.setItem('lastState', JSON.stringify(res)); }catch(e){} }
+function cacheState(res){ try{ localStorage.setItem(ck('lastState'), JSON.stringify(res)); }catch(e){} }
 
 function walletOptions(sel, includeReserve){
   sel.innerHTML='';
@@ -686,6 +731,48 @@ async function submitTransfer(){
   var res=await api('addTransfer',{from:trFrom, to:trTo, amount:document.getElementById('trAmount').value, note:document.getElementById('trNote').value});
   if(!res.ok){ err.textContent=res.error; return; }
   render(res); go('main'); toast('Перевод выполнен');
+}
+
+// ---------- 🔀 МЕЖДУ БУХГАЛТЕРИЯМИ ----------
+var XF={books:null, from:'flowers', to:'bikes', fw:null, tw:null};
+function xfBook(code){ var r=null; (XF.books||[]).forEach(function(b){ if(b.code===code) r=b; }); return r||{label:bookLabel(code),wallets:[]}; }
+async function openXfer(){
+  XF.fw=null; XF.tw=null; XF.from=BOOK; XF.to=(BOOK==='bikes'?'flowers':'bikes');
+  ['xfAmount','xfNote'].forEach(function(id){ document.getElementById(id).value=''; });
+  document.getElementById('xfErr').textContent=''; document.getElementById('xfAvail').textContent='';
+  var res=await api('bookWallets',{});
+  if(!res.ok){ toast(res.error||'Ошибка'); return; }
+  XF.books=res.books; xfRender(); go('xfer');
+}
+function xfSetDir(f,t){ XF.from=f; XF.to=t; XF.fw=null; XF.tw=null; document.getElementById('xfAvail').textContent=''; xfRender(); }
+function xfRender(){
+  Array.prototype.forEach.call(document.getElementById('xfDir').children,function(x){ x.className=(x.getAttribute('data-d')===(XF.from==='flowers'?'fb':'bf'))?'on':''; });
+  var fb=xfBook(XF.from), tb=xfBook(XF.to);
+  document.getElementById('xfFromLbl').textContent='Откуда: '+fb.label+' (только где есть деньги)';
+  document.getElementById('xfToLbl').textContent='Куда: '+tb.label;
+  var fBox=document.getElementById('xfFromList'), tBox=document.getElementById('xfToList'); fBox.innerHTML=''; tBox.innerHTML='';
+  fb.wallets.forEach(function(w){ if(w.vnd<=0) return;
+    var r=document.createElement('div'); r.className='wrow'+(XF.fw===w.id?' on':'');
+    r.innerHTML='<span class="wnm">'+(w.type==='reserve'?'🏦 ':'')+esc(w.name)+'</span><span class="wa">'+fmt(w.vnd,'₫')+'</span>';
+    r.onclick=function(){ XF.fw=w.id; document.getElementById('xfAvail').textContent='Доступно: '+fmt(w.vnd,'₫'); xfRender(); };
+    fBox.appendChild(r); });
+  if(!fBox.children.length) fBox.innerHTML='<div class="muted">В этой бухгалтерии нет счетов с деньгами</div>';
+  tb.wallets.forEach(function(w){
+    var r=document.createElement('div'); r.className='wrow'+(XF.tw===w.id?' on':'');
+    r.innerHTML='<span class="wnm">'+(w.type==='reserve'?'🏦 ':'')+esc(w.name)+'</span><span class="wa g">'+fmt(w.vnd,'₫')+'</span>';
+    r.onclick=function(){ XF.tw=w.id; xfRender(); };
+    tBox.appendChild(r); });
+  if(!tBox.children.length) tBox.innerHTML='<div class="muted">Нет счетов</div>';
+}
+async function submitXfer(){
+  var err=document.getElementById('xfErr'); err.textContent='';
+  if(!XF.fw){ err.textContent='Выбери, откуда'; return; }
+  if(!XF.tw){ err.textContent='Выбери, куда'; return; }
+  var res=await api('bookTransfer',{fromBook:XF.from, from:XF.fw, toBook:XF.to, to:XF.tw, amount:document.getElementById('xfAmount').value, note:document.getElementById('xfNote').value});
+  if(!res.ok){ err.textContent=res.error||'Ошибка'; return; }
+  try{ localStorage.removeItem('cache_history'); localStorage.removeItem('cache_history_bikes'); }catch(e){}
+  if(res.started){ render(res); go('main'); } else { STATE=res; buildStart(res); go('start'); }
+  toast('Перевод между бухгалтериями выполнен');
 }
 
 // ---------- ЗАЯВКИ ----------
@@ -1042,17 +1129,17 @@ function renderHistory(res){
       d.onclick=function(){ undoTaskEntry(o); };
       box.appendChild(d); return;
     }
-    var ic=o.type==='приход'?'🟢':(o.type==='расход'?'🔴':'🔁');
+    var ic=o.xb?'🔀':(o.type==='приход'?'🟢':(o.type==='расход'?'🔴':'🔁'));
     var main=o.type==='перевод'?(fmt(o.vnd,'₫')+' '+esc(o.from)+' → '+esc(o.to)):(fmt(o.vnd,'₫')+' · '+esc(o.from));
-    d.innerHTML='<div class="row"><span class="t">'+ic+' '+main+'</span></div><div class="s">'+o.date+(o.cat?(' · '+esc(o.cat)):'')+(o.note?(' · '+esc(o.note)):'')+(o.receipt?(' · <a href="'+o.receipt+'" target="_blank" rel="noopener noreferrer">чек</a>'):'')+'</div>';
+    d.innerHTML='<div class="row"><span class="t">'+ic+' '+main+'</span></div><div class="s">'+o.date+(o.xb?' · между бухгалтериями':'')+((o.cat&&!o.xb)?(' · '+esc(o.cat)):'')+(o.note?(' · '+esc(o.note)):'')+(o.receipt?(' · <a href="'+o.receipt+'" target="_blank" rel="noopener noreferrer">чек</a>'):'')+'</div>';
     d.onclick=function(ev){ if(ev.target.tagName==='A')return; openEdit(o); }; box.appendChild(d); });
   if(!(res.history||[]).length) box.innerHTML='<div class="card center muted">Пока нет операций</div>';
 }
 async function openHistory(){
-  var c=localStorage.getItem('cache_history'), had=false;
+  var c=localStorage.getItem(ck('cache_history')), had=false;
   if(c){ try{ var r=JSON.parse(c); STATE=r; renderHistory(r); go('history'); had=true; }catch(e){} }
   var res=await api('listHistory',{}, had); if(!res.ok){ if(!had) toast(res.error); return; } STATE=res;
-  localStorage.setItem('cache_history',JSON.stringify(res)); renderHistory(res); go('history');
+  localStorage.setItem(ck('cache_history'),JSON.stringify(res)); renderHistory(res); go('history');
 }
 function openEdit(o){
   EDIT_OP=o;
@@ -1069,13 +1156,13 @@ async function submitEdit(){
   if(EDIT_OP.type==='расход') body.category=document.getElementById('edCat').value;
   var res=await api('editEntry',body);
   if(!res.ok){ document.getElementById('edErr').textContent=res.error; return; }
-  STATE=res; cacheState(res); localStorage.setItem('cache_history',JSON.stringify(res)); renderHistory(res); go('history'); toast('Сохранено');
+  STATE=res; cacheState(res); localStorage.setItem(ck('cache_history'),JSON.stringify(res)); renderHistory(res); go('history'); toast('Сохранено');
 }
 async function submitDelete(){
   if(!confirm('Отменить операцию? Баланс и связанные заказы/задачи вернутся как было.')) return;
   var res=await api('deleteEntry',{id:EDIT_OP.id});
   if(!res.ok){ document.getElementById('edErr').textContent=res.error; return; }
-  STATE=res; cacheState(res); localStorage.setItem('cache_history',JSON.stringify(res)); renderHistory(res); go('history'); toast('Отменено, состояние восстановлено');
+  STATE=res; cacheState(res); localStorage.setItem(ck('cache_history'),JSON.stringify(res)); renderHistory(res); go('history'); toast('Отменено, состояние восстановлено');
 }
 // Отмена действий с задачами прямо из истории
 async function undoTaskEntry(o){
@@ -1084,7 +1171,7 @@ async function undoTaskEntry(o){
   if(!confirm(msg)) return;
   var res=await api(o.event==='done'?'reopenTask':'deleteTaskEntry',{id:o.id});
   if(!res.ok){ toast(res.error||'Ошибка'); return; }
-  STATE=res; cacheState(res); localStorage.setItem('cache_history',JSON.stringify(res)); renderHistory(res); toast('Готово');
+  STATE=res; cacheState(res); localStorage.setItem(ck('cache_history'),JSON.stringify(res)); renderHistory(res); toast('Готово');
 }
 
 // ---------- КОШЕЛЬКИ ----------
@@ -1198,13 +1285,14 @@ function renderWho(){
 window.addEventListener('load', async function(){
   renderWho();
   if('serviceWorker' in navigator){ try{ navigator.serviceWorker.register('sw.js'); }catch(e){} }
+  applyBookUi();
   var savedPin=localStorage.getItem('pin'); if(savedPin) document.getElementById('pin').value=savedPin;
-  var cached=localStorage.getItem('lastState');
+  var cached=localStorage.getItem(ck('lastState'));
   if(savedPin && cached){
     PIN=savedPin;
     try{ var st=JSON.parse(cached); if(st && st.started){ render(st); go('main'); } }catch(e){}
     var res=await api('getState',{}, true);           // фоновое обновление, без крутилки
-    if(res && res.ok){ if(res.started){ render(res); if(!document.getElementById('v-pin').classList.contains('hidden')) go('main'); } else { go('pin'); } }
+    if(res && res.ok){ if(res.started){ render(res); if(!document.getElementById('v-pin').classList.contains('hidden')) go('main'); } else { STATE=res; buildStart(res); go('start'); } }
     else if(res && (res.needId || !res.ok)){ /* доступ изменился — оставим экран как есть, пусть введёт ПИН */ if(!STATE){ go('pin'); } }
   }
 });
