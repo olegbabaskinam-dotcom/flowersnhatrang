@@ -860,7 +860,7 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
   window.ordersOpen=ordersOpen;
   /* ==== ДОП-ТОВАРЫ (апселл на этапе оформления) ==== */
   var ADDONS=[
-    {id:"dop-plastikovaya-tara-dlya-cvetov", kind:"vase", price:100000,
+    {id:"dop-plastikovaya-tara-dlya-cvetov", kind:"extra", price:100000,
      img:"img/products/dop-plastikovaya-tara-dlya-cvetov/1.webp",
      name:{ru:"Пластиковая тара для цветов",en:"Plastic vase for flowers",ko:"꽃용 플라스틱 화병"},
      why:{ru:"Букету сразу есть куда встать — стоит дольше и красиво смотрится дома.",
@@ -889,7 +889,45 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
      name:{ru:"Шар-сердце, серебристый",en:"Heart balloon, silver",ko:"하트 풍선, 실버"}},
     {id:"dop-folgirovannyy-shar-zvezda-serebristaya", kind:"balloon", price:150000,
      img:"img/products/dop-folgirovannyy-shar-zvezda-serebristaya/1.webp",
-     name:{ru:"Шар-звезда, серебристый",en:"Star balloon, silver",ko:"별 풍선, 실버"}},
+     name:{ru:"Шар-звезда, серебристый",en:"Star balloon, silver",ko:"별 풍선, 실버"}},    {id:"dop-iskusstvennye-lepestki-roz-krasnye", kind:"extra", price:100000,
+     img:"img/products/dop-iskusstvennye-lepestki-roz-krasnye/1.webp",
+     name:{ru:"Лепестки роз, красные",en:"Rose petals, red",ko:"장미 꽃잎, 레드"}},
+    {id:"dop-iskusstvennye-lepestki-roz-rozovye", kind:"extra", price:100000,
+     img:"img/products/dop-iskusstvennye-lepestki-roz-rozovye/1.webp",
+     name:{ru:"Лепестки роз, розовые",en:"Rose petals, pink",ko:"장미 꽃잎, 핑크"}},
+    {id:"dop-hlopushka-biryuzovaya", kind:"extra", price:100000,
+     img:"img/products/dop-hlopushka-biryuzovaya/1.webp",
+     name:{ru:"Хлопушка бирюзовая",en:"Party popper, turquoise",ko:"파티 폭죽, 터콰이즈"}},
+    {id:"dop-hlopushka-chernaya", kind:"extra", price:100000,
+     img:"img/products/dop-hlopushka-chernaya/1.webp",
+     name:{ru:"Хлопушка чёрная",en:"Party popper, black",ko:"파티 폭죽, 블랙"}},
+    {id:"dop-hlopushka-rozovaya", kind:"extra", price:100000,
+     img:"img/products/dop-hlopushka-rozovaya/1.webp",
+     name:{ru:"Хлопушка розовая",en:"Party popper, pink",ko:"파티 폭죽, 핑크"}},
+    {id:"dop-prazdnichnye-svistki-5-sht", kind:"extra", price:100000,
+     img:"img/products/dop-prazdnichnye-svistki-5-sht/1.webp",
+     name:{ru:"Свистки-язычки, 5 шт",en:"Party blowers, 5 pcs",ko:"파티 피리, 5개"}},
+    {id:"dop-bengalskie-ogni-happy-birthday-3-pachki", kind:"extra", price:100000,
+     img:"img/products/dop-bengalskie-ogni-happy-birthday-3-pachki/1.webp",
+     name:{ru:"Бенгальские огни, 3 пачки по 5 шт",en:"Sparklers, 3 packs of 5",ko:"스파클러, 5개입 3팩"}},
+    {id:"dop-prazdnichnye-kolpachki-5-sht", kind:"extra", price:100000,
+     img:"img/products/dop-prazdnichnye-kolpachki-5-sht/1.webp",
+     name:{ru:"Праздничные колпачки, 5 шт",en:"Party hats, 5 pcs",ko:"파티 고깔모자, 5개"}},
+    {id:"dop-nabor-posudy-happy-birthday-cherno-krasnyy", kind:"extra", price:100000,
+     img:"img/products/dop-nabor-posudy-happy-birthday-cherno-krasnyy/1.webp",
+     name:{ru:"Посуда «Happy Birthday» чёрно-красная, 5+5",en:"“Happy Birthday” tableware, black-red, 5+5",ko:"“Happy Birthday” 식기, 블랙·레드, 5+5"}},
+    {id:"dop-nabor-posudy-happy-birthday-pastelnyy", kind:"extra", price:100000,
+     img:"img/products/dop-nabor-posudy-happy-birthday-pastelnyy/1.webp",
+     name:{ru:"Посуда «Happy Birthday» пастельная, 5+5",en:"“Happy Birthday” tableware, pastel, 5+5",ko:"“Happy Birthday” 식기, 파스텔, 5+5"}},
+    {id:"dop-nabor-posudy-gonochnye-mashinki", kind:"extra", price:100000,
+     img:"img/products/dop-nabor-posudy-gonochnye-mashinki/1.webp",
+     name:{ru:"Посуда с гоночными машинками, 5+5",en:"Race cars tableware, 5+5",ko:"레이싱카 식기, 5+5"}},
+    {id:"dop-nabor-posudy-supergeroi", kind:"extra", price:100000,
+     img:"img/products/dop-nabor-posudy-supergeroi/1.webp",
+     name:{ru:"Посуда с супергероями, 5+5",en:"Superheroes tableware, 5+5",ko:"슈퍼히어로 식기, 5+5"}},
+    {id:"dop-nabor-posudy-happy-dino-birthday", kind:"extra", price:100000,
+     img:"img/products/dop-nabor-posudy-happy-dino-birthday/1.webp",
+     name:{ru:"Посуда «Happy Dino Birthday», 5+5",en:"“Happy Dino Birthday” tableware, 5+5",ko:"“Happy Dino Birthday” 식기, 5+5"}},
   ];
   function addonLang(){ return (window.FLW_LANG==='en'||window.FLW_LANG==='ko')?window.FLW_LANG:'ru'; }
   function renderAddons(items){
@@ -904,22 +942,7 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
     var balH={ru:'Гелиевые шары',en:'Helium balloons',ko:'헬륨 풍선'}[L];
     var swipe={ru:'← листайте или жмите стрелки →',en:'← swipe or use arrows →',ko:'← 스와이프 또는 화살표 →'}[L];
     function qtyOf(id){ return (items.filter(function(x){return x.id===id;})[0]||{}).qty||0; }
-    var vase=ADDONS.filter(function(a){return a.kind==='vase';})[0];
-    var vaseHtml='';
-    if(vase){
-      var vq=qtyOf(vase.id), vu='catalog/'+vase.id+'-'+L+'.html';
-      vaseHtml='<div style="background:#fff;border:1px solid #f0e0e5;border-radius:14px;padding:10px;display:flex;gap:11px;align-items:center">'+
-        '<a href="'+vu+'" style="flex-shrink:0;line-height:0"><img src="'+vase.img+'" alt="'+vase.name[L]+'" loading="lazy" decoding="async" style="width:64px;height:64px;border-radius:10px;object-fit:cover" width="64" height="64"></a>'+
-        '<div style="flex:1;min-width:0">'+
-          '<a href="'+vu+'" style="text-decoration:none;color:#1a1a1a;font-weight:600;font-size:14px;line-height:1.2;display:block">'+vase.name[L]+'</a>'+
-          '<div style="color:#78716c;font-size:12px;margin-top:2px;line-height:1.3">'+vase.why[L]+'</div>'+
-          '<div style="color:#1a1a1a;font-weight:700;font-size:13px;margin-top:4px">'+money(vase.price)+(vq?' · <span style="color:#a94f63">'+inc+' ('+vq+')</span>':'')+'</div>'+
-        '</div>'+
-        '<button type="button" class="addon-add" data-a="'+vase.id+'" style="flex-shrink:0;border:none;background:#c0687a;color:#fff;font-weight:700;font-size:12px;padding:9px 12px;border-radius:10px;cursor:pointer">'+addw+'</button>'+
-      '</div>';
-    }
-    var balloons=ADDONS.filter(function(a){return a.kind==='balloon';});
-    var bCards=balloons.map(function(a){
+    function cardsOf(list){ return list.map(function(a){
       var bq=qtyOf(a.id), bu='catalog/'+a.id+'-'+L+'.html';
       return '<div style="flex:0 0 auto;width:150px;scroll-snap-align:start;background:#fff;border:1px solid #f0e0e5;border-radius:14px;padding:9px;display:flex;flex-direction:column;gap:6px">'+
         '<a href="'+bu+'" style="line-height:0;display:block"><img src="'+a.img+'" alt="'+a.name[L]+'" loading="lazy" decoding="async" style="width:100%;height:120px;border-radius:10px;object-fit:cover" width="132" height="120"></a>'+
@@ -927,35 +950,37 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
         '<div style="color:#1a1a1a;font-weight:700;font-size:13px">'+money(a.price)+(bq?' · <span style="color:#a94f63">'+inc+' ('+bq+')</span>':'')+'</div>'+
         '<button type="button" class="addon-add" data-a="'+a.id+'" style="border:none;background:#c0687a;color:#fff;font-weight:700;font-size:12px;padding:9px 10px;border-radius:10px;cursor:pointer;width:100%">'+addw+'</button>'+
       '</div>';
-    }).join('');
+    }).join(''); }
     var arrowBtn=function(dir,sym){ return '<button type="button" class="balloon-arrow balloon-'+dir+'" aria-label="'+dir+'" style="position:absolute;top:72px;'+(dir==="prev"?"left:-6px":"right:-6px")+';transform:translateY(-50%);width:38px;height:38px;border-radius:999px;border:1px solid #f0e0e5;background:rgba(255,255,255,.97);box-shadow:0 2px 10px rgba(0,0,0,.22);color:#a8566a;font-size:24px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5;padding:0">'+sym+'</button>'; };
-    var balHtml = balloons.length ? (
-      '<div style="display:flex;align-items:baseline;justify-content:space-between;margin:16px 0 8px">'+
-        '<div style="font-weight:700;font-size:15px;color:#1a1a1a">'+balH+'</div>'+
-        (balloons.length>1?'<div style="color:#78716c;font-size:12px">'+swipe+'</div>':'')+
-      '</div>'+
-      '<div style="position:relative">'+
-        '<div class="balloon-row" style="display:flex;gap:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;scroll-behavior:smooth;padding:2px 2px 10px">'+bCards+'</div>'+
-        (balloons.length>1?(arrowBtn('prev','‹')+arrowBtn('next','›')):'')+
-      '</div>'
-    ) : '';
+    function rowHtml(title,list){ if(!list.length) return '';
+      return '<div class="addon-group"><div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:16px 0 8px">'+
+          '<div style="font-weight:700;font-size:15px;color:#1a1a1a">'+title+' · '+money(list[0].price)+'</div>'+
+          (list.length>1?'<div style="color:#78716c;font-size:12px">'+swipe+'</div>':'')+
+        '</div>'+
+        '<div style="position:relative">'+
+          '<div class="balloon-row" style="display:flex;gap:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;scroll-behavior:smooth;padding:2px 2px 10px">'+cardsOf(list)+'</div>'+
+          (list.length>1?(arrowBtn('prev','‹')+arrowBtn('next','›')):'')+
+        '</div></div>'; }
+    var balloons=ADDONS.filter(function(a){return a.kind==='balloon';});
+    var extras=ADDONS.filter(function(a){return a.kind==='extra';});
+    var extH={ru:'🎁 Доп. товары',en:'🎁 Extras',ko:'🎁 추가 상품'}[L];
     box.innerHTML='<div style="margin:18px 0 4px">'+
       '<div style="font-weight:700;font-size:16px;color:#1a1a1a">'+head+'</div>'+
       '<div style="color:#78716c;font-size:13px;margin:2px 0 10px">'+subt+'</div>'+
-      vaseHtml+balHtml+'</div>';
+      rowHtml('🎈 '+balH,balloons)+rowHtml(extH,extras)+'</div>';
     box.querySelectorAll('.addon-add').forEach(function(btn){
       btn.onclick=function(){ var a=ADDONS.filter(function(x){return x.id===btn.dataset.a;})[0];
         Cart.add({id:a.id,name:a.name[L],price:a.price,img:a.img,cat:'addon'}); render(); };
     });
-    var brow=box.querySelector('.balloon-row');
-    if(brow){
+    box.querySelectorAll('.addon-group').forEach(function(g){
+      var brow=g.querySelector('.balloon-row'); if(!brow) return;
       var bstep=function(){ return Math.max(170, Math.round(brow.clientWidth*0.8)); };
-      var bp=box.querySelector('.balloon-prev'), bn=box.querySelector('.balloon-next');
+      var bp=g.querySelector('.balloon-prev'), bn=g.querySelector('.balloon-next');
       var bupd=function(){ var mx=brow.scrollWidth-brow.clientWidth-1; if(bp) bp.style.opacity=brow.scrollLeft<=2?'.35':'1'; if(bn) bn.style.opacity=brow.scrollLeft>=mx?'.35':'1'; };
       if(bp) bp.onclick=function(){ brow.scrollBy({left:-bstep(),behavior:'smooth'}); };
       if(bn) bn.onclick=function(){ brow.scrollBy({left:bstep(),behavior:'smooth'}); };
       brow.addEventListener('scroll',bupd); setTimeout(bupd,60);
-    }
+    });
   }
   function render(){
     renderCur();
