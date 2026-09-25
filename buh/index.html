@@ -107,6 +107,13 @@
   body.bikes .seg,body.bikes .btn.ghost{background:#e0f2f7}
   body.bikes .wrow.on{background:#e6f6fa;box-shadow:0 0 0 2px rgba(14,116,144,.18)}
   body.bikes .fl-only{display:none!important}
+  .bk-only{display:none!important} body.bikes .bk-only{display:block!important}
+  .bkrow{border:1px solid var(--line);border-radius:12px;padding:11px 12px;margin-bottom:9px;background:#fff}
+  .bkrow .t{font-weight:700}.bkrow .s{font-size:13px;color:var(--muted);margin-top:3px}
+  .bkbadge{display:inline-block;font-size:11px;font-weight:700;border-radius:7px;padding:1px 7px;margin-right:5px}
+  .bkbadge.ok{background:#dcfce7;color:#166534}.bkbadge.no{background:#f1f5f9;color:#64748b}.bkbadge.warn{background:#fef3c7;color:#92400e}
+  .kv{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}.kv:last-child{border-bottom:none}
+  .kv b{white-space:nowrap}
   .booktag{font-size:13px;font-weight:700;color:#fff;background:var(--accent);border-radius:8px;padding:2px 8px}
 </style>
 </head>
@@ -162,6 +169,7 @@
     <div class="tile fl-only" onclick="openPending()"><span class="ic">📥</span>Заявки<span id="pendBadge"></span></div>
     <div class="tile" onclick="openExpense()"><span class="ic">🔴</span>Расход</div>
     <div class="tile" onclick="openTransfer()"><span class="ic">🔁</span>Перевод</div>
+    <div class="tile bk-only" onclick="openBikes()"><span class="ic">🏍</span>Байки</div>
     <div class="tile" onclick="openXfer()"><span class="ic">🔀</span>Между бух.</div>
     <div class="tile fl-only" onclick="openHorizon()"><span class="ic">📅</span>Горизонт</div>
     <div class="tile fl-only" onclick="openMap(null,true)"><span class="ic">🗺️</span>Карта заказов</div>
@@ -190,6 +198,43 @@
     <button class="btn" onclick="submitExpense()">Добавить расход</button>
     <div id="exErr" class="err"></div>
   </div>
+</div>
+
+<!-- 🏍 БАЙКИ (список из таблицы) -->
+<div id="v-bikes" class="hidden">
+  <button class="back" onclick="go('main')">‹ Назад</button>
+  <div class="row" style="margin-bottom:10px"><h2 style="margin:0">🏍 Байки</h2><small class="link" onclick="loadBikes(true)">🔄 Из таблицы</small></div>
+  <div class="seg" id="bkTabs" style="margin-bottom:12px"><button data-t="sale" onclick="bkTab('sale')">В продаже</button><button data-t="sold" onclick="bkTab('sold')">Проданные</button></div>
+  <div id="bkNote" class="muted" style="margin-bottom:8px"></div>
+  <div id="bkList"></div>
+</div>
+
+<!-- 🏍 КАРТОЧКА БАЙКА -->
+<div id="v-bike" class="hidden">
+  <button class="back" onclick="openBikes()">‹ Назад</button>
+  <h2 id="bkTitle" style="margin-bottom:6px"></h2>
+  <div id="bkStatus" style="margin-bottom:10px"></div>
+  <div class="card" id="bkInfo"></div>
+  <div class="card">
+    <b>🔴 Закуп (расход)</b>
+    <div id="bkBuyDone" class="muted" style="margin-top:6px"></div>
+    <div id="bkBuyForm">
+      <label>Сумма закупа (₫)</label><input id="bkBuyAmt" type="text" inputmode="numeric" class="num" placeholder="0">
+      <label>Со счёта</label><div id="bkBuyW" class="wsel"></div>
+      <button class="btn" onclick="submitBikeMoney('buy')">Списать закуп</button>
+    </div>
+  </div>
+  <div class="card">
+    <b>🟢 Продажа (приход)</b>
+    <div id="bkSaleDone" class="muted" style="margin-top:6px"></div>
+    <div id="bkSaleForm">
+      <label>Цена продажи (₫)</label><input id="bkSaleAmt" type="text" inputmode="numeric" class="num" placeholder="0">
+      <label>На счёт</label><div id="bkSaleW" class="wsel"></div>
+      <label>Комментарий (необязательно)</label><input id="bkSaleNote" placeholder="кому продали">
+      <button class="btn" style="background:var(--green)" onclick="submitBikeMoney('sell')">Провести продажу</button>
+    </div>
+  </div>
+  <div id="bkErr" class="err center"></div>
 </div>
 
 <!-- 🔀 ПЕРЕВОД МЕЖДУ БУХГАЛТЕРИЯМИ -->
@@ -557,7 +602,7 @@ async function api(action, extra, silent){
 }
 async function refreshReserveNow(){ var res=await api('refreshReserve',{}); if(res&&res.ok){ STATE=res; toast('Резерв обновлён из Финансов'); openReserve(); } else toast(res.error||'Ошибка'); }
 
-var VIEWS=['pin','start','main','xfer','expense','transfer','pending','confirm','horizon','map','mapadd','mapexport','couriers','more','reserve','recurring','history','edit','wallets','reports','tasks','taskdo','adjust','paybill','install'];
+var VIEWS=['pin','start','main','xfer','bikes','bike','expense','transfer','pending','confirm','horizon','map','mapadd','mapexport','couriers','more','reserve','recurring','history','edit','wallets','reports','tasks','taskdo','adjust','paybill','install'];
 function go(v){ VIEWS.forEach(function(x){ var el=document.getElementById('v-'+x); if(el) el.classList.toggle('hidden', x!==v); }); window.scrollTo(0,0); }
 
 // ---------- ВХОД ----------
@@ -731,6 +776,81 @@ async function submitTransfer(){
   var res=await api('addTransfer',{from:trFrom, to:trTo, amount:document.getElementById('trAmount').value, note:document.getElementById('trNote').value});
   if(!res.ok){ err.textContent=res.error; return; }
   render(res); go('main'); toast('Перевод выполнен');
+}
+
+// ---------- 🏍 БАЙКИ ----------
+var BK_TAB='sale', BK_DATA=null, BK_CUR=null;
+function bkMoney(n){ return fmt(n||0,'₫'); }
+async function openBikes(){
+  try{ var c=localStorage.getItem('cache_bikes'); if(c && !BK_DATA) BK_DATA=JSON.parse(c); }catch(e){}
+  go('bikes'); renderBikes();
+  if(!BK_DATA){ await loadBikes(true); }                  // первый раз — ждём таблицу
+  else { await loadBikes(false, true); loadBikes(true, true); }   // потом — мгновенно из базы, таблица догоняет в фоне
+}
+async function loadBikes(sync, silent){
+  var res=await api('bikesState',{sync:!!sync}, !!silent);
+  if(!res.ok){ if(!silent) toast(res.error||'Ошибка'); return; }
+  STATE=res; cacheState(res); BK_DATA=res.bikes; try{ localStorage.setItem('cache_bikes',JSON.stringify(BK_DATA)); }catch(e){}
+  if(sync && res.bikes.sync && !res.bikes.sync.ok && !silent) toast(res.bikes.sync.error||'Таблица не ответила');
+  if(!document.getElementById('v-bikes').classList.contains('hidden')) renderBikes();
+  if(BK_CUR && !document.getElementById('v-bike').classList.contains('hidden')){ var f=bkFind(BK_CUR.key); if(f) openBike(f,true); }
+}
+function bkFind(k){ var r=null; if(BK_DATA) BK_DATA.forSale.concat(BK_DATA.sold).forEach(function(x){ if(x.key===k) r=x; }); return r; }
+function bkTab(t){ BK_TAB=t; renderBikes(); }
+function renderBikes(){
+  var d=BK_DATA||{forSale:[],sold:[]};
+  Array.prototype.forEach.call(document.getElementById('bkTabs').children,function(x){
+    var t=x.getAttribute('data-t'); x.className=(t===BK_TAB)?'on':'';
+    x.textContent=(t==='sale'?'В продаже':'Проданные')+' ('+(t==='sale'?d.forSale.length:d.sold.length)+')'; });
+  document.getElementById('bkNote').textContent = (BK_DATA && BK_DATA.configured===false) ? '⚠️ Таблица байков ещё не подключена к бухгалтерии' : '';
+  var box=document.getElementById('bkList'); box.innerHTML='';
+  var list=BK_TAB==='sale'?d.forSale:d.sold;
+  if(!list.length){ box.innerHTML='<div class="card center muted">'+(BK_DATA?'Пусто':'Загружаю из таблицы…')+'</div>'; return; }
+  list.forEach(function(x){ var el=document.createElement('div'); el.className='bkrow';
+    var badges=(x.buyDone?'<span class="bkbadge ok">закуп ✓</span>':'<span class="bkbadge no">закуп не проведён</span>')
+      +(x.sold?(x.saleDone?'<span class="bkbadge ok">приход ✓</span>':'<span class="bkbadge warn">приход не проведён</span>'):'');
+    var info = x.sold
+      ? ('продан '+(x.saleDate||'')+' за '+bkMoney(x.saleDone?x.saleAmt:x.sale)+(x.profit!=null?(' · прибыль '+bkMoney(x.profit)):''))
+      : ((x.days!=null?('в продаже '+x.days+' дн. · '):'')+'себестоимость '+bkMoney(x.total));
+    el.innerHTML='<div class="t">'+esc(x.name)+'</div><div class="s">'+info+'</div><div style="margin-top:6px">'+badges+'</div>';
+    el.onclick=function(){ openBike(x); }; box.appendChild(el); });
+}
+function openBike(x, keepInputs){
+  BK_CUR=x; document.getElementById('bkErr').textContent='';
+  document.getElementById('bkTitle').textContent=x.name;
+  document.getElementById('bkStatus').innerHTML = x.sold?'<span class="bkbadge ok">продан</span>':'<span class="bkbadge no">в продаже</span>';
+  var kv=[['Дата покупки',x.buyDate||'—'],['Дата продажи',x.saleDate||'—'],['Дней в продаже',x.days!=null?x.days:'—'],
+    ['Закуп (таблица)',bkMoney(x.buy)],['Доставка',bkMoney(x.deliv)],['ТО',bkMoney(x.to)],['Мойка',bkMoney(x.wash)],['Всего вложено',bkMoney(x.total)],
+    ['Цена продажи',x.sale?bkMoney(x.sale):'—'],['Чистая прибыль',x.profit!=null?bkMoney(x.profit):'—']];
+  document.getElementById('bkInfo').innerHTML=kv.map(function(r){ return '<div class="kv"><span class="muted">'+r[0]+'</span><b>'+esc(r[1])+'</b></div>'; }).join('')
+    +'<div class="muted" style="font-size:12px;margin-top:6px">Цифры — из таблицы «Байки 50cc» (строка '+(x.row||'?')+')</div>';
+  document.getElementById('bkBuyDone').innerHTML = x.buyDone ? ('✅ Проведён: '+bkMoney(x.buyAmt)+' · отменить — в «Истории»') : '';
+  document.getElementById('bkBuyForm').classList.toggle('hidden', !!x.buyDone);
+  document.getElementById('bkSaleDone').innerHTML = x.saleDone ? ('✅ Проведена: '+bkMoney(x.saleAmt)+' · отменить — в «Истории»')
+    : (x.sold ? '⚠️ В таблице байк уже продан, а прихода в бухгалтерии нет. Проведи, если деньги ещё не учтены.' : '');
+  document.getElementById('bkSaleForm').classList.toggle('hidden', !!x.saleDone);
+  if(!keepInputs){
+    document.getElementById('bkBuyAmt').value = x.buy?groupNum(Math.round(x.buy)):'';
+    document.getElementById('bkSaleAmt').value = x.sale?groupNum(Math.round(x.sale)):'';
+    document.getElementById('bkSaleNote').value='';
+    pickerReset('bkBuyW'); pickerReset('bkSaleW');
+  }
+  renderPicker('bkBuyW',{funded:true});
+  renderPicker('bkSaleW',{grey:true});
+  go('bike');
+}
+async function submitBikeMoney(kind){
+  var err=document.getElementById('bkErr'); err.textContent='';
+  var BUY=kind==='buy', w=pickerVal(BUY?'bkBuyW':'bkSaleW');
+  if(!w){ err.textContent=BUY?'Выбери, с какого счёта':'Выбери, на какой счёт'; return; }
+  var amt=document.getElementById(BUY?'bkBuyAmt':'bkSaleAmt').value;
+  if(!confirm((BUY?'Списать закуп ':'Провести продажу ')+amt+' ₫ — '+BK_CUR.name+'?')) return;
+  var res=await api(BUY?'bikeBuy':'bikeSell',{key:BK_CUR.key, wallet:w, amount:amt, note:BUY?'':document.getElementById('bkSaleNote').value});
+  if(!res.ok){ err.textContent=res.error||'Ошибка'; return; }
+  STATE=res; cacheState(res); BK_DATA=res.bikes; try{ localStorage.setItem('cache_bikes',JSON.stringify(BK_DATA)); localStorage.removeItem('cache_history_bikes'); }catch(e){}
+  if(res.warn) alert(res.warn);
+  if(!BUY){ BK_TAB='sold'; go('bikes'); renderBikes(); toast('Продажа проведена'); }
+  else { var f=bkFind(BK_CUR.key); if(f) openBike(f); toast('Закуп списан'); }
 }
 
 // ---------- 🔀 МЕЖДУ БУХГАЛТЕРИЯМИ ----------
