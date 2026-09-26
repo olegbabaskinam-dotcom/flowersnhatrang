@@ -279,7 +279,7 @@ function updateSpecialOrderUi() {
 var MIN_DATE, MIN_START;
 function initDate() {
   var t = ntParts(), base = new Date(Date.UTC(t.y, t.mo - 1, t.d));
-  if (t.h >= 6 && t.h < 22) { base.setUTCDate(base.getUTCDate() + 1); MIN_START = 6; }
+  if (t.h >= 7 && t.h < 22) { base.setUTCDate(base.getUTCDate() + 1); MIN_START = 7; }
   else { if (t.h >= 22) base.setUTCDate(base.getUTCDate() + 1); MIN_START = 9; }
   skipClosedDeliveryDate(base);
   MIN_DATE = base.getUTCFullYear() + "-" + pad(base.getUTCMonth() + 1) + "-" + pad(base.getUTCDate());
@@ -309,7 +309,7 @@ async function rebuildTimes() {
   var sel = document.getElementById("deliveryTime"); var hint = document.getElementById("timeHint");
   var zone = window.__zoneKey;
   if (!zone || window.__outside) { sel.innerHTML = '<option value="">Сначала укажите адрес на карте</option>'; hint.textContent = "Сначала укажите адрес на карте"; return; }
-  var startMin = ((inp.value === MIN_DATE) ? MIN_START : 6) * 60;
+  var startMin = ((inp.value === MIN_DATE) ? MIN_START : 7) * 60;
   sel.innerHTML = '<option value="">Загружаем свободное время…</option>'; hint.textContent = "Загружаем свободное время…";
   var myDate = inp.value;
   try {
@@ -665,7 +665,7 @@ function bindReceipt() {
 }
 function finishOrder(note) {
   document.getElementById("doneText").innerHTML =
-    note + " по заказу <span class='oid'>" + esc(currentId) + "</span>.<br>Подтвердим в течение ~10 минут (06:00–21:00). 🌸";
+    note + " по заказу <span class='oid'>" + esc(currentId) + "</span>.<br>Подтвердим в течение ~10 минут (07:00–21:00). 🌸";
   localStorage.removeItem(LS);
   show("scrDone");
 }
