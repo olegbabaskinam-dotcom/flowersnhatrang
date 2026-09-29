@@ -135,7 +135,6 @@
         .xo-stars.done em{opacity:1;}
         .xo-cta-grid{display:grid;gap:.75rem;max-width:34rem;margin:0 auto;}
         .xo-cta-row{display:grid;gap:.75rem;}
-        [data-views-wrap]{display:none;} [data-views-wrap].on{display:inline;}
         #xo-lb{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:9999;}
         #xo-lb.on{display:flex;} #xo-lb img{max-width:96vw;max-height:88vh;border-radius:.5rem;}
         #xo-lb button{position:absolute;background:rgba(255,255,255,.15);color:#fff;border:0;border-radius:999px;width:3rem;height:3rem;font-size:1.6rem;cursor:pointer;}
@@ -158,7 +157,7 @@
         </div>
     </section>
     <article class="xo-art max-w-3xl mx-auto px-6 py-8">
-        <div class="xo-meta"><span class="xo-badge">✍️ 작성자 칼럼</span><span>2026년 9월 26일</span><span data-views-wrap>👁 <span data-views>0</span> 조회</span></div>
+        <div class="xo-meta"><span class="xo-badge">✍️ 작성자 칼럼</span><span>2026년 9월 26일</span><span data-views-wrap>👁 <span data-views>…</span> 조회</span></div>
         <h1 class="font-serif text-3xl md:text-4xl font-bold mt-2 mb-6 leading-tight" style="color:#1a1a1a;">나트랑에서 해산물 먹을 곳: 시내 남쪽의 저렴한 현지 식당</h1>
         <p>나트랑은 바닷가의 작고 아늑한 도시입니다. 이곳에 휴가를 온 사람이라면 누구나 무엇보다 바다와 해산물을 즐기고 싶어 하죠.</p>
         <p>이곳의 해산물은 정말 다양합니다. 엄청나게 큰 새우, 큰 게와 작은 꽃게, 여러 종류의 조개와 갑각류, 바다 생물, 작은 생선, 성게까지 — 한마디로 끝없이 나열할 수 있습니다.</p>
@@ -368,8 +367,8 @@ if(/[?&]nocount=1/.test(location.search))ls('fl_nocount','1');
 function put(n){document.querySelectorAll('[data-views]').forEach(function(el){el.textContent=Number(n).toLocaleString('ru-RU');});document.querySelectorAll('[data-views-wrap]').forEach(function(el){el.classList.add('on');});}
 var day=new Date().toISOString().slice(0,10),key='fl_v_'+slug,own=ls('fl_nocount')==='1',seen=ls(key)===day;
 var req=(own||seen)?fetch(API+'/get?slugs='+slug).then(function(r){return r.json();}).then(function(d){return d[slug];})
- :fetch(API+'/hit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({slug:slug})}).then(function(r){return r.json();}).then(function(d){ls(key,day);return d.n;});
-req.then(function(n){if(typeof n==='number')put(n);}).catch(function(){});})();
+ :fetch(API+'/hit',{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({slug:slug})}).then(function(r){return r.json();}).then(function(d){ls(key,day);return d.n;});
+req.then(function(n){if(typeof n==='number')put(n);}).catch(function(e){console.warn('views counter:',e);});})();
 </script>
 </body>
 </html>

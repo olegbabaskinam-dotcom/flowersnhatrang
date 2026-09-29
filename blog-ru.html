@@ -105,8 +105,7 @@
         .filt:hover{border-color:var(--rose);color:var(--rose);}
         .filt.active{background:var(--rose);color:#fff;border-color:var(--rose);}
         /*END-CARD-CSS*/
-            [data-views-wrap]{display:none;}
-    </style>
+        </style>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
     <div style="background:#fce8ee; color:#a8566a;" class="text-xs py-2 text-center tracking-widest font-medium uppercase">
@@ -126,7 +125,7 @@
             <a href="blog/gde-poest-moreprodukty-nyachang-kafe-xo-ru.html" class="product-card bg-white rounded-2xl overflow-hidden flex flex-col md:flex-row group" style="text-decoration:none;">
                 <div class="card-img-wrap" style="flex:0 0 auto;"><img src="img/blog/gde-poest-moreprodukty-nyachang-kafe-xo.webp" alt="Где поесть морепродукты в Нячанге: местное недорогое кафе на юге города." loading="lazy" class="w-full h-48 object-cover" width="1200" height="760" style="min-width:18rem;"></div>
                 <div class="p-5 flex flex-col flex-grow">
-                    <span class="text-xs font-medium mb-2" style="color:#c0687a;">✍️ Авторская · 26 сентября 2026<span data-views-wrap data-views-slug="gde-poest-moreprodukty-nyachang-kafe-xo"> · 👁 <span data-views>0</span> просмотров</span></span>
+                    <span class="text-xs font-medium mb-2" style="color:#c0687a;">✍️ Авторская · 26 сентября 2026<span data-views-wrap data-views-slug="gde-poest-moreprodukty-nyachang-kafe-xo"> · 👁 <span data-views>…</span> просмотров</span></span>
                     <h3 class="font-serif text-lg font-bold mb-2 leading-snug" style="color:#1a1a1a;">Где поесть морепродукты в Нячанге: местное недорогое кафе на юге города.</h3>
                     <p class="text-stone-500 text-xs mb-4 flex-grow">Личный опыт: кафе Quán ăn X.O у южного пляжа — креветки, устрицы с сыром, пиво со льдом и честные цены.</p>
                     <span class="text-xs font-medium" style="color:#c0687a;">читать →</span>
@@ -485,7 +484,7 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"], a[href*="kakao"], 
     <script src="cart.js?v=20260902" defer></script>
 <script>/*XO-VIEWS-LIST*/
 (function(){var els=document.querySelectorAll('[data-views-slug]');if(!els.length)return;var s=[].map.call(els,function(e){return e.dataset.viewsSlug;});
-fetch('https://views.olegbabaskin-am.workers.dev/get?slugs='+s.join(',')).then(function(r){return r.json();}).then(function(d){els.forEach(function(e){var n=d[e.dataset.viewsSlug];if(typeof n==='number'){e.querySelector('[data-views]').textContent=n.toLocaleString('ru-RU');e.style.display='inline';}});}).catch(function(){});})();
+fetch('https://views.olegbabaskin-am.workers.dev/get?slugs='+s.join(',')).then(function(r){return r.json();}).then(function(d){els.forEach(function(e){var n=d[e.dataset.viewsSlug];if(typeof n==='number'){e.querySelector('[data-views]').textContent=n.toLocaleString('ru-RU');}});}).catch(function(e){console.warn('views counter:',e);});})();
 </script>
 </body>
 </html>
