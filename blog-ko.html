@@ -105,6 +105,7 @@
         .filt:hover{border-color:var(--rose);color:var(--rose);}
         .filt.active{background:var(--rose);color:#fff;border-color:var(--rose);}
         /*END-CARD-CSS*/
+            [data-views-wrap]{display:none;}
     </style>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
@@ -116,6 +117,22 @@
     <section class="py-12 px-4 max-w-5xl mx-auto text-center">
         <h1 class="font-serif text-3xl md:text-4xl font-bold mb-3" style="color:#1a1a1a;">블로그</h1>
         <p class="text-stone-500 text-sm max-w-xl mx-auto">꽃, 기념일, 베트남 문화에 대한 유용한 글.</p>
+    </section>
+    <!--XO-AUTHOR-BLOCK-->
+    <section class="pb-10 px-4 max-w-5xl mx-auto">
+        <div style="background:#fdf4f7;border:1px solid #f0d0d8;border-radius:1.5rem;padding:1.5rem;">
+            <h2 class="font-serif text-2xl font-bold mb-1" style="color:#1a1a1a;">✍️ 작성자 칼럼</h2>
+            <p class="text-stone-500 text-sm mb-5">이 프로젝트를 운영하는 저희가 직접 경험하고 쓴 글입니다. 직접 찍은 사진과 솔직한 후기 — 러시아어 원문 번역.</p>
+            <a href="blog/gde-poest-moreprodukty-nyachang-kafe-xo-ko.html" class="product-card bg-white rounded-2xl overflow-hidden flex flex-col md:flex-row group" style="text-decoration:none;">
+                <div class="card-img-wrap" style="flex:0 0 auto;"><img src="img/blog/gde-poest-moreprodukty-nyachang-kafe-xo.webp" alt="나트랑에서 해산물 먹을 곳: 시내 남쪽의 저렴한 현지 식당" loading="lazy" class="w-full h-48 object-cover" width="1200" height="760" style="min-width:18rem;"></div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <span class="text-xs font-medium mb-2" style="color:#c0687a;">✍️ 작성자 칼럼 · 2026년 9월 26일<span data-views-wrap data-views-slug="gde-poest-moreprodukty-nyachang-kafe-xo"> · 👁 <span data-views>0</span> 조회</span></span>
+                    <h3 class="font-serif text-lg font-bold mb-2 leading-snug" style="color:#1a1a1a;">나트랑에서 해산물 먹을 곳: 시내 남쪽의 저렴한 현지 식당</h3>
+                    <p class="text-stone-500 text-xs mb-4 flex-grow">남쪽 해변 근처 Quán ăn X.O 직접 방문 후기 — 찐 새우, 치즈 구운 굴, 얼음 맥주와 실제 가격.</p>
+                    <span class="text-xs font-medium" style="color:#c0687a;">읽기 →</span>
+                </div>
+            </a>
+        </div>
     </section>
     <section class="pb-24 px-4 max-w-5xl mx-auto">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -458,5 +475,9 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"], a[href*="kakao"], 
 })();
 </script>
     <script src="cart.js?v=20260902" defer></script>
+<script>/*XO-VIEWS-LIST*/
+(function(){var els=document.querySelectorAll('[data-views-slug]');if(!els.length)return;var s=[].map.call(els,function(e){return e.dataset.viewsSlug;});
+fetch('https://views.olegbabaskin-am.workers.dev/get?slugs='+s.join(',')).then(function(r){return r.json();}).then(function(d){els.forEach(function(e){var n=d[e.dataset.viewsSlug];if(typeof n==='number'){e.querySelector('[data-views]').textContent=n.toLocaleString('ru-RU');e.style.display='inline';}});}).catch(function(){});})();
+</script>
 </body>
 </html>

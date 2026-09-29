@@ -282,3 +282,9 @@
 - **id171** (короткий id торта **id24**) «Шоколадный торт с клубникой и топпером Happy Birthday» — 500 000 ₫ (≈ $20 · 1 900 ₽), ~5 персон, 7 фото. slug `tort-shokoladnyy-klubnika-happy-birthday`, cat `cakes`. Папка `img/_src/ТОРТЫ/id24-…-500k`.
 - Пайплайн как у id165–169 (gen_one_product + пост-обработка шапки/width-height/title) → каталоги ×3 → лендинги torty ×3 → featured 163 → products.json 163 → sitemap +6 (741). PDF не пересобирали.
 - Проверки: audit_links ❌0 ⚠️2, check_site ❌0 ⚠️1, xmllint OK, node --check OK.
+
+### 2026-09-29 (первая АВТОРСКАЯ статья — новый формат)
+- Трио `gde-poest-moreprodukty-nyachang-kafe-xo` RU/EN/KO — обзор кафе Quán ăn X.O (17 Hoàng Diệu). RU-текст автора дословно (0 правок), EN/KO — перевод с пометкой «оригинал на русском».
+- 46 живых фото `img/blog/gde-poest-moreprodukty-nyachang-kafe-xo/01–46.webp` (логотипы 789BET и чужие лица размыты), обложка `img/blog/gde-poest-moreprodukty-nyachang-kafe-xo.webp` 1200×760. Лайтбокс по клику.
+- Новый блок «✍️ Авторские статьи» над сеткой в `blog-ru/en/ko.html` (статья только там, не в общей сетке). Счётчик просмотров — воркер `views` (`cloudflare_worker_views.js`, D1), деплой вручную.
+- sitemap +3 (774), registry id420.
