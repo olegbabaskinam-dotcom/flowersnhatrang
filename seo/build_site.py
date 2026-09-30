@@ -438,7 +438,7 @@ def head(lang, title, desc, canonical, alts, base, og_image):
         gtag('config', 'G-NNYC00Y4EB');
         gtag('config', 'AW-18183091777');
     </script>
-    <link rel="stylesheet" href="{base}styles.css">
+    <link rel="stylesheet" href="{base}styles.css?v=20260930">
     <style>
         :root {{ --rose: #c0687a; --rose-light: #fce8ee; --rose-hover: #a8566a; }}
         body {{ font-family: 'Montserrat', sans-serif; background-color: #ffffff; color: #1a1a1a; }}
@@ -621,7 +621,7 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"], a[href*="kakao"], 
 })();
 </script>
 __CARD_JS__
-<script src="__BASE__cart.js?v=20260902" defer></script>
+<script src="__BASE__cart.js?v=20260930" defer></script>
 </body>
 </html>
 '''
