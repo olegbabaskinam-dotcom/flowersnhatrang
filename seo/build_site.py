@@ -572,21 +572,24 @@ HOURS = {
     "ko": "매일 운영 · 나트랑 07:00–21:00 · 깜라인 07:00–20:00",
 }
 
+FOOTER_STYLE = '<style>.sf{background:#fce8ee;padding:52px 16px 28px;margin-top:auto;text-align:center}.sf-in{max-width:40rem;margin:0 auto;display:flex;flex-direction:column;align-items:center}.sf-brand{font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;font-style:italic;font-weight:600;font-size:clamp(22px,3vw,30px);line-height:1.2;color:#1a1a1a}.sf-tag{margin-top:10px;font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:#a8566a}.sf-orn{width:64px;height:1px;background:#d9a3b1;margin:22px auto}.sf-soc{display:flex;justify-content:center;gap:14px}.sf-ic{width:46px;height:46px;border-radius:50%;background:#fff;border:1px solid #f0d0d8;display:flex;align-items:center;justify-content:center;font-size:20px;color:#a8566a;text-decoration:none;box-shadow:0 2px 8px rgba(192,104,122,.08);transition:transform .2s,box-shadow .2s}.sf-ic:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(192,104,122,.18)}.sf-hours{margin-top:22px;font-size:12px;letter-spacing:.03em;color:#a8566a}.sf-copy{max-width:64rem;margin:34px auto 0;padding-top:20px;border-top:1px solid #f0d0d8;font-size:11px;color:#b08090;text-align:center}</style>'
+FOOTER_TAG = {"ru": "Качество · Ответственность · Пунктуальность", "en": "Quality · Responsibility · Punctuality", "ko": "품질 · 책임 · 시간 엄수"}
+
 def footer(base, lang="ru"):
-    return f'''    <footer class="py-12 px-4 mt-auto" style="background:#fce8ee;">
-        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-            <div class="text-center md:text-left">
-                <div class="font-serif font-bold text-2xl mb-1" style="color:#1a1a1a;">{BRAND[lang]}</div>
-                <div class="text-xs font-medium tracking-widest uppercase" style="color:#a8566a;">{ {"ru":"Качество · Ответственность · Пунктуальность","en":"Quality · Responsibility · Punctuality","ko":"품질 · 책임 · 시간 엄수"}.get(lang,"Качество · Ответственность · Пунктуальность") }</div>
-            </div>
-            <div class="flex gap-6 text-2xl">
-                {"".join(f'<a href="{u}" target="_blank" rel="noopener noreferrer" style="color:#c0a0a8;" class="hover:text-[#c0687a] transition" aria-label="{lbl}">{svg}</a>' for u, lbl, svg in contact_links(lang))}
-            </div>
+    # Подвал 30.09.2026: всё по центру — бренд курсивом, девиз, орнамент-линия, круглые иконки, часы, копирайт.
+    links = [(u, lbl, svg) for u, lbl, svg in contact_links(lang)]
+    if lang in ("ru", "en") and not any(l == "Instagram" for _, l, _ in links):
+        links.append((IG_RU, "Instagram", IG_SVG))
+    icons = "".join(f'<a class="sf-ic" href="{u}" target="_blank" rel="noopener noreferrer" aria-label="{lbl}">{svg}</a>' for u, lbl, svg in links)
+    return f'''    <footer class="sf">{FOOTER_STYLE}
+        <div class="sf-in">
+            <div class="sf-brand">{BRAND[lang]}</div>
+            <div class="sf-tag">{FOOTER_TAG.get(lang, FOOTER_TAG["ru"])}</div>
+            <div class="sf-orn"></div>
+            <div class="sf-soc">{icons}</div>
+            <div class="sf-hours">{HOURS.get(lang, HOURS["ru"])}</div>
         </div>
-        <div class="text-center text-xs mt-8" style="color:#a8566a;">🕖 {HOURS.get(lang, HOURS["ru"])}</div>
-        <div class="text-center text-xs mt-6 pt-6" style="border-top: 1px solid #f0d0d8; color:#b08090;">
-            &copy; 2026 {BRAND[lang]}.
-        </div>
+        <div class="sf-copy">&copy; 2026 {BRAND[lang]}.</div>
     </footer>
 '''
 
