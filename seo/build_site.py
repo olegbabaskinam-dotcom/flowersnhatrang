@@ -726,6 +726,10 @@ def product_color(p):
         return "pink"
     if s == "151-nezhno-rozovaya-roza-belaya-upakovka":
         return "pink"  # цветы нежно-розовые, «belaya» упаковка не должна давать white
+    if s == "101-sinyaya-okrashennaya-roza-korzina":
+        return ""  # id190: синие окрашенные, «okrashennaya» содержит «kras» — не red
+    if s == "101-malinovaya-roza-korzina-bukva-v":
+        return "pink"  # id187: малиновые розы, в слаге нет rozov
     if s == "51-malinovaya-roza-belaya-upakovka-prazdnichnyy-tort":
         return "pink"  # id134: коралово-малиновые розы, «belaya» упаковка не должна давать white
     if "belo-rozov" in s:

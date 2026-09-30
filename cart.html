@@ -72,7 +72,7 @@ var I18N_RAW={
  collapse:{ru:"Свернуть ▴",en:"Collapse ▴",ko:"접기 ▴"},
  co_title:{ru:"Оформление заказа",en:"Checkout",ko:"주문하기"},
  co_sub:{ru:"Заполните данные — мы подтвердим заказ в чате.",en:"Fill in the details — we'll confirm the order in chat.",ko:"정보를 입력해 주세요 — 채팅으로 주문을 확정해 드립니다."},
- note:{ru:"🕒 Подтверждаем заказы ежедневно с 07:00 до 21:00, обычно в течение 10 минут. Заказы ночью подтверждаем утром.",en:"🕒 We confirm orders daily from 07:00 to 21:00, usually within 10 minutes. Night orders are confirmed in the morning.",ko:"🕒 매일 07:00~21:00에 주문을 확인하며 보통 10분 이내입니다. 야간 주문은 아침에 확인해 드립니다."},
+ note:{ru:"🕒 Подтверждаем заказы ежедневно с 07:00 до 21:00, обычно в течение 10 минут. Заказы, сделанные ночью, подтверждаем утром.",en:"🕒 We confirm orders daily from 07:00 to 21:00, usually within 10 minutes. Night orders are confirmed in the morning.",ko:"🕒 매일 07:00~21:00에 주문을 확인하며 보통 10분 이내입니다. 야간 주문은 아침에 확인해 드립니다."},
  special_schedule:{ru:"📅 Важно: 3 сентября онлайн-заказы принимаем до 14:00. 4 сентября — выходной. С 5 сентября работаем в обычном режиме.",en:"📅 Important: online orders are accepted until 14:00 on September 3. We are closed on September 4 and return to normal hours on September 5.",ko:"📅 중요: 9월 3일 온라인 주문은 14:00까지 접수합니다. 9월 4일은 휴무이며 9월 5일부터 정상 운영합니다."},
  special_closed:{ru:"Онлайн-заказы закрыты до 5 сентября: 4 сентября мы не работаем. С 5 сентября оформление снова доступно.",en:"Online ordering is closed until September 5: we are closed on September 4. Ordering reopens on September 5.",ko:"온라인 주문은 9월 5일까지 마감되었습니다. 9월 4일은 휴무이며 9월 5일부터 다시 주문할 수 있습니다."},
  special_closed_btn:{ru:"Онлайн-заказы закрыты до 5 сентября",en:"Online ordering closed until September 5",ko:"9월 5일까지 온라인 주문 마감"},
@@ -493,7 +493,7 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
     <h1 class="serif" data-i18n="co_title">Оформление заказа</h1>
     <p class="sub" data-i18n="co_sub">Заполните данные — мы подтвердим заказ в чате.</p>
 
-    <div class="note" data-i18n="note">🕒 Подтверждаем заказы ежедневно с 07:00 до 21:00, обычно в течение 10 минут. Заказы ночью подтверждаем утром.</div>
+    <div class="note" data-i18n="note">🕒 Подтверждаем заказы ежедневно с 07:00 до 21:00, обычно в течение 10 минут. Заказы, сделанные ночью, подтверждаем утром.</div>
     <div class="note hidden" id="specialScheduleNotice" data-i18n="special_schedule">📅 Важно: 3 сентября онлайн-заказы принимаем до 14:00. 4 сентября — выходной. С 5 сентября работаем в обычном режиме.</div>
 
     <div class="helpbox">
@@ -883,10 +883,10 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
      img:"img/products/dop-folgirovannyy-shar-zvezda-serebristaya/1.webp",
      name:{ru:"Шар-звезда, серебристый",en:"Star balloon, silver",ko:"별 풍선, 실버"}},    {id:"dop-iskusstvennye-lepestki-roz-krasnye", kind:"extra", price:100000,
      img:"img/products/dop-iskusstvennye-lepestki-roz-krasnye/1.webp",
-     name:{ru:"Лепестки роз, красные",en:"Rose petals, red",ko:"장미 꽃잎, 레드"}},
+     name:{ru:"Искусственные лепестки роз, красные",en:"Artificial rose petals, red",ko:"인조 장미 꽃잎, 레드"}},
     {id:"dop-iskusstvennye-lepestki-roz-rozovye", kind:"extra", price:100000,
      img:"img/products/dop-iskusstvennye-lepestki-roz-rozovye/1.webp",
-     name:{ru:"Лепестки роз, розовые",en:"Rose petals, pink",ko:"장미 꽃잎, 핑크"}},
+     name:{ru:"Искусственные лепестки роз, розовые",en:"Artificial rose petals, pink",ko:"인조 장미 꽃잎, 핑크"}},
     {id:"dop-hlopushka-biryuzovaya", kind:"extra", price:100000,
      img:"img/products/dop-hlopushka-biryuzovaya/1.webp",
      name:{ru:"Хлопушка бирюзовая",en:"Party popper, turquoise",ko:"파티 폭죽, 터콰이즈"}},
@@ -907,19 +907,19 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
      name:{ru:"Праздничные колпачки, 5 шт",en:"Party hats, 5 pcs",ko:"파티 고깔모자, 5개"}},
     {id:"dop-nabor-posudy-happy-birthday-cherno-krasnyy", kind:"extra", price:100000,
      img:"img/products/dop-nabor-posudy-happy-birthday-cherno-krasnyy/1.webp",
-     name:{ru:"Посуда «Happy Birthday» чёрно-красная, 5+5",en:"“Happy Birthday” tableware, black-red, 5+5",ko:"“Happy Birthday” 식기, 블랙·레드, 5+5"}},
+     name:{ru:"Посуда «Happy Birthday» чёрно-красная, 10+10",en:"“Happy Birthday” tableware, black-red, 10+10",ko:"“Happy Birthday” 식기, 블랙·레드, 10+10"}},
     {id:"dop-nabor-posudy-happy-birthday-pastelnyy", kind:"extra", price:100000,
      img:"img/products/dop-nabor-posudy-happy-birthday-pastelnyy/1.webp",
-     name:{ru:"Посуда «Happy Birthday» пастельная, 5+5",en:"“Happy Birthday” tableware, pastel, 5+5",ko:"“Happy Birthday” 식기, 파스텔, 5+5"}},
+     name:{ru:"Посуда «Happy Birthday» пастельная, 10+10",en:"“Happy Birthday” tableware, pastel, 10+10",ko:"“Happy Birthday” 식기, 파스텔, 10+10"}},
     {id:"dop-nabor-posudy-gonochnye-mashinki", kind:"extra", price:100000,
      img:"img/products/dop-nabor-posudy-gonochnye-mashinki/1.webp",
-     name:{ru:"Посуда с гоночными машинками, 5+5",en:"Race cars tableware, 5+5",ko:"레이싱카 식기, 5+5"}},
+     name:{ru:"Посуда с гоночными машинками, 10+10",en:"Race cars tableware, 10+10",ko:"레이싱카 식기, 10+10"}},
     {id:"dop-nabor-posudy-supergeroi", kind:"extra", price:100000,
      img:"img/products/dop-nabor-posudy-supergeroi/1.webp",
-     name:{ru:"Посуда с супергероями, 5+5",en:"Superheroes tableware, 5+5",ko:"슈퍼히어로 식기, 5+5"}},
+     name:{ru:"Посуда с супергероями, 10+10",en:"Superheroes tableware, 10+10",ko:"슈퍼히어로 식기, 10+10"}},
     {id:"dop-nabor-posudy-happy-dino-birthday", kind:"extra", price:100000,
      img:"img/products/dop-nabor-posudy-happy-dino-birthday/1.webp",
-     name:{ru:"Посуда «Happy Dino Birthday», 5+5",en:"“Happy Dino Birthday” tableware, 5+5",ko:"“Happy Dino Birthday” 식기, 5+5"}},
+     name:{ru:"Посуда «Happy Dino Birthday», 10+10",en:"“Happy Dino Birthday” tableware, 10+10",ko:"“Happy Dino Birthday” 식기, 10+10"}},
   ];
   function addonLang(){ return (window.FLW_LANG==='en'||window.FLW_LANG==='ko')?window.FLW_LANG:'ru'; }
   function renderAddons(items){

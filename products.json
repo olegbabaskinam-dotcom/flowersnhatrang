@@ -1,6 +1,6 @@
 {
- "generated": "2026-09-25 05:57",
- "count": 164,
+ "generated": "2026-09-30 08:36",
+ "count": 171,
  "categories": [
   {
    "key": "all",
@@ -3833,6 +3833,171 @@
     "img/products/51-korallovaya-roza-belaya-upakovka-rozovaya-lenta/3.webp",
     "img/products/51-korallovaya-roza-belaya-upakovka-rozovaya-lenta/4.webp",
     "img/products/51-korallovaya-roza-belaya-upakovka-rozovaya-lenta/5.webp"
+   ]
+  },
+  {
+   "id": 186,
+   "slug": "101-krasno-rozovaya-roza-rozovaya-upakovka",
+   "name": "101 красно-розовая роза в розовой упаковке",
+   "desc": "Букет из 101 розы в розовой упаковке: в центре нежно-розовые розы, по краю — тёмно-красные. Контрастный и объёмный букет на день рождения, годовщину или признание в чувствах. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "101 красно-розовая роза в розовой упаковке Нячанг доставка",
+   "price_vnd": 1500000,
+   "price": "1 500 000 донгов",
+   "price_sub": "≈ $60 · 5 600 ₽",
+   "cats": [
+    "r101"
+   ],
+   "color": "red",
+   "images": [
+    "img/products/101-krasno-rozovaya-roza-rozovaya-upakovka/1.webp",
+    "img/products/101-krasno-rozovaya-roza-rozovaya-upakovka/2.webp",
+    "img/products/101-krasno-rozovaya-roza-rozovaya-upakovka/3.webp",
+    "img/products/101-krasno-rozovaya-roza-rozovaya-upakovka/4.webp",
+    "img/products/101-krasno-rozovaya-roza-rozovaya-upakovka/5.webp",
+    "img/products/101-krasno-rozovaya-roza-rozovaya-upakovka/6.webp",
+    "img/products/101-krasno-rozovaya-roza-rozovaya-upakovka/7.webp"
+   ]
+  },
+  {
+   "id": 187,
+   "slug": "101-malinovaya-roza-korzina-bukva-v",
+   "name": "101 малиновая роза в корзине с буквой «В» в центре",
+   "desc": "Корзина из 101 малиновой розы с буквой «В», выложенной в центре белыми розами, с зеленью и розовыми лентами. Персональный подарок тому, чьё имя начинается на «В». Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "101 малиновая роза в корзине с буквой «В» в центре Нячанг доставка",
+   "price_vnd": 2500000,
+   "price": "2 500 000 донгов",
+   "price_sub": "≈ $100 · 9 300 ₽",
+   "cats": [
+    "r101"
+   ],
+   "color": "pink",
+   "images": [
+    "img/products/101-malinovaya-roza-korzina-bukva-v/1.webp",
+    "img/products/101-malinovaya-roza-korzina-bukva-v/2.webp",
+    "img/products/101-malinovaya-roza-korzina-bukva-v/3.webp",
+    "img/products/101-malinovaya-roza-korzina-bukva-v/4.webp",
+    "img/products/101-malinovaya-roza-korzina-bukva-v/5.webp",
+    "img/products/101-malinovaya-roza-korzina-bukva-v/6.webp",
+    "img/products/101-malinovaya-roza-korzina-bukva-v/7.webp",
+    "img/products/101-malinovaya-roza-korzina-bukva-v/8.webp"
+   ]
+  },
+  {
+   "id": 188,
+   "slug": "25-belyh-roz-pirozhnoe-otkrytka",
+   "name": "25 белых роз + пирожное + открытка",
+   "desc": "Букет из 25 белых роз в белой упаковке с красным бантом, порционное пирожное в коробке со свечами и открытка. Небольшой комплект, чтобы поздравить с днём рождения. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "25 белых роз + пирожное + открытка Нячанг доставка",
+   "price_vnd": 600000,
+   "price": "600 000 донгов",
+   "price_sub": "≈ $24 · 2 300 ₽",
+   "cats": [
+    "r25"
+   ],
+   "color": "white",
+   "images": [
+    "img/products/25-belyh-roz-pirozhnoe-otkrytka/1.webp",
+    "img/products/25-belyh-roz-pirozhnoe-otkrytka/2.webp",
+    "img/products/25-belyh-roz-pirozhnoe-otkrytka/3.webp",
+    "img/products/25-belyh-roz-pirozhnoe-otkrytka/4.webp",
+    "img/products/25-belyh-roz-pirozhnoe-otkrytka/5.webp",
+    "img/products/25-belyh-roz-pirozhnoe-otkrytka/6.webp"
+   ]
+  },
+  {
+   "id": 189,
+   "slug": "korzina-belyh-liliy-belaya-lenta",
+   "name": "Корзина из белых лилий с белой лентой",
+   "desc": "Плетёная корзина из белых лилий с мелкими белыми цветами и зеленью, украшенная белой лентой. Сдержанная и торжественная композиция для поздравления, открытия или выражения уважения. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Корзина из белых лилий с белой лентой Нячанг доставка",
+   "price_vnd": 2000000,
+   "price": "2 000 000 донгов",
+   "price_sub": "≈ $80 · 7 500 ₽",
+   "cats": [
+    "mixed"
+   ],
+   "color": "white",
+   "images": [
+    "img/products/korzina-belyh-liliy-belaya-lenta/1.webp",
+    "img/products/korzina-belyh-liliy-belaya-lenta/2.webp",
+    "img/products/korzina-belyh-liliy-belaya-lenta/3.webp",
+    "img/products/korzina-belyh-liliy-belaya-lenta/4.webp",
+    "img/products/korzina-belyh-liliy-belaya-lenta/5.webp",
+    "img/products/korzina-belyh-liliy-belaya-lenta/6.webp"
+   ]
+  },
+  {
+   "id": 190,
+   "slug": "101-sinyaya-okrashennaya-roza-korzina",
+   "name": "101 покрашенная роза в корзине по индивидуальному заказу",
+   "desc": "Корзина из 101 окрашенной розы по индивидуальному заказу: узор из тёмно-синих, белых и голубых роз с тёмным центром, зелень и ленты. Цвета и рисунок согласовываются с оператором при заказе. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "101 покрашенная роза в корзине по индивидуальному заказу Нячанг доставка",
+   "price_vnd": 2500000,
+   "price": "2 500 000 донгов",
+   "price_sub": "≈ $100 · 9 300 ₽",
+   "cats": [
+    "r101"
+   ],
+   "color": "",
+   "images": [
+    "img/products/101-sinyaya-okrashennaya-roza-korzina/1.webp",
+    "img/products/101-sinyaya-okrashennaya-roza-korzina/2.webp",
+    "img/products/101-sinyaya-okrashennaya-roza-korzina/3.webp",
+    "img/products/101-sinyaya-okrashennaya-roza-korzina/4.webp",
+    "img/products/101-sinyaya-okrashennaya-roza-korzina/5.webp",
+    "img/products/101-sinyaya-okrashennaya-roza-korzina/6.webp",
+    "img/products/101-sinyaya-okrashennaya-roza-korzina/7.webp",
+    "img/products/101-sinyaya-okrashennaya-roza-korzina/8.webp",
+    "img/products/101-sinyaya-okrashennaya-roza-korzina/9.webp",
+    "img/products/101-sinyaya-okrashennaya-roza-korzina/10.webp"
+   ]
+  },
+  {
+   "id": 191,
+   "slug": "tort-shokoladnyy-drip-klubnika-happy-birthday-svechi",
+   "name": "Шоколадный торт с клубникой, топпером Happy Birthday и свечами",
+   "desc": "Праздничный торт с шоколадными подтёками, шоколадным кремом, клубникой, шоколадными листьями и золотым топпером Happy Birthday. В комплекте коробка, свечи, одноразовые тарелки и приборы. Торт заказывается онлайн только вместе с букетом, шарами или подарочным набором. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Шоколадный торт с клубникой, топпером Happy Birthday и свечами Нячанг доставка",
+   "price_vnd": 500000,
+   "price": "500 000 донгов",
+   "price_sub": "≈ $20 · 1 900 ₽",
+   "cats": [
+    "cakes"
+   ],
+   "color": "",
+   "images": [
+    "img/products/tort-shokoladnyy-drip-klubnika-happy-birthday-svechi/1.webp",
+    "img/products/tort-shokoladnyy-drip-klubnika-happy-birthday-svechi/2.webp",
+    "img/products/tort-shokoladnyy-drip-klubnika-happy-birthday-svechi/3.webp",
+    "img/products/tort-shokoladnyy-drip-klubnika-happy-birthday-svechi/4.webp",
+    "img/products/tort-shokoladnyy-drip-klubnika-happy-birthday-svechi/5.webp",
+    "img/products/tort-shokoladnyy-drip-klubnika-happy-birthday-svechi/6.webp",
+    "img/products/tort-shokoladnyy-drip-klubnika-happy-birthday-svechi/7.webp",
+    "img/products/tort-shokoladnyy-drip-klubnika-happy-birthday-svechi/8.webp"
+   ]
+  },
+  {
+   "id": 192,
+   "slug": "tort-klubnichnyy-slivochnyy-happy-birthday",
+   "name": "Клубничный торт со сливочным кремом и топпером Happy Birthday",
+   "desc": "Праздничный торт со сливочным кремом, шоколадной крошкой и свежей клубникой сверху, с золотым топпером Happy Birthday. В комплекте коробка, свечи, одноразовые тарелки и приборы. Торт заказывается онлайн только вместе с букетом, шарами или подарочным набором. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Клубничный торт со сливочным кремом и топпером Happy Birthday Нячанг доставка",
+   "price_vnd": 500000,
+   "price": "500 000 донгов",
+   "price_sub": "≈ $20 · 1 900 ₽",
+   "cats": [
+    "cakes"
+   ],
+   "color": "",
+   "images": [
+    "img/products/tort-klubnichnyy-slivochnyy-happy-birthday/1.webp",
+    "img/products/tort-klubnichnyy-slivochnyy-happy-birthday/2.webp",
+    "img/products/tort-klubnichnyy-slivochnyy-happy-birthday/3.webp",
+    "img/products/tort-klubnichnyy-slivochnyy-happy-birthday/4.webp",
+    "img/products/tort-klubnichnyy-slivochnyy-happy-birthday/5.webp",
+    "img/products/tort-klubnichnyy-slivochnyy-happy-birthday/6.webp",
+    "img/products/tort-klubnichnyy-slivochnyy-happy-birthday/7.webp",
+    "img/products/tort-klubnichnyy-slivochnyy-happy-birthday/8.webp"
    ]
   }
  ]

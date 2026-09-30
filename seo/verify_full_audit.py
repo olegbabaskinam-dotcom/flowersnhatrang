@@ -136,16 +136,16 @@ def main() -> int:
         errors.append("слоты доставки в cart.html должны заканчиваться в 21:00")
 
     home_rules = {
-        "index.html": ("Онлайн-заказ — со следующего дня", "срочная доставка сегодня", "через оператора до 18:00"),
-        "index-en.html": ("Online orders start next day", "urgent delivery today", "via an operator until 18:00"),
-        "index-kr.html": ("온라인 주문은 다음 날부터", "오늘 긴급 배송", "18:00까지 상담원"),
+        "index.html": ("Онлайн-заказ — со следующего дня", "срочная доставка сегодня", "через оператора до 17:00"),
+        "index-en.html": ("Online orders start next day", "urgent delivery today", "via an operator until 17:00"),
+        "index-kr.html": ("온라인 주문은 다음 날부터", "오늘 긴급 배송", "17:00까지 상담원"),
     }
     for filename, required in home_rules.items():
         source = (ROOT / filename).read_text(encoding="utf-8")
         if not all(phrase.lower() in source.lower() for phrase in required):
             errors.append(f"не разделены онлайн/срочные заказы на главной: {filename}")
         if 'id="countdown"' not in source or "window.__renderOperatorCountdown=render" not in source or "Asia/Ho_Chi_Minh" not in source:
-            errors.append(f"нет рабочего таймера оператора до 18:00: {filename}")
+            errors.append(f"нет рабочего таймера оператора до 17:00: {filename}")
 
     website_source = (ROOT / "index.html").read_text(encoding="utf-8")
     if '"@type": "WebSite"' not in website_source or '"name": "NhaTrang Flowers"' not in website_source:

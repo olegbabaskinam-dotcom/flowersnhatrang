@@ -133,7 +133,7 @@
       "@type": ["Florist","LocalBusiness"], "aggregateRating": {"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"150","bestRating":"5","worstRating":"1"},
       "@id": "https://flowers-nha-trang.online/index-en.html",
       "name": "NhaTrang Flowers",
-      "description": "Flower and balloon delivery in Nha Trang. Online orders start next day; urgent delivery today is available via an operator until 18:00 (Cam Ranh — until 15:00).",
+      "description": "Flower and balloon delivery in Nha Trang. Online orders start next day; urgent delivery today is available via an operator until 17:00.",
       "url": "https://flowers-nha-trang.online/index-en.html",
       "telephone": "+37443529162",
       "image": "img/site/og-default.webp",
@@ -220,7 +220,7 @@
           <h1 class="hs-h1">Flowers, Balloons &amp; Gifts Delivery in Nha Trang</h1>
           <p class="hs-sub">A complete solution for your celebration</p>
           <p class="hs-small">🕐 open daily from 07:00 to 21:00</p>
-          <p id="countdown" aria-live="polite" style="min-height:1.1rem;color:#c0687a;font-size:12px;margin:0">⏱ Urgent delivery today — via an operator until 18:00 (Cam Ranh — until 15:00).</p>
+          <p id="countdown" aria-live="polite" style="min-height:1.1rem;color:#c0687a;font-size:12px;margin:0">⏱ Urgent delivery today — via an operator until 17:00.</p>
           <div class="hs-btns">
             <a href="order.html" class="btn-rose hs-cta flex items-center justify-center gap-2 font-medium py-3 px-5 rounded-xl text-sm"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 328c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg> Order online</a>
             <div class="hs-row" style="grid-template-columns:repeat(2,1fr)">
@@ -973,7 +973,7 @@
                         <h4 class="font-bold text-base mb-3" style="color:#1a1a1a;">delivery terms</h4>
                         <ul class="space-y-2 text-stone-500 text-sm">
                             <li class="flex gap-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg> free delivery across Nha Trang.</li>
-                            <li class="flex gap-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg> online orders start next day; urgent delivery today is available via an operator until 18:00 (Cam Ranh — until 15:00).</li>
+                            <li class="flex gap-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg> online orders start next day; urgent delivery today is available via an operator until 17:00.</li>
                             <li class="p-3 rounded-xl mt-3 text-xs" style="background:#fce8ee; color:#a8566a;">cam ranh: delivery for orders of 51+ roses — 600,000 VND (charged separately).</li>
                         </ul>
                     </div>
@@ -1065,16 +1065,16 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="instagram.com"]').forEach(
             return;
         }
         if(h < 7){
-            el.textContent = '⏱ Urgent delivery today via an operator is available from 07:00 to 18:00.';
+            el.textContent = '⏱ Urgent delivery today via an operator is available from 07:00 to 17:00.';
             return;
         }
-        if(h >= 18){
+        if(h >= 17){
             el.textContent = '⏱ Urgent orders for today are closed. Online delivery starts from the next day.';
             return;
         }
-        var diff=(18*3600)-(h*3600+m*60+s);
+        var diff=(17*3600)-(h*3600+m*60+s);
         var hh=Math.floor(diff/3600), mm=Math.floor((diff%3600)/60), ss=diff%60;
-        el.textContent = '⏱ Urgent delivery today via an operator — time left until 18:00: ' + p(hh) + ':' + p(mm) + ':' + p(ss);
+        el.textContent = '⏱ Urgent delivery today via an operator — time left until 17:00: ' + p(hh) + ':' + p(mm) + ':' + p(ss);
     }
     function update(){
         var parts={}, fmt=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Ho_Chi_Minh',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
