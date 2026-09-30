@@ -75,13 +75,13 @@ HREFLANG = {"ru": "ru", "en": "en", "ko": "ko"}
 HTML_LANG = {"ru": "ru", "en": "en", "ko": "ko"}
 # Название бренда по языкам. С 05.07.2026 фокус на русскоязычную аудиторию:
 # на RU везде «Русскоязычная доставка…», EN/KO остаются «NhaTrang Flowers» (дубли).
-BRAND = {"ru": "Русскоязычная доставка цветов и гелиевых шаров в Нячанге",
+BRAND = {"ru": "Русскоязычная доставка цветов, шаров и подарков в Нячанге",
          "en": "NhaTrang Flowers", "ko": "NhaTrang Flowers"}
 
 # Подписи интерфейса
 T = {
     "ru": {
-        "site_sub": "Русскоязычная доставка цветов<br>и гелиевых шаров в Нячанге",
+        "site_sub": "Русскоязычная доставка цветов, шаров<br>и подарков в Нячанге",
         "nav_home": "Главная", "nav_catalog": "Каталог", "nav_articles": "Статьи", "nav_balloons": "🎈 Шары", "nav_cakes": "🎂 Торты", "nav_nabory": "🎁 Наборы",
         "catalog_h1": "Каталог цветов и букетов в Нячанге",
         "catalog_sub": "Розы, букеты, корзины и гелиевые шары с ценами и бесплатной доставкой по Нячангу со следующего дня.",
@@ -277,7 +277,7 @@ CARD_CSS = """/*MARK-CARD-CSS*/
         .filt{background:#fff;border:1px solid #f0e0e5;color:#6b6b6b;font-size:.8rem;font-weight:500;padding:.45rem .9rem;border-radius:999px;cursor:pointer;transition:all .2s;}
         .filt:hover{border-color:var(--rose);color:var(--rose);}
         .filt.active{background:var(--rose);color:#fff;border-color:var(--rose);}
-        .sort-bar{display:flex;justify-content:center;margin-bottom:1rem;}
+        .sort-bar{display:flex;justify-content:center;margin-bottom:1rem;}.filt-group[hidden]{display:none!important;}.tree-sub{background:#fdf4f7;border-radius:1rem;padding:.4rem;}.tree-sub .filt{font-size:.75rem;padding:.35rem .8rem;}
         .combo-note{display:inline-flex;align-items:flex-start;gap:.25rem;width:fit-content;max-width:100%;font-size:.68rem;font-weight:600;line-height:1.35;color:#a8566a;background:#fce8ee;border:1px solid #f3d3dc;border-radius:.6rem;padding:.2rem .5rem;margin-bottom:.5rem;}"""
 
 CARD_JS = """<script>/*MARK-CARD-JS*/
@@ -304,7 +304,38 @@ CARD_JS = """<script>/*MARK-CARD-JS*/
   function isCake(c){return cats(c).indexOf('cakes')>-1;}
   function isCombo(c){return cats(c).filter(function(x){return x!=='nabory'&&x!=='prazdnik';}).length>1;}
   // «Чистая» позиция для выбранной категории = в ней есть эта категория и это НЕ комбо-набор.
-  function isPure(c,sel){return !!sel&&cats(c).indexOf(sel)>-1&&!isCombo(c);}
+  function isPure(c,sel){return !!sel&&match(c,sel)&&!isCombo(c);}
+  var PARENT={mixed:'flowers',roses:'flowers',r25:'roses',r51:'roses',r101:'roses','b-helium':'balloons','b-latex':'balloons','b-combo':'balloons',nabory:'gifts',cakes:'gifts'};
+  function has(c,x){return cats(c).indexOf(x)>-1;}
+  function toks(c){var a=c.querySelector('a[href*="catalog/"]');var s=a?a.getAttribute('href').replace(/^.*catalog\//,'').replace(/-(ru|en|ko)\.html$/,''):'';return s.split('-');}
+  function flowerSlug(c){return toks(c).some(function(t){return /^(roz|roza|rozy|buket|korzina|korzine|liliy|eustom|eustomy)$/.test(t);});}
+  function isFlower(c){return has(c,'r25')||has(c,'r51')||has(c,'r101')||has(c,'mixed')||(has(c,'balloons')&&flowerSlug(c));}
+  function bCombo(c){return has(c,'balloons')&&(isFlower(c)||has(c,'cakes'));}
+  function bLatex(c){return has(c,'balloons')&&!bCombo(c)&&toks(c).some(function(t){return /^(rezinovyh|potolok)$/.test(t);});}
+  function match(c,k){
+    if(!k)return true;
+    if(k==='flowers')return isFlower(c);
+    if(k==='roses')return has(c,'r25')||has(c,'r51')||has(c,'r101');
+    if(k==='b-combo')return bCombo(c);
+    if(k==='b-latex')return bLatex(c);
+    if(k==='b-helium')return has(c,'balloons')&&!bCombo(c)&&!bLatex(c);
+    if(k==='gifts')return has(c,'nabory')||has(c,'cakes');
+    if(k==='decor')return has(c,'prazdnik');
+    return has(c,k);
+  }
+  function selectCat(k){
+    var chain=[k];var p=k;while(PARENT[p]){p=PARENT[p];chain.push(p);}
+    state.cat=k;
+    bar.querySelectorAll('.filt-group[data-filter="tree"]').forEach(function(g){
+      var par=g.getAttribute('data-parent');
+      if(par!==null){if(chain.indexOf(par)>-1)g.removeAttribute('hidden');else g.setAttribute('hidden','');}
+      g.querySelectorAll('.filt').forEach(function(b){var v=b.getAttribute('data-val');b.classList.toggle('active',v===k||(chain.indexOf(v)>-1&&v!==par&&par!==null));});
+    });
+    var l1=bar.querySelector('.tree-l1');if(l1){l1.querySelectorAll('.filt').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-val')===chain[chain.length-1]);});}
+    try{history.replaceState(null,'',k?'#'+k:location.pathname+location.search);}catch(e){}
+    applyFilter();applySort();
+  }
+  
   function applySort(){
     if(!grid)return;
     var sel=state.cat;
@@ -320,8 +351,7 @@ CARD_JS = """<script>/*MARK-CARD-JS*/
   }
   function applyFilter(){
     document.querySelectorAll('.product-card').forEach(function(c){
-      var dc=' '+(c.getAttribute('data-cat')||'')+' ';
-      var ok=(state.cat===''||dc.indexOf(' '+state.cat+' ')>-1)&&(state.color===''||c.getAttribute('data-color')===state.color);
+      var ok=match(c,state.cat)&&(state.color===''||c.getAttribute('data-color')===state.color);
       c.style.display=ok?'':'none';
     });
     updateCount();
@@ -340,7 +370,7 @@ CARD_JS = """<script>/*MARK-CARD-JS*/
   if(bar){
     bar.querySelectorAll('.filt').forEach(function(b){
       b.addEventListener('click',function(){
-        var g=b.parentNode.getAttribute('data-filter');
+        var g=b.parentNode.getAttribute('data-filter');if(g==='tree'){selectCat(b.getAttribute('data-val'));return;}
         state[g]=b.getAttribute('data-val');
         b.parentNode.querySelectorAll('.filt').forEach(function(x){x.classList.remove('active');});
         b.classList.add('active');
@@ -362,7 +392,7 @@ CARD_JS = """<script>/*MARK-CARD-JS*/
   }
   applySort();
   updateCount();
-  if(bar){var _hf=(location.hash||'').replace('#','');if(_hf){var _tf=bar.querySelector('.filt-group[data-filter="cat"] .filt[data-val="'+_hf+'"]');if(_tf)_tf.click();}}
+  if(bar){var _hf=decodeURIComponent((location.hash||'').replace('#',''));if(_hf&&bar.querySelector('.filt-group[data-filter="tree"] .filt[data-val="'+_hf+'"]'))selectCat(_hf);}
 })();
 </script>"""
 
@@ -1028,6 +1058,32 @@ def reviews_block(lang, base=""):
     import reviews_data
     return "\n    " + reviews_data.carousel_section(lang, base)
 
+# Дерево категорий каталога (30.09.2026): Цветы/Шары/Подарки/Оформление с раскрытием подкатегорий
+TREE={
+ 'ru':[('l1',None,[('','🌸 Все'),('flowers','💐 Цветы'),('balloons','🎈 Шары'),('gifts','🎁 Подарки'),('decor','🎉 Оформление праздников')]),
+       ('sub','flowers',[('flowers','Все цветы'),('mixed','💐 Сборные'),('roses','🌹 Розы')]),
+       ('sub','roses',[('roses','Все розы'),('r25','25 роз'),('r51','51 роза'),('r101','101+ роз')]),
+       ('sub','balloons',[('balloons','Все шары'),('b-helium','🎈 Гелиевые'),('b-latex','🎈 Резиновые'),('b-combo','💐 Комбо с цветами')]),
+       ('sub','gifts',[('gifts','Все подарки'),('nabory','🎁 Подарочные наборы'),('cakes','🎂 Торты')])],
+ 'en':[('l1',None,[('','🌸 All'),('flowers','💐 Flowers'),('balloons','🎈 Balloons'),('gifts','🎁 Gifts'),('decor','🎉 Party decor')]),
+       ('sub','flowers',[('flowers','All flowers'),('mixed','💐 Mixed'),('roses','🌹 Roses')]),
+       ('sub','roses',[('roses','All roses'),('r25','25 roses'),('r51','51 roses'),('r101','101+ roses')]),
+       ('sub','balloons',[('balloons','All balloons'),('b-helium','🎈 Foil helium'),('b-latex','🎈 Latex'),('b-combo','💐 Combo with flowers')]),
+       ('sub','gifts',[('gifts','All gifts'),('nabory','🎁 Gift sets'),('cakes','🎂 Cakes')])],
+ 'ko':[('l1',None,[('','🌸 전체'),('flowers','💐 꽃'),('balloons','🎈 풍선'),('gifts','🎁 선물'),('decor','🎉 파티 데코')]),
+       ('sub','flowers',[('flowers','꽃 전체'),('mixed','💐 혼합'),('roses','🌹 장미')]),
+       ('sub','roses',[('roses','장미 전체'),('r25','장미 25'),('r51','장미 51'),('r101','장미 101+')]),
+       ('sub','balloons',[('balloons','풍선 전체'),('b-helium','🎈 호일 헬륨'),('b-latex','🎈 라텍스'),('b-combo','💐 꽃 콤보')]),
+       ('sub','gifts',[('gifts','선물 전체'),('nabory','🎁 선물 세트'),('cakes','🎂 케이크')])],
+}
+def catalog_tree_html(lang):
+    out=[]
+    for kind,parent,btns in TREE[lang]:
+        b=''.join(f'<button type="button" class="filt{" active" if (kind=="l1" and v=="") else ""}" data-val="{v}">{l}</button>' for v,l in btns)
+        attr=' data-parent="%s" hidden'%parent if parent else ''
+        out.append(f'<div class="filt-group tree-{kind}" data-filter="tree"{attr}>{b}</div>')
+    return ''.join(out)
+
 def render_catalog(lang, products):
     t = T[lang]
     base = ""
@@ -1069,7 +1125,7 @@ def render_catalog(lang, products):
     COUNT_STYLE = ("font-size:13px;color:#6b6b6b;font-weight:600;background:#fff;"
                    "border:1px solid #f0e0e5;border-radius:999px;padding:.4rem .95rem;margin-top:.25rem;")
     count_box = f'<div id="catCount" data-tpl="{COUNT_TPL}" style="{COUNT_STYLE}"></div>'
-    filters = f'{sort_bar}<div class="cat-filters">{filt_group("cat")}{filt_group("color")}{count_box}</div>'
+    filters = f'{sort_bar}<div class="cat-filters">{catalog_tree_html(lang)}{filt_group("color")}{count_box}</div>'
     body = f'''    <main class="flex-grow">
     <section class="py-12 px-4 max-w-5xl mx-auto text-center">
         <h1 class="font-serif text-3xl md:text-4xl font-bold mb-3" style="color:#1a1a1a;">{t["catalog_h1"]}</h1>
