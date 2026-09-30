@@ -280,7 +280,7 @@ CARD_CSS = """/*MARK-CARD-CSS*/
         .filt{background:#fff;border:1px solid #f0e0e5;color:#6b6b6b;font-size:.8rem;font-weight:500;padding:.45rem .9rem;border-radius:999px;cursor:pointer;transition:all .2s;}
         .filt:hover{border-color:var(--rose);color:var(--rose);}
         .filt.active{background:var(--rose);color:#fff;border-color:var(--rose);}
-        .sort-bar{display:flex;justify-content:center;margin-bottom:1rem;}.filt-group[hidden]{display:none!important;}.tree-sub{background:#fdf4f7;border-radius:1rem;padding:.4rem;}.tree-sub .filt{font-size:.75rem;padding:.35rem .8rem;}
+        .sort-bar{display:flex;justify-content:center;margin-bottom:1rem;}.filt-group[hidden]{display:none!important;}.cat-anchor{display:block;position:relative;top:-90px;height:0;}.tree-sub{background:#fdf4f7;border-radius:1rem;padding:.4rem;}.tree-sub .filt{font-size:.75rem;padding:.35rem .8rem;}
         .combo-note{display:inline-flex;align-items:flex-start;gap:.25rem;width:fit-content;max-width:100%;font-size:.68rem;font-weight:600;line-height:1.35;color:#a8566a;background:#fce8ee;border:1px solid #f3d3dc;border-radius:.6rem;padding:.2rem .5rem;margin-bottom:.5rem;}"""
 
 CARD_JS = """<script>/*MARK-CARD-JS*/
@@ -1125,7 +1125,7 @@ def render_catalog(lang, products):
     COUNT_STYLE = ("font-size:13px;color:#6b6b6b;font-weight:600;background:#fff;"
                    "border:1px solid #f0e0e5;border-radius:999px;padding:.4rem .95rem;margin-top:.25rem;")
     count_box = f'<div id="catCount" data-tpl="{COUNT_TPL}" style="{COUNT_STYLE}"></div>'
-    filters = f'{sort_bar}<div class="cat-filters">{catalog_tree_html(lang)}{filt_group("color")}{count_box}</div>'
+    filters = f'{sort_bar}<span id="flowers" class="cat-anchor"></span><span id="balloons" class="cat-anchor"></span><span id="gifts" class="cat-anchor"></span><span id="decor" class="cat-anchor"></span><div class="cat-filters">{catalog_tree_html(lang)}{filt_group("color")}{count_box}</div>'
     body = f'''    <main class="flex-grow">
     <section class="py-12 px-4 max-w-5xl mx-auto text-center">
         <h1 class="font-serif text-3xl md:text-4xl font-bold mb-3" style="color:#1a1a1a;">{t["catalog_h1"]}</h1>
