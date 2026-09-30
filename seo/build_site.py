@@ -68,6 +68,9 @@ HOME = {"ru": "index.html", "en": "index-en.html", "ko": "index-kr.html"}
 # имя файла страницы шаров для каждого языка (ru = balloons.html)
 BALLOONS = {"ru": "balloons.html", "en": "balloons-en.html", "ko": "balloons-kr.html"}
 # отдельная страница тортов (с 05.07.2026) — как шары, свой лендинг
+CAT_NAV = {"ru": [("flowers", "💐 Цветы"), ("balloons", "🎈 Шары"), ("gifts", "🎁 Подарки"), ("decor", "🎉 Оформление")],
+           "en": [("flowers", "💐 Flowers"), ("balloons", "🎈 Balloons"), ("gifts", "🎁 Gifts"), ("decor", "🎉 Party decor")],
+           "ko": [("flowers", "💐 꽃"), ("balloons", "🎈 풍선"), ("gifts", "🎁 선물"), ("decor", "🎉 파티 데코")]}
 CAKES = {"ru": "torty.html", "en": "torty-en.html", "ko": "torty-kr.html"}
 # отдельная страница подарочных наборов (с 14.07.2026) — как торты/шары, свой лендинг
 NABORY = {"ru": "nabory.html", "en": "nabory-en.html", "ko": "nabory-kr.html"}
@@ -393,6 +396,7 @@ CARD_JS = """<script>/*MARK-CARD-JS*/
   applySort();
   updateCount();
   if(bar){var _hf=decodeURIComponent((location.hash||'').replace('#',''));if(_hf&&bar.querySelector('.filt-group[data-filter="tree"] .filt[data-val="'+_hf+'"]'))selectCat(_hf);}
+  window.addEventListener('hashchange',function(){var _h=decodeURIComponent((location.hash||'').replace('#',''));if(bar&&bar.querySelector('.filt-group[data-filter="tree"] .filt[data-val="'+_h+'"]')){selectCat(_h);bar.scrollIntoView({behavior:'smooth',block:'start'});}});
 })();
 </script>"""
 
@@ -523,9 +527,7 @@ def header(lang, base, lang_urls=None):
         f'<a href="{base}{HOME[lang]}" {_mnav}>🏠 {t["nav_home"]}</a>'
         f'<a href="{base}catalog-{lang}.html" {_mnav}>💐 {t["nav_catalog"]}</a>'
         f'<a href="{base}blog-{lang}.html" {_mnav}>📖 {t["nav_articles"]}</a>'
-        f'<a href="{base}{BALLOONS[lang]}" {_mnav}>{t["nav_balloons"]}</a>'
-        f'<a href="{base}{CAKES[lang]}" {_mnav}>{t["nav_cakes"]}</a>'
-        f'<a href="{base}{NABORY[lang]}" {_mnav}>{t["nav_nabory"]}</a>')
+        + "".join(f'<a href="{base}catalog-{lang}.html#{k}" {_mnav}>{v}</a>' for k, v in CAT_NAV[lang]))
     return f'''    <div style="background:#fce8ee; color:#a8566a;" class="text-xs py-2 text-center tracking-widest font-medium uppercase">
         {BRAND[lang]}
     </div>
@@ -539,9 +541,7 @@ def header(lang, base, lang_urls=None):
                 <a href="{base}{HOME[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🏠 {t["nav_home"]}</a>
                 <a href="{base}catalog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">💐 {t["nav_catalog"]}</a>
                 <a href="{base}blog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">📖 {t["nav_articles"]}</a>
-                <a href="{base}{BALLOONS[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_balloons"]}</a>
-                <a href="{base}{CAKES[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_cakes"]}</a>
-                <a href="{base}{NABORY[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{t["nav_nabory"]}</a>
+                {"".join(f'<a href="{base}catalog-{lang}.html#{k}" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{v}</a>' for k, v in CAT_NAV[lang])}
                 <span class="w-px h-4 bg-stone-200 mx-1"></span>
                 {nav_langs}
             </nav>

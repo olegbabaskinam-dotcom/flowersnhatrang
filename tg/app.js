@@ -67,20 +67,62 @@ fetch("/products.json").then(function (r) { return r.json(); }).then(function (d
   document.getElementById("grid").innerHTML = "<div class='empty'>Не удалось загрузить каталог. Обновите страницу.</div>";
 });
 
-/* ---- вкладки категорий (только непустые) ---- */
+/* ---- дерево категорий (30.09.2026): Цветы / Шары / Подарки / Оформление, подкатегории раскрываются ---- */
+var TREE = [
+  { key: "all", label: "Все" }, { key: "flowers", label: "💐 Цветы" }, { key: "balloons", label: "🎈 Шары" },
+  { key: "gifts", label: "🎁 Подарки" }, { key: "decor", label: "🎉 Оформление" }];
+var SUB = {
+  flowers: [["flowers", "Все цветы"], ["mixed", "💐 Сборные"], ["roses", "🌹 Розы"]],
+  roses: [["roses", "Все розы"], ["r25", "25 роз"], ["r51", "51 роза"], ["r101", "101+ роз"]],
+  balloons: [["balloons", "Все шары"], ["b-helium", "🎈 Гелиевые"], ["b-latex", "🎈 Резиновые"], ["b-combo", "💐 Комбо с цветами"]],
+  gifts: [["gifts", "Все подарки"], ["nabory", "🎁 Подарочные наборы"], ["cakes", "🎂 Торты"]]
+};
+var PARENT = { mixed: "flowers", roses: "flowers", r25: "roses", r51: "roses", r101: "roses", "b-helium": "balloons", "b-latex": "balloons", "b-combo": "balloons", nabory: "gifts", cakes: "gifts" };
+function hasC(p, x) { return (p.cats || []).indexOf(x) >= 0; }
+function toks(p) { return String(p.slug || "").split("-"); }
+function flowerSlug(p) { return toks(p).some(function (t) { return /^(roz|roza|rozy|buket|korzina|korzine|liliy|eustom|eustomy)$/.test(t); }); }
+function isFlower(p) { return hasC(p, "r25") || hasC(p, "r51") || hasC(p, "r101") || hasC(p, "mixed") || (hasC(p, "balloons") && flowerSlug(p)); }
+function bCombo(p) { return hasC(p, "balloons") && (isFlower(p) || hasC(p, "cakes")); }
+function bLatex(p) { return hasC(p, "balloons") && !bCombo(p) && toks(p).some(function (t) { return /^(rezinovyh|potolok)$/.test(t); }); }
+function match(p, k) {
+  if (!k || k === "all") return true;
+  if (k === "flowers") return isFlower(p);
+  if (k === "roses") return hasC(p, "r25") || hasC(p, "r51") || hasC(p, "r101");
+  if (k === "b-combo") return bCombo(p);
+  if (k === "b-latex") return bLatex(p);
+  if (k === "b-helium") return hasC(p, "balloons") && !bCombo(p) && !bLatex(p);
+  if (k === "gifts") return hasC(p, "nabory") || hasC(p, "cakes");
+  if (k === "decor") return hasC(p, "prazdnik");
+  return hasC(p, k);
+}
+function chain(k) { var c = [k]; while (PARENT[k]) { k = PARENT[k]; c.push(k); } return c; }
+function tabBtn(key, label, on) {
+  var b = document.createElement("button");
+  b.className = "tab" + (on ? " on" : "");
+  b.textContent = label;
+  b.onclick = function () { activeCat = key; renderTabs(); renderGrid(); window.scrollTo(0, 0); };
+  return b;
+}
 function renderTabs() {
   var box = document.getElementById("tabs");
   box.innerHTML = "";
-  DATA.categories.forEach(function (c) {
-    if (c.key !== "all") {
-      var has = PRODUCTS.some(function (p) { return p.cats.indexOf(c.key) >= 0; });
-      if (!has) return;
-    }
-    var b = document.createElement("button");
-    b.className = "tab" + (c.key === activeCat ? " on" : "");
-    b.textContent = c.label;
-    b.onclick = function () { activeCat = c.key; renderTabs(); renderGrid(); window.scrollTo(0, 0); };
-    box.appendChild(b);
+  var ch = chain(activeCat), top = ch[ch.length - 1];
+  TREE.forEach(function (c) {
+    if (c.key !== "all" && !PRODUCTS.some(function (p) { return match(p, c.key); })) return;
+    box.appendChild(tabBtn(c.key, c.label, c.key === top));
+  });
+  var sub = document.getElementById("subtabs");
+  if (!sub) { sub = document.createElement("div"); sub.id = "subtabs"; box.parentNode.insertBefore(sub, box.nextSibling); }
+  sub.innerHTML = "";
+  ch.slice().reverse().forEach(function (par) {
+    if (!SUB[par]) return;
+    var row = document.createElement("div"); row.className = "tabs subtabs";
+    SUB[par].forEach(function (x) {
+      if (x[0] !== par && !PRODUCTS.some(function (p) { return match(p, x[0]); })) return;
+      var on = x[0] === activeCat || (ch.indexOf(x[0]) >= 0 && x[0] !== par);
+      row.appendChild(tabBtn(x[0], x[1], on));
+    });
+    sub.appendChild(row);
   });
 }
 
@@ -88,7 +130,7 @@ function renderTabs() {
 var COMBO_PARTS = { r25: "25 роз", r51: "51 роза", r101: "101 роза", balloons: "шары", cakes: "торт", mixed: "сборный букет" };
 function catList(p) { return (p.cats || []); }
 function isCombo(p) { return catList(p).filter(function (c) { return c !== "nabory" && c !== "prazdnik"; }).length > 1; }
-function isPure(p, sel) { return !!sel && sel !== "all" && catList(p).indexOf(sel) >= 0 && !isCombo(p); }
+function isPure(p, sel) { return !!sel && sel !== "all" && match(p, sel) && !isCombo(p); }
 function comboBadge(p) {
   if (!isCombo(p)) return "";
   var parts = catList(p).map(function (c) { return COMBO_PARTS[c]; }).filter(Boolean);
@@ -99,7 +141,7 @@ function comboBadge(p) {
 /* ---- карточки товаров ---- */
 function filtered() {
   var list = PRODUCTS.filter(function (p) {
-    if (activeCat !== "all" && p.cats.indexOf(activeCat) < 0) return false;
+    if (!match(p, activeCat)) return false;
     if (searchQ && p.name.toLowerCase().indexOf(searchQ) < 0) return false;
     return true;
   });
