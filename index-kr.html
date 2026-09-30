@@ -171,16 +171,16 @@
     .hs-trust{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:12px;font-size:11px;color:#8a807b}
     .hs-right{display:flex;flex-direction:column;gap:12px;min-height:0}
     .hs-grid{flex:1;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:1fr;gap:12px;min-height:0}
-    .hc{position:relative;border-radius:18px;overflow:hidden;background:#f3efec;min-height:150px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.06)}
-    .hc-track{position:absolute;inset:0;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+    .hc{position:relative;border-radius:18px;overflow:hidden;background:#fff;border:1px solid #f0d0d8;min-height:150px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+    .hc-track{position:absolute;top:58px;left:0;right:0;bottom:0;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
     .hc-track::-webkit-scrollbar{display:none}
     .hc-track img{flex:0 0 100%;width:100%;height:100%;object-fit:cover;scroll-snap-align:start}
     .hc-lbl{position:absolute;left:0;right:0;bottom:0;padding:34px 10px 22px;background:linear-gradient(0deg,rgba(0,0,0,.42),rgba(0,0,0,0));color:#fff;text-decoration:none;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px}
-    .hc-top{position:absolute;top:12px;left:0;right:0;z-index:2;display:flex;justify-content:center;padding:0 8px;text-decoration:none;pointer-events:auto}
-    .hc-top b{font-family:'Cormorant Garamond','Noto Serif KR',Georgia,serif;font-style:italic;font-weight:600;font-size:clamp(24px,2.3vw,32px);line-height:1.05;letter-spacing:.3px;color:#fff7f9;text-align:center;background:rgba(104,38,62,.86);border:1px solid rgba(104,38,62,.86);box-shadow:inset 0 0 0 3px rgba(104,38,62,.0),inset 0 0 0 4px rgba(244,205,216,.55),0 4px 14px rgba(60,18,34,.28);border-radius:3px;padding:6px 18px 8px;text-decoration:none}
+    .hc-top{position:absolute;top:0;left:0;right:0;height:58px;z-index:2;display:flex;align-items:center;justify-content:center;padding:0 8px;text-decoration:none;background:#fff}
+    .hc-top b{font-family:'Cormorant Garamond','Noto Serif KR',Georgia,serif;font-style:italic;font-weight:600;font-size:clamp(21px,1.9vw,27px);line-height:1;letter-spacing:.3px;color:#7a2e48;text-align:center}
     .hc-lbl .hc-open{flex:0 0 auto;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:#fff;background:transparent;border:1px solid rgba(255,255,255,.85);border-radius:999px;padding:.45rem 1.1rem;margin-top:4px;transition:.2s}
     .hc-lbl:hover .hc-open{background:#fff;color:#a94f63}
-    .hc-arr{position:absolute;top:40%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;border:none;background:rgba(255,255,255,.9);color:#a8566a;font-size:20px;line-height:1;cursor:pointer;z-index:2;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+    .hc-arr{position:absolute;top:55%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;border:none;background:rgba(255,255,255,.9);color:#a8566a;font-size:20px;line-height:1;cursor:pointer;z-index:2;box-shadow:0 1px 4px rgba(0,0,0,.15)}
     .hc-prev{left:6px}.hc-next{right:6px}
     .hc-dots{position:absolute;bottom:8px;left:0;right:0;display:flex;gap:4px;justify-content:center;pointer-events:none}
     .hc-dots i{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.5)}.hc-dots i.on{background:#fff}
@@ -207,7 +207,7 @@
       .hs-grid{grid-template-columns:1fr 1fr;grid-template-rows:none;gap:10px}
       .hc{aspect-ratio:3/4;min-height:0}
       .hc-arr{display:none}
-      .hc-lbl{padding:26px 8px 18px;gap:6px}.hc-top{top:8px}.hc-top b{font-size:20px;padding:4px 12px 6px}.hc-lbl .hc-open{font-size:10px;padding:.3rem .8rem}
+      .hc-lbl{padding:26px 8px 18px;gap:6px}.hc-top{height:44px}.hc-track{top:44px}.hc-top b{font-size:17px}.hc-lbl .hc-open{font-size:10px;padding:.3rem .8rem}
       .hs-rev{flex-direction:column;align-items:stretch;gap:6px}
       .hs-rev-h{display:flex;gap:8px;align-items:center;justify-content:center}.hs-rev-h b{display:inline}
       .hr-box{min-height:80px}
