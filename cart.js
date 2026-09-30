@@ -1,3 +1,5 @@
+/* Градиент Instagram для цветных иконок (30.09.2026) */
+(function(){function a(){try{if(document.getElementById('igGradDefs'))return;document.body.insertAdjacentHTML('afterbegin','<svg id="igGradDefs" width="0" height="0" style="position:absolute;width:0;height:0" aria-hidden="true"><defs><radialGradient id="igGrad" cx="30%" cy="107%" r="150%"><stop offset="0" stop-color="#fdf497"/><stop offset=".05" stop-color="#fdf497"/><stop offset=".45" stop-color="#fd5949"/><stop offset=".6" stop-color="#d6249f"/><stop offset=".9" stop-color="#285AEB"/></radialGradient></defs></svg>');}catch(e){}}if(document.body)a();else document.addEventListener('DOMContentLoaded',a);})();
 /* ============================================================
    КОРЗИНА — общий скрипт (localStorage). Подключается на страницах
    каталога, главной, наборов, тортов, шаров и товара (RU/EN/KO).
