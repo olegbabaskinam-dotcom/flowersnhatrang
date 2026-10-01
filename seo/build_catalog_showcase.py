@@ -21,10 +21,16 @@ GROUPS = [
  ("decor", ["decor"]),
 ]
 # фото плиток (выбраны вручную по фото 01.10.2026)
-PICK = {"r25": "25-krasnyh-roz", "r51": "51-krasnaya-roza-belaya-upakovka-krasnaya-len", "r101": "101-krasno-rozovaya-roza-rozovaya-upakovka",
+PICK = {"r25": "25-krasnyh-roz", "r51": "51-belaya-roza-v-upakovke", "r101": "101-krasno-rozovaya-roza-rozovaya-upakovka",
         "baskets": "101-malinovaya-roza-korzina-bukva-v", "mixed": "stilnyy-sbornyy-buket-rozovyy", "b-helium": "nabor-sharov-m-cherno-zolotoy",
         "b-latex": "35-serebristo-chernyh-gelievyh-sharov-pod-potolok", "b-combo": "svyazka-9-rozovo-krasnyh-serdec-25-rozovyh-roz",
-        "nabory": "podarochnyy-nabor-kofeynyy-vkus-vietnama"}
+        "nabory": "podarochnyy-nabor-zhenskiy"}
+HEAD = {
+ "ru": {"h1": "Каталог цветов, шаров и подарков в Нячанге", "t1": "<b>2000+</b> букетов доставлено", "t2": "<b>157</b> отзывов на Google", "t3": "💵 оплата при получении"},
+ "en": {"h1": "Flowers, Balloons &amp; Gifts Catalog in Nha Trang", "t1": "<b>2000+</b> bouquets delivered", "t2": "<b>157</b> reviews on Google", "t3": "💵 pay on delivery"},
+ "ko": {"h1": "나트랑 꽃·풍선·선물 카탈로그", "t1": "꽃다발 <b>2000+</b> 배달 완료", "t2": "Google 리뷰 <b>157</b>개", "t3": "💵 수령 시 결제"},
+}
+GMAPS = "https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic"
 TXT = {
  "ru": {"h": "Наш каталог", "sub": "Выберите категорию — покажем все позиции", "open": "Смотреть →",
         "g": {"flowers": "💐 Цветы", "balloons": "🎈 Шары", "gifts": "🎁 Подарки", "decor": "🎉 Оформление праздников"},
@@ -43,35 +49,43 @@ TXT = {
         "n": lambda n: f"{n}개", "bal": {"b-helium": "평균 약 7일", "b-latex": "평균 약 12시간"}},
 }
 CSS = """<style id="sc-css">
-.sc{max-width:64rem;margin:0 auto;padding:3rem 1rem 1rem}
-.sc-h{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:600;font-size:2.4rem;text-align:center;color:#1a1a1a;margin:0}
-.sc-sub{text-align:center;color:#a8a29e;font-size:.9rem;margin:.3rem 0 2rem}
-.sc-g{margin:0 0 2.2rem}
-.sc-gh{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:1.6rem;color:#1a1a1a;margin:0 0 .9rem;display:flex;align-items:center;gap:.6rem}
-.sc-gh:after{content:"";flex:1;height:1px;background:#f0d0d8}
-.sc-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
-@media(min-width:640px){.sc-row{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(min-width:900px){.sc-row{grid-template-columns:repeat(5,minmax(0,1fr))}}
-.sc-t{position:relative;display:block;aspect-ratio:3/4;border-radius:18px;overflow:hidden;background:#fdf4f7;text-decoration:none;box-shadow:0 6px 18px rgba(28,25,23,.08);transition:transform .2s,box-shadow .2s}
-.sc-t:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(192,104,122,.22)}
+.sc{max-width:72rem;margin:0 auto;padding:.9rem .75rem .6rem}
+.sc-h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;font-size:clamp(1.35rem,2.6vw,2rem);line-height:1.15;text-align:center;color:#1a1a1a;margin:0}
+.sc-tr{display:flex;flex-wrap:wrap;justify-content:center;gap:.35rem .5rem;margin:.5rem 0 .8rem;font-size:.78rem;color:#78716c}
+.sc-tr>*{display:inline-flex;align-items:center;gap:.25rem;background:#fff;border:1px solid #f0e0e5;border-radius:999px;padding:.22rem .7rem;text-decoration:none;color:#57534e;white-space:nowrap}
+.sc-tr b{color:#1a1a1a;font-size:.9rem}
+.sc-tr a:hover{border-color:#c0687a;color:#a8566a}
+.sc-tr .st{color:#f5b301}
+.sc-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.45rem;margin:0 auto}
+@media(min-width:768px){.sc-row{grid-template-columns:repeat(6,minmax(0,1fr));gap:.6rem;max-width:max(40rem,min(70rem,calc((100vh - 255px)*2.2)))}}
+.sc-t{position:relative;display:block;aspect-ratio:3/4;border-radius:14px;overflow:hidden;background:#fdf4f7;text-decoration:none;box-shadow:0 4px 12px rgba(28,25,23,.08);transition:transform .2s,box-shadow .2s}
+.sc-t:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(192,104,122,.22)}
 .sc-t img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.sc-t:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(20,10,14,.78) 0%,rgba(20,10,14,.25) 45%,rgba(20,10,14,0) 70%)}
-.sc-c{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:.8rem .85rem .9rem;color:#fff}
-.sc-c b{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-size:1.35rem;font-weight:600;line-height:1.1}
-.sc-c i{display:block;font-style:normal;font-size:.72rem;opacity:.85;margin-top:.2rem;letter-spacing:.04em}
-.sc-c em{display:inline-block;font-style:normal;margin-top:.35rem;font-size:.7rem;font-weight:700;background:rgba(238,246,251,.95);color:#0f3c57;border-radius:999px;padding:.15rem .5rem}
-.sc-c span{display:inline-block;margin-top:.5rem;font-size:.75rem;font-weight:600;background:rgba(255,255,255,.92);color:#a8566a;border-radius:999px;padding:.25rem .7rem}
+.sc-t:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(20,10,14,.82) 0%,rgba(20,10,14,.3) 42%,rgba(20,10,14,0) 65%)}
+.sc-g{position:absolute;top:.35rem;left:.35rem;z-index:2;font-size:.6rem;font-weight:700;background:rgba(255,255,255,.92);color:#a8566a;border-radius:999px;padding:.1rem .45rem;white-space:nowrap}
+.sc-c{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:.45rem .5rem .5rem;color:#fff}
+.sc-c b{display:block;font-size:.78rem;font-weight:700;line-height:1.15}
+.sc-c i{display:block;font-style:normal;font-size:.62rem;opacity:.85;margin-top:.1rem}
+.sc-c em{display:block;font-style:normal;margin-top:.2rem;font-size:.58rem;font-weight:700;color:#d6ecf8;line-height:1.2}
+@media(min-width:768px){.sc-c{padding:.6rem .65rem .65rem}.sc-c b{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.15rem;font-weight:600}.sc-c i{font-size:.7rem}.sc-c em{font-size:.66rem}.sc-g{font-size:.66rem;top:.45rem;left:.45rem}}
 </style>
 """
 JS = """<script>/*SHOWCASE-JS*/(function(){document.querySelectorAll('.sc-t[data-k]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var k=a.getAttribute('data-k');if(location.hash==='#'+k){window.dispatchEvent(new HashChangeEvent('hashchange'));}else{location.hash=k;}});});})();</script>"""
 
+STAR = '<svg viewBox="0 0 576 512" fill="currentColor" width="1em" height="1em"><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg>'
+
 def build(lang):
     fn = L.CAT[lang]; s = open(fn, encoding="utf-8").read()
-    cards = L.cards_from_catalog(lang); T = TXT[lang]
-    h = ['<!--SHOWCASE-START-->\n', CSS, '<section class="sc" aria-label="' + T["h"] + '">\n',
-         f'  <h2 class="sc-h">{T["h"]}</h2>\n  <p class="sc-sub">{T["sub"]}</p>\n']
+    cards = L.cards_from_catalog(lang); T = TXT[lang]; Hd = HEAD[lang]
+    # 01.10.2026: убираем старые «шапку» (h1+абзац) и полосу доверия — всё в компактном первом экране
+    s = re.sub(r'    <section class="py-12 px-4 max-w-5xl mx-auto text-center">\s*<h1.*?</section>\n\n?', '', s, count=1, flags=re.S)
+    s = re.sub(r'    <section class="reveal py-8 px-4 border-b border-stone-100">\s*<div class="max-w-4xl mx-auto">\s*<div class="grid grid-cols-3 divide-x divide-stone-100">.*?</section>\n\n?', '', s, count=1, flags=re.S)
+    h = ['<!--SHOWCASE-START-->\n', CSS, '<section class="sc">\n',
+         f'  <h1 class="sc-h1">{Hd["h1"]}</h1>\n',
+         f'  <div class="sc-tr"><span>{Hd["t1"]}</span><a href="{GMAPS}" target="_blank" rel="noopener noreferrer"><span class="st">{STAR}</span>{Hd["t2"]}</a><span>{Hd["t3"]}</span></div>\n',
+         '  <div class="sc-row">\n']
     for g, keys in GROUPS:
-        h.append(f'  <div class="sc-g"><h3 class="sc-gh">{T["g"][g]}</h3><div class="sc-row">\n')
+        gl = T["g"][g].split(" ", 1)[0]  # эмодзи группы
         for k in keys:
             allc = [c for c in cards if MATCH[k](c)]
             lst = [c for c in allc if not c["sold"]]
@@ -81,24 +95,22 @@ def build(lang):
             pic = next((c for c in lst if want and c["slug"].startswith(want)), None) or pure[0]
             img = re.search(r'src="(img/products/[^"]+)"', pic["html"]).group(1)
             bal = f'<em>{T["bal"][k]}</em>' if k in T["bal"] else ""
-            h.append(f'    <a class="sc-t" href="#{k}" data-k="{k}"><img src="{img}" alt="{html.escape(T["t"][k])}" loading="lazy" decoding="async" width="900" height="1200">'
-                     f'<div class="sc-c"><b>{T["t"][k]}</b><i>{T["n"](len(allc))}</i>{bal}<span>{T["open"]}</span></div></a>\n')
-        h.append('  </div></div>\n')
-    h.append('</section>\n' + JS + '\n<!--SHOWCASE-END-->\n')
+            h.append(f'    <a class="sc-t" href="#{k}" data-k="{k}"><img src="{img}" alt="{html.escape(T["t"][k])}" decoding="async" width="900" height="1200">'
+                     f'<span class="sc-g">{T["g"][g]}</span><div class="sc-c"><b>{T["t"][k]}</b><i>{T["n"](len(allc))}</i>{bal}</div></a>\n')
+    h.append('  </div>\n</section>\n' + JS + '\n<!--SHOWCASE-END-->\n')
     block = "".join(h)
     if "<!--SHOWCASE-START-->" in s:
         s = re.sub(r"<!--SHOWCASE-START-->.*?<!--SHOWCASE-END-->\n", lambda m: block, s, flags=re.S)
     else:
-        anchor = '    <section class="pb-16 px-4 max-w-5xl mx-auto pt-12">\n        <div class="sort-bar">'
+        anchor = '    <section class="pb-16 px-4 max-w-5xl mx-auto pt-6">\n        <div class="sort-bar">'
         assert anchor in s, fn
         s = s.replace(anchor, block + anchor, 1)
-    # ensure anchors: у каждого хэша плитки есть <span id=… class="cat-anchor"> (для audit_links и прокрутки)
     keys = [k for g, ks in GROUPS for k in ks]
     miss = [k for k in keys if f'id="{k}"' not in s]
     if miss:
         s = s.replace('<span id="flowers" class="cat-anchor"></span>', "".join(f'<span id="{k}" class="cat-anchor"></span>' for k in miss) + '<span id="flowers" class="cat-anchor"></span>', 1)
     open(fn, "w", encoding="utf-8").write(s)
-    print("showcase →", fn, "anchors+", miss)
+    print("showcase →", fn, s.count("<h1"))
 
 if __name__ == "__main__":
     for lang in ("ru", "en", "ko"): build(lang)
