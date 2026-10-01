@@ -72,27 +72,28 @@ var TREE = [
   { key: "all", label: "Все" }, { key: "flowers", label: "💐 Цветы" }, { key: "balloons", label: "🎈 Шары" },
   { key: "gifts", label: "🎁 Подарки" }, { key: "decor", label: "🎉 Оформление" }];
 var SUB = {
-  flowers: [["flowers", "Все цветы"], ["mixed", "💐 Сборные"], ["roses", "🌹 Розы"]],
+  flowers: [["flowers", "Все цветы"], ["mixed", "💐 Сборные"], ["baskets", "🧺 Корзины"], ["roses", "🌹 Розы"]],
   roses: [["roses", "Все розы"], ["r25", "25 роз"], ["r51", "51 роза"], ["r101", "101+ роз"]],
   balloons: [["balloons", "Все шары"], ["b-helium", "🎈 Фольгированные"], ["b-latex", "🎈 Резиновые"], ["b-combo", "💐 С цветами и тортом"]],
   gifts: [["gifts", "Все подарки"], ["nabory", "🎁 Подарочные наборы"], ["cakes", "🎂 Торты"]]
 };
-var PARENT = { mixed: "flowers", roses: "flowers", r25: "roses", r51: "roses", r101: "roses", "b-helium": "balloons", "b-latex": "balloons", "b-combo": "balloons", nabory: "gifts", cakes: "gifts" };
+var PARENT = { baskets: "flowers", mixed: "flowers", roses: "flowers", r25: "roses", r51: "roses", r101: "roses", "b-helium": "balloons", "b-latex": "balloons", "b-combo": "balloons", nabory: "gifts", cakes: "gifts" };
 function hasC(p, x) { return (p.cats || []).indexOf(x) >= 0; }
 function toks(p) { return String(p.slug || "").split("-"); }
 function flowerSlug(p) { return toks(p).some(function (t) { return /^(roz|roza|rozy|buket|korzina|korzine|liliy|eustom|eustomy)$/.test(t); }); }
 function isFlower(p) { return hasC(p, "r25") || hasC(p, "r51") || hasC(p, "r101") || hasC(p, "mixed") || (hasC(p, "balloons") && flowerSlug(p)); }
 function bCombo(p) { return hasC(p, "balloons") && (isFlower(p) || hasC(p, "cakes")); }
 var LATEX = ["nabor-sharov-s-2-cifry-10-sharov", "101-belaya-roza-korzina-shary-serdca", "101-belaya-roza-rozovaya-upakovka-cifry-25-sharov", "35-serebristo-chernyh-gelievyh-sharov-pod-potolok", "101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov", "yarkaya-sbornaya-korzina-15-rozovyh-sharov", "27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka"], LATEX_ONLY = ["35-serebristo-chernyh-gelievyh-sharov-pod-potolok", "27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka"]; // проверено по фото 01.10.2026
-var BAL_T = { f: "🎈 Фольгированные шары летают в среднем 7 дней", l: "🎈 Резиновые шары летают в среднем 12 часов" };
+var BAL_T = { f: "🎈 <b>Фольгированные шары</b> — <b>летают в среднем 7 дней</b>", l: "🎈 <b>Резиновые шары</b> — <b>летают в среднем 12 часов</b>" };
 function balType(p) { if (!p) return ""; var cs = p.cats || []; if (cs.indexOf("balloons") < 0) return ""; if (LATEX_ONLY.indexOf(p.slug) > -1) return "l"; if (LATEX.indexOf(p.slug) > -1) return "fl"; return "f"; }
-function balNote(p) { var t = balType(p); if (!t) return ""; var a = []; if (t.indexOf("f") > -1) a.push(BAL_T.f); if (t.indexOf("l") > -1) a.push(BAL_T.l); return '<div class="bnote">' + a.join("<br>") + '</div>'; }
+function balNote(p) { var t = balType(p); if (!t) return ""; var a = []; if (t.indexOf("f") > -1) a.push(BAL_T.f); if (t.indexOf("l") > -1) a.push(BAL_T.l); return a.map(function (x) { return '<div class="bnote">' + x + '</div>'; }).join(""); }
 function bLatex(p) { return hasC(p, "balloons") && LATEX.indexOf(p.slug) > -1; }
 function match(p, k) {
   if (!k || k === "all") return true;
   if (k === "flowers") return isFlower(p);
   if (k === "roses") return hasC(p, "r25") || hasC(p, "r51") || hasC(p, "r101");
   if (k === "b-combo") return bCombo(p);
+  if (k === "baskets") return isFlower(p) && toks(p).some(function (t) { return /^(korzina|korzine|korzinoy)$/.test(t); });
   if (k === "b-latex") return bLatex(p);
   if (k === "b-helium") return hasC(p, "balloons") && LATEX_ONLY.indexOf(p.slug) < 0;
   if (k === "gifts") return hasC(p, "nabory") || hasC(p, "cakes");

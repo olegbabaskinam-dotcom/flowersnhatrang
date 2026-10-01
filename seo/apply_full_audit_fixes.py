@@ -366,15 +366,8 @@ def normalise_navigation(path: Path, text: str) -> str:
 def remove_unverified_social_proof(text: str) -> str:
     text = re.sub(r'\s*"aggregateRating"\s*:\s*\{[^{}]*\},\s*', "\n      ", text)
     text = re.sub(r',\s*"aggregateRating"\s*:\s*\{[^{}]*\}', "", text)
+    # 01.10.2026: цифры «157 отзывов на Google», «2000+ букетов» и т.п. подтверждены Олегом — не стираем
     replacements = {
-        ">1000+</div>": ">💐</div>",
-        ">букетов доставлено</div>": ">свежие букеты</div>",
-        ">bouquets delivered</div>": ">fresh bouquets</div>",
-        ">배달 완료</div>": ">신선한 꽃다발</div>",
-        ">5.0</span>": ">Google</span>",
-        ">148 отзывов на Google</div>": ">отзывы на Google</div>",
-        ">148 Google reviews</div>": ">reviews on Google</div>",
-        ">구글 148 Google 리뷰</div>": ">Google 리뷰</div>",
     }
     for old, new in replacements.items():
         text = text.replace(old, new)

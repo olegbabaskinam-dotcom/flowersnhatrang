@@ -68,6 +68,12 @@ SPECIAL = {
     "prazdnik.html": {"ru":"prazdnik.html","en":"prazdnik-en.html","ko":"prazdnik-kr.html"},
     "prazdnik-en.html": {"ru":"prazdnik.html","en":"prazdnik-en.html","ko":"prazdnik-kr.html"},
     "prazdnik-kr.html": {"ru":"prazdnik.html","en":"prazdnik-en.html","ko":"prazdnik-kr.html"},
+    "cvety.html": {"ru":"cvety.html","en":"cvety-en.html","ko":"cvety-kr.html"},
+    "cvety-en.html": {"ru":"cvety.html","en":"cvety-en.html","ko":"cvety-kr.html"},
+    "cvety-kr.html": {"ru":"cvety.html","en":"cvety-en.html","ko":"cvety-kr.html"},
+    "podarki.html": {"ru":"podarki.html","en":"podarki-en.html","ko":"podarki-kr.html"},
+    "podarki-en.html": {"ru":"podarki.html","en":"podarki-en.html","ko":"podarki-kr.html"},
+    "podarki-kr.html": {"ru":"podarki.html","en":"podarki-en.html","ko":"podarki-kr.html"},
 }
 def sibling(f, want):
     """Ожидаемый файл-сосед на другом языке."""

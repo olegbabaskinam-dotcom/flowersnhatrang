@@ -146,11 +146,23 @@ PAGES = {
           sec={"decor":"파티 데코 세트"})),
 }
 
+# цифра в блоке доверия (01.10.2026, данные Олега)
+TRUST = {
+ "cvety":    {"n": "2000+", "ru": "букетов доставлено", "en": "bouquets delivered", "ko": "꽃다발 배달 완료"},
+ "balloons": {"n": "300+",  "ru": "наборов доставлено", "en": "balloon sets delivered", "ko": "풍선 세트 배달 완료"},
+ "podarki":  {"n": "300+",  "ru": "наборов и тортов доставлено", "en": "gift sets &amp; cakes delivered", "ko": "선물 세트·케이크 배달 완료"},
+ "prazdnik": {"n": "25+",   "ru": "оформлений праздников", "en": "parties decorated", "ko": "파티 데코 완료"},
+}
+TRUST_RX = re.compile(r'(<div class="text-2xl md:text-3xl font-bold" style="color:#1a1a1a;">)[^<]*(</div>\s*<div class="text-stone-400 text-xs font-medium mt-1">)[^<]*(</div>)')
+
 def fname(key, lang): return PAGES[key]["base"] + SUF[lang]
 
-BAL_INFO = {"ru": "🎈 Фольгированные шары летают в среднем 7 дней, резиновые — в среднем 12 часов.",
-            "en": "🎈 Foil balloons float for about 7 days on average, latex ones for about 12 hours.",
-            "ko": "🎈 호일 풍선은 평균 약 7일, 라텍스 풍선은 평균 약 12시간 떠 있습니다."}
+BAL_INFO = {
+ "ru": [("🎈 Фольгированные шары", "летают в среднем 7 дней"), ("🎈 Резиновые шары", "летают в среднем 12 часов")],
+ "en": [("🎈 Foil balloons", "float for about 7 days on average"), ("🎈 Latex balloons", "float for about 12 hours on average")],
+ "ko": [("🎈 호일 풍선", "평균 약 7일 동안 떠 있습니다"), ("🎈 라텍스 풍선", "평균 약 12시간 동안 떠 있습니다")],
+}
+BAL_SEC = {"b-helium": 0, "b-latex": 1}
 
 def section_html(key, lang, cards):
     P = PAGES[key]; T = P[lang]; Lg = L[lang]
@@ -167,7 +179,7 @@ def section_html(key, lang, cards):
     h.append('    <section id="catalog" class="py-16 px-4 max-w-5xl mx-auto flex-grow">\n')
     h.append(f'        <h2 class="reveal font-serif text-3xl md:text-4xl font-bold text-center mb-6" style="color:#1a1a1a;">{html.escape(T["h2"])}</h2>\n')
     if key == "balloons":
-        h.append('        <p class="lnd-bal">' + BAL_INFO[lang] + '</p>\n')
+        h.append('        <div class="lnd-bal">' + "".join('<div class="lnd-bal-i"><b>' + a + '</b><span>' + b + '</span></div>' for a, b in BAL_INFO[lang]) + '</div>\n')
     if len(chips) > 1:
         h.append('        <div class="lnd-chips">' + "".join(chips) + '</div>\n')
     for k in P["order"]:
@@ -178,6 +190,9 @@ def section_html(key, lang, cards):
         h.append(f'        <div id="sec-{k}" class="lnd-sec">\n')
         h.append(f'            <h3 class="lnd-h">{html.escape(T["sec"][k])} <span>{Lg["count"](len(lst))}</span></h3>\n')
         note = T.get("note", {}).get(k)
+        if key == "balloons" and k in BAL_SEC:
+            a, b = BAL_INFO[lang][BAL_SEC[k]]
+            h.append('            <p class="lnd-bal-s">' + a + ' — ' + b + '</p>\n')
         if note: h.append(f'            <p class="lnd-note">{html.escape(note)}</p>\n')
         h.append(GRID_A)
         for c in lst: h.append("            " + c["html"] + "\n")
@@ -193,7 +208,11 @@ CSS = """<style id="lnd-css">
 .lnd-sec{scroll-margin-top:90px;margin:0 0 3.5rem}
 .lnd-h{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:1.9rem;font-weight:600;color:#1a1a1a;text-align:center;margin:0 0 .4rem;line-height:1.2}
 .lnd-h span{display:block;font-family:inherit;font-style:normal;font-size:.8rem;font-weight:500;color:#a8a29e;letter-spacing:.08em;text-transform:uppercase;margin-top:.25rem}
-.lnd-bal{max-width:36rem;margin:-.5rem auto 1.75rem;text-align:center;background:#eef6fb;border:1px solid #cfe3ef;color:#2f5d78;border-radius:14px;padding:.7rem 1rem;font-size:.9rem;font-weight:600;line-height:1.45}
+.lnd-bal{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;max-width:44rem;margin:-.25rem auto 2rem}
+.lnd-bal-i{flex:1 1 15rem;background:#eef6fb;border:1.5px solid #9cc7df;border-radius:16px;padding:1rem 1.1rem;text-align:center;color:#1f4a63}
+.lnd-bal-i b{display:block;font-size:1.05rem;font-weight:700;margin-bottom:.2rem}
+.lnd-bal-i span{display:block;font-size:1.25rem;font-weight:800;color:#0f3c57}
+.lnd-bal-s{text-align:center;margin:0 auto 1rem;display:table;background:#eef6fb;border:1px solid #9cc7df;color:#0f3c57;border-radius:999px;padding:.4rem 1rem;font-size:.9rem;font-weight:700}
 .lnd-note{text-align:center;color:#a8566a;font-size:.85rem;margin:0 0 1.25rem}
 .lnd-sec .grid{margin-top:1.25rem}
 .lnd-all{display:inline-flex;align-items:center;gap:.4rem;background:#c0687a;color:#fff;border-radius:999px;padding:.8rem 1.6rem;font-weight:600;font-size:.95rem;text-decoration:none;box-shadow:0 6px 18px rgba(192,104,122,.25)}
@@ -265,6 +284,8 @@ def build(key, lang):
     # доставка
     for o in Lg["deliv_old"]: s = s.replace(o, Lg["deliv_new"])
     s = CD_RX.sub(lambda m: countdown_js(lang), s, 1)
+    tr = TRUST[key]
+    s = TRUST_RX.sub(lambda m: m.group(1) + tr["n"] + m.group(2) + tr[lang] + m.group(3), s, 1)
     # css
     s = re.sub(r'<style id="lnd-css">.*?</style>\n', '', s, flags=re.S)
     s = s.replace("</head>", CSS + "</head>", 1)

@@ -161,7 +161,7 @@ UI = {
            "dl_cam": "Южные пригороды +300 000 ₫; Bãi Dài/северная Камрань +600 000 ₫; аэропорт и южнее вне зоны",
            "dl_pay": "Оплата: донги, рубли, доллары, USDT, наличные",
            "st1": "букетов доставлено", "st2": "отзывов на Google", "st3": "оплата при получении",
-           "rev_h": "отзывы на Google", "rev_cta": "читать отзывы на Google Maps",
+           "rev_h": "отзывов на Google", "rev_cta": "читать 157 отзывов на Google Maps",
            "art_read": "читать", "art_back": "← все статьи", "art_rel_h": "Подходящие букеты",
            "art_cta_h": "Закажите доставку букета в Нячанге",
            "art_cta_sub": "Свежие букеты с онлайн-доставкой со следующего дня в отель или на виллу.",
@@ -176,7 +176,7 @@ UI = {
            "dl_cam": "Southern suburbs +300,000 VND; Bãi Dài/northern Cam Ranh +600,000 VND; airport and locations south of it excluded",
            "dl_pay": "Payment: VND, USD, RUB, USDT, cash",
            "st1": "bouquets delivered", "st2": "Google reviews", "st3": "pay on delivery",
-           "rev_h": "Google reviews", "rev_cta": "read reviews on Google Maps",
+           "rev_h": "Google reviews", "rev_cta": "read 157 reviews on Google Maps",
            "art_read": "read", "art_back": "← all articles", "art_rel_h": "Bouquets you may like",
            "art_cta_h": "Order flower delivery in Nha Trang",
            "art_cta_sub": "Fresh bouquets with online delivery from the next day to your hotel or villa.",
@@ -191,7 +191,7 @@ UI = {
            "dl_cam": "남부 교외 +300,000동; Bãi Dài/북부 깜라인 +600,000동; 공항과 남쪽은 배달 제외",
            "dl_pay": "결제: 수령 시 현금 또는 암호화폐 송금",
            "st1": "꽃다발 배달 완료", "st2": "Google 리뷰", "st3": "수령 시 결제",
-           "rev_h": "Google 리뷰", "rev_cta": "Google 지도에서 리뷰 보기",
+           "rev_h": "Google 리뷰", "rev_cta": "Google 지도에서 리뷰 157개 보기",
            "art_read": "읽기", "art_back": "← 모든 글", "art_rel_h": "어울리는 꽃다발",
            "art_cta_h": "나트랑 꽃 배달 주문하기",
            "art_cta_sub": "신선한 꽃다발을 주문 다음 날부터 호텔·빌라로 배달해 드립니다.",
@@ -310,7 +310,7 @@ CARD_JS = """<script>/*MARK-CARD-JS*/
   function isCombo(c){return cats(c).filter(function(x){return x!=='nabory'&&x!=='prazdnik';}).length>1;}
   // «Чистая» позиция для выбранной категории = в ней есть эта категория и это НЕ комбо-набор.
   function isPure(c,sel){return !!sel&&match(c,sel)&&!isCombo(c);}
-  var PARENT={mixed:'flowers',roses:'flowers',r25:'roses',r51:'roses',r101:'roses','b-helium':'balloons','b-latex':'balloons','b-combo':'balloons',nabory:'gifts',cakes:'gifts'};
+  var PARENT={baskets:'flowers',mixed:'flowers',roses:'flowers',r25:'roses',r51:'roses',r101:'roses','b-helium':'balloons','b-latex':'balloons','b-combo':'balloons',nabory:'gifts',cakes:'gifts'};
   function has(c,x){return cats(c).indexOf(x)>-1;}
   function toks(c){var a=c.querySelector('a[href*="catalog/"]');var s=a?a.getAttribute('href').replace(/^.*catalog\//,'').replace(/-(ru|en|ko)\.html$/,''):'';return s.split('-');}
   function flowerSlug(c){return toks(c).some(function(t){return /^(roz|roza|rozy|buket|korzina|korzine|liliy|eustom|eustomy)$/.test(t);});}
@@ -323,6 +323,7 @@ CARD_JS = """<script>/*MARK-CARD-JS*/
     if(!k)return true;
     if(k==='flowers')return isFlower(c);
     if(k==='roses')return has(c,'r25')||has(c,'r51')||has(c,'r101');
+    if(k==='baskets')return isFlower(c)&&toks(c).some(function(t){return /^(korzina|korzine|korzinoy)$/.test(t);});
     if(k==='b-combo')return bCombo(c);
     if(k==='b-latex')return bLatex(c);
     if(k==='b-helium')return has(c,'balloons')&&LATEX_ONLY.indexOf(bslug(c))<0;
@@ -1037,19 +1038,19 @@ GMAPS = "https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic"
 REVIEW_IMGS = ["img/site/review-1.webp", "img/site/review-2.webp", "img/site/review-3.webp"]
 
 def trust_bar(lang, base):
-    """Полоса доверия без неподтверждённых счётчиков и рейтинга."""
+    """Полоса доверия. 01.10.2026: цифры подтвердил Олег — 2000+ букетов, 157 отзывов на Google."""
     u = UI[lang]
     return f'''
     <section class="reveal py-8 px-4 border-b border-stone-100">
         <div class="max-w-4xl mx-auto">
             <div class="grid grid-cols-3 divide-x divide-stone-100">
                 <div class="flex flex-col items-center px-4 py-2 text-center">
-                    <div class="text-2xl md:text-3xl font-bold" style="color:#1a1a1a;">💐</div>
-                    <div class="text-stone-400 text-xs font-medium mt-1">{u["st1"]}</div>
+                    <div class="text-2xl md:text-3xl font-bold" style="color:#1a1a1a;">2000+</div>
+                    <div class="text-stone-400 text-xs font-medium mt-1">{ {"ru":"букетов доставлено","en":"bouquets delivered","ko":"꽃다발 배달 완료"}[lang] }</div>
                 </div>
                 <div class="flex flex-col items-center px-4 py-2 text-center">
                     <div class="flex items-center justify-center gap-1">
-                        <span style="color:#f5b301;">{IC_STAR}</span>
+                        <span class="text-2xl md:text-3xl font-bold" style="color:#1a1a1a;">157</span><span style="color:#f5b301;">{IC_STAR}</span>
                     </div>
                     <div class="text-stone-400 text-xs font-medium mt-1">{u["rev_h"]}</div>
                 </div>
@@ -1076,17 +1077,17 @@ def reviews_block(lang, base=""):
 # Дерево категорий каталога (30.09.2026): Цветы/Шары/Подарки/Оформление с раскрытием подкатегорий
 TREE={
  'ru':[('l1',None,[('','🌸 Все'),('flowers','💐 Цветы'),('balloons','🎈 Шары'),('gifts','🎁 Подарки'),('decor','🎉 Оформление праздников')]),
-       ('sub','flowers',[('flowers','Все цветы'),('mixed','💐 Сборные'),('roses','🌹 Розы')]),
+       ('sub','flowers',[('flowers','Все цветы'),('mixed','💐 Сборные'),('baskets','🧺 Корзины'),('roses','🌹 Розы')]),
        ('sub','roses',[('roses','Все розы'),('r25','25 роз'),('r51','51 роза'),('r101','101+ роз')]),
        ('sub','balloons',[('balloons','Все шары'),('b-helium','🎈 Фольгированные'),('b-latex','🎈 Резиновые'),('b-combo','💐 С цветами и тортом')]),
        ('sub','gifts',[('gifts','Все подарки'),('nabory','🎁 Подарочные наборы'),('cakes','🎂 Торты')])],
  'en':[('l1',None,[('','🌸 All'),('flowers','💐 Flowers'),('balloons','🎈 Balloons'),('gifts','🎁 Gifts'),('decor','🎉 Party decor')]),
-       ('sub','flowers',[('flowers','All flowers'),('mixed','💐 Mixed'),('roses','🌹 Roses')]),
+       ('sub','flowers',[('flowers','All flowers'),('mixed','💐 Mixed'),('baskets','🧺 Baskets'),('roses','🌹 Roses')]),
        ('sub','roses',[('roses','All roses'),('r25','25 roses'),('r51','51 roses'),('r101','101+ roses')]),
        ('sub','balloons',[('balloons','All balloons'),('b-helium','🎈 Foil'),('b-latex','🎈 Latex'),('b-combo','💐 With flowers & cake')]),
        ('sub','gifts',[('gifts','All gifts'),('nabory','🎁 Gift sets'),('cakes','🎂 Cakes')])],
  'ko':[('l1',None,[('','🌸 전체'),('flowers','💐 꽃'),('balloons','🎈 풍선'),('gifts','🎁 선물'),('decor','🎉 파티 데코')]),
-       ('sub','flowers',[('flowers','꽃 전체'),('mixed','💐 혼합'),('roses','🌹 장미')]),
+       ('sub','flowers',[('flowers','꽃 전체'),('mixed','💐 혼합'),('baskets','🧺 꽃바구니'),('roses','🌹 장미')]),
        ('sub','roses',[('roses','장미 전체'),('r25','장미 25'),('r51','장미 51'),('r101','장미 101+')]),
        ('sub','balloons',[('balloons','풍선 전체'),('b-helium','🎈 호일'),('b-latex','🎈 라텍스'),('b-combo','💐 꽃·케이크 콤보')]),
        ('sub','gifts',[('gifts','선물 전체'),('nabory','🎁 선물 세트'),('cakes','🎂 케이크')])],

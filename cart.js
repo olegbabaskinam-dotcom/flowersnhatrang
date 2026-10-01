@@ -226,7 +226,9 @@
 (function () {
   var LATEX = ["nabor-sharov-s-2-cifry-10-sharov", "101-belaya-roza-korzina-shary-serdca", "101-belaya-roza-rozovaya-upakovka-cifry-25-sharov", "35-serebristo-chernyh-gelievyh-sharov-pod-potolok", "101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov", "yarkaya-sbornaya-korzina-15-rozovyh-sharov", "27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka"];
   var LATEX_ONLY = ["35-serebristo-chernyh-gelievyh-sharov-pod-potolok", "27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka"];
-  var T = {"ru": {"f": "🎈 Фольгированные шары летают в среднем 7 дней", "l": "🎈 Резиновые шары летают в среднем 12 часов"}, "en": {"f": "🎈 Foil balloons float for about 7 days on average", "l": "🎈 Latex balloons float for about 12 hours on average"}, "ko": {"f": "🎈 호일 풍선은 평균 약 7일 동안 떠 있습니다", "l": "🎈 라텍스 풍선은 평균 약 12시간 동안 떠 있습니다"}};
+  var T = {"ru": {"f": ["Фольгированные шары", "летают в среднем 7 дней"], "l": ["Резиновые шары", "летают в среднем 12 часов"]},
+           "en": {"f": ["Foil balloons", "float about 7 days on average"], "l": ["Latex balloons", "float about 12 hours on average"]},
+           "ko": {"f": ["호일 풍선", "평균 약 7일 동안 떠 있습니다"], "l": ["라텍스 풍선", "평균 약 12시간 동안 떠 있습니다"]}};
   var cats = null, waiters = [];
   function lang() {
     var w = window.FLW_LANG; if (w === "en" || w === "ko") return w;
@@ -246,11 +248,14 @@
     return "f";
   }
   function lines(t) { var x = T[lang()], a = []; if (t.indexOf("f") > -1) a.push(x.f); if (t.indexOf("l") > -1) a.push(x.l); return a; }
+  function txt(p) { return "🎈 " + p[0] + " — " + p[1]; }
   function note(t, big) {
     if (!t) return "";
-    return '<div class="flw-bnote" style="display:block;margin:' + (big ? "10px 0 12px" : "6px 0 0") + ';padding:' + (big ? "10px 12px" : "6px 9px") +
-      ';border-radius:10px;background:#eef6fb;border:1px solid #cfe3ef;color:#2f5d78;font:600 ' + (big ? "13px" : "11.5px") + '/1.4 system-ui,-apple-system,sans-serif">' +
-      lines(t).join("<br>") + "</div>";
+    return '<div class="flw-bnote" style="display:flex;flex-direction:column;gap:4px;margin:' + (big ? "10px 0 12px" : "6px 0 0") + '">' +
+      lines(t).map(function (p) {
+        return '<div style="padding:' + (big ? "9px 12px" : "5px 9px") + ';border-radius:10px;background:#eef6fb;border:1.5px solid #9cc7df;color:#0f3c57;font:' +
+          (big ? "14px" : "12px") + '/1.35 system-ui,-apple-system,sans-serif">🎈 <b>' + p[0] + '</b> — <b>' + p[1] + '</b></div>';
+      }).join("") + "</div>";
   }
   function ready(cb) { if (cats) cb(); else waiters.push(cb); }
   window.FLW_BAL = { type: type, note: note, lines: lines, ready: ready };

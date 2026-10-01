@@ -280,9 +280,9 @@ GLOGO = ('<svg viewBox="0 0 48 48" width="18" height="18" style="flex:0 0 auto" 
  '<path fill="#EA4335" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.8-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>')
 
 L = {
- "ru":{"title":"Отзывы на Google","sub":"Настоящие отзывы наших клиентов","btn":"Смотреть все отзывы на Google","prev":"Предыдущий","next":"Следующий","of":"Отзывы на Google"},
- "en":{"title":"Google reviews","sub":"Real reviews from our customers","btn":"See all reviews on Google","prev":"Previous","next":"Next","of":"Reviews on Google"},
- "ko":{"title":"구글 리뷰","sub":"실제 고객들의 후기","btn":"구글에서 모든 리뷰 보기","prev":"이전","next":"다음","of":"Google 리뷰"},
+ "ru":{"title":"Отзывы на Google","sub":"Настоящие отзывы наших клиентов","btn":"Смотреть все 157 отзывов на Google","prev":"Предыдущий","next":"Следующий","of":"157 отзывов на Google"},
+ "en":{"title":"Google reviews","sub":"Real reviews from our customers","btn":"See all 157 reviews on Google","prev":"Previous","next":"Next","of":"157 reviews on Google"},
+ "ko":{"title":"구글 리뷰","sub":"실제 고객들의 후기","btn":"구글에서 리뷰 157개 모두 보기","prev":"이전","next":"다음","of":"Google 리뷰 157개"},
 }
 
 def card(r, lang, base=""):
