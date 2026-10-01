@@ -298,3 +298,10 @@
 - 46 живых фото `img/blog/gde-poest-moreprodukty-nyachang-kafe-xo/01–46.webp` (логотипы 789BET и чужие лица размыты), обложка `img/blog/gde-poest-moreprodukty-nyachang-kafe-xo.webp` 1200×760. Лайтбокс по клику.
 - Новый блок «✍️ Авторские статьи» над сеткой в `blog-ru/en/ko.html` (статья только там, не в общей сетке). Счётчик просмотров — воркер `views` (`cloudflare_worker_views.js`, D1), деплой вручную.
 - sitemap +3 (774), registry id420.
+
+## 2026-10-01 — id193–id195
+- id193 «51 розовая роза в белой упаковке + торт с клубникой + свечи» — 1 500 000 ₫ · ≈ $60 · 5 600 ₽, 9 фото, `r51 cakes`, pink (оверрайд в build_site.py и build_products_json.py). Исходники `img/_src/ТОВАРЫ/id193-…`.
+- id194 «Мужской подарочный набор» (`podarochnyy-nabor-muzhskoy`) — 1 000 000 ₫ · ≈ $40 · 3 800 ₽, 9 фото, `nabory`. Исходники `img/_src/ПОДАРОЧНЫЕ НАБОРЫ/id5-muzhskoy-nabor`.
+- id195 «Женский подарочный набор» (`podarochnyy-nabor-zhenskiy`) — 1 000 000 ₫ · ≈ $40 · 3 800 ₽, 7 фото, `nabory`. Исходники `img/_src/ПОДАРОЧНЫЕ НАБОРЫ/id6-zhenskiy-nabor`.
+- Страницы RU/EN/KO (gen_one_product), карточки первыми в catalog-{ru,en,ko}, nabory×3 (194/195), torty×3 (193); featured.js 174; products.json 174 (nabory 6); TG 1.jpg ×3; sitemap +9 = 804 URL; width/height проставлены точечно. audit_links ❌0 ⚠️2, check_site ❌0 ⚠️13.
+- TG-бот: карточка товара на весь экран (большие фото, свайп, миниатюры, описание, кнопка в корзину) — tg/app.js `openProduct`, стили `.pv*` в tg/index.html.

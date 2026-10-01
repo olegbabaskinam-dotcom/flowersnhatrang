@@ -1,6 +1,6 @@
 {
- "generated": "2026-09-30 08:36",
- "count": 171,
+ "generated": "2026-10-01 03:40",
+ "count": 174,
  "categories": [
   {
    "key": "all",
@@ -3998,6 +3998,80 @@
     "img/products/tort-klubnichnyy-slivochnyy-happy-birthday/6.webp",
     "img/products/tort-klubnichnyy-slivochnyy-happy-birthday/7.webp",
     "img/products/tort-klubnichnyy-slivochnyy-happy-birthday/8.webp"
+   ]
+  },
+  {
+   "id": 193,
+   "slug": "51-rozovaya-roza-belaya-upakovka-tort-klubnika-svechi",
+   "name": "51 розовая роза в белой упаковке + торт с клубникой + свечи",
+   "desc": "Букет из 51 розовой розы в белой упаковке с розовой лентой и торт в коробке: сливочный крем, шоколадная посыпка, свежая клубника и золотой топпер Happy Birthday. В комплекте свечи и набор для сервировки торта. Онлайн-доставка по Нячангу со следующего дня, вложим открытку по желанию",
+   "alt": "51 розовая роза в белой упаковке + торт с клубникой + свечи Нячанг доставка",
+   "price_vnd": 1500000,
+   "price": "1 500 000 донгов",
+   "price_sub": "≈ $60 · 5 600 ₽",
+   "cats": [
+    "r51",
+    "cakes"
+   ],
+   "color": "pink",
+   "images": [
+    "img/products/51-rozovaya-roza-belaya-upakovka-tort-klubnika-svechi/1.webp",
+    "img/products/51-rozovaya-roza-belaya-upakovka-tort-klubnika-svechi/2.webp",
+    "img/products/51-rozovaya-roza-belaya-upakovka-tort-klubnika-svechi/3.webp",
+    "img/products/51-rozovaya-roza-belaya-upakovka-tort-klubnika-svechi/4.webp",
+    "img/products/51-rozovaya-roza-belaya-upakovka-tort-klubnika-svechi/5.webp",
+    "img/products/51-rozovaya-roza-belaya-upakovka-tort-klubnika-svechi/6.webp",
+    "img/products/51-rozovaya-roza-belaya-upakovka-tort-klubnika-svechi/7.webp",
+    "img/products/51-rozovaya-roza-belaya-upakovka-tort-klubnika-svechi/8.webp",
+    "img/products/51-rozovaya-roza-belaya-upakovka-tort-klubnika-svechi/9.webp"
+   ]
+  },
+  {
+   "id": 194,
+   "slug": "podarochnyy-nabor-muzhskoy",
+   "name": "Мужской подарочный набор",
+   "desc": "подарочный набор для мужчины в синей коробке-сердце и пакете «Season of Joy» — 8 предметов: натуральное мыло в форме манго, кокосовое масло CoCo Fresh Premium, шампунь против перхоти Romano Classic, роликовый антиперспирант Nivea Men Dry Impact, травяная зубная паста с бамбуковым углём, гель-маска от чёрных точек Lukmask, магнит с флагом Вьетнама и брелок-оберег с монетами фэн-шуй. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Мужской подарочный набор Нячанг доставка",
+   "price_vnd": 1000000,
+   "price": "1 000 000 донгов",
+   "price_sub": "≈ $40 · 3 800 ₽",
+   "cats": [
+    "nabory"
+   ],
+   "color": "",
+   "images": [
+    "img/products/podarochnyy-nabor-muzhskoy/1.webp",
+    "img/products/podarochnyy-nabor-muzhskoy/2.webp",
+    "img/products/podarochnyy-nabor-muzhskoy/3.webp",
+    "img/products/podarochnyy-nabor-muzhskoy/4.webp",
+    "img/products/podarochnyy-nabor-muzhskoy/5.webp",
+    "img/products/podarochnyy-nabor-muzhskoy/6.webp",
+    "img/products/podarochnyy-nabor-muzhskoy/7.webp",
+    "img/products/podarochnyy-nabor-muzhskoy/8.webp",
+    "img/products/podarochnyy-nabor-muzhskoy/9.webp"
+   ]
+  },
+  {
+   "id": 195,
+   "slug": "podarochnyy-nabor-zhenskiy",
+   "name": "Женский подарочный набор",
+   "desc": "подарочный набор для женщины в розовой коробке с бантом и пакете «Thank you» — 12 предметов: напиток из ласточкиного гнезда Red Nest, ароматическое мыло в форме цветка франжипани, мыло на рисовом молоке Jam, травяная кокосовая зубная паста Green Herb, роликовый масляный бальзам с лавандой, бальзам для губ с кокосовым маслом и пчелиным воском, гель с алоэ вера Farm Stay, глиняная маска Vedette с жемчугом, гель-маска от чёрных точек Lukmask, цветок франжипани, брелок с фигуркой Будды и сувенирные фигурки пары в вьетнамских национальных костюмах. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Женский подарочный набор Нячанг доставка",
+   "price_vnd": 1000000,
+   "price": "1 000 000 донгов",
+   "price_sub": "≈ $40 · 3 800 ₽",
+   "cats": [
+    "nabory"
+   ],
+   "color": "",
+   "images": [
+    "img/products/podarochnyy-nabor-zhenskiy/1.webp",
+    "img/products/podarochnyy-nabor-zhenskiy/2.webp",
+    "img/products/podarochnyy-nabor-zhenskiy/3.webp",
+    "img/products/podarochnyy-nabor-zhenskiy/4.webp",
+    "img/products/podarochnyy-nabor-zhenskiy/5.webp",
+    "img/products/podarochnyy-nabor-zhenskiy/6.webp",
+    "img/products/podarochnyy-nabor-zhenskiy/7.webp"
    ]
   }
  ]

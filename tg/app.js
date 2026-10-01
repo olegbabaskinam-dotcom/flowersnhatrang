@@ -171,7 +171,7 @@ function renderGrid() {
     var nav = imgs.length > 1
       ? '<div class="nav"><button data-d="-1">‹</button><button data-d="1">›</button></div>' : "";
     card.innerHTML =
-      '<div class="ph"><img src="' + imgs[0] + '" alt="" loading="lazy">' + nav + dots + '</div>' +
+      '<div class="ph"><img src="' + imgs[0] + '" alt="" loading="lazy"><button class="zoom" aria-label="Открыть">⤢</button>' + nav + dots + '</div>' +
       '<div class="bd">' +
         '<h3>' + esc(p.name) + '</h3>' + comboBadge(p) +
         '<div class="pr">' + money(p.price_vnd) + '</div>' +
@@ -189,9 +189,58 @@ function renderGrid() {
         dotEls.forEach(function (d, i) { d.className = i === idx ? "on" : ""; });
       };
     });
+    // 🔍 открыть товар: тап по фото или названию
+    card.querySelector(".ph img").onclick = function () { openProduct(p, idx); };
+    card.querySelector(".ph .zoom").onclick = function (e) { e.stopPropagation(); openProduct(p, idx); };
+    card.querySelector("h3").onclick = function () { openProduct(p, idx); };
     renderAct(card.querySelector(".act"), p);
     grid.appendChild(card);
   });
+}
+/* ---- карточка товара: большие фото + описание ---- */
+function openProduct(p, start) {
+  var imgs = p.images.map(function (im) { return "/" + im; });
+  var i = start || 0;
+  var o = document.createElement("div");
+  o.className = "pv";
+  o.innerHTML =
+    '<div class="pv-top"><span class="pv-cnt"></span><button class="pv-x" aria-label="Закрыть">✕</button></div>' +
+    '<div class="pv-ph"><div class="pv-track">' + imgs.map(function (s) { return '<div class="pv-sl"><img src="' + s + '" alt=""></div>'; }).join("") + '</div>' +
+      (imgs.length > 1 ? '<button class="pv-nav l">‹</button><button class="pv-nav r">›</button>' : '') + '</div>' +
+    '<div class="pv-th">' + (imgs.length > 1 ? imgs.map(function (s, k) { return '<img src="' + s + '" data-k="' + k + '" alt="">'; }).join("") : '') + '</div>' +
+    '<div class="pv-bd"><h2>' + esc(p.name) + '</h2>' + comboBadge(p) +
+      '<div class="pv-pr">' + money(p.price_vnd) + ' <span>' + esc(p.price_sub) + '</span></div>' +
+      '<div class="pv-act act"></div>' +
+      (p.desc ? '<p class="pv-ds">' + esc(p.desc) + '</p>' : '') + '</div>';
+  document.body.appendChild(o);
+  document.body.style.overflow = "hidden";
+  var tr = o.querySelector(".pv-track"), cnt = o.querySelector(".pv-cnt"), th = o.querySelectorAll(".pv-th img");
+  function go(n, anim) {
+    i = (n + imgs.length) % imgs.length;
+    tr.style.transition = anim === false ? "none" : "transform .25s ease";
+    tr.style.transform = "translateX(" + (-100 * i) + "%)";
+    cnt.textContent = imgs.length > 1 ? (i + 1) + " / " + imgs.length : "";
+    th.forEach(function (t, k) { t.className = k === i ? "on" : ""; });
+    if (th[i]) th[i].scrollIntoView({ block: "nearest", inline: "center" });
+  }
+  go(i, false);
+  var l = o.querySelector(".pv-nav.l"), r = o.querySelector(".pv-nav.r");
+  if (l) l.onclick = function () { go(i - 1); };
+  if (r) r.onclick = function () { go(i + 1); };
+  th.forEach(function (t) { t.onclick = function () { go(+t.dataset.k); }; });
+  // свайп
+  var x0 = null, dx = 0, ph = o.querySelector(".pv-ph");
+  ph.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; dx = 0; tr.style.transition = "none"; }, { passive: true });
+  ph.addEventListener("touchmove", function (e) { if (x0 === null) return; dx = e.touches[0].clientX - x0; tr.style.transform = "translateX(calc(" + (-100 * i) + "% + " + dx + "px))"; }, { passive: true });
+  ph.addEventListener("touchend", function () { if (x0 === null) return; var w = ph.clientWidth; if (dx < -w * 0.15) go(i + 1); else if (dx > w * 0.15) go(i - 1); else go(i); x0 = null; });
+  function close() {
+    o.remove(); document.body.style.overflow = "";
+    try { if (TG && TG.BackButton) { TG.BackButton.offClick(close); TG.BackButton.hide(); } } catch (_) {}
+    renderGrid();
+  }
+  o.querySelector(".pv-x").onclick = close;
+  try { if (TG && TG.BackButton) { TG.BackButton.onClick(close); TG.BackButton.show(); } } catch (_) {}
+  renderAct(o.querySelector(".pv-act"), p);
 }
 function renderAct(box, p) {
   var q = cartQty(p.id);
