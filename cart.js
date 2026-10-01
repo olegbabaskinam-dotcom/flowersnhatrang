@@ -176,6 +176,8 @@
     }
     var mm = document.getElementById("mnav");
     if (mm && !mm.querySelector(".flw-mnav")) {
+      // в статичном мобильном меню уже есть «🛒 Корзина» внизу — убираем её, чтобы не было двух корзин
+      mm.querySelectorAll('a[href$="cart.html"], a[href*="cart.html?"]').forEach(function (x) { if (!x.classList.contains("flw-mnav")) x.remove(); });
       var st = "display:block;padding:10px 8px;border-radius:8px;text-decoration:none;color:#57534e";
       var lq2 = pageLang()!=="ru" ? ("?lang="+pageLang()) : "";
       mm.insertAdjacentHTML("afterbegin",
@@ -213,4 +215,70 @@
     injectButtons(); injectProductPage(); injectNav(); injectSpecialSchedule(); fab();
     var n = 0, iv = setInterval(function () { injectButtons(); if (++n > 10) clearInterval(iv); }, 400);
   });
+})();
+
+/* ============================================================
+   🎈 СКОЛЬКО ЛЕТАЮТ ШАРЫ (01.10.2026, требование Олега — честно предупреждаем):
+   фольгированные — в среднем 7 дней, резиновые (латекс) — в среднем 12 часов.
+   Пометка на карточках с шарами, на странице товара и в корзине (window.FLW_BAL).
+   LATEX / LATEX_ONLY — тот же список, что в catalog-*.html, build_site.py, tg/app.js, build_category_landings.py.
+   ============================================================ */
+(function () {
+  var LATEX = ["nabor-sharov-s-2-cifry-10-sharov", "101-belaya-roza-korzina-shary-serdca", "101-belaya-roza-rozovaya-upakovka-cifry-25-sharov", "35-serebristo-chernyh-gelievyh-sharov-pod-potolok", "101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov", "yarkaya-sbornaya-korzina-15-rozovyh-sharov", "27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka"];
+  var LATEX_ONLY = ["35-serebristo-chernyh-gelievyh-sharov-pod-potolok", "27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka"];
+  var T = {"ru": {"f": "🎈 Фольгированные шары летают в среднем 7 дней", "l": "🎈 Резиновые шары летают в среднем 12 часов"}, "en": {"f": "🎈 Foil balloons float for about 7 days on average", "l": "🎈 Latex balloons float for about 12 hours on average"}, "ko": {"f": "🎈 호일 풍선은 평균 약 7일 동안 떠 있습니다", "l": "🎈 라텍스 풍선은 평균 약 12시간 동안 떠 있습니다"}};
+  var cats = null, waiters = [];
+  function lang() {
+    var w = window.FLW_LANG; if (w === "en" || w === "ko") return w;
+    var l = (document.documentElement.getAttribute("lang") || "").toLowerCase();
+    if (l.indexOf("en") === 0) return "en";
+    if (l.indexOf("ko") === 0 || l.indexOf("kr") === 0) return "ko";
+    return "ru";
+  }
+  function type(slug, cat) {
+    slug = String(slug || "");
+    if (/^dop-folgirovannyy-shar/.test(slug)) return "f";
+    var c = String(cat || "").split(/\s+/).filter(Boolean);
+    if (c.indexOf("balloons") < 0 && cats && cats[slug]) c = cats[slug];
+    if (c.indexOf("balloons") < 0) return "";
+    if (LATEX_ONLY.indexOf(slug) > -1) return "l";
+    if (LATEX.indexOf(slug) > -1) return "fl";
+    return "f";
+  }
+  function lines(t) { var x = T[lang()], a = []; if (t.indexOf("f") > -1) a.push(x.f); if (t.indexOf("l") > -1) a.push(x.l); return a; }
+  function note(t, big) {
+    if (!t) return "";
+    return '<div class="flw-bnote" style="display:block;margin:' + (big ? "10px 0 12px" : "6px 0 0") + ';padding:' + (big ? "10px 12px" : "6px 9px") +
+      ';border-radius:10px;background:#eef6fb;border:1px solid #cfe3ef;color:#2f5d78;font:600 ' + (big ? "13px" : "11.5px") + '/1.4 system-ui,-apple-system,sans-serif">' +
+      lines(t).join("<br>") + "</div>";
+  }
+  function ready(cb) { if (cats) cb(); else waiters.push(cb); }
+  window.FLW_BAL = { type: type, note: note, lines: lines, ready: ready };
+  function cardsNotes() {
+    document.querySelectorAll(".product-card").forEach(function (card) {
+      if (card.querySelector(".flw-bnote")) return;
+      var a = card.querySelector("a[href*='catalog/']"); if (!a) return;
+      var m = a.getAttribute("href").match(/catalog\/(.+?)-(?:ru|en|ko)\.html/); if (!m) return;
+      var t = type(m[1], card.getAttribute("data-cat")); if (!t) return;
+      var anchor = card.querySelector(".combo-note") || card.querySelector("h3"); if (!anchor) return;
+      anchor.insertAdjacentHTML("afterend", note(t, false));
+    });
+  }
+  function pageNote() {
+    var pb = document.querySelector(".price-box");
+    if (!pb || document.querySelector(".flw-bnote-page")) return;
+    var m = location.pathname.match(/catalog\/(.+?)-(?:ru|en|ko)\.html/); if (!m) return;
+    var t = type(m[1], ""); if (!t) return;
+    pb.insertAdjacentHTML("afterend", note(t, true).replace('class="flw-bnote"', 'class="flw-bnote flw-bnote-page"'));
+  }
+  function load() {
+    fetch("/products.json").then(function (r) { return r.json(); }).then(function (d) {
+      var L = Array.isArray(d) ? d : (d.products || []); cats = {};
+      L.forEach(function (p) { cats[p.slug] = p.cats || []; });
+    }).catch(function () { cats = {}; }).then(function () {
+      pageNote(); var w = waiters; waiters = []; w.forEach(function (f) { try { f(); } catch (e) {} });
+    });
+  }
+  function run() { cardsNotes(); load(); var n = 0, iv = setInterval(function () { cardsNotes(); if (++n > 10) clearInterval(iv); }, 500); }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();
 })();

@@ -68,6 +68,8 @@ HOME = {"ru": "index.html", "en": "index-en.html", "ko": "index-kr.html"}
 # имя файла страницы шаров для каждого языка (ru = balloons.html)
 BALLOONS = {"ru": "balloons.html", "en": "balloons-en.html", "ko": "balloons-kr.html"}
 # отдельная страница тортов (с 05.07.2026) — как шары, свой лендинг
+CAT_LANDING = {"flowers": "cvety", "balloons": "balloons", "gifts": "podarki", "decor": "prazdnik"}
+LANDING_SUF = {"ru": ".html", "en": "-en.html", "ko": "-kr.html"}
 CAT_NAV = {"ru": [("flowers", "💐 Цветы"), ("balloons", "🎈 Шары"), ("gifts", "🎁 Подарки"), ("decor", "🎉 Оформление")],
            "en": [("flowers", "💐 Flowers"), ("balloons", "🎈 Balloons"), ("gifts", "🎁 Gifts"), ("decor", "🎉 Party decor")],
            "ko": [("flowers", "💐 꽃"), ("balloons", "🎈 풍선"), ("gifts", "🎁 선물"), ("decor", "🎉 파티 데코")]}
@@ -314,14 +316,16 @@ CARD_JS = """<script>/*MARK-CARD-JS*/
   function flowerSlug(c){return toks(c).some(function(t){return /^(roz|roza|rozy|buket|korzina|korzine|liliy|eustom|eustomy)$/.test(t);});}
   function isFlower(c){return has(c,'r25')||has(c,'r51')||has(c,'r101')||has(c,'mixed')||(has(c,'balloons')&&flowerSlug(c));}
   function bCombo(c){return has(c,'balloons')&&(isFlower(c)||has(c,'cakes'));}
-  function bLatex(c){return has(c,'balloons')&&!bCombo(c)&&toks(c).some(function(t){return /^(rezinovyh|potolok)$/.test(t);});}
+  var LATEX=['nabor-sharov-s-2-cifry-10-sharov', '101-belaya-roza-korzina-shary-serdca', '101-belaya-roza-rozovaya-upakovka-cifry-25-sharov', '35-serebristo-chernyh-gelievyh-sharov-pod-potolok', '101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov', 'yarkaya-sbornaya-korzina-15-rozovyh-sharov', '27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka'],LATEX_ONLY=['35-serebristo-chernyh-gelievyh-sharov-pod-potolok', '27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka']; // шары с резиновыми (латексными) шарами — проверено по фото 01.10.2026
+  function bslug(c){return toks(c).join('-');}
+  function bLatex(c){return has(c,'balloons')&&LATEX.indexOf(bslug(c))>-1;}
   function match(c,k){
     if(!k)return true;
     if(k==='flowers')return isFlower(c);
     if(k==='roses')return has(c,'r25')||has(c,'r51')||has(c,'r101');
     if(k==='b-combo')return bCombo(c);
     if(k==='b-latex')return bLatex(c);
-    if(k==='b-helium')return has(c,'balloons')&&!bCombo(c)&&!bLatex(c);
+    if(k==='b-helium')return has(c,'balloons')&&LATEX_ONLY.indexOf(bslug(c))<0;
     if(k==='gifts')return has(c,'nabory')||has(c,'cakes');
     if(k==='decor')return has(c,'prazdnik');
     return has(c,k);
@@ -527,7 +531,7 @@ def header(lang, base, lang_urls=None):
         f'<a href="{base}{HOME[lang]}" {_mnav}>🏠 {t["nav_home"]}</a>'
         f'<a href="{base}catalog-{lang}.html" {_mnav}>💐 {t["nav_catalog"]}</a>'
         f'<a href="{base}blog-{lang}.html" {_mnav}>📖 {t["nav_articles"]}</a>'
-        + "".join(f'<a href="{base}catalog-{lang}.html#{k}" {_mnav}>{v}</a>' for k, v in CAT_NAV[lang]))
+        + "".join(f'<a href="{base}{CAT_LANDING[k]}{LANDING_SUF[lang]}" {_mnav}>{v}</a>' for k, v in CAT_NAV[lang]))
     return f'''    <div style="background:#fce8ee; color:#a8566a;" class="text-xs py-2 text-center tracking-widest font-medium uppercase">
         {BRAND[lang]}
     </div>
@@ -541,7 +545,7 @@ def header(lang, base, lang_urls=None):
                 <a href="{base}{HOME[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">🏠 {t["nav_home"]}</a>
                 <a href="{base}catalog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">💐 {t["nav_catalog"]}</a>
                 <a href="{base}blog-{lang}.html" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">📖 {t["nav_articles"]}</a>
-                {"".join(f'<a href="{base}catalog-{lang}.html#{k}" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{v}</a>' for k, v in CAT_NAV[lang])}
+                {"".join(f'<a href="{base}{CAT_LANDING[k]}{LANDING_SUF[lang]}" class="px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition">{v}</a>' for k, v in CAT_NAV[lang])}
                 <span class="w-px h-4 bg-stone-200 mx-1"></span>
                 {nav_langs}
             </nav>
@@ -624,7 +628,7 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"], a[href*="kakao"], 
 })();
 </script>
 __CARD_JS__
-<script src="__BASE__cart.js?v=20260930" defer></script>
+<script src="__BASE__cart.js?v=20261001" defer></script>
 </body>
 </html>
 '''
@@ -694,6 +698,10 @@ def product_cat(p):
         cats.insert(0, "mixed")
     if s == "yarkaya-sbornaya-korzina-15-rozovyh-sharov" and "mixed" not in cats:
         cats.insert(0, "mixed")  # id142: сборная корзина + шары = комбо (Сборные + Шары)
+    if s in ("prazdnichnyy-sbornyy-buket-i-shokoladnyy-tort", "sbornyy-buket-belaya-upakovka-7-sharov") and "mixed" not in cats:
+        cats.insert(0, "mixed")  # 01.10: id69/id104 — в составе сборный букет (аудит матрицы)
+    if s == "25-belyh-roz-pirozhnoe-otkrytka" and "cakes" not in cats:
+        cats.append("cakes")  # 01.10: id188 — пирожное = раздел Торты (аудит матрицы)
     if s in ("yarkaya-sbornaya-korzina-nabor-sharov-l-cifry-29", "stilnaya-sbornaya-korzina-101-rozovaya-25-rozovaya-eustoma") and "mixed" not in cats:
         cats.insert(0, "mixed")  # id157/id160: сборная корзина в комбо
     if is_nabor and "nabory" not in cats:
@@ -1070,17 +1078,17 @@ TREE={
  'ru':[('l1',None,[('','🌸 Все'),('flowers','💐 Цветы'),('balloons','🎈 Шары'),('gifts','🎁 Подарки'),('decor','🎉 Оформление праздников')]),
        ('sub','flowers',[('flowers','Все цветы'),('mixed','💐 Сборные'),('roses','🌹 Розы')]),
        ('sub','roses',[('roses','Все розы'),('r25','25 роз'),('r51','51 роза'),('r101','101+ роз')]),
-       ('sub','balloons',[('balloons','Все шары'),('b-helium','🎈 Гелиевые'),('b-latex','🎈 Резиновые'),('b-combo','💐 Комбо с цветами')]),
+       ('sub','balloons',[('balloons','Все шары'),('b-helium','🎈 Фольгированные'),('b-latex','🎈 Резиновые'),('b-combo','💐 С цветами и тортом')]),
        ('sub','gifts',[('gifts','Все подарки'),('nabory','🎁 Подарочные наборы'),('cakes','🎂 Торты')])],
  'en':[('l1',None,[('','🌸 All'),('flowers','💐 Flowers'),('balloons','🎈 Balloons'),('gifts','🎁 Gifts'),('decor','🎉 Party decor')]),
        ('sub','flowers',[('flowers','All flowers'),('mixed','💐 Mixed'),('roses','🌹 Roses')]),
        ('sub','roses',[('roses','All roses'),('r25','25 roses'),('r51','51 roses'),('r101','101+ roses')]),
-       ('sub','balloons',[('balloons','All balloons'),('b-helium','🎈 Foil helium'),('b-latex','🎈 Latex'),('b-combo','💐 Combo with flowers')]),
+       ('sub','balloons',[('balloons','All balloons'),('b-helium','🎈 Foil'),('b-latex','🎈 Latex'),('b-combo','💐 With flowers & cake')]),
        ('sub','gifts',[('gifts','All gifts'),('nabory','🎁 Gift sets'),('cakes','🎂 Cakes')])],
  'ko':[('l1',None,[('','🌸 전체'),('flowers','💐 꽃'),('balloons','🎈 풍선'),('gifts','🎁 선물'),('decor','🎉 파티 데코')]),
        ('sub','flowers',[('flowers','꽃 전체'),('mixed','💐 혼합'),('roses','🌹 장미')]),
        ('sub','roses',[('roses','장미 전체'),('r25','장미 25'),('r51','장미 51'),('r101','장미 101+')]),
-       ('sub','balloons',[('balloons','풍선 전체'),('b-helium','🎈 호일 헬륨'),('b-latex','🎈 라텍스'),('b-combo','💐 꽃 콤보')]),
+       ('sub','balloons',[('balloons','풍선 전체'),('b-helium','🎈 호일'),('b-latex','🎈 라텍스'),('b-combo','💐 꽃·케이크 콤보')]),
        ('sub','gifts',[('gifts','선물 전체'),('nabory','🎁 선물 세트'),('cakes','🎂 케이크')])],
 }
 def catalog_tree_html(lang):

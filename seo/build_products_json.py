@@ -44,6 +44,10 @@ def product_cats(slug, name_ru):
         cats.insert(0, "mixed")
     if s == "yarkaya-sbornaya-korzina-15-rozovyh-sharov" and "mixed" not in cats:
         cats.insert(0, "mixed")  # id142: сборная корзина + шары = комбо
+    if s in ("prazdnichnyy-sbornyy-buket-i-shokoladnyy-tort", "sbornyy-buket-belaya-upakovka-7-sharov") and "mixed" not in cats:
+        cats.insert(0, "mixed")  # 01.10: id69/id104 — в составе сборный букет (аудит матрицы)
+    if s == "25-belyh-roz-pirozhnoe-otkrytka" and "cakes" not in cats:
+        cats.append("cakes")  # 01.10: id188 — пирожное = раздел Торты (аудит матрицы)
     if s in ("yarkaya-sbornaya-korzina-nabor-sharov-l-cifry-29", "stilnaya-sbornaya-korzina-101-rozovaya-25-rozovaya-eustoma") and "mixed" not in cats:
         cats.insert(0, "mixed")  # id157/id160: сборная корзина в комбо
     if is_nabor and "nabory" not in cats:       cats.insert(0, "nabory")

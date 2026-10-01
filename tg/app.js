@@ -74,7 +74,7 @@ var TREE = [
 var SUB = {
   flowers: [["flowers", "Все цветы"], ["mixed", "💐 Сборные"], ["roses", "🌹 Розы"]],
   roses: [["roses", "Все розы"], ["r25", "25 роз"], ["r51", "51 роза"], ["r101", "101+ роз"]],
-  balloons: [["balloons", "Все шары"], ["b-helium", "🎈 Гелиевые"], ["b-latex", "🎈 Резиновые"], ["b-combo", "💐 Комбо с цветами"]],
+  balloons: [["balloons", "Все шары"], ["b-helium", "🎈 Фольгированные"], ["b-latex", "🎈 Резиновые"], ["b-combo", "💐 С цветами и тортом"]],
   gifts: [["gifts", "Все подарки"], ["nabory", "🎁 Подарочные наборы"], ["cakes", "🎂 Торты"]]
 };
 var PARENT = { mixed: "flowers", roses: "flowers", r25: "roses", r51: "roses", r101: "roses", "b-helium": "balloons", "b-latex": "balloons", "b-combo": "balloons", nabory: "gifts", cakes: "gifts" };
@@ -83,14 +83,18 @@ function toks(p) { return String(p.slug || "").split("-"); }
 function flowerSlug(p) { return toks(p).some(function (t) { return /^(roz|roza|rozy|buket|korzina|korzine|liliy|eustom|eustomy)$/.test(t); }); }
 function isFlower(p) { return hasC(p, "r25") || hasC(p, "r51") || hasC(p, "r101") || hasC(p, "mixed") || (hasC(p, "balloons") && flowerSlug(p)); }
 function bCombo(p) { return hasC(p, "balloons") && (isFlower(p) || hasC(p, "cakes")); }
-function bLatex(p) { return hasC(p, "balloons") && !bCombo(p) && toks(p).some(function (t) { return /^(rezinovyh|potolok)$/.test(t); }); }
+var LATEX = ["nabor-sharov-s-2-cifry-10-sharov", "101-belaya-roza-korzina-shary-serdca", "101-belaya-roza-rozovaya-upakovka-cifry-25-sharov", "35-serebristo-chernyh-gelievyh-sharov-pod-potolok", "101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov", "yarkaya-sbornaya-korzina-15-rozovyh-sharov", "27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka"], LATEX_ONLY = ["35-serebristo-chernyh-gelievyh-sharov-pod-potolok", "27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka"]; // проверено по фото 01.10.2026
+var BAL_T = { f: "🎈 Фольгированные шары летают в среднем 7 дней", l: "🎈 Резиновые шары летают в среднем 12 часов" };
+function balType(p) { if (!p) return ""; var cs = p.cats || []; if (cs.indexOf("balloons") < 0) return ""; if (LATEX_ONLY.indexOf(p.slug) > -1) return "l"; if (LATEX.indexOf(p.slug) > -1) return "fl"; return "f"; }
+function balNote(p) { var t = balType(p); if (!t) return ""; var a = []; if (t.indexOf("f") > -1) a.push(BAL_T.f); if (t.indexOf("l") > -1) a.push(BAL_T.l); return '<div class="bnote">' + a.join("<br>") + '</div>'; }
+function bLatex(p) { return hasC(p, "balloons") && LATEX.indexOf(p.slug) > -1; }
 function match(p, k) {
   if (!k || k === "all") return true;
   if (k === "flowers") return isFlower(p);
   if (k === "roses") return hasC(p, "r25") || hasC(p, "r51") || hasC(p, "r101");
   if (k === "b-combo") return bCombo(p);
   if (k === "b-latex") return bLatex(p);
-  if (k === "b-helium") return hasC(p, "balloons") && !bCombo(p) && !bLatex(p);
+  if (k === "b-helium") return hasC(p, "balloons") && LATEX_ONLY.indexOf(p.slug) < 0;
   if (k === "gifts") return hasC(p, "nabory") || hasC(p, "cakes");
   if (k === "decor") return hasC(p, "prazdnik");
   return hasC(p, k);
@@ -173,7 +177,7 @@ function renderGrid() {
     card.innerHTML =
       '<div class="ph"><img src="' + imgs[0] + '" alt="" loading="lazy"><button class="zoom" aria-label="Открыть">⤢</button>' + nav + dots + '</div>' +
       '<div class="bd">' +
-        '<h3>' + esc(p.name) + '</h3>' + comboBadge(p) +
+        '<h3>' + esc(p.name) + '</h3>' + comboBadge(p) + balNote(p) +
         '<div class="pr">' + money(p.price_vnd) + '</div>' +
         '<div class="sub">' + esc(p.price_sub) + '</div>' +
         '<div class="act"></div>' +
@@ -208,7 +212,7 @@ function openProduct(p, start) {
     '<div class="pv-ph"><div class="pv-track">' + imgs.map(function (s) { return '<div class="pv-sl"><img src="' + s + '" alt=""></div>'; }).join("") + '</div>' +
       (imgs.length > 1 ? '<button class="pv-nav l">‹</button><button class="pv-nav r">›</button>' : '') + '</div>' +
     '<div class="pv-th">' + (imgs.length > 1 ? imgs.map(function (s, k) { return '<img src="' + s + '" data-k="' + k + '" alt="">'; }).join("") : '') + '</div>' +
-    '<div class="pv-bd"><h2>' + esc(p.name) + '</h2>' + comboBadge(p) +
+    '<div class="pv-bd"><h2>' + esc(p.name) + '</h2>' + comboBadge(p) + balNote(p) +
       '<div class="pv-pr">' + money(p.price_vnd) + ' <span>' + esc(p.price_sub) + '</span></div>' +
       '<div class="pv-act act"></div>' +
       (p.desc ? '<p class="pv-ds">' + esc(p.desc) + '</p>' : '') + '</div>';
@@ -302,7 +306,7 @@ function renderCart() {
     d.className = "ci";
     d.innerHTML =
       '<img src="/' + it.img + '" alt="">' +
-      '<div class="info"><h4>' + esc(it.name) + '</h4>' +
+      '<div class="info"><h4>' + esc(it.name) + '</h4>' + balNote(it) +
       '<div class="pr">' + money(it.price_vnd) + '</div><div class="sub">' + esc(it.price_sub || "") + '</div>' +
       '<div class="ctr"><button class="qbtn">−</button><span>' + it.qty + ' шт</span><button class="qbtn">+</button>' +
       '<button class="rm">удалить</button></div></div>';

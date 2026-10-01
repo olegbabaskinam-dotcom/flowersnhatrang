@@ -7821,4 +7821,64 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://flowers-nha-trang.online/cvety.html</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://flowers-nha-trang.online/cvety.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://flowers-nha-trang.online/cvety-en.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://flowers-nha-trang.online/cvety-kr.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://flowers-nha-trang.online/cvety.html"/>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://flowers-nha-trang.online/cvety-en.html</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://flowers-nha-trang.online/cvety.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://flowers-nha-trang.online/cvety-en.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://flowers-nha-trang.online/cvety-kr.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://flowers-nha-trang.online/cvety.html"/>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://flowers-nha-trang.online/cvety-kr.html</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://flowers-nha-trang.online/cvety.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://flowers-nha-trang.online/cvety-en.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://flowers-nha-trang.online/cvety-kr.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://flowers-nha-trang.online/cvety.html"/>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://flowers-nha-trang.online/podarki.html</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://flowers-nha-trang.online/podarki.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://flowers-nha-trang.online/podarki-en.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://flowers-nha-trang.online/podarki-kr.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://flowers-nha-trang.online/podarki.html"/>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://flowers-nha-trang.online/podarki-en.html</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://flowers-nha-trang.online/podarki.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://flowers-nha-trang.online/podarki-en.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://flowers-nha-trang.online/podarki-kr.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://flowers-nha-trang.online/podarki.html"/>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://flowers-nha-trang.online/podarki-kr.html</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://flowers-nha-trang.online/podarki.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://flowers-nha-trang.online/podarki-en.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://flowers-nha-trang.online/podarki-kr.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://flowers-nha-trang.online/podarki.html"/>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
 </urlset>
