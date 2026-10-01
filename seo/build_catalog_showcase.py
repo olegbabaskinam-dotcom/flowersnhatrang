@@ -31,9 +31,11 @@ HEAD = {
  "ko": {"h1": "나트랑 꽃·풍선·선물 카탈로그", "t1": "꽃다발 <b>2000+</b> 배달 완료", "t2": "Google 리뷰 <b>157</b>개", "t3": "💵 수령 시 결제"},
 }
 GMAPS = "https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic"
+ZLINK = {"ru": "Вся категория →", "en": "Whole category →", "ko": "전체 보기 →"}
+ZPAGE = {"flowers": "cvety", "balloons": "balloons", "gifts": "podarki", "decor": "prazdnik"}
 TXT = {
  "ru": {"h": "Наш каталог", "sub": "Выберите категорию — покажем все позиции", "open": "Смотреть →",
-        "g": {"flowers": "💐 Цветы", "balloons": "🎈 Шары", "gifts": "🎁 Подарки", "decor": "🎉 Оформление праздников"},
+        "g": {"flowers": "💐 Цветы", "balloons": "🎈 Шары", "gifts": "🎁 Подарки", "decor": "🎉 Оформление"},
         "t": {"r25": "25 роз", "r51": "51 роза", "r101": "101 роза и больше", "baskets": "Корзины с цветами", "mixed": "Сборные букеты",
               "b-helium": "Фольгированные шары", "b-latex": "Резиновые шары", "b-combo": "Шары с цветами", "cakes": "Торты", "nabory": "Подарочные наборы", "decor": "Готовое оформление"},
         "n": lambda n: f"{n} поз.", "bal": {"b-helium": "летают в среднем 7 дней", "b-latex": "летают в среднем 12 часов"}},
@@ -49,25 +51,44 @@ TXT = {
         "n": lambda n: f"{n}개", "bal": {"b-helium": "평균 약 7일", "b-latex": "평균 약 12시간"}},
 }
 CSS = """<style id="sc-css">
-.sc{max-width:72rem;margin:0 auto;padding:.9rem .75rem .6rem}
-.sc-h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;font-size:clamp(1.35rem,2.6vw,2rem);line-height:1.15;text-align:center;color:#1a1a1a;margin:0}
-.sc-tr{display:flex;flex-wrap:wrap;justify-content:center;gap:.35rem .5rem;margin:.5rem 0 .8rem;font-size:.78rem;color:#78716c}
-.sc-tr>*{display:inline-flex;align-items:center;gap:.25rem;background:#fff;border:1px solid #f0e0e5;border-radius:999px;padding:.22rem .7rem;text-decoration:none;color:#57534e;white-space:nowrap}
-.sc-tr b{color:#1a1a1a;font-size:.9rem}
+.sc{max-width:78rem;margin:0 auto;padding:.9rem 1rem .4rem}
+.sc-h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;font-size:clamp(1.4rem,2.8vw,2.2rem);line-height:1.15;text-align:center;color:#1a1a1a;margin:0}
+.sc-tr{display:flex;flex-wrap:wrap;justify-content:center;gap:.35rem .5rem;margin:.55rem 0 1rem;font-size:.8rem;color:#78716c}
+.sc-tr>*{display:inline-flex;align-items:center;gap:.25rem;background:#fff;border:1px solid #f0e0e5;border-radius:999px;padding:.25rem .8rem;text-decoration:none;color:#57534e;white-space:nowrap}
+.sc-tr b{color:#1a1a1a;font-size:.92rem}
 .sc-tr a:hover{border-color:#c0687a;color:#a8566a}
 .sc-tr .st{color:#f5b301}
-.sc-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.45rem;margin:0 auto}
-@media(min-width:768px){.sc-row{grid-template-columns:repeat(6,minmax(0,1fr));gap:.6rem;max-width:max(40rem,min(70rem,calc((100vh - 255px)*2.2)))}}
-.sc-t{position:relative;display:block;aspect-ratio:3/4;border-radius:14px;overflow:hidden;background:#fdf4f7;text-decoration:none;box-shadow:0 4px 12px rgba(28,25,23,.08);transition:transform .2s,box-shadow .2s}
-.sc-t:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(192,104,122,.22)}
-.sc-t img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.sc-t:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(20,10,14,.82) 0%,rgba(20,10,14,.3) 42%,rgba(20,10,14,0) 65%)}
-.sc-g{position:absolute;top:.35rem;left:.35rem;z-index:2;font-size:.6rem;font-weight:700;background:rgba(255,255,255,.92);color:#a8566a;border-radius:999px;padding:.1rem .45rem;white-space:nowrap}
-.sc-c{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:.45rem .5rem .5rem;color:#fff}
-.sc-c b{display:block;font-size:.78rem;font-weight:700;line-height:1.15}
-.sc-c i{display:block;font-style:normal;font-size:.62rem;opacity:.85;margin-top:.1rem}
-.sc-c em{display:block;font-style:normal;margin-top:.2rem;font-size:.58rem;font-weight:700;color:#d6ecf8;line-height:1.2}
-@media(min-width:768px){.sc-c{padding:.6rem .65rem .65rem}.sc-c b{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.15rem;font-weight:600}.sc-c i{font-size:.7rem}.sc-c em{font-size:.66rem}.sc-g{font-size:.66rem;top:.45rem;left:.45rem}}
+.sc-zones{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem}
+.sc-z{min-width:0}
+@media(min-width:900px){.sc-zones{grid-template-columns:minmax(0,3fr) minmax(0,2fr) minmax(0,1fr)}.sc-z.flowers{grid-column:1/-1}}
+.sc-z{border-radius:24px;padding:.9rem .9rem 1rem;border:1px solid rgba(0,0,0,.04)}
+.sc-z.flowers{background:linear-gradient(135deg,#fdf0f4 0%,#fff7f9 100%)}
+.sc-z.balloons{background:linear-gradient(135deg,#eaf4fb 0%,#f6fbfe 100%)}
+.sc-z.gifts{background:linear-gradient(135deg,#fbf1e4 0%,#fffaf3 100%)}
+.sc-z.decor{background:linear-gradient(135deg,#f3edfb 0%,#fbf8fe 100%)}
+.sc-zh{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.2rem .5rem;margin:0 .15rem .7rem}
+.sc-zh h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;font-size:clamp(1.35rem,2.2vw,1.75rem);color:#1a1a1a;margin:0;line-height:1.1}
+@media(min-width:900px){.sc-z.decor .sc-zh h2{font-size:1.3rem;white-space:nowrap}.sc-z.decor .sc-zh{margin-bottom:.45rem}}
+.sc-zh a{font-size:.75rem;font-weight:600;color:#a8566a;text-decoration:none;white-space:nowrap;border-bottom:1px solid rgba(168,86,106,.35)}
+.sc-zh a:hover{color:#7d3a4c}
+.sc-row{display:grid;gap:.6rem;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:899px){.sc-row>.sc-t:last-child:nth-child(odd){grid-column:1/-1;aspect-ratio:16/10}}
+@media(min-width:900px){.sc-row{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.sc-z.gifts .sc-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+.sc-z.decor .sc-row{grid-template-columns:minmax(0,1fr)}
+@media(min-width:900px){.sc-z.flowers .sc-row{grid-template-columns:repeat(5,minmax(0,1fr));gap:.8rem}.sc-row{gap:.8rem}}
+.sc-t{position:relative;display:block;aspect-ratio:3/4;border-radius:18px;overflow:hidden;background:#fdf4f7;text-decoration:none;box-shadow:0 6px 16px rgba(28,25,23,.10);transition:transform .2s,box-shadow .2s}
+.sc-t:hover{transform:translateY(-3px);box-shadow:0 14px 28px rgba(192,104,122,.25)}
+.sc-t img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.sc-t:hover img{transform:scale(1.04)}
+.sc-t:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(20,10,14,.85) 0%,rgba(20,10,14,.35) 38%,rgba(20,10,14,0) 62%)}
+.sc-c{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:.55rem .6rem .65rem;color:#fff}
+.sc-c b{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;font-size:clamp(1rem,1.35vw,1.4rem);line-height:1.08}
+@media(max-width:899px){.sc-c b{font-size:1.02rem}.sc-row>.sc-t:last-child:nth-child(odd) .sc-c b{font-size:1.3rem}}
+.sc-c i{display:block;font-style:normal;font-size:.7rem;opacity:.85;margin-top:.15rem}
+.sc-c em{display:inline-block;font-style:normal;margin-top:.3rem;font-size:.66rem;font-weight:700;line-height:1.2;background:rgba(238,246,251,.95);color:#0f3c57;border-radius:8px;padding:.15rem .4rem}
+.sc-c span{display:inline-block;margin-top:.4rem;font-size:.7rem;font-weight:700;background:rgba(255,255,255,.93);color:#a8566a;border-radius:999px;padding:.2rem .65rem}
+
 </style>
 """
 JS = """<script>/*SHOWCASE-JS*/(function(){document.querySelectorAll('.sc-t[data-k]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var k=a.getAttribute('data-k');if(location.hash==='#'+k){window.dispatchEvent(new HashChangeEvent('hashchange'));}else{location.hash=k;}});});})();</script>"""
@@ -83,9 +104,9 @@ def build(lang):
     h = ['<!--SHOWCASE-START-->\n', CSS, '<section class="sc">\n',
          f'  <h1 class="sc-h1">{Hd["h1"]}</h1>\n',
          f'  <div class="sc-tr"><span>{Hd["t1"]}</span><a href="{GMAPS}" target="_blank" rel="noopener noreferrer"><span class="st">{STAR}</span>{Hd["t2"]}</a><span>{Hd["t3"]}</span></div>\n',
-         '  <div class="sc-row">\n']
+         '  <div class="sc-zones">\n']
     for g, keys in GROUPS:
-        gl = T["g"][g].split(" ", 1)[0]  # эмодзи группы
+        h.append(f'  <div class="sc-z {g}"><div class="sc-zh"><h2>{T["g"][g]}</h2><a href="{L.fname(ZPAGE[g], lang)}">{ZLINK[lang]}</a></div><div class="sc-row">\n')
         for k in keys:
             allc = [c for c in cards if MATCH[k](c)]
             lst = [c for c in allc if not c["sold"]]
@@ -96,7 +117,8 @@ def build(lang):
             img = re.search(r'src="(img/products/[^"]+)"', pic["html"]).group(1)
             bal = f'<em>{T["bal"][k]}</em>' if k in T["bal"] else ""
             h.append(f'    <a class="sc-t" href="#{k}" data-k="{k}"><img src="{img}" alt="{html.escape(T["t"][k])}" decoding="async" width="900" height="1200">'
-                     f'<span class="sc-g">{T["g"][g]}</span><div class="sc-c"><b>{T["t"][k]}</b><i>{T["n"](len(allc))}</i>{bal}</div></a>\n')
+                     f'<div class="sc-c"><b>{T["t"][k]}</b><i>{T["n"](len(allc))}</i>{bal}<span>{T["open"]}</span></div></a>\n')
+        h.append('  </div></div>\n')
     h.append('  </div>\n</section>\n' + JS + '\n<!--SHOWCASE-END-->\n')
     block = "".join(h)
     if "<!--SHOWCASE-START-->" in s:
