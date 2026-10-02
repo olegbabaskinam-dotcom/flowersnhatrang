@@ -1468,7 +1468,7 @@ form.addEventListener('submit',async e=>{
   try{
     const r=await apiPost(data);
     if(!r||!r.ok) throw new Error();
-    if(!isUpdate){ saveOrder({id:r.orderId, paid:false}); try{ if(window.Cart) Cart.clear(); }catch(_){} goPay(r.orderId); }
+    if(!isUpdate){ try{ if(window.gtag) gtag('event','conversion',{'send_to':'AW-17946655007/L0hfCM-bs40dEJ_y0O1C','value':1.0,'currency':'USD','transaction_id':String(r.orderId||'')}); }catch(_){} saveOrder({id:r.orderId, paid:false}); try{ if(window.Cart) Cart.clear(); }catch(_){} goPay(r.orderId); }
     else { goPay(currentId); }
   }catch(_){
     err.textContent=tr('err_send');
@@ -1650,7 +1650,7 @@ window.addEventListener('load',function(){
 });
 </script>
 <script>
-document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"], a[href*="kakao"]').forEach(function(el){
+document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"], a[href*="instagram.com"], a[href*="kakao.com"], a[href*="kakao"]').forEach(function(el){
   el.addEventListener('click', function(){ if(typeof gtag==='function') gtag('event','conversion',{'send_to':'AW-17946655007/GAphCLTdvY0dEJ_y0O1C','value':1.0,'currency':'VND'}); });
 });
 </script>
