@@ -28,3 +28,7 @@ SEO_АУДИТ_*.html
 SEO_АУДИТ_*.md
 # Исходные фото товаров/блога — локальные, на сайт идут только webp в img/products и img/blog
 img/_src/
+
+# временные файлы сборки каталога PDF
+seo/_catalog_tmp/
+seo/_catalog_map/
