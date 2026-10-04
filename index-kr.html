@@ -217,7 +217,7 @@
     <section class="hs">
       <div class="hs-in">
         <div class="hs-left">
-          <h1 class="hs-h1"><span class="hs-l" style="display:block">Surprise Service</span><span class="hs-l" style="display:block">Nha Trang</span><span class="hs-t" style="display:block;font-size:.72em;margin-top:8px;line-height:1.25">나트랑 파티를 위한 모든 것</span></h1>
+          <h1 class="hs-h1">Surprise Service<br>Nha Trang<br><span style="font-size:.72em;line-height:1.25">나트랑 파티를 위한 모든 것</span></h1>
           <p class="hs-small">🕐 영업시간 07:00 ~ 21:00</p>
           <p id="countdown" aria-live="polite" style="min-height:1.1rem;color:#c0687a;font-size:12px;margin:0">⏱ 오늘 긴급 배송 — 17:00까지 상담원 주문.</p>
           <div class="hs-btns">
@@ -1080,7 +1080,7 @@ document.querySelectorAll('a[href*="kakao.com"], a[href*="instagram.com"]').forE
 (function(){
     var el = document.getElementById('countdown');
     if(!el) return;
-    var hoursEl=el.previousElementSibling, introEl=hoursEl&&hoursEl.previousElementSibling;
+    var hoursEl=el.previousElementSibling, introEl=hoursEl&&hoursEl.previousElementSibling;if(introEl&&introEl.tagName==="H1")introEl=null;
     var defaultHours=hoursEl?hoursEl.textContent:'', defaultIntro=introEl?introEl.textContent:'';
     var p=function(n){return('0'+n).slice(-2);};
     function render(h,m,s,date){
