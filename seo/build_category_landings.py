@@ -42,8 +42,8 @@ def flowerSlug(c): return any(re.match(r'^(roz|roza|rozy|buket|korzina|korzine|l
 def isFlower(c): return has(c,"r25") or has(c,"r51") or has(c,"r101") or has(c,"mixed") or (has(c,"balloons") and flowerSlug(c))
 def bCombo(c): return has(c,"balloons") and (isFlower(c) or has(c,"cakes"))
 # шары с резиновыми (латексными) шарами — проверено по фото 01.10.2026 (тот же список в catalog-*.html, build_site.py, tg/app.js)
-LATEX = ['nabor-sharov-s-2-cifry-10-sharov', '101-belaya-roza-korzina-shary-serdca', '101-belaya-roza-rozovaya-upakovka-cifry-25-sharov', '35-serebristo-chernyh-gelievyh-sharov-pod-potolok', '101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov', 'yarkaya-sbornaya-korzina-15-rozovyh-sharov', '27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka']
-LATEX_ONLY = ['35-serebristo-chernyh-gelievyh-sharov-pod-potolok', '27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka']
+LATEX = ['nabor-sharov-s-2-cifry-10-sharov', '101-belaya-roza-korzina-shary-serdca', '101-belaya-roza-rozovaya-upakovka-cifry-25-sharov', '35-serebristo-chernyh-gelievyh-sharov-pod-potolok', '101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov', 'yarkaya-sbornaya-korzina-15-rozovyh-sharov', '27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka', 'svyazka-20-sinih-rezinovyh-sharov']
+LATEX_ONLY = ['35-serebristo-chernyh-gelievyh-sharov-pod-potolok', '27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka', 'svyazka-20-sinih-rezinovyh-sharov']
 def bLatex(c): return has(c,"balloons") and c["slug"] in LATEX
 def isCombo(c): return len([x for x in c["cats"] if x not in ("nabory","prazdnik")]) > 1
 

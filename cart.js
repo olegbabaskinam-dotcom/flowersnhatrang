@@ -224,8 +224,8 @@
    LATEX / LATEX_ONLY — тот же список, что в catalog-*.html, build_site.py, tg/app.js, build_category_landings.py.
    ============================================================ */
 (function () {
-  var LATEX = ["nabor-sharov-s-2-cifry-10-sharov", "101-belaya-roza-korzina-shary-serdca", "101-belaya-roza-rozovaya-upakovka-cifry-25-sharov", "35-serebristo-chernyh-gelievyh-sharov-pod-potolok", "101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov", "yarkaya-sbornaya-korzina-15-rozovyh-sharov", "27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka"];
-  var LATEX_ONLY = ["35-serebristo-chernyh-gelievyh-sharov-pod-potolok", "27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka"];
+  var LATEX = ["nabor-sharov-s-2-cifry-10-sharov", "101-belaya-roza-korzina-shary-serdca", "101-belaya-roza-rozovaya-upakovka-cifry-25-sharov", "35-serebristo-chernyh-gelievyh-sharov-pod-potolok", "101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov", "yarkaya-sbornaya-korzina-15-rozovyh-sharov", "27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka", "svyazka-20-sinih-rezinovyh-sharov"];
+  var LATEX_ONLY = ["35-serebristo-chernyh-gelievyh-sharov-pod-potolok", "27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka", "svyazka-20-sinih-rezinovyh-sharov"];
   var T = {"ru": {"f": ["Фольгированные шары", "летают в среднем 7 дней"], "l": ["Резиновые шары", "летают в среднем 12 часов"]},
            "en": {"f": ["Foil balloons", "float about 7 days on average"], "l": ["Latex balloons", "float about 12 hours on average"]},
            "ko": {"f": ["호일 풍선", "평균 약 7일 동안 떠 있습니다"], "l": ["라텍스 풍선", "평균 약 12시간 동안 떠 있습니다"]}};

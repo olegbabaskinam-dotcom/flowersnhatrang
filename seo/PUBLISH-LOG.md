@@ -314,3 +314,10 @@
 - Шары: тип по фото. Резиновые (латекс): id47, 94, 105, 111, 126, 142, 156 (только латекс: 111, 156), остальные — фольгированные. Фильтры: Фольгированные / Резиновые / С цветами и тортом. Названия id94/id105 (RU/EN/KO), id111/id142 (EN/KO) уточнены.
 - Категории: id69 и id104 + mixed, id188 + cakes.
 - Шары — сколько летают: фольгированные ~7 дней, резиновые ~12 часов. Пометка: карточки (cart.js, window.FLW_BAL), страница товара (под ценой), корзина сайта (у каждой позиции + заголовок карусели доп-шаров), TG-бот (карточка, просмотр, корзина), лендинг шаров, PDF «Основная информация».
+
+## 2026-10-05 — id196–id199
+- id196 «Связка из 20 синих резиновых шаров» (`svyazka-20-sinih-rezinovyh-sharov`) — 1 400 000 ₫ · ≈ $56 · 5 200 ₽, 8 фото, `balloons`, без цвета; добавлен в LATEX и LATEX_ONLY (cart.js, tg/app.js, catalog-*, build_site.py, build_category_landings.py).
+- id197 «Набор из фольгированных шаров: 2 дракона, лисичка, цифра «1» и шар Happy Birthday» (`nabor-folgirovannyh-sharov-drakony-lisichka-cifra-1`) — 1 750 000 ₫ · ≈ $70 · 6 500 ₽, 8 фото, `balloons`. Title RU/EN укорочен до ≤70.
+- id198 «51 красная роза в черной упаковке» (`51-krasnaya-roza-chernaya-upakovka`) — 1 000 000 ₫ · ≈ $40 · 3 800 ₽, 6 фото, `r51`, red.
+- id199 «Яркий сборный букет в фиолетово-розовых оттенках» (`yarkiy-sbornyy-buket-fioletovo-rozovyy`) — 1 250 000 ₫ · ≈ $50 · 4 700 ₽, 6 фото, `mixed`, pink.
+- Исходники `img/_src/ТОВАРЫ/id196…id199-…`. Страницы RU/EN/KO (gen_one_product + пост-обработка: шапка с id195, бренд Surprise Service Nha Trang в og/JSON-LD/подвале, width/height), карточки первыми в catalog-*, build_category_landings (balloons×3, cvety×3), build_catalog_showcase; featured.js 178; products.json 178; TG 1.jpg ×4; sitemap +12 = 822. audit_links: реальных ❌0 (1241 — только локальные _removed_piony/_to_delete), check_site ❌0 ⚠️13.
