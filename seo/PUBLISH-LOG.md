@@ -321,3 +321,18 @@
 - id198 «51 красная роза в черной упаковке» (`51-krasnaya-roza-chernaya-upakovka`) — 1 000 000 ₫ · ≈ $40 · 3 800 ₽, 6 фото, `r51`, red.
 - id199 «Яркий сборный букет в фиолетово-розовых оттенках» (`yarkiy-sbornyy-buket-fioletovo-rozovyy`) — 1 250 000 ₫ · ≈ $50 · 4 700 ₽, 6 фото, `mixed`, pink.
 - Исходники `img/_src/ТОВАРЫ/id196…id199-…`. Страницы RU/EN/KO (gen_one_product + пост-обработка: шапка с id195, бренд Surprise Service Nha Trang в og/JSON-LD/подвале, width/height), карточки первыми в catalog-*, build_category_landings (balloons×3, cvety×3), build_catalog_showcase; featured.js 178; products.json 178; TG 1.jpg ×4; sitemap +12 = 822. audit_links: реальных ❌0 (1241 — только локальные _removed_piony/_to_delete), check_site ❌0 ⚠️13.
+
+## 2026-10-09 — id200–id212 + корзина: доп-шары по разделам + Каталог 5.3
+- id200 «25 красных роз в белой упаковке с красной лентой + 7 красных сердец» (`25-krasnyh-roz-belaya-upakovka-7-krasnyh-sharov-serdec`) — 1 500 000 ₫ · ≈ $60 · 5 600 ₽, 8 фото, `r25 balloons`, red.
+- id201 «Набор шаров S (цифра «7» и 3 шара)» (`nabor-sharov-s-cifra-7-3-shara`) — 1 000 000 ₫, 6 фото, `balloons`.
+- id202 «2 набора шаров M (золотой + серебряный) + 4 букета (101 роза + 25 роз + 25 роз + 1 пачка эустомы)» (`2-nabora-sharov-m-zolotoy-serebryanyy-4-buketa`) — 6 000 000 ₫ · ≈ $240 · 22 300 ₽, 10 фото, `r101 r25 balloons`.
+- id203 «51 коралловая роза в белой упаковке + 25 красных роз в белой упаковке» (`51-korallovaya-roza-25-krasnyh-roz-belaya-upakovka`) — 1 500 000 ₫, 8 фото, `r51 r25`, red.
+- id204 «Бежево-золотая связка фольгированных шаров» (`svyazka-sharov-bezhevo-zolotaya`) — 1 000 000 ₫, 5 фото, `balloons`.
+- id205 «Чёрно-золотая связка фольгированных шаров Happy Birthday» (`svyazka-sharov-cherno-zolotaya`) — 1 000 000 ₫, 6 фото, `balloons`.
+- id206 торт №27 «Мини-торт шоколадный с печеньем орео» (`tort-mini-shokoladnyy-oreo-ananas`; slug с -ananas, т.к. `tort-mini-shokoladnyy-oreo` = старый id130) — 250 000 ₫ · ≈ $10 · 1 000 ₽, 7 фото, `cakes`.
+- id207 торт №28 «Торт с розовыми кремовыми розами и топпером Happy Birthday» (`tort-rozovye-kremovye-rozy-happy-birthday`) — 500 000 ₫, 8 фото, `cakes`.
+- Доп-шары 150 000 ₫ (addon): id208 круг HB чёрный с золотом · id209 звезда золотая · id210 сердце бежевое · id211 сердце золотое · id212 сердце красное (`dop-folgirovannyy-shar-*`), по 2 фото.
+- Страницы RU/EN/KO: gen_one_product + пост-обработка (шапка/подвал из свежей страницы id198, бренд Surprise Service Nha Trang, width/height), title ≤70 укорочены. Карточки первыми в catalog-*, cvety/balloons/podarki ×3 (build_category_landings), showcase, torty ×3 (2 торта), featured.js 186, products.json 186, TG 1.jpg ×13, sitemap +39 = 861.
+- cart.html: доп-шары разбиты на разделы-карусели «С днём рождения» (4) / «Сердца» (5) / «Звёзды» (2) / «I love you» (1), поле `sub` в ADDONS (hb/heart/star/love). Проверено headless: 4 раздела + доп. товары, кнопка «Добавить» работает.
+- PDF Каталог 5.3 RU/EN/KO (165 стр.): подарочные наборы — по 1 на страницу с полным составом списком в 2 колонки («Состав набора: N предметов»), бренд в колонтитулах → Surprise Service Nha Trang. Правки в `seo/build_catalog_pdf.py` (gift_parts/draw_gift_card/PER_CAT). ⚠️ Языки собирать ПОСЛЕДОВАТЕЛЬНО — параллельно кэш `_catalog_tmp` портит картинки.
+- Проверки: check_site ❌0 ⚠️13 (как раньше), audit_links — только старые локальные _removed_piony/_to_delete, xmllint ок, node --check ок.

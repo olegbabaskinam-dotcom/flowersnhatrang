@@ -82,7 +82,7 @@ L = {
         "cats": {"r25":"25 роз","r51":"51 роза","r101":"101 роза","mixed":"Сборные букеты",
                  "nabory":"Подарочные наборы","prazdnik":"Готовые наборы для праздника",
                  "cakes":"Торты","balloons":"Гелиевые шары","combo":"Комбо-наборы","addon":"Дополнения к заказу"},
-        "brand":"Цветы Нячанг", "made":"День в день — при заказе до 17:00",
+        "brand":"Surprise Service Nha Trang", "made":"День в день — при заказе до 17:00",
     },
     "en": {
         "title": "CATALOG", "sub": "Flowers, balloons & gifts\ndelivery in Nha Trang",
@@ -91,7 +91,7 @@ L = {
         "cats": {"r25":"25 Roses","r51":"51 Roses","r101":"101 Roses","mixed":"Mixed Bouquets",
                  "nabory":"Gift Sets","prazdnik":"Festive Ready Sets",
                  "cakes":"Cakes","balloons":"Helium Balloons","combo":"Combo Sets","addon":"Order Add-ons"},
-        "brand":"NhaTrang Flowers", "made":"Same-day delivery — order by 17:00",
+        "brand":"Surprise Service Nha Trang", "made":"Same-day delivery — order by 17:00",
     },
     "ko": {
         "title": "카탈로그", "sub": "나트랑 꽃·풍선·선물 배달",
@@ -100,7 +100,7 @@ L = {
         "cats": {"r25":"장미 25송이","r51":"장미 51송이","r101":"장미 101송이","mixed":"믹스 꽃다발",
                  "nabory":"선물 세트","prazdnik":"축하 세트",
                  "cakes":"케이크","balloons":"헬륨 풍선","combo":"콤보 세트","addon":"추가 상품"},
-        "brand":"NhaTrang Flowers", "made":"당일 배달 — 17:00까지 주문",
+        "brand":"Surprise Service Nha Trang", "made":"당일 배달 — 17:00까지 주문",
     },
 }
 
@@ -537,6 +537,109 @@ def draw_card(c, F, t, p, lang, x, y_top, w):
     ty -= 10
     return y_top - ty
 
+def split_top(text, sep=", "):
+    """split по запятым вне скобок"""
+    out, cur, d = [], "", 0
+    i = 0
+    while i < len(text):
+        ch = text[i]
+        if ch in "([": d += 1
+        if ch in ")]": d -= 1
+        if d == 0 and text.startswith(sep, i):
+            out.append(cur.strip()); cur = ""; i += len(sep); continue
+        cur += ch; i += 1
+    if cur.strip(): out.append(cur.strip())
+    return out
+
+def gift_parts(desc):
+    """Каталог 5.3: подарочный набор → (вступление, «N предметов», [состав], концовка)."""
+    t = (desc or "").strip()
+    m = re.match(r"(.*?)\s[—–]\s(.*?):\s(.*)$", t, re.S)
+    if not m:
+        return None
+    head, label, rest = m.group(1).strip(), m.group(2).strip(), m.group(3).strip()
+    # конец списка — первая «. » вне скобок
+    d = 0; end = len(rest)
+    for i, ch in enumerate(rest):
+        if ch in "([": d += 1
+        elif ch in ")]": d -= 1
+        elif ch == "." and d == 0 and (i + 1 == len(rest) or rest[i+1] == " "):
+            end = i; break
+    lst, tail = rest[:end], rest[end+1:].strip()
+    KEEP = (", тела и волос", ", body and hair", "·바디·")
+    for k in KEEP: lst = lst.replace(k, k.replace(",", "\u0001").replace(" и ", " \u0002 ").replace(" and ", " \u0003 "))
+    items = split_top(lst)
+    if items and re.search(r"\s(и|and)\s", items[-1]) and len(items) > 1:
+        a = re.split(r"\s(?:и|and)\s", items[-1], 1)
+        items = items[:-1] + [a[0].strip(), a[1].strip()]
+    items = [x.replace("\u0001", ",").replace(" \u0002 ", " и ").replace(" \u0003 ", " and ") for x in items]
+    items = [x[:1].upper() + x[1:] for x in items if x]
+    head = head[:1].upper() + head[1:]
+    tail = tail[:1].upper() + tail[1:] if tail else ""
+    return head, label, items, tail
+
+def is_gift(p):
+    return p["slug"].startswith("podarochnyy-nabor")
+
+def draw_gift_card(c, F, t, p, lang, x, y_top, w):
+    """Каталог 5.3: подарочный набор — на всю страницу, с полным составом."""
+    photos = pick_photos(p["slug"])
+    gap = 9; n = max(1, len(photos))
+    iw = (w - gap*(n-1)) / n if n > 1 else w*0.62
+    ih = 250
+    iy = y_top - ih
+    for i, ph in enumerate(photos):
+        draw_rounded_image(c, ph, x + i*(iw+gap), iy, iw, ih, r=8)
+    ty = iy - 24
+    c.setFillColor(INK); c.setFont(F["serifb"], 16)
+    for ln in wrap(c, p[f"name_{lang}"], F["serifb"], 16, w)[:2]:
+        c.drawString(x, ty, ln); ty -= 19
+    parts = gift_parts(p[f"desc_{lang}"])
+    if not parts:
+        c.setFillColor(GREY); c.setFont(F["sans"], 9.5)
+        for ln in wrap(c, p[f"desc_{lang}"], F["sans"], 9.5, w):
+            c.drawString(x, ty, ln); ty -= 13
+    else:
+        head, label, items, tail = parts
+        if lang == "ko":   # в корейском шрифте нет «·»
+            items = [x.replace("·", "/") for x in items]; head = head.replace("·", "/"); tail = tail.replace("·", "/")
+        ty -= 2
+        c.setFillColor(GREY); c.setFont(F["sans"], 9.5)
+        for ln in wrap(c, head, F["sans"], 9.5, w):
+            c.drawString(x, ty, ln); ty -= 13
+        ty -= 6
+        c.setFillColor(ROSE); c.setFont(F["sansb"], 10.5)
+        c.drawString(x, ty, GIFT_LBL.get(lang, GIFT_LBL["ru"]) + ": " + label); ty -= 16
+        colw = (w - 16) / 2
+        half = (len(items) + 1) // 2
+        cols = [items[:half], items[half:]]
+        ys = []
+        for ci, col in enumerate(cols):
+            cy = ty; cx = x + ci * (colw + 16)
+            for it in col:
+                lines = wrap(c, it, F["sans"], 9.3, colw - 12)
+                c.setFillColor(ROSE); c.circle(cx + 3, cy + 3, 1.8, stroke=0, fill=1)
+                c.setFillColor(INK); c.setFont(F["sans"], 9.3)
+                for ln in lines:
+                    c.drawString(cx + 11, cy, ln); cy -= 12.5
+                cy -= 3
+            ys.append(cy)
+        ty = min(ys) - 4
+        if tail:
+            c.setFillColor(GREY); c.setFont(F["sans"], 9.3)
+            for ln in wrap(c, tail, F["sans"], 9.3, w):
+                c.drawString(x, ty, ln); ty -= 12.5
+    ty -= 10
+    pm = price_main(p) + " " + t["price_cur"]
+    c.setFillColor(ROSE); c.setFont("SansB", 15)
+    c.drawString(x, ty, pm)
+    c.setFillColor(GREY); c.setFont("Sans", 9)
+    c.drawString(x + pdfmetrics.stringWidth(pm, "SansB", 15) + 12, ty+1, p["price_sub"])
+    ty -= 10
+    return y_top - ty
+
+GIFT_LBL = {"ru": "Состав набора", "en": "What's inside", "ko": "구성품"}
+
 def draw_cat_header(c, F, t, cat, n):
     band_h = 66
     top = PH - M - band_h
@@ -559,11 +662,12 @@ def build(lang, out_path, version="2.0"):
 
     # ---- пагинация (обложка=1, содержание=2, контент с 3) ----
     PER = 2
+    PER_CAT = {"nabory": 1}   # Каталог 5.3: подарочный набор = 1 страница с полным составом
     ranges = {}
     pg = 5
     for cat in CAT_ORDER:
         n = len(by[cat])
-        pages = max(1, math.ceil(n / PER))
+        pages = max(1, math.ceil(n / PER_CAT.get(cat, PER)))
         ranges[cat] = (pg, pg + pages - 1, n)
         pg += pages
     total = pg - 1
@@ -583,7 +687,8 @@ def build(lang, out_path, version="2.0"):
     page_no = 5
     for cat in CAT_ORDER:
         items = by[cat]
-        chunks = [items[i:i+PER] for i in range(0, len(items), PER)] or [[]]
+        per = PER_CAT.get(cat, PER)
+        chunks = [items[i:i+per] for i in range(0, len(items), per)] or [[]]
         for ci, chunk in enumerate(chunks):
             if ci == 0:
                 y = draw_cat_header(c, F, t, cat, len(items))
@@ -594,7 +699,7 @@ def build(lang, out_path, version="2.0"):
                 c.setStrokeColor(LINE); c.setLineWidth(0.6); c.line(M, PH-M-14, PW-M, PH-M-14)
                 y = PH - M - 30
             for p in chunk:
-                used = draw_card(c, F, t, p, lang, M, y, CW)
+                used = (draw_gift_card if (cat == "nabory" and is_gift(p)) else draw_card)(c, F, t, p, lang, M, y, CW)
                 y -= used + 30
             draw_footer(c, F, t, page_no, t["cats"][cat])
             c.showPage()
