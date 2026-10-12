@@ -1453,7 +1453,8 @@ form.addEventListener('submit',async e=>{
   var hotel = placeType==='hotel' ? form.hotel_name.value.trim() : 'Частный дом';
   var recipWho=(form.querySelector('input[name=recip_who]:checked')||{}).value||'self';
   if(recipWho==='other' && !form.recip_contact.value.trim()){ err.textContent=tr('err_recip'); return; }
-  var amountStr=form.amount.value.trim(); // поле уже содержит «товары + доставка = итого»
+  // FIX 12.10.2026: сумму всегда пересчитываем из корзины + доставки зоны (поле amount могло перезаписаться без доставки)
+  var amountStr=(function(){var st=(window.Cart?Cart.total():0); if(st>0){var g=window.fmtMoney(st,'VND'); return delFee>0?(g+' + '+tr('amt_delivery')+' '+window.fmtMoney(delFee,'VND')+' = '+window.fmtMoney(st+delFee,'VND')):(g+' · '+tr('amt_free_full'));} return form.amount.value.trim();})();
   const chan=form.querySelector('input[name=chan]:checked').value;
   var recipStr;
   if(recipWho==='other'){
