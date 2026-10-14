@@ -25,9 +25,9 @@
     return "ru";
   }
   var LBL = {
-    ru: { add:"🛒 В корзину", addcake:"🎂 Добавить к заказу", added:"Добавлено ✓", cart:"🛒 Корзина", order:"🧾 Оформить заказ", fab:"Корзина", schedule:"📅 Важно: 3 сентября онлайн-заказы принимаем до 14:00. 4 сентября — выходной. С 5 сентября работаем в обычном режиме.", closed:"📅 Онлайн-заказы закрыты до 5 сентября: 4 сентября мы не работаем. С 5 сентября — обычный режим." },
-    en: { add:"🛒 Add to cart", addcake:"🎂 Add to order", added:"Added ✓", cart:"🛒 Cart", order:"🧾 Order online", fab:"Cart", schedule:"📅 Important: online orders are accepted until 14:00 on September 3. We are closed on September 4 and return to normal hours on September 5.", closed:"📅 Online ordering is closed until September 5: we are closed on September 4. Normal hours resume September 5." },
-    ko: { add:"🛒 장바구니에 담기", addcake:"🎂 주문에 추가", added:"담김 ✓", cart:"🛒 장바구니", order:"🧾 주문하기", fab:"장바구니", schedule:"📅 중요: 9월 3일 온라인 주문은 14:00까지 접수합니다. 9월 4일은 휴무이며 9월 5일부터 정상 운영합니다.", closed:"📅 온라인 주문은 9월 5일까지 마감되었습니다. 9월 4일은 휴무이며 9월 5일부터 정상 운영합니다." }
+    ru: { add:"🛒 В корзину", addcake:"🎂 Добавить к заказу", added:"Добавлено ✓", cart:"🛒 Корзина", order:"🧾 Оформить заказ", fab:"Корзина", schedule:"🌸 19 и 20 октября не работаем — Вьетнамский женский день (аналог 8 марта). 21 октября возобновляем работу в обычном режиме.", closed:"🌸 19 и 20 октября не работаем — Вьетнамский женский день (аналог 8 марта). 21 октября возобновляем работу в обычном режиме." },
+    en: { add:"🛒 Add to cart", addcake:"🎂 Add to order", added:"Added ✓", cart:"🛒 Cart", order:"🧾 Order online", fab:"Cart", schedule:"🌸 We are closed on October 19 and 20 — Vietnamese Women's Day (like March 8). We resume normal work on October 21.", closed:"🌸 We are closed on October 19 and 20 — Vietnamese Women's Day (like March 8). We resume normal work on October 21." },
+    ko: { add:"🛒 장바구니에 담기", addcake:"🎂 주문에 추가", added:"담김 ✓", cart:"🛒 장바구니", order:"🧾 주문하기", fab:"장바구니", schedule:"🌸 10월 19일과 20일은 베트남 여성의 날(3월 8일 여성의 날과 같은 날)로 휴무합니다. 10월 21일부터 정상 영업합니다.", closed:"🌸 10월 19일과 20일은 베트남 여성의 날(3월 8일 여성의 날과 같은 날)로 휴무합니다. 10월 21일부터 정상 영업합니다." }
   };
   function L() { return LBL[pageLang()]; }
 
@@ -196,7 +196,7 @@
   }
   function injectSpecialSchedule() {
     var t = nhaTrangNow();
-    if (!t || t.date < "2026-08-22" || t.date > "2026-09-04") return;
+    if (!t || t.date < "2026-10-19" || t.date > "2026-10-20") return;
     var b = document.getElementById("flw-special-schedule");
     if (!b) {
       b = document.createElement("div"); b.id = "flw-special-schedule";
@@ -205,7 +205,7 @@
       if (header && header.parentNode) header.parentNode.insertBefore(b, header.nextSibling);
       else document.body.insertBefore(b, document.body.firstChild);
     }
-    var closed = t.date === "2026-09-04" || (t.date === "2026-09-03" && (t.hour > 14 || (t.hour === 14 && t.minute >= 0)));
+    var closed = true; // 19–20.10 Вьетнамский женский день
     b.textContent = closed ? L().closed : L().schedule;
   }
 

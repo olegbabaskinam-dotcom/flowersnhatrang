@@ -1102,10 +1102,10 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"], a[href*="instagram
         el.style.display = '';
         if(hoursEl) hoursEl.textContent=defaultHours;
         if(introEl) introEl.textContent=defaultIntro;
-        if(date==='2026-09-04'){
-            if(hoursEl) hoursEl.textContent='🕐 4 сентября — выходной';
-            if(introEl) introEl.textContent='Сегодня мы не работаем. С 5 сентября возвращаемся к обычному режиму.';
-            el.textContent='📅 4 сентября заказы и доставка закрыты. Работаем снова с 5 сентября.';
+        if(date==='2026-10-19'||date==='2026-10-20'){
+            if(hoursEl) hoursEl.textContent='🕐 19 и 20 октября — не работаем';
+            if(introEl) introEl.textContent='Вьетнамский женский день (аналог 8 марта). 21 октября возобновляем работу в обычном режиме.';
+            el.textContent='📅 19 и 20 октября заказы и доставка закрыты. Работаем снова с 21 октября.';
             return;
         }
         if(date==='2026-09-03'){

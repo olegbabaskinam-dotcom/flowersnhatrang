@@ -348,27 +348,25 @@ function ntParts(now) {
 }
 function pad(n) { return n < 10 ? "0" + n : "" + n; }
 function isoDate(t) { return t.y + "-" + pad(t.mo) + "-" + pad(t.d); }
-function isClosedDeliveryDate(iso) { return iso === "2026-09-04"; }
+function isClosedDeliveryDate(iso) { return iso === "2026-10-19" || iso === "2026-10-20"; } // Вьетнамский женский день
 function skipClosedDeliveryDate(base) {
   while (isClosedDeliveryDate(base.getUTCFullYear() + "-" + pad(base.getUTCMonth() + 1) + "-" + pad(base.getUTCDate()))) base.setUTCDate(base.getUTCDate() + 1);
   return base;
 }
 function specialOrderClosed(now) {
   var t = ntParts(now), d = isoDate(t);
-  return d === "2026-09-04" || (d === "2026-09-03" && (t.h > 14 || (t.h === 14 && t.mi >= 0)));
+  return d === "2026-10-19" || d === "2026-10-20";
 }
 function updateSpecialOrderUi() {
-  var t = ntParts(), d = isoDate(t), active = d >= "2026-08-22" && d <= "2026-09-04";
+  var t = ntParts(), d = isoDate(t), active = d >= "2026-10-19" && d <= "2026-10-20";
   var notice = document.getElementById("specialScheduleNotice");
   if (notice) {
     notice.classList.toggle("hidden", !active);
-    notice.textContent = specialOrderClosed()
-      ? "📅 Онлайн-заказы закрыты до 5 сентября: 4 сентября мы не работаем. С 5 сентября оформление снова доступно."
-      : "📅 Важно: 3 сентября онлайн-заказы принимаем до 14:00. 4 сентября — выходной. С 5 сентября работаем в обычном режиме.";
+    notice.textContent = "📅 19 и 20 октября не работаем — Вьетнамский женский день (аналог 8 марта). 21 октября возобновляем работу в обычном режиме.";
   }
   var btn = document.getElementById("submitBtn"), closed = specialOrderClosed();
   if (btn) {
-    if (closed) { if (!btn.dataset.normalText) btn.dataset.normalText = btn.textContent; btn.disabled = true; btn.textContent = "Онлайн-заказы закрыты до 5 сентября"; }
+    if (closed) { if (!btn.dataset.normalText) btn.dataset.normalText = btn.textContent; btn.disabled = true; btn.textContent = "Онлайн-заказы закрыты до 21 октября"; }
     else if (btn.dataset.normalText) { btn.disabled = false; btn.textContent = btn.dataset.normalText; delete btn.dataset.normalText; }
   }
 }
@@ -391,14 +389,12 @@ async function rebuildTimes() {
   if (inp.value && inp.value < MIN_DATE) inp.value = MIN_DATE;
   var selectedDate = inp.value;
   var adjusted = isClosedDeliveryDate(selectedDate);
-  if (adjusted) inp.value = "2026-09-05";
+  if (adjusted) inp.value = "2026-10-21";
   var dateNotice = document.getElementById("dateScheduleNotice");
   if (dateNotice) {
-    var message = selectedDate === "2026-09-03"
-      ? "Здравствуйте! 3 сентября заказы принимаем только до 14:00. 4 сентября мы не работаем. Спасибо за понимание 🌸"
-      : selectedDate === "2026-09-04"
-        ? "Здравствуйте! 4 сентября у нас полный выходной, поэтому оформить доставку на эту дату нельзя. Календарь перенесён на 5 сентября. Спасибо за понимание 🌸"
-        : "";
+    var message = isClosedDeliveryDate(selectedDate)
+      ? "Извините, пожалуйста! 19 и 20 октября — Вьетнамский женский день (аналог 8 марта), мы не работаем, оформить заказ на эти даты нельзя. 21 октября возобновляем работу в обычном режиме 🌸"
+      : "";
     dateNotice.classList.toggle("hidden", !message);
     dateNotice.textContent = message;
   }
@@ -573,8 +569,8 @@ function submitOrder(e) {
   if (document.getElementById("website").value) return;
   var err = document.getElementById("err1"); err.textContent = "";
   var form = e.target;
-  if (specialOrderClosed()) { err.textContent = "Онлайн-заказы закрыты до 5 сентября: 4 сентября мы не работаем. С 5 сентября оформление снова доступно."; updateSpecialOrderUi(); return; }
-  if (isClosedDeliveryDate(document.getElementById("deliveryDate").value)) { err.textContent = "4 сентября мы не работаем. Выберите 5 сентября или другую доступную дату."; return; }
+  if (specialOrderClosed()) { err.textContent = "19 и 20 октября не работаем — Вьетнамский женский день (аналог 8 марта). 21 октября возобновляем работу в обычном режиме."; updateSpecialOrderUi(); return; }
+  if (isClosedDeliveryDate(document.getElementById("deliveryDate").value)) { err.textContent = "Извините, пожалуйста! 19 и 20 октября — Вьетнамский женский день (аналог 8 марта), мы не работаем, оформить заказ на эти даты нельзя. 21 октября возобновляем работу в обычном режиме 🌸"; return; }
 
   var its = cartRead();
   if (!its.length) { err.textContent = "Корзина пуста."; return; }

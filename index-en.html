@@ -1053,10 +1053,10 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="instagram.com"]').forEach(
         el.style.display = '';
         if(hoursEl) hoursEl.textContent=defaultHours;
         if(introEl) introEl.textContent=defaultIntro;
-        if(date==='2026-09-04'){
-            if(hoursEl) hoursEl.textContent='🕐 September 4 — closed';
-            if(introEl) introEl.textContent='We are closed today. Normal service resumes on September 5.';
-            el.textContent='📅 Orders and deliveries are closed on September 4. We reopen September 5.';
+        if(date==='2026-10-19'||date==='2026-10-20'){
+            if(hoursEl) hoursEl.textContent='🕐 October 19 and 20 — closed';
+            if(introEl) introEl.textContent='Vietnamese Women\'s Day (like March 8). We resume normal work on October 21.';
+            el.textContent='📅 Orders and deliveries are closed on October 19 and 20. We reopen October 21.';
             return;
         }
         if(date==='2026-09-03'){
