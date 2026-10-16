@@ -348,21 +348,21 @@ function ntParts(now) {
 }
 function pad(n) { return n < 10 ? "0" + n : "" + n; }
 function isoDate(t) { return t.y + "-" + pad(t.mo) + "-" + pad(t.d); }
-function isClosedDeliveryDate(iso) { return iso === "2026-10-19" || iso === "2026-10-20"; } // Вьетнамский женский день
+function isClosedDeliveryDate(iso) { return iso >= "2026-10-17" && iso <= "2026-10-20"; } // Вьетнамский женский день
 function skipClosedDeliveryDate(base) {
   while (isClosedDeliveryDate(base.getUTCFullYear() + "-" + pad(base.getUTCMonth() + 1) + "-" + pad(base.getUTCDate()))) base.setUTCDate(base.getUTCDate() + 1);
   return base;
 }
 function specialOrderClosed(now) {
   var t = ntParts(now), d = isoDate(t);
-  return d === "2026-10-19" || d === "2026-10-20";
+  return false; // 17–20.10 закрыты только даты
 }
 function updateSpecialOrderUi() {
-  var t = ntParts(), d = isoDate(t), active = d >= "2026-10-19" && d <= "2026-10-20";
+  var t = ntParts(), d = isoDate(t), active = d >= "2026-10-17" && d <= "2026-10-20";
   var notice = document.getElementById("specialScheduleNotice");
   if (notice) {
     notice.classList.toggle("hidden", !active);
-    notice.textContent = "📅 19 и 20 октября не работаем — Вьетнамский женский день (аналог 8 марта). 21 октября возобновляем работу в обычном режиме.";
+    notice.textContent = "🌸 Извините! В связи с повышенным спросом (20 октября — Вьетнамский женский день) заказы на 17–20 октября принимаются только напрямую через оператора: Telegram @babaskin_o · WhatsApp +374 43 529162 · Instagram @flowers_vietnam_inst. Онлайн-оформление доступно на даты с 21 октября.";
   }
   var btn = document.getElementById("submitBtn"), closed = specialOrderClosed();
   if (btn) {
@@ -393,7 +393,7 @@ async function rebuildTimes() {
   var dateNotice = document.getElementById("dateScheduleNotice");
   if (dateNotice) {
     var message = isClosedDeliveryDate(selectedDate)
-      ? "Извините, пожалуйста! 19 и 20 октября — Вьетнамский женский день (аналог 8 марта), мы не работаем, оформить заказ на эти даты нельзя. 21 октября возобновляем работу в обычном режиме 🌸"
+      ? "🌸 Извините! В связи с повышенным спросом (20 октября — Вьетнамский женский день) заказы на 17–20 октября принимаются только напрямую через оператора: Telegram @babaskin_o · WhatsApp +374 43 529162 · Instagram @flowers_vietnam_inst. Онлайн-оформление доступно на даты с 21 октября."
       : "";
     dateNotice.classList.toggle("hidden", !message);
     dateNotice.textContent = message;
@@ -570,7 +570,7 @@ function submitOrder(e) {
   var err = document.getElementById("err1"); err.textContent = "";
   var form = e.target;
   if (specialOrderClosed()) { err.textContent = "19 и 20 октября не работаем — Вьетнамский женский день (аналог 8 марта). 21 октября возобновляем работу в обычном режиме."; updateSpecialOrderUi(); return; }
-  if (isClosedDeliveryDate(document.getElementById("deliveryDate").value)) { err.textContent = "Извините, пожалуйста! 19 и 20 октября — Вьетнамский женский день (аналог 8 марта), мы не работаем, оформить заказ на эти даты нельзя. 21 октября возобновляем работу в обычном режиме 🌸"; return; }
+  if (isClosedDeliveryDate(document.getElementById("deliveryDate").value)) { err.textContent = "🌸 Извините! В связи с повышенным спросом (20 октября — Вьетнамский женский день) заказы на 17–20 октября принимаются только напрямую через оператора: Telegram @babaskin_o · WhatsApp +374 43 529162 · Instagram @flowers_vietnam_inst. Онлайн-оформление доступно на даты с 21 октября."; return; }
 
   var its = cartRead();
   if (!its.length) { err.textContent = "Корзина пуста."; return; }

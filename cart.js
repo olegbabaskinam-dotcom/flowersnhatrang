@@ -196,7 +196,7 @@
   }
   function injectSpecialSchedule() {
     var t = nhaTrangNow();
-    if (!t || t.date < "2026-10-19" || t.date > "2026-10-20") return;
+    return; // плашка на всех страницах отключена (17.10)
     var b = document.getElementById("flw-special-schedule");
     if (!b) {
       b = document.createElement("div"); b.id = "flw-special-schedule";

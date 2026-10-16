@@ -1087,7 +1087,7 @@ document.querySelectorAll('a[href*="kakao.com"], a[href*="instagram.com"]').forE
         el.style.display = '';
         if(hoursEl) hoursEl.textContent=defaultHours;
         if(introEl) introEl.textContent=defaultIntro;
-        if(date==='2026-10-19'||date==='2026-10-20'){
+        if(false){ // 19–20.10 на главной не показываем
             if(hoursEl) hoursEl.textContent='🕐 10월 19일·20일 — 휴무';
             if(introEl) introEl.textContent='베트남 여성의 날(3월 8일 여성의 날과 같은 날). 10월 21일부터 정상 영업합니다.';
             el.textContent='📅 10월 19일과 20일은 주문과 배달을 하지 않습니다. 10월 21일부터 다시 운영합니다.';
