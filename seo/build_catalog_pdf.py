@@ -708,9 +708,49 @@ def build(lang, out_path, version="2.0"):
     c.save()
     return total, out_path
 
+def build_one(lang, out_path, version, only_cat):
+    """Каталог 5.4: отдельный PDF одной категории. В категориях — только ЧИСТЫЕ позиции
+    (без комбо); only_cat="combo" — все комбо-наборы отдельным файлом."""
+    global TMP
+    TMP = os.path.join(os.path.dirname(os.path.abspath(__file__)), "_catalog_tmp")
+    os.makedirs(TMP, exist_ok=True)
+    t = dict(L[lang], _lang=lang)
+    F = register_fonts(lang)
+    by = members_by_cat(load_products())
+    if only_cat == "combo":
+        items = by["combo"]
+    else:
+        items = [p for p in by[only_cat] if not B.is_combo(B.product_cat(p))]
+    hero = [os.path.join(ROOT, f"img/products/{p['slug']}/1.webp") for p in items[:3]]
+    c = canvas.Canvas(out_path, pagesize=A4)
+    c.setTitle(f"Каталог {version} — {t['cats'][only_cat]}")
+    draw_cover(c, F, t, hero, f"{version} · {t['cats'][only_cat]}")
+    draw_info(c, F, t, lang)
+    per = {"nabory": 1}.get(only_cat, 2)
+    page_no = 3
+    chunks = [items[i:i+per] for i in range(0, len(items), per)] or [[]]
+    for ci, chunk in enumerate(chunks):
+        if ci == 0:
+            y = draw_cat_header(c, F, t, only_cat, len(items))
+        else:
+            c.setFillColor(GREY); c.setFont(F["serifi"], 11)
+            c.drawString(M, PH-M-6, t["cats"][only_cat])
+            c.setStrokeColor(LINE); c.setLineWidth(0.6); c.line(M, PH-M-14, PW-M, PH-M-14)
+            y = PH - M - 30
+        for p in chunk:
+            used = (draw_gift_card if (only_cat == "nabory" and is_gift(p)) else draw_card)(c, F, t, p, lang, M, y, CW)
+            y -= used + 30
+        draw_footer(c, F, t, page_no, t["cats"][only_cat])
+        c.showPage(); page_no += 1
+    c.save()
+    return page_no - 1, len(items), out_path
+
 if __name__ == "__main__":
     lang = sys.argv[1] if len(sys.argv) > 1 else "ru"
     out = sys.argv[2] if len(sys.argv) > 2 else f"/tmp/catalog_{lang}.pdf"
     version = sys.argv[3] if len(sys.argv) > 3 else "2.0"
+    if len(sys.argv) > 4:
+        total, n, path = build_one(lang, out, version, sys.argv[4])
+        print(f"{lang}/{sys.argv[4]}: {n} товаров, {total} страниц → {path}"); sys.exit(0)
     total, path = build(lang, out, version)
     print(f"{lang}: {total} страниц → {path}")
