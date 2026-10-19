@@ -161,6 +161,15 @@
     </script>
 <link rel="preload" as="image" href="img/site/articles-banner.webp" fetchpriority="high">
 <style>@media (max-width:768px){img[src^="img/site/home-"]{object-position:right center !important}}</style>
+<style>/*THIN-BANNERS 19.10.2026*/
+.hbs{padding-top:6px!important;padding-bottom:6px!important}
+.hb{height:110px!important;border-radius:20px!important}
+.hb>div.flex{flex-direction:row!important;align-items:center!important;justify-content:space-between!important;gap:12px;padding:0 28px!important}
+.hb p{display:none!important}
+.hb h2{font-size:clamp(20px,2.4vw,30px)!important;margin:0!important;line-height:1.15!important}
+.hb span{margin:0!important;padding:.55rem 1.1rem!important;align-self:center!important;white-space:nowrap;flex-shrink:0}
+@media(max-width:640px){.hb{height:84px!important;border-radius:16px!important}.hb>div.flex{padding:0 16px!important}.hb h2{font-size:18px!important}.hb span{font-size:12px!important;padding:.4rem .7rem!important}}
+</style>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
 
@@ -797,8 +806,8 @@
 
 <!--MARK-ONLINE-ORDER-->
     <!-- Баннер: оформить онлайн заказ (первый) -->
-    <section class="reveal py-10 px-4 max-w-5xl mx-auto w-full">
-        <a href="order.html" class="block rounded-3xl overflow-hidden relative group" style="height: 340px; background:#3a3a3a;">
+    <section class="reveal hbs py-10 px-4 max-w-5xl mx-auto w-full">
+        <a href="order.html" class="hb block rounded-3xl overflow-hidden relative group" style="height: 340px; background:#3a3a3a;">
             <img src="img/site/home-order.webp" alt="Оформить онлайн заказ цветов Нячанг" onerror="this.style.display='none'"
                  class="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105" width="1280" height="426" loading="lazy" decoding="async">
             <div class="absolute inset-0 transition-opacity duration-500"
@@ -815,8 +824,8 @@
     </section>
 
     <!-- Баннер: готовые наборы для праздника (второй) -->
-    <section class="reveal py-10 px-4 max-w-5xl mx-auto w-full">
-        <a href="prazdnik.html" class="block rounded-3xl overflow-hidden relative group" style="height: 340px;">
+    <section class="reveal hbs py-10 px-4 max-w-5xl mx-auto w-full">
+        <a href="prazdnik.html" class="hb block rounded-3xl overflow-hidden relative group" style="height: 340px;">
             <img src="img/site/home-prazdnik.webp" alt="Готовые наборы для праздника Нячанг"
                  class="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105" width="1280" height="426" loading="lazy" decoding="async">
             <div class="absolute inset-0 transition-opacity duration-500"
@@ -833,8 +842,8 @@
     </section>
 
     <!-- Баннер шаров -->
-    <section class="reveal py-10 px-4 max-w-5xl mx-auto w-full">
-        <a href="balloons.html" class="block rounded-3xl overflow-hidden relative group" style="height: 340px;">
+    <section class="reveal hbs py-10 px-4 max-w-5xl mx-auto w-full">
+        <a href="balloons.html" class="hb block rounded-3xl overflow-hidden relative group" style="height: 340px;">
             <img src="img/site/home-balloons.webp"
                  alt="Гелиевые шары Нячанг"
                  class="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105" width="1280" height="640" loading="lazy" decoding="async">
@@ -852,8 +861,8 @@
     </section>
 <!--MARK-CAKES-->
     <!-- Баннер тортов -->
-    <section class="reveal py-10 px-4 max-w-5xl mx-auto w-full">
-        <a href="torty.html" class="block rounded-3xl overflow-hidden relative group" style="height: 340px;">
+    <section class="reveal hbs py-10 px-4 max-w-5xl mx-auto w-full">
+        <a href="torty.html" class="hb block rounded-3xl overflow-hidden relative group" style="height: 340px;">
             <img src="img/site/home-torty.webp"
                  alt="Торты Нячанг доставка"
                  class="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105" width="1280" height="640" loading="lazy" decoding="async">
@@ -870,8 +879,8 @@
         </a>
     </section>
     <!-- Баннер наборов -->
-    <section class="reveal py-10 px-4 max-w-5xl mx-auto w-full">
-        <a href="nabory.html" class="block rounded-3xl overflow-hidden relative group" style="height: 340px;">
+    <section class="reveal hbs py-10 px-4 max-w-5xl mx-auto w-full">
+        <a href="nabory.html" class="hb block rounded-3xl overflow-hidden relative group" style="height: 340px;">
             <img src="img/site/home-nabory.webp" alt="Подарочные наборы Нячанг" class="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105" width="1280" height="640" loading="lazy" decoding="async">
             <div class="absolute inset-0 transition-opacity duration-500" style="background: linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 100%);"></div>
             <div class="absolute inset-0 flex flex-col justify-center px-10 md:px-14">
@@ -887,8 +896,8 @@
 
 <!--MARK-ARTICLES-->
     <!-- Сквозной блок: Статьи -->
-    <section class="reveal py-10 px-4 max-w-5xl mx-auto w-full">
-        <a href="blog-ru.html" class="block rounded-3xl overflow-hidden relative group" style="height: 340px;">
+    <section class="reveal hbs py-10 px-4 max-w-5xl mx-auto w-full">
+        <a href="blog-ru.html" class="hb block rounded-3xl overflow-hidden relative group" style="height: 340px;">
             <img src="img/site/home-articles.webp" alt="Статьи" class="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105" width="1280" height="568" loading="lazy" decoding="async">
             <div class="absolute inset-0 transition-opacity duration-500" style="background: linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 100%);"></div>
             <div class="absolute inset-0 flex flex-col justify-center px-10 md:px-14">
