@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """build_kolyaski.py — лендинг «Аренда детских колясок» RU/EN/KO (19.10.2026).
 
-Шапка/подвал берутся из podarki*.html (единый стиль сайта), контент — ниже.
-Новая коляска: добавить словарь в STROLLERS и перезапустить скрипт.
+kolyaski*.html — ГЛАВНАЯ раздела (как torty/balloons): сетка позиций (коляски, манежи…) + условия.
+catalog/<slug>-<ru|en|ko>.html — страница каждой позиции (фото, цены, характеристики, условия).
+Шапка/подвал: раздел — из podarki*.html, позиция — из catalog/25-rozovyh-roz-*.html.
+Новая позиция: добавить словарь в STROLLERS (+ фото в img/products/<slug>/) и перезапустить скрипт.
 Цены аренды — PRICES (VND), ₽/$ считаются по правилам сайта (₽ курс 270 вверх до 100, $ = /25000).
 """
 import os, re, math, json, html
@@ -14,6 +16,7 @@ PRICES = [(1, 300000), (2, 400000), (3, 500000), (4, 650000), (5, 750000), (6, 9
 STROLLERS = [{
     "slug": "arenda-detskoy-kolyaski-capella",
     "photos": 14,
+    "prices": PRICES,
     "name": {"ru": "Прогулочная коляска Capella (бирюзовая)",
              "en": "Capella stroller (turquoise)",
              "ko": "카펠라 유모차 (청록색)"},
@@ -194,50 +197,91 @@ t.addEventListener('scroll',function(){c.textContent=(i()+1)+' / '+n;},{passive:
 g.querySelector('.kl-prev').onclick=function(){go(i()-1);};g.querySelector('.kl-next').onclick=function(){go(i()+1);};})();
 </script>"""
 
-def page(lang):
-    t = T[lang]
-    src = open(os.path.join(ROOT, SRC[lang]), encoding="utf-8").read()
+EXTRA = {
+ "ru": {"items_h": "Коляски и манежи в аренду", "more": "Подробнее →", "per_day": "/ день", "from": "от", "home": "Главная", "cat": "Аренда колясок", "order_h": "Заказать"},
+ "en": {"items_h": "Strollers & playpens for rent", "more": "Details →", "per_day": "/ day", "from": "from", "home": "Home", "cat": "Stroller rental", "order_h": "Order"},
+ "ko": {"items_h": "대여 유모차·놀이울", "more": "자세히 →", "per_day": "/ 1일", "from": "", "home": "홈", "cat": "유모차 대여", "order_h": "주문하기"},
+}
+CSS2 = """<style id="kl-css2">
+.kl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;max-width:64rem;margin:0 auto}
+.kl-card{display:block;background:#fff;border:1px solid #f0e0e5;border-radius:18px;overflow:hidden;text-decoration:none;color:#1a1a1a;transition:.2s}
+.kl-card:hover{border-color:#c0687a;box-shadow:0 6px 24px rgba(192,104,122,.12)}
+.kl-card img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}
+.kl-card div{padding:12px 14px 14px}.kl-card b{display:block;font-size:15px;margin-bottom:4px}
+.kl-card i{display:block;font-style:normal;color:#c0687a;font-weight:700;margin-bottom:10px}
+.kl-card span{display:block;text-align:center;border:1.5px solid #c0687a;color:#c0687a;border-radius:12px;padding:9px;font-weight:600;font-size:14px}
+.kl-crumbs{max-width:64rem;margin:0 auto;padding:12px 16px 0;font-size:12px;color:#a8a29e}.kl-crumbs a{color:#a8566a;text-decoration:none}
+.kl-hero-img{border-radius:20px;overflow:hidden;border:1px solid #f0d0d8}.kl-hero-img img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}
+</style>"""
+
+def price_rows(lang, t, prices):
+    out = ""
+    for d, v in prices:
+        per = round(v / d / 1000) * 1000
+        if lang == "ru":
+            out += f'<tr><td><b>{t["days"][d-1]}</b></td><td><b>{vnd(v)} ₫</b><small>≈ ${usd(v)} · {vnd(rub(v))} ₽</small></td><td>{vnd(per)} ₫</td></tr>'
+        else:
+            out += f'<tr><td><b>{t["days"][d-1]}</b></td><td><b>{v:,} ₫</b><small>≈ ${usd(v)}</small></td><td>{per:,} ₫</td></tr>'
+    return out
+
+def money(lang, v): return f"{vnd(v)} ₫" if lang == "ru" else f"{v:,} ₫"
+
+def parts(srcfile):
+    src = open(os.path.join(ROOT, srcfile), encoding="utf-8").read()
     icons(src)
     head = src[:src.index("</head>")]
-    body_start = src.index("<body")
-    header = src[body_start:src.index("</header>", body_start) + len("</header>")]
+    b = src.index("<body")
+    header = src[b:src.index("</header>", b) + len("</header>")]
     footer = src[src.index('<footer class="sf"'):]
+    return head, header, footer
+
+def fix_head(head, title, desc, url, img, ld, pre, cleanup_urls):
+    head = re.sub(r"<title>.*?</title>", f"<title>{html.escape(title)}</title>", head, flags=re.S)
+    head = re.sub(r'(<meta (?:name="description"|property="og:description"|name="twitter:description") content=")[^"]*', lambda m: m.group(1) + html.escape(desc), head)
+    head = re.sub(r'(<meta (?:property="og:title"|name="twitter:title") content=")[^"]*', lambda m: m.group(1) + html.escape(title), head)
+    head = re.sub(r'(<meta (?:property="og:image"|name="twitter:image") content=")[^"]*', lambda m: m.group(1) + img, head)
+    head = re.sub(r'(<meta property="og:url" content=")[^"]*', lambda m: m.group(1) + url, head)
+    for a, b2 in cleanup_urls:
+        head = head.replace(a, b2)
+    head = re.sub(r'<script type="application/ld\+json">.*?</script>', "", head, flags=re.S)
+    head = re.sub(r'<link rel="preload" as="image"[^>]*>', "", head)
+    head = re.sub(r'<style id="lnd-css">.*?</style>', "", head, flags=re.S)
+    return head + '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + "</script>\n" + pre + CSS + "\n" + CSS2 + "\n"
+
+PFILES = lambda slug: {l: f"catalog/{slug}-{l}.html" for l in ("ru", "en", "ko")}
+
+def rules_block(t, zimg):
+    return (f'<section class="kl-sec"><h2 class="kl-h2">{t["rules_h"]}</h2><ol class="kl-rules">' + "".join(f"<li>{r}</li>" for r in t["rules"]) + "</ol>"
+            + (f'<div class="kl-map"><img src="{zimg}" alt="{t["map_alt"]}" width="900" height="1040" loading="lazy" decoding="async"><p>{t["map_cap"]}</p></div>' if zimg else "") + "</section>")
+
+def how_block(lang, t):
+    return (f'<section class="kl-sec" style="padding-bottom:48px"><h2 class="kl-h2">{t["how_h"]}</h2><ol class="kl-how">'
+            + "".join(f"<li><b>{i}</b>{h}</li>" for i, h in enumerate(t["how"], 1)) + f'</ol><div class="kl-btns" style="max-width:34rem;margin:0 auto">{buttons(lang, t)}</div></section>')
+
+def category(lang):
+    t, x = T[lang], EXTRA[lang]
+    head, header, footer = parts(SRC[lang])
     fn = FILES[lang]; url = f"{DOMAIN}/{fn}"
-    for l2 in ("ru", "en", "ko"):  # языковой переключатель → kolyaski*
+    for l2 in ("ru", "en", "ko"):
         header = header.replace(f'href="{SRC[l2]}" style="padding:3px', f'href="{FILES[l2]}" style="padding:3px')
     bal = {"ru": "balloons.html", "en": "balloons-en.html", "ko": "balloons-kr.html"}[lang]
     header = re.sub(r'href="podarki(?:-en|-kr)?\.html"((?: class| style)="[^"]*">🎈)', lambda m: f'href="{bal}"' + m.group(1), header)
     s0 = STROLLERS[0]
-    img1 = f"img/products/{s0['slug']}/1.webp"
-    # head: заменяем title/meta/canonical/hreflang/og/JSON-LD/preload
-    head = re.sub(r"<title>.*?</title>", f"<title>{html.escape(t['title'])}</title>", head, flags=re.S)
-    head = re.sub(r'(<meta (?:name="description"|property="og:description"|name="twitter:description") content=")[^"]*', lambda m: m.group(1) + html.escape(t["desc"]), head)
-    head = re.sub(r'(<meta (?:property="og:title"|name="twitter:title") content=")[^"]*', lambda m: m.group(1) + html.escape(t["title"]), head)
-    head = re.sub(r'(<meta (?:property="og:image"|name="twitter:image") content=")[^"]*', lambda m: m.group(1) + f"{DOMAIN}/img/products/{s0['slug']}/1.jpg", head)
-    head = head.replace(f'/{SRC[lang]}"', f'/{fn}"')
-    for l2 in ("ru", "en", "ko"):
-        head = head.replace(f'{DOMAIN}/{SRC[l2]}"', f'{DOMAIN}/{FILES[l2]}"')
-    head = re.sub(r'<script type="application/ld\+json">.*?</script>', "", head, flags=re.S)
-    head = re.sub(r'<link rel="preload" as="image"[^>]*>', "", head)
-    head = re.sub(r'<style id="lnd-css">.*?</style>', "", head, flags=re.S)
-    ld = {"@context": "https://schema.org", "@type": "Product", "name": s0["name"][lang], "brand": {"@type": "Brand", "name": "Capella"},
-          "image": [f"{DOMAIN}/img/products/{s0['slug']}/{i}.webp" for i in range(1, 4)], "description": t["desc"], "url": url,
-          "offers": {"@type": "AggregateOffer", "priceCurrency": "VND", "lowPrice": PRICES[0][1], "highPrice": PRICES[-1][1], "offerCount": len(PRICES),
-                     "availability": "https://schema.org/InStock", "seller": {"@type": "Organization", "name": "Surprise Service Nha Trang"}}}
-    head += ('<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + "</script>\n"
-             f'<link rel="preload" as="image" href="{img1}" fetchpriority="high">\n' + CSS + "\n")
-    # галерея
-    imgs = "".join(f'<img src="img/products/{s0["slug"]}/{i}.webp" alt="{html.escape(s0["name"][lang])} — {i}" width="960" height="1280" loading="{"eager" if i == 1 else "lazy"}" decoding="async">' for i in range(1, s0["photos"] + 1))
-    gal = (f'<div class="kl-gal"><div class="kl-track">{imgs}</div><button type="button" class="kl-arr kl-prev" aria-label="‹">‹</button>'
-           f'<button type="button" class="kl-arr kl-next" aria-label="›">›</button><span class="kl-cnt">1 / {s0["photos"]}</span>'
-           f'<div class="kl-name">{html.escape(s0["name"][lang])}</div></div>')
-    rows = "".join(f'<tr><td><b>{t["days"][d-1]}</b></td><td><b>{vnd(v)} ₫</b><small>≈ ${usd(v)} · {vnd(rub(v))} ₽</small></td><td>{vnd(round(v/d/1000)*1000)} ₫</td></tr>' if lang == "ru"
-                   else f'<tr><td><b>{t["days"][d-1]}</b></td><td><b>{v:,} ₫</b><small>≈ ${usd(v)}</small></td><td>{round(v/d/1000)*1000:,} ₫</td></tr>' for d, v in PRICES)
-    p1 = f"{vnd(PRICES[0][1])} ₫" if lang == "ru" else f"{PRICES[0][1]:,} ₫"
+    ld = {"@context": "https://schema.org", "@type": "ItemList", "name": t["h1"], "url": url,
+          "itemListElement": [{"@type": "ListItem", "position": i + 1, "url": f"{DOMAIN}/{PFILES(s['slug'])[lang]}", "name": s["name"][lang]} for i, s in enumerate(STROLLERS)]}
+    cl = [(f'/{SRC[lang]}"', f'/{fn}"')] + [(f'{DOMAIN}/{SRC[l2]}"', f'{DOMAIN}/{FILES[l2]}"') for l2 in ("ru", "en", "ko")]
+    head = fix_head(head, t["title"], t["desc"], url, f"{DOMAIN}/img/products/{s0['slug']}/1.jpg", ld,
+                    f'<link rel="preload" as="image" href="img/products/{s0["slug"]}/1.webp" fetchpriority="high">\n', cl)
+    p1 = money(lang, min(v for s in STROLLERS for _, v in s["prices"]))
     badges = {"ru": ["✅ Без залога", "🏨 Доставка в отель", "💵 Оплата при получении", f"от {p1} / день"],
               "en": ["✅ No deposit", "🏨 Hotel delivery", "💵 Pay on delivery", f"from {p1} / day"],
               "ko": ["✅ 보증금 없음", "🏨 호텔 배달", "💵 받을 때 결제", f"1일 {p1}부터"]}[lang]
-    zl = {"ru": "ru", "en": "en", "ko": "ko"}[lang]
+    cards = ""
+    for s in STROLLERS:
+        pv = money(lang, s["prices"][0][1])
+        price = f"{x['from']} {pv} {x['per_day']}".strip()
+        cards += (f'<a class="kl-card" href="{PFILES(s["slug"])[lang]}"><img src="img/products/{s["slug"]}/1.webp" alt="{html.escape(s["name"][lang])}" width="960" height="1280" loading="lazy" decoding="async">'
+                  f'<div><b>{html.escape(s["name"][lang])}</b><i>{price}</i><span>{x["more"]}</span></div></a>')
     content = f"""
 <main>
 <section class="kl-hero"><div class="kl-in kl-top">
@@ -248,24 +292,64 @@ def page(lang):
     <div class="kl-badges">{''.join(f'<span>{b}</span>' for b in badges)}</div>
     <div class="kl-btns">{buttons(lang, t)}</div>
   </div>
+  <a class="kl-hero-img" href="#items"><img src="img/products/{s0['slug']}/1.webp" alt="{html.escape(t['h1'])}" width="960" height="1280" fetchpriority="high" decoding="async"></a>
+</div></section>
+<section class="kl-sec" id="items"><h2 class="kl-h2">{x['items_h']}</h2><div class="kl-grid">{cards}</div></section>
+{rules_block(t, f"img/site/zones/zone-center-{lang}.webp")}
+{how_block(lang, t)}
+</main>
+"""
+    out = head + "</head>\n" + header + "\n" + content + "\n    " + footer
+    open(os.path.join(ROOT, fn), "w", encoding="utf-8").write(out); print("OK", fn)
+
+def product(lang, s):
+    t, x = T[lang], EXTRA[lang]
+    srcp = f"catalog/25-rozovyh-roz-{lang}.html"
+    head, header, footer = parts(srcp)
+    header = re.sub(r'<script type="application/ld\+json">.*?</script>', "", header, flags=re.S)
+    files = PFILES(s["slug"]); fn = files[lang]; url = f"{DOMAIN}/{fn}"
+    for l2 in ("ru", "en", "ko"):
+        header = header.replace(f'href="25-rozovyh-roz-{l2}.html"', f'href="{s["slug"]}-{l2}.html"')
+    cl = [(f"{DOMAIN}/catalog/25-rozovyh-roz-{l2}.html\"", f"{DOMAIN}/{files[l2]}\"") for l2 in ("ru", "en", "ko")]
+    name = s["name"][lang]
+    title = f"{name} — {t['h1']}"
+    desc = f"{name}. " + t["desc"]
+    ld = {"@context": "https://schema.org", "@type": "Product", "name": name, "brand": {"@type": "Brand", "name": s.get("brand", "Capella")},
+          "image": [f"{DOMAIN}/img/products/{s['slug']}/{i}.webp" for i in range(1, 4)], "description": desc, "url": url,
+          "offers": {"@type": "AggregateOffer", "priceCurrency": "VND", "lowPrice": s["prices"][0][1], "highPrice": s["prices"][-1][1], "offerCount": len(s["prices"]),
+                     "availability": "https://schema.org/InStock", "seller": {"@type": "Organization", "name": "Surprise Service Nha Trang"}}}
+    head = fix_head(head, title, desc, url, f"{DOMAIN}/img/products/{s['slug']}/1.jpg", ld,
+                    f'<link rel="preload" as="image" href="../img/products/{s["slug"]}/1.webp" fetchpriority="high">\n', cl)
+    imgs = "".join(f'<img src="../img/products/{s["slug"]}/{i}.webp" alt="{html.escape(name)} — {i}" width="960" height="1280" loading="{"eager" if i == 1 else "lazy"}" decoding="async">' for i in range(1, s["photos"] + 1))
+    gal = (f'<div class="kl-gal"><div class="kl-track">{imgs}</div><button type="button" class="kl-arr kl-prev" aria-label="‹">‹</button>'
+           f'<button type="button" class="kl-arr kl-next" aria-label="›">›</button><span class="kl-cnt">1 / {s["photos"]}</span></div>')
+    catf = "../" + FILES[lang]; homef = "../" + {"ru": "index.html", "en": "index-en.html", "ko": "index-kr.html"}[lang]
+    pv = money(lang, s["prices"][0][1])
+    content = f"""
+<main>
+<nav class="kl-crumbs"><a href="{homef}">{x['home']}</a> › <a href="{catf}">{x['cat']}</a> › {html.escape(name)}</nav>
+<section class="kl-hero"><div class="kl-in kl-top">
   {gal}
+  <div>
+    <p class="kl-eb">{t['eyebrow']}</p>
+    <h1 class="kl-h1" style="font-size:clamp(26px,3.2vw,38px)">{html.escape(name)}<span>{t['h1s']}</span></h1>
+    <p class="kl-lead" style="font-size:22px;font-weight:700;color:#c0687a">{(x['from'] + ' ' + pv + ' ' + x['per_day']).strip()}</p>
+    <ul class="kl-feat" style="grid-template-columns:1fr;margin-bottom:16px">{''.join(f'<li>{f}</li>' for f in t['feat'])}</ul>
+    <div class="kl-btns">{buttons(lang, t)}</div>
+  </div>
 </div></section>
 <section class="kl-sec"><h2 class="kl-h2">{t['price_h']}</h2>
-<table class="kl-tbl"><thead><tr>{''.join(f'<th>{c}</th>' for c in t['col'])}</tr></thead><tbody>{rows}</tbody></table></section>
-<section class="kl-sec"><h2 class="kl-h2">{t['rules_h']}</h2>
-<ol class="kl-rules">{''.join(f'<li>{r}</li>' for r in t['rules'])}</ol>
-<div class="kl-map"><img src="img/site/zones/zone-center-{zl}.webp" alt="{t['map_alt']}" width="900" height="1040" loading="lazy" decoding="async"><p>{t['map_cap']}</p></div></section>
-<section class="kl-sec"><h2 class="kl-h2">{t['feat_h']}</h2><ul class="kl-feat">{''.join(f'<li>{f}</li>' for f in t['feat'])}</ul></section>
-<section class="kl-sec" style="padding-bottom:48px"><h2 class="kl-h2">{t['how_h']}</h2>
-<ol class="kl-how">{''.join(f'<li><b>{i}</b>{h}</li>' for i, h in enumerate(t['how'], 1))}</ol>
-<div class="kl-btns" style="max-width:34rem;margin:0 auto">{buttons(lang, t)}</div></section>
+<table class="kl-tbl"><thead><tr>{''.join(f'<th>{c}</th>' for c in t['col'])}</tr></thead><tbody>{price_rows(lang, t, s['prices'])}</tbody></table></section>
+{rules_block(t, f"../img/site/zones/zone-center-{lang}.webp")}
+{how_block(lang, t)}
 </main>
 """
     out = head + "</head>\n" + header + "\n" + content + "\n    " + footer
     out = out.replace("</body>", JS + "\n</body>", 1)
-    open(os.path.join(ROOT, fn), "w", encoding="utf-8").write(out)
-    print("OK", fn, len(out))
+    open(os.path.join(ROOT, fn), "w", encoding="utf-8").write(out); print("OK", fn)
 
 if __name__ == "__main__":
     for l in ("ru", "en", "ko"):
-        page(l)
+        category(l)
+        for s in STROLLERS:
+            product(l, s)

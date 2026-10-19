@@ -160,9 +160,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&display=swap&subset=cyrillic" rel="stylesheet">
     <style>
     .hs{min-height:calc(100vh - 74px);min-height:calc(100svh - 74px);display:flex;background:linear-gradient(180deg,#fff 0%,#fdf4f7 100%)}
-    .hs-in{max-width:1240px;width:100%;margin:0 auto;padding:16px 20px;display:grid;grid-template-columns:minmax(300px,380px) 1fr;gap:20px}
-    .hs-left{background:#fff;border:1px solid #f0d0d8;border-radius:22px;box-shadow:0 6px 24px rgba(192,104,122,.07);padding:22px 22px;display:flex;flex-direction:column;justify-content:center;text-align:center}
-    .hs-h1{font-family:Georgia,'Playfair Display',serif;font-style:italic;font-weight:500;color:#1a1a1a;font-size:clamp(24px,2.6vw,34px);line-height:1.15;margin:0 0 8px}
+    .hs-in{max-width:1320px;width:100%;margin:0 auto;padding:12px 16px;display:grid;grid-template-columns:minmax(250px,300px) 1fr;gap:14px}
+    .hs-left{background:#fff;border:1px solid #f0d0d8;border-radius:22px;box-shadow:0 6px 24px rgba(192,104,122,.07);padding:16px 16px;display:flex;flex-direction:column;justify-content:center;text-align:center}
+    .hs-h1{font-family:Georgia,'Playfair Display',serif;font-style:italic;font-weight:500;color:#1a1a1a;font-size:clamp(22px,2.2vw,30px);line-height:1.15;margin:0 0 8px}
     .hs-sub{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;color:#c0687a;font-weight:600;letter-spacing:.2px;font-size:clamp(18px,1.65vw,23px);line-height:1.2;margin:0 0 12px}
     .hs-txt{color:#57534e;font-size:13px;line-height:1.45;margin:0 0 8px}
     .hs-small{color:#c0687a;font-size:12px;margin:0 0 2px}
@@ -173,12 +173,12 @@
     .hs-right{display:flex;flex-direction:column;gap:12px;min-height:0}
     .hs-grid{flex:1;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:12px;min-height:0}
     .hc{position:relative;border-radius:18px;overflow:hidden;background:#fff;border:1px solid #f0d0d8;min-height:150px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.06)}
-    .hc-track{position:absolute;top:58px;left:0;right:0;bottom:0;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+    .hc-track{position:absolute;top:0;left:0;right:0;bottom:0;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
     .hc-track::-webkit-scrollbar{display:none}
     .hc-track img{flex:0 0 100%;width:100%;height:100%;object-fit:cover;scroll-snap-align:start}
     .hc-lbl{position:absolute;left:0;right:0;bottom:0;padding:34px 10px 22px;background:linear-gradient(0deg,rgba(0,0,0,.42),rgba(0,0,0,0));color:#fff;text-decoration:none;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px}
-    .hc-top{position:absolute;top:0;left:0;right:0;height:58px;z-index:2;display:flex;align-items:center;justify-content:center;padding:0 8px;text-decoration:none;background:#fff}
-    .hc-top b{font-family:'Cormorant Garamond','Noto Serif KR',Georgia,serif;font-style:italic;font-weight:600;font-size:clamp(21px,1.9vw,27px);line-height:1;letter-spacing:.3px;color:#7a2e48;text-align:center}
+    .hc-top{position:absolute;top:0;left:0;right:0;height:auto;z-index:2;display:flex;align-items:flex-start;justify-content:center;padding:12px 8px 34px;text-decoration:none;background:linear-gradient(180deg,rgba(0,0,0,.5),rgba(0,0,0,0));pointer-events:auto}
+    .hc-top b{font-family:'Cormorant Garamond','Noto Serif KR',Georgia,serif;font-style:italic;font-weight:600;font-size:clamp(21px,1.9vw,27px);line-height:1;letter-spacing:.3px;color:#fff;text-align:center;text-shadow:0 1px 6px rgba(0,0,0,.45)}
     .hc-lbl .hc-open{flex:0 0 auto;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:#fff;background:transparent;border:1px solid rgba(255,255,255,.85);border-radius:999px;padding:.45rem 1.1rem;margin-top:4px;transition:.2s}
     .hc-lbl:hover .hc-open{background:#fff;color:#a94f63}
     .hc-arr{position:absolute;top:55%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;border:none;background:rgba(255,255,255,.9);color:#a8566a;font-size:20px;line-height:1;cursor:pointer;z-index:2;box-shadow:0 1px 4px rgba(0,0,0,.15)}
@@ -208,11 +208,12 @@
       .hs-grid{grid-template-columns:1fr 1fr;grid-template-rows:none;gap:10px}
       .hc{aspect-ratio:3/4;min-height:0}
       .hc-arr{display:none}
-      .hc-lbl{padding:26px 8px 18px;gap:6px}.hc-top{height:44px}.hc-track{top:44px}.hc-top b{font-size:17px}.hc-lbl .hc-open{font-size:10px;padding:.3rem .8rem}
+      .hc-lbl{padding:26px 8px 18px;gap:6px}.hc-top{padding:8px 6px 24px}.hc-track{top:0}.hc-top b{font-size:17px}.hc-lbl .hc-open{font-size:10px;padding:.3rem .8rem}
       .hs-rev{flex-direction:column;align-items:stretch;gap:6px}
       .hs-rev-h{display:flex;gap:8px;align-items:center;justify-content:center}.hs-rev-h b{display:inline}
       .hr-box{min-height:80px}
     }
+    .hs-catb{border-width:1.5px}
     </style>
     <style>.hs-h1 .hs-l{display:block}.hs-h1 .hs-t{display:block;font-size:.72em;margin-top:8px;line-height:1.25}.hs-small{font-size:15px!important;margin:12px 0 4px!important}#countdown{font-size:14px!important}@media(max-width:768px){.hs-small{font-size:14px!important;margin:8px 0 2px!important}#countdown{font-size:13px!important}}</style>
     <section class="hs">
@@ -223,6 +224,7 @@
           <p id="countdown" aria-live="polite" style="min-height:1.1rem;color:#c0687a;font-size:12px;margin:0">⏱ Urgent delivery today — via an operator until 17:00.</p>
           <div class="hs-btns">
             <a href="order.html" class="btn-rose hs-cta flex items-center justify-center gap-2 font-medium py-3 px-5 rounded-xl text-sm"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 328c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg> Order online</a>
+            <a href="catalog-en.html" class="btn-rose hs-catb flex items-center justify-center gap-2 font-medium py-3 px-5 rounded-xl text-sm">🌸 Full catalog →</a>
             <div class="hs-row" style="grid-template-columns:repeat(2,1fr)">
               <a href="https://wa.me/37443529162?text=Hello,%20I'd%20like%20to%20order%20flowers" target="_blank" class="btn-rose flex items-center justify-center gap-1 font-medium rounded-xl" rel="noopener noreferrer"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> WhatsApp </a><a href="https://instagram.com/flowers_vietnam_inst" target="_blank" class="btn-rose flex items-center justify-center gap-1 font-medium rounded-xl" rel="noopener noreferrer"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg> Instagram </a>
             </div>
@@ -263,7 +265,6 @@
           <div class="hc-dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
         </div>
           </div>
-          <a href="catalog-en.html" class="hs-all btn-rose-filled">Full catalog →</a>
         </div>
       </div>
     </section>
