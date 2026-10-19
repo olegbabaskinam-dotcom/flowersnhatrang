@@ -173,6 +173,10 @@
 #reviews .rv-badge{margin:6px 12px 0}
 #reviews .rv-track{gap:.75rem}
 @media(max-width:640px){#reviews .rv-card{flex-basis:180px!important;max-width:180px!important}#reviews .rv-photo,#reviews .rv-card:not(.rv-card--img)::before{height:130px!important}}
+#reviews .rv-catph{order:-1;position:relative;height:150px;border-bottom:1px solid #efeae7;overflow:hidden}
+#reviews .rv-catph .rv-photo{height:100%!important;border:0!important;object-position:center 55%}
+#reviews .rv-catph span{position:absolute;left:8px;bottom:8px;background:rgba(255,255,255,.92);color:#8a807b;font-size:10px;font-weight:600;letter-spacing:.03em;border-radius:999px;padding:2px 8px}
+@media(max-width:640px){#reviews .rv-catph{height:130px}}
 </style>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
@@ -588,7 +592,7 @@
 <p class="rv-text rv-text--full">I got a small bouquet and heart balloons. We sorted everything out in about 10 minutes. I couldn&#x27;t pin down a delivery time since my holiday schedule was unpredictable, so we agreed to do it on demand. From my go-ahead to delivery was about an hour.</p>
 <img class="rv-photo" src="img/site/reviews/vladimir.webp" alt="Владимир Потапов — customer review photo, Nha Trang flower delivery" loading="lazy" decoding="async" width="521" height="344">
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#EF6C00">А</div>
 <div class="rv-meta"><div class="rv-name">Артем Пушкин</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">review on Google</a></div>
@@ -596,8 +600,9 @@
 </header>
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <p class="rv-text">Thank you so much! Top-level service, the flowers are beautiful. Everything was delivered fast and on time.</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/101-belaya-roza-v-rozovoy-upakovke/1.webp" alt="Photo from our catalog" loading="lazy" decoding="async" width="900" height="1200"><span>Photo from our catalog</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#3949AB">B</div>
 <div class="rv-meta"><div class="rv-name">ll B</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">review on Google</a></div>
@@ -605,8 +610,9 @@
 </header>
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <p class="rv-text">Great flowers! Fast delivery. I messaged at 9:15 and by 10:00 they were already at the hotel! Handy that you can pay by transfer in rubles.</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/25-rozovyh-roz/1.webp" alt="Photo from our catalog" loading="lazy" decoding="async" width="900" height="1200"><span>Photo from our catalog</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#43A047">Ю</div>
 <div class="rv-meta"><div class="rv-name">Юлия Медунова</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">review on Google</a></div>
@@ -614,8 +620,9 @@
 </header>
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <p class="rv-text">Beautiful, fresh, fragrant flowers delivered to the hotel right on time! Big thanks, and I wish you as many grateful clients as possible!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/stilnyy-sbornyy-buket-rozovyy/1.webp" alt="Photo from our catalog" loading="lazy" decoding="async" width="900" height="1200"><span>Photo from our catalog</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#C2185B">Н</div>
 <div class="rv-meta"><div class="rv-name">Надежда Никифорова</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">review on Google</a></div>
@@ -623,8 +630,9 @@
 </header>
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <p class="rv-text">An incredible bouquet! Instant order processing and fast delivery. Convenient payment in rubles. Thank you!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/101-krasno-rozovaya-roza-rozovaya-upakovka/1.webp" alt="Photo from our catalog" loading="lazy" decoding="async" width="900" height="1200"><span>Photo from our catalog</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#6D4C41">S</div>
 <div class="rv-meta"><div class="rv-name">Semper In Motu</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">review on Google</a></div>
@@ -632,8 +640,9 @@
 </header>
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <p class="rv-text">We ordered flowers — we liked everything, especially the punctuality of the delivery.</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/51-korallovaya-roza-v-upakovke/1.webp" alt="Photo from our catalog" loading="lazy" decoding="async" width="900" height="1200"><span>Photo from our catalog</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#2E7D32">А</div>
 <div class="rv-meta"><div class="rv-name">Александр Пономарев</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">review on Google</a></div>
@@ -641,8 +650,9 @@
 </header>
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <p class="rv-text">I got in touch, they replied instantly, sorted everything out quickly and clearly, good price — I recommend it to everyone.</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/51-fioletovaya-roza-v-upakovke/1.webp" alt="Photo from our catalog" loading="lazy" decoding="async" width="900" height="1200"><span>Photo from our catalog</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#8E24AA">L</div>
 <div class="rv-meta"><div class="rv-name">lavvvrenova</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">review on Google</a></div>
@@ -650,8 +660,9 @@
 </header>
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <p class="rv-text">They put it together quickly, took all my wishes into account, and delivered to the hotel exactly on time! Very beautiful flowers.</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/yarkaya-sbornaya-korzina-rozovo-fioletovaya/1.webp" alt="Photo from our catalog" loading="lazy" decoding="async" width="900" height="1200"><span>Photo from our catalog</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#7E57C2">Л</div>
 <div class="rv-meta"><div class="rv-name">Лина Зверева</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">review on Google</a></div>
@@ -659,8 +670,9 @@
 </header>
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <p class="rv-text">If there were 10 stars I&#x27;d give them all! Well organised, super fast and polite! Thank you so much, my happy child got the surprise. The balloons are great quality — I messaged at 7:40 and they were at our home within 1.5 hours!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/nabor-sharov-s-7-rozovo-fioletovyh/1.webp" alt="Photo from our catalog" loading="lazy" decoding="async" width="900" height="1200"><span>Photo from our catalog</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#26A69A">A</div>
 <div class="rv-meta"><div class="rv-name">Anna D.</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">review on Google</a></div>
@@ -668,8 +680,9 @@
 </header>
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <p class="rv-text">My daughter turned 15 today. I messaged on WhatsApp and ordered a bouquet. They sent a photo of it at the agreed time and delivered quickly. Everything was precise, high quality, on time and affordable. My daughter was delighted. Highly recommend!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/25-nezhno-rozovaya-roza-belaya-upakovka-otkrytka/1.webp" alt="Photo from our catalog" loading="lazy" decoding="async" width="900" height="1200"><span>Photo from our catalog</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#EF5350">W</div>
 <div class="rv-meta"><div class="rv-name">Wonjin Seo</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">review on Google</a></div>
@@ -677,8 +690,9 @@
 </header>
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <p class="rv-text">My first time giving flowers in Vietnam. After looking around I ordered from this Russian owner. The flowers were better quality than local shops, and most importantly my girlfriend loved them. I&#x27;ll order here again for her next birthday!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/101-krasnaya-roza-chernaya-upakovka/1.webp" alt="Photo from our catalog" loading="lazy" decoding="async" width="900" height="1200"><span>Photo from our catalog</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#5C6BC0">H</div>
 <div class="rv-meta"><div class="rv-name">harrys kalaigidis</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">review on Google</a></div>
@@ -686,8 +700,9 @@
 </header>
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <p class="rv-text">Very professional guy, he did everything with detail. Informed me on every step he did. Quick and easy to communicate. Very good prices also.</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/51-belaya-roza-v-upakovke/1.webp" alt="Photo from our catalog" loading="lazy" decoding="async" width="900" height="1200"><span>Photo from our catalog</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#EC407A">П</div>
 <div class="rv-meta"><div class="rv-name">Павел К</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">review on Google</a></div>
@@ -695,8 +710,9 @@
 </header>
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <p class="rv-text">Excellent service. We agreed quickly, they sent photos of flower and wrapping options and delivered to the hotel right on time. A very pleasant and positive person. Wishing the business success and growth!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/51-krasnaya-roza-belaya-upakovka-krasnaya-lenta/1.webp" alt="Photo from our catalog" loading="lazy" decoding="async" width="900" height="1200"><span>Photo from our catalog</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#FF7043">I</div>
 <div class="rv-meta"><div class="rv-name">Iskhak Dzhanov</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">review on Google</a></div>
@@ -704,8 +720,9 @@
 </header>
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <p class="rv-text">Great service, I ordered 3 bouquets and balloons — everything was beautifully wrapped, with cards added, and the flowers were fresh. Free delivery to the right place and time.</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/25-krasnyh-roz-belaya-upakovka-7-krasnyh-sharov-serdec/1.webp" alt="Photo from our catalog" loading="lazy" decoding="async" width="900" height="1200"><span>Photo from our catalog</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#AB47BC">Ю</div>
 <div class="rv-meta"><div class="rv-name">Юля Певлина</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">review on Google</a></div>
@@ -713,8 +730,9 @@
 </header>
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <p class="rv-text">Fast and precise delivery of the freshest flowers in Nha Trang. We ordered 51 pink roses. They reply quickly: we messaged in the morning, got photos to choose from within 40 minutes, and 30 minutes later it was delivered to our hotel near Cam Ranh.</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/51-nezhno-rozovaya-roza-rozovaya-lenta/1.webp" alt="Photo from our catalog" loading="lazy" decoding="async" width="900" height="1200"><span>Photo from our catalog</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#D81B60">М</div>
 <div class="rv-meta"><div class="rv-name">Марина Бахметьева</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">review on Google</a></div>
@@ -722,8 +740,9 @@
 </header>
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <p class="rv-text">Thank you so much! The bouquet is gorgeous! My wife is thrilled!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/101-krasnaya-roza-v-upakovke/1.webp" alt="Photo from our catalog" loading="lazy" decoding="async" width="900" height="1200"><span>Photo from our catalog</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#42A5F5">V</div>
 <div class="rv-meta"><div class="rv-name">Vitas Grishov</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">review on Google</a></div>
@@ -731,8 +750,9 @@
 </header>
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <p class="rv-text">Big thanks to the team — they helped make my girl happy! Delivered to the room by 6 a.m. Thanks again, you&#x27;re amazing!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/101-rozovaya-roza-v-upakovke/1.webp" alt="Photo from our catalog" loading="lazy" decoding="async" width="900" height="1200"><span>Photo from our catalog</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#66BB6A">A</div>
 <div class="rv-meta"><div class="rv-name">Artem Yurin</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">review on Google</a></div>
@@ -740,8 +760,9 @@
 </header>
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <p class="rv-text">The best one. Many thanks!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/5-vetok-eustomy-belaya-upakovka/1.webp" alt="Photo from our catalog" loading="lazy" decoding="async" width="900" height="1200"><span>Photo from our catalog</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#8D6E63">А</div>
 <div class="rv-meta"><div class="rv-name">Амелия Емельянова</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">review on Google</a></div>
@@ -749,8 +770,9 @@
 </header>
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <p class="rv-text">We ordered two bouquets — red roses and white lilies — for mum&#x27;s birthday. They advised us well, lots of different flowers. The flowers were fresh and beautiful. We loved it!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/7-vetok-liliy/1.webp" alt="Photo from our catalog" loading="lazy" decoding="async" width="900" height="1200"><span>Photo from our catalog</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#7E57C2">А</div>
 <div class="rv-meta"><div class="rv-name">Андрей Рудиков</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">review on Google</a></div>
@@ -758,8 +780,9 @@
 </header>
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <p class="rv-text">Excellent service. I just couldn&#x27;t find a flower shop in Nha Trang that was nearby with a good range. Then I found this delivery with great descriptions, bouquet photos and even helium balloons. Ordered at lunch — everything was great!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/yarkaya-sbornaya-korzina-15-rozovyh-sharov/1.webp" alt="Photo from our catalog" loading="lazy" decoding="async" width="900" height="1200"><span>Photo from our catalog</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#FFA726">M</div>
 <div class="rv-meta"><div class="rv-name">Mad Mike</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">review on Google</a></div>
@@ -767,8 +790,9 @@
 </header>
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <p class="rv-text">Amazing work! By 9 a.m. a gorgeous, fresh bouquet was delivered to the hotel!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/51-persikovo-rozovaya-roza-v-beloy-upakovke/1.webp" alt="Photo from our catalog" loading="lazy" decoding="async" width="900" height="1200"><span>Photo from our catalog</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#26C6DA">О</div>
 <div class="rv-meta"><div class="rv-name">Оксана Герасимова</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">review on Google</a></div>
@@ -776,8 +800,9 @@
 </header>
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <p class="rv-text">Beautiful bouquet, fresh roses! Excellent service! Thank you so much!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/51-nezhno-rozovaya-roza-v-upakovke/1.webp" alt="Photo from our catalog" loading="lazy" decoding="async" width="900" height="1200"><span>Photo from our catalog</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#5C6BC0">I</div>
 <div class="rv-meta"><div class="rv-name">Iskander Gera</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">review on Google</a></div>
@@ -785,6 +810,7 @@
 </header>
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <p class="rv-text">Everything was perfect: the bouquet, the service, the communication. When I needed to tweak the order a little, it was all sorted out. Recommend!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/101-belo-rozovaya-roza-v-korzine/1.webp" alt="Photo from our catalog" loading="lazy" decoding="async" width="900" height="1200"><span>Photo from our catalog</span></div>
 </article>
                 </div>
                 <button class="rv-nav rv-next" id="rvNext-en" aria-label="Next" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>

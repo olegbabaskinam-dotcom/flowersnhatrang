@@ -173,6 +173,10 @@
 #reviews .rv-badge{margin:6px 12px 0}
 #reviews .rv-track{gap:.75rem}
 @media(max-width:640px){#reviews .rv-card{flex-basis:180px!important;max-width:180px!important}#reviews .rv-photo,#reviews .rv-card:not(.rv-card--img)::before{height:130px!important}}
+#reviews .rv-catph{order:-1;position:relative;height:150px;border-bottom:1px solid #efeae7;overflow:hidden}
+#reviews .rv-catph .rv-photo{height:100%!important;border:0!important;object-position:center 55%}
+#reviews .rv-catph span{position:absolute;left:8px;bottom:8px;background:rgba(255,255,255,.92);color:#8a807b;font-size:10px;font-weight:600;letter-spacing:.03em;border-radius:999px;padding:2px 8px}
+@media(max-width:640px){#reviews .rv-catph{height:130px}}
 </style>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
@@ -416,7 +420,7 @@
             <div class="rv-wrap">
                 <button class="rv-nav rv-prev" id="rvPrev-ko" aria-label="이전" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
                 <div class="rv-track" id="rvTrack-ko">
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#EF5350">W</div>
 <div class="rv-meta"><div class="rv-name">Wonjin Seo</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">Google 리뷰</a></div>
@@ -425,6 +429,7 @@
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <span class="rv-badge rv-badge--kr">🇰🇷 실제 한국 고객</span>
 <p class="rv-text">베트남에서 처음 꽃을 선물해보는데 여기저기 알아보다가 러시아 사장님 가게에 주문했어요. 베트남 가게들보다 꽃이 더 퀄리티 있고, 무엇보다 여자친구가 너무 좋아하더라구요. 다음 여자친구 생일에도 이용할게요~</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/101-krasnaya-roza-chernaya-upakovka/1.webp" alt="카탈로그 사진" loading="lazy" decoding="async" width="900" height="1200"><span>카탈로그 사진</span></div>
 </article>
 <article class="rv-card rv-card--img">
 <header class="rv-head">
@@ -657,7 +662,7 @@
 <p class="rv-text rv-text--full">작은 부케와 하트 풍선을 주문했어요. 10분 만에 모든 걸 정했어요. 휴가 일정이 불규칙해서 배달 시간을 정하기 어려웠는데, 요청하는 대로 해주기로 했어요. 요청부터 배달까지 약 1시간 걸렸어요.</p>
 <img class="rv-photo" src="img/site/reviews/vladimir.webp" alt="Владимир Потапов — 꽃다발 사진 후기, 나트랑 꽃배달" loading="lazy" decoding="async" width="521" height="344">
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#EF6C00">А</div>
 <div class="rv-meta"><div class="rv-name">Артем Пушкин</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">Google 리뷰</a></div>
@@ -666,8 +671,9 @@
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <span class="rv-badge rv-badge--intl">🌍 해외 고객 (번역)</span>
 <p class="rv-text">정말 감사합니다! 서비스 수준이 최고이고 꽃도 아름다워요. 모든 것을 빠르고 제시간에 배달해 주었어요.</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/101-belaya-roza-v-rozovoy-upakovke/1.webp" alt="카탈로그 사진" loading="lazy" decoding="async" width="900" height="1200"><span>카탈로그 사진</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#3949AB">B</div>
 <div class="rv-meta"><div class="rv-name">ll B</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">Google 리뷰</a></div>
@@ -676,8 +682,9 @@
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <span class="rv-badge rv-badge--intl">🌍 해외 고객 (번역)</span>
 <p class="rv-text">꽃이 훌륭해요! 배달도 빨라요. 9시 15분에 연락했는데 10시에 벌써 호텔에 도착했어요! 결제는 수령 시 현금 또는 암호화폐 송금입니다.</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/25-rozovyh-roz/1.webp" alt="카탈로그 사진" loading="lazy" decoding="async" width="900" height="1200"><span>카탈로그 사진</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#43A047">Ю</div>
 <div class="rv-meta"><div class="rv-name">Юлия Медунова</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">Google 리뷰</a></div>
@@ -686,8 +693,9 @@
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <span class="rv-badge rv-badge--intl">🌍 해외 고객 (번역)</span>
 <p class="rv-text">예쁘고 신선하고 향기로운 꽃을 호텔로 정확히 제시간에 배달해 주었어요! 정말 감사하고, 감사하는 고객이 더 많아지길 바랍니다!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/stilnyy-sbornyy-buket-rozovyy/1.webp" alt="카탈로그 사진" loading="lazy" decoding="async" width="900" height="1200"><span>카탈로그 사진</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#C2185B">Н</div>
 <div class="rv-meta"><div class="rv-name">Надежда Никифорова</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">Google 리뷰</a></div>
@@ -696,8 +704,9 @@
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <span class="rv-badge rv-badge--intl">🌍 해외 고객 (번역)</span>
 <p class="rv-text">믿을 수 없는 부케예요! 주문 처리도 즉각적이고 배달도 빨라요. 결제는 수령 시 현금 또는 암호화폐 송금입니다. 감사합니다!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/101-krasno-rozovaya-roza-rozovaya-upakovka/1.webp" alt="카탈로그 사진" loading="lazy" decoding="async" width="900" height="1200"><span>카탈로그 사진</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#6D4C41">S</div>
 <div class="rv-meta"><div class="rv-name">Semper In Motu</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">Google 리뷰</a></div>
@@ -706,8 +715,9 @@
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <span class="rv-badge rv-badge--intl">🌍 해외 고객 (번역)</span>
 <p class="rv-text">꽃을 주문했는데 모든 것이 마음에 들었어요, 특히 배달 시간을 정확히 지켜서 좋았어요.</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/51-korallovaya-roza-v-upakovke/1.webp" alt="카탈로그 사진" loading="lazy" decoding="async" width="900" height="1200"><span>카탈로그 사진</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#2E7D32">А</div>
 <div class="rv-meta"><div class="rv-name">Александр Пономарев</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">Google 리뷰</a></div>
@@ -716,8 +726,9 @@
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <span class="rv-badge rv-badge--intl">🌍 해외 고객 (번역)</span>
 <p class="rv-text">연락하니 즉시 답장이 왔고, 모든 것을 빠르고 명확하게 해결해 주었어요. 가격도 좋아서 모두에게 추천해요.</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/51-fioletovaya-roza-v-upakovke/1.webp" alt="카탈로그 사진" loading="lazy" decoding="async" width="900" height="1200"><span>카탈로그 사진</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#8E24AA">L</div>
 <div class="rv-meta"><div class="rv-name">lavvvrenova</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">Google 리뷰</a></div>
@@ -726,8 +737,9 @@
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <span class="rv-badge rv-badge--intl">🌍 해외 고객 (번역)</span>
 <p class="rv-text">빠르게 준비하고 모든 요청을 반영해서 호텔까지 정확히 제시간에 배달해 주었어요! 꽃이 아주 예뻐요.</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/yarkaya-sbornaya-korzina-rozovo-fioletovaya/1.webp" alt="카탈로그 사진" loading="lazy" decoding="async" width="900" height="1200"><span>카탈로그 사진</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#7E57C2">Л</div>
 <div class="rv-meta"><div class="rv-name">Лина Зверева</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">Google 리뷰</a></div>
@@ -736,8 +748,9 @@
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <span class="rv-badge rv-badge--intl">🌍 해외 고객 (번역)</span>
 <p class="rv-text">별 10개가 있다면 다 드리고 싶어요! 체계적이고 정말 빠르고 친절해요! 아이가 깜짝 선물을 받고 너무 좋아했어요. 풍선 퀄리티도 훌륭하고, 7시 40분에 연락했는데 1시간 반 만에 집에 도착했어요!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/nabor-sharov-s-7-rozovo-fioletovyh/1.webp" alt="카탈로그 사진" loading="lazy" decoding="async" width="900" height="1200"><span>카탈로그 사진</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#26A69A">A</div>
 <div class="rv-meta"><div class="rv-name">Anna D.</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">Google 리뷰</a></div>
@@ -746,8 +759,9 @@
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <span class="rv-badge rv-badge--intl">🌍 해외 고객 (번역)</span>
 <p class="rv-text">오늘 딸이 15살이 되었어요. WhatsApp으로 부케를 주문했어요. 약속한 시간에 부케 사진을 보내주고 빠르게 배달해 주었어요. 모든 것이 정확하고, 품질도 좋고, 시간도 잘 지키고 가격도 합리적이에요. 딸이 정말 좋아했어요. 강력 추천합니다!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/25-nezhno-rozovaya-roza-belaya-upakovka-otkrytka/1.webp" alt="카탈로그 사진" loading="lazy" decoding="async" width="900" height="1200"><span>카탈로그 사진</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#5C6BC0">H</div>
 <div class="rv-meta"><div class="rv-name">harrys kalaigidis</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">Google 리뷰</a></div>
@@ -756,8 +770,9 @@
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <span class="rv-badge rv-badge--intl">🌍 해외 고객 (번역)</span>
 <p class="rv-text">정말 전문적인 분이에요. 모든 것을 세심하게 처리해 주었어요. 단계마다 알려주었고, 소통이 빠르고 쉬웠어요. 가격도 아주 좋아요.</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/51-belaya-roza-v-upakovke/1.webp" alt="카탈로그 사진" loading="lazy" decoding="async" width="900" height="1200"><span>카탈로그 사진</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#EC407A">П</div>
 <div class="rv-meta"><div class="rv-name">Павел К</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">Google 리뷰</a></div>
@@ -766,8 +781,9 @@
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <span class="rv-badge rv-badge--intl">🌍 해외 고객 (번역)</span>
 <p class="rv-text">훌륭한 서비스예요. 빠르게 협의하고, 꽃과 포장 옵션 사진을 보내주고, 약속한 시간에 호텔로 배달해 주었어요. 아주 친절하고 긍정적인 분이에요. 사업 번창을 기원합니다!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/51-krasnaya-roza-belaya-upakovka-krasnaya-lenta/1.webp" alt="카탈로그 사진" loading="lazy" decoding="async" width="900" height="1200"><span>카탈로그 사진</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#FF7043">I</div>
 <div class="rv-meta"><div class="rv-name">Iskhak Dzhanov</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">Google 리뷰</a></div>
@@ -776,8 +792,9 @@
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <span class="rv-badge rv-badge--intl">🌍 해외 고객 (번역)</span>
 <p class="rv-text">훌륭한 서비스예요. 부케 3개와 풍선을 주문했는데 모두 예쁘게 포장하고 카드도 넣어주고 꽃도 신선했어요. 원하는 장소와 시간에 무료 배달해 주었어요.</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/25-krasnyh-roz-belaya-upakovka-7-krasnyh-sharov-serdec/1.webp" alt="카탈로그 사진" loading="lazy" decoding="async" width="900" height="1200"><span>카탈로그 사진</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#AB47BC">Ю</div>
 <div class="rv-meta"><div class="rv-name">Юля Певлина</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">Google 리뷰</a></div>
@@ -786,8 +803,9 @@
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <span class="rv-badge rv-badge--intl">🌍 해외 고객 (번역)</span>
 <p class="rv-text">냐짱에서 가장 신선한 꽃을 빠르고 정확하게 배달해 줘요. 핑크 장미 51송이를 주문했어요. 답장이 빨라요 — 아침에 연락하니 40분 만에 고를 수 있는 사진을 보내주고, 30분 뒤 깜라인 근처 호텔로 배달됐어요.</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/51-nezhno-rozovaya-roza-rozovaya-lenta/1.webp" alt="카탈로그 사진" loading="lazy" decoding="async" width="900" height="1200"><span>카탈로그 사진</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#D81B60">М</div>
 <div class="rv-meta"><div class="rv-name">Марина Бахметьева</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">Google 리뷰</a></div>
@@ -796,8 +814,9 @@
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <span class="rv-badge rv-badge--intl">🌍 해외 고객 (번역)</span>
 <p class="rv-text">정말 감사합니다! 부케가 너무 멋져요! 아내가 아주 좋아해요!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/101-krasnaya-roza-v-upakovke/1.webp" alt="카탈로그 사진" loading="lazy" decoding="async" width="900" height="1200"><span>카탈로그 사진</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#42A5F5">V</div>
 <div class="rv-meta"><div class="rv-name">Vitas Grishov</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">Google 리뷰</a></div>
@@ -806,8 +825,9 @@
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <span class="rv-badge rv-badge--intl">🌍 해외 고객 (번역)</span>
 <p class="rv-text">팀에게 정말 감사해요 — 제 여자친구를 행복하게 해줬어요! 새벽 6시까지 객실로 배달해 주었어요. 다시 한번 감사합니다, 정말 최고예요!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/101-rozovaya-roza-v-upakovke/1.webp" alt="카탈로그 사진" loading="lazy" decoding="async" width="900" height="1200"><span>카탈로그 사진</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#66BB6A">A</div>
 <div class="rv-meta"><div class="rv-name">Artem Yurin</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">Google 리뷰</a></div>
@@ -816,8 +836,9 @@
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <span class="rv-badge rv-badge--intl">🌍 해외 고객 (번역)</span>
 <p class="rv-text">최고예요. 정말 감사합니다!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/5-vetok-eustomy-belaya-upakovka/1.webp" alt="카탈로그 사진" loading="lazy" decoding="async" width="900" height="1200"><span>카탈로그 사진</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#8D6E63">А</div>
 <div class="rv-meta"><div class="rv-name">Амелия Емельянова</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">Google 리뷰</a></div>
@@ -826,8 +847,9 @@
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <span class="rv-badge rv-badge--intl">🌍 해외 고객 (번역)</span>
 <p class="rv-text">엄마 생신을 위해 빨간 장미와 흰 백합 두 부케를 주문했어요. 상담도 잘 해주고 꽃 종류도 다양했어요. 꽃이 신선하고 예뻤어요. 정말 마음에 들었어요!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/7-vetok-liliy/1.webp" alt="카탈로그 사진" loading="lazy" decoding="async" width="900" height="1200"><span>카탈로그 사진</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#7E57C2">А</div>
 <div class="rv-meta"><div class="rv-name">Андрей Рудиков</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">Google 리뷰</a></div>
@@ -836,8 +858,9 @@
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <span class="rv-badge rv-badge--intl">🌍 해외 고객 (번역)</span>
 <p class="rv-text">훌륭한 서비스예요. 냐짱에서 가깝고 종류 많은 꽃집을 못 찾고 있었는데, 설명도 잘 되어 있고 부케 사진에 헬륨 풍선까지 있는 이 배달 서비스를 발견했어요. 점심에 주문했는데 모든 게 완벽했어요!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/yarkaya-sbornaya-korzina-15-rozovyh-sharov/1.webp" alt="카탈로그 사진" loading="lazy" decoding="async" width="900" height="1200"><span>카탈로그 사진</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#FFA726">M</div>
 <div class="rv-meta"><div class="rv-name">Mad Mike</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">Google 리뷰</a></div>
@@ -846,8 +869,9 @@
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <span class="rv-badge rv-badge--intl">🌍 해외 고객 (번역)</span>
 <p class="rv-text">환상적이에요! 아침 9시에 가장 예쁘고 신선한 부케를 호텔로 배달해 주었어요!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/51-persikovo-rozovaya-roza-v-beloy-upakovke/1.webp" alt="카탈로그 사진" loading="lazy" decoding="async" width="900" height="1200"><span>카탈로그 사진</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#26C6DA">О</div>
 <div class="rv-meta"><div class="rv-name">Оксана Герасимова</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">Google 리뷰</a></div>
@@ -856,8 +880,9 @@
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <span class="rv-badge rv-badge--intl">🌍 해외 고객 (번역)</span>
 <p class="rv-text">부케가 예쁘고 장미가 신선해요! 서비스도 훌륭해요! 정말 감사합니다!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/51-nezhno-rozovaya-roza-v-upakovke/1.webp" alt="카탈로그 사진" loading="lazy" decoding="async" width="900" height="1200"><span>카탈로그 사진</span></div>
 </article>
-<article class="rv-card">
+<article class="rv-card rv-card--img rv-card--cat">
 <header class="rv-head">
 <div class="rv-ava" style="background:#5C6BC0">I</div>
 <div class="rv-meta"><div class="rv-name">Iskander Gera</div><a class="rv-date rv-glink" href="https://maps.app.goo.gl/3H4ngJ1UoLrMDkiS7?g_st=ic" target="_blank" rel="noopener" title="Google">Google 리뷰</a></div>
@@ -866,6 +891,7 @@
 <div class="rv-stars" aria-label="5 / 5">★★★★★</div>
 <span class="rv-badge rv-badge--intl">🌍 해외 고객 (번역)</span>
 <p class="rv-text">모든 것이 완벽했어요: 부케, 서비스, 소통까지. 주문을 조금 수정해야 했을 때도 다 해결해 주었어요. 추천합니다!</p>
+<div class="rv-catph"><img class="rv-photo" src="img/products/101-belo-rozovaya-roza-v-korzine/1.webp" alt="카탈로그 사진" loading="lazy" decoding="async" width="900" height="1200"><span>카탈로그 사진</span></div>
 </article>
                 </div>
                 <button class="rv-nav rv-next" id="rvNext-ko" aria-label="다음" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
