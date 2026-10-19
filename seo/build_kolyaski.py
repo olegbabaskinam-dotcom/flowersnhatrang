@@ -17,6 +17,7 @@ STROLLERS = [{
     "slug": "arenda-detskoy-kolyaski-capella",
     "photos": 14,
     "prices": PRICES,
+    "cover": 2,   # обложка раздела/карточки — полубоком (порядок фото: сбоку, полубоком, … сложенная последней)
     "name": {"ru": "Прогулочная коляска Capella (бирюзовая)",
              "en": "Capella stroller (turquoise)",
              "ko": "카펠라 유모차 (청록색)"},
@@ -268,7 +269,7 @@ def category(lang):
           "itemListElement": [{"@type": "ListItem", "position": i + 1, "url": f"{DOMAIN}/{PFILES(s['slug'])[lang]}", "name": s["name"][lang]} for i, s in enumerate(STROLLERS)]}
     cl = [(f'/{SRC[lang]}"', f'/{fn}"')] + [(f'{DOMAIN}/{SRC[l2]}"', f'{DOMAIN}/{FILES[l2]}"') for l2 in ("ru", "en", "ko")]
     head = fix_head(head, t["title"], t["desc"], url, f"{DOMAIN}/img/products/{s0['slug']}/1.jpg", ld,
-                    f'<link rel="preload" as="image" href="img/products/{s0["slug"]}/1.webp" fetchpriority="high">\n', cl)
+                    f'<link rel="preload" as="image" href="img/products/{s0["slug"]}/{s0.get("cover",1)}.webp" fetchpriority="high">\n', cl)
     p1 = money(lang, min(v for s in STROLLERS for _, v in s["prices"]))
     badges = {"ru": ["✅ Без залога", "🏨 Доставка в отель", "💵 Оплата при получении", f"от {p1} / день"],
               "en": ["✅ No deposit", "🏨 Hotel delivery", "💵 Pay on delivery", f"from {p1} / day"],
@@ -277,7 +278,7 @@ def category(lang):
     for s in STROLLERS:
         pv = money(lang, s["prices"][0][1])
         price = f"{x['from']} {pv} {x['per_day']}".strip()
-        cards += (f'<a class="kl-card" href="{PFILES(s["slug"])[lang]}"><img src="img/products/{s["slug"]}/1.webp" alt="{html.escape(s["name"][lang])}" width="960" height="1280" loading="lazy" decoding="async">'
+        cards += (f'<a class="kl-card" href="{PFILES(s["slug"])[lang]}"><img src="img/products/{s["slug"]}/{s.get("cover",1)}.webp" alt="{html.escape(s["name"][lang])}" width="960" height="1280" loading="lazy" decoding="async">'
                   f'<div><b>{html.escape(s["name"][lang])}</b><i>{price}</i><span>{x["more"]}</span></div></a>')
     content = f"""
 <main>
@@ -289,7 +290,7 @@ def category(lang):
     <div class="kl-badges">{''.join(f'<span>{b}</span>' for b in badges)}</div>
     <div class="kl-btns">{buttons(lang, t)}</div>
   </div>
-  <a class="kl-hero-img" href="#items"><img src="img/products/{s0['slug']}/1.webp" alt="{html.escape(t['h1'])}" width="960" height="1280" fetchpriority="high" decoding="async"></a>
+  <a class="kl-hero-img" href="#items"><img src="img/products/{s0['slug']}/{s0.get('cover',1)}.webp" alt="{html.escape(t['h1'])}" width="960" height="1280" fetchpriority="high" decoding="async"></a>
 </div></section>
 <section class="kl-sec" id="items"><h2 class="kl-h2">{x['items_h']}</h2><div class="kl-grid">{cards}</div></section>
 {rules_block(t, f"img/site/zones/zone-center-{lang}.webp")}

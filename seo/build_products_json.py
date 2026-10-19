@@ -141,7 +141,7 @@ def main():
                        "Сообщите отель, номер комнаты, имя и фамилию на английском (как при заселении) — залога нет, так мы знаем, где коляска.",
                        "Вернуть можно через ресепшен: оставьте коляску и пришлите фото — мы приедем и заберём."],
         "cats": ["kolyaski"], "color": "",
-        "images": product_imgs("arenda-detskoy-kolyaski-capella", "img/products/arenda-detskoy-kolyaski-capella/1.webp"),
+        "images": ["img/products/arenda-detskoy-kolyaski-capella/2.webp"] + [x for x in product_imgs("arenda-detskoy-kolyaski-capella", "img/products/arenda-detskoy-kolyaski-capella/1.webp") if not x.endswith("/2.webp")],
     })
     # витрина-вкладки (порядок = как показываем в боте)
     categories = [
