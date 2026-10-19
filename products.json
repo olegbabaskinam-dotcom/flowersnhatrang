@@ -1,6 +1,6 @@
 {
- "generated": "2026-10-17 01:43",
- "count": 196,
+ "generated": "2026-10-19 06:21",
+ "count": 197,
  "categories": [
   {
    "key": "all",
@@ -37,6 +37,10 @@
   {
    "key": "cakes",
    "label": "Торты"
+  },
+  {
+   "key": "kolyaski",
+   "label": "Аренда колясок"
   }
  ],
  "products": [
@@ -4605,6 +4609,74 @@
     "img/products/tort-belyy-kremovyy-klubnika-svechi-happy-birthday/5.webp",
     "img/products/tort-belyy-kremovyy-klubnika-svechi-happy-birthday/6.webp",
     "img/products/tort-belyy-kremovyy-klubnika-svechi-happy-birthday/7.webp"
+   ]
+  },
+  {
+   "id": 9001,
+   "slug": "arenda-detskoy-kolyaski-capella",
+   "rent": true,
+   "name": "Аренда коляски Capella (бирюзовая)",
+   "desc": "Перекидная ручка (малыш лицом к вам или вперёд), спинка опускается — можно сидеть или спать лёжа, капюшон со смотровым окошком, 5-точечные ремни, корзина под сиденьем, компактно складывается.",
+   "alt": "Аренда детской коляски в Нячанге",
+   "price_vnd": 300000,
+   "price": "от 300 000 донгов / день",
+   "price_sub": "7 дней — 1 000 000 ₫",
+   "rent_prices": [
+    [
+     1,
+     300000
+    ],
+    [
+     2,
+     400000
+    ],
+    [
+     3,
+     500000
+    ],
+    [
+     4,
+     650000
+    ],
+    [
+     5,
+     750000
+    ],
+    [
+     6,
+     900000
+    ],
+    [
+     7,
+     1000000
+    ]
+   ],
+   "rent_rules": [
+    "Без залога и депозита.",
+    "Доставка и забор бесплатно — только по центру Нячанга (зона «Центр»): к отелю или в удобное место в центре.",
+    "Оплата 100% — когда привозим коляску.",
+    "Сообщите отель, номер комнаты, имя и фамилию на английском (как при заселении) — залога нет, так мы знаем, где коляска.",
+    "Вернуть можно через ресепшен: оставьте коляску и пришлите фото — мы приедем и заберём."
+   ],
+   "cats": [
+    "kolyaski"
+   ],
+   "color": "",
+   "images": [
+    "img/products/arenda-detskoy-kolyaski-capella/1.webp",
+    "img/products/arenda-detskoy-kolyaski-capella/2.webp",
+    "img/products/arenda-detskoy-kolyaski-capella/3.webp",
+    "img/products/arenda-detskoy-kolyaski-capella/4.webp",
+    "img/products/arenda-detskoy-kolyaski-capella/5.webp",
+    "img/products/arenda-detskoy-kolyaski-capella/6.webp",
+    "img/products/arenda-detskoy-kolyaski-capella/7.webp",
+    "img/products/arenda-detskoy-kolyaski-capella/8.webp",
+    "img/products/arenda-detskoy-kolyaski-capella/9.webp",
+    "img/products/arenda-detskoy-kolyaski-capella/10.webp",
+    "img/products/arenda-detskoy-kolyaski-capella/11.webp",
+    "img/products/arenda-detskoy-kolyaski-capella/12.webp",
+    "img/products/arenda-detskoy-kolyaski-capella/13.webp",
+    "img/products/arenda-detskoy-kolyaski-capella/14.webp"
    ]
   }
  ]

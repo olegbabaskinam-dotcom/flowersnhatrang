@@ -70,7 +70,7 @@ fetch("/products.json").then(function (r) { return r.json(); }).then(function (d
 /* ---- дерево категорий (30.09.2026): Цветы / Шары / Подарки / Оформление, подкатегории раскрываются ---- */
 var TREE = [
   { key: "all", label: "Все" }, { key: "flowers", label: "💐 Цветы" }, { key: "balloons", label: "🎈 Шары" },
-  { key: "gifts", label: "🎁 Подарки" }, { key: "decor", label: "🎉 Оформление" }];
+  { key: "gifts", label: "🎁 Подарки" }, { key: "decor", label: "🎉 Оформление" }, { key: "kolyaski", label: "👶 Коляски" }];
 var SUB = {
   flowers: [["flowers", "Все цветы"], ["mixed", "💐 Сборные"], ["baskets", "🧺 Корзины"], ["roses", "🌹 Розы"]],
   roses: [["roses", "Все розы"], ["r25", "25 роз"], ["r51", "51 роза"], ["r101", "101+ роз"]],
@@ -179,7 +179,7 @@ function renderGrid() {
       '<div class="ph"><img src="' + imgs[0] + '" alt="" loading="lazy"><button class="zoom" aria-label="Открыть">⤢</button>' + nav + dots + '</div>' +
       '<div class="bd">' +
         '<h3>' + esc(p.name) + '</h3>' + comboBadge(p) + balNote(p) +
-        '<div class="pr">' + money(p.price_vnd) + '</div>' +
+        '<div class="pr">' + (p.rent ? 'от ' + money(p.price_vnd) + ' / день' : money(p.price_vnd)) + '</div>' +
         '<div class="sub">' + esc(p.price_sub) + '</div>' +
         '<div class="act"></div>' +
       '</div>';
@@ -214,8 +214,8 @@ function openProduct(p, start) {
       (imgs.length > 1 ? '<button class="pv-nav l">‹</button><button class="pv-nav r">›</button>' : '') + '</div>' +
     '<div class="pv-th">' + (imgs.length > 1 ? imgs.map(function (s, k) { return '<img src="' + s + '" data-k="' + k + '" alt="">'; }).join("") : '') + '</div>' +
     '<div class="pv-bd"><h2>' + esc(p.name) + '</h2>' + comboBadge(p) + balNote(p) +
-      '<div class="pv-pr">' + money(p.price_vnd) + ' <span>' + esc(p.price_sub) + '</span></div>' +
-      '<div class="pv-act act"></div>' +
+      '<div class="pv-pr">' + (p.rent ? 'от ' + money(p.price_vnd) + ' / день' : money(p.price_vnd)) + ' <span>' + esc(p.price_sub) + '</span></div>' +
+      '<div class="pv-act act"></div>' + rentInfo(p) +
       (p.desc ? '<p class="pv-ds">' + esc(p.desc) + '</p>' : '') + '</div>';
   document.body.appendChild(o);
   document.body.style.overflow = "hidden";
@@ -247,7 +247,21 @@ function openProduct(p, start) {
   try { if (TG && TG.BackButton) { TG.BackButton.onClick(close); TG.BackButton.show(); } } catch (_) {}
   renderAct(o.querySelector(".pv-act"), p);
 }
+/* ---- аренда колясок (19.10.2026): не в корзину — заказ через оператора ---- */
+var RENT_DAYS = ["", "1 день", "2 дня", "3 дня", "4 дня", "5 дней", "6 дней", "7 дней"];
+function rentInfo(p) {
+  if (!p.rent) return "";
+  var rows = (p.rent_prices || []).map(function (r) { return '<tr><td>' + (RENT_DAYS[r[0]] || r[0]) + '</td><td><b>' + money(r[1]) + '</b></td></tr>'; }).join("");
+  var rules = (p.rent_rules || []).map(function (r) { return '<li>' + esc(r) + '</li>'; }).join("");
+  return '<div class="rent"><h4>Цены аренды</h4><table>' + rows + '</table><h4>Условия</h4><ol>' + rules + '</ol></div>';
+}
+function rentAct(box) {
+  var t = encodeURIComponent("Здравствуйте, хочу арендовать детскую коляску");
+  box.innerHTML = '<div class="rentbtns"><a class="add" href="https://t.me/babaskin_o?text=' + t + '" target="_blank" rel="noopener">✈️ Заказать в Telegram</a>' +
+    '<a class="add alt" href="https://wa.me/37443529162?text=' + t + '" target="_blank" rel="noopener">💬 WhatsApp</a></div>';
+}
 function renderAct(box, p) {
+  if (p.rent) { rentAct(box); return; }
   var q = cartQty(p.id);
   if (q > 0) {
     box.innerHTML = '<div class="qtybox"><button>−</button><span>' + q + ' шт</span><button>+</button></div>';
