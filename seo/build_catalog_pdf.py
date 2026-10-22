@@ -688,7 +688,7 @@ def icon(c, name, x, y, s):
 def gift_lines(c, F, items, x, y, maxw, size=10, lead=19, ic=14):
     """items: [(icon, text)] столбиком; возвращает новую y."""
     for ico, txt in items:
-        lines = wrap(c, txt, F["sans"], size, maxw - ic + 6)
+        lines = wrap(c, txt, F["sans"], size, maxw - ic - 10)
         icon(c, ico, x, y - 3.5, ic)
         c.setFillColor(INK); c.setFont(F["sans"], size)
         for k, ln in enumerate(lines):
@@ -702,84 +702,99 @@ def price_tag(c, txt, xr, y):
     c.setFillColor(BLUSH); c.roundRect(xr - w, y - 6, w, 20, 10, stroke=0, fill=1)
     c.setFillColor(ROSE_D); c.drawCentredString(xr - w / 2, y, txt)
 
+# фото для уровней подарков (выбор 22.10.2026 по просьбе Олега): сборные — 3 разных; букет/корзина + шары; большие заказы от 3 000 000
+GIFT_PICK = {"mixed": ["31", "34", "199"], "t3": ["104", "82", "107"], "t4": ["84", "114", "121"]}
+
 def draw_gifts(c, F, t, lang, by):
     G = GIFTS[lang]
     c.setFillColor(WHITE); c.rect(0, 0, PW, PH, stroke=0, fill=1)
-    c.setFillColor(BLUSH); c.rect(0, PH-128, PW, 128, stroke=0, fill=1)
+    c.setFillColor(BLUSH); c.rect(0, PH-118, PW, 118, stroke=0, fill=1)
     c.setFillColor(ROSE); c.setFont(F["sans"], 9)
-    c.drawCentredString(PW/2, PH-52, t["brand"] + "  |  " + t["site"])
-    c.setFillColor(INK); c.setFont(F["serifb"], 30)
-    c.drawCentredString(PW/2, PH-90, G["title"])
-    c.setStrokeColor(GOLD); c.setLineWidth(1.2); c.line(PW/2-50, PH-106, PW/2+50, PH-106)
+    c.drawCentredString(PW/2, PH-46, t["brand"] + "  |  " + t["site"])
+    c.setFillColor(INK); c.setFont(F["serifb"], 28)
+    c.drawCentredString(PW/2, PH-82, G["title"])
+    c.setStrokeColor(GOLD); c.setLineWidth(1.2); c.line(PW/2-50, PH-96, PW/2+50, PH-96)
     c.setFillColor(GREY); c.setFont(F["sans"], 10.5)
-    c.drawCentredString(PW/2, PH-122, G["sub"])
+    c.drawCentredString(PW/2, PH-111, G["sub"])
+    byid = {}
+    for lst in by.values():
+        for p in lst: byid[p["id"]] = p
 
-    def box(y_top, h, accent=False):
+    def box(x, y_top, w, h, accent=False):
         c.setFillColor(BLUSH2 if accent else WHITE); c.setStrokeColor(ROSE if accent else LINE)
         c.setLineWidth(1.4 if accent else 1)
-        c.roundRect(M, y_top - h, CW, h, 12, stroke=1, fill=1)
-        c.setFillColor(ROSE); c.roundRect(M, y_top - 34, 5, 22, 2, stroke=0, fill=1)
-    def head(ico, txt, y_top, x=M + 16):
-        icon(c, ico, x, y_top - 31, 17)
-        c.setFillColor(INK); xx = x + 24
-        for k, part in enumerate(txt.split("₫")):          # ₫ нет в DejaVuSerif-Bold → рисуем Sans
-            c.setFont(F["serifb"], 14.5); c.drawString(xx, y_top - 27, part); xx += pdfmetrics.stringWidth(part, F["serifb"], 14.5)
+        c.roundRect(x, y_top - h, w, h, 12, stroke=1, fill=1)
+        c.setFillColor(ROSE); c.roundRect(x, y_top - 32, 5, 20, 2, stroke=0, fill=1)
+    def head(ico, txt, x, y_top, w, size=14):
+        icon(c, ico, x, y_top - 28, 16)
+        while pdfmetrics.stringWidth(txt, F["serifb"], size) > w - 28 and size > 9:
+            size -= 0.5
+        c.setFillColor(INK); xx = x + 22
+        for k, part in enumerate(txt.split("₫")):          # ₫ нет в DejaVuSerif-Bold → Sans
+            c.setFont(F["serifb"], size); c.drawString(xx, y_top - 25, part); xx += pdfmetrics.stringWidth(part, F["serifb"], size)
             if k < txt.count("₫"):
-                c.setFont("SansB", 14.5); c.drawString(xx, y_top - 27, "₫"); xx += pdfmetrics.stringWidth("₫", "SansB", 14.5)
-    def photos(cat, x, y, w, h, gap=6):
-        its = pick_info_items(by[cat], cat=cat)
+                c.setFont("SansB", size); c.drawString(xx, y_top - 25, "₫"); xx += pdfmetrics.stringWidth("₫", "SansB", size)
+    def photos(items, x, y, w, h, gap=6):
         iw = (w - gap * 2) / 3
-        for j, p in enumerate(its[:3]):
+        for j, p in enumerate(items[:3]):
             ph = sorted(glob.glob(os.path.join(ROOT, f"img/products/{p['slug']}/*.webp")))[0]
             draw_rounded_image(c, ph, x + j * (iw + gap), y, iw, h, r=7)
+    pick = lambda key: [byid[i] for i in GIFT_PICK[key] if i in byid]
+    def label(txt, price, x, y, w):
+        c.setFillColor(GREY); c.setFont(F["sansb"], 10); c.drawString(x, y, txt)
+        if price: price_tag(c, fmt_vnd(price, lang), x + w, y)
     def sub_in(x, y):
-        c.setFillColor(ROSE); c.setFont(F["sansb"], 10); c.drawString(x, y, G["in"])
+        c.setFillColor(ROSE); c.setFont(F["sansb"], 9.5); c.drawString(x, y, G["in"])
 
-    y = PH - 146
+    PHH = 74
     half = (CW - 16 * 3) / 2
+    xL, xR = M + 16, M + 16 + half + 16
+    y = PH - 130
     # --- 1. 25 и 51 роза ---
-    h1 = 222
-    box(y, h1); head("rose", G["t1"], y)
-    for k, (cat, price) in enumerate((("r25", 500000), ("r51", 1000000))):
-        x = M + 16 + k * (half + 16)
-        c.setFillColor(GREY); c.setFont(F["sansb"], 10); c.drawString(x, y - 52, G[cat])
-        price_tag(c, fmt_vnd(price, lang), x + half, y - 52)
-        photos(cat, x, y - 152, half, 88)
-    sub_in(M + 16, y - 178)
-    gift_lines(c, F, [("card", G["card"])], M + 16, y - 198, half)
-    gift_lines(c, F, [("cry", G["cry"])], M + 16 + half + 16, y - 198, half)
-    y -= h1 + 12
+    h1 = 182
+    box(M, y, CW, h1); head("rose", G["t1"], xL, y, CW)
+    for x, cat, price in ((xL, "r25", 500000), (xR, "r51", 1000000)):
+        label(G[cat], price, x, y - 46, half)
+        photos(pick_info_items(by[cat], cat=cat), x, y - 56 - PHH, half, PHH)
+    sub_in(xL, y - 148)
+    gift_lines(c, F, [("card", G["card"])], xL, y - 166, half)
+    gift_lines(c, F, [("cry", G["cry"])], xR, y - 166, half)
+    y -= h1 + 10
     # --- 2. 101 роза или сборный букет ---
-    h2 = 168
-    box(y, h2); head("rose", G["t2"], y)
-    x = M + 16
-    c.setFillColor(GREY); c.setFont(F["sansb"], 10); c.drawString(x, y - 52, G["r101"])
-    price_tag(c, fmt_vnd(1500000, lang), x + half, y - 52)
-    photos("r101", x, y - 152, half, 88)
-    x2 = M + 16 + half + 16
-    c.setFillColor(GREY); c.setFont(F["sansb"], 10); c.drawString(x2, y - 52, G["mixed"])
-    price_tag(c, fmt_vnd(1500000, lang), x2 + half, y - 52)
-    sub_in(x2, y - 76)
-    gift_lines(c, F, [("card", G["card"]), ("cry", G["cry"]), ("bal", G["bal"])], x2, y - 96, half)
-    y -= h2 + 12
-    # --- 3. + набор шаров ---
-    h3 = 98
-    box(y, h3); head("bal", G["t3"], y)
-    c.setFillColor(GREY); c.setFont(F["sans"], 9.5); c.drawString(M + 56, y - 44, G["t3s"])
-    gift_lines(c, F, [("card", G["card"]), ("cry", G["cry"])], M + 16, y - 64, half)
-    gift_lines(c, F, [("tara", G["tara"])], M + 16 + half + 16, y - 64, half)
-    y -= h3 + 12
-    # --- 4. от 3 000 000 ---
-    h4 = 100
-    box(y, h4, accent=True); head("crown", G["t4"], y)
-    gift_lines(c, F, [("card", G["card"]), ("cry", G["cry"])], M + 16, y - 58, half)
-    gift_lines(c, F, [("bal", G["bt"]), ("toy", G["toy"])], M + 16 + half + 16, y - 58, half)
-    y -= h4 + 14
-    # --- игрушки отдельно ---
-    icon(c, "toy", PW/2 - pdfmetrics.stringWidth(G["toys"], F["sans"], 10)/2 - 20, y - 14, 14)
-    c.setFillColor(ROSE_D); c.setFont(F["sans"], 10); c.drawCentredString(PW/2, y - 10, G["toys"])
+    h2 = 210
+    box(M, y, CW, h2); head("rose", G["t2"], xL, y, CW)
+    label(G["r101"], 1500000, xL, y - 46, half)
+    photos(pick_info_items(by["r101"], cat="r101"), xL, y - 56 - PHH, half, PHH)
+    label(G["mixed"], 1500000, xR, y - 46, half)
+    photos(pick("mixed"), xR, y - 56 - PHH, half, PHH)
+    sub_in(xL, y - 148)
+    gift_lines(c, F, [("card", G["card"]), ("cry", G["cry"])], xL, y - 166, half)
+    gift_lines(c, F, [("bal", G["bal"])], xR, y - 166, half)
+    y -= h2 + 10
+    # --- 3 и 4 рядом ---
+    bw = (CW - 10) / 2
+    h3 = y - 58
+    for k, (ico, title, key, items, acc) in enumerate((
+            ("bal", G["t3"], "t3", [("card", G["card"]), ("cry", G["cry"]), ("tara", G["tara"])], False),
+            ("crown", G["t4"], "t4", [("card", G["card"]), ("cry", G["cry"]), ("bal", G["bt"]), ("toy", G["toy"])], True))):
+        x = M + k * (bw + 10); xi = x + 14; wi = bw - 28
+        box(x, y, bw, h3, accent=acc)
+        tl = wrap(c, title, F["serifb"], 13, wi - 24)
+        head(ico, tl[0], xi, y, wi, size=13)
+        yy = y - 42
+        for ln in tl[1:]:
+            c.setFillColor(INK); c.setFont(F["serifb"], 13); c.drawString(xi + 22, y - 41, ln); yy -= 16
+        if key == "t3":
+            c.setFillColor(GREY); c.setFont(F["sans"], 9); c.drawString(xi, yy, G["t3s"]); yy -= 8
+        PH3 = 82 if key == "t4" else 82 - 16 * (len(tl) - 1) + 12
+        photos(pick(key), xi, yy - PH3 - 4, wi, PH3)
+        yy -= PH3 + 22
+        sub_in(xi, yy); yy -= 18
+        yy = gift_lines(c, F, items, xi, yy, wi, size=9.5, lead=17, ic=13)
+    icon(c, "toy", PW/2 - pdfmetrics.stringWidth(G["toys"], F["sans"], 10)/2 - 20, 39, 13)
+    c.setFillColor(ROSE_D); c.setFont(F["sans"], 10); c.drawCentredString(PW/2, 42, G["toys"])
     c.setFillColor(GREY); c.setFont("Sans", 8)
-    c.drawCentredString(PW/2, 26, t["brand"] + "  ·  " + t["site"])
+    c.drawCentredString(PW/2, 22, t["brand"] + "  ·  " + t["site"])
     c.showPage()
 
 
