@@ -651,6 +651,138 @@ def draw_cat_header(c, F, t, cat, n):
     c.drawRightString(PW-M-18, top+band_h/2-3, f"{n} {t['items']}")
     return top - 16   # y для первой карточки
 
+# ---------- Каталог 6.0: стр.3 «Подарки к заказу» (22.10.2026) ----------
+# 3 фото 25/51/101 (белые/розовые/красные, INFO_PICK) + уровни подарков. Иконки — seo/_icons/*.png (Noto Emoji).
+GIFTS = {
+ "ru": {"title": "Подарки к заказу", "sub": "Чем больше заказ — тем больше подарков",
+        "in": "В подарок:", "card": "Открытка с вашим текстом", "cry": "Гранулы-кристаллы для свежести цветов",
+        "bal": "Фольгированный гелиевый шар на выбор (летает до 7 дней)", "tara": "Тара для букета — вместо шара",
+        "bt": "Шар или тара для букета на выбор", "toy": "Мягкая игрушка на выбор",
+        "t1": "25 и 51 роза", "t2": "101 роза или сборный букет", "mixed": "Сборный букет",
+        "t3": "101 роза или сборный букет + набор шаров", "t3s": "наборы S / M / L, цифры и т.п.",
+        "t4": "Заказ от 3 000 000 ₫", "toys": "Мягкие игрушки — 300 000 ₫, можно купить отдельно",
+        "r25": "25 роз", "r51": "51 роза", "r101": "101 роза"},
+ "en": {"title": "Gifts with your order", "sub": "The bigger the order — the more gifts",
+        "in": "Free gifts:", "card": "Greeting card with your text", "cry": "Water crystals to keep flowers fresh",
+        "bal": "Foil helium balloon of your choice (floats up to 7 days)", "tara": "Vase for the bouquet — instead of the balloon",
+        "bt": "Balloon or vase for the bouquet — your choice", "toy": "Soft toy of your choice",
+        "t1": "25 and 51 roses", "t2": "101 roses or a mixed bouquet", "mixed": "Mixed bouquet",
+        "t3": "101 roses or a mixed bouquet + a balloon set", "t3s": "sets S / M / L, numbers, etc.",
+        "t4": "Orders from 3,000,000 ₫", "toys": "Soft toys — 300,000 ₫, also sold separately",
+        "r25": "25 roses", "r51": "51 roses", "r101": "101 roses"},
+ "ko": {"title": "주문 선물", "sub": "주문이 클수록 선물도 더 많아져요",
+        "in": "선물:", "card": "원하시는 문구의 카드", "cry": "꽃을 싱싱하게 유지하는 워터 크리스탈",
+        "bal": "원하시는 호일 헬륨 풍선 (최대 7일)", "tara": "풍선 대신 꽃병",
+        "bt": "풍선 또는 꽃병 중 선택", "toy": "원하시는 봉제 인형",
+        "t1": "장미 25송이 / 51송이", "t2": "장미 101송이 또는 믹스 꽃다발", "mixed": "믹스 꽃다발",
+        "t3": "장미 101송이 또는 믹스 꽃다발 + 풍선 세트", "t3s": "S / M / L 세트, 숫자 풍선 등",
+        "t4": "3 000 000동 이상 주문", "toys": "봉제 인형 — 300 000동, 따로 구매 가능",
+        "r25": "장미 25송이", "r51": "장미 51송이", "r101": "장미 101송이"},
+}
+ICON_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "_icons")
+def icon(c, name, x, y, s):
+    pth = os.path.join(ICON_DIR, name + ".png")
+    if os.path.isfile(pth):
+        c.drawImage(pth, x, y, s, s, mask='auto')
+
+def gift_lines(c, F, items, x, y, maxw, size=10, lead=19, ic=14):
+    """items: [(icon, text)] столбиком; возвращает новую y."""
+    for ico, txt in items:
+        lines = wrap(c, txt, F["sans"], size, maxw - ic + 6)
+        icon(c, ico, x, y - 3.5, ic)
+        c.setFillColor(INK); c.setFont(F["sans"], size)
+        for k, ln in enumerate(lines):
+            c.drawString(x + ic + 8, y - k * (size + 3), ln)
+        y -= lead + (len(lines) - 1) * (size + 3)
+    return y
+
+def price_tag(c, txt, xr, y):
+    c.setFont("SansB", 10.5)
+    w = pdfmetrics.stringWidth(txt, "SansB", 10.5) + 18
+    c.setFillColor(BLUSH); c.roundRect(xr - w, y - 6, w, 20, 10, stroke=0, fill=1)
+    c.setFillColor(ROSE_D); c.drawCentredString(xr - w / 2, y, txt)
+
+def draw_gifts(c, F, t, lang, by):
+    G = GIFTS[lang]
+    c.setFillColor(WHITE); c.rect(0, 0, PW, PH, stroke=0, fill=1)
+    c.setFillColor(BLUSH); c.rect(0, PH-128, PW, 128, stroke=0, fill=1)
+    c.setFillColor(ROSE); c.setFont(F["sans"], 9)
+    c.drawCentredString(PW/2, PH-52, t["brand"] + "  |  " + t["site"])
+    c.setFillColor(INK); c.setFont(F["serifb"], 30)
+    c.drawCentredString(PW/2, PH-90, G["title"])
+    c.setStrokeColor(GOLD); c.setLineWidth(1.2); c.line(PW/2-50, PH-106, PW/2+50, PH-106)
+    c.setFillColor(GREY); c.setFont(F["sans"], 10.5)
+    c.drawCentredString(PW/2, PH-122, G["sub"])
+
+    def box(y_top, h, accent=False):
+        c.setFillColor(BLUSH2 if accent else WHITE); c.setStrokeColor(ROSE if accent else LINE)
+        c.setLineWidth(1.4 if accent else 1)
+        c.roundRect(M, y_top - h, CW, h, 12, stroke=1, fill=1)
+        c.setFillColor(ROSE); c.roundRect(M, y_top - 34, 5, 22, 2, stroke=0, fill=1)
+    def head(ico, txt, y_top, x=M + 16):
+        icon(c, ico, x, y_top - 31, 17)
+        c.setFillColor(INK); xx = x + 24
+        for k, part in enumerate(txt.split("₫")):          # ₫ нет в DejaVuSerif-Bold → рисуем Sans
+            c.setFont(F["serifb"], 14.5); c.drawString(xx, y_top - 27, part); xx += pdfmetrics.stringWidth(part, F["serifb"], 14.5)
+            if k < txt.count("₫"):
+                c.setFont("SansB", 14.5); c.drawString(xx, y_top - 27, "₫"); xx += pdfmetrics.stringWidth("₫", "SansB", 14.5)
+    def photos(cat, x, y, w, h, gap=6):
+        its = pick_info_items(by[cat], cat=cat)
+        iw = (w - gap * 2) / 3
+        for j, p in enumerate(its[:3]):
+            ph = sorted(glob.glob(os.path.join(ROOT, f"img/products/{p['slug']}/*.webp")))[0]
+            draw_rounded_image(c, ph, x + j * (iw + gap), y, iw, h, r=7)
+    def sub_in(x, y):
+        c.setFillColor(ROSE); c.setFont(F["sansb"], 10); c.drawString(x, y, G["in"])
+
+    y = PH - 146
+    half = (CW - 16 * 3) / 2
+    # --- 1. 25 и 51 роза ---
+    h1 = 222
+    box(y, h1); head("rose", G["t1"], y)
+    for k, (cat, price) in enumerate((("r25", 500000), ("r51", 1000000))):
+        x = M + 16 + k * (half + 16)
+        c.setFillColor(GREY); c.setFont(F["sansb"], 10); c.drawString(x, y - 52, G[cat])
+        price_tag(c, fmt_vnd(price, lang), x + half, y - 52)
+        photos(cat, x, y - 152, half, 88)
+    sub_in(M + 16, y - 178)
+    gift_lines(c, F, [("card", G["card"])], M + 16, y - 198, half)
+    gift_lines(c, F, [("cry", G["cry"])], M + 16 + half + 16, y - 198, half)
+    y -= h1 + 12
+    # --- 2. 101 роза или сборный букет ---
+    h2 = 168
+    box(y, h2); head("rose", G["t2"], y)
+    x = M + 16
+    c.setFillColor(GREY); c.setFont(F["sansb"], 10); c.drawString(x, y - 52, G["r101"])
+    price_tag(c, fmt_vnd(1500000, lang), x + half, y - 52)
+    photos("r101", x, y - 152, half, 88)
+    x2 = M + 16 + half + 16
+    c.setFillColor(GREY); c.setFont(F["sansb"], 10); c.drawString(x2, y - 52, G["mixed"])
+    price_tag(c, fmt_vnd(1500000, lang), x2 + half, y - 52)
+    sub_in(x2, y - 76)
+    gift_lines(c, F, [("card", G["card"]), ("cry", G["cry"]), ("bal", G["bal"])], x2, y - 96, half)
+    y -= h2 + 12
+    # --- 3. + набор шаров ---
+    h3 = 98
+    box(y, h3); head("bal", G["t3"], y)
+    c.setFillColor(GREY); c.setFont(F["sans"], 9.5); c.drawString(M + 56, y - 44, G["t3s"])
+    gift_lines(c, F, [("card", G["card"]), ("cry", G["cry"])], M + 16, y - 64, half)
+    gift_lines(c, F, [("tara", G["tara"])], M + 16 + half + 16, y - 64, half)
+    y -= h3 + 12
+    # --- 4. от 3 000 000 ---
+    h4 = 100
+    box(y, h4, accent=True); head("crown", G["t4"], y)
+    gift_lines(c, F, [("card", G["card"]), ("cry", G["cry"])], M + 16, y - 58, half)
+    gift_lines(c, F, [("bal", G["bt"]), ("toy", G["toy"])], M + 16 + half + 16, y - 58, half)
+    y -= h4 + 14
+    # --- игрушки отдельно ---
+    icon(c, "toy", PW/2 - pdfmetrics.stringWidth(G["toys"], F["sans"], 10)/2 - 20, y - 14, 14)
+    c.setFillColor(ROSE_D); c.setFont(F["sans"], 10); c.drawCentredString(PW/2, y - 10, G["toys"])
+    c.setFillColor(GREY); c.setFont("Sans", 8)
+    c.drawCentredString(PW/2, 26, t["brand"] + "  ·  " + t["site"])
+    c.showPage()
+
+
 def build(lang, out_path, version="2.0"):
     global TMP
     TMP = os.path.join(os.path.dirname(os.path.abspath(__file__)), "_catalog_tmp")
@@ -681,7 +813,7 @@ def build(lang, out_path, version="2.0"):
     c.setTitle(f"Каталог {version}")
     draw_cover(c, F, t, hero, version)
     draw_info(c, F, t, lang)
-    draw_info_cats(c, F, t, lang, by, ranges)
+    draw_gifts(c, F, t, lang, by)          # 6.0: вместо «основных категорий» — страница «Подарки»
     draw_toc(c, F, t, ranges)
 
     page_no = 5
@@ -726,8 +858,9 @@ def build_one(lang, out_path, version, only_cat):
     c.setTitle(f"Каталог {version} — {t['cats'][only_cat]}")
     draw_cover(c, F, t, hero, f"{version} · {t['cats'][only_cat]}")
     draw_info(c, F, t, lang)
+    draw_gifts(c, F, t, lang, members_by_cat(load_products()))
     per = {"nabory": 1}.get(only_cat, 2)
-    page_no = 3
+    page_no = 4
     chunks = [items[i:i+per] for i in range(0, len(items), per)] or [[]]
     for ci, chunk in enumerate(chunks):
         if ci == 0:

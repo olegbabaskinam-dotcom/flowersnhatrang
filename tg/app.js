@@ -331,6 +331,15 @@ function renderCart() {
     d.querySelector(".rm").onclick = function () { cartSet(it.id, 0); renderCart(); };
     list.appendChild(d);
   });
+  /* 🎁 подарки к заказу + мягкие игрушки (общий модуль /js/gifts.js) */
+  if (window.FLW_GIFTS) {
+    FLW_GIFTS.render(document.getElementById("giftBox"), c, "ru", null);
+    FLW_GIFTS.toysRow(document.getElementById("toyBox"), c, "ru", function (o) {
+      var cc = cartRead(), ex = cc.filter(function (x) { return x.id === o.id; })[0];
+      if (ex) ex.qty++; else cc.push({ id: o.id, slug: o.id, name: o.name.ru, price_vnd: o.price, price_sub: "", img: String(o.img).replace(/^\//, ""), cats: ["addon"], qty: 1 });
+      cartWrite(cc); renderCart();
+    });
+  }
   refreshZone();
 }
 
@@ -593,6 +602,7 @@ function submitOrder(e) {
   var hasOther = its.some(function (x) { return x.cats.indexOf("cakes") < 0; });
   if (hasCake && !hasOther) { err.textContent = "🎂 Торт заказывается только вместе с букетом, шарами или набором."; return; }
 
+  if (window.FLW_GIFTS) { var gErr = FLW_GIFTS.check(its, "ru"); if (gErr) { err.textContent = gErr; var gb = document.getElementById("giftBox"); if (gb) gb.scrollIntoView({ behavior: "smooth", block: "center" }); return; } }
   if (!latlng) { err.textContent = "Укажите адрес доставки на карте."; return; }
   if (window.__outside) { err.textContent = (window.__delLabel === "аэропорт") ? "✈️ В аэропорт и южнее аэропорта доставки нет." : "Адрес вне зоны доставки."; return; }
   if (!document.getElementById("deliveryTime").value) { err.textContent = "Выберите время доставки."; return; }
@@ -625,6 +635,8 @@ function submitOrder(e) {
 
   // строки заказа
   var items = its.map(function (x) { return x.qty + "× " + x.name; }).join("\n");
+  var giftLine = window.FLW_GIFTS ? FLW_GIFTS.orderText(its) : "";
+  if (giftLine) items += "\n" + giftLine;
   var photos = its.map(function (x) { return CONFIG.DOMAIN + "/" + String(x.img).replace(/\.webp$/i, ".jpg"); }).join("\n");
   var amountStr = fee > 0
     ? money(sub, "VND") + " + доставка " + money(fee, "VND") + " = " + money(sub + fee, "VND")
