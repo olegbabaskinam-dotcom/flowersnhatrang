@@ -705,6 +705,12 @@ def product_cat(p):
         cats.append("cakes")  # 01.10: id188 — пирожное = раздел Торты (аудит матрицы)
     if s in ("yarkaya-sbornaya-korzina-nabor-sharov-l-cifry-29", "stilnaya-sbornaya-korzina-101-rozovaya-25-rozovaya-eustoma", "sbornyy-buket-51-belaya-roza-evkalipt-eustomy-25-rozovyh-roz-tort") and "mixed" not in cats:
         cats.insert(0, "mixed")  # id157/id160: сборная корзина в комбо
+    # 22.10.2026 (Олег): несколько букетов в одном товаре = КОМБО. В разделах 25/51/101 — только одиночные букеты,
+    # всё составное — только в «Комбо-наборах» (иначе люди путаются). 'multi' = несколько букетов одной категории.
+    if "сборн" in n and any(c in cats for c in ("r25", "r51", "r101")) and "mixed" not in cats:
+        cats.insert(0, "mixed")
+    if len(_re.findall(r'(\d+)\s*[а-яё-]*\s*роз', n)) >= 2 and len(cats) == 1:
+        cats.append("multi")
     if is_nabor and "nabory" not in cats:
         cats.insert(0, "nabory")
     if is_prazdnik and "prazdnik" not in cats:

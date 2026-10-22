@@ -309,12 +309,14 @@ def load_products():
 def members_by_cat(prods):
     by = {c: [] for c in CAT_ORDER}
     for p in prods:
-        tags = B.product_cat(p).split()
+        cat = B.product_cat(p); tags = cat.split()
+        # 22.10.2026 (Олег): комбо — ТОЛЬКО в разделе «Комбо-наборы», в 25/51/101/сборных/шарах/тортах — только чистые позиции
+        if B.is_combo(cat):
+            by["combo"].append(p)
+            continue
         for t in tags:
             if t in by:
                 by[t].append(p)
-        if len(tags) >= 2:
-            by["combo"].append(p)
     # Каталог 4.2: внутри каждой категории сначала ЧИСТЫЕ одиночные позиции,
     # затем комбо-наборы (где эта позиция лишь входит в набор). Сортировка стабильная.
     for cat in CAT_ORDER:

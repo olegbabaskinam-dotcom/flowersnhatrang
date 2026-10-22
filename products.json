@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-22 06:46",
+ "generated": "2026-10-22 09:45",
  "count": 197,
  "categories": [
   {
@@ -1164,7 +1164,8 @@
    "price": "1 800 000 донгов",
    "price_sub": "≈ $72 · 6 700 ₽",
    "cats": [
-    "r51"
+    "r51",
+    "multi"
    ],
    "color": "red",
    "images": [
@@ -1669,6 +1670,7 @@
    "price": "2 000 000 донгов",
    "price_sub": "≈ $80 · 7 500 ₽",
    "cats": [
+    "mixed",
     "r25"
    ],
    "color": "pink",
@@ -1943,6 +1945,7 @@
    "price": "8 500 000 донгов",
    "price_sub": "≈ $340 · 31 500 ₽",
    "cats": [
+    "mixed",
     "r101",
     "r51",
     "balloons"
@@ -1993,7 +1996,8 @@
    "price": "4 500 000 донгов",
    "price_sub": "≈ $180 · 16 700 ₽",
    "cats": [
-    "r101"
+    "r101",
+    "multi"
    ],
    "color": "pink",
    "images": [
@@ -2340,6 +2344,7 @@
    "price": "2 500 000 донгов",
    "price_sub": "≈ $100 · 9 300 ₽",
    "cats": [
+    "mixed",
     "r25"
    ],
    "color": "",
@@ -2504,6 +2509,7 @@
    "price": "2 500 000 донгов",
    "price_sub": "≈ $100 · 9 300 ₽",
    "cats": [
+    "mixed",
     "r25"
    ],
    "color": "red",
@@ -2791,7 +2797,8 @@
    "price": "4 250 000 донгов",
    "price_sub": "≈ $170 · 15 800 ₽",
    "cats": [
-    "r101"
+    "r101",
+    "multi"
    ],
    "color": "red",
    "images": [
