@@ -108,7 +108,7 @@ navsets = {}
 for f in HTML:
     if f in {"cart.html", "order.html", "checkout.html", "zakaz.html", "Dialog.html"}:
         continue
-    lang = "ru" if (f in ("index.html",) or f.endswith("-ru.html") or f in ("catalog-ru.html","blog-ru.html","balloons.html","torty.html","nabory.html","prazdnik.html")) else ("en" if "-en" in f or f.endswith("index-en.html") else "ko")
+    lang = "ru" if (f in ("index.html",) or f.endswith("-ru.html") or f in ("catalog-ru.html","blog-ru.html","balloons.html","torty.html","nabory.html","prazdnik.html","cvety.html","podarki.html","kolyaski.html")) else ("en" if "-en" in f or f.endswith("index-en.html") else "ko")
     s = open(f, encoding="utf-8").read()
     ni = nav_items(s)
     if ni: navsets.setdefault(lang, {}).setdefault(ni, []).append(f)

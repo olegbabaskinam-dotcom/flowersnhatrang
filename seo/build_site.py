@@ -316,7 +316,7 @@ CARD_JS = """<script>/*MARK-CARD-JS*/
   function flowerSlug(c){return toks(c).some(function(t){return /^(roz|roza|rozy|buket|korzina|korzine|liliy|eustom|eustomy)$/.test(t);});}
   function isFlower(c){return has(c,'r25')||has(c,'r51')||has(c,'r101')||has(c,'mixed')||(has(c,'balloons')&&flowerSlug(c));}
   function bCombo(c){return has(c,'balloons')&&(isFlower(c)||has(c,'cakes'));}
-  var LATEX=['nabor-sharov-s-2-cifry-10-sharov', '101-belaya-roza-korzina-shary-serdca', '101-belaya-roza-rozovaya-upakovka-cifry-25-sharov', '35-serebristo-chernyh-gelievyh-sharov-pod-potolok', '101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov', 'yarkaya-sbornaya-korzina-15-rozovyh-sharov', '27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka', 'svyazka-20-sinih-rezinovyh-sharov'],LATEX_ONLY=['35-serebristo-chernyh-gelievyh-sharov-pod-potolok', '27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka', 'svyazka-20-sinih-rezinovyh-sharov']; // шары с резиновыми (латексными) шарами — проверено по фото 01.10.2026
+  var LATEX=['nabor-sharov-s-2-cifry-10-sharov', '101-belaya-roza-korzina-shary-serdca', '101-belaya-roza-rozovaya-upakovka-cifry-25-sharov', '35-serebristo-chernyh-gelievyh-sharov-pod-potolok', '101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov', 'yarkaya-sbornaya-korzina-15-rozovyh-sharov', '27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka', 'svyazka-20-sinih-rezinovyh-sharov', 'nabor-sharov-l-raduzhnye-cifry-30-15-rozovyh', 'svyazka-15-rezinovyh-sharov-rozovye-belye-serebryanye', 'svyazka-15-hromirovannyh-rezinovyh-sharov-rozovoe-zoloto', 'svyazka-belyh-rezinovyh-sharov-zhemchuzhnye-serdca'],LATEX_ONLY=['35-serebristo-chernyh-gelievyh-sharov-pod-potolok', '27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka', 'svyazka-20-sinih-rezinovyh-sharov', 'svyazka-15-rezinovyh-sharov-rozovye-belye-serebryanye', 'svyazka-15-hromirovannyh-rezinovyh-sharov-rozovoe-zoloto']; // шары с резиновыми (латексными) шарами — проверено по фото 01.10.2026
   function bslug(c){return toks(c).join('-');}
   function bLatex(c){return has(c,'balloons')&&LATEX.indexOf(bslug(c))>-1;}
   function match(c,k){
@@ -719,9 +719,12 @@ def product_cat(p):
         cats = ["mixed"]
     return " ".join(cats)
 
+NEW_BALLOONS_223 = ("nabor-sharov-s-rozovye-zvezdy-golubye-serdca", "nabor-sharov-m-rozovye-cifry-27", "nabor-sharov-l-raduzhnye-cifry-30-15-rozovyh", "nabor-sharov-l-serebryanye-cifry-39-serdca", "svyazka-15-rezinovyh-sharov-rozovye-belye-serebryanye", "nabor-sharov-s-sirenevo-goluboy-happy-birthday", "svyazka-15-hromirovannyh-rezinovyh-sharov-rozovoe-zoloto", "nabor-sharov-l-serebryanye-cifry-29-happy-birthday", "nabor-sharov-s-happy-birthday-7-serebristo-bezhevyh", "nabor-sharov-s-7-rozovo-bezhevyh-sharov", "svyazka-9-rozovo-krasnyh-serdec", "nabor-sharov-s-zolotye-cifry-25", "nabor-sharov-m-serebryanye-cifry-12-happy-birthday", "nabor-sharov-s-zolotye-cifry-45", "nabor-sharov-s-rozovye-i-malinovye-zvezdy", "nabor-sharov-l-zolotye-cifry-40-sinie-zolotye", "nabor-sharov-m-bezhevye-cifry-22", "svyazka-belyh-rezinovyh-sharov-zhemchuzhnye-serdca", "nabor-sharov-s-7-rozovyh-serdec-i-zvezd", "nabor-sharov-l-zolotye-cifry-52-serdca")
 def product_color(p):
     """Цвет роз для фильтра (red/white/pink/purple/'')."""
     s = p["slug"].lower()
+    if s in NEW_BALLOONS_223:
+        return ""  # id223–id242: наборы шаров — фильтра цвета роз нет
     if s.startswith("dop-"):
         return ""  # у доп-товаров цвета роз нет
     if s in ("101-rozovaya-roza-belaya-upakovka-plastikovaya-tara",

@@ -1,6 +1,6 @@
 {
- "generated": "2026-10-22 09:45",
- "count": 197,
+ "generated": "2026-10-23 12:57",
+ "count": 217,
  "categories": [
   {
    "key": "all",
@@ -4616,6 +4616,377 @@
     "img/products/tort-belyy-kremovyy-klubnika-svechi-happy-birthday/5.webp",
     "img/products/tort-belyy-kremovyy-klubnika-svechi-happy-birthday/6.webp",
     "img/products/tort-belyy-kremovyy-klubnika-svechi-happy-birthday/7.webp"
+   ]
+  },
+  {
+   "id": 223,
+   "slug": "nabor-sharov-s-rozovye-zvezdy-golubye-serdca",
+   "name": "Набор шаров S (розовые звёзды и серо-голубые сердца)",
+   "desc": "Набор фольгированных гелиевых шаров S: розовые звёзды и серо-голубые сердца в нежной пастельной гамме. Для дня рождения, свидания или сюрприза. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Набор шаров S (розовые звёзды и серо-голубые сердца) Нячанг доставка",
+   "price_vnd": 1000000,
+   "price": "1 000 000 донгов",
+   "price_sub": "≈ $40 · 3 800 ₽",
+   "cats": [
+    "balloons"
+   ],
+   "color": "",
+   "images": [
+    "img/products/nabor-sharov-s-rozovye-zvezdy-golubye-serdca/1.webp",
+    "img/products/nabor-sharov-s-rozovye-zvezdy-golubye-serdca/2.webp",
+    "img/products/nabor-sharov-s-rozovye-zvezdy-golubye-serdca/3.webp"
+   ]
+  },
+  {
+   "id": 224,
+   "slug": "nabor-sharov-m-rozovye-cifry-27",
+   "name": "Набор шаров M (розовые цифры «27» + 3 шара)",
+   "desc": "Набор фольгированных гелиевых шаров M: большие розовые цифры «27» и 3 шара в тон. Цифры подберём под ваш возраст или дату. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Набор шаров M (розовые цифры «27» + 3 шара) Нячанг доставка",
+   "price_vnd": 1500000,
+   "price": "1 500 000 донгов",
+   "price_sub": "≈ $60 · 5 600 ₽",
+   "cats": [
+    "balloons"
+   ],
+   "color": "",
+   "images": [
+    "img/products/nabor-sharov-m-rozovye-cifry-27/1.webp",
+    "img/products/nabor-sharov-m-rozovye-cifry-27/2.webp"
+   ]
+  },
+  {
+   "id": 225,
+   "slug": "nabor-sharov-l-raduzhnye-cifry-30-15-rozovyh",
+   "name": "Набор шаров L (радужные цифры «30» + 15 розовых резиновых шаров)",
+   "desc": "Набор шаров L: большие радужные фольгированные цифры «30» и связка из 15 розовых резиновых гелиевых шаров. Яркое оформление для юбилея или дня рождения. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Набор шаров L (радужные цифры «30» + 15 розовых резиновых шаров) Нячанг доставка",
+   "price_vnd": 2000000,
+   "price": "2 000 000 донгов",
+   "price_sub": "≈ $80 · 7 500 ₽",
+   "cats": [
+    "balloons"
+   ],
+   "color": "",
+   "images": [
+    "img/products/nabor-sharov-l-raduzhnye-cifry-30-15-rozovyh/1.webp",
+    "img/products/nabor-sharov-l-raduzhnye-cifry-30-15-rozovyh/2.webp",
+    "img/products/nabor-sharov-l-raduzhnye-cifry-30-15-rozovyh/3.webp"
+   ]
+  },
+  {
+   "id": 226,
+   "slug": "nabor-sharov-l-serebryanye-cifry-39-serdca",
+   "name": "Набор шаров L (серебряные цифры «39» + красные и серебряные сердца)",
+   "desc": "Набор фольгированных гелиевых шаров L: большие серебряные цифры «39», красные и серебряные шары-сердца. Для юбилея, дня рождения или романтического сюрприза. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Набор шаров L (серебряные цифры «39» + красные и серебряные сердца) Нячанг доставка",
+   "price_vnd": 2000000,
+   "price": "2 000 000 донгов",
+   "price_sub": "≈ $80 · 7 500 ₽",
+   "cats": [
+    "balloons"
+   ],
+   "color": "",
+   "images": [
+    "img/products/nabor-sharov-l-serebryanye-cifry-39-serdca/1.webp",
+    "img/products/nabor-sharov-l-serebryanye-cifry-39-serdca/2.webp"
+   ]
+  },
+  {
+   "id": 227,
+   "slug": "svyazka-15-rezinovyh-sharov-rozovye-belye-serebryanye",
+   "name": "Связка из 15 резиновых шаров (розовые, белые, серебряные)",
+   "desc": "Связка из 15 резиновых гелиевых шаров в розовом, белом и серебряном цвете. Нежное оформление для дня рождения, праздника или фотозоны. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Связка из 15 резиновых шаров (розовые, белые, серебряные) Нячанг доставка",
+   "price_vnd": 1000000,
+   "price": "1 000 000 донгов",
+   "price_sub": "≈ $40 · 3 800 ₽",
+   "cats": [
+    "balloons"
+   ],
+   "color": "",
+   "images": [
+    "img/products/svyazka-15-rezinovyh-sharov-rozovye-belye-serebryanye/1.webp",
+    "img/products/svyazka-15-rezinovyh-sharov-rozovye-belye-serebryanye/2.webp",
+    "img/products/svyazka-15-rezinovyh-sharov-rozovye-belye-serebryanye/3.webp"
+   ]
+  },
+  {
+   "id": 228,
+   "slug": "nabor-sharov-s-sirenevo-goluboy-happy-birthday",
+   "name": "Набор шаров S (сиренево-голубой с шаром Happy Birthday)",
+   "desc": "Набор фольгированных гелиевых шаров S в сиренево-голубой гамме с круглым шаром Happy Birthday. Праздничное оформление на день рождения. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Набор шаров S (сиренево-голубой с шаром Happy Birthday) Нячанг доставка",
+   "price_vnd": 1000000,
+   "price": "1 000 000 донгов",
+   "price_sub": "≈ $40 · 3 800 ₽",
+   "cats": [
+    "balloons"
+   ],
+   "color": "",
+   "images": [
+    "img/products/nabor-sharov-s-sirenevo-goluboy-happy-birthday/1.webp",
+    "img/products/nabor-sharov-s-sirenevo-goluboy-happy-birthday/2.webp",
+    "img/products/nabor-sharov-s-sirenevo-goluboy-happy-birthday/3.webp"
+   ]
+  },
+  {
+   "id": 229,
+   "slug": "svyazka-15-hromirovannyh-rezinovyh-sharov-rozovoe-zoloto",
+   "name": "Связка из 15 хромированных резиновых шаров (розовое золото)",
+   "desc": "Связка из 15 хромированных резиновых гелиевых шаров цвета «розовое золото» с зеркальным блеском. Эффектное оформление для дня рождения, праздника или фотозоны. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Связка из 15 хромированных резиновых шаров (розовое золото) Нячанг доставка",
+   "price_vnd": 1000000,
+   "price": "1 000 000 донгов",
+   "price_sub": "≈ $40 · 3 800 ₽",
+   "cats": [
+    "balloons"
+   ],
+   "color": "",
+   "images": [
+    "img/products/svyazka-15-hromirovannyh-rezinovyh-sharov-rozovoe-zoloto/1.webp",
+    "img/products/svyazka-15-hromirovannyh-rezinovyh-sharov-rozovoe-zoloto/2.webp",
+    "img/products/svyazka-15-hromirovannyh-rezinovyh-sharov-rozovoe-zoloto/3.webp"
+   ]
+  },
+  {
+   "id": 230,
+   "slug": "nabor-sharov-l-serebryanye-cifry-29-happy-birthday",
+   "name": "Набор шаров L (серебряные цифры «29» + шары Happy Birthday)",
+   "desc": "Набор фольгированных гелиевых шаров L: большие серебряные цифры «29» и шары Happy Birthday. Цифры подберём под ваш возраст. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Набор шаров L (серебряные цифры «29» + шары Happy Birthday) Нячанг доставка",
+   "price_vnd": 2000000,
+   "price": "2 000 000 донгов",
+   "price_sub": "≈ $80 · 7 500 ₽",
+   "cats": [
+    "balloons"
+   ],
+   "color": "",
+   "images": [
+    "img/products/nabor-sharov-l-serebryanye-cifry-29-happy-birthday/1.webp",
+    "img/products/nabor-sharov-l-serebryanye-cifry-29-happy-birthday/2.webp"
+   ]
+  },
+  {
+   "id": 231,
+   "slug": "nabor-sharov-s-happy-birthday-7-serebristo-bezhevyh",
+   "name": "Набор шаров S (Happy Birthday, 7 серебристо-бежевых шаров)",
+   "desc": "Набор фольгированных гелиевых шаров S: 7 шаров в серебристо-бежевой гамме с надписью Happy Birthday. Элегантное оформление на день рождения. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Набор шаров S (Happy Birthday, 7 серебристо-бежевых шаров) Нячанг доставка",
+   "price_vnd": 1000000,
+   "price": "1 000 000 донгов",
+   "price_sub": "≈ $40 · 3 800 ₽",
+   "cats": [
+    "balloons"
+   ],
+   "color": "",
+   "images": [
+    "img/products/nabor-sharov-s-happy-birthday-7-serebristo-bezhevyh/1.webp",
+    "img/products/nabor-sharov-s-happy-birthday-7-serebristo-bezhevyh/2.webp"
+   ]
+  },
+  {
+   "id": 232,
+   "slug": "nabor-sharov-s-7-rozovo-bezhevyh-sharov",
+   "name": "Набор шаров S (7 розово-бежевых шаров)",
+   "desc": "Набор шаров S: связка из 7 гелиевых шаров в розово-бежевой гамме. Нежное оформление на день рождения, годовщину или сюрприз. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Набор шаров S (7 розово-бежевых шаров) Нячанг доставка",
+   "price_vnd": 1000000,
+   "price": "1 000 000 донгов",
+   "price_sub": "≈ $40 · 3 800 ₽",
+   "cats": [
+    "balloons"
+   ],
+   "color": "",
+   "images": [
+    "img/products/nabor-sharov-s-7-rozovo-bezhevyh-sharov/1.webp",
+    "img/products/nabor-sharov-s-7-rozovo-bezhevyh-sharov/2.webp",
+    "img/products/nabor-sharov-s-7-rozovo-bezhevyh-sharov/3.webp"
+   ]
+  },
+  {
+   "id": 233,
+   "slug": "svyazka-9-rozovo-krasnyh-serdec",
+   "name": "Связка из 9 розово-красных шаров-сердец",
+   "desc": "Связка из 9 фольгированных гелиевых шаров-сердец в розовом и красном цвете. Романтичный сюрприз на годовщину, свидание или 14 февраля. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Связка из 9 розово-красных шаров-сердец Нячанг доставка",
+   "price_vnd": 1000000,
+   "price": "1 000 000 донгов",
+   "price_sub": "≈ $40 · 3 800 ₽",
+   "cats": [
+    "balloons"
+   ],
+   "color": "",
+   "images": [
+    "img/products/svyazka-9-rozovo-krasnyh-serdec/1.webp",
+    "img/products/svyazka-9-rozovo-krasnyh-serdec/2.webp",
+    "img/products/svyazka-9-rozovo-krasnyh-serdec/3.webp"
+   ]
+  },
+  {
+   "id": 234,
+   "slug": "nabor-sharov-s-zolotye-cifry-25",
+   "name": "Набор шаров S (золотые цифры «25»)",
+   "desc": "Набор фольгированных гелиевых шаров S: большие золотые цифры «25». Цифры подберём под ваш возраст или дату. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Набор шаров S (золотые цифры «25») Нячанг доставка",
+   "price_vnd": 1000000,
+   "price": "1 000 000 донгов",
+   "price_sub": "≈ $40 · 3 800 ₽",
+   "cats": [
+    "balloons"
+   ],
+   "color": "",
+   "images": [
+    "img/products/nabor-sharov-s-zolotye-cifry-25/1.webp"
+   ]
+  },
+  {
+   "id": 235,
+   "slug": "nabor-sharov-m-serebryanye-cifry-12-happy-birthday",
+   "name": "Набор шаров M (серебряные цифры «12» + шары Happy Birthday)",
+   "desc": "Набор фольгированных гелиевых шаров M: серебряные цифры «12» и шары Happy Birthday. Цифры подберём под ваш возраст. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Набор шаров M (серебряные цифры «12» + шары Happy Birthday) Нячанг доставка",
+   "price_vnd": 1500000,
+   "price": "1 500 000 донгов",
+   "price_sub": "≈ $60 · 5 600 ₽",
+   "cats": [
+    "balloons"
+   ],
+   "color": "",
+   "images": [
+    "img/products/nabor-sharov-m-serebryanye-cifry-12-happy-birthday/1.webp",
+    "img/products/nabor-sharov-m-serebryanye-cifry-12-happy-birthday/2.webp"
+   ]
+  },
+  {
+   "id": 236,
+   "slug": "nabor-sharov-s-zolotye-cifry-45",
+   "name": "Набор шаров S (золотые цифры «45»)",
+   "desc": "Набор фольгированных гелиевых шаров S: большие золотые цифры «45». Для юбилея или дня рождения, цифры подберём под ваш возраст. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Набор шаров S (золотые цифры «45») Нячанг доставка",
+   "price_vnd": 1000000,
+   "price": "1 000 000 донгов",
+   "price_sub": "≈ $40 · 3 800 ₽",
+   "cats": [
+    "balloons"
+   ],
+   "color": "",
+   "images": [
+    "img/products/nabor-sharov-s-zolotye-cifry-45/1.webp",
+    "img/products/nabor-sharov-s-zolotye-cifry-45/2.webp",
+    "img/products/nabor-sharov-s-zolotye-cifry-45/3.webp"
+   ]
+  },
+  {
+   "id": 237,
+   "slug": "nabor-sharov-s-rozovye-i-malinovye-zvezdy",
+   "name": "Набор шаров S (розовые и малиновые звёзды)",
+   "desc": "Набор фольгированных гелиевых шаров S: розовые и малиновые шары-звёзды. Яркое оформление на день рождения или праздник. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Набор шаров S (розовые и малиновые звёзды) Нячанг доставка",
+   "price_vnd": 1000000,
+   "price": "1 000 000 донгов",
+   "price_sub": "≈ $40 · 3 800 ₽",
+   "cats": [
+    "balloons"
+   ],
+   "color": "",
+   "images": [
+    "img/products/nabor-sharov-s-rozovye-i-malinovye-zvezdy/1.webp",
+    "img/products/nabor-sharov-s-rozovye-i-malinovye-zvezdy/2.webp",
+    "img/products/nabor-sharov-s-rozovye-i-malinovye-zvezdy/3.webp"
+   ]
+  },
+  {
+   "id": 238,
+   "slug": "nabor-sharov-l-zolotye-cifry-40-sinie-zolotye",
+   "name": "Набор шаров L (золотые цифры «40» + синие и золотые шары)",
+   "desc": "Набор фольгированных гелиевых шаров L: большие золотые цифры «40», синие и золотые шары. Солидное оформление для юбилея. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Набор шаров L (золотые цифры «40» + синие и золотые шары) Нячанг доставка",
+   "price_vnd": 2000000,
+   "price": "2 000 000 донгов",
+   "price_sub": "≈ $80 · 7 500 ₽",
+   "cats": [
+    "balloons"
+   ],
+   "color": "",
+   "images": [
+    "img/products/nabor-sharov-l-zolotye-cifry-40-sinie-zolotye/1.webp",
+    "img/products/nabor-sharov-l-zolotye-cifry-40-sinie-zolotye/2.webp"
+   ]
+  },
+  {
+   "id": 239,
+   "slug": "nabor-sharov-m-bezhevye-cifry-22",
+   "name": "Набор шаров M (бежевые цифры «22» + шары)",
+   "desc": "Набор фольгированных гелиевых шаров M: бежевые цифры «22» и шары в тон. Цифры подберём под ваш возраст или дату. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Набор шаров M (бежевые цифры «22» + шары) Нячанг доставка",
+   "price_vnd": 1500000,
+   "price": "1 500 000 донгов",
+   "price_sub": "≈ $60 · 5 600 ₽",
+   "cats": [
+    "balloons"
+   ],
+   "color": "",
+   "images": [
+    "img/products/nabor-sharov-m-bezhevye-cifry-22/1.webp",
+    "img/products/nabor-sharov-m-bezhevye-cifry-22/2.webp",
+    "img/products/nabor-sharov-m-bezhevye-cifry-22/3.webp"
+   ]
+  },
+  {
+   "id": 240,
+   "slug": "svyazka-belyh-rezinovyh-sharov-zhemchuzhnye-serdca",
+   "name": "Связка белых резиновых шаров и жемчужных сердец",
+   "desc": "Связка белых резиновых гелиевых шаров и фольгированных жемчужных сердец. Нежное оформление для свадьбы, годовщины или признания. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Связка белых резиновых шаров и жемчужных сердец Нячанг доставка",
+   "price_vnd": 1500000,
+   "price": "1 500 000 донгов",
+   "price_sub": "≈ $60 · 5 600 ₽",
+   "cats": [
+    "balloons"
+   ],
+   "color": "",
+   "images": [
+    "img/products/svyazka-belyh-rezinovyh-sharov-zhemchuzhnye-serdca/1.webp",
+    "img/products/svyazka-belyh-rezinovyh-sharov-zhemchuzhnye-serdca/2.webp",
+    "img/products/svyazka-belyh-rezinovyh-sharov-zhemchuzhnye-serdca/3.webp"
+   ]
+  },
+  {
+   "id": 241,
+   "slug": "nabor-sharov-s-7-rozovyh-serdec-i-zvezd",
+   "name": "Набор шаров S (7 розовых сердец и звёзд)",
+   "desc": "Набор фольгированных гелиевых шаров S: 7 розовых шаров-сердец и звёзд. Нежное оформление на день рождения, годовщину или сюрприз. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Набор шаров S (7 розовых сердец и звёзд) Нячанг доставка",
+   "price_vnd": 1000000,
+   "price": "1 000 000 донгов",
+   "price_sub": "≈ $40 · 3 800 ₽",
+   "cats": [
+    "balloons"
+   ],
+   "color": "",
+   "images": [
+    "img/products/nabor-sharov-s-7-rozovyh-serdec-i-zvezd/1.webp",
+    "img/products/nabor-sharov-s-7-rozovyh-serdec-i-zvezd/2.webp",
+    "img/products/nabor-sharov-s-7-rozovyh-serdec-i-zvezd/3.webp"
+   ]
+  },
+  {
+   "id": 242,
+   "slug": "nabor-sharov-l-zolotye-cifry-52-serdca",
+   "name": "Набор шаров L (золотые цифры «52» + золотые сердца)",
+   "desc": "Набор фольгированных гелиевых шаров L: большие золотые цифры «52» и золотые шары-сердца. Для юбилея или дня рождения, цифры подберём под ваш возраст. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Набор шаров L (золотые цифры «52» + золотые сердца) Нячанг доставка",
+   "price_vnd": 2000000,
+   "price": "2 000 000 донгов",
+   "price_sub": "≈ $80 · 7 500 ₽",
+   "cats": [
+    "balloons"
+   ],
+   "color": "",
+   "images": [
+    "img/products/nabor-sharov-l-zolotye-cifry-52-serdca/1.webp",
+    "img/products/nabor-sharov-l-zolotye-cifry-52-serdca/2.webp"
    ]
   },
   {
