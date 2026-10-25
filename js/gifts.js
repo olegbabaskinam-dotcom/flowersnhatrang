@@ -99,9 +99,22 @@
     var t = T[lang(l)], h = [];
     if (!st.total) return h;
     if (st.tier === "D") return [t.top];
-    if (st.tier === "A" && !st.big) h.push(t.hBal);
-    if (st.tier === "B") h.push(t.hTara);
-    h.push(t.hToy.replace("{x}", fmt(BIG - st.total)));
+    /* 25.10.2026: у каждой подсказки — кнопка, чтобы сразу добавить нужное (на сайте; в TG-боте без ссылок) */
+    var LL = lang(l), web = !/\/tg\//.test(location.pathname);
+    var cat = "/catalog-" + (LL === "ko" ? "ko" : LL) + ".html#";
+    var B = {
+      ru: { r101: "Выбрать 101 розу →", mixed: "Сборные букеты →", bal: "Выбрать набор шаров →", set: "Добавить подарочный набор ↓", more: "Выбрать в каталоге →" },
+      en: { r101: "Choose 101 roses →", mixed: "Mixed bouquets →", bal: "Choose a balloon set →", set: "Add a gift set ↓", more: "Open the catalog →" },
+      ko: { r101: "장미 101송이 고르기 →", mixed: "믹스 꽃다발 →", bal: "풍선 세트 고르기 →", set: "선물 세트 추가 ↓", more: "카탈로그 보기 →" }
+    }[LL];
+    var btn = function (href, txt, scroll) {
+      return '<a href="' + href + '"' + (scroll ? ' data-scroll="' + scroll + '"' : '') + ' style="display:inline-block;margin:7px 6px 0 0;background:#c0687a;color:#fff;text-decoration:none;font-weight:700;font-size:12.5px;padding:7px 12px;border-radius:9px">' + txt + '</a>';
+    };
+    var add = function (txt, links) { h.push(web ? txt + '<br>' + links : txt); };
+    if (st.tier === "A" && !st.big) add(t.hBal, btn(cat + "r101", B.r101) + btn(cat + "mixed", B.mixed));
+    if (st.tier === "B") add(t.hTara, btn(cat + "balloons", B.bal));
+    var onCart = /\/cart\.html$/.test(location.pathname) && document.getElementById("setBox");
+    add(t.hToy.replace("{x}", fmt(BIG - st.total)), onCart ? btn("#setBox", B.set, "setBox") + btn(cat, B.more) : btn(cat, B.more));
     return h;
   }
   /* выбор клиента */
@@ -158,6 +171,7 @@
     }
     h.forEach(function (x) { html += '<div class="fg-hint">' + x + '</div>'; });
     el.innerHTML = html + '</div>';
+    el.querySelectorAll('[data-scroll]').forEach(function (a) { a.onclick = function (e) { var t2 = document.getElementById(a.dataset.scroll); if (t2) { e.preventDefault(); t2.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }; });
     el.querySelectorAll(".fg-ch").forEach(function (b) {
       b.onclick = function () { setSel(b.dataset.k === "toy" ? "toy" : "bal", b.dataset.v); render(el, items, l, onChange); if (onChange) onChange(); };
     });
