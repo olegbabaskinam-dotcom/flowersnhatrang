@@ -9,6 +9,7 @@
 import sys, os, csv, re, glob, math
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import build_site as B
+from PIL import ImageFilter
 from PIL import Image, ImageOps
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import mm
@@ -306,6 +307,23 @@ def draw_info_cats(c, F, t, lang, by, ranges):
 def load_products():
     return list(csv.DictReader(open(os.path.join(ROOT, "seo/products.csv"), encoding="utf-8")))
 
+# 25.10.2026: мягкие игрушки в наличии (реальные фото, js/gifts.js) — в «Дополнения к заказу»
+TOYS = [
+    ("dop-myagkaya-igrushka-1", "Розовый мишка", "Pink teddy bear", "핑크 곰 인형"),
+    ("dop-myagkaya-igrushka-2", "Мишка в свитере «I love you»", "Teddy bear in “I love you” sweater", "“I love you” 스웨터 곰 인형"),
+    ("dop-myagkaya-igrushka-3", "Зайка в платье", "Bunny in a dress", "드레스 입은 토끼 인형"),
+    ("dop-myagkaya-igrushka-4", "Щенок-бульдог", "Bulldog puppy", "불독 강아지 인형"),
+]
+def toy_products():
+    out = []
+    for i, (slug, ru, en, ko) in enumerate(TOYS):
+        out.append({"id": f"toy{i+1}", "slug": slug, "name_ru": ru, "name_en": en, "name_ko": ko,
+                    "desc_ru": "Мягкая игрушка в наличии. Добавляется к букету, шарам или подарочному набору",
+                    "desc_en": "Soft toy in stock. Added to a bouquet, balloons or gift set",
+                    "desc_ko": "재고 있는 봉제 인형. 꽃다발, 풍선, 선물 세트에 추가할 수 있습니다",
+                    "price": "300 000 донгов", "price_sub": "≈ $12 · 1 050 ₽"})
+    return out
+
 def members_by_cat(prods):
     by = {c: [] for c in CAT_ORDER}
     for p in prods:
@@ -323,6 +341,7 @@ def members_by_cat(prods):
         if cat == "combo":
             continue
         by[cat] = sorted(by[cat], key=lambda p: 1 if B.is_combo(B.product_cat(p)) else 0)
+    by["addon"] = toy_products() + by["addon"]
     return by
 
 def combo_line(p, lang):
@@ -339,6 +358,8 @@ def combo_line(p, lang):
     return B.COMBO_LABEL.get(lang, B.COMBO_LABEL["ru"]) + ": " + sep.join(parts)
 
 def pick_photos(slug):
+    if slug.startswith("dop-myagkaya-igrushka-"):   # 25.10.2026: игрушка целиком, без обрезки головы
+        return [os.path.join(ROOT, f"seo/_catalog_toys/t{slug[-1]}.webp")]
     files = sorted(glob.glob(os.path.join(ROOT, f"img/products/{slug}/*.webp")))
     n = len(files)
     if n >= 5:
@@ -353,15 +374,23 @@ def jpg_crop(path, aspect, tw=440, q=80):
     key = (path, round(aspect, 3), tw, q)
     if key in _CACHE:
         return _CACHE[key]
-    out = os.path.join(TMP, re.sub(r"[^a-zA-Z0-9]", "_", path) + f"_{round(aspect,3)}_{tw}.jpg")
+    out = os.path.join(TMP, re.sub(r"[^a-zA-Z0-9]", "_", path) + f"_{round(aspect,3)}_{tw}_fit.jpg")
     im = ImageOps.exif_transpose(Image.open(path)).convert("RGB")
     w, h = im.size
     cur = w / h
-    if cur > aspect:                       # слишком широкое → режем по бокам
-        nw = int(round(h * aspect)); x = (w - nw) // 2; im = im.crop((x, 0, x + nw, h))
-    else:                                  # слишком высокое → режем сверху/снизу
-        nh = int(round(w / aspect)); y = (h - nh) // 2; im = im.crop((0, y, w, y + nh))
-    im = im.resize((tw, max(1, int(round(tw / aspect)))), Image.LANCZOS)
+    th = max(1, int(round(tw / aspect)))
+    # 25.10.2026 (Олег): если кроп отрезает больше 10% кадра — фото целиком (contain) на размытом фоне из него же;
+    # если почти совпадает — обычный кроп, как раньше.
+    if min(cur, aspect) / max(cur, aspect) >= 0.9:
+        if cur > aspect:
+            nw = int(round(h * aspect)); x = (w - nw) // 2; im = im.crop((x, 0, x + nw, h))
+        else:
+            nh = int(round(w / aspect)); y = (h - nh) // 2; im = im.crop((0, y, w, y + nh))
+        im = im.resize((tw, th), Image.LANCZOS)
+    else:
+        bg = ImageOps.fit(im, (tw, th), Image.LANCZOS).filter(ImageFilter.GaussianBlur(max(6, tw // 25)))
+        fg = im.copy(); fg.thumbnail((tw, th), Image.LANCZOS)
+        bg.paste(fg, ((tw - fg.width) // 2, (th - fg.height) // 2)); im = bg
     im.save(out, "JPEG", quality=q, optimize=True)
     _CACHE[key] = out
     return out
