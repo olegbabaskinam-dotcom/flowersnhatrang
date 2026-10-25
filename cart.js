@@ -33,7 +33,7 @@
 
   // Курсы: сколько ДОНГОВ за 1 единицу (базовая — донг).
   window.FLW_CFG = {
-    rates: { VND: 1, USD: 25000, RUB: 270, KRW: 18.8 },
+    rates: { VND: 1, USD: 25000, RUB: 295, KRW: 18.8 },
     sym:   { VND: "₫", USD: "$",  RUB: "₽",  KRW: "₩" },
     order: ["VND", "USD", "RUB", "KRW"],
     names: { VND: "Донги", USD: "Доллары", RUB: "Рубли", KRW: "Воны" },
@@ -71,7 +71,7 @@
     var rounded = cur === "VND" ? Math.round(v / 1000) * 1000
                : cur === "USD" ? Math.round(v)
                : cur === "KRW" ? Math.round(v / 100) * 100
-               : cur === "RUB" ? Math.ceil(v / 100) * 100
+               : cur === "RUB" ? Math.ceil(v / 50) * 50
                : Math.round(v / 10) * 10;
     var str = rounded.toLocaleString("ru-RU").replace(/,/g, " ");
     return cur === "USD" ? (s + str) : (str + " " + s);

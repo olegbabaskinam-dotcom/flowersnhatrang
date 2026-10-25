@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Обновляет все опубликованные рублёвые цены по products.csv.
 
-Формула: цена VND / курс, затем всегда вверх до ближайших 100 ₽.
-Запуск из корня new-site: python3 seo/update_rub_rate.py 270
+Формула: цена VND / курс, затем всегда вверх до ближайших 50 ₽.
+Запуск из корня new-site: python3 seo/update_rub_rate.py 295
 """
 
 import csv
@@ -14,7 +14,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 CSV_PATH = ROOT / "seo" / "products.csv"
-RATE = int(sys.argv[1]) if len(sys.argv) > 1 else 270
+RATE = int(sys.argv[1]) if len(sys.argv) > 1 else 295
 RUB_RE = re.compile(r"(?<!\d)(\d[\d ]{0,8}) ₽")
 
 
@@ -23,7 +23,7 @@ def digits(value):
 
 
 def rub_price(vnd):
-    return math.ceil((vnd / RATE) / 100) * 100
+    return math.ceil((vnd / RATE) / 50) * 50
 
 
 def spaced(value):

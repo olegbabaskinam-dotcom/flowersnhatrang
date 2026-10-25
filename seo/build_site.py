@@ -237,12 +237,12 @@ CUR = {"ru": "донгов", "en": "VND", "ko": "동"}
 def price_loc(price, lang):
     return price.replace("донгов", CUR[lang])
 
-RUB_VND_RATE = 270
+RUB_VND_RATE = 295
 
 def rub_price(price):
-    """VND → RUB по курсу, всегда вверх до ближайших 100 ₽."""
+    """VND → RUB по курсу, всегда вверх до ближайших 50 ₽."""
     vnd = int(price_num(price))
-    return ((vnd + RUB_VND_RATE * 100 - 1) // (RUB_VND_RATE * 100)) * 100
+    return ((vnd + RUB_VND_RATE * 50 - 1) // (RUB_VND_RATE * 50)) * 50
 
 def sub_loc(sub, lang, price=None):
     """price_sub локализуется: RU — $ + ₽ по курсу; EN — только $; KO — воны."""
@@ -629,7 +629,7 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"], a[href*="instagram
 })();
 </script>
 __CARD_JS__
-<script src="__BASE__cart.js?v=20261022" defer></script><script src="__BASE__js/gifts.js?v=20261022" defer></script>
+<script src="__BASE__cart.js?v=20261025" defer></script><script src="__BASE__js/gifts.js?v=20261022" defer></script>
 </body>
 </html>
 '''

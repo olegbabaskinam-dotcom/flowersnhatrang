@@ -5,7 +5,7 @@ kolyaski*.html — ГЛАВНАЯ раздела (как torty/balloons): сет
 catalog/<slug>-<ru|en|ko>.html — страница каждой позиции (фото, цены, характеристики, условия).
 Шапка/подвал: раздел — из podarki*.html, позиция — из catalog/25-rozovyh-roz-*.html.
 Новая позиция: добавить словарь в STROLLERS (+ фото в img/products/<slug>/) и перезапустить скрипт.
-Цены аренды — PRICES (VND), ₽/$ считаются по правилам сайта (₽ курс 270 вверх до 100, $ = /25000).
+Цены аренды — PRICES (VND), ₽/$ считаются по правилам сайта (₽ курс 295 вверх до 50, $ = /25000).
 """
 import os, re, math, json, html
 
@@ -23,7 +23,7 @@ STROLLERS = [{
              "ko": "카펠라 유모차 (청록색)"},
 }]
 
-def rub(v): return math.ceil(v / 270 / 100) * 100
+def rub(v): return math.ceil(v / 295 / 50) * 50
 def usd(v): return round(v / 25000)
 def vnd(v): return f"{v:,}".replace(",", " ")
 

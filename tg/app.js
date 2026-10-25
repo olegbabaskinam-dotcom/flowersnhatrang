@@ -22,7 +22,7 @@ if (TG) {
 }
 
 /* ---- деньги (курсы как на сайте) ---- */
-var RATES = { VND: 1, USD: 25000, RUB: 270 };
+var RATES = { VND: 1, USD: 25000, RUB: 295 };
 var SYM   = { VND: "₫", USD: "$", RUB: "₽" };
 var CUR_ORDER = ["VND", "RUB", "USD"];
 var CUR = localStorage.getItem("flw_tg_cur") || "VND";
@@ -31,7 +31,7 @@ function money(vnd, cur) {
   var r = RATES[cur] || 1, s = SYM[cur] || "₫", v = vnd / r;
   var rounded = cur === "VND" ? Math.round(v / 1000) * 1000
               : cur === "USD" ? Math.round(v)
-              : cur === "RUB" ? Math.ceil(v / 100) * 100
+              : cur === "RUB" ? Math.ceil(v / 50) * 50
               : Math.round(v / 10) * 10;
   var str = rounded.toLocaleString("ru-RU").replace(/,/g, " ");
   return cur === "USD" ? (s + str) : (str + " " + s);
