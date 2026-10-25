@@ -629,7 +629,7 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"], a[href*="instagram
 })();
 </script>
 __CARD_JS__
-<script src="__BASE__cart.js?v=20261025" defer></script><script src="__BASE__js/gifts.js?v=20261022" defer></script>
+<script src="__BASE__cart.js?v=20261025" defer></script><script src="__BASE__js/gifts.js?v=20261025" defer></script>
 </body>
 </html>
 '''
