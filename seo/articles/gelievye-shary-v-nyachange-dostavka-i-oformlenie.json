@@ -34,7 +34,7 @@
       },
       {
         "h2": "Как заказать и оплатить",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Напишите нам в WhatsApp или Telegram, опишите повод — подберём набор, покажем фото и назовём цену. Подтверждаем заказ обычно в течение 10 минут.</p><p class=\"text-stone-600 leading-relaxed\">Оплата удобная для туриста: донги, рубли, доллары, USDT или наличные. Хотите добавить к шарам цветы или торт — соберём единый подарок-сюрприз.</p>"
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Напишите нам в WhatsApp или Telegram, опишите повод — подберём набор, покажем фото и назовём цену. Подтверждаем заказ обычно в течение 10 минут.</p><p class=\"text-stone-600 leading-relaxed\">Оплата удобная для туриста: донги, рубли, доллары, USDT, карта банка СНГ (от 1 000 000 ₫, через оператора) или наличные. Хотите добавить к шарам цветы или торт — соберём единый подарок-сюрприз.</p>"
       }
     ],
     "faq": [
@@ -81,7 +81,7 @@
       },
       {
         "h2": "How to order and pay",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Message us on WhatsApp or Telegram and describe the occasion — we will pick a set, show photos and give a price. We usually confirm within 10 minutes.</p><p class=\"text-stone-600 leading-relaxed\">Payment is easy for travellers: VND, USD, RUB, USDT or cash. Want flowers or a cake with the balloons? We will build one combined surprise gift.</p>"
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Message us on WhatsApp or Telegram and describe the occasion — we will pick a set, show photos and give a price. We usually confirm within 10 minutes.</p><p class=\"text-stone-600 leading-relaxed\">Payment is easy for travellers: VND, USD, RUB, USDT, CIS bank card (from 1,000,000 ₫, via our operator) or cash. Want flowers or a cake with the balloons? We will build one combined surprise gift.</p>"
       }
     ],
     "faq": [

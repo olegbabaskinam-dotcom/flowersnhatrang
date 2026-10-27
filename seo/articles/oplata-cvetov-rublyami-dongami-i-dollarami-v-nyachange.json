@@ -12,13 +12,13 @@
   "ru": {
     "title": "Оплата цветов рублями, донгами и долларами в Нячанге",
     "h1": "Как оплатить цветы в Нячанге",
-    "meta": "Как оплатить доставку цветов в Нячанге: рубли (СБП), донги (перевод/QR), доллары, USDT или наличные. Удобно туристу, подтверждаем за 10 минут.",
-    "excerpt": "Все удобные способы оплаты для туриста: рубли, донги, доллары, USDT и наличные — платите так, как вам удобно, даже удалённо из другой страны.",
+    "meta": "Как оплатить доставку цветов в Нячанге: рубли (СБП), донги (перевод/QR), доллары, USDT, карта банка СНГ (от 1 000 000 ₫, через оператора) или наличные. Удобно туристу, подтверждаем за 10 минут.",
+    "excerpt": "Все удобные способы оплаты для туриста: рубли, донги, доллары, USDT, карты банков СНГ (от 1 000 000 ₫, через оператора) и наличные — платите так, как вам удобно, даже удалённо из другой страны.",
     "intro": "Одна из частых причин, почему туристу проще заказать у нас, а не в местном магазине, — удобная оплата. Не нужно искать обменник или снимать донги: платите рублями, долларами, криптой или наличными. Разбираем все способы и как это работает, в том числе если вы заказываете издалека.",
     "sections": [
       {
         "h2": "Какими способами можно оплатить",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Мы принимаем оплату так, как удобно именно вам:</p><ul class=\"space-y-2 mb-4 text-stone-600\"><li>🇷🇺 <b>Рубли</b> — перевод по СБП на российскую карту.</li><li>🇻🇳 <b>Донги</b> — перевод или Dong QR (банк BIDV).</li><li>💵 <b>Доллары</b> — наличными или переводом.</li><li>💠 <b>USDT</b> — криптоперевод (TRC-20).</li><li>💰 <b>Наличные</b> — донги или доллары при получении.</li></ul><p class=\"text-stone-600 leading-relaxed\">Курс считаем честно и говорим сумму сразу, чтобы не было сюрпризов.</p>"
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Мы принимаем оплату так, как удобно именно вам:</p><ul class=\"space-y-2 mb-4 text-stone-600\"><li>🇷🇺 <b>Рубли</b> — перевод по СБП на российскую карту.</li><li>🇻🇳 <b>Донги</b> — перевод или Dong QR (банк BIDV).</li><li>💵 <b>Доллары</b> — наличными или переводом.</li><li>💠 <b>USDT</b> — криптоперевод (TRC-20).</li><li>🌍 <b>Карта банка СНГ</b> (Казахстан, Кыргызстан, Таджикистан, Узбекистан) — от 1 000 000 ₫, только через оператора: он подтвердит заказ и пришлёт реквизиты, чек отправляете ему в чат.</li><li>💰 <b>Наличные</b> — донги или доллары при получении.</li></ul><p class=\"text-stone-600 leading-relaxed\">Курс считаем честно и говорим сумму сразу, чтобы не было сюрпризов.</p>"
       },
       {
         "h2": "Сколько это в рублях и долларах",
@@ -26,7 +26,7 @@
       },
       {
         "h2": "Оплата, если заказываете удалённо",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Можно заказать букет любимым в Нячанге, находясь в другой стране: вы оплачиваете рублями по СБП, долларами или USDT, а мы собираем и доставляем на месте. Перед доставкой пришлём фото букета.</p><p class=\"text-stone-600 leading-relaxed\">Это удобный способ сделать сюрприз, даже если вы сейчас далеко от Вьетнама.</p>"
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Можно заказать букет любимым в Нячанге, находясь в другой стране: вы оплачиваете рублями по СБП, долларами, USDT или с карты банка СНГ (от 1 000 000 ₫, через оператора), а мы собираем и доставляем на месте. Перед доставкой пришлём фото букета.</p><p class=\"text-stone-600 leading-relaxed\">Это удобный способ сделать сюрприз, даже если вы сейчас далеко от Вьетнама.</p>"
       },
       {
         "h2": "Когда платить и как подтверждается заказ",
@@ -40,11 +40,11 @@
     "faq": [
       [
         "Можно оплатить рублями?",
-        "Да, переводом по СБП на российскую карту. Также принимаем донги, доллары, USDT и наличные при получении."
+        "Да, переводом по СБП на российскую карту. Также принимаем донги, доллары, USDT, карты банков СНГ (от 1 000 000 ₫, через оператора) и наличные при получении."
       ],
       [
         "Можно заказать и оплатить из другой страны?",
-        "Да. Вы оплачиваете рублями, долларами или USDT удалённо, мы собираем и доставляем в Нячанге, перед доставкой пришлём фото букета."
+        "Да. Вы оплачиваете рублями, долларами, USDT или с карты банка СНГ (от 1 000 000 ₫, через оператора) удалённо, мы собираем и доставляем в Нячанге, перед доставкой пришлём фото букета."
       ],
       [
         "По какому курсу считаете?",
@@ -59,13 +59,13 @@
   "en": {
     "title": "Paying for Flowers in Rubles, Dong and Dollars in Nha Trang",
     "h1": "How to Pay for Flowers in Nha Trang",
-    "meta": "How to pay for flower delivery in Nha Trang: rubles (SBP), dong (transfer/QR), dollars, USDT or cash. Convenient for travellers, confirmed in 10 minutes.",
-    "excerpt": "All the convenient ways to pay: rubles, dong, dollars, USDT and cash — pay the way that suits you, even remotely from another country.",
+    "meta": "How to pay for flower delivery in Nha Trang: rubles (SBP), dong (transfer/QR), dollars, USDT, CIS bank card (from 1,000,000 ₫, via our operator) or cash. Convenient for travellers, confirmed in 10 minutes.",
+    "excerpt": "All the convenient ways to pay: rubles, dong, dollars, USDT, CIS bank cards (from 1,000,000 ₫, via our operator) and cash — pay the way that suits you, even remotely from another country.",
     "intro": "One common reason travellers order from us rather than a local shop is easy payment. No need to find an exchange office or withdraw dong: pay in rubles, dollars, crypto or cash. Here are all the options and how it works, including ordering from afar.",
     "sections": [
       {
         "h2": "Payment methods we accept",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">We accept payment the way that suits you:</p><ul class=\"space-y-2 mb-4 text-stone-600\"><li>🇷🇺 <b>Rubles</b> — SBP transfer to a Russian card.</li><li>🇻🇳 <b>Dong</b> — transfer or Dong QR (BIDV bank).</li><li>💵 <b>Dollars</b> — cash or transfer.</li><li>💠 <b>USDT</b> — crypto transfer (TRC-20).</li><li>💰 <b>Cash</b> — dong or dollars on delivery.</li></ul><p class=\"text-stone-600 leading-relaxed\">We calculate the rate fairly and quote the amount upfront, so there are no surprises.</p>"
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">We accept payment the way that suits you:</p><ul class=\"space-y-2 mb-4 text-stone-600\"><li>🇷🇺 <b>Rubles</b> — SBP transfer to a Russian card.</li><li>🇻🇳 <b>Dong</b> — transfer or Dong QR (BIDV bank).</li><li>💵 <b>Dollars</b> — cash or transfer.</li><li>💠 <b>USDT</b> — crypto transfer (TRC-20).</li><li>🌍 <b>CIS bank card</b> (Kazakhstan, Kyrgyzstan, Tajikistan, Uzbekistan) — from 1,000,000 ₫, only via our operator: they confirm the order and send the payment details, you send the receipt to them in the chat.</li><li>💰 <b>Cash</b> — dong or dollars on delivery.</li></ul><p class=\"text-stone-600 leading-relaxed\">We calculate the rate fairly and quote the amount upfront, so there are no surprises.</p>"
       },
       {
         "h2": "How much is it in rubles and dollars",
@@ -73,7 +73,7 @@
       },
       {
         "h2": "Paying when ordering remotely",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">You can order flowers for loved ones in Nha Trang while in another country: pay in rubles via SBP, dollars or USDT, and we prepare and deliver on the spot. We send a photo of the bouquet before delivery.</p><p class=\"text-stone-600 leading-relaxed\">It's a handy way to surprise someone even when you're far from Vietnam.</p>"
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">You can order flowers for loved ones in Nha Trang while in another country: pay in rubles via SBP, dollars, USDT or a CIS bank card (from 1,000,000 ₫, via our operator), and we prepare and deliver on the spot. We send a photo of the bouquet before delivery.</p><p class=\"text-stone-600 leading-relaxed\">It's a handy way to surprise someone even when you're far from Vietnam.</p>"
       },
       {
         "h2": "When to pay and how the order is confirmed",
@@ -87,11 +87,11 @@
     "faq": [
       [
         "Can I pay in rubles?",
-        "Yes, by SBP transfer to a Russian card. We also accept dong, dollars, USDT and cash on delivery."
+        "Yes, by SBP transfer to a Russian card. We also accept dong, dollars, USDT, CIS bank cards (from 1,000,000 ₫, via our operator) and cash on delivery."
       ],
       [
         "Can I order and pay from another country?",
-        "Yes. You pay in rubles, dollars or USDT remotely, we prepare and deliver in Nha Trang, and send a photo of the bouquet before delivery."
+        "Yes. You pay in rubles, dollars, USDT or a CIS bank card (from 1,000,000 ₫, via our operator) remotely, we prepare and deliver in Nha Trang, and send a photo of the bouquet before delivery."
       ],
       [
         "What exchange rate do you use?",

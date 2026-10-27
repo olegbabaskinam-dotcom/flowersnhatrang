@@ -34,7 +34,7 @@
       },
       {
         "h2": "Когда заказывать и как оплатить",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Лучше заказать заранее, но мы успеваем и в день обращения — главное оформить заказ до 17:00. Букет собираем в день доставки, чтобы цветы были максимально свежими.</p><p class=\"text-stone-600 leading-relaxed\">Оплата удобная для туриста: донги, рубли, доллары, USDT или наличные. Напишите нам в WhatsApp или Telegram — поможем выбрать букет и подскажем способ оплаты.</p>"
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Лучше заказать заранее, но мы успеваем и в день обращения — главное оформить заказ до 17:00. Букет собираем в день доставки, чтобы цветы были максимально свежими.</p><p class=\"text-stone-600 leading-relaxed\">Оплата удобная для туриста: донги, рубли, доллары, USDT, карта банка СНГ (от 1 000 000 ₫, через оператора) или наличные. Напишите нам в WhatsApp или Telegram — поможем выбрать букет и подскажем способ оплаты.</p>"
       }
     ],
     "faq": [
@@ -52,7 +52,7 @@
       ],
       [
         "Как оплатить доставку цветов?",
-        "Принимаем донги, рубли, доллары, USDT и наличные. Напишите в WhatsApp или Telegram — подскажем удобный способ."
+        "Принимаем донги, рубли, доллары, USDT, переводы с карт банков стран СНГ (Казахстан, Кыргызстан, Таджикистан, Узбекистан — от 1 000 000 ₫, через оператора) и наличные. Напишите в WhatsApp или Telegram — подскажем удобный способ."
       ]
     ]
   },
@@ -81,7 +81,7 @@
       },
       {
         "h2": "When to order and how to pay",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Ordering ahead is best, but next-day works too — just place the order before 6 PM. We arrange each bouquet on the delivery day so the flowers stay fresh.</p><p class=\"text-stone-600 leading-relaxed\">Payment is easy for travellers: VND, USD, RUB, USDT or cash. Message us on WhatsApp or Telegram and we will help you choose and pay.</p>"
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Ordering ahead is best, but next-day works too — just place the order before 6 PM. We arrange each bouquet on the delivery day so the flowers stay fresh.</p><p class=\"text-stone-600 leading-relaxed\">Payment is easy for travellers: VND, USD, RUB, USDT, CIS bank card (from 1,000,000 ₫, via our operator) or cash. Message us on WhatsApp or Telegram and we will help you choose and pay.</p>"
       }
     ],
     "faq": [
@@ -99,7 +99,7 @@
       ],
       [
         "How can I pay?",
-        "We accept VND, USD, RUB, USDT and cash. Message us on WhatsApp or Telegram and we will suggest the easiest option."
+        "We accept VND, USD, RUB, USDT, CIS bank card transfers (Kazakhstan, Kyrgyzstan, Tajikistan, Uzbekistan — from 1,000,000 ₫, via our operator) and cash. Message us on WhatsApp or Telegram and we will suggest the easiest option."
       ]
     ]
   },

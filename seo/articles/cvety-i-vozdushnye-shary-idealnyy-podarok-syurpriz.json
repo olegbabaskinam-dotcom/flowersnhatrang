@@ -34,7 +34,7 @@
       },
       {
         "h2": "Как заказать и оплатить",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Напишите нам в WhatsApp или Telegram, расскажите про повод и получателя — предложим сочетание, покажем фото и назовём цену. Подтверждаем обычно за 10 минут.</p><p class=\"text-stone-600 leading-relaxed\">Оплата удобная: донги, рубли, доллары, USDT или наличные. По желанию добавим открытку с вашим текстом.</p>"
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Напишите нам в WhatsApp или Telegram, расскажите про повод и получателя — предложим сочетание, покажем фото и назовём цену. Подтверждаем обычно за 10 минут.</p><p class=\"text-stone-600 leading-relaxed\">Оплата удобная: донги, рубли, доллары, USDT, карта банка СНГ (от 1 000 000 ₫, через оператора) или наличные. По желанию добавим открытку с вашим текстом.</p>"
       }
     ],
     "faq": [
@@ -52,7 +52,7 @@
       ],
       [
         "Как заказать и оплатить?",
-        "Напишите в WhatsApp или Telegram — подберём сочетание. Принимаем донги, рубли, доллары, USDT и наличные, доставка по городу бесплатная."
+        "Напишите в WhatsApp или Telegram — подберём сочетание. Принимаем донги, рубли, доллары, USDT, карты банков СНГ (от 1 000 000 ₫, через оператора) и наличные, доставка по городу бесплатная."
       ]
     ]
   },
@@ -81,7 +81,7 @@
       },
       {
         "h2": "How to order and pay",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Message us on WhatsApp or Telegram, tell us about the occasion and the recipient — we will suggest a pairing, show photos and give a price. We usually confirm within 10 minutes.</p><p class=\"text-stone-600 leading-relaxed\">Payment is easy: VND, USD, RUB, USDT or cash. We will add a card with your message on request.</p>"
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Message us on WhatsApp or Telegram, tell us about the occasion and the recipient — we will suggest a pairing, show photos and give a price. We usually confirm within 10 minutes.</p><p class=\"text-stone-600 leading-relaxed\">Payment is easy: VND, USD, RUB, USDT, CIS bank card (from 1,000,000 ₫, via our operator) or cash. We will add a card with your message on request.</p>"
       }
     ],
     "faq": [
@@ -99,7 +99,7 @@
       ],
       [
         "How do I order and pay?",
-        "Message us on WhatsApp or Telegram and we will pick a pairing. We accept VND, USD, RUB, USDT and cash, and city delivery is free."
+        "Message us on WhatsApp or Telegram and we will pick a pairing. We accept VND, USD, RUB, USDT, CIS bank cards (from 1,000,000 ₫, via our operator) and cash, and city delivery is free."
       ]
     ]
   },

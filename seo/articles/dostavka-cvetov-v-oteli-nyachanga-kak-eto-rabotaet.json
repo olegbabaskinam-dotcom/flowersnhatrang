@@ -30,7 +30,7 @@
       },
       {
         "h2": "Как заказать и оплатить",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Напишите нам в WhatsApp или Telegram, пришлите отель и пожелания — подберём букет, покажем фото и назовём цену. Подтверждаем обычно за 10 минут.</p><p class=\"text-stone-600 leading-relaxed\">Оплата удобная для туриста: донги, рубли, доллары, USDT или наличные. Пришлём фото букета перед выездом, если попросите.</p>"
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Напишите нам в WhatsApp или Telegram, пришлите отель и пожелания — подберём букет, покажем фото и назовём цену. Подтверждаем обычно за 10 минут.</p><p class=\"text-stone-600 leading-relaxed\">Оплата удобная для туриста: донги, рубли, доллары, USDT, карта банка СНГ (от 1 000 000 ₫, через оператора) или наличные. Пришлём фото букета перед выездом, если попросите.</p>"
       }
     ],
     "faq": [
@@ -48,7 +48,7 @@
       ],
       [
         "Как оплатить из другой страны?",
-        "Принимаем донги, рубли, доллары, USDT и наличные. Напишите в WhatsApp или Telegram — подскажем удобный способ."
+        "Принимаем донги, рубли, доллары, USDT, переводы с карт банков стран СНГ (Казахстан, Кыргызстан, Таджикистан, Узбекистан — от 1 000 000 ₫, через оператора) и наличные. Напишите в WhatsApp или Telegram — подскажем удобный способ."
       ]
     ]
   },
@@ -73,7 +73,7 @@
       },
       {
         "h2": "How to order and pay",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Message us on WhatsApp or Telegram with the hotel and your wishes — we pick a bouquet, show photos and give a price. We usually confirm within 10 minutes.</p><p class=\"text-stone-600 leading-relaxed\">Payment is easy for travellers: VND, USD, RUB, USDT or cash. We can send a photo of the bouquet before departure on request.</p>"
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Message us on WhatsApp or Telegram with the hotel and your wishes — we pick a bouquet, show photos and give a price. We usually confirm within 10 minutes.</p><p class=\"text-stone-600 leading-relaxed\">Payment is easy for travellers: VND, USD, RUB, USDT, CIS bank card (from 1,000,000 ₫, via our operator) or cash. We can send a photo of the bouquet before departure on request.</p>"
       }
     ],
     "faq": [
@@ -91,7 +91,7 @@
       ],
       [
         "How can I pay from abroad?",
-        "We accept VND, USD, RUB, USDT and cash. Message us on WhatsApp or Telegram and we will suggest the easiest option."
+        "We accept VND, USD, RUB, USDT, CIS bank card transfers (Kazakhstan, Kyrgyzstan, Tajikistan, Uzbekistan — from 1,000,000 ₫, via our operator) and cash. Message us on WhatsApp or Telegram and we will suggest the easiest option."
       ]
     ]
   },

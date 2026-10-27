@@ -34,7 +34,7 @@
       },
       {
         "h2": "Как заказать и оплатить",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Напишите нам в WhatsApp или Telegram, расскажите про повод и получателя — предложим букет, покажем фото и назовём цену. Подтверждаем обычно за 10 минут.</p><p class=\"text-stone-600 leading-relaxed\">Оплата удобная для туриста: донги, рубли, доллары, USDT или наличные. По Нячангу доставка бесплатная, можно со следующего дня.</p>"
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Напишите нам в WhatsApp или Telegram, расскажите про повод и получателя — предложим букет, покажем фото и назовём цену. Подтверждаем обычно за 10 минут.</p><p class=\"text-stone-600 leading-relaxed\">Оплата удобная для туриста: донги, рубли, доллары, USDT, карта банка СНГ (от 1 000 000 ₫, через оператора) или наличные. По Нячангу доставка бесплатная, можно со следующего дня.</p>"
       }
     ],
     "faq": [
@@ -81,7 +81,7 @@
       },
       {
         "h2": "How to order and pay",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Message us on WhatsApp or Telegram, tell us the occasion and the recipient — we will suggest a bouquet, show photos and name a price. We usually confirm within 10 minutes.</p><p class=\"text-stone-600 leading-relaxed\">Payment is easy for travellers: dong, roubles, dollars, USDT or cash. Delivery within Nha Trang is free and available next-day.</p>"
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Message us on WhatsApp or Telegram, tell us the occasion and the recipient — we will suggest a bouquet, show photos and name a price. We usually confirm within 10 minutes.</p><p class=\"text-stone-600 leading-relaxed\">Payment is easy for travellers: dong, roubles, dollars, USDT, CIS bank card (from 1,000,000 ₫, via our operator) or cash. Delivery within Nha Trang is free and available next-day.</p>"
       }
     ],
     "faq": [

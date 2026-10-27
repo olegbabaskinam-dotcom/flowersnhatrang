@@ -145,6 +145,11 @@ var I18N_RAW={
  pay_opt_cash:{ru:"Наличными при получении",en:"Cash on delivery",ko:"수령 시 현금"},
  pay_opt_rub:{ru:"Рубли (СБП)",en:"Rubles (SBP)",ko:"루블 (SBP)"},
  pay_opt_vnd:{ru:"Донги (VND)",en:"Dong (VND)",ko:"동 (VND)"},
+ pay_opt_cis:{ru:"Карта банка СНГ",en:"CIS bank card",ko:"CIS 은행 카드"},
+ cisWarn:{ru:"🌍 <b>Оплата с карты банка страны СНГ</b> (Казахстан, Кыргызстан, Таджикистан, Узбекистан).<br>Доступна для заказов <b>от 1 000 000 ₫</b>. Оплата проходит <b>только через оператора</b>: подтвердите заказ — оператор напишет вам в указанный мессенджер (Telegram или WhatsApp), подтвердит заказ и пришлёт реквизиты. Оплатите и отправьте чек оператору в этот же чат.",en:"🌍 <b>Payment from a CIS bank card</b> (Kazakhstan, Kyrgyzstan, Tajikistan, Uzbekistan).<br>Available for orders <b>from 1,000,000 ₫</b>. Payment goes <b>only through our operator</b>: confirm the order — the operator will message you in the messenger you provided (Telegram or WhatsApp), confirm the order and send the payment details. Pay and send the receipt to the operator in the same chat.",ko:"🌍 <b>CIS 국가 은행 카드로 결제</b> (카자흐스탄, 키르기스스탄, 타지키스탄, 우즈베키스탄).<br><b>1,000,000 ₫ 이상</b> 주문에 가능합니다. 결제는 <b>운영자를 통해서만</b> 진행됩니다: 주문을 확정하시면 운영자가 입력하신 메신저로 연락해 주문을 확인하고 결제 정보를 보내드립니다. 결제 후 같은 채팅으로 영수증을 보내주세요."},
+ cisBtn:{ru:"Подтвердить заказ (оплата с карты СНГ)",en:"Confirm order (pay from a CIS bank card)",ko:"주문 확정 (CIS 은행 카드로 결제)"},
+ cisMin:{ru:"⚠️ Оплата с карты банка СНГ доступна для заказов от 1 000 000 ₫. Сумма этого заказа меньше — выберите другой способ оплаты.",en:"⚠️ Paying from a CIS bank card is available for orders from 1,000,000 ₫. This order is below that — please choose another payment method.",ko:"⚠️ CIS 은행 카드로 결제는 1,000,000 ₫ 이상 주문에만 가능합니다. 다른 결제 방법을 선택해 주세요."},
+ done_cis:{ru:"Заявка <span class='oid'>{id}</span> принята. Оплата — с карты банка страны СНГ.<br><br>⏳ Оператор напишет вам в указанный мессенджер, подтвердит заказ и пришлёт реквизиты для оплаты. После оплаты отправьте чек оператору в этот же чат 🌸",en:"Order <span class='oid'>{id}</span> received. Payment — from a CIS bank card.<br><br>⏳ Our operator will message you in the messenger you provided, confirm the order and send the payment details. After paying, send the receipt to the operator in the same chat 🌸",ko:"주문 <span class='oid'>{id}</span>이(가) 접수되었습니다. 결제 — CIS 은행 카드로.<br><br>⏳ 운영자가 입력하신 메신저로 연락해 주문을 확인하고 결제 정보를 보내드립니다. 결제 후 같은 채팅으로 영수증을 보내주세요 🌸"},
  pay_opt_usdt:{ru:"USDT TRC-20",en:"USDT TRC-20",ko:"USDT TRC-20"},
  lbl_receipt:{ru:"Скрин оплаты (чек)",en:"Payment screenshot (receipt)",ko:"결제 스크린샷 (영수증)"},
  fileWrap:{ru:"📎 Нажмите, чтобы прикрепить скрин чека",en:"📎 Tap to attach a receipt screenshot",ko:"📎 눌러서 영수증 스크린샷 첨부"},
@@ -652,6 +657,7 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
         <div class="pay" data-m="rub"><span class="em">🇷🇺</span><span data-i18n="pay_opt_rub">Рубли (СБП)</span></div>
         <div class="pay" data-m="vnd"><span class="em">🇻🇳</span><span data-i18n="pay_opt_vnd">Донги (VND)</span></div>
         <div class="pay" data-m="usdt"><span class="em">💠</span><span data-i18n="pay_opt_usdt">USDT TRC-20</span></div>
+        <div class="pay" data-m="cis" style="grid-column:1/-1"><span class="em">🌍</span><span data-i18n="pay_opt_cis">Карта банка СНГ</span></div>
       </div>
       <div id="payDetails" class="details"></div>
     </div>
@@ -672,6 +678,16 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
       </div>
       <button class="btn" id="cashBtn" style="margin-top:14px" data-i18n="cashBtn">Подтвердить заказ (оплата наличными)</button>
       <div class="err" id="errCash"></div>
+    </div>
+
+    <div class="card" id="cisCard" style="display:none">
+      <div class="warnbox" style="font-size:14px;line-height:1.55" data-i18n-html="cisWarn">
+        🌍 <b>Оплата с карты банка страны СНГ</b> (Казахстан, Кыргызстан, Таджикистан, Узбекистан).<br>
+        Доступна для заказов <b>от 1 000 000 ₫</b>. Оплата проходит <b>только через оператора</b>: подтвердите заказ — оператор напишет вам в указанный мессенджер (Telegram или WhatsApp), подтвердит заказ и пришлёт реквизиты. Оплатите и отправьте чек оператору в этот же чат.
+      </div>
+      <div class="err" id="cisMin" style="display:none" data-i18n="cisMin"></div>
+      <button class="btn" id="cisBtn" style="margin-top:14px" data-i18n="cisBtn">Подтвердить заказ (оплата с карты СНГ)</button>
+      <div class="err" id="errCis"></div>
     </div>
   </section>
 
@@ -1116,6 +1132,7 @@ const CONFIG = {
 };
 const PAY = {
   cash: { titleK:"pay_opt_cash", cash:true, method:"Наличными при получении" },
+  cis: { titleK:"pay_opt_cis", cis:true, method:"С карты банка СНГ" },
   rub: { titleK:"pay_rub_title", rows:[
       ["pl_phone","+79627155432","+79627155432"],
       ["pl_recipient","Оксана Анатольевна Я.",null],
@@ -1480,6 +1497,7 @@ form.addEventListener('submit',async e=>{
   // доставка по зоне + минимум 1 000 000 ₫ в платные зоны
   var delFee=window.__delFee||0, delLabel=window.__delLabel||'Нячанг';
   var subtotal=(window.Cart?Cart.total():0);
+  if(subtotal>0) window.__orderTotal=subtotal+delFee;
   if(delFee>0 && subtotal>0 && subtotal<1000000){
     err.textContent=tr('err_min').replace('{label}',delLabel).replace('{x}',window.fmtMoney(subtotal,'VND'));
     return;
@@ -1538,7 +1556,7 @@ form.addEventListener('submit',async e=>{
   try{
     const r=await apiPost(data);
     if(!r||!r.ok) throw new Error();
-    if(!isUpdate){ try{ if(window.gtag) gtag('event','conversion',{'send_to':'AW-17946655007/L0hfCM-bs40dEJ_y0O1C','value':1.0,'currency':'USD','transaction_id':String(r.orderId||'')}); }catch(_){} saveOrder({id:r.orderId, paid:false}); try{ if(window.Cart) Cart.clear(); }catch(_){} goPay(r.orderId); }
+    if(!isUpdate){ try{ if(window.gtag) gtag('event','conversion',{'send_to':'AW-17946655007/L0hfCM-bs40dEJ_y0O1C','value':1.0,'currency':'USD','transaction_id':String(r.orderId||'')}); }catch(_){} saveOrder({id:r.orderId, paid:false, total:(window.__orderTotal||0)}); try{ if(window.Cart) Cart.clear(); }catch(_){} goPay(r.orderId); }
     else { goPay(currentId); }
   }catch(_){
     err.textContent=tr('err_send');
@@ -1564,21 +1582,25 @@ function goBackToData(){
   var sb=document.getElementById('submitBtn'); if(sb) sb.textContent=tr('saveBtn');
   var h=document.getElementById('coHead'); if(h) h.scrollIntoView({behavior:'smooth',block:'start'});
 }
-var METHODS={cash:'Наличными при получении',rub:'Рубли (СБП)',vnd:'Донги (BIDV)',usdt:'USDT TRC-20'};
+var METHODS={cash:'Наличными при получении',cis:'С карты банка СНГ',rub:'Рубли (СБП)',vnd:'Донги (BIDV)',usdt:'USDT TRC-20'};
 document.querySelectorAll('.pay').forEach(el=>{
   el.addEventListener('click',()=>{
     document.querySelectorAll('.pay').forEach(p=>p.classList.remove('on'));
     el.classList.add('on');
     var m=el.dataset.m; window.__payMethod=METHODS[m]||m;
     renderPay(m);
-    var isCash=PAY[m]&&PAY[m].cash;
-    document.getElementById('receiptCard').style.display=isCash?"none":"block";
+    var isCash=PAY[m]&&PAY[m].cash, isCis=PAY[m]&&PAY[m].cis;
+    document.getElementById('receiptCard').style.display=(isCash||isCis)?"none":"block";
     document.getElementById('cashCard').style.display=isCash?"block":"none";
+    document.getElementById('cisCard').style.display=isCis?"block":"none";
+    if(isCis){ var ot=orderTotal(), low=(ot>0&&ot<1000000);
+      document.getElementById('cisMin').style.display=low?"block":"none";
+      document.getElementById('cisBtn').disabled=low; }
   });
 });
 function renderPay(m){
   const p=PAY[m], box=document.getElementById('payDetails');
-  if(p.cash){ box.innerHTML=''; return; }
+  if(p.cash||p.cis){ box.innerHTML=''; return; }
   let html='<div style="font-weight:700;margin:6px 0 4px">'+tr(p.titleK)+'</div>';
   p.rows.forEach(r=>{
     html+='<div class="kv"><span style="color:var(--muted)">'+tr(r[0])+'</span><b>'+r[1]
@@ -1652,6 +1674,27 @@ document.getElementById('cashBtn').addEventListener('click',async()=>{
     document.getElementById('step2').classList.add('hidden');
     document.getElementById('stepDone').classList.remove('hidden');
     document.getElementById('doneText').innerHTML=tr('done_cash').replace('{id}',escHtml(currentId));
+    localStorage.removeItem(LS);
+    window.scrollTo(0,0);
+  }catch(_){
+    err.textContent=tr('err_receipt');
+    btn.disabled=false; btn.innerHTML=old;
+  }
+});
+
+// оплата с карты банка СНГ — только через оператора, от 1 000 000 ₫
+function orderTotal(){ if(window.__orderTotal) return window.__orderTotal; var o=loadOrder(); return (o&&o.total)||0; }
+document.getElementById('cisBtn').addEventListener('click',async()=>{
+  const btn=document.getElementById('cisBtn'), err=document.getElementById('errCis');
+  var ot=orderTotal(); if(ot>0&&ot<1000000) return;
+  err.textContent=""; btn.disabled=true; const old=btn.innerHTML;
+  btn.innerHTML='<span class="spin"></span>'+tr('sending');
+  try{
+    const r=await apiPost({action:"cash",pay:"cis",orderId:currentId,lang:(window.FLW_LANG||'ru')});
+    if(!r||!r.ok) throw new Error();
+    document.getElementById('step2').classList.add('hidden');
+    document.getElementById('stepDone').classList.remove('hidden');
+    document.getElementById('doneText').innerHTML=tr('done_cis').replace('{id}',escHtml(currentId));
     localStorage.removeItem(LS);
     window.scrollTo(0,0);
   }catch(_){

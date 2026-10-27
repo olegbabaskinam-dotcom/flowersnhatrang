@@ -585,7 +585,7 @@ function handleGmapLink() {
 function apiPost(data) {
   return fetch(CONFIG.API, { method: "POST", body: new URLSearchParams(data) }).then(function (r) { return r.json(); });
 }
-var currentId = null, receiptB64 = null, payMethod = "";
+var currentId = null, receiptB64 = null, payMethod = "", orderTotal = 0;
 
 function submitOrder(e) {
   e.preventDefault();
@@ -638,6 +638,7 @@ function submitOrder(e) {
   var giftLine = window.FLW_GIFTS ? FLW_GIFTS.orderText(its) : "";
   if (giftLine) items += "\n" + giftLine;
   var photos = its.map(function (x) { return CONFIG.DOMAIN + "/" + String(x.img).replace(/\.webp$/i, ".jpg"); }).join("\n");
+  orderTotal = sub + fee;
   var amountStr = fee > 0
     ? money(sub, "VND") + " + доставка " + money(fee, "VND") + " = " + money(sub + fee, "VND")
     : money(sub, "VND") + " · доставка бесплатно";
@@ -690,11 +691,12 @@ function submitOrder(e) {
 /* ============ ОПЛАТА ============ */
 var PAY = {
   cash: { title: "Наличными при получении", cash: true },
+  cis: { title: "С карты банка СНГ", cis: true },
   rub: { title: "Рубли (СБП)", rows: [["Телефон", "+79627155432", "+79627155432"], ["Получатель", "Оксана Анатольевна Я.", null], ["Банк", "Сбербанк или Тинькофф", null]], warn: "Переведите точную сумму и пришлите скрин чека." },
   vnd: { title: "Донги (BIDV)", rows: [["Банк", "BIDV (PGD Bình Tân)", null], ["Счёт", "8865888241", "8865888241"], ["Получатель", "BABASKIN OLEG", null]], vietqr: "https://img.vietqr.io/image/970418-8865888241-qr_only.png?accountName=BABASKIN%20OLEG" },
   usdt: { title: "USDT (TRC-20)", rows: [["Сеть", "TRON (TRC-20)", null], ["Кошелёк", "TGniTscazmp3MJrmLxSgDPnNGeZPyMPVhb", "TGniTscazmp3MJrmLxSgDPnNGeZPyMPVhb"]], qrtext: "TGniTscazmp3MJrmLxSgDPnNGeZPyMPVhb", warn: "Только сеть TRON (TRC-20). 💡 Если переводите из Trust Wallet, иногда бывает ошибка (причина нам неизвестна) — попробуйте оплатить с другого кошелька или приложения, обычно всё проходит. Извините за неудобство 🙏" }
 };
-var PAY_ORDER = [["cash", "💵 Наличные"], ["rub", "🇷🇺 Рубли"], ["vnd", "🇻🇳 Донги"], ["usdt", "USDT"]];
+var PAY_ORDER = [["cash", "💵 Наличные"], ["rub", "🇷🇺 Рубли"], ["vnd", "🇻🇳 Донги"], ["usdt", "USDT"], ["cis", "🌍 Карта банка СНГ"]];
 
 function goPay(id) {
   document.getElementById("payOid").textContent = id;
@@ -720,10 +722,12 @@ function renderPayChips() {
 function selectPay(m) {
   payMethod = PAY[m].title;
   var p = PAY[m], box = document.getElementById("payDetails");
-  var isCash = !!p.cash;
-  document.getElementById("receiptCard").classList.toggle("hidden", isCash);
+  var isCash = !!p.cash, isCis = !!p.cis;
+  document.getElementById("receiptCard").classList.toggle("hidden", isCash || isCis);
   document.getElementById("cashCard").classList.toggle("hidden", !isCash);
-  if (isCash) { box.classList.add("hidden"); return; }
+  document.getElementById("cisCard").classList.toggle("hidden", !isCis);
+  if (isCis) { var low = orderTotal > 0 && orderTotal < 1000000; document.getElementById("cisMin").classList.toggle("hidden", !low); document.getElementById("cisBtn").disabled = low; }
+  if (isCash || isCis) { box.classList.add("hidden"); return; }
   box.classList.remove("hidden");
   var html = '<div style="font-weight:700;margin-bottom:6px">' + p.title + '</div>';
   p.rows.forEach(function (r) {
@@ -780,8 +784,20 @@ function bindReceipt() {
       .then(function (r) { if (!r || !r.ok) throw new Error(); finishOrder("💵 Оплата наличными при получении"); })
       .catch(function () { err.textContent = "Ошибка. Попробуйте ещё раз."; btn.disabled = false; btn.innerHTML = old; });
   };
+  document.getElementById("cisBtn").onclick = function () {
+    if (orderTotal > 0 && orderTotal < 1000000) return;
+    var btn = this, err = document.getElementById("errCis"), old = btn.innerHTML;
+    err.textContent = ""; btn.disabled = true; btn.innerHTML = '<span class="spin"></span>Отправляем…';
+    apiPost({ action: "cash", pay: "cis", orderId: currentId, lang: "ru", tg_id: (TG_USER && TG_USER.id) ? String(TG_USER.id) : "" })
+      .then(function (r) { if (!r || !r.ok) throw new Error(); finishOrder("cis"); })
+      .catch(function () { err.textContent = "Ошибка. Попробуйте ещё раз."; btn.disabled = false; btn.innerHTML = old; });
+  };
 }
 function finishOrder(note) {
+  if (note === "cis") {
+    document.getElementById("doneText").innerHTML = "Заявка <span class='oid'>" + esc(currentId) + "</span> принята. Оплата — с карты банка страны СНГ.<br>Оператор напишет вам в указанный мессенджер, подтвердит заказ и пришлёт реквизиты. После оплаты отправьте чек оператору в этот же чат 🌸";
+    localStorage.removeItem(LS); show("scrDone"); return;
+  }
   document.getElementById("doneText").innerHTML =
     note + " по заказу <span class='oid'>" + esc(currentId) + "</span>.<br>Подтвердим в течение ~10 минут (07:00–21:00). 🌸";
   localStorage.removeItem(LS);
