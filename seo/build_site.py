@@ -316,7 +316,7 @@ CARD_JS = """<script>/*MARK-CARD-JS*/
   function flowerSlug(c){return toks(c).some(function(t){return /^(roz|roza|rozy|buket|korzina|korzine|liliy|eustom|eustomy)$/.test(t);});}
   function isFlower(c){return has(c,'r25')||has(c,'r51')||has(c,'r101')||has(c,'mixed')||(has(c,'balloons')&&flowerSlug(c));}
   function bCombo(c){return has(c,'balloons')&&(isFlower(c)||has(c,'cakes'));}
-  var LATEX=['nabor-sharov-s-2-cifry-10-sharov', '101-belaya-roza-korzina-shary-serdca', '101-belaya-roza-rozovaya-upakovka-cifry-25-sharov', '35-serebristo-chernyh-gelievyh-sharov-pod-potolok', '101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov', 'yarkaya-sbornaya-korzina-15-rozovyh-sharov', '27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka', 'svyazka-20-sinih-rezinovyh-sharov', 'nabor-sharov-l-raduzhnye-cifry-30-15-rozovyh', 'svyazka-15-rezinovyh-sharov-rozovye-belye-serebryanye', 'svyazka-15-hromirovannyh-rezinovyh-sharov-rozovoe-zoloto', 'svyazka-belyh-rezinovyh-sharov-zhemchuzhnye-serdca'],LATEX_ONLY=['35-serebristo-chernyh-gelievyh-sharov-pod-potolok', '27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka', 'svyazka-20-sinih-rezinovyh-sharov', 'svyazka-15-rezinovyh-sharov-rozovye-belye-serebryanye', 'svyazka-15-hromirovannyh-rezinovyh-sharov-rozovoe-zoloto']; // шары с резиновыми (латексными) шарами — проверено по фото 01.10.2026
+  var LATEX=['nabor-sharov-s-2-cifry-10-sharov', '101-belaya-roza-korzina-shary-serdca', '101-belaya-roza-rozovaya-upakovka-cifry-25-sharov', '35-serebristo-chernyh-gelievyh-sharov-pod-potolok', '101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov', 'yarkaya-sbornaya-korzina-15-rozovyh-sharov', '27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka', 'svyazka-20-sinih-rezinovyh-sharov', 'nabor-sharov-l-raduzhnye-cifry-30-15-rozovyh', 'svyazka-15-rezinovyh-sharov-rozovye-belye-serebryanye', 'svyazka-15-hromirovannyh-rezinovyh-sharov-rozovoe-zoloto', 'svyazka-belyh-rezinovyh-sharov-zhemchuzhnye-serdca', 'nebolshaya-sbornaya-korzina-15-sharov', 'svyazka-oranzhevo-chernyh-sharov-happy-birthday'],LATEX_ONLY=['35-serebristo-chernyh-gelievyh-sharov-pod-potolok', '27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka', 'svyazka-20-sinih-rezinovyh-sharov', 'svyazka-15-rezinovyh-sharov-rozovye-belye-serebryanye', 'svyazka-15-hromirovannyh-rezinovyh-sharov-rozovoe-zoloto']; // шары с резиновыми (латексными) шарами — проверено по фото 01.10.2026
   function bslug(c){return toks(c).join('-');}
   function bLatex(c){return has(c,'balloons')&&LATEX.indexOf(bslug(c))>-1;}
   function match(c,k){
@@ -701,6 +701,12 @@ def product_cat(p):
         cats.insert(0, "mixed")  # id142: сборная корзина + шары = комбо (Сборные + Шары)
     if s in ("prazdnichnyy-sbornyy-buket-i-shokoladnyy-tort", "sbornyy-buket-belaya-upakovka-7-sharov") and "mixed" not in cats:
         cats.insert(0, "mixed")  # 01.10: id69/id104 — в составе сборный букет (аудит матрицы)
+    if s in ("sbornyy-buket-cifry-55-otkrytka", "nezhnaya-sbornaya-korzina-tort", "yarkiy-sbornyy-buket-gerbery-tort", "nebolshaya-sbornaya-korzina-15-sharov") and "mixed" not in cats:
+        cats.insert(0, "mixed")  # id244/245/247/248: сборные в комбо
+    if s == "sbornyy-buket-cifry-55-otkrytka" and "balloons" not in cats:
+        cats.append("balloons")  # id244: цифры «55» = фольгированные шары, в названии нет «шар»
+    if s == "svyazka-7-cherno-zolotyh-sharov-pirozhnoe" and "cakes" not in cats:
+        cats.append("cakes")  # id252: пирожное = раздел Торты → комбо
     if s == "25-belyh-roz-pirozhnoe-otkrytka" and "cakes" not in cats:
         cats.append("cakes")  # 01.10: id188 — пирожное = раздел Торты (аудит матрицы)
     if s in ("yarkaya-sbornaya-korzina-nabor-sharov-l-cifry-29", "stilnaya-sbornaya-korzina-101-rozovaya-25-rozovaya-eustoma", "sbornyy-buket-51-belaya-roza-evkalipt-eustomy-25-rozovyh-roz-tort") and "mixed" not in cats:

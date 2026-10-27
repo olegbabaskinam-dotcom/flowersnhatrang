@@ -46,6 +46,12 @@ def product_cats(slug, name_ru):
         cats.insert(0, "mixed")  # id142: сборная корзина + шары = комбо
     if s in ("prazdnichnyy-sbornyy-buket-i-shokoladnyy-tort", "sbornyy-buket-belaya-upakovka-7-sharov") and "mixed" not in cats:
         cats.insert(0, "mixed")  # 01.10: id69/id104 — в составе сборный букет (аудит матрицы)
+    if s in ("sbornyy-buket-cifry-55-otkrytka", "nezhnaya-sbornaya-korzina-tort", "yarkiy-sbornyy-buket-gerbery-tort", "nebolshaya-sbornaya-korzina-15-sharov") and "mixed" not in cats:
+        cats.insert(0, "mixed")  # id244/245/247/248: сборные в комбо
+    if s == "sbornyy-buket-cifry-55-otkrytka" and "balloons" not in cats:
+        cats.append("balloons")  # id244: цифры «55» = фольгированные шары, в названии нет «шар»
+    if s == "svyazka-7-cherno-zolotyh-sharov-pirozhnoe" and "cakes" not in cats:
+        cats.append("cakes")  # id252: пирожное = раздел Торты → комбо
     if s == "25-belyh-roz-pirozhnoe-otkrytka" and "cakes" not in cats:
         cats.append("cakes")  # 01.10: id188 — пирожное = раздел Торты (аудит матрицы)
     if s in ("yarkaya-sbornaya-korzina-nabor-sharov-l-cifry-29", "stilnaya-sbornaya-korzina-101-rozovaya-25-rozovaya-eustoma", "sbornyy-buket-51-belaya-roza-evkalipt-eustomy-25-rozovyh-roz-tort") and "mixed" not in cats:

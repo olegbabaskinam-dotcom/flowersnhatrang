@@ -1,6 +1,6 @@
 {
- "generated": "2026-10-24 05:15",
- "count": 213,
+ "generated": "2026-10-27 05:13",
+ "count": 223,
  "categories": [
   {
    "key": "all",
@@ -4916,6 +4916,245 @@
    "images": [
     "img/products/nabor-sharov-l-zolotye-cifry-52-serdca/1.webp",
     "img/products/nabor-sharov-l-zolotye-cifry-52-serdca/2.webp"
+   ]
+  },
+  {
+   "id": 243,
+   "slug": "51-krasnaya-roza-bordovaya-upakovka-2-svyazki-sharov",
+   "name": "51 красная роза в бордовой упаковке + 2 связки серебряно-красных шаров по 7 штук",
+   "desc": "Букет из 51 красной розы в бордовой упаковке и две связки фольгированных гелиевых шаров-сердец по 7 штук — красные и серебряные. Для признания в любви, годовщины или дня рождения. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "51 красная роза в бордовой упаковке + 2 связки серебряно-красных шаров по 7 штук Нячанг доставка",
+   "price_vnd": 3000000,
+   "price": "3 000 000 донгов",
+   "price_sub": "≈ $120 · 10 200 ₽",
+   "cats": [
+    "r51",
+    "balloons"
+   ],
+   "color": "red",
+   "images": [
+    "img/products/51-krasnaya-roza-bordovaya-upakovka-2-svyazki-sharov/1.webp",
+    "img/products/51-krasnaya-roza-bordovaya-upakovka-2-svyazki-sharov/2.webp",
+    "img/products/51-krasnaya-roza-bordovaya-upakovka-2-svyazki-sharov/3.webp",
+    "img/products/51-krasnaya-roza-bordovaya-upakovka-2-svyazki-sharov/4.webp",
+    "img/products/51-krasnaya-roza-bordovaya-upakovka-2-svyazki-sharov/5.webp",
+    "img/products/51-krasnaya-roza-bordovaya-upakovka-2-svyazki-sharov/6.webp",
+    "img/products/51-krasnaya-roza-bordovaya-upakovka-2-svyazki-sharov/7.webp",
+    "img/products/51-krasnaya-roza-bordovaya-upakovka-2-svyazki-sharov/8.webp"
+   ]
+  },
+  {
+   "id": 244,
+   "slug": "sbornyy-buket-cifry-55-otkrytka",
+   "name": "Стильный сборный букет + большие красные цифры «55» + открытка",
+   "desc": "Сборный букет из роз и цветов в розово-сиреневых тонах в белой упаковке, большие красные фольгированные гелиевые цифры «55» и открытка. Для юбилея или дня рождения, цифры подберём под ваш возраст. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Стильный сборный букет + большие красные цифры «55» + открытка Нячанг доставка",
+   "price_vnd": 2250000,
+   "price": "2 250 000 донгов",
+   "price_sub": "≈ $90 · 7 650 ₽",
+   "cats": [
+    "mixed",
+    "balloons"
+   ],
+   "color": "",
+   "images": [
+    "img/products/sbornyy-buket-cifry-55-otkrytka/1.webp",
+    "img/products/sbornyy-buket-cifry-55-otkrytka/2.webp",
+    "img/products/sbornyy-buket-cifry-55-otkrytka/3.webp",
+    "img/products/sbornyy-buket-cifry-55-otkrytka/4.webp",
+    "img/products/sbornyy-buket-cifry-55-otkrytka/5.webp",
+    "img/products/sbornyy-buket-cifry-55-otkrytka/6.webp",
+    "img/products/sbornyy-buket-cifry-55-otkrytka/7.webp",
+    "img/products/sbornyy-buket-cifry-55-otkrytka/8.webp"
+   ]
+  },
+  {
+   "id": 245,
+   "slug": "nezhnaya-sbornaya-korzina-tort",
+   "name": "Нежная сборная корзина + торт",
+   "desc": "Сборная корзина из розовых, белых и персиковых роз с розовыми герберами и торт с кремовыми розами и топпером Happy Birthday в коробке. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Нежная сборная корзина + торт Нячанг доставка",
+   "price_vnd": 2500000,
+   "price": "2 500 000 донгов",
+   "price_sub": "≈ $100 · 8 500 ₽",
+   "cats": [
+    "mixed",
+    "cakes"
+   ],
+   "color": "",
+   "images": [
+    "img/products/nezhnaya-sbornaya-korzina-tort/1.webp",
+    "img/products/nezhnaya-sbornaya-korzina-tort/2.webp",
+    "img/products/nezhnaya-sbornaya-korzina-tort/3.webp",
+    "img/products/nezhnaya-sbornaya-korzina-tort/4.webp",
+    "img/products/nezhnaya-sbornaya-korzina-tort/5.webp",
+    "img/products/nezhnaya-sbornaya-korzina-tort/6.webp",
+    "img/products/nezhnaya-sbornaya-korzina-tort/7.webp"
+   ]
+  },
+  {
+   "id": 246,
+   "slug": "101-belo-fioletovaya-roza",
+   "name": "101 бело-фиолетовая роза в фиолетовой упаковке",
+   "desc": "Букет из 101 розы: белые розы в центре и розовые по краю, в фиолетовой упаковке с лентами. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "101 бело-фиолетовая роза в фиолетовой упаковке Нячанг доставка",
+   "price_vnd": 1500000,
+   "price": "1 500 000 донгов",
+   "price_sub": "≈ $60 · 5 100 ₽",
+   "cats": [
+    "r101"
+   ],
+   "color": "white",
+   "images": [
+    "img/products/101-belo-fioletovaya-roza/1.webp",
+    "img/products/101-belo-fioletovaya-roza/2.webp",
+    "img/products/101-belo-fioletovaya-roza/3.webp",
+    "img/products/101-belo-fioletovaya-roza/4.webp",
+    "img/products/101-belo-fioletovaya-roza/5.webp",
+    "img/products/101-belo-fioletovaya-roza/6.webp"
+   ]
+  },
+  {
+   "id": 247,
+   "slug": "yarkiy-sbornyy-buket-gerbery-tort",
+   "name": "Яркий сборный букет в красной упаковке + торт",
+   "desc": "Сборный букет из розовых гербер и роз, сиреневой статицы и гипсофилы в розово-красной упаковке и белый торт с клубникой и свечами-буквами Happy Birthday. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Яркий сборный букет в красной упаковке + торт Нячанг доставка",
+   "price_vnd": 2000000,
+   "price": "2 000 000 донгов",
+   "price_sub": "≈ $80 · 6 800 ₽",
+   "cats": [
+    "mixed",
+    "cakes"
+   ],
+   "color": "",
+   "images": [
+    "img/products/yarkiy-sbornyy-buket-gerbery-tort/1.webp",
+    "img/products/yarkiy-sbornyy-buket-gerbery-tort/2.webp",
+    "img/products/yarkiy-sbornyy-buket-gerbery-tort/3.webp",
+    "img/products/yarkiy-sbornyy-buket-gerbery-tort/4.webp",
+    "img/products/yarkiy-sbornyy-buket-gerbery-tort/5.webp",
+    "img/products/yarkiy-sbornyy-buket-gerbery-tort/6.webp",
+    "img/products/yarkiy-sbornyy-buket-gerbery-tort/7.webp",
+    "img/products/yarkiy-sbornyy-buket-gerbery-tort/8.webp",
+    "img/products/yarkiy-sbornyy-buket-gerbery-tort/9.webp"
+   ]
+  },
+  {
+   "id": 248,
+   "slug": "nebolshaya-sbornaya-korzina-15-sharov",
+   "name": "Небольшая сборная корзина + 15 резиновых шаров микс",
+   "desc": "Сборная корзина из розовых, персиковых и белых роз с эвкалиптом и связка из 15 резиновых гелиевых шаров — розовые, белые и серебряные. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Небольшая сборная корзина + 15 резиновых шаров микс Нячанг доставка",
+   "price_vnd": 2250000,
+   "price": "2 250 000 донгов",
+   "price_sub": "≈ $90 · 7 650 ₽",
+   "cats": [
+    "mixed",
+    "balloons"
+   ],
+   "color": "",
+   "images": [
+    "img/products/nebolshaya-sbornaya-korzina-15-sharov/1.webp",
+    "img/products/nebolshaya-sbornaya-korzina-15-sharov/2.webp",
+    "img/products/nebolshaya-sbornaya-korzina-15-sharov/3.webp",
+    "img/products/nebolshaya-sbornaya-korzina-15-sharov/4.webp",
+    "img/products/nebolshaya-sbornaya-korzina-15-sharov/5.webp",
+    "img/products/nebolshaya-sbornaya-korzina-15-sharov/6.webp",
+    "img/products/nebolshaya-sbornaya-korzina-15-sharov/7.webp"
+   ]
+  },
+  {
+   "id": 249,
+   "slug": "svyazka-oranzhevo-chernyh-sharov-happy-birthday",
+   "name": "Связка из оранжево-чёрных резиновых шаров + фольгированный шар Happy Birthday",
+   "desc": "Связка оранжевых и чёрных резиновых гелиевых шаров и чёрный фольгированный шар Happy Birthday. Яркое оформление для дня рождения. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Связка из оранжево-чёрных резиновых шаров + фольгированный шар Happy Birthday Нячанг доставка",
+   "price_vnd": 1000000,
+   "price": "1 000 000 донгов",
+   "price_sub": "≈ $40 · 3 400 ₽",
+   "cats": [
+    "balloons"
+   ],
+   "color": "",
+   "images": [
+    "img/products/svyazka-oranzhevo-chernyh-sharov-happy-birthday/1.webp",
+    "img/products/svyazka-oranzhevo-chernyh-sharov-happy-birthday/2.webp",
+    "img/products/svyazka-oranzhevo-chernyh-sharov-happy-birthday/3.webp",
+    "img/products/svyazka-oranzhevo-chernyh-sharov-happy-birthday/4.webp",
+    "img/products/svyazka-oranzhevo-chernyh-sharov-happy-birthday/5.webp",
+    "img/products/svyazka-oranzhevo-chernyh-sharov-happy-birthday/6.webp"
+   ]
+  },
+  {
+   "id": 250,
+   "slug": "101-roza-krasnye-oranzhevye-malinovye",
+   "name": "101 роза из красных, оранжевых и малиновых роз в авторской упаковке",
+   "desc": "Букет из 101 розы: красные, оранжевые и малиновые розы в авторской упаковке. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "101 роза из красных, оранжевых и малиновых роз в авторской упаковке Нячанг доставка",
+   "price_vnd": 1500000,
+   "price": "1 500 000 донгов",
+   "price_sub": "≈ $60 · 5 100 ₽",
+   "cats": [
+    "r101"
+   ],
+   "color": "red",
+   "images": [
+    "img/products/101-roza-krasnye-oranzhevye-malinovye/1.webp",
+    "img/products/101-roza-krasnye-oranzhevye-malinovye/2.webp",
+    "img/products/101-roza-krasnye-oranzhevye-malinovye/3.webp",
+    "img/products/101-roza-krasnye-oranzhevye-malinovye/4.webp",
+    "img/products/101-roza-krasnye-oranzhevye-malinovye/5.webp",
+    "img/products/101-roza-krasnye-oranzhevye-malinovye/6.webp",
+    "img/products/101-roza-krasnye-oranzhevye-malinovye/7.webp",
+    "img/products/101-roza-krasnye-oranzhevye-malinovye/8.webp"
+   ]
+  },
+  {
+   "id": 251,
+   "slug": "101-rozovaya-roza-v-korzine",
+   "name": "101 розовая роза с фиолетовым оттенком в корзине",
+   "desc": "101 розовая роза с фиолетовым оттенком в плетёной корзине. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "101 розовая роза с фиолетовым оттенком в корзине Нячанг доставка",
+   "price_vnd": 2000000,
+   "price": "2 000 000 донгов",
+   "price_sub": "≈ $80 · 6 800 ₽",
+   "cats": [
+    "r101"
+   ],
+   "color": "pink",
+   "images": [
+    "img/products/101-rozovaya-roza-v-korzine/1.webp",
+    "img/products/101-rozovaya-roza-v-korzine/2.webp",
+    "img/products/101-rozovaya-roza-v-korzine/3.webp",
+    "img/products/101-rozovaya-roza-v-korzine/4.webp",
+    "img/products/101-rozovaya-roza-v-korzine/5.webp",
+    "img/products/101-rozovaya-roza-v-korzine/6.webp",
+    "img/products/101-rozovaya-roza-v-korzine/7.webp",
+    "img/products/101-rozovaya-roza-v-korzine/8.webp"
+   ]
+  },
+  {
+   "id": 252,
+   "slug": "svyazka-7-cherno-zolotyh-sharov-pirozhnoe",
+   "name": "Связка из семи черно-золотых шаров + пирожное",
+   "desc": "Связка из 7 фольгированных гелиевых шаров — звёзды и шары Happy Birthday — и пирожное со свечами. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Связка из семи черно-золотых шаров + пирожное Нячанг доставка",
+   "price_vnd": 1100000,
+   "price": "1 100 000 донгов",
+   "price_sub": "≈ $44 · 3 750 ₽",
+   "cats": [
+    "balloons",
+    "cakes"
+   ],
+   "color": "",
+   "images": [
+    "img/products/svyazka-7-cherno-zolotyh-sharov-pirozhnoe/1.webp",
+    "img/products/svyazka-7-cherno-zolotyh-sharov-pirozhnoe/2.webp",
+    "img/products/svyazka-7-cherno-zolotyh-sharov-pirozhnoe/3.webp",
+    "img/products/svyazka-7-cherno-zolotyh-sharov-pirozhnoe/4.webp",
+    "img/products/svyazka-7-cherno-zolotyh-sharov-pirozhnoe/5.webp",
+    "img/products/svyazka-7-cherno-zolotyh-sharov-pirozhnoe/6.webp"
    ]
   },
   {
