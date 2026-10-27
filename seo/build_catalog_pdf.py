@@ -62,6 +62,7 @@ def register_fonts(lang):
         korean_ttf = next((path for path in (
             "/System/Library/Fonts/Supplemental/AppleGothic.ttf",
             "/Library/Fonts/AppleGothic.ttf",
+            "/usr/share/fonts/truetype/nanum/NanumGothic.ttf",
         ) if os.path.isfile(path)), None)
         if korean_ttf:
             # Встраиваем шрифт в PDF: корейский текст будет виден даже без CMap-пакетов.
