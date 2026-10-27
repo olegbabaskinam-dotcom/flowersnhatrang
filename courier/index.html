@@ -126,7 +126,9 @@ var API_URL='https://buhproxy.olegbabaskin-am.workers.dev';
 var tg=window.Telegram?window.Telegram.WebApp:null;
 if(tg){ tg.ready(); tg.expand(); }
 // секрет прямой ссылки (?k=...): для открытия с рабочего стола вне Telegram
+// ключ доступа из ссылки ?k=… запоминаем на устройстве — иконка на главном экране открывает страницу без ?k
 var URL_KEY=(new URLSearchParams(location.search)).get('k')||'';
+try{ if(URL_KEY) localStorage.setItem('flw_map_k',URL_KEY); else URL_KEY=localStorage.getItem('flw_map_k')||''; }catch(e){}
 var PIN='';                       // вводится вручную для правок
 var CAN_EDIT=false;               // true после верного ПИНа
 var MAP_DATE=null, LAST=null, CUR=null;
