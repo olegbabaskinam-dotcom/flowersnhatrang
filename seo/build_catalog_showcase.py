@@ -24,7 +24,7 @@ GROUPS = [
 PICK = {"r25": "25-krasnyh-roz", "r51": "51-belaya-roza-v-upakovke", "r101": "101-krasno-rozovaya-roza-rozovaya-upakovka",
         "baskets": "101-malinovaya-roza-korzina-bukva-v", "mixed": "stilnyy-sbornyy-buket-rozovyy", "b-helium": "nabor-sharov-m-cherno-zolotoy",
         "b-latex": "35-serebristo-chernyh-gelievyh-sharov-pod-potolok", "b-combo": "svyazka-9-rozovo-krasnyh-serdec-25-rozovyh-roz",
-        "nabory": "podarochnyy-nabor-zhenskiy"}
+        "nabory": "podarochnyy-nabor-vkus-vietnama-kofeynyy"}
 HEAD = {
  "ru": {"h1": "Каталог цветов, шаров и подарков в Нячанге", "t1": "<b>2000+</b> букетов доставлено", "t2": "<b>157</b> отзывов на Google", "t3": "💵 оплата при получении"},
  "en": {"h1": "Flowers, Balloons &amp; Gifts Catalog in Nha Trang", "t1": "<b>2000+</b> bouquets delivered", "t2": "<b>157</b> reviews on Google", "t3": "💵 pay on delivery"},
