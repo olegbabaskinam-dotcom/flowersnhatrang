@@ -1394,6 +1394,10 @@ function renderAnalytics(r){
     '<div class="row" style="margin-top:6px"><span class="muted">Регулярные платежи (30 дн.)</span><span class="amt" style="color:var(--red)">'+anM(f.regDue)+'</span></div>';
   (f.regList||[]).forEach(function(x){ h+='<div class="an-s" style="margin-top:3px">• '+esc(x.name)+' — '+anM(x.amount)+(x.inDays===0?' (сегодня)':' (через '+x.inDays+' дн.)')+'</div>'; });
   h+='<div class="row" style="margin-top:8px"><span class="muted">Резерв / на рекламе</span><span class="amt">'+anM(mo.reserve)+' / '+anM(mo.adsLeft)+'</span></div></div>';
+  if(r.google&&r.google.length){ h+='<div class="card"><b>📣 Google Ads (реальные данные)</b><div class="an-tbl"><div class="an-tr an-th"><span>Кампания</span><span>Клики</span><span>Расход</span><span>Цена конв.</span></div>';
+    r.google.forEach(function(x){ h+='<div class="an-tr"><span>'+esc(x.name)+'</span><span>'+x.clicks+'</span><span>'+anM(x.cost)+'</span><span>'+(x.cpa==null?'—':anM(x.cpa))+'</span></div>'; });
+    h+='</div><div class="an-s" style="margin-top:6px">Конверсий: '+r.google.reduce(function(s,x){return s+x.conv;},0)+' · данные по '+(r.googleLast||'').split('-').reverse().join('.')+'</div></div>'; }
+  else h+='<div class="card"><b>📣 Google Ads</b><div class="an-s">Реальные данные ещё не приходили — пока реклама считается по списаниям с кошелька. Подключается скриптом в Google Ads.</div></div>';
   h+='<div class="card"><b>Что продаётся</b><div class="an-tbl"><div class="an-tr an-th"><span>Категория</span><span>Зак.</span><span>Выручка</span><span>Маржа</span></div>';
   (r.products||[]).forEach(function(x){ h+='<div class="an-tr"><span>'+esc(x.name)+'</span><span>'+x.orders+'</span><span>'+anM(x.revenue)+'</span><span>'+(x.margin==null?'—':String(x.margin).replace('.',',')+'%')+'</span></div>'; });
   h+='</div><div class="an-s" style="margin-top:6px">Категории — по тексту заказа из «Финансов»</div></div>';
