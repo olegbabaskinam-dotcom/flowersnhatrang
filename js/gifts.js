@@ -11,8 +11,6 @@
   var BIG = 3000000;
   var TOYS = [
     { id: "dop-myagkaya-igrushka-1", price: 300000, img: "/img/products/dop-myagkaya-igrushka-1/1.webp", name: { ru: "Розовый мишка", en: "Pink teddy bear", ko: "핑크 곰 인형" } },
-    { id: "dop-myagkaya-igrushka-2", price: 300000, img: "/img/products/dop-myagkaya-igrushka-2/1.webp", name: { ru: "Мишка в свитере «I love you»", en: "Teddy bear in “I love you” sweater", ko: "“I love you” 스웨터 곰 인형" } },
-    { id: "dop-myagkaya-igrushka-3", price: 300000, img: "/img/products/dop-myagkaya-igrushka-3/1.webp", name: { ru: "Зайка в платье", en: "Bunny in a dress", ko: "드레스 입은 토끼 인형" } },
     { id: "dop-myagkaya-igrushka-4", price: 300000, img: "/img/products/dop-myagkaya-igrushka-4/1.webp", name: { ru: "Щенок-бульдог", en: "Bulldog puppy", ko: "불독 강아지 인형" } }
   ];
   var BALLOONS = [

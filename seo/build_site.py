@@ -104,7 +104,7 @@ T = {
         "faq_q2": "Когда возможна ближайшая доставка?",
         "faq_a2": "Онлайн-форма принимает доставку со следующего дня, слоты — с 07:00 до 21:00 (в Камрань — с 07:00 до 20:00). По Нячангу доставка бесплатная.",
         "faq_q3": "Как оплатить?",
-        "faq_a3": "Принимаем донги, рубли, доллары, USDT, переводы с карт банков стран СНГ (Казахстан, Кыргызстан, Таджикистан, Узбекистан — от 1 000 000 ₫, через оператора) и наличные. Напишите в WhatsApp или Telegram — подскажем удобный способ.",
+        "faq_a3": "Принимаем донги, рубли, доллары, USDT, переводы с карт банков стран СНГ (Казахстан, Кыргызстан — от 1 000 000 ₫, через оператора) и наличные. Напишите в WhatsApp или Telegram — подскажем удобный способ.",
     },
     "en": {
         "site_sub": "Flower & balloon delivery<br>in Nha Trang",
@@ -125,7 +125,7 @@ T = {
         "faq_q2": "When is the earliest delivery?",
         "faq_a2": "Online delivery is available from the next day, with time slots from 07:00 to 21:00 (Cam Ranh 07:00–20:00). Delivery within Nha Trang is free.",
         "faq_q3": "How can I pay?",
-        "faq_a3": "We accept VND, USD, RUB, USDT, CIS bank card transfers (Kazakhstan, Kyrgyzstan, Tajikistan, Uzbekistan — from 1,000,000 ₫, via our operator) and cash. Message us on WhatsApp or Telegram and we'll suggest the easiest option.",
+        "faq_a3": "We accept VND, USD, RUB, USDT, CIS bank card transfers (Kazakhstan, Kyrgyzstan — from 1,000,000 ₫, via our operator) and cash. Message us on WhatsApp or Telegram and we'll suggest the easiest option.",
     },
     "ko": {
         "site_sub": "나트랑 꽃 & 풍선<br>배달 서비스",

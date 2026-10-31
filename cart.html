@@ -146,7 +146,7 @@ var I18N_RAW={
  pay_opt_rub:{ru:"Рубли (СБП)",en:"Rubles (SBP)",ko:"루블 (SBP)"},
  pay_opt_vnd:{ru:"Донги (VND)",en:"Dong (VND)",ko:"동 (VND)"},
  pay_opt_cis:{ru:"Карта банка СНГ",en:"CIS bank card",ko:"CIS 은행 카드"},
- cisWarn:{ru:"🌍 <b>Оплата с карты банка страны СНГ</b> (Казахстан, Кыргызстан, Таджикистан, Узбекистан).<br>Доступна для заказов <b>от 1 000 000 ₫</b>. Оплата проходит <b>только через оператора</b>: подтвердите заказ — оператор напишет вам в указанный мессенджер (Telegram или WhatsApp), подтвердит заказ и пришлёт реквизиты. Оплатите и отправьте чек оператору в этот же чат.",en:"🌍 <b>Payment from a CIS bank card</b> (Kazakhstan, Kyrgyzstan, Tajikistan, Uzbekistan).<br>Available for orders <b>from 1,000,000 ₫</b>. Payment goes <b>only through our operator</b>: confirm the order — the operator will message you in the messenger you provided (Telegram or WhatsApp), confirm the order and send the payment details. Pay and send the receipt to the operator in the same chat.",ko:"🌍 <b>CIS 국가 은행 카드로 결제</b> (카자흐스탄, 키르기스스탄, 타지키스탄, 우즈베키스탄).<br><b>1,000,000 ₫ 이상</b> 주문에 가능합니다. 결제는 <b>운영자를 통해서만</b> 진행됩니다: 주문을 확정하시면 운영자가 입력하신 메신저로 연락해 주문을 확인하고 결제 정보를 보내드립니다. 결제 후 같은 채팅으로 영수증을 보내주세요."},
+ cisWarn:{ru:"🌍 <b>Оплата с карты банка страны СНГ</b> (Казахстан, Кыргызстан).<br>Доступна для заказов <b>от 1 000 000 ₫</b>. Оплата проходит <b>только через оператора</b>: подтвердите заказ — оператор напишет вам в указанный мессенджер (Telegram или WhatsApp), подтвердит заказ и пришлёт реквизиты. Оплатите и отправьте чек оператору в этот же чат.",en:"🌍 <b>Payment from a CIS bank card</b> (Kazakhstan, Kyrgyzstan).<br>Available for orders <b>from 1,000,000 ₫</b>. Payment goes <b>only through our operator</b>: confirm the order — the operator will message you in the messenger you provided (Telegram or WhatsApp), confirm the order and send the payment details. Pay and send the receipt to the operator in the same chat.",ko:"🌍 <b>CIS 국가 은행 카드로 결제</b> (카자흐스탄, 키르기스스탄).<br><b>1,000,000 ₫ 이상</b> 주문에 가능합니다. 결제는 <b>운영자를 통해서만</b> 진행됩니다: 주문을 확정하시면 운영자가 입력하신 메신저로 연락해 주문을 확인하고 결제 정보를 보내드립니다. 결제 후 같은 채팅으로 영수증을 보내주세요."},
  cisBtn:{ru:"Подтвердить заказ (оплата с карты СНГ)",en:"Confirm order (pay from a CIS bank card)",ko:"주문 확정 (CIS 은행 카드로 결제)"},
  cisMin:{ru:"⚠️ Оплата с карты банка СНГ доступна для заказов от 1 000 000 ₫. Сумма этого заказа меньше — выберите другой способ оплаты.",en:"⚠️ Paying from a CIS bank card is available for orders from 1,000,000 ₫. This order is below that — please choose another payment method.",ko:"⚠️ CIS 은행 카드로 결제는 1,000,000 ₫ 이상 주문에만 가능합니다. 다른 결제 방법을 선택해 주세요."},
  done_cis:{ru:"Заявка <span class='oid'>{id}</span> принята. Оплата — с карты банка страны СНГ.<br><br>⏳ Оператор напишет вам в указанный мессенджер, подтвердит заказ и пришлёт реквизиты для оплаты. После оплаты отправьте чек оператору в этот же чат 🌸",en:"Order <span class='oid'>{id}</span> received. Payment — from a CIS bank card.<br><br>⏳ Our operator will message you in the messenger you provided, confirm the order and send the payment details. After paying, send the receipt to the operator in the same chat 🌸",ko:"주문 <span class='oid'>{id}</span>이(가) 접수되었습니다. 결제 — CIS 은행 카드로.<br><br>⏳ 운영자가 입력하신 메신저로 연락해 주문을 확인하고 결제 정보를 보내드립니다. 결제 후 같은 채팅으로 영수증을 보내주세요 🌸"},
@@ -682,7 +682,7 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
 
     <div class="card" id="cisCard" style="display:none">
       <div class="warnbox" style="font-size:14px;line-height:1.55" data-i18n-html="cisWarn">
-        🌍 <b>Оплата с карты банка страны СНГ</b> (Казахстан, Кыргызстан, Таджикистан, Узбекистан).<br>
+        🌍 <b>Оплата с карты банка страны СНГ</b> (Казахстан, Кыргызстан).<br>
         Доступна для заказов <b>от 1 000 000 ₫</b>. Оплата проходит <b>только через оператора</b>: подтвердите заказ — оператор напишет вам в указанный мессенджер (Telegram или WhatsApp), подтвердит заказ и пришлёт реквизиты. Оплатите и отправьте чек оператору в этот же чат.
       </div>
       <div class="err" id="cisMin" style="display:none" data-i18n="cisMin"></div>
@@ -804,7 +804,7 @@ document.addEventListener('DOMContentLoaded',function(){applyI18n();});
         </div>
         <div class="sf-copy">&copy; 2026 Surprise Service Nha Trang. все права защищены.</div>
     </footer>
-<script src="cart.js?v=20261025"></script><script src="js/gifts.js?v=20261025b"></script>
+<script src="cart.js?v=20261025"></script><script src="js/gifts.js?v=20261031"></script>
 <script>/*MARK-CARD-JS*/
 (function(){
   document.querySelectorAll('.pcard-slider').forEach(function(sl){

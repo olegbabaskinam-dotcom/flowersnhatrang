@@ -18,7 +18,7 @@
     "sections": [
       {
         "h2": "Какими способами можно оплатить",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Мы принимаем оплату так, как удобно именно вам:</p><ul class=\"space-y-2 mb-4 text-stone-600\"><li>🇷🇺 <b>Рубли</b> — перевод по СБП на российскую карту.</li><li>🇻🇳 <b>Донги</b> — перевод или Dong QR (банк BIDV).</li><li>💵 <b>Доллары</b> — наличными или переводом.</li><li>💠 <b>USDT</b> — криптоперевод (TRC-20).</li><li>🌍 <b>Карта банка СНГ</b> (Казахстан, Кыргызстан, Таджикистан, Узбекистан) — от 1 000 000 ₫, только через оператора: он подтвердит заказ и пришлёт реквизиты, чек отправляете ему в чат.</li><li>💰 <b>Наличные</b> — донги или доллары при получении.</li></ul><p class=\"text-stone-600 leading-relaxed\">Курс считаем честно и говорим сумму сразу, чтобы не было сюрпризов.</p>"
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">Мы принимаем оплату так, как удобно именно вам:</p><ul class=\"space-y-2 mb-4 text-stone-600\"><li>🇷🇺 <b>Рубли</b> — перевод по СБП на российскую карту.</li><li>🇻🇳 <b>Донги</b> — перевод или Dong QR (банк BIDV).</li><li>💵 <b>Доллары</b> — наличными или переводом.</li><li>💠 <b>USDT</b> — криптоперевод (TRC-20).</li><li>🌍 <b>Карта банка СНГ</b> (Казахстан, Кыргызстан) — от 1 000 000 ₫, только через оператора: он подтвердит заказ и пришлёт реквизиты, чек отправляете ему в чат.</li><li>💰 <b>Наличные</b> — донги или доллары при получении.</li></ul><p class=\"text-stone-600 leading-relaxed\">Курс считаем честно и говорим сумму сразу, чтобы не было сюрпризов.</p>"
       },
       {
         "h2": "Сколько это в рублях и долларах",
@@ -65,7 +65,7 @@
     "sections": [
       {
         "h2": "Payment methods we accept",
-        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">We accept payment the way that suits you:</p><ul class=\"space-y-2 mb-4 text-stone-600\"><li>🇷🇺 <b>Rubles</b> — SBP transfer to a Russian card.</li><li>🇻🇳 <b>Dong</b> — transfer or Dong QR (BIDV bank).</li><li>💵 <b>Dollars</b> — cash or transfer.</li><li>💠 <b>USDT</b> — crypto transfer (TRC-20).</li><li>🌍 <b>CIS bank card</b> (Kazakhstan, Kyrgyzstan, Tajikistan, Uzbekistan) — from 1,000,000 ₫, only via our operator: they confirm the order and send the payment details, you send the receipt to them in the chat.</li><li>💰 <b>Cash</b> — dong or dollars on delivery.</li></ul><p class=\"text-stone-600 leading-relaxed\">We calculate the rate fairly and quote the amount upfront, so there are no surprises.</p>"
+        "html": "<p class=\"text-stone-600 leading-relaxed mb-4\">We accept payment the way that suits you:</p><ul class=\"space-y-2 mb-4 text-stone-600\"><li>🇷🇺 <b>Rubles</b> — SBP transfer to a Russian card.</li><li>🇻🇳 <b>Dong</b> — transfer or Dong QR (BIDV bank).</li><li>💵 <b>Dollars</b> — cash or transfer.</li><li>💠 <b>USDT</b> — crypto transfer (TRC-20).</li><li>🌍 <b>CIS bank card</b> (Kazakhstan, Kyrgyzstan) — from 1,000,000 ₫, only via our operator: they confirm the order and send the payment details, you send the receipt to them in the chat.</li><li>💰 <b>Cash</b> — dong or dollars on delivery.</li></ul><p class=\"text-stone-600 leading-relaxed\">We calculate the rate fairly and quote the amount upfront, so there are no surprises.</p>"
       },
       {
         "h2": "How much is it in rubles and dollars",
