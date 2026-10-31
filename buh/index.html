@@ -1416,6 +1416,28 @@ function anGoogleCharts(r){
     {type:'line',label:'Конверсии',data:g.hours.map(function(x){return x.conv;}),borderColor:'#16a34a',backgroundColor:'#16a34a',pointRadius:1,tension:.3}]},
     options:{responsive:true,plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11}}}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{beginAtZero:true,ticks:{font:{size:10}}}}}}));
 }
+async function anIgSync(){ var r=await api('igSync',{}); if(!r||!r.ok){ toast((r&&r.error)||'Ошибка Instagram'); var e=document.getElementById('anIgLog'); if(e) e.textContent=(r&&r.error)||''; return; } toast('Instagram обновлён'); loadAnalytics(); }
+function anIg(r){
+  var g=r.ig, h='<div class="an-sec">📸 Instagram'+(g&&g.user?' · @'+esc(g.user):'')+'</div>';
+  if(!g||!g.connected){ return h+'<div class="card"><div class="an-s">Instagram ещё не подключён. Нужен секрет META_TOKEN в сервере.</div><button class="btn ghost" onclick="anIgSync()">🔄 Подключить / обновить Instagram</button><div class="an-s" id="anIgLog" style="margin-top:6px">'+esc((g&&g.log)||'')+'</div></div>'; }
+  h+='<div class="an-g">'+
+    anTile('<span class="an-ic">👥</span>Подписчики',g.followers==null?'—':Number(g.followers).toLocaleString('ru-RU'),g.growth==null?'':'<span class="an-d '+(g.growth>=0?'up':'dn')+'">'+(g.growth>=0?'▲ +':'▼ ')+g.growth+' за период</span>',g.newFollowers?'новых: '+g.newFollowers:'')+
+    anTile('<span class="an-ic">📡</span>Охват',Number(g.reach||0).toLocaleString('ru-RU'),'','сумма уникальных за дни')+
+    anTile('<span class="an-ic">▶️</span>Просмотры',Number(g.views||0).toLocaleString('ru-RU'))+
+    anTile('<span class="an-ic">👤</span>Просмотры профиля',Number(g.profileViews||0).toLocaleString('ru-RU'))+
+    anTile('<span class="an-ic">🔗</span>Клики по ссылке',Number(g.websiteClicks||0).toLocaleString('ru-RU'))+
+    anTile('<span class="an-ic">💬</span>Взаимодействия',Number(g.interactions||0).toLocaleString('ru-RU'),'','лайки, комменты, сохранения, репосты')+
+  '</div>';
+  if((g.days||[]).some(function(x){return x.reach||x.newf;})) h+='<div class="card"><b>Охват по дням</b><canvas id="anIgDay" height="180"></canvas></div>';
+  h+=anTbl('🎬 Последние публикации',['Публикация','Охват','❤️ / 💬','💾 / ↗'],(g.media||[]).map(function(m){ return ['<a href="'+esc(m.link)+'" target="_blank">'+esc(m.type)+' '+m.ts.split('-').reverse().slice(0,2).join('.')+'</a><div class="an-s">'+esc((m.caption||'').slice(0,50))+'</div>',Number(m.reach||0).toLocaleString('ru-RU'),m.likes+' / '+m.comments,m.saved+' / '+m.shares]; }));
+  h+='<div class="card"><button class="btn ghost" style="margin-top:0" onclick="anIgSync()">🔄 Обновить Instagram сейчас</button><div class="an-s" id="anIgLog" style="margin-top:6px">Обновлено: '+(g.lastSync?new Date(g.lastSync).toLocaleString('ru-RU'):'—')+(g.log?' · '+esc(g.log):'')+'</div></div>';
+  return h;
+}
+function anIgCharts(r){ var g=r.ig, el=document.getElementById('anIgDay'); if(!g||!el) return;
+  AN_CH.push(new Chart(el,{data:{labels:g.days.map(function(x){return x.d;}),datasets:[
+    {type:'bar',label:'Охват',data:g.days.map(function(x){return x.reach;}),backgroundColor:'#f9a8d4',yAxisID:'y'},
+    {type:'line',label:'Новые подписчики',data:g.days.map(function(x){return x.newf;}),borderColor:'#db2777',backgroundColor:'#db2777',pointRadius:2,tension:.3,yAxisID:'y1'}]},
+    options:{responsive:true,plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11}}}},scales:{x:{grid:{display:false},ticks:{font:{size:9},maxRotation:0,autoSkip:true}},y:{beginAtZero:true,ticks:{font:{size:10}}},y1:{beginAtZero:true,position:'right',grid:{display:false},ticks:{precision:0,font:{size:10}}}}}})); }
 function renderAnalytics(r){
   AN_CH.forEach(function(c){ try{c.destroy();}catch(e){} }); AN_CH=[];
   var c=r.cur, p=r.prev, mo=r.money, f=r.forecast, h='';
@@ -1444,6 +1466,7 @@ function renderAnalytics(r){
   (f.regList||[]).forEach(function(x){ h+='<div class="an-s" style="margin-top:3px">• '+esc(x.name)+' — '+anM(x.amount)+(x.inDays===0?' (сегодня)':' (через '+x.inDays+' дн.)')+'</div>'; });
   h+='<div class="row" style="margin-top:8px"><span class="muted">Резерв / на рекламе</span><span class="amt">'+anM(mo.reserve)+' / '+anM(mo.adsLeft)+'</span></div></div>';
   h+=anGoogle(r);
+  h+=anIg(r);
   h+='<div class="card"><b>Что продаётся</b><div class="an-tbl"><div class="an-tr an-th"><span>Категория</span><span>Зак.</span><span>Выручка</span><span>Маржа</span></div>';
   (r.products||[]).forEach(function(x){ h+='<div class="an-tr"><span>'+esc(x.name)+'</span><span>'+x.orders+'</span><span>'+anM(x.revenue)+'</span><span>'+(x.margin==null?'—':String(x.margin).replace('.',',')+'%')+'</span></div>'; });
   h+='</div><div class="an-s" style="margin-top:6px">Категории — по тексту заказа из «Финансов»</div></div>';
@@ -1463,6 +1486,7 @@ function renderAnalytics(r){
   if((r.zones||[]).length) AN_CH.push(new Chart(document.getElementById('anZn'),{type:'bar',data:{labels:r.zones.map(function(x){return x.name;}),datasets:[{data:r.zones.map(function(x){return x.n;}),backgroundColor:'#a855f7'}]},options:opt({indexAxis:'y'})}));
   if((r.hours||[]).length) AN_CH.push(new Chart(document.getElementById('anHr'),{type:'bar',data:{labels:r.hours.map(function(x){return x.h;}),datasets:[{data:r.hours.map(function(x){return x.n;}),backgroundColor:'#c084fc'}]},options:opt()}));
   anGoogleCharts(r);
+  anIgCharts(r);
 }
 
 function openReports(){
