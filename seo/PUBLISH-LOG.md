@@ -370,3 +370,4 @@
 ## 31.10.2026 — id253
 - id253 «Кофейный набор «Вкус Вьетнама»» (`podarochnyy-nabor-vkus-vietnama-kofeynyy`) — 1 000 000 ₫ · ≈ $40 · 3 400 ₽, 9 фото, `nabory`, «В наличии». Описание — текст Олега без изменений (EN/KO — перевод). Страницы RU/EN/KO (клон структуры id195), карточки в catalog-*, podarki*, nabory*, витрина, featured, products.json, TG jpg, sitemap +3.
 - id254 «Женский подарочный набор «Красота Вьетнама»» (`podarochnyy-nabor-krasota-vietnama-zhenskiy`) — 1 000 000 ₫, 7 фото, `nabory`, «В наличии». Описание — текст Олега без изменений.
+- id255 «Женский подарочный набор «Красота Вьетнама» — розовый» (`podarochnyy-nabor-krasota-vietnama-rozovyy`) — 1 000 000 ₫, 6 фото, `nabory`, «В наличии». Описание — текст Олега без изменений.
