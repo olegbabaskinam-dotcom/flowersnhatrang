@@ -112,6 +112,8 @@
   .an-tr{display:grid;grid-template-columns:1.6fr .6fr 1.2fr .8fr;gap:6px;padding:7px 0;border-bottom:1px solid var(--line)}
   .an-tr span:not(:first-child){text-align:right;white-space:nowrap}
   .an-th{color:var(--muted);font-size:12px}
+  .an-ic{font-size:20px;margin-right:6px;vertical-align:-3px}
+  .an-t .muted{font-weight:700;color:var(--ink);font-size:14px}
   .an-sec{font-size:17px;font-weight:800;margin:6px 2px 10px}
   canvas{max-width:100%}
   a{color:var(--accent)}
@@ -1420,16 +1422,19 @@ function renderAnalytics(r){
   if(r.alerts&&r.alerts.length){ h+='<div class="card an-al"><b>⚡ Требует внимания</b>'; r.alerts.forEach(function(a){ h+='<div class="an-a '+a.lvl+'">'+(a.lvl==='bad'?'⛔ ':a.lvl==='warn'?'⚠️ ':'ℹ️ ')+esc(a.t)+'</div>'; }); h+='</div>'; }
   else h+='<div class="card an-al ok"><b>✅ Всё спокойно</b><div class="muted">Тревог нет</div></div>';
   h+='<div class="muted" style="margin:0 2px 8px">'+r.from.split('-').reverse().join('.')+' — '+r.to.split('-').reverse().join('.')+' ('+r.days+' дн.) · сравнение с предыдущими '+r.days+' дн.</div>';
+  var mo2=r.month||{}, MN=['январе','феврале','марте','апреле','мае','июне','июле','августе','сентябре','октябре','ноябре','декабре'];
+  var mName=mo2.from?MN[Number(mo2.from.slice(5,7))-1]:'';
   h+='<div class="an-g">'+
-    anTile('Выручка',anM(c.revenue),anDelta(c.revenue,p.revenue))+
-    anTile('Заказы',c.orders,anDelta(c.orders,p.orders))+
-    anTile('Средний чек',anM(c.aov),anDelta(c.aov,p.aov))+
-    anTile('Прибыль (оценка)',c.profit==null?'—':anM(c.profit),anDelta(c.profit,p.profit),c.margin==null?'нет себестоимости':'маржа '+String(c.margin).replace('.',',')+'%')+
-    anTile('Реклама',anM(c.ads),anDelta(c.ads,p.ads,true),c.roas==null?'':'ROAS '+String(c.roas).replace('.',','))+
-    anTile('Цена клиента',c.cac==null?'—':anM(c.cac),anDelta(c.cac,p.cac,true),'реклама ÷ заказы')+
-    anTile('Поток денег',anM(c.net),anDelta(c.net,p.net),'приход − расход')+
-    anTile('Деньги сейчас',anM(mo.cash),'',mo.daysLeft==null?'':'хватит на ~'+mo.daysLeft+' дн.')+
-  '</div>';
+    anTile('<span class="an-ic">📈</span>Выручка',anM(c.revenue),anDelta(c.revenue,p.revenue))+
+    anTile('<span class="an-ic">🛒</span>Заказы',c.orders,anDelta(c.orders,p.orders))+
+    anTile('<span class="an-ic">🪙</span>Средний чек',anM(c.aov),anDelta(c.aov,p.aov))+
+    anTile('<span class="an-ic">📅</span>Средняя прибыль в день',c.avgDay==null?'—':anM(c.avgDay),anDelta(c.avgDay,p.avgDay),'чистая прибыль ÷ '+c.days+' дн.')+
+    anTile('<span class="an-ic">📣</span>Реклама',anM(c.ads),anDelta(c.ads,p.ads,true),c.roas==null?'':'ROAS '+String(c.roas).replace('.',','))+
+    anTile('<span class="an-ic">🚕</span>Такси',anM(c.taxi),anDelta(c.taxi,p.taxi,true),'такси и бензин')+
+    anTile('<span class="an-ic">💰</span>Чистая прибыль',anM(c.profitNet),anDelta(c.profitNet,p.profitNet),'сколько заработали')+
+    anTile('<span class="an-ic">🎯</span>Предполагаемая прибыль',anM(mo2.forecast),'',(mName?'в '+mName+': ':'')+anM(mo2.avg)+' × '+mo2.days+' дн.')+
+  '</div>'+
+  '<div class="an-s" style="margin:-4px 2px 12px">Чистая прибыль = весь приход − все расходы (без «Личное/на жизнь»). Предполагаемая — по средней прибыли в день с 1-го числа: уже заработано '+anM(mo2.profit)+' за '+mo2.passed+' дн.</div>';
   h+='<div class="card"><b>Выручка и заказы по дням</b><canvas id="anDay" height="200"></canvas></div>';
   h+='<div class="card"><b>🔮 Следующие 7 дней</b>'+
     '<div class="row" style="margin-top:8px"><span class="muted">Заказов в плане</span><span class="amt">'+f.orders+'</span></div>'+
