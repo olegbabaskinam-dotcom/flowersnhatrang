@@ -98,6 +98,20 @@
   .loader{position:fixed;inset:0;background:rgba(250,247,255,.6);display:none;align-items:center;justify-content:center;z-index:40}
   .loader.show{display:flex}.spin{width:34px;height:34px;border:3px solid #e5d9f7;border-top-color:var(--accent);border-radius:50%;animation:sp 1s linear infinite}
   @keyframes sp{to{transform:rotate(360deg)}}
+  /* 📊 Панель пилота */
+  .an-g{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:12px}
+  .an-t{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:11px 12px;min-width:0}
+  .an-v{font-size:20px;font-weight:800;letter-spacing:-.3px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .an-d{display:inline-block;font-size:12px;font-weight:700;color:var(--muted);margin-top:3px}
+  .an-d.up{color:var(--green)}.an-d.dn{color:var(--red)}
+  .an-s{font-size:12px;color:var(--muted);margin-top:3px}
+  .an-al .an-a{font-size:14px;line-height:1.35;padding:8px 10px;border-radius:10px;margin-top:7px}
+  .an-a.bad{background:#fef2f2}.an-a.warn{background:#fff7ed}.an-a.info{background:#f5f3ff}
+  .an-al.ok{background:#f0fdf4;border-color:#bbf7d0}
+  .an-tbl{margin-top:8px;font-size:13px}
+  .an-tr{display:grid;grid-template-columns:1.6fr .6fr 1.2fr .8fr;gap:6px;padding:7px 0;border-bottom:1px solid var(--line)}
+  .an-tr span:not(:first-child){text-align:right;white-space:nowrap}
+  .an-th{color:var(--muted);font-size:12px}
   canvas{max-width:100%}
   a{color:var(--accent)}
   small.link{color:var(--accent);font-weight:600}
@@ -149,7 +163,7 @@
 <!-- ГЛАВНЫЙ -->
 <div id="v-main" class="hidden">
   <h1>💰 Бухгалтерия <span class="booktag" id="bookTitle"></span></h1>
-  <div class="card"><div class="muted">Какая бухгалтерия</div><div class="seg" id="bookSeg" style="margin-top:8px"><button data-b="flowers" onclick="switchBook('flowers')">🌸 Цветы</button><button data-b="bikes" onclick="switchBook('bikes')">🏍 Байки</button></div></div>
+  <div class="card"><div class="muted">Какая бухгалтерия</div><div class="seg" id="bookSeg" style="margin-top:8px"><button data-b="flowers" onclick="switchBook('flowers')">🌸 Цветы</button><button onclick="openAnalytics()">📊 Аналитика</button></div></div>
 
   <div class="fc fl-only" id="fcBlock" onclick="openHorizon()"></div>
 
@@ -170,6 +184,7 @@
     <div class="tile" onclick="openExpense()"><span class="ic">🔴</span>Расход</div>
     <div class="tile" onclick="openTransfer()"><span class="ic">🔁</span>Перевод</div>
     <div class="tile bk-only" onclick="openBikes()"><span class="ic">🏍</span>Байки</div>
+    <div class="tile fl-only" onclick="openAnalytics()"><span class="ic">📊</span>Аналитика</div>
     <div class="tile" onclick="openXfer()"><span class="ic">🔀</span>Между бух.</div>
     <div class="tile fl-only" onclick="openHorizon()"><span class="ic">📅</span>Горизонт</div>
     <div class="tile fl-only" onclick="openMap(null,true)"><span class="ic">🗺️</span>Карта заказов</div>
@@ -551,7 +566,7 @@ function linkMode(){ return !(tg && tg.initData) && !!buhKey(); }
 function initData(){ return (tg && tg.initData) ? tg.initData : ''; }
 function base(){ return 'VND'; }   // смотрим только в донгах (переключатель валют убран 25.09 → вместо него переключатель бухгалтерий)
 // ── 🌸 Цветы / 🏍 Байки: какая бухгалтерия открыта (запоминается на устройстве) ──
-var BOOK=(function(){ try{ return localStorage.getItem('book')==='bikes'?'bikes':'flowers'; }catch(e){ return 'flowers'; } })();
+var BOOK=(function(){ try{ return 'flowers'; /* 31.10.2026: байки не используются — вместо них «📊 Аналитика» */ }catch(e){ return 'flowers'; } })();
 function bookLabel(b){ return (b||BOOK)==='bikes'?'🏍 Байки':'🌸 Цветы'; }
 function applyBookUi(){
   document.body.classList.toggle('bikes', BOOK==='bikes');
@@ -1330,6 +1345,75 @@ async function submitAdjust(){
 
 // ---------- ОТЧЁТЫ ----------
 var repPeriod='month';
+
+// ================== 📊 АНАЛИТИКА — панель пилота (31.10.2026) ==================
+var AN_DAYS=30, AN_CH=[];
+function anM(v){ v=Number(v)||0; var a=Math.abs(v), s=v<0?'−':'';
+  if(a>=1e6) return s+(a/1e6).toFixed(a>=1e8?0:1).replace('.',',')+' млн ₫';
+  if(a>=1e3) return s+Math.round(a/1e3)+' тыс ₫'; return s+Math.round(a)+' ₫'; }
+function anDelta(c,p,invert){ if(p==null||c==null||!p) return '<span class="an-d">нет данных</span>';
+  var x=Math.round((c-p)/Math.abs(p)*100); if(!x) return '<span class="an-d">= как раньше</span>';
+  var good=invert?x<0:x>0; return '<span class="an-d '+(good?'up':'dn')+'">'+(x>0?'▲ +':'▼ ')+x+'%</span>'; }
+function anTile(t,v,d,sub){ return '<div class="an-t"><div class="muted">'+t+'</div><div class="an-v">'+v+'</div>'+(d||'')+(sub?'<div class="an-s">'+sub+'</div>':'')+'</div>'; }
+function openAnalytics(){
+  var v=document.getElementById('v-analytics');
+  if(!v){ v=document.createElement('div'); v.id='v-analytics'; document.body.appendChild(v); }
+  if(VIEWS.indexOf('analytics')<0) VIEWS.push('analytics');
+  v.innerHTML='<button class="back" onclick="go(\'main\')">‹ Назад</button>'+
+    '<div class="row"><h2 style="margin:0">📊 Панель пилота</h2><small class="link" onclick="loadAnalytics()">🔄</small></div>'+
+    '<div class="seg" id="anSeg" style="margin:10px 0 12px"></div><div id="anBody"><div class="muted center" style="padding:30px">Загрузка…</div></div>';
+  var seg=document.getElementById('anSeg'); [[7,'7 дней'],[30,'30 дней'],[90,'90 дней']].forEach(function(o){ var b=document.createElement('button'); b.textContent=o[1]; if(o[0]===AN_DAYS) b.className='on';
+    b.onclick=function(){ AN_DAYS=o[0]; Array.prototype.forEach.call(seg.children,function(c){c.className='';}); b.className='on'; loadAnalytics(); }; seg.appendChild(b); });
+  go('analytics'); loadAnalytics();
+}
+async function loadAnalytics(){
+  var res=await api('analytics',{days:AN_DAYS}); if(!res||!res.ok){ toast((res&&res.error)||'Ошибка'); return; }
+  renderAnalytics(res);
+}
+function renderAnalytics(r){
+  AN_CH.forEach(function(c){ try{c.destroy();}catch(e){} }); AN_CH=[];
+  var c=r.cur, p=r.prev, mo=r.money, f=r.forecast, h='';
+  if(r.alerts&&r.alerts.length){ h+='<div class="card an-al"><b>⚡ Требует внимания</b>'; r.alerts.forEach(function(a){ h+='<div class="an-a '+a.lvl+'">'+(a.lvl==='bad'?'⛔ ':a.lvl==='warn'?'⚠️ ':'ℹ️ ')+esc(a.t)+'</div>'; }); h+='</div>'; }
+  else h+='<div class="card an-al ok"><b>✅ Всё спокойно</b><div class="muted">Тревог нет</div></div>';
+  h+='<div class="muted" style="margin:0 2px 8px">'+r.from.split('-').reverse().join('.')+' — '+r.to.split('-').reverse().join('.')+' · сравнение с прошлыми '+r.days+' дн.</div>';
+  h+='<div class="an-g">'+
+    anTile('Выручка',anM(c.revenue),anDelta(c.revenue,p.revenue))+
+    anTile('Заказы',c.orders,anDelta(c.orders,p.orders))+
+    anTile('Средний чек',anM(c.aov),anDelta(c.aov,p.aov))+
+    anTile('Прибыль (оценка)',c.profit==null?'—':anM(c.profit),anDelta(c.profit,p.profit),c.margin==null?'нет себестоимости':'маржа '+String(c.margin).replace('.',',')+'%')+
+    anTile('Реклама',anM(c.ads),anDelta(c.ads,p.ads,true),c.roas==null?'':'ROAS '+String(c.roas).replace('.',','))+
+    anTile('Цена клиента',c.cac==null?'—':anM(c.cac),anDelta(c.cac,p.cac,true),'реклама ÷ заказы')+
+    anTile('Поток денег',anM(c.net),anDelta(c.net,p.net),'приход − расход')+
+    anTile('Деньги сейчас',anM(mo.cash),'',mo.daysLeft==null?'':'хватит на ~'+mo.daysLeft+' дн.')+
+  '</div>';
+  h+='<div class="card"><b>Выручка и заказы по дням</b><canvas id="anDay" height="200"></canvas></div>';
+  h+='<div class="card"><b>🔮 Следующие 7 дней</b>'+
+    '<div class="row" style="margin-top:8px"><span class="muted">Заказов в плане</span><span class="amt">'+f.orders+'</span></div>'+
+    '<div class="row" style="margin-top:6px"><span class="muted">Ожидаемая выручка</span><span class="amt ok2">'+anM(f.revenue)+'</span></div>'+
+    '<div class="row" style="margin-top:6px"><span class="muted">Нужно на закуп</span><span class="amt">'+anM(f.cost)+(f.unknownCost?' + '+f.unknownCost+' без цены':'')+'</span></div>'+
+    '<div class="row" style="margin-top:6px"><span class="muted">Регулярные платежи (30 дн.)</span><span class="amt" style="color:var(--red)">'+anM(f.regDue)+'</span></div>';
+  (f.regList||[]).forEach(function(x){ h+='<div class="an-s" style="margin-top:3px">• '+esc(x.name)+' — '+anM(x.amount)+(x.inDays===0?' (сегодня)':' (через '+x.inDays+' дн.)')+'</div>'; });
+  h+='<div class="row" style="margin-top:8px"><span class="muted">Резерв / на рекламе</span><span class="amt">'+anM(mo.reserve)+' / '+anM(mo.adsLeft)+'</span></div></div>';
+  h+='<div class="card"><b>Что продаётся</b><div class="an-tbl"><div class="an-tr an-th"><span>Категория</span><span>Зак.</span><span>Выручка</span><span>Маржа</span></div>';
+  (r.products||[]).forEach(function(x){ h+='<div class="an-tr"><span>'+esc(x.name)+'</span><span>'+x.orders+'</span><span>'+anM(x.revenue)+'</span><span>'+(x.margin==null?'—':String(x.margin).replace('.',',')+'%')+'</span></div>'; });
+  h+='</div><div class="an-s" style="margin-top:6px">Категории — по тексту заказа из «Финансов»</div></div>';
+  h+='<div class="card"><b>Куда уходят деньги</b><canvas id="anExp" height="190"></canvas></div>';
+  h+='<div class="card"><b>Заказы по дням недели</b><canvas id="anWd" height="150"></canvas></div>';
+  if((r.zones||[]).length) h+='<div class="card"><b>Зоны доставки (Карта)</b><canvas id="anZn" height="160"></canvas><div class="an-s" style="margin-top:6px">Доставлено отмечено: '+r.delivery.done+' из '+r.delivery.past+'</div></div>';
+  if((r.hours||[]).length) h+='<div class="card"><b>Время доставки</b><canvas id="anHr" height="150"></canvas></div>';
+  h+='<div class="an-s center" style="margin:6px 0 20px">Источники: Финансы (заказы), бухгалтерия (деньги), Карта заказов. Реклама — списания с рекламных кошельков.</div>';
+  document.getElementById('anBody').innerHTML=h;
+  var C='#7c3aed', opt=function(extra){ return Object.assign({responsive:true,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{beginAtZero:true,ticks:{font:{size:10}}}}},extra||{}); };
+  AN_CH.push(new Chart(document.getElementById('anDay'),{data:{labels:r.byDay.map(function(x){return x.d;}),datasets:[
+    {type:'bar',label:'Выручка, млн ₫',data:r.byDay.map(function(x){return Math.round(x.revenue/1e5)/10;}),backgroundColor:'#c4b5fd',yAxisID:'y'},
+    {type:'line',label:'Заказы',data:r.byDay.map(function(x){return x.orders;}),borderColor:C,backgroundColor:C,pointRadius:2,tension:.3,yAxisID:'y1'}]},
+    options:{responsive:true,plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11}}}},scales:{x:{grid:{display:false},ticks:{font:{size:9},maxRotation:0,autoSkip:true}},y:{beginAtZero:true,ticks:{font:{size:10}}},y1:{beginAtZero:true,position:'right',grid:{display:false},ticks:{precision:0,font:{size:10}}}}}}));
+  if((r.expCats||[]).length) AN_CH.push(new Chart(document.getElementById('anExp'),{type:'doughnut',data:{labels:r.expCats.map(function(x){return x.name+' · '+anM(x.value);}),datasets:[{data:r.expCats.map(function(x){return x.value;}),backgroundColor:['#7c3aed','#a855f7','#c084fc','#f0abfc','#f9a8d4','#fca5a5','#fdba74','#86efac']}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11}}}}}}));
+  AN_CH.push(new Chart(document.getElementById('anWd'),{type:'bar',data:{labels:['Пн','Вт','Ср','Чт','Пт','Сб','Вс'],datasets:[{data:r.weekday,backgroundColor:C}]},options:opt()}));
+  if((r.zones||[]).length) AN_CH.push(new Chart(document.getElementById('anZn'),{type:'bar',data:{labels:r.zones.map(function(x){return x.name;}),datasets:[{data:r.zones.map(function(x){return x.n;}),backgroundColor:'#a855f7'}]},options:opt({indexAxis:'y'})}));
+  if((r.hours||[]).length) AN_CH.push(new Chart(document.getElementById('anHr'),{type:'bar',data:{labels:r.hours.map(function(x){return x.h;}),datasets:[{data:r.hours.map(function(x){return x.n;}),backgroundColor:'#c084fc'}]},options:opt()}));
+}
+
 function openReports(){
   var v=document.getElementById('v-reports');
   if(!v){ v=document.createElement('div'); v.id='v-reports'; document.body.appendChild(v); }
