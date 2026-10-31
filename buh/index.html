@@ -112,6 +112,7 @@
   .an-tr{display:grid;grid-template-columns:1.6fr .6fr 1.2fr .8fr;gap:6px;padding:7px 0;border-bottom:1px solid var(--line)}
   .an-tr span:not(:first-child){text-align:right;white-space:nowrap}
   .an-th{color:var(--muted);font-size:12px}
+  .an-sec{font-size:17px;font-weight:800;margin:6px 2px 10px}
   canvas{max-width:100%}
   a{color:var(--accent)}
   small.link{color:var(--accent);font-weight:600}
@@ -1361,21 +1362,64 @@ function openAnalytics(){
   if(VIEWS.indexOf('analytics')<0) VIEWS.push('analytics');
   v.innerHTML='<button class="back" onclick="go(\'main\')">‹ Назад</button>'+
     '<div class="row"><h2 style="margin:0">📊 Панель пилота</h2><small class="link" onclick="loadAnalytics()">🔄</small></div>'+
-    '<div class="seg" id="anSeg" style="margin:10px 0 12px"></div><div id="anBody"><div class="muted center" style="padding:30px">Загрузка…</div></div>';
-  var seg=document.getElementById('anSeg'); [[7,'7 дней'],[30,'30 дней'],[90,'90 дней']].forEach(function(o){ var b=document.createElement('button'); b.textContent=o[1]; if(o[0]===AN_DAYS) b.className='on';
-    b.onclick=function(){ AN_DAYS=o[0]; Array.prototype.forEach.call(seg.children,function(c){c.className='';}); b.className='on'; loadAnalytics(); }; seg.appendChild(b); });
+    '<div class="seg" id="anSeg" style="margin:10px 0 8px"></div>'+
+    '<div id="anCustom" class="card hidden"><div class="grid2"><div><label style="margin-top:0">С</label><input type="date" id="anFrom"></div><div><label style="margin-top:0">По</label><input type="date" id="anTo"></div></div><button class="btn ghost" onclick="loadAnalytics()">Показать</button></div>'+
+    '<div id="anBody"><div class="muted center" style="padding:30px">Загрузка…</div></div>';
+  var seg=document.getElementById('anSeg'); [[1,'День'],[7,'Неделя'],[30,'Месяц'],[90,'90 дн.'],['c','Даты']].forEach(function(o){ var b=document.createElement('button'); b.textContent=o[1]; b.style.fontSize='14px'; if(o[0]===AN_DAYS) b.className='on';
+    b.onclick=function(){ AN_DAYS=o[0]; Array.prototype.forEach.call(seg.children,function(c){c.className='';}); b.className='on'; document.getElementById('anCustom').classList.toggle('hidden',o[0]!=='c'); if(o[0]!=='c') loadAnalytics(); }; seg.appendChild(b); });
   go('analytics'); loadAnalytics();
 }
 async function loadAnalytics(){
-  var res=await api('analytics',{days:AN_DAYS}); if(!res||!res.ok){ toast((res&&res.error)||'Ошибка'); return; }
+  var q={days:AN_DAYS};
+  if(AN_DAYS==='c'){ var a=document.getElementById('anFrom').value, z=document.getElementById('anTo').value; if(!a||!z){ toast('Выбери даты'); return; } q={from:a,to:z}; }
+  var res=await api('analytics',q); if(!res||!res.ok){ toast((res&&res.error)||'Ошибка'); return; }
   renderAnalytics(res);
+}
+function anRow(cols){ return '<div class="an-tr">'+cols.map(function(c,i){ return '<span>'+c+'</span>'; }).join('')+'</div>'; }
+function anTbl(title,head,rows,note){ if(!rows||!rows.length) return ''; var h='<div class="card"><b>'+title+'</b><div class="an-tbl"><div class="an-tr an-th">'+head.map(function(x){return '<span>'+x+'</span>';}).join('')+'</div>';
+  rows.forEach(function(r){ h+=anRow(r); }); return h+'</div>'+(note?'<div class="an-s" style="margin-top:6px">'+note+'</div>':'')+'</div>'; }
+function anP(v){ return v==null?'—':String(v).replace('.',',')+'%'; }
+function anGoogle(r){
+  var g=r.gx; if(!r.googleReal||!g) return '<div class="card"><b>📣 Google Ads</b><div class="an-s">Реальные данные ещё не приходили — пока реклама считается по списаниям с кошелька.</div></div>';
+  var c=g.cur, p=g.prev, h='<div class="an-sec">📣 Google Ads</div>';
+  h+='<div class="an-g">'+
+    anTile('Расход',anM(c.cost),anDelta(c.cost,p.cost,true))+
+    anTile('Конверсии',String(c.conv).replace('.',','),anDelta(c.conv,p.conv),'цена '+(c.cpa==null?'—':anM(c.cpa)))+
+    anTile('Клики',c.clicks,anDelta(c.clicks,p.clicks),'цена клика '+(c.cpc==null?'—':anM(c.cpc)))+
+    anTile('Показы',(c.impr||0).toLocaleString('ru-RU'),anDelta(c.impr,p.impr),'CTR '+anP(c.ctr))+
+    anTile('% конверсий',anP(c.cvr),anDelta(c.cvr,p.cvr),'из кликов в конверсию')+
+    anTile('Выручка на 1 ₫',r.cur.roas==null?'—':String(r.cur.roas).replace('.',','),anDelta(r.cur.roas,r.prev.roas),'ROAS (вся реклама)')+
+  '</div>';
+  h+='<div class="card"><b>Google по дням</b><canvas id="anGDay" height="200"></canvas></div>';
+  h+=anTbl('Кампании',['Кампания','Клики','Расход','Конв.'],(r.google||[]).map(function(x){ return [esc(x.name),x.clicks,anM(x.cost),String(x.conv).replace('.',',')]; }));
+  h+=anTbl('🔎 Что люди искали',['Запрос','Клики','Расход','Конв.'],(g.terms||[]).map(function(x){ return [esc(x.name),x.clicks,anM(x.cost),String(x.conv).replace('.',',')]; }),'Топ-25 по расходу');
+  h+=anTbl('💸 Деньги без результата',['Запрос','Клики','Расход','CTR'],(g.termsWaste||[]).map(function(x){ return [esc(x.name),x.clicks,anM(x.cost),anP(x.ctr)]; }),'Запросы с расходом и 0 конверсий — кандидаты в минус-слова');
+  h+=anTbl('🔑 Ключевые слова',['Слово','Клики','Расход','Цена конв.'],(g.keywords||[]).map(function(x){ return [esc(x.name),x.clicks,anM(x.cost),x.cpa==null?'—':anM(x.cpa)]; }));
+  h+=anTbl('📱 Устройства',['Устройство','Клики','Расход','Конв.'],(g.devices||[]).map(function(x){ var n={MOBILE:'Телефон',DESKTOP:'Компьютер',TABLET:'Планшет',CONNECTED_TV:'ТВ',OTHER:'Другое'}[x.name]||x.name; return [n,x.clicks,anM(x.cost),String(x.conv).replace('.',',')]; }));
+  if((g.hours||[]).some(function(x){return x.clicks||x.conv;})) h+='<div class="card"><b>🕐 Клики по часам</b><canvas id="anGHr" height="150"></canvas><div class="an-s" style="margin-top:6px">Время — часовой пояс рекламного аккаунта</div></div>';
+  if(!(g.terms||[]).length) h+='<div class="card an-s">Поисковые запросы, ключевые слова, устройства и часы появятся после обновления скрипта в Google Ads.</div>';
+  h+='<div class="an-s" style="margin:-4px 2px 12px">Данные Google по '+(r.googleLast||'').split('-').reverse().join('.')+' (обновляются каждое утро)</div>';
+  return h;
+}
+function anGoogleCharts(r){
+  var g=r.gx; if(!r.googleReal||!g) return; var el=document.getElementById('anGDay');
+  if(el) AN_CH.push(new Chart(el,{data:{labels:g.byDay.map(function(x){return x.d;}),datasets:[
+    {type:'bar',label:'Расход, тыс ₫',data:g.byDay.map(function(x){return Math.round(x.cost/1e3);}),backgroundColor:'#fcd34d',yAxisID:'y'},
+    {type:'line',label:'Клики',data:g.byDay.map(function(x){return x.clicks;}),borderColor:'#2563eb',backgroundColor:'#2563eb',pointRadius:2,tension:.3,yAxisID:'y1'},
+    {type:'line',label:'Конверсии',data:g.byDay.map(function(x){return x.conv;}),borderColor:'#16a34a',backgroundColor:'#16a34a',pointRadius:2,tension:.3,yAxisID:'y1'}]},
+    options:{responsive:true,plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11}}}},scales:{x:{grid:{display:false},ticks:{font:{size:9},maxRotation:0,autoSkip:true}},y:{beginAtZero:true,ticks:{font:{size:10}}},y1:{beginAtZero:true,position:'right',grid:{display:false},ticks:{font:{size:10}}}}}}));
+  var eh=document.getElementById('anGHr');
+  if(eh) AN_CH.push(new Chart(eh,{data:{labels:g.hours.map(function(x){return String(x.h).padStart(2,'0');}),datasets:[
+    {type:'bar',label:'Клики',data:g.hours.map(function(x){return x.clicks;}),backgroundColor:'#93c5fd'},
+    {type:'line',label:'Конверсии',data:g.hours.map(function(x){return x.conv;}),borderColor:'#16a34a',backgroundColor:'#16a34a',pointRadius:1,tension:.3}]},
+    options:{responsive:true,plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11}}}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{beginAtZero:true,ticks:{font:{size:10}}}}}}));
 }
 function renderAnalytics(r){
   AN_CH.forEach(function(c){ try{c.destroy();}catch(e){} }); AN_CH=[];
   var c=r.cur, p=r.prev, mo=r.money, f=r.forecast, h='';
   if(r.alerts&&r.alerts.length){ h+='<div class="card an-al"><b>⚡ Требует внимания</b>'; r.alerts.forEach(function(a){ h+='<div class="an-a '+a.lvl+'">'+(a.lvl==='bad'?'⛔ ':a.lvl==='warn'?'⚠️ ':'ℹ️ ')+esc(a.t)+'</div>'; }); h+='</div>'; }
   else h+='<div class="card an-al ok"><b>✅ Всё спокойно</b><div class="muted">Тревог нет</div></div>';
-  h+='<div class="muted" style="margin:0 2px 8px">'+r.from.split('-').reverse().join('.')+' — '+r.to.split('-').reverse().join('.')+' · сравнение с прошлыми '+r.days+' дн.</div>';
+  h+='<div class="muted" style="margin:0 2px 8px">'+r.from.split('-').reverse().join('.')+' — '+r.to.split('-').reverse().join('.')+' ('+r.days+' дн.) · сравнение с предыдущими '+r.days+' дн.</div>';
   h+='<div class="an-g">'+
     anTile('Выручка',anM(c.revenue),anDelta(c.revenue,p.revenue))+
     anTile('Заказы',c.orders,anDelta(c.orders,p.orders))+
@@ -1394,10 +1438,7 @@ function renderAnalytics(r){
     '<div class="row" style="margin-top:6px"><span class="muted">Регулярные платежи (30 дн.)</span><span class="amt" style="color:var(--red)">'+anM(f.regDue)+'</span></div>';
   (f.regList||[]).forEach(function(x){ h+='<div class="an-s" style="margin-top:3px">• '+esc(x.name)+' — '+anM(x.amount)+(x.inDays===0?' (сегодня)':' (через '+x.inDays+' дн.)')+'</div>'; });
   h+='<div class="row" style="margin-top:8px"><span class="muted">Резерв / на рекламе</span><span class="amt">'+anM(mo.reserve)+' / '+anM(mo.adsLeft)+'</span></div></div>';
-  if(r.google&&r.google.length){ h+='<div class="card"><b>📣 Google Ads (реальные данные)</b><div class="an-tbl"><div class="an-tr an-th"><span>Кампания</span><span>Клики</span><span>Расход</span><span>Цена конв.</span></div>';
-    r.google.forEach(function(x){ h+='<div class="an-tr"><span>'+esc(x.name)+'</span><span>'+x.clicks+'</span><span>'+anM(x.cost)+'</span><span>'+(x.cpa==null?'—':anM(x.cpa))+'</span></div>'; });
-    h+='</div><div class="an-s" style="margin-top:6px">Конверсий: '+r.google.reduce(function(s,x){return s+x.conv;},0)+' · данные по '+(r.googleLast||'').split('-').reverse().join('.')+'</div></div>'; }
-  else h+='<div class="card"><b>📣 Google Ads</b><div class="an-s">Реальные данные ещё не приходили — пока реклама считается по списаниям с кошелька. Подключается скриптом в Google Ads.</div></div>';
+  h+=anGoogle(r);
   h+='<div class="card"><b>Что продаётся</b><div class="an-tbl"><div class="an-tr an-th"><span>Категория</span><span>Зак.</span><span>Выручка</span><span>Маржа</span></div>';
   (r.products||[]).forEach(function(x){ h+='<div class="an-tr"><span>'+esc(x.name)+'</span><span>'+x.orders+'</span><span>'+anM(x.revenue)+'</span><span>'+(x.margin==null?'—':String(x.margin).replace('.',',')+'%')+'</span></div>'; });
   h+='</div><div class="an-s" style="margin-top:6px">Категории — по тексту заказа из «Финансов»</div></div>';
@@ -1416,6 +1457,7 @@ function renderAnalytics(r){
   AN_CH.push(new Chart(document.getElementById('anWd'),{type:'bar',data:{labels:['Пн','Вт','Ср','Чт','Пт','Сб','Вс'],datasets:[{data:r.weekday,backgroundColor:C}]},options:opt()}));
   if((r.zones||[]).length) AN_CH.push(new Chart(document.getElementById('anZn'),{type:'bar',data:{labels:r.zones.map(function(x){return x.name;}),datasets:[{data:r.zones.map(function(x){return x.n;}),backgroundColor:'#a855f7'}]},options:opt({indexAxis:'y'})}));
   if((r.hours||[]).length) AN_CH.push(new Chart(document.getElementById('anHr'),{type:'bar',data:{labels:r.hours.map(function(x){return x.h;}),datasets:[{data:r.hours.map(function(x){return x.n;}),backgroundColor:'#c084fc'}]},options:opt()}));
+  anGoogleCharts(r);
 }
 
 function openReports(){
