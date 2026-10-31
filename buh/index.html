@@ -1416,7 +1416,10 @@ function anGoogleCharts(r){
     {type:'line',label:'Конверсии',data:g.hours.map(function(x){return x.conv;}),borderColor:'#16a34a',backgroundColor:'#16a34a',pointRadius:1,tension:.3}]},
     options:{responsive:true,plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11}}}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{beginAtZero:true,ticks:{font:{size:10}}}}}}));
 }
-async function anIgSync(){ var r=await api('igSync',{}); if(!r||!r.ok){ toast((r&&r.error)||'Ошибка Instagram'); var e=document.getElementById('anIgLog'); if(e) e.textContent=(r&&r.error)||''; return; } toast('Instagram обновлён'); loadAnalytics(); }
+async function anIgSync(){ var r=await api('igSync',{}); var e=document.getElementById('anIgLog');
+  if(!r||!r.ok){ toast((r&&r.error)||'Ошибка Instagram'); if(e) e.textContent=(r&&r.error)||''; return; }
+  toast('Обновляю Instagram — около 30 секунд'); if(e) e.textContent='⏳ Обновляю данные Instagram… страница обновится сама через 30 сек.';
+  setTimeout(function(){ if(!document.getElementById('v-analytics').classList.contains('hidden')) loadAnalytics(); },30000); }
 function anIg(r){
   var g=r.ig, h='<div class="an-sec">📸 Instagram'+(g&&g.user?' · @'+esc(g.user):'')+'</div>';
   if(!g||!g.connected){ return h+'<div class="card"><div class="an-s">Instagram ещё не подключён. Нужен секрет META_TOKEN в сервере.</div><button class="btn ghost" onclick="anIgSync()">🔄 Подключить / обновить Instagram</button><div class="an-s" id="anIgLog" style="margin-top:6px">'+esc((g&&g.log)||'')+'</div></div>'; }
