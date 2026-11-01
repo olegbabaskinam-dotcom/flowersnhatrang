@@ -1,6 +1,6 @@
 {
- "generated": "2026-11-01 13:03",
- "count": 236,
+ "generated": "2026-11-01 13:13",
+ "count": 237,
  "categories": [
   {
    "key": "all",
@@ -5412,6 +5412,25 @@
     "img/products/yarkiy-sbornyy-buket-gerbery/1.webp",
     "img/products/yarkiy-sbornyy-buket-gerbery/2.webp",
     "img/products/yarkiy-sbornyy-buket-gerbery/3.webp"
+   ]
+  },
+  {
+   "id": 266,
+   "slug": "nebolshaya-sbornaya-korzina",
+   "name": "Небольшая сборная корзина",
+   "desc": "Небольшая корзина из розовых, персиковых и кремовых роз, эустомы и эвкалипта. Нежный подарок на день рождения или любой другой повод; не нужна ваза, сразу на стол. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Небольшая сборная корзина Нячанг доставка",
+   "price_vnd": 1500000,
+   "price": "1 500 000 донгов",
+   "price_sub": "≈ $60 · 5 100 ₽",
+   "cats": [
+    "mixed"
+   ],
+   "color": "",
+   "images": [
+    "img/products/nebolshaya-sbornaya-korzina/1.webp",
+    "img/products/nebolshaya-sbornaya-korzina/2.webp",
+    "img/products/nebolshaya-sbornaya-korzina/3.webp"
    ]
   },
   {
