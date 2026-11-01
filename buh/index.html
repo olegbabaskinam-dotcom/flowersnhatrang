@@ -1350,7 +1350,46 @@ async function submitAdjust(){
 var repPeriod='month';
 
 // ================== 📊 АНАЛИТИКА — панель пилота (31.10.2026) ==================
-var AN_DAYS=30, AN_CH=[];
+var AN_CH=[], AN={p:'month',ref:null};
+var AN_MN=['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
+var AN_MS=['янв','фев','мар','апр','мая','июн','июл','авг','сен','окт','ноя','дек'];
+var AN_MSHORT=['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'];
+var AN_WD=['пн','вт','ср','чт','пт','сб','вс'];
+function anToday(){ return new Date(Date.now()+7*3600e3).toISOString().slice(0,10); }
+function anAdd(ds,n){ var d=new Date(ds+'T00:00:00Z'); d.setUTCDate(d.getUTCDate()+n); return d.toISOString().slice(0,10); }
+function anDM(ds){ return Number(ds.slice(8,10))+' '+AN_MS[Number(ds.slice(5,7))-1]; }
+function anRange(p,ref){ var y=+ref.slice(0,4), m=+ref.slice(5,7), r={};
+  if(p==='day'){ r.from=r.to=ref; r.pfrom=r.pto=anAdd(ref,-1); r.label=anDM(ref)+' '+y; r.plabel=anDM(r.pfrom); }
+  else if(p==='week'){ var wd=(new Date(ref+'T00:00:00Z').getUTCDay()+6)%7; r.from=anAdd(ref,-wd); r.to=anAdd(r.from,6); r.pfrom=anAdd(r.from,-7); r.pto=anAdd(r.from,-1);
+    r.label=anDM(r.from)+' — '+anDM(r.to); r.plabel='прошлой неделей'; }
+  else if(p==='month'){ var last=new Date(Date.UTC(y,m,0)).getUTCDate(); r.from=ref.slice(0,8)+'01'; r.to=ref.slice(0,8)+String(last).padStart(2,'0');
+    var pm=m===1?12:m-1, py=m===1?y-1:y, pl=new Date(Date.UTC(py,pm,0)).getUTCDate(); r.pfrom=py+'-'+String(pm).padStart(2,'0')+'-01'; r.pto=py+'-'+String(pm).padStart(2,'0')+'-'+pl;
+    r.label=AN_MN[m-1].charAt(0).toUpperCase()+AN_MN[m-1].slice(1)+' '+y; r.plabel=['январём','февралём','мартом','апрелем','маем','июнем','июлем','августом','сентябрём','октябрём','ноябрём','декабрём'][pm-1]+(py!==y?' '+py:''); }
+  else { r.from=y+'-01-01'; r.to=y+'-12-31'; r.pfrom=(y-1)+'-01-01'; r.pto=(y-1)+'-12-31'; r.label=y+' год'; r.plabel=(y-1)+' годом'; }
+  return r; }
+function anShift(dir){ var r=anRange(AN.p,AN.ref);
+  var nref = dir<0 ? r.pfrom : anAdd(r.to,1);
+  if(dir>0 && nref>anToday()) return; AN.ref=nref; anNav(); loadAnalytics(); }
+function anNav(){ var n=document.getElementById('anNav'); if(!n) return; if(AN.p==='c'){ n.innerHTML=''; return; }
+  var r=anRange(AN.p,AN.ref), canNext=anAdd(r.to,1)<=anToday();
+  n.innerHTML='<button class="btn ghost" style="width:auto;margin:0;padding:6px 14px" onclick="anShift(-1)">‹</button>'+
+    '<div style="flex:1;text-align:center"><b>'+r.label+'</b><div style="margin-top:4px">'+anPick(r)+'</div></div>'+
+    '<button class="btn ghost" style="width:auto;margin:0;padding:6px 14px'+(canNext?'':';opacity:.3')+'" onclick="anShift(1)">›</button>'; }
+function anPick(r){ var t=anToday(), st='font-size:13px;padding:4px 6px;border:1px solid #e7e5e4;border-radius:8px;background:#fff;max-width:170px';
+  if(AN.p==='day'||AN.p==='week') return '<input type="date" style="'+st+'" max="'+t+'" value="'+AN.ref+'" onchange="anSet(this.value)">';
+  if(AN.p==='month') return '<input type="month" style="'+st+'" max="'+t.slice(0,7)+'" value="'+AN.ref.slice(0,7)+'" onchange="anSet(this.value+\'-01\')">';
+  var o='', y0=2025, y1=+t.slice(0,4); for(var y=y1;y>=y0;y--) o+='<option value="'+y+'"'+(y===+AN.ref.slice(0,4)?' selected':'')+'>'+y+'</option>';
+  return '<select style="'+st+'" onchange="anSet(this.value+\'-01-01\')">'+o+'</select>'; }
+function anSet(v){ if(!/^\d{4}-\d{2}-\d{2}$/.test(v||'')) return; var t=anToday(); AN.ref=v>t?t:v; anNav(); loadAnalytics(); }
+function anLab(d,i,n){ // d = 'дд.мм'
+  if(AN.p==='week') return AN_WD[i]+' '+Number(d.slice(0,2));
+  if(AN.p==='month') return String(Number(d.slice(0,2)));
+  return d; }
+function anB(arr,keys){ if(!arr) return arr;
+  if(AN.p!=='year') return arr.map(function(x,i){ var o=Object.assign({},x); o.d=anLab(x.d,i,arr.length); return o; });
+  var M={}; arr.forEach(function(x){ var k=Number(x.d.slice(3,5)); if(!M[k]){ M[k]=Object.assign({},x); keys.forEach(function(q){ M[k][q]=0; }); }
+    keys.forEach(function(q){ M[k][q]+=Number(x[q])||0; }); if(x.followers!=null) M[k].followers=x.followers; });
+  var out=[]; for(var k=1;k<=12;k++){ var o=M[k]||{}; if(!M[k]) keys.forEach(function(q){ o[q]=0; }); o.d=AN_MSHORT[k-1]; out.push(o); } return out; }
 function anM(v){ v=Number(v)||0; var a=Math.abs(v), s=v<0?'−':'';
   if(a>=1e6) return s+(a/1e6).toFixed(a>=1e8?0:1).replace('.',',')+' млн ₫';
   if(a>=1e3) return s+Math.round(a/1e3)+' тыс ₫'; return s+Math.round(a)+' ₫'; }
@@ -1365,15 +1404,18 @@ function openAnalytics(){
   v.innerHTML='<button class="back" onclick="go(\'main\')">‹ Назад</button>'+
     '<div class="row"><h2 style="margin:0">📊 Панель пилота</h2><small class="link" onclick="loadAnalytics()">🔄</small></div>'+
     '<div class="seg" id="anSeg" style="margin:10px 0 8px"></div>'+
+    '<div id="anNav" style="display:flex;align-items:center;gap:8px;margin:0 0 10px"></div>'+
     '<div id="anCustom" class="card hidden"><div class="grid2"><div><label style="margin-top:0">С</label><input type="date" id="anFrom"></div><div><label style="margin-top:0">По</label><input type="date" id="anTo"></div></div><button class="btn ghost" onclick="loadAnalytics()">Показать</button></div>'+
     '<div id="anBody"><div class="muted center" style="padding:30px">Загрузка…</div></div>';
-  var seg=document.getElementById('anSeg'); [[1,'День'],[7,'Неделя'],[30,'Месяц'],[90,'90 дн.'],['c','Даты']].forEach(function(o){ var b=document.createElement('button'); b.textContent=o[1]; b.style.fontSize='14px'; if(o[0]===AN_DAYS) b.className='on';
-    b.onclick=function(){ AN_DAYS=o[0]; Array.prototype.forEach.call(seg.children,function(c){c.className='';}); b.className='on'; document.getElementById('anCustom').classList.toggle('hidden',o[0]!=='c'); if(o[0]!=='c') loadAnalytics(); }; seg.appendChild(b); });
+  var seg=document.getElementById('anSeg'); [['day','День'],['week','Неделя'],['month','Месяц'],['year','Год'],['c','Даты']].forEach(function(o){ var b=document.createElement('button'); b.textContent=o[1]; b.style.fontSize='14px'; if(o[0]===AN.p) b.className='on';
+    b.onclick=function(){ AN.p=o[0]; AN.ref=anToday(); Array.prototype.forEach.call(seg.children,function(c){c.className='';}); b.className='on'; document.getElementById('anCustom').classList.toggle('hidden',o[0]!=='c'); anNav(); if(o[0]!=='c') loadAnalytics(); }; seg.appendChild(b); });
+  if(!AN.ref) AN.ref=anToday(); anNav();
   go('analytics'); loadAnalytics();
 }
 async function loadAnalytics(){
-  var q={days:AN_DAYS};
-  if(AN_DAYS==='c'){ var a=document.getElementById('anFrom').value, z=document.getElementById('anTo').value; if(!a||!z){ toast('Выбери даты'); return; } q={from:a,to:z}; }
+  var q;
+  if(AN.p!=='c'){ var rg=anRange(AN.p,AN.ref||anToday()); q={from:rg.from,to:rg.to,pfrom:rg.pfrom,pto:rg.pto,period:AN.p}; }
+  if(AN.p==='c'){ var a=document.getElementById('anFrom').value, z=document.getElementById('anTo').value; if(!a||!z){ toast('Выбери даты'); return; } q={from:a,to:z}; }
   var res=await api('analytics',q); if(!res||!res.ok){ toast((res&&res.error)||'Ошибка'); return; }
   renderAnalytics(res);
 }
@@ -1480,10 +1522,16 @@ function anSiteCharts(r){ var w=r.site, el=document.getElementById('anSiteDay');
     options:{responsive:true,plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11}}}},scales:{x:{grid:{display:false},ticks:{font:{size:9},maxRotation:0,autoSkip:true}},y:{beginAtZero:true,ticks:{precision:0,font:{size:10}}}}}})); }
 function renderAnalytics(r){
   AN_CH.forEach(function(c){ try{c.destroy();}catch(e){} }); AN_CH=[];
+  r.byDay=anB(r.byDay,['orders','revenue','income','expense']);
+  if(r.gx&&r.gx.byDay) r.gx.byDay=anB(r.gx.byDay,['cost','clicks','conv']);
+  if(r.ig&&r.ig.days) r.ig.days=anB(r.ig.days,['reach','newf']);
+  if(r.site&&r.site.byDay) r.site.byDay=anB(r.site.byDay,['v','s','lead','click']);
   var c=r.cur, p=r.prev, mo=r.money, f=r.forecast, h='';
   if(r.alerts&&r.alerts.length){ h+='<div class="card an-al"><b>⚡ Требует внимания</b>'; r.alerts.forEach(function(a){ h+='<div class="an-a '+a.lvl+'">'+(a.lvl==='bad'?'⛔ ':a.lvl==='warn'?'⚠️ ':'ℹ️ ')+esc(a.t)+'</div>'; }); h+='</div>'; }
   else h+='<div class="card an-al ok"><b>✅ Всё спокойно</b><div class="muted">Тревог нет</div></div>';
-  h+='<div class="muted" style="margin:0 2px 8px">'+r.from.split('-').reverse().join('.')+' — '+r.to.split('-').reverse().join('.')+' ('+r.days+' дн.) · сравнение с предыдущими '+r.days+' дн.</div>';
+  var rg=AN.p!=='c'?anRange(AN.p,AN.ref):null, going=r.to>r.today&&r.from<=r.today;
+  h+='<div class="muted" style="margin:0 2px 8px">'+anDM(r.from)+' — '+anDM(r.to)+(going?' · прошло '+r.days+' из '+r.periodDays+' дн.':'')+
+    ' · сравнение с '+(rg?rg.plabel:'предыдущими '+r.days+' дн.')+(r.pFrom?' ('+anDM(r.pFrom)+(r.pTo!==r.pFrom?' — '+anDM(r.pTo):'')+')':'')+'</div>';
   var mo2=r.month||{}, MN=['январе','феврале','марте','апреле','мае','июне','июле','августе','сентябре','октябре','ноябре','декабре'];
   var mName=mo2.from?MN[Number(mo2.from.slice(5,7))-1]:'';
   h+='<div class="an-g">'+
@@ -1516,6 +1564,7 @@ function renderAnalytics(r){
   if((r.zones||[]).length) h+='<div class="card"><b>Зоны доставки (Карта)</b><canvas id="anZn" height="160"></canvas><div class="an-s" style="margin-top:6px">Доставлено отмечено: '+r.delivery.done+' из '+r.delivery.past+'</div></div>';
   if((r.hours||[]).length) h+='<div class="card"><b>Время доставки</b><canvas id="anHr" height="150"></canvas></div>';
   h+='<div class="an-s center" style="margin:6px 0 20px">Источники: Финансы (заказы), бухгалтерия (деньги), Карта заказов. Реклама — списания с рекламных кошельков.</div>';
+  if(AN.p==='year') h=h.replace(/по дням/g,'по месяцам');
   document.getElementById('anBody').innerHTML=h;
   var C='#7c3aed', opt=function(extra){ return Object.assign({responsive:true,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{beginAtZero:true,ticks:{font:{size:10}}}}},extra||{}); };
   AN_CH.push(new Chart(document.getElementById('anDay'),{data:{labels:r.byDay.map(function(x){return x.d;}),datasets:[
