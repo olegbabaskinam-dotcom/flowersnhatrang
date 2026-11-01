@@ -1,6 +1,6 @@
 {
- "generated": "2026-10-31 13:33",
- "count": 226,
+ "generated": "2026-11-01 13:03",
+ "count": 236,
  "categories": [
   {
    "key": "all",
@@ -5225,6 +5225,193 @@
     "img/products/podarochnyy-nabor-krasota-vietnama-rozovyy/4.webp",
     "img/products/podarochnyy-nabor-krasota-vietnama-rozovyy/5.webp",
     "img/products/podarochnyy-nabor-krasota-vietnama-rozovyy/6.webp"
+   ]
+  },
+  {
+   "id": 256,
+   "slug": "151-krasnaya-roza-v-korzine",
+   "name": "151 красная роза в корзине",
+   "desc": "корзина из 151 красной розы с красной лентой — впечатляющий подарок на юбилей, годовщину или признание в любви; не нужна ваза, сразу на стол. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "151 красная роза в корзине Нячанг доставка",
+   "price_vnd": 2750000,
+   "price": "2 750 000 донгов",
+   "price_sub": "≈ $110 · 9 350 ₽",
+   "cats": [
+    "r101"
+   ],
+   "color": "red",
+   "images": [
+    "img/products/151-krasnaya-roza-v-korzine/1.webp",
+    "img/products/151-krasnaya-roza-v-korzine/2.webp",
+    "img/products/151-krasnaya-roza-v-korzine/3.webp",
+    "img/products/151-krasnaya-roza-v-korzine/4.webp"
+   ]
+  },
+  {
+   "id": 257,
+   "slug": "101-belaya-roza-v-beloy-upakovke",
+   "name": "101 белая роза в белой упаковке",
+   "desc": "Букет из 101 белой розы в белой упаковке. Нежный и торжественный подарок на день рождения, годовщину или предложение. Онлайн-доставка по Нячангу со следующего дня, вложим открытку по желанию",
+   "alt": "101 белая роза в белой упаковке Нячанг доставка",
+   "price_vnd": 1500000,
+   "price": "1 500 000 донгов",
+   "price_sub": "≈ $60 · 5 100 ₽",
+   "cats": [
+    "r101"
+   ],
+   "color": "white",
+   "images": [
+    "img/products/101-belaya-roza-v-beloy-upakovke/1.webp",
+    "img/products/101-belaya-roza-v-beloy-upakovke/2.webp",
+    "img/products/101-belaya-roza-v-beloy-upakovke/3.webp",
+    "img/products/101-belaya-roza-v-beloy-upakovke/4.webp"
+   ]
+  },
+  {
+   "id": 258,
+   "slug": "151-krasnaya-roza-v-beloy-upakovke",
+   "name": "151 красная роза в белой упаковке",
+   "desc": "Большой букет из 151 красной розы в белой упаковке. Яркий подарок на юбилей, годовщину или признание в любви. Онлайн-доставка по Нячангу со следующего дня, вложим открытку по желанию",
+   "alt": "151 красная роза в белой упаковке Нячанг доставка",
+   "price_vnd": 2250000,
+   "price": "2 250 000 донгов",
+   "price_sub": "≈ $90 · 7 650 ₽",
+   "cats": [
+    "r101"
+   ],
+   "color": "red",
+   "images": [
+    "img/products/151-krasnaya-roza-v-beloy-upakovke/1.webp",
+    "img/products/151-krasnaya-roza-v-beloy-upakovke/2.webp",
+    "img/products/151-krasnaya-roza-v-beloy-upakovke/3.webp"
+   ]
+  },
+  {
+   "id": 259,
+   "slug": "101-oranzhevaya-roza-oranzhevaya-upakovka",
+   "name": "101 оранжевая роза в оранжевой упаковке",
+   "desc": "Букет из 101 оранжевой розы в оранжевой упаковке. Яркий солнечный подарок на день рождения или для хорошего настроения. Онлайн-доставка по Нячангу со следующего дня, вложим открытку по желанию",
+   "alt": "101 оранжевая роза в оранжевой упаковке Нячанг доставка",
+   "price_vnd": 1500000,
+   "price": "1 500 000 донгов",
+   "price_sub": "≈ $60 · 5 100 ₽",
+   "cats": [
+    "r101"
+   ],
+   "color": "",
+   "images": [
+    "img/products/101-oranzhevaya-roza-oranzhevaya-upakovka/1.webp",
+    "img/products/101-oranzhevaya-roza-oranzhevaya-upakovka/2.webp"
+   ]
+  },
+  {
+   "id": 260,
+   "slug": "51-oranzhevaya-roza",
+   "name": "51 оранжевая роза в белой упаковке",
+   "desc": "Букет из 51 оранжевой розы в белой упаковке. Яркий солнечный подарок на день рождения, в благодарность или для хорошего настроения. Онлайн-доставка по Нячангу со следующего дня, вложим открытку по желанию",
+   "alt": "51 оранжевая роза в белой упаковке Нячанг доставка",
+   "price_vnd": 1000000,
+   "price": "1 000 000 донгов",
+   "price_sub": "≈ $40 · 3 400 ₽",
+   "cats": [
+    "r51"
+   ],
+   "color": "",
+   "images": [
+    "img/products/51-oranzhevaya-roza/1.webp"
+   ]
+  },
+  {
+   "id": 261,
+   "slug": "25-belo-rozovyh-roz-rozovaya-upakovka",
+   "name": "25 бело-розовых роз в розовой упаковке",
+   "desc": "Букет из 25 бело-розовых роз в розовой упаковке. Нежный подарок на день рождения, свидание или без повода. Онлайн-доставка по Нячангу со следующего дня, вложим открытку по желанию",
+   "alt": "25 бело-розовых роз в розовой упаковке Нячанг доставка",
+   "price_vnd": 500000,
+   "price": "500 000 донгов",
+   "price_sub": "≈ $20 · 1 700 ₽",
+   "cats": [
+    "r25"
+   ],
+   "color": "pink",
+   "images": [
+    "img/products/25-belo-rozovyh-roz-rozovaya-upakovka/1.webp",
+    "img/products/25-belo-rozovyh-roz-rozovaya-upakovka/2.webp"
+   ]
+  },
+  {
+   "id": 262,
+   "slug": "25-belyh-roz-v-yarkoy-upakovke",
+   "name": "25 белых роз в красной упаковке",
+   "desc": "Букет из 25 белых роз в красной упаковке. Контрастный и нарядный подарок на день рождения, свидание или годовщину. Онлайн-доставка по Нячангу со следующего дня, вложим открытку по желанию",
+   "alt": "25 белых роз в красной упаковке Нячанг доставка",
+   "price_vnd": 500000,
+   "price": "500 000 донгов",
+   "price_sub": "≈ $20 · 1 700 ₽",
+   "cats": [
+    "r25"
+   ],
+   "color": "white",
+   "images": [
+    "img/products/25-belyh-roz-v-yarkoy-upakovke/1.webp",
+    "img/products/25-belyh-roz-v-yarkoy-upakovke/2.webp",
+    "img/products/25-belyh-roz-v-yarkoy-upakovke/3.webp"
+   ]
+  },
+  {
+   "id": 263,
+   "slug": "51-krasnaya-roza-bordovaya-upakovka",
+   "name": "51 красная роза в бордовой упаковке",
+   "desc": "Букет из 51 красной розы в бордово-красной упаковке. Классический подарок для признания в любви, годовщины или дня рождения. Онлайн-доставка по Нячангу со следующего дня, вложим открытку по желанию",
+   "alt": "51 красная роза в бордовой упаковке Нячанг доставка",
+   "price_vnd": 1000000,
+   "price": "1 000 000 донгов",
+   "price_sub": "≈ $40 · 3 400 ₽",
+   "cats": [
+    "r51"
+   ],
+   "color": "red",
+   "images": [
+    "img/products/51-krasnaya-roza-bordovaya-upakovka/1.webp",
+    "img/products/51-krasnaya-roza-bordovaya-upakovka/2.webp",
+    "img/products/51-krasnaya-roza-bordovaya-upakovka/3.webp"
+   ]
+  },
+  {
+   "id": 264,
+   "slug": "prazdnichnyy-sbornyy-buket-zhelto-oranzhevyy",
+   "name": "Праздничный сборный букет в жёлто-оранжевых оттенках",
+   "desc": "Сборный букет в жёлто-оранжевых и персиковых оттенках в белой упаковке. Солнечный подарок на день рождения или любой другой повод. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Праздничный сборный букет в жёлто-оранжевых оттенках Нячанг доставка",
+   "price_vnd": 1500000,
+   "price": "1 500 000 донгов",
+   "price_sub": "≈ $60 · 5 100 ₽",
+   "cats": [
+    "mixed"
+   ],
+   "color": "",
+   "images": [
+    "img/products/prazdnichnyy-sbornyy-buket-zhelto-oranzhevyy/1.webp",
+    "img/products/prazdnichnyy-sbornyy-buket-zhelto-oranzhevyy/2.webp"
+   ]
+  },
+  {
+   "id": 265,
+   "slug": "yarkiy-sbornyy-buket-gerbery",
+   "name": "Яркий сборный букет с герберами в красной упаковке",
+   "desc": "Сборный букет с розовыми герберами, розами и гипсофилой в розово-красной упаковке. Яркий подарок на день рождения или любой другой повод. Онлайн-доставка по Нячангу со следующего дня",
+   "alt": "Яркий сборный букет с герберами в красной упаковке Нячанг доставка",
+   "price_vnd": 1500000,
+   "price": "1 500 000 донгов",
+   "price_sub": "≈ $60 · 5 100 ₽",
+   "cats": [
+    "mixed"
+   ],
+   "color": "",
+   "images": [
+    "img/products/yarkiy-sbornyy-buket-gerbery/1.webp",
+    "img/products/yarkiy-sbornyy-buket-gerbery/2.webp",
+    "img/products/yarkiy-sbornyy-buket-gerbery/3.webp"
    ]
   },
   {
