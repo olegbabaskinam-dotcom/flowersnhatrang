@@ -122,7 +122,7 @@ PAGES = {
           sec={"b-helium":"Foil balloon sets","b-latex":"Latex balloons","b-combo":"Balloons with flowers and cake"}),
   ko=dict(title=None, desc=None, h1="나트랑 풍선 배달", wa="", h2="풍선",
           sec={"b-helium":"호일 풍선 세트","b-latex":"라텍스 풍선","b-combo":"꽃·케이크와 함께하는 풍선"})),
- "podarki": dict(base="podarki", hero="img/products/podarochnyy-nabor-kofeynyy-vkus-vietnama/1.webp",
+ "podarki": dict(base="podarki", hero="img/products/podarochnyy-nabor-krasota-vietnama-rozovyy/5.webp", hero_w=960,
   order=["nabory","cakes"], assign=["nabory","cakes"],
   ru=dict(title="Подарки с доставкой в Нячанге — подарочные наборы и торты",
           desc="Подарочные наборы с вьетнамскими товарами и торты с доставкой по Нячангу. Онлайн-заказ со следующего дня, срочно сегодня — через оператора до 17:00.",
@@ -259,7 +259,7 @@ def build(key, lang):
     hi = s.index('<div class="md:w-1/2 h-64 md:h-auto overflow-hidden">')
     im = re.compile(r'<img [^>]*>').search(s, hi)
     alt = html.escape(T["h1"], quote=True)
-    newimg = f'<img src="{P["hero"]}" alt="{alt}" class="w-full h-full object-cover" width="900" height="1200" fetchpriority="high" decoding="async">'
+    newimg = f'<img src="{P["hero"]}" alt="{alt}" class="w-full h-full object-cover" width="{P.get("hero_w",900)}" height="1200" fetchpriority="high" decoding="async">'
     s = s[:im.start()] + newimg + s[im.end():]
     s = re.sub(r'<link rel="preload" as="image" href="[^"]*" fetchpriority="high">', f'<link rel="preload" as="image" href="{P["hero"]}" fetchpriority="high">', s, 1)
     # текст для WhatsApp/Telegram
