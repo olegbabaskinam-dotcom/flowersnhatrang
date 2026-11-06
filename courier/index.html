@@ -57,7 +57,6 @@
     <button class="btn ghost navbtn" onclick="mapDay(1)">›</button>
   </div>
 
-  <div id="rentDay"></div>
   <div id="lockRow" class="pinwrap hidden">
     <span class="muted" style="font-size:12px">🔒 Правки:</span>
     <input id="pin" type="tel" inputmode="numeric" maxlength="6" placeholder="ПИН">
@@ -158,24 +157,7 @@ async function openMap(date, sync){
   var res=await api('mapState', sync?{date:MAP_DATE,sync:1}:{date:MAP_DATE});
   if(!res.ok){ document.getElementById('authErr').textContent=res.error||'Нет доступа'; document.getElementById('authErr').classList.remove('hidden'); return; }
   document.getElementById('authErr').classList.add('hidden');
-  LAST=res; renderMap(res); show('map'); loadRentDay(MAP_DATE);
-}
-// 👶 коляски на выбранный день: отвезти / забрать
-async function loadRentDay(date){
-  var box=document.getElementById('rentDay'); if(!box) return;
-  var res=await api('rentState',{month:String(date).slice(0,7)});
-  if(!res||!res.ok){ box.innerHTML=''; return; }
-  var names={}; (res.items||[]).forEach(function(x){ names[x.id]='№'+x.num+' '+x.name; });
-  var g={}, ord=[]; (res.bookings||[]).forEach(function(r){ if(['hold','confirmed','delivered'].indexOf(r.status)<0) return; if(r.sdate!==date && r.edate!==date) return; if(!g[r.grp]){ g[r.grp]=[]; ord.push(r.grp); } g[r.grp].push(r); });
-  if(!ord.length){ box.innerHTML=''; return; }
-  var ev=[];
-  ord.forEach(function(k){ var a=g[k], r=a[0], nm=a.map(function(x){return esc(names[x.item_id]||'');}).join(', '), sum=a.reduce(function(s,x){return s+(+x.amount||0);},0);
-    var where='🏨 '+esc(r.hotel||'—')+(r.room?(', № '+esc(r.room)):'')+(r.guest?(' · 👤 '+esc(r.guest)):'')+(r.contact?(' · 📞 '+esc(r.contact)):'');
-    if(r.sdate===date && r.status!=='delivered') ev.push([r.stime,'<div class="item"><div class="t">🛵 '+r.stime+' отвезти · '+nm+'</div><div class="s">'+where+'</div><div class="s">💵 к оплате при получении: '+fmt(sum)+(r.status==='hold'?' · ⚠️ не подтверждена':'')+'</div></div>']);
-    if(r.edate===date) ev.push([r.etime,'<div class="item"><div class="t">↩️ '+r.etime+' забрать · '+nm+'</div><div class="s">'+where+'</div></div>']);
-  });
-  ev.sort(function(a,b){ return a[0]<b[0]?-1:1; });
-  box.innerHTML=ev.length?('<div class="card" style="margin-bottom:10px"><b>👶 Коляски</b><div style="margin-top:8px">'+ev.map(function(x){return x[1];}).join('')+'</div></div>'):'';
+  LAST=res; renderMap(res); show('map');
 }
 function refreshMap(){ openMap(MAP_DATE,true); toast('Обновляю…'); }
 function mapDay(d){ openMap(addDays(MAP_DATE||vnToday(), d)); }
@@ -190,10 +172,10 @@ function renderMap(res){
       d.onclick=function(){ openCard(b); }; ul.appendChild(d); });
   } else { uw.classList.add('hidden'); ul.innerHTML=''; }
   var box=document.getElementById('list'); box.innerHTML='';
-  if(!res.day || !res.day.length){ box.innerHTML='<div class="card center muted">На этот день заказов нет</div>'; return; }
-  res.day.forEach(function(b){
+  if((!res.day || !res.day.length) && !(res.rent&&res.rent.length)){ box.innerHTML='<div class="card center muted">На этот день заказов нет</div>'; return; }
+  (res.day||[]).forEach(function(b){
     var end=m2hh(hh2m(b.arrive)+(b.slots||2)*15);
-    var row=document.createElement('div'); row.className='item'; row.style.cursor='pointer'; row.style.borderLeft='5px solid '+(b.color||'#ccc');
+    var row=document.createElement('div'); row.className='item'; row.style.cursor='pointer'; row.style.borderLeft='5px solid '+(b.color||'#ccc'); row.setAttribute('data-t', b.arrive||'');
     if(b.status==='done') row.style.opacity='.55';
     var mark=b.status==='done'?'✅':'🟡';
     var pay=b.pay==='transfer'?'💳 перевод':(b.pay==='cash'?'💵 наличные':'');
@@ -204,12 +186,39 @@ function renderMap(res){
     row.onclick=function(){ openCard(b); }; box.appendChild(row);
     if(b.status!=='done'){
       var qb=document.createElement('button'); qb.textContent='✅ отвезён (без фото)';
-      qb.className='btn green'; qb.style.cssText='width:auto;margin:6px 0 2px;padding:7px 14px;font-size:13px';
+      qb.className='btn green'; qb.style.cssText='width:auto;margin:6px 0 2px;padding:7px 14px;font-size:13px'; qb.setAttribute('data-t', b.arrive||'');
       qb.onclick=(function(bk){ return function(e){ e.stopPropagation(); quickDeliver(bk); }; })(b);
       box.appendChild(qb);
     }
   });
+  mapRentRows(res, box);   // 👶 коляски
 }
+// 👶 коляски в ленте дня: отдельные позиции «отвезти» и «забрать» (по времени, вперемешку с цветами)
+function rvnd(n){ return Math.round(+n||0).toLocaleString('ru-RU').replace(/,/g,' ')+' ₫'; }
+function rdm(d){ var p=String(d||'').split('-'); return p.length===3?(p[2]+'.'+p[1]):d; }
+function mapRentRows(res, box){
+  (res.rent||[]).forEach(function(ev){
+    var dl=ev.kind==='deliv';
+    var row=document.createElement('div'); row.className='item'; row.setAttribute('data-t', ev.time);
+    row.style.borderLeft='5px solid #7c3aed'; if(ev.done) row.style.opacity='.55';
+    var where='🏨 '+esc(ev.hotel||'—')+(ev.room?(', № '+esc(ev.room)):'')+(ev.guest?(' · 👤 '+esc(ev.guest)):'')+(ev.contact?(' · 📞 '+esc(ev.contact)):'');
+    row.innerHTML='<div class="row"><b>'+(ev.done?'✅':'👶')+' '+ev.time+' · '+(dl?'🛵 Отвезти коляску':'↩️ Забрать коляску')+'</b><span class="amt">'+(dl&&ev.amount?rvnd(ev.amount):'')+'</span></div>'+
+      '<div class="t" style="margin-top:3px">'+esc(ev.items)+'</div>'+
+      '<div class="s">'+where+'</div>'+
+      '<div class="s">'+(dl?('💵 к оплате при получении · аренда до '+rdm(ev.edate)+' '+ev.etime+' ('+ev.days+' дн.)'):('выдана '+rdm(ev.sdate)+' '+ev.stime+' · 🧽 после забора почистить'))+(ev.status==='hold'?' · ⚠️ бронь не подтверждена':'')+'</div>'+
+      (ev.note?('<div class="s">📝 '+esc(ev.note)+'</div>'):'');
+    var bt=document.createElement('button'); bt.className='btn'; bt.style.cssText='width:auto;margin:8px 0 0;padding:8px 14px;font-size:14px';
+    if(!ev.done && !(dl && ev.status==='hold')){ bt.textContent=dl?'✅ Отвезли':'✅ Забрали'; bt.style.background='#1f9d55'; bt.style.color='#fff'; bt.onclick=function(e){ e.stopPropagation(); rentMarkDo(ev,false); }; row.appendChild(bt); }
+    else if(ev.done){ bt.textContent='↩︎ Снять отметку'; bt.className='btn ghost'; bt.style.cssText+=';font-size:12px;padding:6px 12px'; bt.onclick=function(e){ e.stopPropagation(); if(confirm('Снять отметку «'+(dl?'отвезли':'забрали')+'»?')) rentMarkDo(ev,true); }; row.appendChild(bt); }
+    var before=null; Array.prototype.some.call(box.children,function(c){ var t=c.getAttribute&&c.getAttribute('data-t'); if(t && t>ev.time){ before=c; return true; } return false; });
+    box.insertBefore(row, before);
+  });
+}
+async function rentMarkDo(ev, undo){
+  var res=await api('rentMark',{grp:ev.grp, kind:ev.kind, undo:undo?1:0});
+  if(res&&res.ok){ toast(undo?'Отметка снята':(ev.kind==='deliv'?'Отвезли ✅':'Забрали ✅')); openMap(); } else toast((res&&res.error)||'Ошибка');
+}
+
 async function quickDeliver(b){
   var res=await api('mapDeliver',{id:b.id, amount:0, comment:''});
   if(res.ok){ toast('Отвезён ✅'); openMap(); } else toast(res.error||'Ошибка');

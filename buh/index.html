@@ -1092,10 +1092,10 @@ function renderMap(res){
       d.onclick=function(){ openMapEdit(b); }; ul.appendChild(d); });
   } else { uw.classList.add('hidden'); ul.innerHTML=''; }
   var box=document.getElementById('mapList'); box.innerHTML='';
-  if(!res.day || !res.day.length){ box.innerHTML='<div class="card center muted">На этот день заказов нет</div>'; return; }
-  res.day.forEach(function(b){
+  if((!res.day || !res.day.length) && !(res.rent&&res.rent.length)){ box.innerHTML='<div class="card center muted">На этот день заказов нет</div>'; return; }
+  (res.day||[]).forEach(function(b){
     var end=mMinToHH(mHHtoMin(b.arrive)+(b.slots||2)*15);
-    var row=document.createElement('div'); row.className='item'; row.style.cursor='pointer'; row.style.borderLeft='5px solid '+b.color;
+    var row=document.createElement('div'); row.className='item'; row.style.cursor='pointer'; row.style.borderLeft='5px solid '+b.color; row.setAttribute('data-t', b.arrive||'');
     if(b.status==='done') row.style.opacity='.55';
     var mark=b.status==='done'?'✅':'🟡';
     var pay=b.pay==='transfer'?'💳 перевод':(b.pay==='cash'?'💵 наличные':'');
@@ -1106,7 +1106,34 @@ function renderMap(res){
       '<div class="s">'+(b.paid?'💰 оплачен':'⏳ не оплачен')+' · '+src+' '+esc(b.zoneLabel||'')+(pay?(' · '+pay):'')+(b.addr?(' · '+esc(b.addr)):'')+'</div>'+extra;
     row.onclick=function(){ openMapEdit(b); }; box.appendChild(row);
   });
+  mapRentRows(res, box);   // 👶 коляски
 }
+// 👶 коляски в ленте дня: отдельные позиции «отвезти» и «забрать» (по времени, вперемешку с цветами)
+function rvnd(n){ return Math.round(+n||0).toLocaleString('ru-RU').replace(/,/g,' ')+' ₫'; }
+function rdm(d){ var p=String(d||'').split('-'); return p.length===3?(p[2]+'.'+p[1]):d; }
+function mapRentRows(res, box){
+  (res.rent||[]).forEach(function(ev){
+    var dl=ev.kind==='deliv';
+    var row=document.createElement('div'); row.className='item'; row.setAttribute('data-t', ev.time);
+    row.style.borderLeft='5px solid #7c3aed'; if(ev.done) row.style.opacity='.55';
+    var where='🏨 '+esc(ev.hotel||'—')+(ev.room?(', № '+esc(ev.room)):'')+(ev.guest?(' · 👤 '+esc(ev.guest)):'')+(ev.contact?(' · 📞 '+esc(ev.contact)):'');
+    row.innerHTML='<div class="row"><b>'+(ev.done?'✅':'👶')+' '+ev.time+' · '+(dl?'🛵 Отвезти коляску':'↩️ Забрать коляску')+'</b><span class="amt">'+(dl&&ev.amount?rvnd(ev.amount):'')+'</span></div>'+
+      '<div class="t" style="margin-top:3px">'+esc(ev.items)+'</div>'+
+      '<div class="s">'+where+'</div>'+
+      '<div class="s">'+(dl?('💵 к оплате при получении · аренда до '+rdm(ev.edate)+' '+ev.etime+' ('+ev.days+' дн.)'):('выдана '+rdm(ev.sdate)+' '+ev.stime+' · 🧽 после забора почистить'))+(ev.status==='hold'?' · ⚠️ бронь не подтверждена':'')+'</div>'+
+      (ev.note?('<div class="s">📝 '+esc(ev.note)+'</div>'):'');
+    var bt=document.createElement('button'); bt.className='btn'; bt.style.cssText='width:auto;margin:8px 0 0;padding:8px 14px;font-size:14px';
+    if(!ev.done && !(dl && ev.status==='hold')){ bt.textContent=dl?'✅ Отвезли':'✅ Забрали'; bt.style.background='#1f9d55'; bt.style.color='#fff'; bt.onclick=function(e){ e.stopPropagation(); rentMarkDo(ev,false); }; row.appendChild(bt); }
+    else if(ev.done){ bt.textContent='↩︎ Снять отметку'; bt.className='btn ghost'; bt.style.cssText+=';font-size:12px;padding:6px 12px'; bt.onclick=function(e){ e.stopPropagation(); if(confirm('Снять отметку «'+(dl?'отвезли':'забрали')+'»?')) rentMarkDo(ev,true); }; row.appendChild(bt); }
+    var before=null; Array.prototype.some.call(box.children,function(c){ var t=c.getAttribute&&c.getAttribute('data-t'); if(t && t>ev.time){ before=c; return true; } return false; });
+    box.insertBefore(row, before);
+  });
+}
+async function rentMarkDo(ev, undo){
+  var res=await api('rentMark',{grp:ev.grp, kind:ev.kind, undo:undo?1:0});
+  if(res&&res.ok){ toast(undo?'Отметка снята':(ev.kind==='deliv'?'Отвезли ✅':'Забрали ✅')); openMap(); } else toast((res&&res.error)||'Ошибка');
+}
+
 function fillZoneSel(sel,val){ sel.innerHTML=''; MAP_ZONES.forEach(function(z){ var o=document.createElement('option'); o.value=z.k; o.textContent=z.t; if(z.k===val)o.selected=true; sel.appendChild(o); }); }
 function openMapAdd(){
   MAP_EDIT_ID=null;
