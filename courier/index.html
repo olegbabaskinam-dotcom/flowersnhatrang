@@ -57,6 +57,7 @@
     <button class="btn ghost navbtn" onclick="mapDay(1)">›</button>
   </div>
 
+  <div id="rentDay"></div>
   <div id="lockRow" class="pinwrap hidden">
     <span class="muted" style="font-size:12px">🔒 Правки:</span>
     <input id="pin" type="tel" inputmode="numeric" maxlength="6" placeholder="ПИН">
@@ -157,7 +158,24 @@ async function openMap(date, sync){
   var res=await api('mapState', sync?{date:MAP_DATE,sync:1}:{date:MAP_DATE});
   if(!res.ok){ document.getElementById('authErr').textContent=res.error||'Нет доступа'; document.getElementById('authErr').classList.remove('hidden'); return; }
   document.getElementById('authErr').classList.add('hidden');
-  LAST=res; renderMap(res); show('map');
+  LAST=res; renderMap(res); show('map'); loadRentDay(MAP_DATE);
+}
+// 👶 коляски на выбранный день: отвезти / забрать
+async function loadRentDay(date){
+  var box=document.getElementById('rentDay'); if(!box) return;
+  var res=await api('rentState',{month:String(date).slice(0,7)});
+  if(!res||!res.ok){ box.innerHTML=''; return; }
+  var names={}; (res.items||[]).forEach(function(x){ names[x.id]='№'+x.num+' '+x.name; });
+  var g={}, ord=[]; (res.bookings||[]).forEach(function(r){ if(['hold','confirmed','delivered'].indexOf(r.status)<0) return; if(r.sdate!==date && r.edate!==date) return; if(!g[r.grp]){ g[r.grp]=[]; ord.push(r.grp); } g[r.grp].push(r); });
+  if(!ord.length){ box.innerHTML=''; return; }
+  var ev=[];
+  ord.forEach(function(k){ var a=g[k], r=a[0], nm=a.map(function(x){return esc(names[x.item_id]||'');}).join(', '), sum=a.reduce(function(s,x){return s+(+x.amount||0);},0);
+    var where='🏨 '+esc(r.hotel||'—')+(r.room?(', № '+esc(r.room)):'')+(r.guest?(' · 👤 '+esc(r.guest)):'')+(r.contact?(' · 📞 '+esc(r.contact)):'');
+    if(r.sdate===date && r.status!=='delivered') ev.push([r.stime,'<div class="item"><div class="t">🛵 '+r.stime+' отвезти · '+nm+'</div><div class="s">'+where+'</div><div class="s">💵 к оплате при получении: '+fmt(sum)+(r.status==='hold'?' · ⚠️ не подтверждена':'')+'</div></div>']);
+    if(r.edate===date) ev.push([r.etime,'<div class="item"><div class="t">↩️ '+r.etime+' забрать · '+nm+'</div><div class="s">'+where+'</div></div>']);
+  });
+  ev.sort(function(a,b){ return a[0]<b[0]?-1:1; });
+  box.innerHTML=ev.length?('<div class="card" style="margin-bottom:10px"><b>👶 Коляски</b><div style="margin-top:8px">'+ev.map(function(x){return x[1];}).join('')+'</div></div>'):'';
 }
 function refreshMap(){ openMap(MAP_DATE,true); toast('Обновляю…'); }
 function mapDay(d){ openMap(addDays(MAP_DATE||vnToday(), d)); }

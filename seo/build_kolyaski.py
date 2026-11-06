@@ -59,7 +59,7 @@ T = {
   "map_alt": "Карта: центр Нячанга — зона бесплатной доставки колясок",
   "map_cap": "Зона доставки колясок — центр Нячанга",
   "how_h": "Как заказать",
-  "how": ["Напишите нам в WhatsApp, Telegram или Instagram", "Укажите даты, отель и номер комнаты, имя и фамилию на английском", "Привезём коляску к отелю — оплата при получении"],
+  "how": ["Забронируйте онлайн в календаре выше — или напишите нам в WhatsApp, Telegram или Instagram", "Укажите даты, отель и номер комнаты, имя и фамилию на английском", "Привезём коляску к отелю — оплата при получении"],
   "gal": "фото", "back": "Весь каталог",
   "chip": "👶 Коляски",
  },
@@ -91,7 +91,7 @@ T = {
   "map_alt": "Map: central Nha Trang — free stroller delivery zone",
   "map_cap": "Stroller delivery zone — central Nha Trang",
   "how_h": "How to order",
-  "how": ["Message us on WhatsApp, Telegram or Instagram", "Tell us your dates, hotel, room number and your name in English", "We bring the stroller to your hotel — pay on delivery"],
+  "how": ["Book online in the calendar above — or message us on WhatsApp, Telegram or Instagram", "Tell us your dates, hotel, room number and your name in English", "We bring the stroller to your hotel — pay on delivery"],
   "gal": "photos", "back": "Full catalog",
   "chip": "👶 Strollers",
  },
@@ -123,7 +123,7 @@ T = {
   "map_alt": "지도: 나트랑 시내 — 유모차 무료 배달 구역",
   "map_cap": "유모차 배달 구역 — 나트랑 시내",
   "how_h": "주문 방법",
-  "how": ["카카오톡 또는 인스타그램으로 메시지를 보내 주세요", "날짜, 호텔, 객실 번호, 영문 이름을 알려 주세요", "호텔로 유모차를 가져다 드립니다 — 받을 때 결제"],
+  "how": ["위 달력에서 온라인으로 예약하거나 카카오톡 또는 인스타그램으로 메시지를 보내 주세요", "날짜, 호텔, 객실 번호, 영문 이름을 알려 주세요", "호텔로 유모차를 가져다 드립니다 — 받을 때 결제"],
   "gal": "사진", "back": "전체 카탈로그",
   "chip": "👶 유모차",
  },
@@ -252,6 +252,8 @@ def rules_block(t, zimg):
     return (f'<section class="kl-sec"><h2 class="kl-h2">{t["rules_h"]}</h2><ol class="kl-rules">' + "".join(f"<li>{r}</li>" for r in t["rules"]) + "</ol>"
             + (f'<div class="kl-map"><img src="{zimg}" alt="{t["map_alt"]}" width="900" height="1040" loading="lazy" decoding="async"><p>{t["map_cap"]}</p></div>' if zimg else "") + "</section>")
 
+BOOK_H = {'ru': 'Свободные дни и онлайн-бронь', 'en': 'Free dates & online booking', 'ko': '예약 가능 날짜 · 온라인 예약'}  # 👶 календарь свободных дней + онлайн-бронь (js/rent.js, 06.11.2026)
+
 def how_block(lang, t):
     return (f'<section class="kl-sec" style="padding-bottom:48px"><h2 class="kl-h2">{t["how_h"]}</h2><ol class="kl-how">'
             + "".join(f"<li><b>{i}</b>{h}</li>" for i, h in enumerate(t["how"], 1)) + f'</ol><div class="kl-btns" style="max-width:34rem;margin:0 auto">{buttons(lang, t)}</div></section>')
@@ -293,6 +295,7 @@ def category(lang):
   <a class="kl-hero-img" href="#items"><img src="img/products/{s0['slug']}/{s0.get('cover',1)}.webp" alt="{html.escape(t['h1'])}" width="960" height="1280" fetchpriority="high" decoding="async"></a>
 </div></section>
 <section class="kl-sec" id="items"><h2 class="kl-h2">{x['items_h']}</h2><div class="kl-grid">{cards}</div></section>
+<section class="kl-sec" id="booking"><h2 class="kl-h2">{BOOK_H[lang]}</h2><div id="rentCal" data-lang="{lang}"></div><script src="js/rent.js?v=20261106" defer></script></section>
 {rules_block(t, f"img/site/zones/zone-center-{lang}.webp")}
 {how_block(lang, t)}
 </main>

@@ -132,6 +132,22 @@
   .kv{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}.kv:last-child{border-bottom:none}
   .kv b{white-space:nowrap}
   .booktag{font-size:13px;font-weight:700;color:#fff;background:var(--accent);border-radius:8px;padding:2px 8px}
+  /* 👶 календарь аренды колясок */
+  .rc-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .rc{border-collapse:separate;border-spacing:0;font-size:12px}
+  .rc th{font-weight:700;color:var(--muted);padding:2px 0 4px;min-width:26px;text-align:center;line-height:1.1}
+  .rc th small{display:block;font-weight:400;font-size:9px}
+  .rc th.rc-we{color:#c0687a}
+  .rc td{height:46px;min-width:26px;border-left:1px solid var(--line);border-top:1px solid var(--line);padding:0}
+  .rc td.rc-past{opacity:.5}
+  .rc .rc-now{box-shadow:inset 0 0 0 2px var(--accent)}
+  .rc .rc-it{position:sticky;left:0;background:#fff;z-index:2;min-width:150px;max-width:170px;text-align:left;padding:4px 8px 4px 10px;border-left:none;cursor:pointer;box-shadow:2px 0 4px rgba(0,0,0,.04)}
+  .rc .rc-in{display:flex;gap:7px;align-items:center}
+  .rc .rc-in img,.rc .rc-noimg{width:34px;height:34px;border-radius:8px;object-fit:cover;flex:0 0 34px;display:flex;align-items:center;justify-content:center;background:#f1ecfa}
+  .rc .rc-in b{display:block;font-size:12px;line-height:1.2}
+  .rc .rc-in small{display:block;color:var(--muted);font-size:10px;line-height:1.2;margin-top:1px}
+  .rc-leg{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:11px;color:var(--muted);padding:8px 10px 0}
+  .rc-leg i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:4px}
 </style>
 </head>
 <body>
@@ -320,6 +336,8 @@
 <!-- КАРТА ЗАКАЗОВ -->
 <div id="v-map" class="hidden">
   <button class="back" onclick="go('main')">‹ Назад</button>
+  <div class="seg" id="mapTabs" style="margin-bottom:12px"><button data-t="flowers" class="on" onclick="mapTab('flowers')">🌸 Цветы</button><button data-t="rent" onclick="mapTab('rent')">👶 Коляски</button></div>
+  <div id="mapFlowers">
   <div class="row" style="margin-bottom:8px"><h2 style="margin:0">🗺️ Карта заказов</h2><span><small class="link" onclick="refreshMap()">🔄 Обновить</small> · <small class="link" onclick="openMapExport()">📋 Экспорт</small></span></div>
   <div class="row" style="margin-bottom:10px">
     <button class="btn ghost" style="width:auto;margin:0;padding:9px 16px" onclick="mapDay(-1)">‹</button>
@@ -331,6 +349,65 @@
     <div id="mapUnplaced" style="margin-top:8px"></div>
   </div>
   <div id="mapList" style="margin-top:12px"></div>
+  </div>
+<!-- 👶 АРЕНДА КОЛЯСОК (вкладка Карты заказов) -->
+<div id="mapRent" class="hidden">
+  <div class="row" style="margin-bottom:8px"><h2 style="margin:0">👶 Аренда колясок</h2><small class="link" onclick="openRent(RENT_MON)">🔄 Обновить</small></div>
+  <div class="row" style="margin-bottom:10px">
+    <button class="btn ghost" style="width:auto;margin:0;padding:9px 16px" onclick="rentMonth(-1)">‹</button>
+    <b id="rentMonTitle" style="text-align:center;flex:1">—</b>
+    <button class="btn ghost" style="width:auto;margin:0;padding:9px 16px" onclick="rentMonth(1)">›</button>
+  </div>
+  <div id="rentToday"></div>
+  <div class="card" style="padding:10px 0 6px">
+    <div class="rc-wrap"><table class="rc" id="rentCal"></table></div>
+    <div class="rc-leg"><span><i style="background:#fde68a"></i>ждёт подтверждения</span><span><i style="background:#86efac"></i>подтверждена</span><span><i style="background:#93c5fd"></i>у клиента</span><span><i style="background:#d6d3d1"></i>забрана</span></div>
+  </div>
+  <div id="rentList"></div>
+  <button class="btn ghost" onclick="openRentItem(null)">➕ Добавить коляску</button>
+  <div class="muted center" style="font-size:12px;margin-top:8px">Новую аренду вносите через форму «➕ Добавить заказы» в Финашке → «👶 Коляска» — так сумма сразу попадает в Финашку.</div>
+</div>
+</div>
+
+<!-- 👶 БРОНЬ КОЛЯСКИ -->
+<div id="v-rentbk" class="hidden">
+  <button class="back" onclick="openRent()">‹ Назад</button>
+  <h2 style="margin:6px 0">👶 Аренда коляски</h2>
+  <div id="rbInfo" class="card"></div>
+  <div id="rbActions"></div>
+  <div class="card">
+    <b>✏️ Изменить</b>
+    <div class="muted" style="font-size:12px;margin-top:4px">Продлить, перенести, поменять коляски. Сумму в Финашке после изменения поправьте вручную — подскажу новую.</div>
+    <label>Коляски</label><div id="rb_items"></div>
+    <div class="grid2"><div><label>Доставка — дата</label><input id="rb_sdate" type="date"></div><div><label>Время</label><select id="rb_stime"></select></div></div>
+    <div class="grid2"><div><label>Забор — дата</label><input id="rb_edate" type="date"></div><div><label>Время</label><select id="rb_etime"></select></div></div>
+    <label>Отель</label><input id="rb_hotel">
+    <div class="grid2"><div><label>Номер</label><input id="rb_room"></div><div><label>Имя (EN)</label><input id="rb_guest"></div></div>
+    <label>Контакт</label><input id="rb_contact">
+    <label>Комментарий</label><input id="rb_note">
+    <button class="btn" onclick="rentSaveEdit()">Сохранить изменения</button>
+    <div id="rb_err" class="err center"></div>
+  </div>
+</div>
+
+<!-- 👶 КОЛЯСКА (позиция) -->
+<div id="v-rentitem" class="hidden">
+  <button class="back" onclick="openRent()">‹ Назад</button>
+  <h2 style="margin:6px 0" id="riTitle">Коляска</h2>
+  <div class="card">
+    <div class="grid2"><div><label>Номер</label><input id="ri_num" inputmode="numeric" placeholder="2"></div><div><label>Показывать</label><select id="ri_active"><option value="1">Да</option><option value="0">Нет (скрыта)</option></select></div></div>
+    <label>Название (RU)</label><input id="ri_name" placeholder="Прогулочная коляска …">
+    <label>Короткое описание (RU)</label><input id="ri_descr" placeholder="Лёгкая, складная, до 22 кг">
+    <label>Название (EN)</label><input id="ri_name_en">
+    <label>Описание (EN)</label><input id="ri_descr_en">
+    <label>Название (KO)</label><input id="ri_name_ko">
+    <label>Описание (KO)</label><input id="ri_descr_ko">
+    <label>Ссылка на страницу на сайте (необязательно)</label><input id="ri_url" placeholder="https://flowers-nha-trang.online/catalog/…">
+    <label>Мини-фото</label>
+    <div class="row" style="justify-content:flex-start;gap:12px"><img id="ri_photoPrev" style="width:64px;height:64px;object-fit:cover;border-radius:10px;border:1px solid var(--line);display:none"><input id="ri_photo" type="file" accept="image/*" style="flex:1"></div>
+    <button class="btn" onclick="rentSaveItem()">Сохранить</button>
+    <div id="ri_err" class="err center"></div>
+  </div>
 </div>
 
 <!-- КУРЬЕРЫ (доступ к курьерской Карте по нику) -->
@@ -620,7 +697,7 @@ async function api(action, extra, silent){
 }
 async function refreshReserveNow(){ var res=await api('refreshReserve',{}); if(res&&res.ok){ STATE=res; toast('Резерв обновлён из Финансов'); openReserve(); } else toast(res.error||'Ошибка'); }
 
-var VIEWS=['pin','start','main','xfer','bikes','bike','expense','transfer','pending','confirm','horizon','map','mapadd','mapexport','couriers','more','reserve','recurring','history','edit','wallets','reports','tasks','taskdo','adjust','paybill','install'];
+var VIEWS=['pin','start','main','xfer','bikes','bike','expense','transfer','pending','confirm','horizon','map','mapadd','rentbk','rentitem','mapexport','couriers','more','reserve','recurring','history','edit','wallets','reports','tasks','taskdo','adjust','paybill','install'];
 function go(v){ VIEWS.forEach(function(x){ var el=document.getElementById('v-'+x); if(el) el.classList.toggle('hidden', x!==v); }); window.scrollTo(0,0); }
 
 // ---------- ВХОД ----------
@@ -1001,7 +1078,7 @@ async function openMap(date, doSync){
   MAP_DATE = date || MAP_DATE || vnToday();   // по умолчанию — сегодня (Олег возит сегодня же)
   var res=await api('mapState', doSync?{date:MAP_DATE, sync:1}:{date:MAP_DATE});
   if(!res.ok){ toast(res.error||'Ошибка'); return; }
-  MAP_LAST=res; renderMap(res); go('map');
+  MAP_LAST=res; renderMap(res); mapTabUi('flowers'); go('map');
 }
 function refreshMap(){ openMap(MAP_DATE, true); toast('Обновляю…'); }
 function mapDay(delta){ openMap(addDays(MAP_DATE||addDays(vnToday(),1), delta)); }
@@ -1095,6 +1172,147 @@ async function saveMapAdd(){
 }
 async function mapUnplaceCur(){ if(!MAP_EDIT_ID) return; var res=await api('mapUnplace',{id:MAP_EDIT_ID}); if(res.ok){ toast('Снято со слота'); openMap(); } else toast(res.error||'Ошибка'); }
 async function mapCancelCur(){ if(!MAP_EDIT_ID) return; if(!confirm('Отменить этот заказ? Слот освободится.')) return; var res=await api('mapCancel',{id:MAP_EDIT_ID}); if(res.ok){ toast('Заказ отменён'); openMap(); } else toast(res.error||'Ошибка'); }
+
+
+// ---------- 👶 АРЕНДА КОЛЯСОК (вкладка Карты заказов) ----------
+var RENT_MON=null, RENT_LAST=null, RENT_GRP=null, RENT_PHOTO='', RENT_ITEM_ID=null, MAP_TAB='flowers';
+var RC_COL={hold:'#fde68a',confirmed:'#86efac',delivered:'#93c5fd',returned:'#d6d3d1'};
+var RC_ST={hold:'🟡 ждёт подтверждения',confirmed:'🟢 подтверждена',delivered:'🛵 у клиента',returned:'✅ забрана',cancelled:'❌ отменена'};
+var RC_MON=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+function rcDM(d){ var p=String(d||'').split('-'); return p.length===3?(p[2]+'.'+p[1]):d; }
+function rcMin(t){ var m=String(t||'').match(/^(\d{1,2}):(\d{2})$/); return m?(+m[1]*60+ +m[2]):null; }
+function rcPrice(d){ var P=[300000,400000,500000,650000,750000,900000,1000000]; d=Math.max(1,Math.min(30,d|0)); return d<=7?P[d-1]:P[6]+(d-7)*130000; }
+function rcDays(a,b){ var x=new Date(a+'T00:00:00Z'), y=new Date(b+'T00:00:00Z'); return Math.round((y-x)/864e5)+1; }
+function mapTabUi(t){
+  MAP_TAB=t; var seg=document.getElementById('mapTabs');
+  if(seg) Array.prototype.forEach.call(seg.children,function(x){ x.className=(x.getAttribute('data-t')===t)?'on':''; });
+  document.getElementById('mapFlowers').classList.toggle('hidden', t!=='flowers');
+  document.getElementById('mapRent').classList.toggle('hidden', t!=='rent');
+}
+function mapTab(t){ mapTabUi(t); if(t==='rent') openRent(RENT_MON, true); }
+async function openRent(mon){
+  RENT_MON = mon || RENT_MON || vnToday().slice(0,7);
+  var res=await api('rentState',{month:RENT_MON});
+  if(!res.ok){ toast(res.error||'Ошибка'); return; }
+  RENT_LAST=res; mapTabUi('rent'); go('map'); renderRent(res);
+}
+function rentMonth(d){ var p=(RENT_MON||vnToday().slice(0,7)).split('-'); var y=+p[0], m=+p[1]-1+d; y+=Math.floor(m/12); m=((m%12)+12)%12; openRent(y+'-'+('0'+(m+1)).slice(-2), true); }
+function rcItemName(id){ var it=(RENT_LAST&&RENT_LAST.items||[]).filter(function(x){return x.id===id;})[0]; return it?('№'+it.num+' '+it.name):('#'+id); }
+function rcGroups(rows){ var g={}, order=[]; rows.forEach(function(r){ if(!g[r.grp]){ g[r.grp]=[]; order.push(r.grp); } g[r.grp].push(r); }); return order.map(function(k){ return g[k]; }); }
+function rcGrad(segs){ // segs: [{a:0..1, b:0..1, c:color}]
+  if(!segs.length) return '';
+  segs.sort(function(x,y){return x.a-y.a;}); var st=[], pos=0;
+  segs.forEach(function(s){ var a=Math.round(s.a*100), b=Math.round(s.b*100); if(a>pos) st.push('transparent '+pos+'%','transparent '+a+'%'); st.push(s.c+' '+a+'%',s.c+' '+b+'%'); pos=b; });
+  if(pos<100) st.push('transparent '+pos+'%','transparent 100%');
+  return 'linear-gradient(90deg,'+st.join(',')+')';
+}
+function renderRent(res){
+  RENT_MON=res.month; var p=res.month.split('-'); var y=+p[0], m=+p[1];
+  document.getElementById('rentMonTitle').textContent=RC_MON[m-1]+' '+y;
+  var nd=new Date(Date.UTC(y,m,0)).getUTCDate(), wd=['вс','пн','вт','ср','чт','пт','сб'];
+  var T0=420, T1=1260;
+  // сегодня
+  var tb=document.getElementById('rentToday'), tl=res.todayList||[];
+  if(tl.length){ var h='<div class="card"><b>📅 Сегодня '+rcDM(res.today)+'</b>', n0=0;
+    rcGroups(tl).forEach(function(g){ var r=g[0], names=g.map(function(x){return esc(rcItemName(x.item_id));}).join(', ');
+      if(r.sdate===res.today && r.status!=='delivered') n0++, h+='<div class="item" style="margin-top:8px;cursor:pointer" onclick="openRentBk(\''+r.grp+'\')"><div class="t">🛵 '+r.stime+' отвезти · '+names+'</div><div class="s">🏨 '+esc(r.hotel||'—')+(r.room?(', № '+esc(r.room)):'')+' · '+fmt(g.reduce(function(a,x){return a+(+x.amount||0);},0),'₫')+(r.status==='hold'?' · ⚠️ не подтверждена':'')+'</div></div>';
+      if(r.edate===res.today) n0++, h+='<div class="item" style="margin-top:8px;cursor:pointer" onclick="openRentBk(\''+r.grp+'\')"><div class="t">↩️ '+r.etime+' забрать · '+names+'</div><div class="s">🏨 '+esc(r.hotel||'—')+(r.room?(', № '+esc(r.room)):'')+'</div></div>';
+    }); tb.innerHTML=n0?(h+'</div>'):''; } else tb.innerHTML='';
+  // календарь
+  var h='<thead><tr><th class="rc-it">Коляска</th>';
+  for(var d=1; d<=nd; d++){ var ds=res.month+'-'+('0'+d).slice(-2); var dw=new Date(Date.UTC(y,m-1,d)).getUTCDay();
+    h+='<th class="'+(ds===res.today?'rc-now':'')+(dw===0||dw===6?' rc-we':'')+'">'+d+'<small>'+wd[dw]+'</small></th>'; }
+  h+='</tr></thead><tbody>';
+  (res.items||[]).forEach(function(it){
+    h+='<tr><td class="rc-it" onclick="openRentItem('+it.id+')"><div class="rc-in">'+(it.photo?'<img src="'+esc(it.photo)+'" alt="">':'<span class="rc-noimg">👶</span>')+'<div><b>№'+it.num+' '+esc(it.name)+'</b>'+(it.descr?'<small>'+esc(it.descr)+'</small>':'')+(it.active?'':'<small>скрыта</small>')+'</div></div></td>';
+    var bk=(res.bookings||[]).filter(function(r){ return r.item_id===it.id; });
+    for(var d=1; d<=nd; d++){ var ds=res.month+'-'+('0'+d).slice(-2), segs=[], first=null;
+      bk.forEach(function(r){ if(r.sdate>ds||r.edate<ds) return; var a=(r.sdate===ds?rcMin(r.stime):T0), b=(r.edate===ds?rcMin(r.etime):T1);
+        a=Math.max(0,Math.min(1,(a-T0)/(T1-T0))); b=Math.max(0,Math.min(1,(b-T0)/(T1-T0))); if(b<=a) b=Math.min(1,a+.08);
+        segs.push({a:a,b:b,c:RC_COL[r.status]||'#e5e7eb'}); if(!first) first=r; });
+      var past=ds<res.today;
+      h+='<td class="'+(past?'rc-past':'')+(ds===res.today?' rc-now':'')+'" style="'+(segs.length?('background:'+rcGrad(segs)+';cursor:pointer'):'')+'"'+(first?(' onclick="openRentBk(\''+first.grp+'\')"'):'')+'></td>';
+    }
+    h+='</tr>';
+  });
+  if(!(res.items||[]).length) h+='<tr><td class="rc-it">Колясок пока нет</td></tr>';
+  document.getElementById('rentCal').innerHTML=h+'</tbody>';
+  try{ var w=document.querySelector('#mapRent .rc-wrap'), thn=document.querySelector('#rentCal th.rc-now'), thi=document.querySelector('#rentCal th.rc-it'); if(w) w.scrollLeft=(thn&&thi)?Math.max(0,thn.offsetLeft-thi.offsetWidth-26):0; }catch(e){}
+  // список броней месяца
+  var gs=rcGroups(res.bookings||[]), L='';
+  if(gs.length){ L='<div class="card"><b>📋 Брони за месяц</b>';
+    gs.forEach(function(g){ var r=g[0]; var sum=g.reduce(function(a,x){return a+(+x.amount||0);},0);
+      L+='<div class="item" style="margin-top:8px;cursor:pointer;border-left:5px solid '+(RC_COL[r.status]||'#e5e7eb')+'" onclick="openRentBk(\''+r.grp+'\')"><div class="row"><b>'+rcDM(r.sdate)+' '+r.stime+' → '+rcDM(r.edate)+' '+r.etime+'</b><span class="amt">'+fmt(sum,'₫')+'</span></div>'+
+        '<div class="t" style="margin-top:3px">'+g.map(function(x){return esc(rcItemName(x.item_id));}).join(', ')+' · '+r.days+' дн.</div>'+
+        '<div class="s">'+(RC_ST[r.status]||r.status)+' · '+(r.source==='online'?'🌐 сайт':'✍️ Финашка')+' · 🏨 '+esc(r.hotel||'—')+(r.room?(', № '+esc(r.room)):'')+(r.guest?(' · 👤 '+esc(r.guest)):'')+'</div></div>'; });
+    L+='</div>'; } else L='<div class="card center muted">В этом месяце броней нет</div>';
+  document.getElementById('rentList').innerHTML=L;
+}
+function rcTimeOpts(sel,val){ sel.innerHTML=''; for(var t=420;t<=1260;t+=15){ var v=('0'+Math.floor(t/60)).slice(-2)+':'+('0'+(t%60)).slice(-2); var o=document.createElement('option'); o.value=v; o.textContent=v; if(v===val) o.selected=true; sel.appendChild(o); } if(val && sel.value!==val){ var o2=document.createElement('option'); o2.value=val; o2.textContent=val; o2.selected=true; sel.insertBefore(o2, sel.firstChild); } }
+function openRentBk(grp){
+  RENT_GRP=grp; var g=(RENT_LAST.bookings||[]).filter(function(x){return x.grp===grp;}); if(!g.length) return;
+  var r=g[0], sum=g.reduce(function(a,x){return a+(+x.amount||0);},0);
+  document.getElementById('rbInfo').innerHTML='<div class="t" style="font-size:16px">'+g.map(function(x){return esc(rcItemName(x.item_id));}).join(', ')+'</div>'+
+    '<div class="s" style="margin-top:6px">🛵 Доставка: <b>'+rcDM(r.sdate)+' в '+r.stime+'</b><br>↩️ Забор: <b>'+rcDM(r.edate)+' в '+r.etime+'</b><br>📆 '+r.days+' дн. · 💵 '+fmt(sum,'₫')+' (при получении)</div>'+
+    '<div class="s" style="margin-top:6px">🏨 '+esc(r.hotel||'—')+(r.room?(', номер '+esc(r.room)):'')+'<br>👤 '+esc(r.guest||'—')+'<br>📞 '+esc(r.contact||'—')+(r.email?('<br>✉ '+esc(r.email)):'')+(r.note?('<br>📝 '+esc(r.note)):'')+'</div>'+
+    '<div class="s" style="margin-top:6px">'+(RC_ST[r.status]||r.status)+' · '+(r.source==='online'?'🌐 с сайта, заявка '+esc(r.order_key||''):'✍️ из Финашки')+'</div>';
+  var A='';
+  if(r.status==='hold') A+='<button class="btn" onclick="rentSetSt(\'confirmed\')">✅ Подтвердить</button><div class="muted center" style="font-size:12px;margin-top:4px">Онлайн-заявку лучше подтверждать в zakaz.html — тогда она сама попадёт в Финашку.</div>';
+  if(r.status==='confirmed') A+='<button class="btn" style="background:#2563eb" onclick="rentSetSt(\'delivered\')">🛵 Отвезли (у клиента)</button>';
+  if(r.status==='delivered') A+='<button class="btn" style="background:#1f9d55" onclick="rentSetSt(\'returned\')">↩️ Забрали</button><button class="btn ghost" onclick="rentSetSt(\'confirmed\')">Вернуть статус «подтверждена»</button>';
+  if(r.status==='returned') A+='<button class="btn ghost" onclick="rentSetSt(\'delivered\')">Вернуть статус «у клиента»</button>';
+  A+='<button class="btn red" onclick="rentSetSt(\'cancelled\')">❌ Отменить бронь</button>';
+  document.getElementById('rbActions').innerHTML=A;
+  var ib=document.getElementById('rb_items'); ib.innerHTML='';
+  var mine=g.map(function(x){return x.item_id;});
+  (RENT_LAST.items||[]).forEach(function(it){ if(!it.active && mine.indexOf(it.id)<0) return; var l=document.createElement('label'); l.style.cssText='display:flex;gap:8px;align-items:center;margin:4px 0;color:var(--ink);font-size:15px';
+    l.innerHTML='<input type="checkbox" value="'+it.id+'" style="width:auto"'+(mine.indexOf(it.id)>=0?' checked':'')+'> №'+it.num+' '+esc(it.name); ib.appendChild(l); });
+  document.getElementById('rb_sdate').value=r.sdate; document.getElementById('rb_edate').value=r.edate;
+  rcTimeOpts(document.getElementById('rb_stime'), r.stime); rcTimeOpts(document.getElementById('rb_etime'), r.etime);
+  document.getElementById('rb_hotel').value=r.hotel||''; document.getElementById('rb_room').value=r.room||''; document.getElementById('rb_guest').value=r.guest||'';
+  document.getElementById('rb_contact').value=r.contact||''; document.getElementById('rb_note').value=r.note||''; document.getElementById('rb_err').textContent='';
+  go('rentbk');
+}
+async function rentSetSt(st){
+  if(st==='cancelled' && !confirm('Отменить бронь? Дни освободятся. Строку в Финашке удалите сами («🗑 Удалить заказ»).')) return;
+  var res=await api('rentStatus',{grp:RENT_GRP, status:st, month:RENT_MON});
+  if(!res.ok){ toast(res.error||'Ошибка'); return; }
+  RENT_LAST=res; go('map'); renderRent(res); toast('Готово');
+}
+async function rentSaveEdit(){
+  var err=document.getElementById('rb_err'); err.textContent='';
+  var ids=Array.prototype.map.call(document.querySelectorAll('#rb_items input:checked'),function(x){return +x.value;});
+  if(!ids.length){ err.textContent='Выберите хотя бы одну коляску'; return; }
+  var res=await api('rentEdit',{grp:RENT_GRP, items:ids, sdate:document.getElementById('rb_sdate').value, stime:document.getElementById('rb_stime').value,
+    edate:document.getElementById('rb_edate').value, etime:document.getElementById('rb_etime').value, hotel:document.getElementById('rb_hotel').value.trim(),
+    room:document.getElementById('rb_room').value.trim(), guest:document.getElementById('rb_guest').value.trim(), contact:document.getElementById('rb_contact').value.trim(), note:document.getElementById('rb_note').value.trim()});
+  if(!res.ok){ err.textContent=res.error||'Ошибка'; return; }
+  RENT_LAST=res; RENT_MON=res.month; go('map'); renderRent(res);
+  if(res.oldText!==res.newText) alert('Сохранено.\n\nПоправьте строку в Финашке:\n'+res.newText+'\nСумма: '+fmt(res.newTotal,'₫'));
+  else toast('Сохранено');
+}
+function openRentItem(id){
+  RENT_ITEM_ID=id; RENT_PHOTO='';
+  var it=id?(RENT_LAST.items||[]).filter(function(x){return x.id===id;})[0]:null; it=it||{};
+  document.getElementById('riTitle').textContent=id?('Коляска №'+it.num):'Новая коляска';
+  ['num','name','descr','name_en','descr_en','name_ko','descr_ko','url'].forEach(function(k){ document.getElementById('ri_'+k).value=(it[k]!=null?it[k]:''); });
+  document.getElementById('ri_active').value=(id&&!it.active)?'0':'1';
+  var pv=document.getElementById('ri_photoPrev'); if(it.photo){ pv.src=it.photo; pv.style.display='block'; } else pv.style.display='none';
+  document.getElementById('ri_photo').value=''; document.getElementById('ri_err').textContent='';
+  go('rentitem');
+}
+document.addEventListener('change',function(e){ if(!e.target||e.target.id!=='ri_photo'||!e.target.files||!e.target.files[0]) return;
+  var f=e.target.files[0], rd=new FileReader(); rd.onload=function(){ var img=new Image(); img.onload=function(){ var S=320, c=document.createElement('canvas'); var k=Math.min(1,S/Math.max(img.width,img.height)); c.width=Math.round(img.width*k); c.height=Math.round(img.height*k); c.getContext('2d').drawImage(img,0,0,c.width,c.height); RENT_PHOTO=c.toDataURL('image/jpeg',.82); var pv=document.getElementById('ri_photoPrev'); pv.src=RENT_PHOTO; pv.style.display='block'; }; img.src=rd.result; }; rd.readAsDataURL(f); });
+async function rentSaveItem(){
+  var err=document.getElementById('ri_err'); err.textContent='';
+  var p={id:RENT_ITEM_ID||'', month:RENT_MON, active:document.getElementById('ri_active').value};
+  ['num','name','descr','name_en','descr_en','name_ko','descr_ko','url'].forEach(function(k){ p[k]=document.getElementById('ri_'+k).value.trim(); });
+  if(RENT_PHOTO) p.photo=RENT_PHOTO;
+  if(!p.name){ err.textContent='Впишите название'; return; }
+  var res=await api('rentItemSave',p);
+  if(!res.ok){ err.textContent=res.error||'Ошибка'; return; }
+  RENT_LAST=res; go('map'); renderRent(res); toast('Коляска сохранена');
+}
 
 // ── Курьеры (доступ к курьерской Карте) ──
 async function openCouriers(){ var res=await api('courierList',{}); go('couriers'); renderCouriers((res&&res.couriers)||[]); }
