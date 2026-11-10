@@ -773,6 +773,49 @@ def product_color(p):
         return "purple"
     return ""
 
+# 10.11.2026: заголовки товаров под реальные запросы (Search Console): «доставка цветов в Нячанге»,
+# «доставка шаров», «торт на заказ», EN «Flower Delivery Nha Trang», KO «나트랑 꽃배달»/«풍선 배달».
+SEO_SUFFIX = {
+    "flowers":  {"ru": ["доставка цветов в Нячанге", "доставка цветов Нячанг", "цветы Нячанг"],
+                 "en": ["Flower Delivery Nha Trang", "Flowers Nha Trang"], "ko": ["나트랑 꽃배달"]},
+    "balloons": {"ru": ["доставка шаров в Нячанге", "шары Нячанг"],
+                 "en": ["Balloon Delivery Nha Trang", "Balloons Nha Trang"], "ko": ["나트랑 풍선 배달"]},
+    "cakes":    {"ru": ["торт на заказ в Нячанге", "торт Нячанг"],
+                 "en": ["Cake Delivery Nha Trang", "Cake Nha Trang"], "ko": ["나트랑 케이크 배달"]},
+    "gift":     {"ru": ["подарок с доставкой в Нячанге", "подарок Нячанг"],
+                 "en": ["Gift Delivery Nha Trang", "Nha Trang"], "ko": ["나트랑 선물 배달"]},
+    "party":    {"ru": ["оформление праздника в Нячанге", "Нячанг"],
+                 "en": ["Party Decor Nha Trang", "Nha Trang"], "ko": ["나트랑 파티 데코"]},
+}
+SEO_WHAT = {"flowers": "цветов", "balloons": "шаров", "cakes": "тортов", "gift": "подарков", "party": ""}
+
+def seo_kind(p):
+    cats = product_cat(p).split()
+    if "nabory" in cats: return "gift"
+    if "prazdnik" in cats: return "party"
+    if any(c in cats for c in ("r25", "r51", "r101", "mixed", "multi")): return "flowers"
+    if "balloons" in cats: return "balloons"
+    if "cakes" in cats: return "cakes"
+    return "flowers"
+
+def seo_title(p, name, lang, limit=70):
+    opts = SEO_SUFFIX[seo_kind(p)][lang]
+    for suf in opts + [{"ru": "Нячанг", "en": "Nha Trang", "ko": "나트랑"}[lang]]:
+        t = f"{name} — {suf}"
+        if len(t) <= limit:
+            return t
+    return f"{name} — " + {"ru": "Нячанг", "en": "Nha Trang", "ko": "나트랑"}[lang]
+
+def seo_meta(p, name, lang):
+    if lang == "ru":
+        w = SEO_WHAT[seo_kind(p)]
+        dl = f"Бесплатная доставка {w} по Нячангу" if w else "Бесплатная доставка по Нячангу"
+        return f"{name}. Цена {p['price']}. {dl} со следующего дня; заказ онлайн или через оператора."
+    if lang == "en":
+        return f"{name}. Price {price_loc(p['price'], lang)}. Free Nha Trang delivery from the next day; order online or via WhatsApp."
+    return f"{name}. 가격 {price_loc(p['price'], lang)}. 나트랑 시내 무료 배달, 온라인 주문은 다음 날부터; 카카오톡 상담."
+
+
 def product_card(p, lang, base, t):
     name = p[f"name_{lang}"]
     desc = p[f"desc_{lang}"]
@@ -897,15 +940,8 @@ def render_product(p, lang, products):
     canonical = f"{DOMAIN}/catalog/{slug}-{lang}.html"
     alts = {l: f"{DOMAIN}/catalog/{slug}-{l}.html" for l in LANGS}
     _tovar = "тортов" if product_cat(p) == "cakes" else "цветов"
-    if lang == "ru":
-        title = f"{name} — доставка в Нячанге"
-        meta = f"{name}. Цена {p['price']}. Бесплатная доставка по Нячангу со следующего дня; заказ онлайн или через оператора."
-    elif lang == "en":
-        title = f"{name} — Nha Trang Delivery"
-        meta = f"{name}. Price {price_loc(p['price'], lang)}. Free Nha Trang delivery from the next day; order online or via WhatsApp."
-    else:
-        title = f"{name} — 나트랑 {'케이크 배달' if is_cake_only else '꽃배달'}"
-        meta = f"{name}. 가격 {price_loc(p['price'], lang)}. 나트랑 시내 무료 배달, 온라인 주문은 다음 날부터; 카카오톡 상담."
+    title = seo_title(p, name, lang)
+    meta = seo_meta(p, name, lang)
 
     # Похожие — 3 следующих по кругу. Для отдельного торта выбираем именно
     # другие отдельные торты, чтобы заголовок «Похожие торты» не вёл к розам.
