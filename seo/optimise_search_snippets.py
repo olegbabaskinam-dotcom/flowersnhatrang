@@ -24,18 +24,18 @@ ROOT = Path(__file__).resolve().parent.parent
 
 CORE: dict[str, tuple[str, str, str | None]] = {
     "index.html": (
-        "Доставка цветов в Нячанге — букеты от 500 000 ₫",
-        "Купить и заказать цветы в Нячанге: розы, букеты и корзины от 500 000 ₫. Бесплатная доставка по городу со следующего дня, заказ онлайн.",
+        "Доставка цветов в Нячанге — цветы, шары и торты | Surprise Service",
+        "Доставка цветов в Нячанге и Камрани: розы, букеты и корзины от 500 000 ₫, гелиевые шары и торты. Бесплатно по городу, заказ онлайн со следующего дня.",
         "Доставка цветов и шаров в Нячанге",
     ),
     "index-en.html": (
-        "Flower Delivery Nha Trang — Bouquets from 500,000₫",
-        "Order roses and fresh bouquets in Nha Trang from 500,000₫. Free city delivery from the next day; English support via WhatsApp and Instagram.",
+        "Flower Delivery Nha Trang — Balloons, Cakes & Gifts | Surprise Service",
+        "Flower delivery in Nha Trang and Cam Ranh: roses, bouquets and baskets from 500,000₫, helium balloons and cakes. Free city delivery from the next day; English support via WhatsApp.",
         "Flower Delivery in Nha Trang",
     ),
     "index-kr.html": (
-        "나트랑 꽃배달·꽃집 — 장미 꽃다발 500,000동부터",
-        "나트랑 꽃배달 전문점. 장미·꽃다발·꽃바구니 500,000동부터, 시내 무료 배달. 온라인 주문은 다음 날부터 가능하며 카카오톡으로 상담합니다.",
+        "나트랑 꽃배달 — 꽃·풍선·케이크·선물 배달 | Surprise Service",
+        "나트랑 꽃배달 전문점. 장미·꽃다발·꽃바구니 500,000동부터, 헬륨풍선과 케이크까지 시내 무료 배달. 온라인 주문은 다음 날부터 가능하며 카카오톡으로 상담합니다.",
         "나트랑 꽃배달·꽃집",
     ),
     "catalog-ru.html": (
@@ -54,8 +54,8 @@ CORE: dict[str, tuple[str, str, str | None]] = {
         "나트랑 꽃배달 카탈로그",
     ),
     "balloons.html": (
-        "Гелиевые шары в Нячанге — наборы с доставкой",
-        "Заказать гелиевые шары в Нячанге: наборы S, M и L, цифры, сердца и комбо с цветами. Бесплатная доставка по городу со следующего дня.",
+        "Доставка шаров в Нячанге — гелиевые шары, цифры и наборы",
+        "Доставка гелиевых шаров в Нячанге: наборы S, M и L, цифры, сердца и комбо с цветами. Бесплатно по городу, онлайн-заказ со следующего дня.",
         "Гелиевые шары с доставкой в Нячанге",
     ),
     "balloons-en.html": (
@@ -99,18 +99,18 @@ CORE: dict[str, tuple[str, str, str | None]] = {
         None,
     ),
     "prazdnik.html": (
-        "Наборы для праздника в Нячанге — шары, торт и декор",
-        "Готовые наборы для праздника в Нячанге: стойки и цифры из шаров, фотозона, торт, посуда и декор. Доставка со следующего дня.",
+        "Оформление дня рождения в Нячанге — шары, фотозона, торт",
+        "Оформление дня рождения в Нячанге: готовые наборы — стойки и цифры из шаров, фотозона, торт, посуда и декор. Доставка со следующего дня.",
         None,
     ),
     "prazdnik-en.html": (
-        "Party Sets in Nha Trang — Balloons, Cake & Decor",
-        "Ready party sets in Nha Trang with balloon stands, number balloons, a photo zone, cake, tableware and decor. Delivery from the next day.",
+        "Birthday Decoration in Nha Trang — Balloons, Photo Zone & Cake",
+        "Birthday decoration in Nha Trang: ready party sets with balloon stands, number balloons, a photo zone, cake, tableware and decor. Delivery from the next day.",
         None,
     ),
     "prazdnik-kr.html": (
-        "나트랑 파티세트 배달 — 생일 풍선·케이크·장식",
-        "나트랑 준비된 파티세트: 풍선 스탠드, 숫자 풍선, 포토존, 케이크, 식기와 장식. 온라인 주문 다음 날부터 배달합니다.",
+        "나트랑 생일 파티 데코 — 풍선·포토존·케이크 배달",
+        "나트랑 생일 파티 데코 세트: 풍선 스탠드, 숫자 풍선, 포토존, 케이크, 식기와 장식. 온라인 주문 다음 날부터 배달합니다.",
         None,
     ),
     "blog-ru.html": (

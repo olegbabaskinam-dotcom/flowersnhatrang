@@ -102,21 +102,21 @@ L["ko"] = dict(
 PAGES = {
  "cvety": dict(base="cvety", hero="img/products/101-krasnaya-roza-chernaya-upakovka/1.webp",
   order=["r25","r51","r101","mixed"], assign=["r101","r51","r25","mixed"],
-  ru=dict(title="Цветы с доставкой в Нячанге — розы, букеты и корзины",
-          desc="Букеты из 25, 51, 101 и более роз, сборные букеты и корзины с доставкой по Нячангу. Онлайн-заказ со следующего дня, срочно сегодня — через оператора до 17:00.",
-          h1="Цветы с доставкой в Нячанге", wa="Здравствуйте,%20хочу%20заказать%20цветы", h2="цветы",
+  ru=dict(title="Цветы в Нячанге — купить и заказать букет с доставкой",
+          desc="Где купить цветы в Нячанге: букеты из 25, 51, 101 и более роз, сборные букеты и корзины с доставкой по Нячангу и Камрани. Онлайн-заказ со следующего дня, срочно сегодня — через оператора до 17:00.",
+          h1="Цветы в Нячанге с доставкой", wa="Здравствуйте,%20хочу%20заказать%20цветы", h2="цветы",
           sec={"r25":"25 роз","r51":"51 роза","r101":"101 роза и больше","mixed":"Сборные букеты и корзины"}),
-  en=dict(title="Flower Delivery in Nha Trang — Roses, Bouquets & Baskets",
+  en=dict(title="Flowers Nha Trang — Order Roses, Bouquets & Baskets",
           desc="Bouquets of 25, 51, 101 and more roses, mixed bouquets and flower baskets delivered across Nha Trang. Online orders from the next day, urgent today via an operator until 17:00.",
-          h1="Flower Delivery in Nha Trang", wa="Hello,%20I'd%20like%20to%20order%20flowers", h2="flowers",
+          h1="Flowers in Nha Trang with Delivery", wa="Hello,%20I'd%20like%20to%20order%20flowers", h2="flowers",
           sec={"r25":"25 roses","r51":"51 roses","r101":"101 roses and more","mixed":"Mixed bouquets & baskets"}),
-  ko=dict(title="나트랑 꽃 배달 — 장미 꽃다발·바구니",
+  ko=dict(title="나트랑 꽃집 — 장미 꽃다발·꽃바구니 주문",
           desc="장미 25·51·101송이 이상 꽃다발, 믹스 꽃다발과 꽃바구니를 나트랑 전역에 배달합니다. 온라인 주문은 다음 날부터, 오늘 긴급 배송은 17:00까지 상담원 주문.",
-          h1="나트랑 꽃 배달", wa="", h2="꽃",
+          h1="나트랑 꽃집 · 꽃다발 주문", wa="", h2="꽃",
           sec={"r25":"장미 25송이","r51":"장미 51송이","r101":"장미 101송이 이상","mixed":"믹스 꽃다발·꽃바구니"})),
  "balloons": dict(base="balloons", hero="img/products/nabor-sharov-m-cherno-zolotoy/1.webp",
   order=["b-helium","b-latex","b-combo"], assign=["b-combo","b-latex","b-helium"], multi=True,
-  ru=dict(title=None, desc=None, h1="Шары с доставкой в Нячанге", wa="Здравствуйте,%20хочу%20заказать%20шары", h2="шары",
+  ru=dict(title="Доставка шаров в Нячанге — гелиевые шары, цифры и наборы", desc="Доставка гелиевых шаров в Нячанге: наборы S, M и L, цифры, сердца и комбо с цветами. Бесплатно по городу, онлайн-заказ со следующего дня.", h1="Доставка гелиевых шаров в Нячанге", wa="Здравствуйте,%20хочу%20заказать%20шары", h2="шары",
           sec={"b-helium":"Наборы из фольгированных шаров","b-latex":"Резиновые шары","b-combo":"Шары вместе с цветами и тортом"}),
   en=dict(title=None, desc=None, h1="Balloon Delivery in Nha Trang", wa="Hello,%20I'd%20like%20to%20order%20balloons", h2="balloons",
           sec={"b-helium":"Foil balloon sets","b-latex":"Latex balloons","b-combo":"Balloons with flowers and cake"}),
@@ -124,9 +124,9 @@ PAGES = {
           sec={"b-helium":"호일 풍선 세트","b-latex":"라텍스 풍선","b-combo":"꽃·케이크와 함께하는 풍선"})),
  "podarki": dict(base="podarki", hero="img/products/podarochnyy-nabor-krasota-vietnama-rozovyy/5.webp", hero_w=960,
   order=["nabory","cakes"], assign=["nabory","cakes"],
-  ru=dict(title="Подарки с доставкой в Нячанге — подарочные наборы и торты",
-          desc="Подарочные наборы с вьетнамскими товарами и торты с доставкой по Нячангу. Онлайн-заказ со следующего дня, срочно сегодня — через оператора до 17:00.",
-          h1="Подарки с доставкой в Нячанге", wa="Здравствуйте,%20хочу%20заказать%20подарок", h2="подарки",
+  ru=dict(title="Подарки и подарочные коробки с доставкой в Нячанге",
+          desc="Подарочные коробки и наборы с вьетнамскими товарами и торты с доставкой по Нячангу. Онлайн-заказ со следующего дня, срочно сегодня — через оператора до 17:00.",
+          h1="Подарки и подарочные коробки в Нячанге", wa="Здравствуйте,%20хочу%20заказать%20подарок", h2="подарки",
           sec={"nabory":"Подарочные наборы","cakes":"Торты"}, note={"cakes":"Торты — только вместе с букетом, шарами или подарочным набором."}),
   en=dict(title="Gift Delivery in Nha Trang — Gift Sets & Cakes",
           desc="Gift sets with Vietnamese goods and cakes delivered across Nha Trang. Online orders from the next day, urgent today via an operator until 17:00.",
@@ -138,11 +138,11 @@ PAGES = {
           sec={"nabory":"선물 세트","cakes":"케이크"}, note={"cakes":"케이크는 꽃다발, 풍선 또는 선물 세트와 함께만 주문 가능합니다."})),
  "prazdnik": dict(base="prazdnik", hero="img/site/prazdnik-banner.webp",
   order=["decor"], assign=["decor"],
-  ru=dict(title=None, desc=None, h1="Оформление праздника в Нячанге", wa="Здравствуйте,%20хочу%20заказать%20готовый%20набор", h2="оформление праздника",
+  ru=dict(title="Оформление дня рождения в Нячанге — шары, фотозона, торт", desc="Оформление дня рождения в Нячанге: готовые наборы — стойки и цифры из шаров, фотозона, торт, посуда и декор. Доставка со следующего дня.", h1="Оформление дня рождения в Нячанге", wa="Здравствуйте,%20хочу%20заказать%20готовый%20набор", h2="оформление праздника",
           sec={"decor":"Готовые наборы для оформления праздника"}),
-  en=dict(title=None, desc=None, h1="Party Décor in Nha Trang", wa="Hello,%20I'd%20like%20to%20order%20a%20party%20set", h2="party décor",
+  en=dict(title="Birthday Decoration in Nha Trang — Balloons, Photo Zone & Cake", desc="Birthday decoration in Nha Trang: ready party sets with balloon stands, number balloons, a photo zone, cake, tableware and decor. Delivery from the next day.", h1="Birthday Decoration in Nha Trang", wa="Hello,%20I'd%20like%20to%20order%20a%20party%20set", h2="party décor",
           sec={"decor":"Ready-made party décor sets"}),
-  ko=dict(title=None, desc=None, h1="나트랑 파티 데코", wa="", h2="파티 데코",
+  ko=dict(title="나트랑 생일 파티 데코 — 풍선·포토존·케이크 배달", desc="나트랑 생일 파티 데코 세트: 풍선 스탠드, 숫자 풍선, 포토존, 케이크, 식기와 장식. 온라인 주문 다음 날부터 배달합니다.", h1="나트랑 생일 파티 데코", wa="", h2="파티 데코",
           sec={"decor":"파티 데코 세트"})),
 }
 
@@ -233,7 +233,7 @@ def build(key, lang):
         for lg in ("ru", "en", "ko"):
             s = s.replace("balloons" + SUF[lg], fname(key, lg))
     # head
-    if key in ("prazdnik",):
+    if key in ("prazdnik",) and not T["title"]:
         old = open(out, encoding="utf-8").read()
         title = re.search(r"<title>(.*?)</title>", old, re.S).group(1)
         desc = re.search(r'name="description" content="([^"]*)"', old).group(1)
