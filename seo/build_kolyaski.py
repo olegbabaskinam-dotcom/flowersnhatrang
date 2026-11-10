@@ -5,7 +5,7 @@ kolyaski*.html — ГЛАВНАЯ раздела (как torty/balloons): сет
 catalog/<slug>-<ru|en|ko>.html — страница каждой позиции (фото, цены, характеристики, условия).
 Шапка/подвал: раздел — из podarki*.html, позиция — из catalog/25-rozovyh-roz-*.html.
 Новая позиция: добавить словарь в STROLLERS (+ фото в img/products/<slug>/) и перезапустить скрипт.
-Цены аренды — PRICES (VND), ₽/$ считаются по правилам сайта (₽ курс 295 вверх до 50, $ = /25000).
+Цены аренды — PRICES (VND), ₽/$ считаются по правилам сайта (₽ курс 280 вверх до 100, $ = /25000).
 """
 import os, re, math, json, html
 
@@ -23,7 +23,7 @@ STROLLERS = [{
              "ko": "카펠라 유모차 (청록색)"},
 }]
 
-def rub(v): return math.ceil(v / 295 / 50) * 50
+def rub(v): return math.ceil(v / 280 / 100) * 100
 def usd(v): return round(v / 25000)
 def vnd(v): return f"{v:,}".replace(",", " ")
 
@@ -295,7 +295,7 @@ def category(lang):
   <a class="kl-hero-img" href="#items"><img src="img/products/{s0['slug']}/{s0.get('cover',1)}.webp" alt="{html.escape(t['h1'])}" width="960" height="1280" fetchpriority="high" decoding="async"></a>
 </div></section>
 <section class="kl-sec" id="items"><h2 class="kl-h2">{x['items_h']}</h2><div class="kl-grid">{cards}</div></section>
-<section class="kl-sec" id="booking"><h2 class="kl-h2">{BOOK_H[lang]}</h2><div id="rentCal" data-lang="{lang}"></div><script src="js/rent.js?v=20261106" defer></script></section>
+<section class="kl-sec" id="booking"><h2 class="kl-h2">{BOOK_H[lang]}</h2><div id="rentCal" data-lang="{lang}"></div><script src="js/rent.js?v=20261110" defer></script></section>
 {rules_block(t, f"img/site/zones/zone-center-{lang}.webp")}
 {how_block(lang, t)}
 </main>

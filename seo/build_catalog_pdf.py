@@ -322,7 +322,7 @@ def toy_products():
                     "desc_ru": "Мягкая игрушка в наличии. Добавляется к букету, шарам или подарочному набору",
                     "desc_en": "Soft toy in stock. Added to a bouquet, balloons or gift set",
                     "desc_ko": "재고 있는 봉제 인형. 꽃다발, 풍선, 선물 세트에 추가할 수 있습니다",
-                    "price": "300 000 донгов", "price_sub": "≈ $12 · 1 050 ₽"})
+                    "price": "300 000 донгов", "price_sub": "≈ $12 · 1 100 ₽"})
     return out
 
 def members_by_cat(prods):

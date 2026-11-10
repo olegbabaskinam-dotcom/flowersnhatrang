@@ -237,12 +237,13 @@ CUR = {"ru": "донгов", "en": "VND", "ko": "동"}
 def price_loc(price, lang):
     return price.replace("донгов", CUR[lang])
 
-RUB_VND_RATE = 295
+RUB_VND_RATE = 280
+RUB_STEP = 100
 
 def rub_price(price):
-    """VND → RUB по курсу, всегда вверх до ближайших 50 ₽."""
+    """VND → RUB по курсу, всегда вверх до ближайших 100 ₽."""
     vnd = int(price_num(price))
-    return ((vnd + RUB_VND_RATE * 50 - 1) // (RUB_VND_RATE * 50)) * 50
+    return ((vnd + RUB_VND_RATE * RUB_STEP - 1) // (RUB_VND_RATE * RUB_STEP)) * RUB_STEP
 
 def sub_loc(sub, lang, price=None):
     """price_sub локализуется: RU — $ + ₽ по курсу; EN — только $; KO — воны."""
@@ -316,7 +317,7 @@ CARD_JS = """<script>/*MARK-CARD-JS*/
   function flowerSlug(c){return toks(c).some(function(t){return /^(roz|roza|rozy|buket|korzina|korzine|liliy|eustom|eustomy)$/.test(t);});}
   function isFlower(c){return has(c,'r25')||has(c,'r51')||has(c,'r101')||has(c,'mixed')||(has(c,'balloons')&&flowerSlug(c));}
   function bCombo(c){return has(c,'balloons')&&(isFlower(c)||has(c,'cakes'));}
-  var LATEX=['nabor-sharov-s-2-cifry-10-sharov', '101-belaya-roza-korzina-shary-serdca', '101-belaya-roza-rozovaya-upakovka-cifry-25-sharov', '35-serebristo-chernyh-gelievyh-sharov-pod-potolok', '101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov', 'yarkaya-sbornaya-korzina-15-rozovyh-sharov', '27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka', 'svyazka-20-sinih-rezinovyh-sharov', 'nabor-sharov-l-raduzhnye-cifry-30-15-rozovyh', 'svyazka-15-rezinovyh-sharov-rozovye-belye-serebryanye', 'svyazka-15-hromirovannyh-rezinovyh-sharov-rozovoe-zoloto', 'svyazka-belyh-rezinovyh-sharov-zhemchuzhnye-serdca', 'nebolshaya-sbornaya-korzina-15-sharov', 'svyazka-oranzhevo-chernyh-sharov-happy-birthday'],LATEX_ONLY=['35-serebristo-chernyh-gelievyh-sharov-pod-potolok', '27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka', 'svyazka-20-sinih-rezinovyh-sharov', 'svyazka-15-rezinovyh-sharov-rozovye-belye-serebryanye', 'svyazka-15-hromirovannyh-rezinovyh-sharov-rozovoe-zoloto']; // шары с резиновыми (латексными) шарами — проверено по фото 01.10.2026
+  var LATEX=['nabor-sharov-s-2-cifry-10-sharov', '101-belaya-roza-korzina-shary-serdca', '101-belaya-roza-rozovaya-upakovka-cifry-25-sharov', '35-serebristo-chernyh-gelievyh-sharov-pod-potolok', '101-rozovaya-roza-korzina-25-persikovyh-roz-15-sharov', 'yarkaya-sbornaya-korzina-15-rozovyh-sharov', '27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka', 'svyazka-20-sinih-rezinovyh-sharov', 'nabor-sharov-l-raduzhnye-cifry-30-15-rozovyh', 'svyazka-15-rezinovyh-sharov-rozovye-belye-serebryanye', 'svyazka-15-hromirovannyh-rezinovyh-sharov-rozovoe-zoloto', 'svyazka-belyh-rezinovyh-sharov-zhemchuzhnye-serdca', 'nebolshaya-sbornaya-korzina-15-sharov', 'svyazka-oranzhevo-chernyh-sharov-happy-birthday', '51-roza-miks-15-rezinovyh-sharov', '51-belo-rozovaya-roza-miks-7-sharov'],LATEX_ONLY=['35-serebristo-chernyh-gelievyh-sharov-pod-potolok', '27-cherno-belyh-rezinovyh-geliyevyh-sharov-svyazka', 'svyazka-20-sinih-rezinovyh-sharov', 'svyazka-15-rezinovyh-sharov-rozovye-belye-serebryanye', 'svyazka-15-hromirovannyh-rezinovyh-sharov-rozovoe-zoloto']; // шары с резиновыми (латексными) шарами — проверено по фото 01.10.2026
   function bslug(c){return toks(c).join('-');}
   function bLatex(c){return has(c,'balloons')&&LATEX.indexOf(bslug(c))>-1;}
   function match(c,k){
@@ -629,7 +630,7 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"], a[href*="instagram
 })();
 </script>
 __CARD_JS__
-<script src="__BASE__cart.js?v=20261025" defer></script><script src="__BASE__js/gifts.js?v=20261025b" defer></script>
+<script src="__BASE__cart.js?v=20261110" defer></script><script src="__BASE__js/gifts.js?v=20261025b" defer></script>
 </body>
 </html>
 '''

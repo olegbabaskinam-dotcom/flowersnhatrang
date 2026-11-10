@@ -58,7 +58,7 @@
   function dm(s){ var p=s.split('-'); return p[2]+'.'+p[1]; }
   function price(d){ var P=(S.data&&S.data.prices)||[300000,400000,500000,650000,750000,900000,1000000], X=(S.data&&S.data.extra)||130000; d=Math.max(1,Math.min(30,d)); return d<=7?P[d-1]:P[6]+(d-7)*X; }
   function vnd(n){ return Math.round(n).toLocaleString(L==='ru'?'ru-RU':'en-US').replace(/,/g,L==='ru'?' ':',')+' ₫'; }
-  function money(n){ var s=vnd(n)+' · $'+Math.round(n/25000); if(L==='ru') s+=' · '+(Math.ceil(n/295/50)*50).toLocaleString('ru-RU')+' ₽'; return s; }
+  function money(n){ var s=vnd(n)+' · $'+Math.round(n/25000); if(L==='ru') s+=' · '+(Math.ceil(n/280/100)*100).toLocaleString('ru-RU')+' ₽'; return s; }
   function itemName(it){ return L==='en'?(it.name_en||it.name):(L==='ko'?(it.name_ko||it.name):it.name); }
   function itemDescr(it){ return L==='en'?(it.descr_en||it.descr):(L==='ko'?(it.descr_ko||it.descr):it.descr); }
   function post(u,b,form){ return fetch(u,form?{method:'POST',body:new URLSearchParams(b)}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(function(r){ return r.json(); }); }
