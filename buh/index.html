@@ -1655,13 +1655,13 @@ function openAnalytics(){
   var seg=document.getElementById('anSeg'); [['day','День'],['week','Неделя'],['month','Месяц'],['year','Год'],['c','Даты']].forEach(function(o){ var b=document.createElement('button'); b.textContent=o[1]; b.style.fontSize='14px'; if(o[0]===AN.p) b.className='on';
     b.onclick=function(){ AN.p=o[0]; AN.ref=anToday(); Array.prototype.forEach.call(seg.children,function(c){c.className='';}); b.className='on'; document.getElementById('anCustom').classList.toggle('hidden',o[0]!=='c'); anNav(); if(o[0]!=='c') loadAnalytics(); }; seg.appendChild(b); });
   if(!AN.ref) AN.ref=anToday(); anNav();
-  go('analytics'); loadAnalytics();
+  AN_SITE='flowers'; go('analytics'); loadAnalytics();
 }
 async function loadAnalytics(){
   var q;
   if(AN.p!=='c'){ var rg=anRange(AN.p,AN.ref||anToday()); q={from:rg.from,to:rg.to,pfrom:rg.pfrom,pto:rg.pto,period:AN.p}; }
   if(AN.p==='c'){ var a=document.getElementById('anFrom').value, z=document.getElementById('anTo').value; if(!a||!z){ toast('Выбери даты'); return; } q={from:a,to:z}; }
-  var res=await api('analytics',q); if(!res||!res.ok){ toast((res&&res.error)||'Ошибка'); return; }
+  q.site=AN_SITE; var res=await api('analytics',q); if(!res||!res.ok){ toast((res&&res.error)||'Ошибка'); return; }
   renderAnalytics(res);
 }
 function anRow(cols){ return '<div class="an-tr">'+cols.map(function(c,i){ return '<span>'+c+'</span>'; }).join('')+'</div>'; }
@@ -1730,25 +1730,37 @@ function anIgCharts(r){ var g=r.ig, el=document.getElementById('anIgDay'); if(!g
     options:{responsive:true,plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11}}}},scales:{x:{grid:{display:false},ticks:{font:{size:9},maxRotation:0,autoSkip:true}},y:{beginAtZero:true,ticks:{font:{size:10}}},y1:{beginAtZero:true,position:'right',grid:{display:false},ticks:{precision:0,font:{size:10}}}}}})); }
 var CLARITY_URL='https://clarity.microsoft.com/projects/view/z6dyodb1l2/impressions';
 function anSec(n){ n=Number(n)||0; if(n<60) return n+' с'; var m=Math.floor(n/60), s=n%60; return m+' мин'+(s?' '+s+' с':''); }
-function anSite(r){
-  var w=r.site, h='<div class="an-sec">🌐 Сайт</div>';
+// 11.11.2026: выбор сайта (4 сайта), по умолчанию — цветы. Переключение грузит только блок сайта.
+var AN_SITE='flowers', AN_SITE_CH=null, AN_SITE_R=null;
+var AN_SITES=[{key:'flowers',name:'🌸 Цветы'},{key:'gta',name:'🎮 Blip Guides (GTA)'},{key:'bikes',name:'🏍 Байки 50cc'},{key:'music',name:'🎧 Студия The Black Tea'}];
+function anSite(r){ AN_SITE_R={from:r.from,to:r.to}; return '<div id="anSiteBox">'+anSiteIn(r.site)+'</div>'; }
+async function anSiteSwitch(v){ AN_SITE=v; if(!AN_SITE_R) return; var res=await api('siteStats',{site:v,from:AN_SITE_R.from,to:AN_SITE_R.to});
+  if(!res||!res.ok){ toast((res&&res.error)||'Ошибка'); return; }
+  if(res.site&&res.site.byDay) res.site.byDay=anB(res.site.byDay,['v','s','lead','click']);
+  if(AN_SITE_CH){ try{AN_SITE_CH.destroy();}catch(e){} AN_SITE_CH=null; }
+  document.getElementById('anSiteBox').innerHTML=anSiteIn(res.site); anSiteCharts({site:res.site}); }
+function anSiteIn(w){
+  var sel='<select onchange="anSiteSwitch(this.value)" style="margin-left:8px;font-size:15px;padding:4px 6px;border-radius:8px;border:1px solid #ddd;background:#fff">'+
+    AN_SITES.map(function(x){ return '<option value="'+x.key+'"'+(x.key===AN_SITE?' selected':'')+'>'+x.name+'</option>'; }).join('')+'</select>';
+  var h='<div class="an-sec">🌐 Сайт'+sel+'</div>', FL=AN_SITE==='flowers', URL0=(w&&w.url)||'https://flowers-nha-trang.online';
   if(!w||w.error) return h+'<div class="card an-s">Нет данных сайта'+(w&&w.error?': '+esc(w.error):'')+'</div>';
-  if(w.empty) return h+'<div class="card an-s">За этот период посетителей ещё нет. Счётчик пишет каждого нового посетителя с 31.10.2026'+(w.total?' (всего записано событий: '+w.total+')':'')+'.</div>';
+  if(w.empty) return h+'<div class="card an-s">За этот период посетителей ещё нет. Счётчик пишет каждого нового посетителя с '+(FL?'31.10.2026':'11.11.2026')+(w.total?' (всего записано событий: '+w.total+')':'')+'.</div>';
   h+='<div class="an-g">'+
     anTile('<span class="an-ic">👥</span>Посетители',w.visitors,'','новых: '+w.newVisitors)+
     anTile('<span class="an-ic">🚪</span>Визиты',w.sessions,'','страниц за визит: '+String(w.pps).replace('.',','))+
     anTile('<span class="an-ic">⏱</span>Время на сайте',anSec(w.avgDur),'','в среднем за визит')+
     anTile('<span class="an-ic">↩️</span>Ушли сразу',w.bounce+'%','','1 страница, <15 с, без кликов')+
     anTile('<span class="an-ic">💬</span>Написали / позвонили',w.contacts,'','WhatsApp, Telegram, звонок, Kakao')+
-    anTile('<span class="an-ic">📝</span>Заявки с сайта',w.leads,'',w.sessions?'конверсия '+String(Math.round(w.leads/w.sessions*1000)/10).replace('.',',')+'%':'')+
+    (FL?anTile('<span class="an-ic">📝</span>Заявки с сайта',w.leads,'',w.sessions?'конверсия '+String(Math.round(w.leads/w.sessions*1000)/10).replace('.',',')+'%':''):
+      anTile('<span class="an-ic">👆</span>Нажали ссылку',w.contactsAll,'','соцсети, мессенджеры, музыка, видео'))+
   '</div>';
   h+='<div class="card"><b>Посетители по дням</b><canvas id="anSiteDay" height="190"></canvas></div>';
-  h+='<div class="card"><b>🔻 Воронка</b>'; var top=(w.funnel[0]||[0,0])[1]||1;
+  if(FL){ h+='<div class="card"><b>🔻 Воронка</b>'; var top=(w.funnel[0]||[0,0])[1]||1;
   w.funnel.forEach(function(x){ var pc=Math.round(x[1]/top*100); h+='<div style="margin-top:9px"><div class="row"><span style="font-size:14px">'+x[0]+'</span><span class="amt">'+x[1]+' <span class="an-s">('+pc+'%)</span></span></div><div class="pbar"><i style="width:'+pc+'%"></i></div></div>'; });
-  h+='</div>';
+  h+='</div>'; }
   h+=anTbl('📍 Откуда пришли',['Источник','Визиты','Связь','Заявки'],(w.sources||[]).map(function(x){ return [esc(x.name)+'<div class="an-s">'+anSec(x.avgDur)+' в среднем</div>',x.sessions,x.contacts,x.leads]; }),'«Связь» — визиты, где нажали WhatsApp/Telegram/звонок/Instagram');
-  h+=anTbl('📄 Страницы',['Страница','Просм.','Время','Прокр.'],(w.pages||[]).map(function(x){ return ['<a href="https://flowers-nha-trang.online'+esc(x.path)+'" target="_blank">'+esc(x.title||x.path)+'</a>',x.views,x.avgDur==null?'—':anSec(x.avgDur),x.sc==null?'—':x.sc+'%']; }),'Время и прокрутка — по тем, кто ушёл со страницы');
-  var cl=w.clicks||{}, CN={whatsapp:'WhatsApp',telegram:'Telegram',phone:'Звонок',instagram:'Instagram',kakao:'KakaoTalk',zalo:'Zalo'};
+  h+=anTbl('📄 Страницы',['Страница','Просм.','Время','Прокр.'],(w.pages||[]).map(function(x){ return ['<a href="'+URL0+esc(x.path)+'" target="_blank">'+esc(x.title||x.path)+'</a>',x.views,x.avgDur==null?'—':anSec(x.avgDur),x.sc==null?'—':x.sc+'%']; }),'Время и прокрутка — по тем, кто ушёл со страницы');
+  var cl=w.clicks||{}, CN={whatsapp:'WhatsApp',telegram:'Telegram',phone:'Звонок',instagram:'Instagram',kakao:'KakaoTalk',zalo:'Zalo',youtube:'YouTube',tiktok:'TikTok',spotify:'Spotify',applemusic:'Apple Music',yandexmusic:'Яндекс Музыка',vk:'VK',suno:'Suno',mail:'Почта'};
   var ck=Object.keys(cl); if(ck.length) h+=anTbl('👆 Нажатия',['Куда','Раз','',''],ck.sort(function(a,b){return cl[b]-cl[a];}).map(function(k){ return [CN[k]||k,cl[k],'','']; }));
   var dv=w.devices||{}, lg=w.langs||{}, DN={mobile:'Телефон',desktop:'Компьютер',tablet:'Планшет'}, LN={ru:'Русский',en:'English',ko:'한국어'};
   h+='<div class="card"><b>📱 Кто они</b><div class="an-s" style="margin-top:6px">'+Object.keys(dv).map(function(k){return (DN[k]||k)+': '+dv[k];}).join(' · ')+'</div><div class="an-s" style="margin-top:4px">'+Object.keys(lg).map(function(k){return (LN[k]||k)+': '+lg[k];}).join(' · ')+'</div>'+((w.countries||[]).length?'<div class="an-s" style="margin-top:4px">Страны: '+w.countries.map(function(x){return x.c+' '+x.n;}).join(' · ')+'</div>':'')+'</div>';
@@ -1756,11 +1768,12 @@ function anSite(r){
   (w.recent||[]).forEach(function(s){ var t=new Date(s.time); h+='<div class="item" style="margin-top:8px"><div class="t" style="font-size:14px">'+t.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit'})+' '+t.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'})+' · '+esc(s.src)+(s.isNew?' · 🆕':'')+(s.lead?' · 📝 заявка'+(s.oid?' '+esc(s.oid):''):'')+(s.paid?' · 💰':'')+'</div>'+
     '<div class="s">'+esc(s.pages.join(' → '))+(s.cart?' · 🛒':'')+(s.clicks.length?' · 👆 '+esc(s.clicks.join(', ')):'')+'</div>'+
     '<div class="s">'+anSec(s.dur)+' · '+(DN[s.dev]||s.dev||'')+' · '+(LN[s.lang]||s.lang||'')+(s.country?' · '+esc(s.country):'')+' · <span style="user-select:all">ID '+esc(s.vid)+'</span></div></div>'; });
-  h+='<a class="btn ghost" style="text-align:center;text-decoration:none" href="'+CLARITY_URL+'" target="_blank">🎥 Смотреть записи в Clarity</a><div class="an-s" style="margin-top:6px">В Clarity: фильтр «Custom user ID» = ID посетителя → его записи</div></div>';
+  if(FL) h+='<a class="btn ghost" style="text-align:center;text-decoration:none" href="'+CLARITY_URL+'" target="_blank">🎥 Смотреть записи в Clarity</a><div class="an-s" style="margin-top:6px">В Clarity: фильтр «Custom user ID» = ID посетителя → его записи</div>';
+  h+='</div>';
   return h;
 }
 function anSiteCharts(r){ var w=r.site, el=document.getElementById('anSiteDay'); if(!w||w.empty||!el) return;
-  AN_CH.push(new Chart(el,{data:{labels:w.byDay.map(function(x){return x.d;}),datasets:[
+  AN_CH.push(AN_SITE_CH=new Chart(el,{data:{labels:w.byDay.map(function(x){return x.d;}),datasets:[
     {type:'bar',label:'Посетители',data:w.byDay.map(function(x){return x.v;}),backgroundColor:'#86efac',yAxisID:'y'},
     {type:'line',label:'Связались',data:w.byDay.map(function(x){return x.click;}),borderColor:'#2563eb',backgroundColor:'#2563eb',pointRadius:2,tension:.3,yAxisID:'y'},
     {type:'line',label:'Заявки',data:w.byDay.map(function(x){return x.lead;}),borderColor:'#7c3aed',backgroundColor:'#7c3aed',pointRadius:2,tension:.3,yAxisID:'y'}]},
