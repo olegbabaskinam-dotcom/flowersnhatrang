@@ -139,7 +139,7 @@ def icons(src):
 
 def buttons(lang, t):
     if lang == "ko":
-        items = [("http://pf.kakao.com/_zbwKX", "💬 KakaoTalk"), ("https://instagram.com/nhatrang.kkot", ICON.get("ig", "") + " Instagram")]
+        items = [("https://pf.kakao.com/_zbwKX", "💬 KakaoTalk"), ("https://instagram.com/nhatrang.kkot", ICON.get("ig", "") + " Instagram")]
     else:
         q = t["wa_text"].replace(" ", "%20")
         items = [(f"https://wa.me/37443529162?text={q}", ICON.get("wa", "") + " WhatsApp"),

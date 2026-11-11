@@ -32,3 +32,12 @@ img/_src/
 # временные файлы сборки каталога PDF
 seo/_catalog_tmp/
 seo/_catalog_map/
+
+# 11.11.2026 аудит: служебное — не на сайт
+.fuse_hidden*
+__pycache__/
+*.pyc
+_removed_*/
+_to_delete/
+/*.py
+РЕКЛАМА_*

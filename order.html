@@ -111,7 +111,7 @@ function applyI18n(root){
   if(window.FLW_LANG==='ko'){
     var contacts=[
       ['a[href*="wa.me"]','https://open.kakao.com/o/seD8jkIi','KakaoTalk'],
-      ['a[href*="t.me"]','http://pf.kakao.com/_zbwKX','KakaoTalk Channel'],
+      ['a[href*="t.me"]','https://pf.kakao.com/_zbwKX','KakaoTalk Channel'],
       ['a[href*="flowers_vietnam_inst"]','https://instagram.com/nhatrang.kkot','Instagram']
     ];
     contacts.forEach(function(rule){document.querySelectorAll(rule[0]).forEach(function(a){a.href=rule[1];a.setAttribute('aria-label',rule[2]);a.setAttribute('rel','noopener noreferrer');});});

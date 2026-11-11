@@ -19,7 +19,7 @@ os.makedirs(CATALOG_DIR, exist_ok=True)
 WA = "https://wa.me/37443529162"
 TG = "https://t.me/babaskin_o"
 # Корейская аудитория не пользуется WhatsApp/Telegram — только KakaoTalk + KO Instagram
-KAKAO = "http://pf.kakao.com/_zbwKX"
+KAKAO = "https://pf.kakao.com/_zbwKX"
 KAKAO_DIRECT = "https://open.kakao.com/o/seD8jkIi"
 IG_KO = "https://instagram.com/nhatrang.kkot"
 IG_RU = "https://instagram.com/flowers_vietnam_inst"
