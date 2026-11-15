@@ -120,6 +120,7 @@ INFO = {
            "free": "бесплатно",
            "notes": ["Фольгированные шары — летают в среднем 7 дней.",
                      "Резиновые шары — летают в среднем 12 часов.",
+                     "Торты: каждый торт украшают вручную — привезём торт из той же категории, декор может отличаться от фото.",
                      "В платные зоны — заказ от 1 000 000 ₫.",
                      "В аэропорт Камрань и южнее аэропорта не доставляем.",
                      "На острова (Vinpearl, Hòn Tre) не возим — передадим заказ в порту на материке."]},
@@ -135,6 +136,7 @@ INFO = {
            "free": "free",
            "notes": ["Foil balloons — float for about 7 days on average.",
                      "Latex balloons — float for about 12 hours on average.",
+                     "Cakes: every cake is decorated by hand — we deliver the same category, decoration may differ from the photo.",
                      "Paid zones: minimum order 1,000,000 ₫.",
                      "No delivery to Cam Ranh airport or south of it.",
                      "No delivery to islands (Vinpearl, Hon Tre) — we hand over the order at the mainland port."]},
@@ -150,6 +152,7 @@ INFO = {
            "free": "무료",
            "notes": ["호일 풍선 — 평균 약 7일 동안 떠 있습니다.",
                      "라텍스 풍선 — 평균 약 12시간 동안 떠 있습니다.",
+                     "케이크: 하나하나 손으로 장식합니다 — 같은 종류의 케이크를 배달하며, 장식은 사진과 다를 수 있습니다.",
                      "유료 지역은 1,000,000동 이상 주문 시 배달합니다.",
                      "깜라인 공항 및 공항 남쪽은 배달하지 않습니다.",
                      "섬(빈펄, 혼째)은 배달하지 않으며 본토 항구에서 전달해 드립니다."]},
@@ -221,7 +224,7 @@ def draw_info(c, F, t, lang):
     # карта зон: реальная подложка Google Maps + зоны/подписи (seo/_catalog_map/map_<lang>.jpg)
     map_img = os.path.join(ROOT, "seo", "_catalog_map", f"map_{lang}.jpg")
     box_top = y - 22
-    notes_h = 70
+    notes_h = 86   # 15.11.2026: +строка про торты
     side = min(box_top - 52 - notes_h, CW)
     mx = (PW - side) / 2; my = box_top - side
     c.saveState(); pth = c.beginPath(); pth.roundRect(mx, my, side, side, 12); c.clipPath(pth, stroke=0, fill=0)
