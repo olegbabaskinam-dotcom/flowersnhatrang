@@ -1096,8 +1096,7 @@ function renderMap(res){
   (res.day||[]).forEach(function(b){
     var end=mMinToHH(mHHtoMin(b.arrive)+(b.slots||2)*15);
     var row=document.createElement('div'); row.className='item'; row.style.cursor='pointer'; row.style.borderLeft='5px solid '+b.color; row.setAttribute('data-t', b.arrive||'');
-    if(b.status==='done') row.style.opacity='.55';
-    var mark=b.status==='done'?'✅':'🟡';
+    var mark=mapPaint(row,b);
     var pay=b.pay==='transfer'?'💳 перевод':(b.pay==='cash'?'💵 наличные':'');
     var src=b.source==='online'?'🌐':'✍️';
     var extra=(b.recipient?('<div class="s">👤 '+esc(b.recipient)+'</div>'):'')+(b.note?('<div class="s">📝 '+esc(b.note)+'</div>'):'');
@@ -1105,9 +1104,30 @@ function renderMap(res){
       '<div class="t" style="margin-top:3px">'+esc(b.items||'')+'</div>'+
       '<div class="s">'+(b.paid?'💰 оплачен':'⏳ не оплачен')+' · '+src+' '+esc(b.zoneLabel||'')+(pay?(' · '+pay):'')+(b.addr?(' · '+esc(b.addr)):'')+'</div>'+extra;
     row.onclick=function(){ openMapEdit(b); }; box.appendChild(row);
+    mapRowBtns(b, box, true, true);
   });
   mapRentRows(res, box);   // 👶 коляски
+  mapHist(res, box);
 }
+function mapHist(res, box){ var h=res.history||[]; if(!h.length) return;
+  var d=document.createElement('div'); d.className='card'; d.style.marginTop='14px'; var s='<b>🕘 История</b>';
+  h.forEach(function(x){ var t=''; try{ t=new Date(x.at).toLocaleTimeString('ru-RU',{timeZone:'Asia/Ho_Chi_Minh',hour:'2-digit',minute:'2-digit'}); }catch(e){}
+    s+='<div style="font-size:13px;color:var(--muted);margin-top:6px">'+t+' · <b>'+esc(x.action||'')+'</b> · '+esc(x.label||'')+(x.author?(' — '+esc(x.author)):'')+'</div>'; });
+  d.innerHTML=s; box.appendChild(d); }
+function mapStage(b){ return b.stage||(b.status==='done'?'done':'ready'); }
+function mapPaint(row,b){ var st=mapStage(b); if(st==='done'){ row.style.background='#e9e9ec'; row.style.opacity='.6'; } else if(st==='prep'){ row.style.background='#fff3b8'; } else { row.style.background='#dcf5e1'; }
+  return st==='done'?'✅ отвезён ·':(st==='prep'?'🟡 подготовить ·':'🟢 готов ·'); }
+function mapRowBtns(b, box, canEdit, withDone){ var st=mapStage(b); if(!canEdit) return;
+  var w=document.createElement('div'); w.style.cssText='display:flex;flex-wrap:wrap;gap:8px;margin:-3px 0 12px'; w.setAttribute('data-t', b.arrive||'');
+  function add(txt,css,act,extra,q){ var x=document.createElement('button'); x.className='btn'; x.textContent=txt; x.style.cssText='width:auto;margin:0;padding:8px 14px;font-size:13px;'+css;
+    x.onclick=async function(e){ e.stopPropagation(); if(q && !confirm(q)) return; var res=await api(act, Object.assign({id:b.id}, extra||{})); if(res&&res.ok){ toast('Готово'); openMap(); } else toast((res&&res.error)||'Ошибка'); }; w.appendChild(x); }
+  var ghost='background:#fff;color:#444;border:1px solid #cfc9dc';
+  if(st==='prep') add('📦 Подготовлен','background:#d97706;color:#fff','mapPrep');
+  if(st==='ready' && b.needPrep && b.prep) add('↩︎ Отменить «подготовлен»',ghost,'mapPrep',{undo:1},'Отменить отметку «подготовлен»?');
+  if(withDone && st!=='done' && b.arrive) add('✅ Отвезён','background:#1f9d55;color:#fff','mapDone');
+  if(st==='done') add('↩︎ Отменить «отвезён»',ghost,'mapUndone',null,'Отменить отметку «отвезён»?');
+  if(w.childNodes.length) box.appendChild(w); }
+
 // 👶 коляски в ленте дня: отдельные позиции «отвезти» и «забрать» (по времени, вперемешку с цветами)
 function rvnd(n){ return Math.round(+n||0).toLocaleString('ru-RU').replace(/,/g,' ')+' ₫'; }
 function rdm(d){ var p=String(d||'').split('-'); return p.length===3?(p[2]+'.'+p[1]):d; }

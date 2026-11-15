@@ -176,8 +176,7 @@ function renderMap(res){
   (res.day||[]).forEach(function(b){
     var end=m2hh(hh2m(b.arrive)+(b.slots||2)*15);
     var row=document.createElement('div'); row.className='item'; row.style.cursor='pointer'; row.style.borderLeft='5px solid '+(b.color||'#ccc'); row.setAttribute('data-t', b.arrive||'');
-    if(b.status==='done') row.style.opacity='.55';
-    var mark=b.status==='done'?'✅':'🟡';
+    var mark=mapPaint(row,b);
     var pay=b.pay==='transfer'?'💳 перевод':(b.pay==='cash'?'💵 наличные':'');
     var extra=(b.recipient?('<div class="s">👤 '+esc(b.recipient)+'</div>'):'')+(b.note?('<div class="s">📝 '+esc(b.note)+'</div>'):'');
     row.innerHTML='<div class="row"><b>'+mark+' '+b.arrive+'–'+end+'</b><span class="amt">'+(b.paid?'💰':'⏳')+'</span></div>'+
@@ -190,9 +189,30 @@ function renderMap(res){
       qb.onclick=(function(bk){ return function(e){ e.stopPropagation(); quickDeliver(bk); }; })(b);
       box.appendChild(qb);
     }
+    mapRowBtns(b, box, CAN_EDIT, false);
   });
   mapRentRows(res, box);   // 👶 коляски
+  mapHist(res, box);
 }
+function mapHist(res, box){ var h=res.history||[]; if(!h.length) return;
+  var d=document.createElement('div'); d.className='card'; d.style.marginTop='14px'; var s='<b>🕘 История</b>';
+  h.forEach(function(x){ var t=''; try{ t=new Date(x.at).toLocaleTimeString('ru-RU',{timeZone:'Asia/Ho_Chi_Minh',hour:'2-digit',minute:'2-digit'}); }catch(e){}
+    s+='<div style="font-size:13px;color:var(--muted);margin-top:6px">'+t+' · <b>'+esc(x.action||'')+'</b> · '+esc(x.label||'')+(x.author?(' — '+esc(x.author)):'')+'</div>'; });
+  d.innerHTML=s; box.appendChild(d); }
+function mapStage(b){ return b.stage||(b.status==='done'?'done':'ready'); }
+function mapPaint(row,b){ var st=mapStage(b); if(st==='done'){ row.style.background='#e9e9ec'; row.style.opacity='.6'; } else if(st==='prep'){ row.style.background='#fff3b8'; } else { row.style.background='#dcf5e1'; }
+  return st==='done'?'✅ отвезён ·':(st==='prep'?'🟡 подготовить ·':'🟢 готов ·'); }
+function mapRowBtns(b, box, canEdit, withDone){ var st=mapStage(b); if(!canEdit) return;
+  var w=document.createElement('div'); w.style.cssText='display:flex;flex-wrap:wrap;gap:8px;margin:-3px 0 12px'; w.setAttribute('data-t', b.arrive||'');
+  function add(txt,css,act,extra,q){ var x=document.createElement('button'); x.className='btn'; x.textContent=txt; x.style.cssText='width:auto;margin:0;padding:8px 14px;font-size:13px;'+css;
+    x.onclick=async function(e){ e.stopPropagation(); if(q && !confirm(q)) return; var res=await api(act, Object.assign({id:b.id}, extra||{})); if(res&&res.ok){ toast('Готово'); openMap(); } else toast((res&&res.error)||'Ошибка'); }; w.appendChild(x); }
+  var ghost='background:#fff;color:#444;border:1px solid #cfc9dc';
+  if(st==='prep') add('📦 Подготовлен','background:#d97706;color:#fff','mapPrep');
+  if(st==='ready' && b.needPrep && b.prep) add('↩︎ Отменить «подготовлен»',ghost,'mapPrep',{undo:1},'Отменить отметку «подготовлен»?');
+  if(withDone && st!=='done' && b.arrive) add('✅ Отвезён','background:#1f9d55;color:#fff','mapDone');
+  if(st==='done') add('↩︎ Отменить «отвезён»',ghost,'mapUndone',null,'Отменить отметку «отвезён»?');
+  if(w.childNodes.length) box.appendChild(w); }
+
 // 👶 коляски в ленте дня: отдельные позиции «отвезти» и «забрать» (по времени, вперемешку с цветами)
 function rvnd(n){ return Math.round(+n||0).toLocaleString('ru-RU').replace(/,/g,' ')+' ₫'; }
 function rdm(d){ var p=String(d||'').split('-'); return p.length===3?(p[2]+'.'+p[1]):d; }
@@ -256,7 +276,7 @@ function openCard(b){
     ro.innerHTML=
       (b.arrive?('<div><b>⏰ '+b.arrive+(end?('–'+end):'')+'</b></div>'):'<div><b>без времени</b></div>')+
       '<div style="margin-top:6px" class="t">'+esc(b.items||'')+'</div>'+
-      '<div class="s">'+esc(b.zoneLabel||'')+' · '+(b.status==='done'?'✅ отвезён':'🟡 не отвезён')+' · '+(b.paid?'💰 оплачен':'⏳ не оплачен')+'</div>'+
+      '<div class="s">'+esc(b.zoneLabel||'')+' · '+(b.status==='done'?'✅ отвезён':(b.stage==='prep'?'🟡 нужно подготовить':'🟢 готов, не отвезён'))+' · '+(b.paid?'💰 оплачен':'⏳ не оплачен')+'</div>'+
       (b.addr?('<div class="s">📍 '+esc(b.addr)+'</div>'):'')+
       (b.recipient?('<div class="s">👤 '+esc(b.recipient)+'</div>'):'')+
       (b.buyer?('<div class="s">🧾 '+esc(b.buyer)+'</div>'):'')+
@@ -326,7 +346,7 @@ async function unlockEdit(){
   PIN=document.getElementById('pin').value.trim();
   if(!PIN){ toast('Введи ПИН'); return; }
   var res=await api('mapState',{date:MAP_DATE||vnToday(), pinCheck:1});
-  if(res.ok && res.canEdit){ CAN_EDIT=true; document.getElementById('lockRow').classList.add('hidden'); document.getElementById('editOn').classList.remove('hidden'); toast('Правки включены'); }
+  if(res.ok && res.canEdit){ CAN_EDIT=true; document.getElementById('lockRow').classList.add('hidden'); document.getElementById('editOn').classList.remove('hidden'); toast('Правки включены'); if(LAST) renderMap(LAST); }
   else { PIN=''; toast('Неверный ПИН'); }
 }
 
