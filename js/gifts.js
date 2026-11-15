@@ -10,8 +10,9 @@
 (function () {
   var BIG = 3000000;
   var TOYS = [
-    { id: "dop-myagkaya-igrushka-1", price: 300000, img: "/img/products/dop-myagkaya-igrushka-1/1.webp", name: { ru: "Розовый мишка", en: "Pink teddy bear", ko: "핑크 곰 인형" } },
-    { id: "dop-myagkaya-igrushka-4", price: 300000, img: "/img/products/dop-myagkaya-igrushka-4/1.webp", name: { ru: "Щенок-бульдог", en: "Bulldog puppy", ko: "불독 강아지 인형" } }
+    { id: "dop-myagkaya-igrushka-4", price: 300000, img: "/img/products/dop-myagkaya-igrushka-4/1.webp", name: { ru: "Щенок-бульдог", en: "Bulldog puppy", ko: "불독 강아지 인형" } },
+    { id: "dop-myagkaya-igrushka-5", price: 300000, img: "/img/products/dop-myagkaya-igrushka-5/1.webp", name: { ru: "Мишка в колпачке с малышом", en: "Teddy bear in a nightcap with a baby bear", ko: "나이트캡을 쓴 곰 인형과 아기 곰" } },
+    { id: "dop-myagkaya-igrushka-6", price: 300000, img: "/img/products/dop-myagkaya-igrushka-6/1.webp", name: { ru: "Белая зайка в жёлтом платье", en: "White bunny in a yellow dress", ko: "노란 원피스를 입은 흰 토끼 인형" } }
   ];
   var BALLOONS = [
     ["dop-folgirovannyy-shar-zvezda-happy-birthday", "Звезда «Happy Birthday»", "Star “Happy Birthday”", "별 “Happy Birthday”"],
