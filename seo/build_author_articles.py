@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Авторские статьи (автор — Оксана Яснова). Запуск из корня репо: python3 seo/build_author_articles.py
-Делает: 1) страницу статьи «Веранда» RU/EN/KO из шаблона статьи кафе X.O; 2) во ВСЕХ авторских статьях —
+Делает: 1) страницы всех статей из ARTS (модули seo/author_*_content.py) RU/EN/KO из шаблона статьи кафе X.O; 2) во ВСЕХ авторских статьях —
 подпись под заголовком, «Автор: …», блок «Об авторе», «Читайте также», JSON-LD с автором-Person;
 3) страницу автора blog/avtor-oksana-yasnova-{ru,en,ko}.html со списком всех статей из REG.
 Новая авторская статья: добавить запись в REG (и модуль с контентом) → запустить → карточка на blog-*, sitemap — вручную.
@@ -8,6 +8,8 @@
 import io, os, re, json, sys, html
 sys.path.insert(0, os.path.dirname(__file__))
 import author_veranda_content as V
+import author_sezony_content as S
+ARTS = [S, V]  # модули авторских статей (новые — в начало)
 SITE = "https://flowers-nha-trang.online"
 XO = "gde-poest-moreprodukty-nyachang-kafe-xo"
 AU = "avtor-oksana-yasnova"
@@ -26,7 +28,7 @@ TX = {"by": {"ru": "Автор", "en": "Author", "ko": "글쓴이"}, "about": {"
       "badge": {"ru": "✍️ Автор", "en": "✍️ Author", "ko": "✍️ 글쓴이"}}
 # Реестр авторских статей (новые — в начало)
 REG = [
- dict(slug=V.SLUG, img="img/blog/%s.webp" % V.SLUG, date=V.DATE, iso=V.DATE_ISO, title={l: V.META[l]["h1"] for l in LANGS}),
+ *[dict(slug=M.SLUG, img="img/blog/%s.webp" % M.SLUG, date=M.DATE, iso=M.DATE_ISO, title={l: M.META[l]["h1"] for l in LANGS}) for M in ARTS],
  dict(slug=XO, img="img/blog/%s.webp" % XO, date={"ru": "26 сентября 2026", "en": "26 September 2026", "ko": "2026년 9월 26일"}, iso="2026-09-29",
       title={"ru": "Где поесть морепродукты в Нячанге: местное недорогое кафе на юге города.", "en": "Where to eat seafood in Nha Trang: a local budget café in the south of the city.", "ko": "나트랑에서 해산물 먹을 곳: 시내 남쪽의 저렴한 현지 식당"}),
 ]
@@ -39,6 +41,7 @@ CSS = """<style id="au-css">.xo-art h2{font-family:'Playfair Display',serif;font
 .au-box p{margin:0;font-size:.92rem;line-height:1.65;color:#4a4a4a;}.au-box .au-all{display:inline-block;margin-top:.6rem;font-size:.85rem;color:#c0687a;font-weight:600;}
 .au-h{font:700 1.4rem 'Playfair Display',serif;color:#1a1a1a;margin:2rem 0 .9rem;}.au-rel{display:flex;gap:.9rem;align-items:center;background:#fff;border:1px solid #f0e0e5;border-radius:1rem;padding:.6rem;text-decoration:none;margin-bottom:.7rem;transition:border-color .2s;}
 .au-rel:hover{border-color:#c0687a;}.au-rel img{flex:0 0 112px;width:112px;height:80px;object-fit:cover;border-radius:.7rem;}.au-rel b{display:block;font:700 1rem/1.35 'Playfair Display',serif;color:#1a1a1a;}.au-rel span{font-size:.75rem;color:#8a8a8a;}
+.xo-art ul.xo-ul{list-style:disc;padding-left:1.4rem;margin:0 0 1.2rem;}.xo-art ul.xo-ul li{margin:.25rem 0;}.xo-art .xo-warn{margin:1.5rem 0;}
 @media(max-width:480px){.au-box{gap:.8rem;padding:1rem}.au-ph{flex-basis:60px;width:60px;height:60px;font-size:1.2rem}.au-rel img{flex-basis:88px;width:88px;height:66px}}</style>"""
 def rd(p): return io.open(p, encoding="utf-8").read()
 def wr(p, s): io.open(p, "w", encoding="utf-8", newline="\n").write(s)
@@ -73,12 +76,14 @@ def apply_common(s, slug, L, date):
             d["@type"] = "BlogPosting"; d["author"] = person(L)
         return '<script type="application/ld+json">' + json.dumps(d, ensure_ascii=False) + "</script>"
     return re.sub(r'<script type="application/ld\+json">(.*?)</script>', ld, s, flags=re.S)
-def block_html(t, v, L):
-    P = "../img/blog/%s/" % V.SLUG
+def block_html(t, v, L, M):
+    P = "../img/blog/%s/" % M.SLUG
     if t == "p": return "<p>%s</p>" % v
     if t == "b": return '<p class="xo-pt">%s</p>' % v
     if t in ("h2", "h3"): return "<%s>%s</%s>" % (t, v, t)
     if t == "note": return '<div class="xo-note">%s</div>' % v
+    if t == "warn": return '<div class="xo-warn">%s</div>' % v
+    if t == "ul": return '<ul class="xo-ul">' + "".join("<li>%s</li>" % x for x in v) + "</ul>"
     if t == "pill": return '<div class="xo-pill">%s</div>' % v
     if t == "rec": return '<p class="xo-rec">%s</p>' % v
     if t == "card": return '<div class="xo-card">' + "".join("<p><b>%s:</b> %s</p>" % kv for kv in v) + "</div>"
@@ -86,15 +91,17 @@ def block_html(t, v, L):
         from PIL import Image
         im = []
         for i in v:
-            w, h = Image.open("img/blog/%s/v%s.webp" % (V.SLUG, i)).size
-            im.append('<img src="%sv%s.webp" data-full="%sv%s.webp" alt="%s" loading="lazy" decoding="async" width="%d" height="%d">' % (P, i, P, i, e(V.ALT[i][LANGS.index(L)]), w, h))
+            w, h = Image.open("img/blog/%s/v%s.webp" % (M.SLUG, i)).size
+            im.append('<img src="%sv%s.webp" data-full="%sv%s.webp" alt="%s" loading="lazy" decoding="async" width="%d" height="%d"%s>' % (P, i, P, i, e(M.ALT[i][LANGS.index(L)]), w, h, ' style="object-position:50% 12%"' if h > w and len(v) > 1 else ""))
         cls = "xo-one" if len(v) == 1 else ("xo-g odd" if len(v) == 3 else "xo-g")
         return '<div class="%s">%s</div>' % (cls, "".join(im))
     raise ValueError(t)
 CTA = {"ru": ("Планируете день рождения или романтический сюрприз в Нячанге?", "Мы поможем организовать праздник: цветы, торты, подарки, воздушные шары и оформление.", "Оформление праздников", "../prazdnik.html"),
        "en": ("Planning a birthday or a romantic surprise in Nha Trang?", "We will help you organise the celebration: flowers, cakes, gifts, balloons and decoration.", "Party decoration", "../prazdnik-en.html"),
        "ko": ("나트랑에서 생일이나 로맨틱한 서프라이즈를 계획하고 계신가요?", "꽃, 케이크, 선물, 풍선과 장식까지 — 파티 준비를 도와드립니다.", "파티 장식 보기", "../prazdnik-kr.html")}
-def build_veranda(L):
+ABOUT = {V.SLUG: {"@type": "Restaurant", "name": "Veranda", "address": {"@type": "PostalAddress", "addressLocality": "Nha Trang", "addressCountry": "VN"}, "servesCuisine": ["Russian", "European"]}}
+def build_article(M, L):
+    V = M
     s = rd("blog/%s-%s.html" % (XO, L))
     old_title = re.search(r"<title>(.*?)</title>", s, flags=re.S).group(1)
     old_desc = re.search(r'<meta name="description" content="(.*?)">', s, flags=re.S).group(1)
@@ -105,7 +112,8 @@ def build_veranda(L):
     url = "%s/blog/%s-%s.html" % (SITE, V.SLUG, L)
     ld = {"@context": "https://schema.org", "@type": "BlogPosting", "headline": M["title"], "description": M["desc"], "image": "%s/img/blog/%s.webp" % (SITE, V.SLUG),
           "datePublished": V.DATE_ISO, "dateModified": V.DATE_ISO, "inLanguage": L, "author": person(L), "publisher": {"@type": "Organization", "name": "Surprise Service Nha Trang"},
-          "mainEntityOfPage": url, "about": {"@type": "Restaurant", "name": "Veranda", "address": {"@type": "PostalAddress", "addressLocality": "Nha Trang", "addressCountry": "VN"}, "servesCuisine": ["Russian", "European"]}}
+          "mainEntityOfPage": url}
+    if ABOUT.get(V.SLUG): ld["about"] = ABOUT[V.SLUG]
     n = [0]
     def ldrep(m):
         if '"headline"' in m.group(1): n[0] += 1; return '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + "</script>"
@@ -114,7 +122,7 @@ def build_veranda(L):
     a = s.index("<article"); a2 = s.index(">", a) + 1; b = s.index("</article>")
     head = s[a2:s.index("</h1>", a2) + 5]
     head = re.sub(r"(<span class=\"xo-badge\">[^<]*</span><span>)[^<]*(</span>)", lambda m: m.group(1) + V.DATE[L] + m.group(2), head)
-    body = "\n        ".join(block_html(t, v, L) for t, v in V.B[L])
+    body = "\n        ".join(block_html(t, v, L, V) for t, v in V.B[L])
     s = s[:a2] + head + "\n        " + body + "\n    " + s[b:]
     s = re.sub(r'(<img src="\.\./img/blog/%s\.webp" alt=")[^"]*' % re.escape(V.SLUG), lambda m: m.group(1) + e(V.ALT[V.HERO][LANGS.index(L)]), s, count=1)
     # CTA после статьи: праздник под ключ
@@ -146,7 +154,7 @@ def build_author_page(L):
     wr("blog/%s-%s.html" % (AU, L), s[:a2] + main + s[b:])
 if __name__ == "__main__":
     for L in LANGS:
-        build_veranda(L)
-        p = "blog/%s-%s.html" % (XO, L); wr(p, apply_common(rd(p), XO, L, REG[1]["date"][L]))
+        for M in ARTS: build_article(M, L)
+        p = "blog/%s-%s.html" % (XO, L); wr(p, apply_common(rd(p), XO, L, REG[-1]["date"][L]))
         build_author_page(L)
     print("ok")
