@@ -63,7 +63,7 @@
     <input id="pin" type="tel" inputmode="numeric" maxlength="6" placeholder="ПИН">
     <button class="btn ghost navbtn" onclick="unlockEdit()">Открыть</button>
   </div>
-  <div id="editOn" class="muted hidden" style="font-size:12px;margin-bottom:8px">✏️ Режим правок включён</div>
+  <div id="editOn" class="muted hidden" style="font-size:12px;margin-bottom:8px;display:flex;align-items:center;gap:10px">✏️ Режим правок включён <button class="btn ghost" style="width:auto;margin:0;padding:6px 12px;font-size:13px" onclick="lockEdit()">🔒 Выйти</button></div>
 
   <div id="unplacedWrap" class="card hidden" style="margin-bottom:12px">
     <b>📦 Не разложенные</b>
@@ -345,6 +345,11 @@ async function doneCur(on){ if(!CUR) return; var res=await api(on?'mapDone':'map
 async function unplaceCur(){ if(!CUR) return; var res=await api('mapUnplace',{id:CUR.id}); if(res.ok){ toast('Снято'); openMap(); } else toast(res.error||'Ошибка'); }
 async function cancelCur(){ if(!CUR) return; if(!confirm('Отменить заказ? Слот освободится.')) return; var res=await api('mapCancel',{id:CUR.id}); if(res.ok){ toast('Отменён'); openMap(); } else toast(res.error||'Ошибка'); }
 
+function lockEdit(){   // выйти из режима правок: ПИН забывается, Карта снова только для просмотра
+  PIN=''; CAN_EDIT=false; document.getElementById('pin').value='';
+  document.getElementById('editOn').classList.add('hidden'); document.getElementById('lockRow').classList.remove('hidden');
+  toast('Режим правок выключен'); if(LAST) renderMap(LAST); show('map');
+}
 async function unlockEdit(){
   PIN=document.getElementById('pin').value.trim();
   if(!PIN){ toast('Введи ПИН'); return; }
