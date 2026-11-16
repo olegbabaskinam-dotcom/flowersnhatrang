@@ -15,6 +15,7 @@
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" href="icon-192.png">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="/js/ordercard.js?v=1"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js" integrity="sha384-dug+JxfBvklEQdJ4AYuBBAIScUz0bVN73xpy273gcAwHjb3qI0fXmuYNaNfdyYJG" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <style>
   :root{--bg:#faf7ff;--card:#fff;--line:#ece6f5;--ink:#2a2540;--muted:#8b83a3;--accent:#7c3aed;--green:#16a34a;--red:#dc2626;--gold:#b8860b}
@@ -441,9 +442,10 @@
     <label>Контакт заказчика</label><input id="ma_buyer" placeholder="как связаться">
     <label>Email заказчика</label><input id="ma_email" placeholder="you@mail.com">
     <label>Оплата</label><select id="ma_pay"><option value="">—</option><option value="transfer">перевод</option><option value="cash">наличные</option></select>
-    <label>Открытка / коммент</label><input id="ma_note" placeholder="текст открытки / пожелания">
+    <label>Коммент к заказу</label><input id="ma_note" placeholder="коммент">
   </div>
   <button class="btn" onclick="saveMapAdd()">Сохранить</button>
+  <div id="mapCardBox" class="hidden"></div>
   <div id="mapEditActions" class="hidden">
     <button class="btn ghost" onclick="mapUnplaceCur()">Снять со слота (в «не разложенные»)</button>
     <button class="btn red" onclick="mapCancelCur()">Отменить заказ</button>
@@ -1166,6 +1168,7 @@ function openMapAdd(){
   document.getElementById('ma_email').value='';
   document.getElementById('ma_note').value=''; document.getElementById('ma_err').textContent='';
   document.getElementById('mapEditActions').classList.add('hidden');
+  var cbx=document.getElementById('mapCardBox'); cbx.innerHTML=''; cbx.classList.add('hidden');
   go('mapadd'); mapFreeReload();
 }
 function openMapEdit(b){
@@ -1183,6 +1186,8 @@ function openMapEdit(b){
   if(b.status==='done') db.innerHTML='<button class="btn ghost" onclick="mapUndoneCur()">↩︎ Вернуть в план (не отвезён)</button>';
   else if(b.arrive) db.innerHTML='<button class="btn" style="background:#1f9d55;color:#fff" onclick="mapDoneCur()">✅ Отметить «отвезён»</button>';
   else db.innerHTML='';
+  var cbx=document.getElementById('mapCardBox'); cbx.classList.remove('hidden');
+  if(window.OrderCard) OrderCard.mount(cbx, { id:b.id, api:api, canEdit:true, toast:toast });   // 📸 фото, открытка, пожелания
   go('mapadd'); mapFreeReload(b.arrive||'');
 }
 async function mapDoneCur(){ if(!MAP_EDIT_ID) return; var res=await api('mapDone',{id:MAP_EDIT_ID}); if(res.ok){ toast('Отмечено: отвезён ✅'); openMap(); } else toast(res.error||'Ошибка'); }

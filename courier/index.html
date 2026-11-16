@@ -13,6 +13,7 @@
 <link rel="apple-touch-icon" href="icon-180.png">
 <title>Карта заказов</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="/js/ordercard.js?v=1"></script>
 <style>
   :root{ --bg:#f6f4fb; --card:#fff; --ink:#221; --muted:#8a8296; --line:#e7e0f2; --accent:#7b4bd6; }
   *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -87,9 +88,10 @@
       <label>Адрес / ссылка</label><input id="e_addr">
       <label>Контакт получателя</label><input id="e_recipient">
       <label>Контакт заказчика</label><input id="e_buyer">
-      <label>Открытка / коммент</label><input id="e_note">
+      <label>Коммент к заказу</label><input id="e_note">
     </div>
   </div>
+  <div id="cardBox"></div>
   <div id="rwActions" class="hidden">
     <button class="btn" onclick="saveEdit()">Сохранить</button>
     <button class="btn ghost" onclick="unplaceCur()">Снять со слота</button>
@@ -289,6 +291,7 @@ function openCard(b){
       document.getElementById('deliverBox').classList.remove('hidden');
     }
   }
+  if(window.OrderCard) OrderCard.mount(document.getElementById('cardBox'), { id:b.id, api:api, canEdit:CAN_EDIT, toast:toast });   // 📸 фото, открытка, пожелания
   show('edit');
 }
 
