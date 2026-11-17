@@ -112,6 +112,8 @@
     var add = function (txt, links) { h.push(web ? txt + '<br>' + links : txt); };
     if (st.tier === "A" && !st.big) add(t.hBal, btn(cat + "r101", B.r101) + btn(cat + "mixed", B.mixed));
     if (st.tier === "B") add(t.hTara, btn(cat + "balloons", B.bal));
+    /* 17.11.2026: на сайте — одна подсказка, самая близкая к следующему подарку (A → шар, B → тара, дальше → игрушка) */
+    if (web && h.length) return h;
     var onCart = /\/cart\.html$/.test(location.pathname) && document.getElementById("setBox");
     add(t.hToy.replace("{x}", fmt(BIG - st.total)), onCart ? btn("#setBox", B.set, "setBox") + btn(cat, B.more) : btn(cat, B.more));
     return h;
