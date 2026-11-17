@@ -310,7 +310,7 @@ CARD_JS = """<script>/*MARK-CARD-JS*/
   function isCake(c){return cats(c).indexOf('cakes')>-1;}
   function isCombo(c){return cats(c).filter(function(x){return x!=='nabory'&&x!=='prazdnik';}).length>1;}
   // «Чистая» позиция для выбранной категории = в ней есть эта категория и это НЕ комбо-набор.
-  function isPure(c,sel){return !!sel&&match(c,sel)&&!isCombo(c);}
+  function isPure(c,sel){return sel.length>0&&matchAny(c)&&!isCombo(c);}
   var PARENT={baskets:'flowers',mixed:'flowers',roses:'flowers',r25:'roses',r51:'roses',r101:'roses','b-helium':'balloons','b-latex':'balloons','b-combo':'balloons',nabory:'gifts',cakes:'gifts'};
   function has(c,x){return cats(c).indexOf(x)>-1;}
   function toks(c){var a=c.querySelector('a[href*="catalog/"]');var s=a?a.getAttribute('href').replace(/^.*catalog\//,'').replace(/-(ru|en|ko)\.html$/,''):'';return s.split('-');}
@@ -332,22 +332,36 @@ CARD_JS = """<script>/*MARK-CARD-JS*/
     if(k==='decor')return has(c,'prazdnik');
     return has(c,k);
   }
-  function selectCat(k){
-    var chain=[k];var p=k;while(PARENT[p]){p=PARENT[p];chain.push(p);}
-    state.cat=k;
+  state.sel=[];
+  function chainOf(k){var c=[k],p=k;while(PARENT[p]){p=PARENT[p];c.push(p);}return c;}
+  function openMap(){var o={};state.sel.forEach(function(k){chainOf(k).forEach(function(x){o[x]=1;});});return o;}
+  function matchAny(c){if(!state.sel.length)return true;for(var i=0;i<state.sel.length;i++){if(match(c,state.sel[i]))return true;}return false;}
+  function renderCats(){
+    var o=openMap();
     bar.querySelectorAll('.filt-group[data-filter="tree"]').forEach(function(g){
       var par=g.getAttribute('data-parent');
-      if(par!==null){if(chain.indexOf(par)>-1)g.removeAttribute('hidden');else g.setAttribute('hidden','');}
-      g.querySelectorAll('.filt').forEach(function(b){var v=b.getAttribute('data-val');b.classList.toggle('active',v===k||(chain.indexOf(v)>-1&&v!==par&&par!==null));});
+      if(par!==null){if(o[par])g.removeAttribute('hidden');else g.setAttribute('hidden','');}
+      g.querySelectorAll('.filt').forEach(function(b){var v=b.getAttribute('data-val');var on=v===''?state.sel.length===0:(state.sel.indexOf(v)>-1||(!!o[v]&&v!==par));b.classList.toggle('active',on);});
     });
-    var l1=bar.querySelector('.tree-l1');if(l1){l1.querySelectorAll('.filt').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-val')===chain[chain.length-1]);});}
-    try{history.replaceState(null,'',k?'#'+k:location.pathname+location.search);}catch(e){}
+    document.querySelectorAll('.sc-t[data-k]').forEach(function(t){t.classList.toggle('sc-on',state.sel.indexOf(t.getAttribute('data-k'))>-1);});
+    try{history.replaceState(null,'',state.sel.length===1?'#'+state.sel[0]:location.pathname+location.search);}catch(e){}
     applyFilter();applySort();
   }
+  // Мультивыбор (17.11.2026): клик — добавить категорию, повторный клик — убрать; страница не прокручивается.
+  function toggleCat(k,isOn){
+    if(!k){state.sel=[];renderCats();return;}
+    if(isOn===undefined){isOn=state.sel.indexOf(k)>-1||!!openMap()[k];}
+    if(isOn){state.sel=state.sel.filter(function(x){return chainOf(x).indexOf(k)<0;});}
+    else{var anc=chainOf(k);state.sel=state.sel.filter(function(x){return anc.indexOf(x)<0&&chainOf(x).indexOf(k)<0;});state.sel.push(k);}
+    renderCats();
+  }
+  function setCats(a){state.sel=a.slice();renderCats();}
+  window.catToggle=function(k){toggleCat(k);};
+  (function(){var st=document.createElement('style');st.textContent='.sc-t.sc-on{outline:3px solid #c0687a;outline-offset:2px}.sc-t.sc-on .sc-c span{background:#c0687a;color:#fff}.sc-t.sc-on:before{content:"\\\\2713";position:absolute;top:8px;right:8px;z-index:3;width:28px;height:28px;border-radius:50%;background:#c0687a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px}';document.head.appendChild(st);})();
   
   function applySort(){
     if(!grid)return;
-    var sel=state.cat;
+    var sel=state.sel;
     var cards=Array.prototype.slice.call(grid.querySelectorAll('.product-card'));
     cards.sort(function(a,b){
       var ac=isCake(a),bc=isCake(b);
@@ -360,7 +374,7 @@ CARD_JS = """<script>/*MARK-CARD-JS*/
   }
   function applyFilter(){
     document.querySelectorAll('.product-card').forEach(function(c){
-      var ok=match(c,state.cat)&&(state.color===''||c.getAttribute('data-color')===state.color);
+      var ok=matchAny(c)&&(state.color===''||c.getAttribute('data-color')===state.color);
       c.style.display=ok?'':'none';
     });
     updateCount();
@@ -379,7 +393,7 @@ CARD_JS = """<script>/*MARK-CARD-JS*/
   if(bar){
     bar.querySelectorAll('.filt').forEach(function(b){
       b.addEventListener('click',function(){
-        var g=b.parentNode.getAttribute('data-filter');if(g==='tree'){selectCat(b.getAttribute('data-val'));return;}
+        var g=b.parentNode.getAttribute('data-filter');if(g==='tree'){toggleCat(b.getAttribute('data-val'),b.classList.contains('active'));return;}
         state[g]=b.getAttribute('data-val');
         b.parentNode.querySelectorAll('.filt').forEach(function(x){x.classList.remove('active');});
         b.classList.add('active');
@@ -401,8 +415,8 @@ CARD_JS = """<script>/*MARK-CARD-JS*/
   }
   applySort();
   updateCount();
-  if(bar){var _hf=decodeURIComponent((location.hash||'').replace('#',''));if(_hf&&bar.querySelector('.filt-group[data-filter="tree"] .filt[data-val="'+_hf+'"]'))selectCat(_hf);}
-  window.addEventListener('hashchange',function(){var _h=decodeURIComponent((location.hash||'').replace('#',''));if(bar&&bar.querySelector('.filt-group[data-filter="tree"] .filt[data-val="'+_h+'"]')){selectCat(_h);bar.scrollIntoView({behavior:'smooth',block:'start'});}});
+  if(bar){var _hf=decodeURIComponent((location.hash||'').replace('#',''));if(_hf&&bar.querySelector('.filt-group[data-filter="tree"] .filt[data-val="'+_hf+'"]'))setCats([_hf]);}
+  window.addEventListener('hashchange',function(){var _h=decodeURIComponent((location.hash||'').replace('#',''));if(bar&&bar.querySelector('.filt-group[data-filter="tree"] .filt[data-val="'+_h+'"]')){setCats([_h]);bar.scrollIntoView({behavior:'smooth',block:'start'});}});
 })();
 </script>"""
 
