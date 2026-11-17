@@ -262,6 +262,15 @@ def sub_loc(sub, lang, price=None):
     won = round(d * 1380 / 1000) * 1000
     return f"≈ ${d} · {won:,} 원".replace(",", " ")
 
+# 17.11.2026 (Олег): короткие названия карточек готовых оформлений — без повтора «Готовый набор для оформления…» (страницы товаров не меняются)
+CARD_SHORT = {
+    "nabor-prazdnik-den-rozhdeniya-devochki": {"ru": "Детский день рождения девочки", "en": "Girl's birthday party", "ko": "여아 생일 파티"},
+    "nabor-prazdnik-den-rozhdeniya-malchika": {"ru": "Детский день рождения мальчика", "en": "Boy's birthday party", "ko": "남아 생일 파티"},
+    "nabor-prazdnik-vzroslyy-zolotaya-gamma": {"ru": "День рождения мужчины", "en": "Men's birthday party", "ko": "남성 생일 파티"},
+    "nabor-prazdnik-vzroslyy-rozovyy": {"ru": "День рождения девушки", "en": "Women's birthday party", "ko": "여성 생일 파티"},
+    "nabor-prazdnik-den-rozhdeniya-parnya": {"ru": "День рождения парня", "en": "Young man's birthday party", "ko": "청년 생일 파티"},
+    "nabor-prazdnik-den-rozhdeniya-parnya-11-let": {"ru": "День рождения парня 11 лет", "en": "11-year-old boy's birthday party", "ko": "11세 소년 생일 파티"},
+}
 CARD_CSS = """/*MARK-CARD-CSS*/
         .pcard-slider{position:relative;overflow:hidden;height:16rem;background:#fdf4f7;}
         .pcard-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s ease;}
@@ -853,7 +862,7 @@ def product_card(p, lang, base, t):
                     {nav}
                 </div>
                 <a href="{url}" class="p-5 flex flex-col flex-grow">
-                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">{html.escape(name)}</h3>
+                    <h3 class="font-serif text-xl font-bold mb-1" style="color:#1a1a1a;">{html.escape(CARD_SHORT.get(p.get("slug",""),{}).get(lang,name))}</h3>
                     {combo_badge_html(product_cat(p), lang)}
                     <p class="text-stone-600 text-xs mb-3 flex-grow">{html.escape(desc)}</p>
                     <p class="font-bold text-base mb-0.5" style="color:#1a1a1a;">{html.escape(price_loc(p['price'], lang))}</p>
