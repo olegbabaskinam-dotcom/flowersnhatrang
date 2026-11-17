@@ -265,7 +265,6 @@ def sub_loc(sub, lang, price=None):
 # 17.11.2026 (Олег): короткие названия карточек готовых оформлений — без повтора «Готовый набор для оформления…» (страницы товаров не меняются)
 CARD_SHORT = {
     "nabor-prazdnik-den-rozhdeniya-devochki": {"ru": "Детский день рождения девочки", "en": "Girl's birthday party", "ko": "여아 생일 파티"},
-    "nabor-prazdnik-den-rozhdeniya-malchika": {"ru": "Детский день рождения мальчика", "en": "Boy's birthday party", "ko": "남아 생일 파티"},
     "nabor-prazdnik-vzroslyy-zolotaya-gamma": {"ru": "День рождения мужчины", "en": "Men's birthday party", "ko": "남성 생일 파티"},
     "nabor-prazdnik-vzroslyy-rozovyy": {"ru": "День рождения девушки", "en": "Women's birthday party", "ko": "여성 생일 파티"},
     "nabor-prazdnik-den-rozhdeniya-parnya": {"ru": "День рождения парня", "en": "Young man's birthday party", "ko": "청년 생일 파티"},
