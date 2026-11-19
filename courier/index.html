@@ -145,7 +145,7 @@ var ZONES=[{k:'center',t:'Центр'},{k:'north',t:'Крайний север'}
 
 function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function fmt(n){ n=Math.round(Number(n)||0); return n.toLocaleString('ru-RU').replace(/,/g,' ')+' ₫'; }
-function toast(m){ var t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(t._h); t._h=setTimeout(function(){ t.classList.remove('show'); },1800); }
+function toast(m){ var t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(t._h); t._h=setTimeout(function(){ t.classList.remove('show'); },String(m).length>40?7000:1800); }
 function show(v){ ['map','edit','export','hist'].forEach(function(x){ document.getElementById('v-'+x).classList.toggle('hidden', x!==v); }); window.scrollTo(0,0); }
 function hh2m(s){ var m=String(s||'').match(/^(\d{1,2}):(\d{2})$/); return m?(+m[1]*60+ +m[2]):null; }
 function m2hh(x){ var h=Math.floor(x/60), m=x%60; return (h<10?'0':'')+h+':'+(m<10?'0':'')+m; }
@@ -155,10 +155,17 @@ function humanDate(d){ var wd=['вс','пн','вт','ср','чт','пт','сб']
 
 async function api(action, extra){
   var payload=Object.assign({ action:action, initData:(tg&&tg.initData)?tg.initData:'', mapKey:URL_KEY, pin:PIN }, extra||{});
-  try{
-    var r=await fetch(API_URL,{method:'POST',body:JSON.stringify(payload),cache:'no-store'});
-    return await r.json();
-  }catch(e){ return {ok:false,error:'Сеть недоступна'}; }
+  // 19.11.2026: вместо общего «Сеть недоступна» — настоящая причина; чтение повторяем до 3 раз, правки — 1 раз (без дублей)
+  var READ={mapState:1,mapFree:1,mapCard:1,mapPhoto:1}, tries=READ[action]?3:1, body=JSON.stringify(payload), err='';
+  for(var i=1;i<=tries;i++){
+    var ctrl=new AbortController(), to=setTimeout(function(){ try{ctrl.abort();}catch(e){} }, READ[action]?15000:25000), r=null, txt='';
+    try{ r=await fetch(API_URL,{method:'POST',body:body,cache:'no-store',signal:ctrl.signal}); txt=await r.text(); }
+    catch(e){ clearTimeout(to); err=(navigator.onLine===false)?'Нет интернета на телефоне':((e&&e.name==='AbortError')?'Сервер не ответил за '+(READ[action]?15:25)+' с':'Нет связи с сервером ('+String(e&&e.message||e)+')'); if(i<tries){ await new Promise(function(ok){ setTimeout(ok,1500*i); }); } continue; }
+    clearTimeout(to);
+    try{ return JSON.parse(txt); }
+    catch(e){ err='Ошибка сервера HTTP '+r.status+': '+String(txt).replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim().slice(0,140); if(i<tries){ await new Promise(function(ok){ setTimeout(ok,1500*i); }); } }
+  }
+  return {ok:false,error:err+(READ[action]?'':' — обновите карту и проверьте, сохранилось ли')};
 }
 
 async function openMap(date, sync){
