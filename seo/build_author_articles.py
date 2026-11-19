@@ -9,7 +9,8 @@ import io, os, re, json, sys, html
 sys.path.insert(0, os.path.dirname(__file__))
 import author_veranda_content as V
 import author_sezony_content as S
-ARTS = [S, V]  # модули авторских статей (новые — в начало)
+import author_rayony_content as R
+ARTS = [R, S, V]  # модули авторских статей (новые — в начало)
 SITE = "https://flowers-nha-trang.online"
 XO = "gde-poest-moreprodukty-nyachang-kafe-xo"
 AU = "avtor-oksana-yasnova"
