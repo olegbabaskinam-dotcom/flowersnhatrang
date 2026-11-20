@@ -232,6 +232,9 @@ def build(key, lang):
     if key != "balloons":
         for lg in ("ru", "en", "ko"):
             s = s.replace("balloons" + SUF[lg], fname(key, lg))
+        # 20.11: меню «🎈 Шары» должно вести на balloons*, а не на текущую страницу
+        for lg in ("ru", "en", "ko"):
+            s = re.sub(r'href="' + re.escape(fname(key, lg)) + r'"([^>]*>🎈)', 'href="balloons' + SUF[lg] + r'"\1', s)
     # head
     if key in ("prazdnik",) and not T["title"]:
         old = open(out, encoding="utf-8").read()
