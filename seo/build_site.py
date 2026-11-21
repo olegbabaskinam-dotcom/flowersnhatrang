@@ -267,11 +267,11 @@ CARD_SHORT = {
     "nabor-prazdnik-den-rozhdeniya-devochki": {"ru": "Детский день рождения девочки", "en": "Girl's birthday party", "ko": "여아 생일 파티"},
     "nabor-prazdnik-den-rozhdeniya-malchika": {"ru": "Детский день рождения мальчика", "en": "Boy's birthday party", "ko": "남아 생일 파티"},
     "nabor-prazdnik-vzroslyy-zolotaya-gamma": {"ru": "Мужской праздничный набор", "en": "Men's party set", "ko": "남성 파티 세트"},
-    "nabor-prazdnik-vzroslyy-rozovyy": {"ru": "День рождения девушки", "en": "Women's birthday party", "ko": "여성 생일 파티"},
+    "nabor-prazdnik-vzroslyy-rozovyy": {"ru": "День рождения девушки + 2 букета по 25 розовых роз", "en": "Women's birthday party + 2 bouquets of 25 pink roses", "ko": "여성 생일 파티 + 핑크 장미 25송이 꽃다발 2개"},
     "nabor-prazdnik-den-rozhdeniya-parnya": {"ru": "День рождения парня", "en": "Young man's birthday party", "ko": "청년 생일 파티"},
     "nabor-prazdnik-romanticheskiy-vecher-rozovyy": {"ru": "Романтический вечер", "en": "Romantic evening", "ko": "로맨틱 이브닝"},
     "nabor-prazdnik-medovyy-mesyac-krasnyy": {"ru": "Медовый месяц", "en": "Honeymoon", "ko": "허니문"},
-    "nabor-prazdnik-den-rozhdeniya-devushki-rozovyy": {"ru": "День рождения девушки (без букетов)", "en": "Women's birthday party (no bouquets)", "ko": "여성 생일 파티 (꽃다발 제외)"},
+    "nabor-prazdnik-den-rozhdeniya-devushki-rozovyy": {"ru": "День рождения девушки", "en": "Women's birthday party", "ko": "여성 생일 파티"},
 }
 CARD_CSS = """/*MARK-CARD-CSS*/
         .pcard-slider{position:relative;overflow:hidden;height:16rem;background:#fdf4f7;}

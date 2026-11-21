@@ -425,3 +425,5 @@
 
 ## 21.11.2026 — id283: блок «💐 Добавить букет» на странице товара (RU/EN/KO)
 - Под ценой/кнопкой корзины раскрывающийся `<details class="addb">`: ряды с прокруткой вправо — 25 роз (25-belyh-roz, 25-krasnyh-roz, 25-rozovyh-roz), 51 (51-belaya/krasnaya/rozovaya-roza-v-upakovke), 101 (101-belaya-roza-v-beloy-upakovke, 101-krasnaya/rozovaya-roza-v-upakovke), сборные (stilnyy-sbornyy-buket-rozovyy, nezhnyy-sbornyy-buket-v-upakovke, yarkiy-sbornyy-buket-fioletovo-rozovyy), корзины (101-belo-rozovaya-roza-v-korzine, 101-belaya-roza-korzina-belaya-lenta, stilnaya-korzina-rozovaya); кнопка «+ В корзину» (Cart.add), «Весь каталог →». Вставлен вручную — при перегенерации страницы сохранить.
+
+## 21.11.2026 — названия карточек: id283 → «День рождения девушки» (EN Women's birthday party, KO 여성 생일 파티); id92 → «День рождения девушки + 2 букета по 25 розовых роз» (EN … + 2 bouquets of 25 pink roses, KO … + 핑크 장미 25송이 꽃다발 2개); в плашке id92 «2 букета по 25 розовых роз». CARD_SHORT, featured.js, catalog-*, prazdnik*.
