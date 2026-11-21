@@ -1,6 +1,6 @@
 {
- "generated": "2026-11-21 03:59",
- "count": 251,
+ "generated": "2026-11-21 04:01",
+ "count": 252,
  "categories": [
   {
    "key": "all",
@@ -5762,6 +5762,25 @@
     "img/products/nabor-prazdnik-romanticheskiy-vecher-rozovyy/1.webp",
     "img/products/nabor-prazdnik-romanticheskiy-vecher-rozovyy/2.webp",
     "img/products/nabor-prazdnik-romanticheskiy-vecher-rozovyy/3.webp"
+   ]
+  },
+  {
+   "id": 282,
+   "slug": "nabor-prazdnik-medovyy-mesyac-krasnyy",
+   "name": "Готовый набор для оформления медового месяца",
+   "desc": "романтическое оформление номера для молодожёнов в красных тонах: две стойки по 7 красных гелиевых фольгированных сердец, 10 красных латексных гелиевых шаров под потолком, красная фольгированная надпись LOVE на кровати, красные лепестки роз на кровати, букет из 51 красной розы, небольшой белый торт-сердце с клубникой, две ароматические свечи, мыло ручной работы в форме цветка франжипани, масло для массажа 50 мл и мягкий мишка. Доставим по Нячангу",
+   "alt": "готовый набор оформление медового месяца красные сердца надпись LOVE 51 красная роза торт Нячанг доставка",
+   "price_vnd": 3500000,
+   "price": "3 500 000 донгов",
+   "price_sub": "≈ $140 · 12 500 ₽",
+   "cats": [
+    "prazdnik"
+   ],
+   "color": "red",
+   "images": [
+    "img/products/nabor-prazdnik-medovyy-mesyac-krasnyy/1.webp",
+    "img/products/nabor-prazdnik-medovyy-mesyac-krasnyy/2.webp",
+    "img/products/nabor-prazdnik-medovyy-mesyac-krasnyy/3.webp"
    ]
   },
   {

@@ -270,6 +270,7 @@ CARD_SHORT = {
     "nabor-prazdnik-vzroslyy-rozovyy": {"ru": "День рождения девушки", "en": "Women's birthday party", "ko": "여성 생일 파티"},
     "nabor-prazdnik-den-rozhdeniya-parnya": {"ru": "День рождения парня", "en": "Young man's birthday party", "ko": "청년 생일 파티"},
     "nabor-prazdnik-romanticheskiy-vecher-rozovyy": {"ru": "Романтический вечер", "en": "Romantic evening", "ko": "로맨틱 이브닝"},
+    "nabor-prazdnik-medovyy-mesyac-krasnyy": {"ru": "Медовый месяц", "en": "Honeymoon", "ko": "허니문"},
 }
 CARD_CSS = """/*MARK-CARD-CSS*/
         .pcard-slider{position:relative;overflow:hidden;height:16rem;background:#fdf4f7;}
