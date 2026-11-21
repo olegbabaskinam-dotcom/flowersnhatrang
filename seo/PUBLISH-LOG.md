@@ -422,3 +422,6 @@
 ## 21.11.2026 — id283 «Готовый набор для оформления дня рождения девушки (без букетов)» 3 500 000
 - Возвращён прежний вариант id92 (ИИ-фото 7 шт. и описание из git до 8a0f1c6, без фразы про пакеты/1–2 минуты) отдельной позицией `nabor-prazdnik-den-rozhdeniya-devushki-rozovyy`, карточка «День рождения девушки (без букетов)». id92 остаётся 4 500 000 с плашкой (набор + 2 букета по 25 роз). Идею кнопки «в корзину без букетов» Олег отменил.
 - Как id281: gen_one_product + merge-file с id93, карточки, лендинги, витрина, featured, products.json, TG jpg, sitemap +3; RU title сокращён до «Набор для оформления…».
+
+## 21.11.2026 — id283: блок «💐 Добавить букет» на странице товара (RU/EN/KO)
+- Под ценой/кнопкой корзины раскрывающийся `<details class="addb">`: ряды с прокруткой вправо — 25 роз (25-belyh-roz, 25-krasnyh-roz, 25-rozovyh-roz), 51 (51-belaya/krasnaya/rozovaya-roza-v-upakovke), 101 (101-belaya-roza-v-beloy-upakovke, 101-krasnaya/rozovaya-roza-v-upakovke), сборные (stilnyy-sbornyy-buket-rozovyy, nezhnyy-sbornyy-buket-v-upakovke, yarkiy-sbornyy-buket-fioletovo-rozovyy), корзины (101-belo-rozovaya-roza-v-korzine, 101-belaya-roza-korzina-belaya-lenta, stilnaya-korzina-rozovaya); кнопка «+ В корзину» (Cart.add), «Весь каталог →». Вставлен вручную — при перегенерации страницы сохранить.
