@@ -53,8 +53,11 @@ M = {
  "b-helium": lambda c: has(c,"balloons") and not bCombo(c) and c["slug"] not in LATEX_ONLY,
  "b-latex": bLatex, "b-combo": bCombo,
  "nabory": lambda c: has(c,"nabory"), "cakes": lambda c: has(c,"cakes"),
- "decor": lambda c: has(c,"prazdnik"),
+ "decor": lambda c: has(c,"prazdnik") and c["slug"] not in ROMANCE,
+ "romance": lambda c: has(c,"prazdnik") and c["slug"] in ROMANCE,
 }
+# 21.11.2026 (Олег): «Оформление» разделено на 2 блока без фильтров — сначала «Романтика», ниже «Поздравление с днём рождения»
+ROMANCE = ["nabor-prazdnik-romanticheskiy-vecher-rozovyy", "nabor-prazdnik-medovyy-mesyac-krasnyy"]
 
 # ---------- таймер «срочно до 17:00» (время Нячанга) ----------
 CD_RX = re.compile(r"\(function\(\)\{\s*var el = document\.getElementById\('countdown'\);.*?update\(\); setInterval\(update,1000\);\s*\}\)\(\);", re.S)
@@ -137,13 +140,13 @@ PAGES = {
           h1="나트랑 선물 배달", wa="", h2="선물",
           sec={"nabory":"선물 세트","cakes":"케이크"}, note={"cakes":"케이크는 꽃다발, 풍선 또는 선물 세트와 함께만 주문 가능합니다."})),
  "prazdnik": dict(base="prazdnik", hero="img/site/prazdnik-banner.webp",
-  order=["decor"], assign=["decor"],
+  order=["romance","decor"], assign=["romance","decor"], nochips=True,
   ru=dict(title="Оформление дня рождения в Нячанге — шары, фотозона, торт", desc="Оформление дня рождения в Нячанге: готовые наборы — стойки и цифры из шаров, фотозона, торт, посуда и декор. Доставка со следующего дня.", h1="Оформление дня рождения в Нячанге", wa="Здравствуйте,%20хочу%20заказать%20готовый%20набор", h2="оформление праздника",
-          sec={"decor":"Готовые наборы для оформления праздника"}),
+          sec={"romance":"Романтика","decor":"Поздравление с днём рождения"}),
   en=dict(title="Birthday Decoration in Nha Trang — Balloons, Photo Zone & Cake", desc="Birthday decoration in Nha Trang: ready party sets with balloon stands, number balloons, a photo zone, cake, tableware and decor. Delivery from the next day.", h1="Birthday Decoration in Nha Trang", wa="Hello,%20I'd%20like%20to%20order%20a%20party%20set", h2="party décor",
-          sec={"decor":"Ready-made party décor sets"}),
+          sec={"romance":"Romance","decor":"Birthday celebration"}),
   ko=dict(title="나트랑 생일 파티 데코 — 풍선·포토존·케이크 배달", desc="나트랑 생일 파티 데코 세트: 풍선 스탠드, 숫자 풍선, 포토존, 케이크, 식기와 장식. 온라인 주문 다음 날부터 배달합니다.", h1="나트랑 생일 파티 데코", wa="", h2="파티 데코",
-          sec={"decor":"파티 데코 세트"})),
+          sec={"romance":"로맨틱","decor":"생일 축하"})),
 }
 
 # цифра в блоке доверия (01.10.2026, данные Олега)
@@ -180,13 +183,13 @@ def section_html(key, lang, cards):
     h.append(f'        <h2 class="reveal font-serif text-3xl md:text-4xl font-bold text-center mb-6" style="color:#1a1a1a;">{html.escape(T["h2"])}</h2>\n')
     if key == "balloons":
         h.append('        <div class="lnd-bal">' + "".join('<div class="lnd-bal-i"><b>' + a + '</b><span>' + b + '</span></div>' for a, b in BAL_INFO[lang]) + '</div>\n')
-    if len(chips) > 1:
+    if len(chips) > 1 and not P.get("nochips"):
         h.append('        <div class="lnd-chips">' + "".join(chips) + '</div>\n')
     for k in P["order"]:
         lst = buckets[k]
         if not lst: continue
         # чистые вперёд, потом комбо; внутри — по цене; проданные в конце
-        lst.sort(key=lambda c: (c["sold"], isCombo(c) if k not in ("nabory","cakes","decor") else False, c["price"]))
+        lst.sort(key=lambda c: (c["sold"], isCombo(c) if k not in ("nabory","cakes","decor","romance") else False, c["price"]))
         h.append(f'        <div id="sec-{k}" class="lnd-sec">\n')
         h.append(f'            <h3 class="lnd-h">{html.escape(T["sec"][k])} <span>{Lg["count"](len(lst))}</span></h3>\n')
         note = T.get("note", {}).get(k)
