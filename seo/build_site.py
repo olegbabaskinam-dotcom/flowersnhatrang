@@ -266,7 +266,7 @@ def sub_loc(sub, lang, price=None):
 CARD_SHORT = {
     "nabor-prazdnik-den-rozhdeniya-devochki": {"ru": "Детский день рождения девочки", "en": "Girl's birthday party", "ko": "여아 생일 파티"},
     "nabor-prazdnik-den-rozhdeniya-malchika": {"ru": "Детский день рождения мальчика", "en": "Boy's birthday party", "ko": "남아 생일 파티"},
-    "nabor-prazdnik-vzroslyy-zolotaya-gamma": {"ru": "День рождения мужчины", "en": "Men's birthday party", "ko": "남성 생일 파티"},
+    "nabor-prazdnik-vzroslyy-zolotaya-gamma": {"ru": "Мужской праздничный набор", "en": "Men's party set", "ko": "남성 파티 세트"},
     "nabor-prazdnik-vzroslyy-rozovyy": {"ru": "День рождения девушки", "en": "Women's birthday party", "ko": "여성 생일 파티"},
     "nabor-prazdnik-den-rozhdeniya-parnya": {"ru": "День рождения парня", "en": "Young man's birthday party", "ko": "청년 생일 파티"},
     "nabor-prazdnik-romanticheskiy-vecher-rozovyy": {"ru": "Романтический вечер", "en": "Romantic evening", "ko": "로맨틱 이브닝"},
