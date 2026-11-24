@@ -46,7 +46,7 @@ def product_cats(slug, name_ru):
         cats.insert(0, "mixed")  # id142: сборная корзина + шары = комбо
     if s in ("prazdnichnyy-sbornyy-buket-i-shokoladnyy-tort", "sbornyy-buket-belaya-upakovka-7-sharov") and "mixed" not in cats:
         cats.insert(0, "mixed")  # 01.10: id69/id104 — в составе сборный букет (аудит матрицы)
-    if s in ("sbornyy-buket-cifry-55-otkrytka", "nezhnaya-sbornaya-korzina-tort", "yarkiy-sbornyy-buket-gerbery-tort", "nebolshaya-sbornaya-korzina-15-sharov") and "mixed" not in cats:
+    if s in ("sbornyy-buket-cifry-55-otkrytka", "nezhnaya-sbornaya-korzina-tort", "yarkiy-sbornyy-buket-gerbery-tort", "nebolshaya-sbornaya-korzina-15-sharov", "ogromnaya-sbornaya-korzina-shokoladnyy-tort", "sbornyy-buket-3-folgirovannyh-shara-tara") and "mixed" not in cats:
         cats.insert(0, "mixed")  # id244/245/247/248: сборные в комбо
     if s == "51-belo-rozovaya-roza-podarochnyy-nabor-krasota-vietnama" and "nabory" not in cats:
         cats.append("nabory")  # id278: 51 роза + два подарочных набора
@@ -99,6 +99,8 @@ def product_color(slug):
         return ""  # id219: окрашенные голубые/синие, «pokrashennaya» содержит «kras»
     if s == "101-sinyaya-okrashennaya-roza-korzina":
         return ""  # id190: синие окрашенные, «okrashennaya» содержит «kras» — не red
+    if s == "101-malinovaya-roza-s-taroy":
+        return "pink"  # id285: малиновые розы, в слаге нет rozov
     if s == "101-malinovaya-roza-korzina-bukva-v":
         return "pink"  # id187: малиновые розы, в слаге нет rozov
     if s == "51-malinovaya-roza-belaya-upakovka-prazdnichnyy-tort":
