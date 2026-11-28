@@ -1262,6 +1262,16 @@ def load_articles():
     arts.sort(key=lambda a: a.get("date", ""), reverse=True)
     return arts
 
+# Перевод меток категорий статей (в реестре они на русском) — 28.11.2026
+ART_CAT_TR = {"Гид": ("Guide", "가이드"), "Повод": ("Occasion", "기념일"), "Получатель": ("For whom", "받는 사람"),
+              "Уход": ("Care", "관리"), "Отель": ("Hotel", "호텔"), "Гео": ("Location", "지역"), "Шары": ("Balloons", "풍선"),
+              "Цветок": ("Flowers", "꽃"), "Праздник": ("Holiday", "축하"), "Авторская": ("Author", "글쓴이")}
+def art_cat(art, lang):
+    c = art.get("category", "")
+    if lang in ("en", "ko") and c in ART_CAT_TR:
+        return ART_CAT_TR[c][0 if lang == "en" else 1]
+    return c
+
 def _read_minutes(art, lang):
     words = len(re.sub(r"<[^>]+>", " ", " ".join(s["html"] for s in art[lang]["sections"])).split())
     return max(2, round(words / 180))
@@ -1277,7 +1287,7 @@ def article_card(art, lang, base):
     return f'''<a href="{url}" class="reveal product-card bg-white rounded-2xl overflow-hidden flex flex-col group">
                 {img}
                 <div class="p-5 flex flex-col flex-grow">
-                    <span class="text-xs font-medium mb-2" style="color:#c0687a;">{html.escape(art.get("category",""))}</span>
+                    <span class="text-xs font-medium mb-2" style="color:#c0687a;">{html.escape(art_cat(art, lang))}</span>
                     <h3 class="font-serif text-lg font-bold mb-2 leading-snug" style="color:#1a1a1a;">{html.escape(a["title"])}</h3>
                     <p class="text-stone-500 text-xs mb-4 flex-grow">{html.escape(a.get("excerpt", a["intro"])[:120])}…</p>
                     <span class="text-xs font-medium" style="color:#c0687a;">{u["art_read"]} →</span>
@@ -1351,7 +1361,7 @@ def render_article(art, lang, products, all_articles):
     else:
         hero = f'''<section class="max-w-4xl mx-auto px-6 pt-8">
         <div class="rounded-3xl flex flex-col justify-center px-8 md:px-12" style="height:240px;background:linear-gradient(135deg,#fce8ee,#fdf4f7);">
-            <span class="text-xs tracking-widest uppercase mb-2 font-medium" style="color:#c0687a;">{html.escape(art.get("category",""))}</span>
+            <span class="text-xs tracking-widest uppercase mb-2 font-medium" style="color:#c0687a;">{html.escape(art_cat(art, lang))}</span>
             <span class="font-serif text-2xl md:text-3xl font-bold" style="color:#1a1a1a;">{html.escape(a["h1"])}</span>
         </div>
     </section>'''
@@ -1362,7 +1372,7 @@ def render_article(art, lang, products, all_articles):
     </nav>
     {hero}
     <article class="max-w-3xl mx-auto px-6 py-8">
-        <span class="text-xs font-medium" style="color:#c0687a;">{html.escape(art.get("category",""))} · {_read_minutes(art, lang)} {u["art_min"]}</span>
+        <span class="text-xs font-medium" style="color:#c0687a;">{html.escape(art_cat(art, lang))} · {_read_minutes(art, lang)} {u["art_min"]}</span>
         <h1 class="font-serif text-3xl md:text-4xl font-bold mt-2 mb-6 leading-tight" style="color:#1a1a1a;">{html.escape(a["h1"])}</h1>
         <p class="text-stone-600 text-lg leading-relaxed mb-2">{a["intro"]}</p>
         {secs}

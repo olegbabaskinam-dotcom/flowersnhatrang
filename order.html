@@ -914,5 +914,33 @@ document.querySelectorAll('a[href*="wa.me"], a[href*="t.me"], a[href*="instagram
   el.addEventListener('click', function(){ if(typeof gtag==='function') gtag('event','conversion',{'send_to':'AW-17946655007/GAphCLTdvY0dEJ_y0O1C','value':1.0,'currency':'VND'}); });
 });
 </script>
+<script>
+/* 28.11.2026: переключатель языка на order.html — остаёмся на этой странице (?lang=), подсветка текущего языка в шапке и в мобильной полосе */
+(function(){
+  function fix(){
+    var lang=window.FLW_LANG||'ru', page='order.html';
+    var map={ru:'🇷🇺 RU',en:'🇬🇧 EN',ko:'🇰🇷 KR'}, order=['ru','en','ko'];
+    Array.prototype.forEach.call(document.querySelectorAll('#langbar'),function(bar){
+      bar.innerHTML=order.map(function(l){
+        return l===lang
+          ? '<span style="padding:3px 8px;border-radius:8px;color:#fff;font-size:11px;background:#c0687a">'+map[l]+'</span>'
+          : '<a href="'+page+'?lang='+l+'" style="padding:3px 8px;border-radius:8px;color:#78716c;font-size:11px;text-decoration:none">'+map[l]+'</a>';
+      }).join('');
+    });
+    var nav=document.querySelector('header nav'); if(!nav) return;
+    var cur=null; Array.prototype.forEach.call(nav.querySelectorAll('span'),function(s){ if(/🇷🇺 RU/.test(s.textContent)) cur=s; });
+    if(!cur) return;
+    var a1=cur.nextElementSibling, a2=a1&&a1.nextElementSibling; if(!a1||!a2) return;
+    var on='px-3 py-1.5 rounded-lg text-white text-xs font-medium', off='px-3 py-1.5 rounded-lg text-stone-500 hover:text-[#c0687a] hover:bg-stone-50 transition';
+    var html=order.map(function(l){
+      return l===lang ? '<span class="'+on+'" style="background:#c0687a;">'+map[l]+'</span>' : '<a href="'+page+'?lang='+l+'" class="'+off+'">'+map[l]+'</a>';
+    }).join('');
+    var tmp=document.createElement('span'); cur.parentNode.insertBefore(tmp,cur);
+    [cur,a1,a2].forEach(function(n){n.parentNode.removeChild(n);});
+    tmp.insertAdjacentHTML('afterend',html); tmp.parentNode.removeChild(tmp);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',fix); else fix();
+})();
+</script>
 </body>
 </html>
