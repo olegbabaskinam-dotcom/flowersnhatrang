@@ -68,7 +68,14 @@ CSS = """<style id="au-css">.xo-art h2{font-family:'Playfair Display',serif;font
 .gs-pl div:last-child{border:0;}.gs-pl span{font-weight:600;color:#1a1a1a;}.gs-pl b{color:#a8566a;}
 .xo-art ol.xo-ol{list-style:decimal;padding-left:1.4rem;margin:0 0 1.2rem;}.xo-art ol.xo-ol li{margin:.3rem 0;}
 @media(max-width:640px){.gs-tiers{grid-template-columns:1fr}.gs-gp img{width:calc(50% - .3rem)}.gs-gp.n1 img{width:100%}.gs-v img{flex-basis:7.5rem;width:7.5rem}.gs-cats{grid-template-columns:1fr 1fr}.gs-cats a{font-size:.9rem;padding:.65rem .75rem}}
-@media(max-width:380px){.gs-cats{grid-template-columns:1fr}}</style>"""
+@media(max-width:380px){.gs-cats{grid-template-columns:1fr}}
+.gs-sets{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.4rem 0 1.6rem;}.gs-set{display:flex;flex-direction:column;gap:.7rem;}
+.gs-set img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border-radius:1rem;display:block;}
+.gs-set a.gs-setb{display:block;text-align:center;background:#c0687a;color:#fff!important;font-weight:700;font-size:1rem;padding:.85rem 1rem;border-radius:999px;text-decoration:none;box-shadow:0 6px 18px rgba(192,104,122,.25);}
+.gs-set a.gs-setb:hover{background:#a8566a;}
+@media(max-width:640px){.gs-sets{gap:.6rem}.gs-set a.gs-setb{font-size:.85rem;padding:.75rem .5rem}}
+@media(max-width:380px){.gs-sets{grid-template-columns:1fr}}
+</style>"""
 def rd(p): return io.open(p, encoding="utf-8").read()
 def wr(p, s): io.open(p, "w", encoding="utf-8", newline="\n").write(s)
 def e(t): return html.escape(t, quote=True)
@@ -115,6 +122,13 @@ def block_html(t, v, L, M):
     if t == "html": return v
     if t == "gnote": return '<div class="xo-note gs-note">%s</div>' % v
     if t == "gwarn": return '<div class="xo-warn gs-warn">%s</div>' % v
+    if t == "sets":
+        from PIL import Image
+        out = []
+        for src, alt, href, lab in v:
+            w, h = Image.open(src).size
+            out.append('<div class="gs-set"><a href="%s"><img src="../%s" alt="%s" loading="lazy" decoding="async" width="%d" height="%d"></a><a class="gs-setb" href="%s">%s →</a></div>' % (href, src, e(alt), w, h, href, lab))
+        return '<div class="gs-sets">' + "".join(out) + "</div>"
     if t == "gift": return '<div class="xo-gift">%s</div>' % v
     if t == "ol": return '<ol class="xo-ol">' + "".join("<li>%s</li>" % x for x in v) + "</ol>"
     if t == "links": return '<nav class="gs-cats">' + "".join('<a href="%s"><span>%s</span>%s</a>' % (h, ic, tx) for ic, tx, h in v) + "</nav>"

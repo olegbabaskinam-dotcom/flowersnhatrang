@@ -164,6 +164,7 @@ B["ru"] = [
          "мягкая игрушка,", "торт",
          "и пакет со всеми праздничными мелочами: стаканчики, тарелочки, вилочки, свистки и колпаки для веселья, бенгальские огни, хлопушки, корона для именинника, свечи для торта."]),
  ("p", "Мы уже продумали всё до мелочей, вам остаётся выбрать тему набора: мужской, детский, женский, для подростка и написать, куда и когда доставка, остальное мы сделаем в лучшем виде."),
+ ("sets", [("img/products/nabor-prazdnik-vzroslyy-zolotaya-gamma/1.webp", "Готовый набор для оформления дня рождения мужчины", "../catalog/nabor-prazdnik-vzroslyy-zolotaya-gamma-ru.html", "Посмотреть полный набор"), ("img/products/nabor-prazdnik-vzroslyy-rozovyy/1.webp", "Готовый набор для оформления дня рождения девушки", "../catalog/nabor-prazdnik-vzroslyy-rozovyy-ru.html", "Посмотреть полный набор")]),
  ("btn", ("🎉 Полное оформление дня рождения", "../prazdnik.html#sec-decor")),
 ]
 CAT_EN = [("💐", "Flowers", "../cvety-en.html"), ("🎈", "Helium balloons", "../balloons-en.html#sec-b-helium"),
@@ -257,6 +258,7 @@ B["en"] = [
          "a soft toy,", "a cake",
          "and a bag with all the party extras: cups, plates, forks, whistles and party hats, sparklers, party poppers, a crown for the birthday person, candles for the cake."]),
  ("p", "We have thought of every detail — all you need to do is choose the theme of the set: men's, kids', women's or for a teenager, and tell us where and when to deliver; we will do the rest perfectly."),
+ ("sets", [("img/products/nabor-prazdnik-vzroslyy-zolotaya-gamma/1.webp", "Ready birthday decoration set for a man", "../catalog/nabor-prazdnik-vzroslyy-zolotaya-gamma-en.html", "See the full set"), ("img/products/nabor-prazdnik-vzroslyy-rozovyy/1.webp", "Ready birthday decoration set for a woman", "../catalog/nabor-prazdnik-vzroslyy-rozovyy-en.html", "See the full set")]),
  ("btn", ("🎉 Full birthday decoration", "../prazdnik-en.html#sec-decor")),
 ]
 CAT_KO = [("💐", "꽃", "../cvety-kr.html"), ("🎈", "헬륨 풍선", "../balloons-kr.html#sec-b-helium"),
@@ -350,5 +352,6 @@ B["ko"] = [
          "인형,", "케이크",
          "그리고 파티 소품 가방: 컵, 접시, 포크, 호루라기와 고깔모자, 스파클라, 폭죽, 생일 주인공 왕관, 케이크 초."]),
  ("p", "모든 것을 세세하게 준비해 두었습니다. 남성용, 어린이용, 여성용, 청소년용 중 테마만 고르시고 배달 장소와 시간을 알려 주세요. 나머지는 저희가 완벽하게 해 드립니다."),
+ ("sets", [("img/products/nabor-prazdnik-vzroslyy-zolotaya-gamma/1.webp", "남성 생일 파티 준비 세트", "../catalog/nabor-prazdnik-vzroslyy-zolotaya-gamma-ko.html", "세트 전체 보기"), ("img/products/nabor-prazdnik-vzroslyy-rozovyy/1.webp", "여성 생일 파티 준비 세트", "../catalog/nabor-prazdnik-vzroslyy-rozovyy-ko.html", "세트 전체 보기")]),
  ("btn", ("🎉 생일 파티 장식 풀세트", "../prazdnik-kr.html#sec-decor")),
 ]
