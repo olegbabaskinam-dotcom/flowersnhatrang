@@ -10,7 +10,7 @@
 SLUG = "chto-podarit-na-den-rozhdeniya-v-otpuske-v-nyachange"
 DATE_ISO = "2026-11-28"
 DATE = {"ru": "28 ноября 2026", "en": "28 November 2026", "ko": "2026년 11월 28일"}
-HERO = "6296"
+HERO = "cover"
 HERO_FULL = True
 SUB = {"ru": "Варианты подарков, которые можно заказать на нашем сайте",
        "en": "Gift options you can order on our website",
@@ -30,6 +30,7 @@ META = {
             card="꽃다발, 헬륨·라텍스 풍선 세트, 선물 세트, 케이크, 인형, 파티 장식 — 무엇을 고르고 얼마인지."),
 }
 ALT = {
+ "cover": ("Красные шары-сердца и шары-цифры 55 на фоне моря и набережной Нячанга", "Red heart balloons and number 55 balloons by the sea on the Nha Trang promenade", "나트랑 해변 산책로와 바다를 배경으로 한 빨간 하트 풍선과 숫자 55 풍선"),
  "6296": ("Красные шары-цифры 55 и букет роз на день рождения в Нячанге", "Red number 55 balloons and a rose bouquet for a birthday in Nha Trang", "나트랑 생일을 위한 빨간 숫자 55 풍선과 장미 꽃다발"),
  "6269": ("Фольгированный шар Happy Birthday", "Happy Birthday foil balloon", "Happy Birthday 호일 풍선"),
  "6270": ("Фольгированный шар-сердце I LOVE YOU", "I LOVE YOU heart foil balloon", "I LOVE YOU 하트 호일 풍선"),
